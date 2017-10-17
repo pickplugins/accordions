@@ -9,8 +9,12 @@ Accordion content create wasn't easy before, you will really love how its works 
 * [Support &raquo;](http://www.pickplugins.com/questions/?ref=wordpress.org)
 * [Documentation &raquo;](https://pickplugins.com/docs/documentation/accordions/?ref=wordpress.org)
 
+# Shortcodes
 
-**Plugin Features**
+```[accordions id="4"]```
+
+
+# Features
 
 * Unlimited Accordion.
 * Responsive Design.
@@ -24,7 +28,7 @@ Accordion content create wasn't easy before, you will really love how its works 
 * Font Awesome Icons(Add your own icons).
 * Tabs
 
-<strong>Premium Features</strong><br />
+# Premium Features
 
 * Short-Codes support inside accordion content
 * Default active accordion.
@@ -45,3 +49,8 @@ Accordion content create wasn't easy before, you will really love how its works 
 * Lazy Load.
 * Tabs Features.
 * Vertical Tabs.
+
+
+# Screenshot
+
+[![Edit Accordion](https://ps.w.org/accordions/assets/screenshot-7.gif?rev=1747755)](https://ps.w.org/accordions/assets/screenshot-7.gif?rev=1747755)
