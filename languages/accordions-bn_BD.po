@@ -1,0 +1,338 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: accordions\n"
+"POT-Creation-Date: 2017-10-16 15:16+0600\n"
+"PO-Revision-Date: 2017-10-16 15:16+0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: bn_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: includes\n"
+"X-Poedit-SearchPath-1: includes/menu\n"
+"X-Poedit-SearchPath-2: assets\n"
+"X-Poedit-SearchPath-3: templates\n"
+
+#: includes/class-settings.php:31
+msgid "Help & Contact"
+msgstr "সাহায্য"
+
+#: includes/functions.php:19 includes/meta.php:137
+msgid "Shortcode"
+msgstr "সর্টকোড"
+
+#: includes/menu/help.php:16
+msgid "Help"
+msgstr "সাহায্য"
+
+#: includes/menu/help.php:24
+msgid "Help & Support"
+msgstr "সাহায্য"
+
+#: includes/menu/help.php:25
+msgid "Our Plugins"
+msgstr ""
+
+#: includes/menu/help.php:32
+msgid "Need Help ?"
+msgstr "সাহায্য দরকার ?"
+
+#: includes/menu/help.php:33
+msgid ""
+"Feel free to contact with any issue for this plugin, Ask any question via "
+"forum"
+msgstr ""
+
+#: includes/menu/help.php:47
+msgid "Try Premium"
+msgstr ""
+
+#: includes/menu/help.php:74
+msgid "Submit Reviews."
+msgstr "রিভিউ সাবমিট করুন"
+
+#: includes/menu/help.php:75
+msgid ""
+"We are working hard to build some awesome plugins for you and spend thousand "
+"hour for plugins. we wish your three(3) minute by submitting five star "
+"reviews at wordpress.org. if you have any issue please submit at forum."
+msgstr ""
+
+#: includes/menu/help.php:86
+msgid "Documentation."
+msgstr ""
+
+#: includes/menu/help.php:87
+msgid "Please go following link for documentation"
+msgstr ""
+
+#: includes/menu/help.php:98
+msgid "Please Share"
+msgstr ""
+
+#: includes/menu/help.php:99
+msgid "If you like this plugin please share with your social share network."
+msgstr ""
+
+#: includes/meta.php:13 includes/meta.php:14
+msgid "Accordions"
+msgstr ""
+
+#: includes/meta.php:15 includes/meta.php:16 includes/meta.php:18
+msgid "New Accordions"
+msgstr ""
+
+#: includes/meta.php:17
+msgid "Edit Accordions"
+msgstr ""
+
+#: includes/meta.php:19
+msgid "View Accordions"
+msgstr ""
+
+#: includes/meta.php:20
+msgid "Search Accordions"
+msgstr ""
+
+#: includes/meta.php:21
+msgid "Nothing found"
+msgstr ""
+
+#: includes/meta.php:22
+msgid "Nothing found in Trash"
+msgstr ""
+
+#: includes/meta.php:60 includes/meta.php:138
+msgid "Accordions Options"
+msgstr ""
+
+#: includes/meta.php:139
+msgid "Style"
+msgstr "স্টাইল"
+
+#: includes/meta.php:140 includes/meta.php:193 includes/meta.php:393
+#: includes/meta.php:457 includes/meta.php:508
+msgid "Content"
+msgstr ""
+
+#: includes/meta.php:141
+msgid "Custom CSS"
+msgstr "কাস্টম সিএসএস"
+
+#: includes/meta.php:142
+msgid "Tabs Options"
+msgstr ""
+
+#: includes/meta.php:151
+msgid "Accordions Shortcode"
+msgstr ""
+
+#: includes/meta.php:152
+msgid ""
+"Copy this shortcode and paste on page or post where you want to display "
+"accordions, Use PHP code to your themes file to display accordions."
+msgstr ""
+
+#: includes/meta.php:165
+msgid "Tabs Shortcode"
+msgstr ""
+
+#: includes/meta.php:179 includes/meta.php:559
+msgid "Collapsible"
+msgstr ""
+
+#: includes/meta.php:182 includes/meta.php:562
+msgid "True"
+msgstr "সত্য"
+
+#: includes/meta.php:183 includes/meta.php:563
+msgid "False"
+msgstr "মিথ্যা"
+
+#: includes/meta.php:190
+msgid "Height Style"
+msgstr ""
+
+#: includes/meta.php:194
+msgid "Fill"
+msgstr ""
+
+#: includes/meta.php:201
+msgid "Activate event"
+msgstr ""
+
+#: includes/meta.php:204
+msgid "Click"
+msgstr ""
+
+#: includes/meta.php:205
+msgid "Mouseover"
+msgstr ""
+
+#: includes/meta.php:216
+msgid "Themes"
+msgstr "থিম"
+
+#: includes/meta.php:271
+msgid "Container options"
+msgstr ""
+
+#: includes/meta.php:275
+msgid "Text Align:"
+msgstr ""
+
+#: includes/meta.php:277
+msgid "Left"
+msgstr "বাম"
+
+#: includes/meta.php:278
+msgid "Center"
+msgstr "কেন্দ্র"
+
+#: includes/meta.php:279
+msgid "Right"
+msgstr "ডান"
+
+#: includes/meta.php:282
+msgid "Padding: (ex: 10px)"
+msgstr ""
+
+#: includes/meta.php:286
+msgid "Background color:"
+msgstr ""
+
+#: includes/meta.php:289
+msgid "Background image:"
+msgstr ""
+
+#: includes/meta.php:294
+msgid "Clear"
+msgstr ""
+
+#: includes/meta.php:328
+msgid "Icon set"
+msgstr ""
+
+#: includes/meta.php:329
+msgid ""
+"Please use font awesome icon id. ex: <b>fa-chevron-up</b>, please visit to "
+"see more <a href=\"https://fortawesome.github.io/Font-Awesome/icons/"
+"\">https://fortawesome.github.io/Font-Awesome/icons/</a>"
+msgstr ""
+
+#: includes/meta.php:332
+msgid "Plus Icon."
+msgstr ""
+
+#: includes/meta.php:336
+msgid "Minus Icon."
+msgstr ""
+
+#: includes/meta.php:341
+msgid "Icon color."
+msgstr "আইকন রঙ"
+
+#: includes/meta.php:345
+msgid "Icon font size."
+msgstr ""
+
+#: includes/meta.php:355
+msgid "Accordions Header."
+msgstr ""
+
+#: includes/meta.php:357
+msgid "Default Background Color."
+msgstr ""
+
+#: includes/meta.php:361
+msgid "Active Background Color."
+msgstr ""
+
+#: includes/meta.php:365
+msgid "Accordions Header Font Color."
+msgstr ""
+
+#: includes/meta.php:368
+msgid "Accordions Header Font Size."
+msgstr ""
+
+#: includes/meta.php:375
+msgid "Accordions Content."
+msgstr ""
+
+#: includes/meta.php:376
+msgid "Accordions Content Font Color."
+msgstr ""
+
+#: includes/meta.php:379
+msgid "Accordions Content Font Size."
+msgstr ""
+
+#: includes/meta.php:382
+msgid "Accordions Content Background Color."
+msgstr ""
+
+#: includes/meta.php:394
+msgid ""
+"You can sorting accordion by dragging each title, click to expand title and "
+"see the input."
+msgstr ""
+
+#: includes/meta.php:397
+msgid "Add"
+msgstr "যোগ করুন"
+
+#: includes/meta.php:431
+msgid "Remove"
+msgstr ""
+
+#: includes/meta.php:447
+msgid "Hide on Frontend"
+msgstr "ফ্রন্টএন্ড এ লুকান"
+
+#: includes/meta.php:453 includes/meta.php:508
+msgid "Header"
+msgstr "শিরোলেখ"
+
+#: includes/meta.php:508
+msgid "Accordion header"
+msgstr ""
+
+#: includes/meta.php:528
+msgid "Custom CSS for this Accordions"
+msgstr ""
+
+#: includes/meta.php:529
+msgid ""
+"Do not use &lt;style>&lt;/style> tag, you can use bellow prefix to your css, "
+"sometime you need use \"!important\" to overrid."
+msgstr ""
+
+#~ msgid "License"
+#~ msgstr "লাইসেন্স"
+
+#~ msgid "Activate"
+#~ msgstr "একটিভ করুন"
+
+#~ msgid "Deactivate"
+#~ msgstr "ডিএকটিভ করুন"
+
+#~ msgid "Options"
+#~ msgstr "অপশন"
+
+#~ msgid "No"
+#~ msgstr "না"
+
+#~ msgid "Yes"
+#~ msgstr "হা"
+
+#~ msgid "Reset Active"
+#~ msgstr "রিসেট"
+
+#~ msgid "Active"
+#~ msgstr "সক্রিয়"
