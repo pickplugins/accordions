@@ -4,7 +4,7 @@
 	Tags: accordion, accordions, Responsive accordions, accordions plugin, jQuery accordions, accordions short-code, accordions Widget, accordions plugin wordpress, accordions plugin jquery, tabs, jquery tabs, tab, responsive tabs
 	Requires at least: 3.8
 	Tested up to: 4.8
-	Stable tag: 2.0.20
+	Stable tag: 2.0.21
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,10 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 == Changelog ==
 
+
+
+	= 2.0.21 =
+    * 24/10/2017 - add - Support link update.
 
 	= 2.0.20 =
     * 23/10/2017 - add - Added Spanish Translation.

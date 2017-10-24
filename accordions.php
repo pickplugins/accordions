@@ -3,7 +3,7 @@
 Plugin Name: Accordions
 Plugin URI: http://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/
 Description: Fully responsive and mobile ready accordion grid for WordPress.
-Version: 2.0.20
+Version: 2.0.21
 Author: pickplugins
 Author URI: http://pickplugins.com
 Text Domain: accordions
@@ -22,12 +22,12 @@ class Accordions{
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
 		define('accordions_wp_url', 'https://wordpress.org/plugins/accordions/' );
 		define('accordions_wp_reviews', 'http://wordpress.org/support/view/plugin-reviews/accordions' );
-		define('accordions_pro_url','https://www.pickplugins.com/product/accordions/?ref=dashboard' );
+		define('accordions_pro_url','https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress//?ref=dashboard' );
 		define('accordions_demo_url', 'http://pickplugins.com' );
-		define('accordions_conatct_url', 'http://pickplugins.com/contact' );
-		define('accordions_qa_url', 'http://www.pickplugins.com/questions/' );
+		define('accordions_conatct_url', 'https://www.pickplugins.com/contact/' );
+		define('accordions_qa_url', 'https://www.pickplugins.com/support/' );
 		define('accordions_plugin_name', 'Accordions' );
-		define('accordions_plugin_version', '2.0.20' );
+		define('accordions_plugin_version', '2.0.21' );
 		define('accordions_customer_type', 'free' );
 		define('accordions_share_url', 'https://wordpress.org/plugins/accordions/' );
 		define('accordions_tutorial_video_url', '//www.youtube.com/embed/h2wNFJaaY8s?rel=0' );
