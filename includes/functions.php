@@ -11,6 +11,118 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
+function accordions_ajax_track_header(){
+
+
+	$post_id = isset($_POST['post_id']) ? $_POST['post_id'] : '';
+	$header_id = isset($_POST['header_id']) ? $_POST['header_id'] : '';
+
+
+	$track_header = get_post_meta($post_id, 'track_header', true);
+
+	if(empty($track_header)):
+
+		$track_header[$header_id]  = 1;
+		update_post_meta($post_id, 'track_header', $track_header);
+    else:
+	    $track_header[$header_id]  += 1;
+	    update_post_meta($post_id, 'track_header', $track_header);
+    endif;
+
+	die();
+}
+add_action('wp_ajax_accordions_ajax_track_header', 'accordions_ajax_track_header');
+add_action('wp_ajax_nopriv_accordions_ajax_track_header', 'accordions_ajax_track_header');
+
+
+
+
+
+function accordions_ajax_import_json(){
+
+	$response = array();
+	$json_file = isset($_POST['json_file']) ? $_POST['json_file'] : '';
+	$string = file_get_contents($json_file);
+	$json_a = json_decode($string,true);
+
+
+	foreach ($json_a as $post_id=>$post_data){
+
+	    $meta_fields = $post_data['meta_fields'];
+		$title = $post_data['title'];
+
+		// Create post object
+		$my_post = array(
+			'post_title'    => $title,
+			'post_type' => 'accordions',
+			'post_status'   => 'publish',
+
+		);
+
+		$post_inserted_id = wp_insert_post( $my_post );
+
+		foreach ($meta_fields as $meta_key=>$meta_value){
+			update_post_meta( $post_inserted_id, $meta_key, $meta_value );
+        }
+
+
+
+
+    }
+
+
+	$response['json_a'] = $json_a;
+	//$response['string'] = $string;
+	//$response['json_file'] = $json_file;
+
+
+
+
+	echo json_encode( $response );
+
+
+
+	die();
+}
+add_action('wp_ajax_accordions_ajax_import_json', 'accordions_ajax_import_json');
+//add_action('wp_ajax_nopriv_accordions_ajax_import_json', 'accordions_ajax_import_json');
+
+
+
+
+
+
+
+add_shortcode('accordions_youtube', 'accordions_youtube');
+
+
+function accordions_youtube($atts, $content = null ){
+
+		$atts = shortcode_atts(
+			array(
+				'video_id' => "",
+				'width' => "560",	
+				'height' => "315",										
+
+				), $atts);
+		
+		$video_id = $atts['video_id'];
+		$width = $atts['width'];			
+		$height = $atts['height'];			
+		
+		$html = '';
+		$html.= '<iframe width="'.$width.'" height="'.$height.'" src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allowfullscreen></iframe>';
+
+		return $html;	
+	}
+
+
+
+
+
+
+
+
 
 
 
@@ -30,69 +142,49 @@ function accordions_posts_shortcode_display( $column, $post_id ) {
 		
     }
 }
+
 add_action( 'manage_accordions_posts_custom_column' , 'accordions_posts_shortcode_display', 10, 2 );
 
 
-function accordions_paratheme_dark_color($input_color)
-	{
-		if(empty($input_color))
-			{
-				return "";
-			}
-		else
-			{
-				$input = $input_color;
-			  
-				$col = Array(
-					hexdec(substr($input,1,2)),
-					hexdec(substr($input,3,2)),
-					hexdec(substr($input,5,2))
-				);
-				$darker = Array(
-					$col[0]/2,
-					$col[1]/2,
-					$col[2]/2
-				);
-		
-				return "#".sprintf("%02X%02X%02X", $darker[0], $darker[1], $darker[2]);
-			}
-
-		
-		
-	}
-	
-	function accordions_share_plugin()
-		{
-			
-			?>
-            <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwordpress.org%2Fplugins%2Faccordions&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=80&amp;appId=652982311485932" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:80px;" allowTransparency="true"></iframe>
-            
-            <br />
-            <!-- Place this tag in your head or just before your close body tag. -->
-            <script src="https://apis.google.com/js/platform.js" async defer></script>
-            
-            <!-- Place this tag where you want the +1 button to render. -->
-            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300" data-href="<?php echo accordions_share_url; ?>"></div>
-            
-            <br />
-            <br />
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo accordions_share_url; ?>" data-text="<?php echo accordions_plugin_name; ?>" data-via="ParaTheme" data-hashtags="WordPress">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 
 
-            <?php
-			
-			
-			
-		
-		
-		}
-	
-	
-	
 
-	
-	
-	
-	
+function accordions_paratheme_hex2rgb($hex) {
+   $hex = str_replace("#", "", $hex);
+
+   if(strlen($hex) == 3) {
+      $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+      $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+      $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+   } else {
+      $r = hexdec(substr($hex,0,2));
+      $g = hexdec(substr($hex,2,2));
+      $b = hexdec(substr($hex,4,2));
+   }
+   $rgb = $r.','.$g.','.$b;
+   //return implode(",", $rgb); // returns the rgb values separated by commas
+   return $rgb; // returns an array with the rgb values
+}
+
+
+
+
+
+
+
+
+
+
+function accordions_plugin_list_meta_links( $links ) {
+
+    $links['get_premium'] = '<a target="_blank" class="" style=" font-weight:bold;color:#f00;" href="https://www.pickplugins.com/product/accordions/?ref=dashboard">'.__('Buy Premium!', 'accordions').'</a>';
+
+
+    return $links;
+
+}
+add_filter( 'plugin_action_links_'.plugin_basename( __FILE__ ) , 'accordions_plugin_list_meta_links' );
+
+
+

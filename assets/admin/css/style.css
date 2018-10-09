@@ -4,20 +4,10 @@
 
 /*Admin CSS*/
 
-#accordions_metabox {
-  background: #f1f1f1 none repeat scroll 0 0;
-  border: medium none;
-  box-shadow: none;
-}
 
-#accordions_metabox .hndle {
-  background: rgb(96, 173, 252) none repeat scroll 0 0;
-  color: rgb(255, 255, 255);
-}
 
-#accordions_metabox .handlediv{
-  color: rgb(255, 255, 255);
-}
+
+
 
 
 
@@ -113,15 +103,12 @@
 #accordions_metabox .accordions-content .section-header {
   background: #a7e1ff none repeat scroll 0 0;
   padding: 10px;
+  margin-bottom: 2px;
 }
 
-#accordions_metabox .accordions-content .section-header:hover {
-
-  padding: 10px;
-}
 #accordions_metabox .accordions-content .section-header .move {
-	cursor: move;
-	padding: 10px;
+  cursor: move;
+  padding: 10px;
 }
 
 
@@ -129,6 +116,8 @@
   cursor: pointer;
   padding: 10px;
 }
+
+
 #accordions_metabox .items .expand-compress .fa-expand{ display:inline-block;}
 #accordions_metabox .items .expand-compress .fa-compress{ display:none;}
 
@@ -136,22 +125,28 @@
 #accordions_metabox .items.active .expand-compress .fa-compress{ display:inline-block;}
 
 
+#accordions_metabox .accordions-content .section-header:hover {
+
+
+}
+
+
 
 #accordions_metabox .accordions-content .accordions-title-preview {
   display: inline-block;
 }
-
 #accordions_metabox .accordions-content .section-header .removeaccordions {
-	background: rgb(255, 91, 64) none repeat scroll 0 0;
-	color: #fff;
-	cursor: pointer;
-	display: inline-block;
-	float: right;
-	padding: 2px 5px;
-	text-align: center;
+  background: rgb(255, 91, 64) none repeat scroll 0 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 4px 5px;
+  text-align: center;
+  vertical-align: top;
+  line-height: normal;
+  border-radius: 3px;
 }
-
-
 
 #accordions_metabox .accordions-content .section-header label {
   float: right;
@@ -192,7 +187,13 @@
   width: 50px;
 }
 
-
+#accordions_metabox .lazy_load_image {
+	border: 1px solid rgb(221, 221, 221);
+	cursor: pointer;
+	margin: 5px;
+	padding: 10px;
+	vertical-align: top;
+}
 
 
 .accordions-license{}
@@ -211,6 +212,9 @@
   color: #3ab5cf !important;
   text-decoration: underline;
 }
+
+
+
 
 
 
@@ -235,17 +239,20 @@
 }
 
 
+.accordions-admin .faq{}
+.accordions-admin .faq .group-title {
+  display: block;
+  font-weight: bold;
+  padding: 10px 0;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+.accordions-admin .faq .item {
+  padding-left: 20px;
+}
+.accordions-admin .faq .item a {
+  display: block;
+  font-size: 14px;
+  padding: 4px 0;
+  text-decoration: none;
+}
