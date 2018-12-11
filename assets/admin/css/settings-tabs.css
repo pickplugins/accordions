@@ -104,6 +104,19 @@
 }
 
 
+@media (max-width: 1440px){
+
+    .settings-tabs .setting-field .field-lable{
+        width: auto;
+        float: none;
+        font-size: 14px;
+    }
+    .settings-tabs .setting-field .field-input{
+        margin-left: 0px;
+    }
+    .settings-tabs .setting-field .description{}
+
+}
 
 
 

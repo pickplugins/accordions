@@ -49,6 +49,6 @@ include accordions_plugin_dir.'/templates/accordion/accordion-edit.php';
 
 
 ?>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo accordions_plugin_url; ?>assets/frontend/css/jquery-ui.css"/>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo accordions_plugin_url; ?>assets/global/css/themes.style.css"/>
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo accordions_plugin_url; ?>assets/global/css/fontawesome.min.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo accordions_plugin_url; ?>assets/frontend/css/jquery-ui.css?ver=20181018"/>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo accordions_plugin_url; ?>assets/global/css/themes.style.css?ver=20181018"/>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo accordions_plugin_url; ?>assets/global/css/fontawesome.min.css?ver=20181018"/>

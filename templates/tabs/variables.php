@@ -40,7 +40,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 		if(empty($accordions_lazy_load)){$accordions_lazy_load = 'yes';}	
 		
 		$accordions_lazy_load_src = get_post_meta( $post_id, 'accordions_lazy_load_src', true );
-		if(empty($accordions_lazy_load_src)){$accordions_lazy_load_src = accordions_plugin_url.'assets/frontend/gif/ajax-loader-1.gif';}		
+
 					
 		
 		$accordions_animate_style = get_post_meta( $post_id, 'accordions_animate_style', true );

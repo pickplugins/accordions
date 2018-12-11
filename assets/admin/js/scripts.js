@@ -41,29 +41,6 @@ jQuery(document).ready(function($)
         })
 
 
-		$(document).on('change', '#accordions_metabox #accordions_header_bg_opacity_hndl', function()
-			{
-
-				var val = $(this).val();
-				
-				$('#accordions_header_bg_opacity').val(val);
-				
-				
-				
-			})
-
-
-
-		$(document).on('change', '#accordions_metabox #accordions_items_content_bg_opacity_hndl', function()
-			{
-
-				var val = $(this).val();
-				
-				$('#accordions_items_content_bg_opacity').val(val);
-				
-				
-				
-			})
 
         $(document).on('click', '#accordions_metabox .expand-collapse', function() {
 

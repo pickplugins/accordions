@@ -3,8 +3,8 @@
 	Donate link: https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard
 	Tags: accordion, accordions, Responsive accordions, accordions plugin, jQuery accordions, accordions short-code, accordions Widget, accordions plugin wordpress, accordions plugin jquery, tabs, jquery tabs, tab, responsive tabs
 	Requires at least: 3.8
-	Tested up to: 4.9
-	Stable tag: 2.1.0
+	Tested up to: 5.0
+	Stable tag: 2.1.7
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,29 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 == Changelog ==
+
+
+	= 2.1.7 =
+    * 08/12/2018 - fix - accordion header html input issue fixed.
+
+	= 2.1.6 =
+    * 11/11/2018 - fix - remove fontawesome twice loaded issue
+
+	= 2.1.5 =
+    * 29/10/2018 - fix - Icons issue fixed.
+
+	= 2.1.4 =
+    * 28/10/2018 - fix - fixed js error on WooCommerce product page.
+    * 28/10/2018 - fix - responsive issue on accordion edit page.
+
+	= 2.1.3 =
+    * 18/10/2018 - fix - minor php error fixed.
+
+	= 2.1.2 =
+    * 10/10/2018 - fix - Icon not saved issue fixed.
+
+	= 2.1.1 =
+    * 10/10/2018 - fix - Minor js issue fixed.
 
 	= 2.1.0 =
     * 08/10/2018 - update - font-awesome 5 added.

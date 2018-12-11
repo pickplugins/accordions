@@ -129,7 +129,7 @@ class settings_tabs_field{
         $details 			= isset( $option['details'] ) ? $option['details'] : "";
 
 
-        $option_value = empty($option_value) ? $default_value : $value;
+        $option_value = empty($value) ? $default_value : $value;
 
 
         ?>

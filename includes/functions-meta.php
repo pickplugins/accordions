@@ -813,24 +813,12 @@ function settings_tabs_field_accordion_content($option, $post_id){
 
                 $time = time();
 
-                if(empty($accordions_content_title))
-                {
-                    $accordions_content_title = array($time=>'Demo Title');
-                }
+
                 $i=0;
-                foreach ($accordions_content_title as $accordions_key => $accordions_title)
-                {
-
-                    if(empty($accordions_content_body[$accordions_key]))
-                    {
-                        $accordions_content_body[$accordions_key] = 'Demo Content';
-                    }
 
 
-
-
-
-
+                if(!empty($accordions_content_title)):
+                foreach ($accordions_content_title as $accordions_key => $accordions_title){
 
                     ?>
 
@@ -868,7 +856,7 @@ function settings_tabs_field_accordion_content($option, $post_id){
                         <div class="section-panel">
 
                             <strong><?php _e('Header text', 'accordions'); ?></strong> <br>
-                            <input class="accordions_content_title" style="width:80%" placeholder="<?php echo __('Accordion header text', 'accordions'); ?>" type="text" name="accordions_content_title[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_title)) echo $accordions_title; //htmlentities ?>" /><br><br>
+                            <input class="accordions_content_title" style="width:80%" placeholder="<?php echo __('Accordion header text', 'accordions'); ?>" type="text" name="accordions_content_title[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_title)) echo esc_attr($accordions_title); //htmlentities ?>" /><br><br>
                             <strong><?php _e('Content', 'accordions'); ?></strong> <br>
                             <?php
 
@@ -886,54 +874,39 @@ function settings_tabs_field_accordion_content($option, $post_id){
                     $i++;
                 }
 
+                else:
+                    ?>
+                    <div class="items"><?php echo __('Click "Add" button to add your accordion content', 'accordions'); ?></div>
+                    <?php
+
+                endif;
+
                 ?>
 
             </div>
 
+
             <script>
-                jQuery(document).ready(function($)
-                {
+                jQuery(document).ready(function($){
                     $(function() {
                         $( "#accordions-content" ).sortable({ handle: '.move' });
-                        //$( ".items-container" ).disableSelection();
                     });
-
-                    // to add editor on textarea
-                    tinyMCE.init({
-                        mode : "none",
-                        statusbar: false,
-                        menubar: false,
-                        statusbar: true,
-                        setup: function (editor) {
-                            editor.on('change', function () {
-                                editor.save();
-                            });
-
-                        },
-                    });
-
-
-
-                    $(document).on('click', '.accordions-content-buttons .add-accordions', function()
-                    {
-
+                    $(document).on('click', '.accordions-content-buttons .add-accordions', function(){
                         var unique_key = $.now();
-
                         $("#accordions_metabox .accordions-content").append('<div class="items" valign="top"><div class="section-header"><span class="move"><i class="fa fa-bars"></i></span><span class="expand-compress"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></span><div class="accordions-title-preview">Demo Title #'+unique_key+'</div><span class="removeaccordions">Remove</span><label class="switch"><input type="checkbox" value="1" name="accordions_hide['+unique_key+']">Hide on Frontend</label></div><div class="section-panel"><strong><?php _e('Header text','accordions'); ?></strong> <br><input style="width:80%" placeholder="<?php echo __('Accordion header text', 'accordions'); ?>" type="text" name="accordions_content_title['+unique_key+']" value="" /><br> <br><strong><?php _e('Content', 'accordions'); ?></strong> <br><textarea class="accordion-content-textarea" id="content-'+unique_key+'" placeholder="Accordion content" name="accordions_content_body['+unique_key+']" ></textarea></div></div>');
-
-                        //alert(unique_key);
-
-
-                        tinyMCE.execCommand('mceAddEditor', false, 'content-'+unique_key);
-
+                        wp.editor.initialize( 'content-'+unique_key, {
+                            mediaButtons: true,
+                            tinymce:      {
+                                toolbar1: 'bold,italic,bullist,numlist,link,blockquote,alignleft,aligncenter,alignright,strikethrough,hr,forecolor,pastetext,removeformat,codeformat,undo,redo'
+                            },
+                            quicktags:    true,
+                        } );
                     })
-
                 })
-
             </script>
 
 
-            <p class="description"><?php if(!empty($details)) echo $details;  ?></p>
+
         </div>
     </div>
 

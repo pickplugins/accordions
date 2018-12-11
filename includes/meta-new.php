@@ -75,6 +75,7 @@ function meta_boxes_accordions_product_input( $post ) {
 	$accordions_id = get_post_meta( $post->ID, 'accordions_id', true );
 	$accordions_tab_title = get_post_meta( $post->ID, 'accordions_tab_title', true );
 
+
 	//var_dump($accordions_id);
 	?>
 
@@ -413,8 +414,8 @@ function meta_boxes_accordions_save( $post_id ) {
 	$accordions_items_content_padding = sanitize_text_field( $_POST['accordions_items_content_padding'] );
 	$accordions_items_content_margin = sanitize_text_field( $_POST['accordions_items_content_margin'] );			
 	
-	$accordions_content_title = stripslashes_deep( $_POST['accordions_content_title'] );	
-	$accordions_content_body = stripslashes_deep( $_POST['accordions_content_body'] );
+	$accordions_content_title = isset($_POST['accordions_content_title']) ? stripslashes_deep( $_POST['accordions_content_title'] ) : array();
+	$accordions_content_body = isset($_POST['accordions_content_body']) ? stripslashes_deep( $_POST['accordions_content_body'] ) : array();
 	
 
 
