@@ -56,7 +56,9 @@ function meta_boxes_accordions(){
 
     $screens = array( 'accordions' );
     foreach ( $screens as $screen ){
-            add_meta_box('accordions_metabox',__( 'Accordions Options', 'accordions' ),'meta_boxes_accordions_input', $screen);
+
+        add_meta_box('accordions_metabox',__( 'Accordions Options', 'accordions' ),'meta_boxes_accordions_input', $screen);
+        add_meta_box('accordions_side_metabox',__( 'Accordions Info', 'accordions' ),'meta_boxes_accordions_side', $screen,'side');
         }
 
 	add_meta_box('accordions_product_metabox',__( 'Product FAQ Tab', 'accordions' ),'meta_boxes_accordions_product_input', 'product', 'side', 'high');
@@ -256,7 +258,7 @@ function meta_boxes_accordions_input( $post ) {
                             <?php echo do_shortcode("[accordions id='".$post_id."']"); ?>
 
                             <p>Tabs</p>
-                            <?php //echo do_shortcode("[accordions_tabs id='".$post_id."']"); ?>
+                            <?php echo do_shortcode("[accordions_tabs id='".$post_id."']"); ?>
                         </div>
 
                     </div>
@@ -618,3 +620,104 @@ add_action( 'save_post', 'meta_boxes_accordions_product_save' );
 
 
 
+
+
+function meta_boxes_accordions_side( $post ) {
+    $class_accordions_support = new class_accordions_support();
+    ?>
+    <div class="post-grid-meta-box">
+
+        <ul>
+            <li>Version: <?php echo accordions_version; ?></li>
+            <li>Tested WP: 5.1</li>
+        </ul>
+
+        <h3>Documentation</h3>
+        <a class="button" href="http://pickplugins.com/docs/documentation/accordions/?ref=dashboard" target="_blank">Documentation</a><p class="description">Before asking, submitting reviews please take a look on our documentation, may help your issue fast.</p>
+
+        <h3>Looking for support?</h3>
+        <a class="button" href="https://www.pickplugins.com/questions/?ref=dashboard" target="_blank">Ask Question</a><p class="description">Its free and you can ask any question about our plugins and get support fast.</p>
+
+
+
+        <h3>Provide your feedback</h3>
+
+        <a class="button" href="https://wordpress.org/support/plugin/accordions/reviews/?filter=5" target="_blank">Submit Reviews</a> <a class="button" href="https://wordpress.org/support/plugin/accordions/#new-topic-0" target="_blank">Ask wordpress.org</a><p>We spent thousand+ hours to development on this plugin, please submit your reviews wisely.</p><p>If you have any issue with this plugin please submit our forums or contact our support first.</p><p class="description">Your feedback and reviews are most important things to keep our development on track. If you have time please submit us five star <span style="color: orange"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span> reviews.</p>
+
+
+
+
+
+        <?php
+
+
+        ?>
+
+
+
+        <?php
+        $video_tutorials =  $class_accordions_support->faq();
+        if(!empty($video_tutorials)):
+            ?>
+            <div class="faq">
+                <h3>FAQ</h3>
+                <ul>
+                    <?php
+                    foreach($video_tutorials as $item){
+                        ?>
+                        <li class="item">
+                            <a target="_blank" href="<?php echo $item['url']; ?>"><i class="far fa-dot-circle"></i> <?php echo $item['title']; ?></a>
+
+                        </li>
+                        <?php
+                    }
+
+                    ?>
+                </ul>
+            </div>
+        <?php
+
+        endif;
+        ?>
+
+
+
+        <?php
+        $video_tutorials =  $class_accordions_support->video_tutorials();
+        if(!empty($video_tutorials)):
+            ?>
+            <div class="video-tutorials">
+                <h3>Video Tutorials</h3>
+                <ul>
+                    <?php
+                    foreach($video_tutorials as $item){
+                        ?>
+                        <li class="item">
+                            <a target="_blank" href="<?php echo $item['video_url']; ?>"><i class="far fa-dot-circle"></i> <?php echo $item['title']; ?></a>
+
+                        </li>
+                        <?php
+                    }
+
+                    ?>
+                </ul>
+            </div>
+        <?php
+
+        endif;
+        ?>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <?php
+
+}

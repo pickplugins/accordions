@@ -232,7 +232,7 @@ $args = array(
     ),
 );
 
-$WPAdminSettings = new WPAdminSettings( $args );
+//$WPAdminSettings = new WPAdminSettings( $args );
 
 
 
@@ -512,7 +512,7 @@ $export_import_options = array(
 $args = array(
     'add_in_menu'       => true,
     'menu_type'         => 'submenu',
-    'menu_title'        => __( 'Settings', 'accordions' ),
+    'menu_title'        => __( 'Export/Import', 'accordions' ),
     'page_title'        => __( 'Accordion - Settings', 'accordions' ),
     'menu_page_title'   => __( 'Accordion - Settings', 'accordions' ),
     'capability'        => "manage_options",

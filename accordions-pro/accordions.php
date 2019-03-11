@@ -22,14 +22,24 @@ class Accordions{
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
 
 
+        define('accordions_version', '2.2.28' );
+        define('accordions_server_url', 'https://www.pickplugins.com' );
+        define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
+
+
         require_once( plugin_dir_path( __FILE__ ) . 'includes/accordions-meta-box.php');
         require_once( plugin_dir_path( __FILE__ ) . 'includes/functions/functions-accordions-meta-box.php');
         require_once( plugin_dir_path( __FILE__ ) . 'includes/functions/functions-duplicate-post.php');
         require_once( plugin_dir_path( __FILE__ ) . 'includes/functions/functions-wc.php');
+        require_once( plugin_dir_path( __FILE__ ) . 'includes/functions/functions-accordions-settings.php');
+
 
         require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/class-functions.php');
+        require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/class-accordions-support.php');
 
-
+        require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/class-wp-autoupdate.php');
+        require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/class-accordions-license.php');
+        require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/class-settings.php');
         require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/class-settings-tabs.php');
 
 		require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php');
