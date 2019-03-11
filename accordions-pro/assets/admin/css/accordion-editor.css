@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+
+.accordion-builder{}
+
+.accordion-builder .columns{}
+.accordion-builder .columns .col-50{
+    display: inline-block;
+    width: 49.5%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.accordion-builder .columns .col-inner{
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

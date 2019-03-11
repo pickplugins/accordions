@@ -1,0 +1,42 @@
+/*
+Admin css
+*/
+
+.post-grid-license{}
+
+
+.post-grid-license .items{}
+
+.post-grid-license .items .item {
+	width: 200px;
+	display: inline-block;
+	padding: 10px;
+	background: #ddd;
+}
+
+
+.post-grid-license .items .status.active {
+	background: #4bd49a;
+	color: #fff;
+}
+
+.post-grid-license .items .status.inactive {
+	background: #fe7d78;
+	color: #fff;
+}
+
+
+
+.post-grid-license .items .expiry.expired {
+	background: #fe7d78;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+

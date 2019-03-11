@@ -1,0 +1,118 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*Admin CSS*/
+
+
+.accordions-meta-box{
+  background: #ffffff none repeat scroll 0 0;
+}
+
+#accordions_metabox .hndle {
+  background: rgb(96, 173, 252) none repeat scroll 0 0;
+  color: rgb(255, 255, 255);
+}
+
+#accordions_metabox {
+  background: #f1f1f1 none repeat scroll 0 0;
+  border: medium none;
+  box-shadow: none;
+}
+
+
+
+#accordions_metabox .accordions_icons_custom {
+  margin-top: 15px;
+}
+
+#accordions_metabox .accordions_icons_custom_plus {
+  background: none repeat scroll 0 0 / 100% auto rgb(221, 221, 221);
+  display: inline-block;
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+  cursor: pointer;
+  border: 1px solid rgb(255, 89, 16);
+  font-size: 30px;
+  vertical-align: top;
+  text-align: center;
+}
+
+#accordions_metabox .accordions_icons_custom_minus {
+  background: none repeat scroll 0 0 / 100% auto rgb(221, 221, 221);
+  display: inline-block;
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+  cursor: pointer;
+  border: 1px solid rgb(255, 89, 16);
+  font-size: 30px;
+  vertical-align: top;
+  text-align: center;
+}
+
+
+
+#accordions_metabox .section-icon-plus{}
+#accordions_metabox .section-icon-plus i {
+  border: 1px solid #fff;
+  font-size: 14px;
+  padding: 5px;
+}
+
+
+#accordions_metabox .section-icon-minus{}
+#accordions_metabox .section-icon-minus i {
+  border: 1px solid #fff;
+  font-size: 14px;
+  padding: 5px;
+}
+
+
+
+
+
+
+#accordions_metabox .bg_image_src {
+  border: 1px solid rgb(221, 221, 221);
+  cursor: pointer;
+  height: 50px;
+  margin: 5px;
+  vertical-align: top;
+  width: 50px;
+}
+
+#accordions_metabox .lazy_load_image {
+	border: 1px solid rgb(221, 221, 221);
+	cursor: pointer;
+	margin: 5px;
+	padding: 10px;
+	vertical-align: top;
+}
+
+
+#accordions_metabox .hide-unhide{
+  margin: 0 5px;
+}
+#accordions_metabox .hide-unhide input{
+  display: none;
+}
+#accordions_metabox .hide-unhide.active .hide{
+  display: none;
+}
+
+#accordions_metabox .hide-unhide.active .unhide{
+  display: inline;
+}
+
+
+#accordions_metabox .hide-unhide .hide{}
+
+#accordions_metabox .hide-unhide .unhide{
+  display: none;
+}
+
+
+
+
