@@ -94,11 +94,7 @@ array_multisort($tabs_sorted, SORT_ASC, $accordions_settings_tabs);
 
             update_option('accordions_license', $accordions_license);
 
-            $accordions_track_product_view = sanitize_text_field($_POST['accordions_track_product_view']);
-            update_option('accordions_track_product_view', $accordions_track_product_view);
 
-            $accordions_load_script_pages = sanitize_text_field($_POST['accordions_load_script_pages']);
-            update_option('accordions_load_script_pages', $accordions_load_script_pages);
 
 
 

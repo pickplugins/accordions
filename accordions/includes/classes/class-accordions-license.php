@@ -26,8 +26,7 @@ if( ! class_exists( 'class_accordions_license' ) ) {
 
         }
 
-        public function check_plugin_update()
-        {
+        public function check_plugin_update(){
 
             $accordions_license = get_option('accordions_license');
             $license_key = isset($accordions_license['license_key']) ? $accordions_license['license_key'] : '';
@@ -45,8 +44,7 @@ if( ! class_exists( 'class_accordions_license' ) ) {
         }
 
 
-        public function check_license_on_server($license_key)
-        {
+        public function check_license_on_server($license_key){
 
 
             if (is_multisite()) {

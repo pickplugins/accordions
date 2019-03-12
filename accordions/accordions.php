@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Accordions - Premium
+Plugin Name: Accordions by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard
 Description: Fully responsive and mobile ready accordion grid for wordpress.
-Version: 3.2.4
+Version: 3.2.2
 Author: PickPlugins
 Author URI: http://pickplugins.com
 Text Domain: accordions
@@ -22,7 +22,7 @@ class Accordions{
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
 
 
-        define('accordions_version', '2.2.28' );
+        define('accordions_version', '3.2.2' );
         define('accordions_server_url', 'https://www.pickplugins.com' );
         define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
 
@@ -46,10 +46,10 @@ class Accordions{
 
 
 
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/class-shortcodes.php');
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/classes/class-shortcodes.php');
 
-        require_once( plugin_dir_path( __FILE__ ) . 'includes/class-WPAdminSettings.php');
-        require_once( plugin_dir_path( __FILE__ ) . 'includes/class-settings.php');
+        //require_once( plugin_dir_path( __FILE__ ) . 'includes/class-WPAdminSettings.php');
+        //require_once( plugin_dir_path( __FILE__ ) . 'includes/class-settings.php');
 
 
 
@@ -144,7 +144,7 @@ class Accordions{
 
 
 		wp_enqueue_style('accordions_admin_style', plugins_url( 'assets/admin/css/style.css', __FILE__ ));
-		//wp_enqueue_style('fontawesome', plugins_url( 'assets/global/css/fontawesome.min.css', __FILE__ ));
+		//wp_enqueue_style('fontawesome-4', plugins_url( 'assets/global/css/fontawesome.min.css', __FILE__ ));
         wp_enqueue_style('fontawesome-5.min', plugins_url( 'assets/global/css/fontawesome-5.min.css', __FILE__ ));
 
         wp_enqueue_script('accordion-editor', plugins_url( 'assets/admin/js/accordion-editor.js' , __FILE__ ) , array( 'jquery' ));

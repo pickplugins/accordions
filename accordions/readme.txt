@@ -3,8 +3,8 @@
 	Donate link: https://www.pickplugins.com/product/accordion/
 	Tags: accordion, accordions, Responsive accordions, accordions plugin, jQuery accordions, accordions short-code, accordions Widget, accordions plugin wordpress, accordions plugin jquery
 	Requires at least: 3.8
-	Tested up to: 5.0
-	Stable tag: 3.2.4
+	Tested up to: 5.1
+	Stable tag: 3.2.5
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 == Changelog ==
+
+    = 3.2.5=
+    * 12/03/2019 - add - automatic plugin update,
 
     = 3.2.4=
     * 04/02/2019 - add - tabs preview,
