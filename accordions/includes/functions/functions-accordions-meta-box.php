@@ -168,31 +168,35 @@ function settings_tabs_content_options($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
 
-    $accordions_child = get_post_meta( $post_id, 'accordions_child', true );
-    $enable_search = get_post_meta( $post_id, 'enable_search', true );
-    $accordions_collapsible = get_post_meta( $post_id, 'accordions_collapsible', true );
-    $accordions_expaned_other = get_post_meta( $post_id, 'accordions_expaned_other', true );
-    $accordions_heightStyle = get_post_meta( $post_id, 'accordions_heightStyle', true );
+    $accordions_child           = get_post_meta( $post_id, 'accordions_child', true );
+    $enable_search              = get_post_meta( $post_id, 'enable_search', true );
+    $accordions_collapsible     = get_post_meta( $post_id, 'accordions_collapsible', true );
+    $accordions_expaned_other   = get_post_meta( $post_id, 'accordions_expaned_other', true );
+    $accordions_heightStyle     = get_post_meta( $post_id, 'accordions_heightStyle', true );
     $accordions_click_scroll_top = get_post_meta( $post_id, 'accordions_click_scroll_top', true );
     $accordions_click_scroll_top_offset = get_post_meta( $post_id, 'accordions_click_scroll_top_offset', true );
-    $accordions_header_toggle = get_post_meta( $post_id, 'accordions_header_toggle', true );
-    $accordions_active_event = get_post_meta( $post_id, 'accordions_active_event', true );
-    $accordions_lazy_load = get_post_meta( $post_id, 'accordions_lazy_load', true );
-    $accordions_lazy_load_src = get_post_meta( $post_id, 'accordions_lazy_load_src', true );
+    $accordions_header_toggle   = get_post_meta( $post_id, 'accordions_header_toggle', true );
+    $accordions_active_event    = get_post_meta( $post_id, 'accordions_active_event', true );
+    $accordions_lazy_load       = get_post_meta( $post_id, 'accordions_lazy_load', true );
+    $accordions_lazy_load_src   = get_post_meta( $post_id, 'accordions_lazy_load_src', true );
 
-    $accordions_animate_style = get_post_meta( $post_id, 'accordions_animate_style', true );
-    $accordions_animate_delay = get_post_meta( $post_id, 'accordions_animate_delay', true );
-    $accordions_hide_edit = get_post_meta( $post_id, 'accordions_hide_edit', true );
+    $accordions_animate_style   = get_post_meta( $post_id, 'accordions_animate_style', true );
+    $accordions_animate_delay   = get_post_meta( $post_id, 'accordions_animate_delay', true );
+    $accordions_hide_edit       = get_post_meta( $post_id, 'accordions_hide_edit', true );
     $accordions_expand_collapse_display = get_post_meta( $post_id, 'accordions_expand_collapse_display', true );
     $accordions_tabs_active_event = get_post_meta( $post_id, 'accordions_tabs_active_event', true );
     $accordions_tabs_collapsible = get_post_meta( $post_id, 'accordions_tabs_collapsible', true );
-    $accordions_tabs_vertical = get_post_meta( $post_id, 'accordions_tabs_vertical', true );
+    $accordions_tabs_vertical   = get_post_meta( $post_id, 'accordions_tabs_vertical', true );
     $accordions_tabs_vertical_width_ratio = get_post_meta( $post_id, 'accordions_tabs_vertical_width_ratio', true );
     $accordions_tabs_icon_toggle = get_post_meta( $post_id, 'accordions_tabs_icon_toggle', true );
 
+    $accordions_width           = get_post_meta( $post_id, 'accordions_width', true );
 
+    $accordions_width_large     = !empty($accordions_width['large']) ? $accordions_width['large'] : '100%';
+    $accordions_width_medium    = !empty($accordions_width['medium']) ? $accordions_width['medium'] : '100%';
+    $accordions_width_small     = !empty($accordions_width['small']) ? $accordions_width['small'] : '100%';
 
-    //var_dump($accordions_tabs_vertical_width_ratio);
+    //var_dump($accordions_width_large);
 
     ?>
 
@@ -202,6 +206,43 @@ function settings_tabs_content_options($tab, $post_id){
 
 
         <?php
+        ob_start();
+        ?>
+        <div class="accordion_width">
+            <input type="text" placeholder="400px" name="accordions_width[large]" value="<?php echo $accordions_width_large; ?>">
+            <p class="description">Accordion width in large screen, larger than 1200px</p>
+
+            <input type="text" placeholder="80%" name="accordions_width[medium]" value="<?php echo $accordions_width_medium; ?>">
+            <p class="description">Accordion width in medium screen, min 768px & max 1199px</p>
+
+            <input type="text" placeholder="100%" name="accordions_width[small]" value="<?php echo $accordions_width_small; ?>">
+            <p class="description">Accordion width in small screen, min 0px & max 767px</p>
+        </div>
+        <?php
+        $html = ob_get_clean();
+        $args = array(
+            'id'		=> 'accordion_width',
+            'title'		=> __('Accordion width','accordions'),
+            'details'	=> '',
+            'type'		=> 'custom_html',
+            'html'		=> $html,
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $args = array(
             'id'		=> 'accordions_child',
             'title'		=> __('Use for child','accordions'),
@@ -377,7 +418,7 @@ function settings_tabs_content_options($tab, $post_id){
             'title'		=> __('Lazy load image source','accordions'),
             'details'	=> __('You can set custom image source for lazy load icon.','accordions'),
             'type'		=> 'text',
-            'placeholder' => '',
+            'placeholder' => 'http://domain.com/url-of-image-source.png',
             'value'		=> $accordions_lazy_load_src,
         );
 
@@ -477,6 +518,28 @@ function settings_tabs_content_options($tab, $post_id){
         );
 
         $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         ?>
 
 
@@ -627,6 +690,7 @@ function settings_tabs_content_style($tab, $post_id){
     $accordions_default_bg_color = get_post_meta( $post_id, 'accordions_default_bg_color', true );
     $accordions_header_bg_opacity = get_post_meta( $post_id, 'accordions_header_bg_opacity', true );
     $accordions_active_bg_color = get_post_meta( $post_id, 'accordions_active_bg_color', true );
+    $accordions_items_title_color = get_post_meta( $post_id, 'accordions_items_title_color', true );
     $accordions_items_title_color_hover = get_post_meta( $post_id, 'accordions_items_title_color_hover', true );
     $accordions_items_title_font_family = get_post_meta( $post_id, 'accordions_items_title_font_family', true );
     $accordions_items_title_font_size = get_post_meta( $post_id, 'accordions_items_title_font_size', true );
@@ -634,6 +698,7 @@ function settings_tabs_content_style($tab, $post_id){
     $accordions_items_title_margin = get_post_meta( $post_id, 'accordions_items_title_margin', true );
     $accordions_items_content_color = get_post_meta( $post_id, 'accordions_items_content_color', true );
     $accordions_items_content_font_family = get_post_meta( $post_id, 'accordions_items_content_font_family', true );
+    $accordions_items_content_font_size = get_post_meta( $post_id, 'accordions_items_content_font_size', true );
     $accordions_items_content_bg_color = get_post_meta( $post_id, 'accordions_items_content_bg_color', true );
     $accordions_items_content_bg_opacity = get_post_meta( $post_id, 'accordions_items_content_bg_opacity', true );
     $accordions_items_content_padding = get_post_meta( $post_id, 'accordions_items_content_padding', true );
@@ -641,6 +706,7 @@ function settings_tabs_content_style($tab, $post_id){
     $accordions_container_padding = get_post_meta( $post_id, 'accordions_container_padding', true );
     $accordions_container_bg_color = get_post_meta( $post_id, 'accordions_container_bg_color', true );
     $accordions_bg_img = get_post_meta( $post_id, 'accordions_bg_img', true );
+    $accordions_container_text_align = get_post_meta( $post_id, 'accordions_container_text_align', true );
 
 
     ?>
@@ -654,7 +720,7 @@ function settings_tabs_content_style($tab, $post_id){
         $class_accordions_functions = new class_accordions_functions();
         $accordions_themes_list = $class_accordions_functions->accordions_themes();
 
-        //var_dump($accordions_themes_list);
+
 
 
         $args = array(
@@ -859,7 +925,7 @@ function settings_tabs_content_style($tab, $post_id){
             'title'		=> __('Accordions header font color.','accordions'),
             'details'	=> __('Font color for accordion headers','accordions'),
             'type'		=> 'colorpicker',
-            'value'		=> $accordions_themes,
+            'value'		=> $accordions_items_title_color,
             'placeholder' => '',
         );
 
@@ -887,7 +953,7 @@ function settings_tabs_content_style($tab, $post_id){
             'details'	=> __('Choose font family for header text','accordions'),
             'type'		=> 'text',
             'value'		=> $accordions_items_title_font_family,
-            'placeholder' => '',
+            'placeholder' => 'Open Sans',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -900,7 +966,7 @@ function settings_tabs_content_style($tab, $post_id){
             'details'	=> __('Choose font size for header text','accordions'),
             'type'		=> 'text',
             'value'		=> $accordions_items_title_font_size,
-            'placeholder' => '',
+            'placeholder' => '15px',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -926,7 +992,7 @@ function settings_tabs_content_style($tab, $post_id){
             'details'	=> __('Choose header area margin','accordions'),
             'type'		=> 'text',
             'value'		=> $accordions_items_title_margin,
-            'placeholder' => '',
+            'placeholder' => '10px',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -965,8 +1031,8 @@ function settings_tabs_content_style($tab, $post_id){
             'title'		=> __('Accordions content font family.','accordions'),
             'details'	=> __('You can set custom font family for accordion content','accordions'),
             'type'		=> 'text',
-            'value'		=> $accordions_themes,
-            'placeholder' => '',
+            'value'		=> $accordions_items_content_font_family,
+            'placeholder' => 'Open Sans',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -980,8 +1046,8 @@ function settings_tabs_content_style($tab, $post_id){
             'title'		=> __('Accordions content font size.','accordions'),
             'details'	=> __('You can set custom font size for accordion content','accordions'),
             'type'		=> 'text',
-            'value'		=> $accordions_items_content_font_family,
-            'placeholder' => '',
+            'value'		=> $accordions_items_content_font_size,
+            'placeholder' => '14px',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -1025,7 +1091,7 @@ function settings_tabs_content_style($tab, $post_id){
             'details'	=> __('You can set custom padding for accordion content','accordions'),
             'type'		=> 'text',
             'value'		=> $accordions_items_content_padding,
-            'placeholder' => '',
+            'placeholder' => '10px',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -1039,7 +1105,7 @@ function settings_tabs_content_style($tab, $post_id){
             'details'	=> __('You can set custom margin for accordion content','accordions'),
             'type'		=> 'text',
             'value'		=> $accordions_items_content_margin,
-            'placeholder' => '',
+            'placeholder' => '10px',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -1085,7 +1151,7 @@ function settings_tabs_content_style($tab, $post_id){
             'title'		=> __('Container background color.','accordions'),
             'details'	=> __('Set container background color','accordions'),
             'type'		=> 'colorpicker',
-            'value'		=> $accordions_themes,
+            'value'		=> $accordions_container_bg_color,
             'placeholder' => '',
 
         );
@@ -1099,7 +1165,7 @@ function settings_tabs_content_style($tab, $post_id){
             'title'		=> __('Container text align.','accordions'),
             'details'	=> __('Set container text align','accordions'),
             'type'		=> 'select',
-            'value'		=> $accordions_container_bg_color,
+            'value'		=> $accordions_container_text_align,
             'args'		=> array(
                 'left'	=> __('Left','accordions'),
                 'right'	=> __('Right','accordions'),
@@ -1120,7 +1186,7 @@ function settings_tabs_content_style($tab, $post_id){
             'details'	=> __('Set container background image','accordions'),
             'type'		=> 'text',
             'value'		=> $accordions_bg_img,
-            'placeholder' => '',
+            'placeholder' => 'http://domain.com/url-of-image-source.png',
 
         );
 
@@ -1253,7 +1319,7 @@ function settings_tabs_content_content($tab, $post_id){
 
 
                             <strong><?php _e('Header background image url for this section', 'accordions'); ?></strong> <br>
-                            <input type="text" placeholder="Image URL" name="accordions_header_bg_img[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_header_bg_img[$accordions_key])) echo $accordions_header_bg_img[$accordions_key]; ?>" />   <br> <br>
+                            <input type="text" placeholder="http://domain.com/url-of-image-source.png" name="accordions_header_bg_img[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_header_bg_img[$accordions_key])) echo $accordions_header_bg_img[$accordions_key]; ?>" />   <br> <br>
 
                             <strong><?php _e('Header text', 'accordions'); ?></strong> <br>
                             <input class="accordions_content_title" style="width:80%" placeholder="<?php echo __('Accordion header text', 'accordions'); ?>" type="text" name="accordions_content_title[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_title)) echo esc_attr($accordions_title); //htmlentities ?>" /><br><br>
@@ -1410,211 +1476,6 @@ function settings_tabs_content_content($tab, $post_id){
 }
 
 
-//add_action('settings_tabs_field_accordion_content', 'settings_tabs_field_accordion_content', 10, 2);
-function settings_tabs_field_accordion_content($option){
-
-    $id 			= isset( $option['id'] ) ? $option['id'] : "";
-    $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
-    $value 	 		= get_option( $id );
-
-    $title			= isset( $option['title'] ) ? $option['title'] : "";
-    $details 			= isset( $option['details'] ) ? $option['details'] : "";
-
-
-    $post_id = get_the_id();
-
-    $accordions_content_title = get_post_meta($post_id,'accordions_content_title', true);
-    $accordions_content_body = get_post_meta($post_id,'accordions_content_body', true);
-    $accordions_content_title_toggled = get_post_meta($post_id,'accordions_content_title_toggled', true);
-    $accordions_section_icon_plus = get_post_meta($post_id,'accordions_section_icon_plus', true);
-    $accordions_section_icon_minus = get_post_meta($post_id,'accordions_section_icon_minus', true);
-    $accordions_hide = get_post_meta($post_id,'accordions_hide', true);
-    $accordions_bg_color = get_post_meta($post_id,'accordions_bg_color', true);
-    $accordions_header_bg_img = get_post_meta($post_id,'accordions_header_bg_img', true);
-
-    $accordions_active_accordion = get_post_meta($post_id,'accordions_active_accordion', true);
-
-    //var_dump($accordions_active_accordion);
-
-
-    ?>
-    <div class="setting-field">
-        <div class="field-lable"><?php if(!empty($title)) echo $title;  ?></div>
-        <div class="field-input">
-
-            <div class="accordions-content-buttons" >
-                <div class="button add-accordions"><?php _e('Add', 'accordions'); ?></div>
-                <div class="button expand-collapse"><?php _e('Expand all', 'accordions'); ?></div>
-                <div class="button reset-active"><?php _e('Reset Active', 'accordions'); ?></div>
-                <br />
-                <br />
-            </div>
-
-            <div class="accordions-content expandable" id="accordions-content">
-
-                <?php
-                // $total_row = count($accordions_content_title);
-
-                $time = time();
-
-
-                $i=0;
-                if(!empty($accordions_content_title)):
-                foreach ($accordions_content_title as $accordions_key => $accordions_title){
-                    ?>
-
-                    <div class="item">
-
-                        <div class="header">
-
-                            <span class="move"><i class="fas fa-sort"></i></span>
-                            <span class="expand-compress"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></span>
-
-                            <div class="accordions-title-preview">
-                                <?php if(!empty($accordions_title)) echo $accordions_title; ?>
-                            </div>
-
-
-
-                            <?php
-
-                            if(!empty($accordions_hide[$accordions_key]))
-                            {
-                                $checked = 'checked';
-                            }
-                            else
-                            {
-                                $checked = '';
-                            }
-
-
-                            ?>
-
-                            <label><input  type="checkbox" name="accordions_hide[<?php echo $accordions_key; ?>]" value="1" <?php echo $checked; ?> /><?php _e('Hide on Frontend', 'accordions'); ?> </label>
-
-                            <?php
-
-                            //var_dump($accordions_active_accordion);
-
-                            //$accordions_active_accordion = '';
-
-                            if($accordions_active_accordion == $i)
-                            {
-                                $checked_active = 'checked';
-                            }
-                            else
-                            {
-                                $checked_active = '';
-                            }
-
-
-                            ?>
-
-
-                            <label> <input  type="radio" name="accordions_active_accordion" value="<?php echo $i; ?>" <?php echo $checked_active; ?> /><?php _e('Active', 'accordions'); ?> </label>
-
-
-                        </div>
-                        <div class="options">
-
-                            <strong><?php _e('Section Icons, <a href="https://fontawesome.com/icons">fontawesome</a> icon id', 'accordions'); ?></strong> <br>
-                            <div class="section-icon-plus">
-                                <i class="fa fa-chevron-up"></i>
-                                <input type="text" placeholder="fa-chevron-up" class="accordions_section_icon_plus" section-id="<?php echo $accordions_key; ?>" name="accordions_section_icon_plus[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_section_icon_plus[$accordions_key])) echo $accordions_section_icon_plus[$accordions_key]; ?>" />
-                            </div>
-
-                            <div class="section-icon-minus <?php echo $accordions_key; ?>">
-                                <i class="fa fa-chevron-down"></i>
-                                <input type="text" placeholder="fa-chevron-down" class="accordions_section_icon_minus" section-id="<?php echo $accordions_key; ?>" name="accordions_section_icon_minus[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_section_icon_minus[$accordions_key])) echo $accordions_section_icon_minus[$accordions_key]; ?>" />
-                            </div>
-
-                            <br><br>
-
-                            <strong><?php _e('Header background color for this section', 'accordions'); ?></strong> <br>
-                            <input class="accordions_color" placeholder="#dddddd"  type="text" name="accordions_bg_color[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_bg_color[$accordions_key])) echo $accordions_bg_color[$accordions_key]; ?>" />   <br> <br>
-
-
-
-                            <strong><?php _e('Header background image url for this section', 'accordions'); ?></strong> <br>
-                            <input type="text" placeholder="Image URL" name="accordions_header_bg_img[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_header_bg_img[$accordions_key])) echo $accordions_header_bg_img[$accordions_key]; ?>" />   <br> <br>
-
-                            <strong><?php _e('Header text', 'accordions'); ?></strong> <br>
-                            <input class="accordions_content_title" style="width:80%" placeholder="<?php echo __('Accordion header text', 'accordions'); ?>" type="text" name="accordions_content_title[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_title)) echo esc_attr($accordions_title); //htmlentities ?>" /><br><br>
-
-                            <strong><?php _e('Header toggled text','accordions'); ?></strong> <br>
-                            <input style="width:80%" placeholder="Accordions alter text on active" type="text" name="accordions_content_title_toggled[<?php echo $accordions_key; ?>]" value="<?php if(!empty($accordions_content_title_toggled)) echo esc_attr($accordions_content_title_toggled[$accordions_key]); ?>" /><br><br>
-
-
-                            <strong><?php _e('Content', 'accordions'); ?></strong> <br>
-                            <?php
-
-                            wp_editor( $accordions_content_body[$accordions_key], 'accordions_content_body'.$accordions_key, $settings = array('textarea_name'=>'accordions_content_body['.$accordions_key.']') );
-
-
-                            ?>
-                        </div>
-
-
-
-                    </div>
-                    <?php
-
-                    $i++;
-                }
-                else:
-                    ?>
-                    <div class="item"><?php echo __('Click "Add" button to add your accordion content', 'accordions'); ?></div>
-                <?php
-
-                endif;
-                ?>
-
-            </div>
-
-            <script>
-                jQuery(document).ready(function($)
-                {
-                    $(function() {
-                        $( "#accordions-content" ).sortable({ handle: '.move' });
-                        //$( ".items-container" ).disableSelection();
-                    });
-
-
-
-                    $(document).on('click', '.accordions-content-buttons .add-accordions', function()
-                    {
-
-                        var unique_key = $.now();
-                        $("#accordions_metabox .accordions-content").append('<div class="items" valign="top"><div class="section-header"><span class="move"><i class="fa fa-bars"></i></span><span class="expand-compress"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></span><div class="accordions-title-preview">Demo Title #'+unique_key+'</div><label class="switch"><input type="checkbox" value="1" name="accordions_hide['+unique_key+']">Hide on Frontend</label></div><div class="section-panel"><strong><?php _e('Header text','accordions'); ?></strong> <br><input style="width:80%" placeholder="<?php echo __('Accordion header text', 'accordions'); ?>" type="text" name="accordions_content_title['+unique_key+']" value="" /><br> <br><strong><?php _e('Content', 'accordions'); ?></strong> <br><textarea class="accordion-content-textarea" id="content-'+unique_key+'" placeholder="Accordion content" name="accordions_content_body['+unique_key+']" ></textarea></div></div>');
-                        wp.editor.initialize( 'content-'+unique_key, {
-                            mediaButtons: true,
-                            tinymce:      {
-                                toolbar1: 'bold,italic,bullist,numlist,link,blockquote,alignleft,aligncenter,alignright,strikethrough,hr,forecolor,pastetext,removeformat,codeformat,undo,redo'
-                            },
-                            quicktags:    true,
-                        } );
-
-                    })
-
-                })
-
-            </script>
-
-
-            <p class="description"><?php if(!empty($details)) echo $details;  ?></p>
-        </div>
-    </div>
-
-
-    <?php
-
-
-}
-
-
-
-
-
 
 
 
@@ -1737,28 +1598,7 @@ function settings_tabs_content_stats($tab, $post_id){
 
 
 
-//add_action('settings_tabs_field_accordions_stats', 'settings_tabs_field_accordions_stats',10,2);
-//function settings_tabs_field_accordions_stats($option){
-//
-//
-//
-//    $id = isset($option['id']) ? $option['id'] : "";
-//    $placeholder = isset($option['placeholder']) ? $option['placeholder'] : "";
-//    $value = get_post_meta($post_id,'track_header', true);
-//
-//    $title = isset($option['title']) ? $option['title'] : "";
-//    $details = isset($option['details']) ? $option['details'] : "";
-//
-//
-//    $accordions_content_title = get_post_meta($post_id, 'accordions_content_title', true);
-//    $track_header = get_post_meta($post_id, 'track_header', true);
-//
-//
-//    ?>
-<!---->
-<!--    --><?php
-//
-//}
+
 
 
 

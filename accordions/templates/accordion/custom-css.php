@@ -84,7 +84,30 @@ if($accordions_lazy_load=='yes'){
 #accordions-<?php echo $post_id; ?> .accordions-head:hover .accordion-icons{
     color:<?php echo $accordions_icons_color_hover; ?>;
 }
+
+@media screen and (min-width: 1200px) {
+    #accordions-<?php echo $post_id; ?> {
+        width: <?php echo $accordions_width_large; ?>;
+    }
+}
+
+@media screen and (max-width:1199px) and (min-width: 768px) {
+    #accordions-<?php echo $post_id; ?> {
+        width: <?php echo $accordions_width_medium; ?>;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #accordions-<?php echo $post_id; ?> {
+        width: <?php echo $accordions_width_small; ?>;
+    }
+}
+
+
+
+
 <?php
+
 
 if(!empty($accordions_custom_css)){
 echo $accordions_custom_css;

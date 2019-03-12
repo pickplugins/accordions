@@ -6,7 +6,12 @@
 */
 
 if ( ! defined('ABSPATH')) exit;  // if direct access 
-		
+
+
+$accordions_width = get_post_meta( $post_id, 'accordions_width', true );
+$accordions_width_large     = !empty($accordions_width['large']) ? $accordions_width['large'] : '100%';
+$accordions_width_medium    = !empty($accordions_width['medium']) ? $accordions_width['medium'] : '100%';
+$accordions_width_small     = !empty($accordions_width['small']) ? $accordions_width['small'] : '100%';
 
 $accordions_collapsible = get_post_meta( $post_id, 'accordions_collapsible', true );
 if(empty($accordions_collapsible)){$accordions_collapsible = 'true';}

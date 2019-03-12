@@ -158,7 +158,7 @@ function meta_boxes_accordions_input( $post ) {
         'id' => 'options',
         'title' => __('<i class="fa fa-cogs"></i> Options','accordions'),
         'priority' => 2,
-        'active' => false,
+        'active' => true,
     );
 
     $accordion_settings_tab[] = array(
@@ -172,7 +172,7 @@ function meta_boxes_accordions_input( $post ) {
         'id' => 'content',
         'title' => __('<i class="fas fa-qrcode"></i> Content','accordions'),
         'priority' => 4,
-        'active' => true,
+        'active' => false,
     );
 
 
@@ -409,7 +409,8 @@ function meta_boxes_accordions_save( $post_id ) {
 
  	$accordions_child = sanitize_text_field( $_POST['accordions_child'] );
     $enable_search = sanitize_text_field( $_POST['enable_search'] );
-	
+
+    $accordions_width = stripslashes_deep( $_POST['accordions_width'] );
 
 	$accordions_container_padding = sanitize_text_field( $_POST['accordions_container_padding'] );	
 	$accordions_container_bg_color = sanitize_text_field( $_POST['accordions_container_bg_color'] );
@@ -492,10 +493,11 @@ function meta_boxes_accordions_save( $post_id ) {
  	update_post_meta( $post_id, 'accordions_hide_edit', $accordions_hide_edit );
 	update_post_meta( $post_id, 'accordions_expand_collapse_display', $accordions_expand_collapse_display );
 
+
 	update_post_meta( $post_id, 'accordions_child', $accordions_child );
     update_post_meta( $post_id, 'enable_search', $enable_search );
-	
 
+    update_post_meta( $post_id, 'accordions_width', $accordions_width );
 	
 	update_post_meta( $post_id, 'accordions_container_padding', $accordions_container_padding );	
 	update_post_meta( $post_id, 'accordions_container_bg_color', $accordions_container_bg_color );
