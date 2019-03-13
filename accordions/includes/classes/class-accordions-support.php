@@ -74,7 +74,7 @@ if( ! class_exists( 'class_accordions_support' ) ) {
 
             );
 
-            return apply_filters('wcps_our_plugins', $our_plugins);
+            return apply_filters('accordions_our_plugins', $our_plugins);
 
 
         }
@@ -84,16 +84,81 @@ if( ! class_exists( 'class_accordions_support' ) ) {
         {
 
             $tutorials = array(
-//                array(
-//                    'title' => __('How to install', 'woocommerce-products-slider'),
-//                    'video_url' => 'https://www.youtube.com/watch?v=q0-OseJrD5I&list=PL2GPPfgLrfWxKBdh3-HNMNm3CmtmCPLQe',
-//                ),
+                array(
+                    'title' => __('Customize content', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=cRjaVwlih6Q&list=PL2GPPfgLrfWxKBdh3-HNMNm3CmtmCPLQe',
+                ),
+                array(
+                    'title' => __('Enable search', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=oLJw6kBHau0',
+                ),
 
+                array(
+                    'title' => __('Click header to scroll top', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=CIcRBoQ5CO4',
+                ),
+                array(
+                    'title' => __('Enable lazy load', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=aKVK5gW1BKA',
+                ),
+
+
+                array(
+                    'title' => __('Hide edit link', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=OvVolGXpnn0',
+                ),
+
+                array(
+                    'title' => __('Create nested or multi-level accordion', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=Z_iKPNDMEBs',
+                ),
+
+                array(
+                    'title' => __('Customize header', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=skU3J0JpcBU',
+                ),
+
+                array(
+                    'title' => __('Customize icons', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=-ATeH0j6-t4',
+                ),
+
+                array(
+                    'title' => __('Open/active via url', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=PaxUawdnmfA',
+                ),
+                array(
+                    'title' => __('Open/active on page load', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=Dqd2zSpCQlo',
+                ),
+
+                array(
+                    'title' => __('How to create accordion', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=9PS63kqe20M',
+                ),
+                array(
+                    'title' => __('How to install accordions', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=ecYxS3Udjz4',
+                ),
+
+                array(
+                    'title' => __('WooCommerce product faq tab', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=1yeIpc52p2Y',
+                ),
+                array(
+                    'title' => __('Expand/collapse all button', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=Ah10F3co83o',
+                ),
+
+                array(
+                    'title' => __('accordions click track', 'woocommerce-products-slider'),
+                    'video_url' => 'https://www.youtube.com/watch?v=qbCsynoaT_Q',
+                ),
 
 
             );
 
-            return apply_filters('wcps_video_tutorials', $tutorials);
+            return apply_filters('accordions_video_tutorials', $tutorials);
 
 
         }
@@ -102,6 +167,7 @@ if( ! class_exists( 'class_accordions_support' ) ) {
         public function faq(){
 
             $faq = array(
+
 
                 array(
                     'title'=>'Create accordion',
@@ -143,10 +209,15 @@ if( ! class_exists( 'class_accordions_support' ) ) {
                     'url'=>'https://www.pickplugins.com/documentation/accordions/faq/custom-header-background-image/?ref=dashboard',
                 ),
 
+
+
+
+
+
                 );
 
 
-            return apply_filters('wcps_faq', $faq);
+            return apply_filters('accordions_faq', $faq);
 
 
         }

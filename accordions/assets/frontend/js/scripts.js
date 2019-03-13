@@ -43,6 +43,9 @@ jQuery(document).ready(function($) {
             header_id = $(this).attr('header_id');
             post_id = $(this).attr('post_id');
 
+            console.log(post_id);
+
+
             $.ajax(
                 {
                     type: 'POST',
@@ -57,7 +60,7 @@ jQuery(document).ready(function($) {
                     success: function( data ) {
 
 
-                        console.log(data);
+                        //console.log(data);
 
 
                     } });

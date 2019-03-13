@@ -23,7 +23,7 @@ function accordions_ajax_track_header(){
 
 	if(empty($track_header)):
 
-		$track_header[$header_id]  = 1;
+		$track_header  = array($header_id => 1);
 		update_post_meta($post_id, 'track_header', $track_header);
     else:
 	    $track_header[$header_id]  += 1;

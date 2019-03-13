@@ -3,7 +3,7 @@
 Plugin Name: Accordions by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard
 Description: Fully responsive and mobile ready accordion grid for wordpress.
-Version: 3.2.6
+Version: 3.2.7
 Author: PickPlugins
 Author URI: http://pickplugins.com
 Text Domain: accordions
@@ -22,7 +22,7 @@ class Accordions{
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
 
 
-        define('accordions_version', '3.2.6' );
+        define('accordions_version', '3.2.7' );
         define('accordions_server_url', 'https://www.pickplugins.com' );
         define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
 
