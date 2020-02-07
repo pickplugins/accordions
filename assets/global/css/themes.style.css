@@ -1,0 +1,246 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+
+
+.accordions .accordions-head .ui-accordion-header-icon {
+    display: none;
+}
+
+.accordions-lazy {
+    text-align: center;
+}
+
+.accordion-edit {
+    margin: 10px 0;
+    text-align: left;
+}
+
+.accordions .accordions-head .accordions-head-title-toogle {
+    display: none;
+    padding: 0 10px;
+}
+
+.accordions .top-navs {
+    margin: 15px 0;
+}
+
+
+.accordions .top-navs .expand-collapse {
+    display: inline-block;
+    background: rgba(112,176,255,1) none repeat scroll 0 0;
+    padding: 4px 15px;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.accordions .top-navs .expand-collapse.active .collapse{  display: block;}
+.accordions .top-navs .expand-collapse.active .expand {
+    display: none;
+}
+
+
+.accordions .top-navs .expand{}
+.accordions .top-navs .collapse {
+    display: none;
+}
+
+
+.accordions .next-prev{}
+.accordions .next-prev .next, .accordions .next-prev .previous {
+    padding: 6px 13px;
+    display: inline-block;
+    margin: 0 10px 0 0;
+
+}
+.accordions .next-prev .next{}
+.accordions .next-prev .previous{}
+
+
+/*Themes CSS*/
+ 
+.accordions .accordions-head {
+	cursor: pointer;
+	padding: 10px;
+	display: flex; 
+	align-items: center;
+    outline: none;
+}
+
+.accordions .accordions-head-title {
+  margin: 0 10px;
+  width:100%;
+}
+
+
+.accordions .accordions-head .accordion-minus{
+	display:none;
+	}
+
+.accordions .accordions-head.ui-state-active .accordion-plus{
+	display:none;
+}
+
+.accordions .accordions-head.ui-state-active .accordion-minus{
+	display:inline-block;
+}
+
+
+.accordions .accordion-content {
+  background: #fff none repeat scroll 0 0;
+  padding: 10px;
+}
+
+.accordions .accordions-head-title, .accordions .accordion-icons {
+
+}
+
+
+.accordions .accordion-icons.left {
+  float: left;
+}
+
+.accordions .accordion-icons.right{
+float: right;
+}
+
+
+
+
+.accordions-themes{}
+
+/*########### flat ##############*/
+.accordions-themes.flat{}
+
+.accordions.flat .accordions-head {
+  border: medium none;
+  border-radius: 0;
+    outline: none;
+}
+
+.accordions.flat .accordion-content {
+  border: medium none;
+  border-radius: 0;
+}
+
+
+
+/*########### flat ##############*/
+.accordions-themes.rounded{}
+
+.accordions.rounded .accordions-head {
+  border: medium none;
+  border-radius: 35px;
+    outline: none;
+}
+
+.accordions.rounded .accordion-content{
+  border-radius: 35px;
+  border: medium none;
+}
+
+
+/*########### semi-rounded ##############*/
+.accordions-themes.semi-rounded{}
+
+.accordions.semi-rounded .accordions-head {
+  border-radius: 8px;
+  border: medium none;
+    outline: none;
+}
+
+.accordions.semi-rounded .accordion-content{
+  border-radius: 8px;
+  border: medium none;
+}
+
+
+/*########### shadow ##############*/
+.accordions-themes.shadow{}
+
+.accordions.shadow .accordions-head {
+  box-shadow: 1px 7px 4px -4px rgb(129, 129, 129);
+  margin: 10px 0;
+  border: medium none;
+    outline: none;
+}
+
+.accordions.shadow .accordion-content{
+	border: medium none;
+
+}
+
+
+/*########### rounded-top ##############*/
+.accordions-themes.rounded-top{}
+
+.accordions.rounded-top .accordions-head {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: medium none;
+    outline: none;
+}
+
+.accordions.rounded-top .accordion-content {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: medium none;
+}
+
+
+
+
+
+/*########### border-bottom ##############*/
+.accordions-themes.border-bottom{}
+
+.accordions.border-bottom .accordions-head {
+  border-bottom: 1px solid #666;
+  border: medium none;
+    outline: none;
+}
+
+.accordions.border-bottom .accordion-content{
+	border: medium none;
+
+}
+
+
+
+/*########### border-top ##############*/
+.accordions-themes.border-top{}
+
+.accordions.border-top .accordions-head {
+  border-top: 1px solid #666;
+  border: medium none;
+    outline: none;
+}
+
+.accordions.border-top .accordion-content{
+	border: medium none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

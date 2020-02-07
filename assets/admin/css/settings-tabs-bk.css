@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#accordions_metabox {
+    background: #f1f1f1 none repeat scroll 0 0;
+
+}
+
+#accordions_metabox .inside {
+    margin: 0;
+    padding: 0;
+}
+
+#accordions_metabox .hndle {
+    background: #fff;
+    /* color: rgb(255, 255, 255); */
+    padding: 15px 15px;
+}
+
+
+.settings-tabs{}
+
+.settings-tabs.vertical{}
+.settings-tabs .tab-navs{
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.settings-tabs .tab-nav{
+    width: 200px;
+    padding: 12px 10px;
+    background: #fff;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.settings-tabs .tab-nav.active{
+    background:#f1f1f1;
+}
+
+.settings-tabs .tab-content{
+    margin-left: 221px;
+    padding: 0;
+    background: #fff;
+    display: none;
+}
+
+.settings-tabs .tab-content.active{
+    display: block;
+}
+
+
+
+.settings-tabs .section{
+    margin: 0;
+    padding: 15px 0;
+}
+.settings-tabs .section-title{
+    padding: 0 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.settings-tabs .section-description{
+    padding: 0 15px;
+    margin-bottom: 25px;
+}
+
+
+
+.settings-tabs .setting-field{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding: 0 15px 15px 15px;
+}
+.settings-tabs .setting-field:last-child{
+    border-bottom: 1px solid #eee0;
+}
+
+
+
+.settings-tabs .setting-field .field-lable{
+    width: 270px;
+    float: left;
+    font-size: 14px;
+}
+.settings-tabs .setting-field .field-input{
+    margin-left: 270px;
+}
+.settings-tabs .setting-field .description{}
+
+
+
+
+
+
+/*input*/
+
+.settings-tabs input[type="text"], .settings-tabs textarea, .settings-tabs select, .settings-tabs input[type="range"]{
+    width: 260px;
+}
+
+
+@media (max-width: 1440px){
+
+    .settings-tabs .setting-field .field-lable{
+        width: auto;
+        float: none;
+        font-size: 14px;
+    }
+    .settings-tabs .setting-field .field-input{
+        margin-left: 0px;
+    }
+    .settings-tabs .setting-field .description{}
+
+}
+
+
+
+
+
+
+
+
+
+
+
