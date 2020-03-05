@@ -35,7 +35,7 @@ function accordions_posttype_register() {
                 'hierarchical' => false,
                 'menu_position' => null,
                 'supports' => array('title'),
-				'menu_icon' => 'dashicons-editor-justify',
+				'menu_icon' => 'dashicons-align-center',
 				
           );
  
@@ -147,9 +147,11 @@ function meta_boxes_accordions_input( $post ) {
     $accordion_settings_tab = array();
 
 
+
+
 	$accordion_settings_tab[] = array(
         'id' => 'shortcode',
-        'title' => __('Shortcode','accordions'),
+        'title' => sprintf(__('%s Shortcode','woocommerce-products-slider'),'<i class="fas fa-laptop-code"></i>'),
         'priority' => 1,
         'active' => true,
     );
@@ -157,21 +159,21 @@ function meta_boxes_accordions_input( $post ) {
 
     $accordion_settings_tab[] = array(
         'id' => 'options',
-        'title' => __('Options','accordions'),
+        'title' => sprintf(__('%s Options','woocommerce-products-slider'),'<i class="fa fa-cogs"></i>'),
         'priority' => 2,
         'active' => false,
     );
 
     $accordion_settings_tab[] = array(
         'id' => 'style',
-        'title' => __('Style','accordions'),
+        'title' => sprintf(__('%s Style','woocommerce-products-slider'),'<i class="fas fa-palette"></i>'),
         'priority' => 3,
         'active' => false,
     );
 
     $accordion_settings_tab[] = array(
         'id' => 'content',
-        'title' => __('Content','accordions'),
+        'title' => sprintf(__('%s Content','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
         'priority' => 4,
         'active' => false,
     );
@@ -180,7 +182,7 @@ function meta_boxes_accordions_input( $post ) {
 
     $accordion_settings_tab[] = array(
         'id' => 'custom_scripts',
-        'title' => __('Custom Scripts','accordions'),
+        'title' => sprintf(__('%s Custom scripts','woocommerce-products-slider'),'<i class="far fa-file-code"></i>'),
         'priority' => 6,
         'active' => false,
     );
@@ -193,7 +195,17 @@ function meta_boxes_accordions_input( $post ) {
     foreach ($accordion_settings_tabs as $page_key => $tab) $tabs_sorted[$page_key] = isset( $tab['priority'] ) ? $tab['priority'] : 0;
     array_multisort($tabs_sorted, SORT_ASC, $accordion_settings_tabs);
 
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('jquery-ui-sortable');
+    wp_enqueue_script( 'jquery-ui-core' );
+    wp_enqueue_script('jquery-ui-accordion');
+    wp_enqueue_script('wp-color-picker');
+    wp_enqueue_style('wp-color-picker');
 
+    wp_enqueue_style( 'jquery-ui');
+    wp_enqueue_style( 'font-awesome-5' );
+    wp_enqueue_style( 'settings-tabs' );
+    wp_enqueue_script( 'settings-tabs' );
 
     $post_id = $post->ID;
 
