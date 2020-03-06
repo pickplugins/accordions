@@ -26,25 +26,29 @@ class Accordions{
         define('accordions_version', '2.1.18' );
         define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
 
-        require_once( plugin_dir_path( __FILE__ ) . 'includes/class-settings-tabs.php');
-        require_once( plugin_dir_path( __FILE__ ) . 'includes/class-accordions-support.php');
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/meta-new.php');
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/functions.php');
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/functions-wc.php');
-        require_once( plugin_dir_path( __FILE__ ) . 'includes/functions-meta.php');
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/class-functions.php');
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/class-shortcodes.php');
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/duplicate-post.php');
-        require_once( plugin_dir_path( __FILE__ ) . 'includes/class-WPAdminSettings.php');
-        require_once( plugin_dir_path( __FILE__ ) . 'includes/class-settings.php');
+        require_once( accordions_plugin_dir . 'includes/class-settings-tabs.php');
+        require_once( accordions_plugin_dir . 'includes/class-accordions-support.php');
+		require_once( accordions_plugin_dir . 'includes/meta-new.php');
+		require_once( accordions_plugin_dir . 'includes/functions.php');
+		require_once( accordions_plugin_dir . 'includes/functions-wc.php');
+        require_once( accordions_plugin_dir . 'includes/functions-meta.php');
+		require_once( accordions_plugin_dir . 'includes/class-functions.php');
+		require_once( accordions_plugin_dir . 'includes/class-shortcodes.php');
+		require_once( accordions_plugin_dir . 'includes/duplicate-post.php');
+        require_once( accordions_plugin_dir . 'includes/class-WPAdminSettings.php');
+        require_once( accordions_plugin_dir . 'includes/class-settings.php');
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'accordions_front_scripts' ) );
+
+        require_once( accordions_plugin_dir . 'templates/accordion/accordion-hook.php');
+
+
+        add_action( 'wp_enqueue_scripts', array( $this, 'accordions_front_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'accordions_admin_scripts' ) );
 		
 		add_action( 'plugins_loaded', array( $this, 'accordions_load_textdomain' ));
 		
 		
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/class-widget-accordions.php');		
+		require_once( accordions_plugin_dir . 'includes/class-widget-accordions.php');
 				
 		add_action( 'widgets_init', array( $this, 'widget_register' ) );
 		

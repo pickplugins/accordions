@@ -39,7 +39,16 @@ class class_accordions_shortcodes  {
 				$accordions_themes = get_post_meta( $post_id, 'accordions_themes', true );
 
 				ob_start();
-				include accordions_plugin_dir.'/templates/accordion/accordion.php';
+
+				?>
+                <div id="accordions-<?php echo $post_id; ?>" class="accordions-<?php echo $post_id; ?>">
+                    <?php
+                    do_action('accordions_main', $atts);
+                    ?>
+                </div>
+                <?php
+
+
 				return ob_get_clean();
 				//return $html;
 

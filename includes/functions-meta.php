@@ -57,7 +57,7 @@ function settings_tabs_content_shortcode($tab, $post_id){
 
         $args = array(
             'id'		=> 'accordions_shortcodes',
-            'title'		=> __('Accordion Shortcode','accordions'),
+            'title'		=> __('Accordion shortcode','accordions'),
             'details'	=> '',
             'type'		=> 'custom_html',
             'html'		=> $html,
@@ -134,7 +134,7 @@ function settings_tabs_content_shortcode($tab, $post_id){
 
         $args = array(
             'id'		=> 'accordions_shortcodes',
-            'title'		=> __('Tabs Shortcodes','accordions'),
+            'title'		=> __('Tabs shortcodes','accordions'),
             'details'	=> '',
             'type'		=> 'custom_html',
             'html'		=> $html,
@@ -531,7 +531,7 @@ function settings_tabs_content_style($tab, $post_id){
             'id'		=> 'background_color',
             'css_id'		=> 'header_background_color',
             'parent'		=> 'accordions_options[header]',
-            'title'		=> __('Background color.','accordions'),
+            'title'		=> __('Background color','accordions'),
             'details'	=> __('Background color of header on idle','accordions'),
             'type'		=> 'colorpicker',
             'value'		=> $header_background_color,
@@ -545,7 +545,7 @@ function settings_tabs_content_style($tab, $post_id){
             'id'		=> 'active_background_color',
             'css_id'		=> 'header_active_background_color',
             'parent'		=> 'accordions_options[header]',
-            'title'		=> __('Active background color.','accordions'),
+            'title'		=> __('Active background color','accordions'),
             'details'	=> __('Background color of header on active stats','accordions'),
             'type'		=> 'colorpicker',
             'value'		=> $header_active_background_color,
@@ -559,7 +559,7 @@ function settings_tabs_content_style($tab, $post_id){
             'id'		=> 'color',
             'css_id'		=> 'header_color',
             'parent'		=> 'accordions_options[header]',
-            'title'		=> __('Color.','accordions'),
+            'title'		=> __('Color','accordions'),
             'details'	=> __('Font color for accordion headers','accordions'),
             'type'		=> 'colorpicker',
             'value'		=> $header_color,
@@ -573,7 +573,7 @@ function settings_tabs_content_style($tab, $post_id){
             'id'		=> 'color_hover',
             'css_id'		=> 'header_color_hover',
             'parent'		=> 'accordions_options[header]',
-            'title'		=> __('Color on hover.','accordions'),
+            'title'		=> __('Color on hover','accordions'),
             'details'	=> __('Font color for accordion headers','accordions'),
             'type'		=> 'colorpicker',
             'value'		=> $header_color_hover,
@@ -586,7 +586,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'font_size',
             'parent'		=> 'accordions_options[header]',
-            'title'		=> __('Font size.','accordions'),
+            'title'		=> __('Font size','accordions'),
             'details'	=> __('Choose font size for header text','accordions'),
             'type'		=> 'text',
             'value'		=> $header_font_size,
@@ -599,7 +599,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'padding',
             'parent'		=> 'accordions_options[header]',
-            'title'		=> __('Padding.','accordions'),
+            'title'		=> __('Padding','accordions'),
             'details'	=> __('Choose header area padding','accordions'),
             'type'		=> 'text',
             'value'		=> $header_padding,
@@ -612,7 +612,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'margin',
             'parent'		=> 'accordions_options[header]',
-            'title'		=> __('Margin.','accordions'),
+            'title'		=> __('Margin','accordions'),
             'details'	=> __('Choose header area margin','accordions'),
             'type'		=> 'text',
             'value'		=> $header_margin,
@@ -635,7 +635,7 @@ function settings_tabs_content_style($tab, $post_id){
             'id'		=> 'color',
             'css_id'		=> 'body_color_hover',
             'parent'		=> 'accordions_options[body]',
-            'title'		=> __('Color.','accordions'),
+            'title'		=> __('Color','accordions'),
             'details'	=> __('You can choose custom color for accordion content','accordions'),
             'type'		=> 'colorpicker',
             'value'		=> $body_color,
@@ -651,7 +651,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'font_size',
             'parent'		=> 'accordions_options[body]',
-            'title'		=> __('Font size.','accordions'),
+            'title'		=> __('Font size','accordions'),
             'details'	=> __('You can set custom font size for accordion content','accordions'),
             'type'		=> 'text',
             'value'		=> $body_font_size,
@@ -667,7 +667,7 @@ function settings_tabs_content_style($tab, $post_id){
             'id'		=> 'background_color',
             'css_id'		=> 'body_background_color',
             'parent'		=> 'accordions_options[body]',
-            'title'		=> __('Background color.','accordions'),
+            'title'		=> __('Background color','accordions'),
             'details'	=> __('You can choose custom background color for accordion content area','accordions'),
             'type'		=> 'colorpicker',
             'value'		=> $body_background_color,
@@ -683,7 +683,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'padding',
             'parent'		=> 'accordions_options[body]',
-            'title'		=> __('Padding.','accordions'),
+            'title'		=> __('Padding','accordions'),
             'details'	=> __('You can set custom padding for accordion content','accordions'),
             'type'		=> 'text',
             'value'		=> $body_padding,
@@ -699,7 +699,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'margin',
             'parent'		=> 'accordions_options[body]',
-            'title'		=> __('Margin.','accordions'),
+            'title'		=> __('Margin','accordions'),
             'details'	=> __('You can set custom margin for accordion content','accordions'),
             'type'		=> 'text',
             'value'		=> $body_margin,
@@ -730,7 +730,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'padding',
             'parent'		=> 'accordions_options[container]',
-            'title'		=> __('Padding.','accordions'),
+            'title'		=> __('Padding','accordions'),
             'details'	=> __('Set container padding','accordions'),
             'type'		=> 'text',
             'value'		=> $container_padding,
@@ -747,7 +747,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'background_color',
             'parent'		=> 'accordions_options[container]',
-            'title'		=> __('Background color.','accordions'),
+            'title'		=> __('Background color','accordions'),
             'details'	=> __('Set container background color','accordions'),
             'type'		=> 'colorpicker',
             'value'		=> $container_background_color,
@@ -763,7 +763,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'text_align',
             'parent'		=> 'accordions_options[container]',
-            'title'		=> __('Text align.','accordions'),
+            'title'		=> __('Text align','accordions'),
             'details'	=> __('Set container text align','accordions'),
             'type'		=> 'select',
             'value'		=> $container_text_align,
@@ -785,7 +785,7 @@ function settings_tabs_content_style($tab, $post_id){
         $args = array(
             'id'		=> 'background_img',
             'parent'		=> 'accordions_options[container]',
-            'title'		=> __('Background image.','accordions'),
+            'title'		=> __('Background image','accordions'),
             'details'	=> __('Set container background image','accordions'),
             'type'		=> 'media_url',
             'value'		=> $container_background_img,
@@ -812,17 +812,7 @@ function settings_tabs_content_content($tab, $post_id){
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
 
-
-    $accordions_content_title = get_post_meta($post_id,'accordions_content_title', true);
-    $accordions_content_body = get_post_meta($post_id,'accordions_content_body', true);
-    $accordions_hide = get_post_meta($post_id,'accordions_hide', true);
-
-
-
-
     ?>
-
-    <pre><?php //echo var_export($accordions_content, true); ?></pre>
 
     <div class="section">
         <div class="section-title"><?php echo __('Accordions content','accordions'); ?></div>
@@ -926,7 +916,7 @@ function settings_tabs_content_custom_scripts($tab, $post_id){
         $args = array(
             'id'		=> 'custom_js',
             'parent'		=> 'accordions_options[custom_scripts]',
-            'title'		=> __('Custom Js.','accordions'),
+            'title'		=> __('Custom Js','accordions'),
             'details'	=> __('You can add custom scripts here, do not use <code>&lt;script&gt; &lt;/script&gt;</code> tag','accordions'),
             'type'		=> 'scripts_js',
             'value'		=> $custom_js,
@@ -938,7 +928,7 @@ function settings_tabs_content_custom_scripts($tab, $post_id){
         $args = array(
             'id'		=> 'custom_css',
             'parent'		=> 'accordions_options[custom_scripts]',
-            'title'		=> __('Custom CSS.','accordions'),
+            'title'		=> __('Custom CSS','accordions'),
             'details'	=> __('You can add custom css here, do not use <code>  &lt;style&gt; &lt;/style&gt;</code> tag','accordions'),
             'type'		=> 'scripts_css',
             'value'		=> $custom_css,
