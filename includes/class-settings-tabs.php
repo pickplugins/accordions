@@ -85,6 +85,7 @@ class settings_tabs_field{
 
         elseif( isset($option['type']) && $option['type'] === 'option_group')	    $this->field_option_group( $option );
         elseif( isset($option['type']) && $option['type'] === 'option_group_accordion')	    $this->field_option_group_accordion( $option );
+        elseif( isset($option['type']) && $option['type'] === 'wp_editor')	    $this->field_wp_editor( $option );
 
 
 
@@ -569,6 +570,9 @@ class settings_tabs_field{
                     $count = 1;
                     foreach ($values as $index=>$val):
                         $title_field_val = !empty($val[$title_field]) ? $val[$title_field] : '#'.$count;
+
+                    //var_dump($index);
+
                         ?>
                         <div class="item-wrap <?php if($collapsible) echo 'collapsible'; ?>">
                             <?php if($collapsible):?>
@@ -589,6 +593,9 @@ class settings_tabs_field{
 
                             foreach ($fields as $field_index => $field):
                                 $fieldId = $field['id'];
+                                $field_css_id = isset($field['css_id']) ? str_replace('[INDEX]',$index, $field['css_id']) : '';
+
+                            //var_dump($field_css_id);
 
                                 $title_field_class = ($title_field == $field_index) ? 'title-field':'';
                                 ?>
@@ -599,6 +606,8 @@ class settings_tabs_field{
 
                                         <?php
                                         $field['parent'] = $field_name.'['.$index.']';
+                                        $field['css_id'] = $field_css_id;
+
                                         $field['value'] = isset($val[$fieldId]) ? $val[$fieldId] : '';
 
                                         $settings_tabs_field->generate_field($field);
@@ -958,6 +967,57 @@ class settings_tabs_field{
 
     }
 
+
+
+    public function field_wp_editor( $option ){
+
+        $id 			= isset( $option['id'] ) ? $option['id'] : "";
+        $css_id 			= isset( $option['css_id'] ) ? $option['css_id'] : $id;
+        $parent 			= isset( $option['parent'] ) ? $option['parent'] : "";
+        $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
+        $value 	= isset( $option['value'] ) ? $option['value'] : '';
+        $default 	= isset( $option['default'] ) ? $option['default'] : '';
+        $field_template 	= isset( $option['field_template'] ) ? $option['field_template'] : $this->field_template($option);
+
+
+
+        $is_pro 	= isset( $option['is_pro'] ) ? $option['is_pro'] : false;
+        $pro_text 	= isset( $option['pro_text'] ) ? $option['pro_text'] : '';
+
+        $value = !empty($value) ? $value : $default;
+
+        $title			= isset( $option['title'] ) ? $option['title'] : "";
+        $details 			= isset( $option['details'] ) ? $option['details'] : "";
+
+        if($is_pro == true){
+            $details = '<span class="pro-feature">'.$pro_text.'</span> '.$details;
+        }
+
+        $field_name = !empty($parent) ? $parent.'['.$id.']' : $id;
+
+        $editor_settings= isset( $option['editor_settings'] ) ? $option['editor_settings'] : array('textarea_name'=>$field_name, 'teeny' => true,  'textarea_rows' => 15, );
+
+        ob_start();
+
+        ?>
+        <div id="field-wrapper-<?php echo $id; ?>" class="<?php if(!empty($depends)) echo 'dependency-field'; ?> field-wrapper field-wp_editor-wrapper
+            field-wp_editor-wrapper-<?php echo $id; ?>">
+            <?php
+            wp_editor( $value, $css_id, $editor_settings);
+            ?>
+            <div class="error-mgs"></div>
+        </div>
+
+        <?php
+
+
+
+
+        $input_html = ob_get_clean();
+
+        echo sprintf($field_template, $title, $input_html, $details);
+
+    }
 
 
 

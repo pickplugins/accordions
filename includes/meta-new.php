@@ -141,12 +141,14 @@ function meta_boxes_accordions_input( $post ) {
 	
 	global $post;
 	wp_nonce_field( 'meta_boxes_accordions_input', 'meta_boxes_accordions_input_nonce' );
-	
 
+    $post_id = $post->ID;
 
     $accordion_settings_tab = array();
 
-
+    $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $view_type = !empty($accordions_options['view_type']) ? $accordions_options['view_type'] : 'accordion';
+    $settings_tabs_field = new settings_tabs_field();
 
 
 	$accordion_settings_tab[] = array(
@@ -156,13 +158,33 @@ function meta_boxes_accordions_input( $post ) {
         'active' => true,
     );
 
-
     $accordion_settings_tab[] = array(
-        'id' => 'options',
-        'title' => sprintf(__('%s Options','woocommerce-products-slider'),'<i class="fa fa-cogs"></i>'),
+        'id' => 'general',
+        'title' => sprintf(__('%s General','woocommerce-products-slider'),'<i class="fa fa-cogs"></i>'),
         'priority' => 2,
         'active' => false,
     );
+
+    $accordion_settings_tab[] = array(
+        'id' => 'accordion_options',
+        'title' => sprintf(__('%s Accordion options','woocommerce-products-slider'),'<i class="fa fa-cogs"></i>'),
+        'priority' => 2,
+        'active' => false,
+        'hidden' => ($view_type == 'tabs')? true : false ,
+        'data_visible' => 'accordion',
+    );
+
+    $accordion_settings_tab[] = array(
+        'id' => 'tabs_options',
+        'title' => sprintf(__('%s Tabs options','woocommerce-products-slider'),'<i class="fa fa-cogs"></i>'),
+        'priority' => 2,
+        'active' => false,
+        'hidden' => ($view_type == 'accordion')? true : false ,
+        'data_visible' => 'tabs',
+
+
+    );
+
 
     $accordion_settings_tab[] = array(
         'id' => 'style',
@@ -211,17 +233,76 @@ function meta_boxes_accordions_input( $post ) {
 
 
 ?>
+    <script>
+        jQuery(document).ready(function($){
+            $(document).on('click', '.settings-tabs input[name="accordions_options[view_type]"]', function(){
+                var val = $(this).val();
+
+                console.log( val );
+
+                $('.settings-tabs .tab-navs li').each(function( index ) {
+                    data_visible = $( this ).attr('data_visible');
+
+                    if(typeof data_visible != 'undefined'){
+                        //console.log('undefined '+ data_visible );
+
+                        n = data_visible.indexOf(val);
+                        if(n<0){
+                            $( this ).hide();
+                        }else{
+                            $( this ).show();
+                        }
+                    }else{
+                        console.log('Not matched: '+ data_visible );
+
+
+                    }
+                });
+
+
+            })
+        })
+
+
+    </script>
+
     <div class="accordion-builder">
         <div class="accordion-editor">
             <div class="settings-tabs vertical">
+
+                <div class="view-types">
+
+                    <?php
+
+                    $view_types = apply_filters('team_view_types', array('accordion'=>'Accordion', 'tabs'=>'Tabs'));
+
+                    $args = array(
+                        'id'		=> 'view_type',
+                        'parent'		=> 'accordions_options',
+                        'title'		=> __('View type','team'),
+                        'details'	=> '',
+                        'type'		=> 'radio',
+                        'value'		=> $view_type,
+                        'default'		=> '',
+                        'args'		=> $view_types,
+                    );
+
+                    $settings_tabs_field->generate_field($args);
+
+                    ?>
+                </div>
+
+
                 <ul class="tab-navs">
                     <?php
                     foreach ($accordion_settings_tabs as $tab){
                         $id = $tab['id'];
                         $title = $tab['title'];
                         $active = $tab['active'];
+                        $data_visible = isset($tab['data_visible']) ? $tab['data_visible'] : '';
+                        $hidden = isset($tab['hidden']) ? $tab['hidden'] : false;
                         ?>
-                        <li class="tab-nav <?php if($active) echo 'active';?>" data-id="<?php echo $id; ?>"><?php echo $title; ?></li>
+                        <li <?php if(!empty($data_visible)):  ?> data_visible="<?php echo $data_visible; ?>" <?php endif; ?> class="tab-nav <?php if($active) echo 'active';?> <?php if($hidden) echo 'hidden';?>" data-id="<?php echo $id; ?>"><?php echo $title; ?></li>
                         <?php
                     }
                     ?>
@@ -382,7 +463,15 @@ function meta_boxes_accordions_save( $post_id ) {
   /* OK, its safe for us to save the data now. */
 
   // Sanitize user input.
- 	$accordions_collapsible = sanitize_text_field( $_POST['accordions_collapsible'] );	
+
+    $accordions_options = isset($_POST['accordions_options']) ? stripslashes_deep( $_POST['accordions_options'] ) : array();
+    update_post_meta( $post_id, 'accordions_options', $accordions_options );
+
+
+
+
+
+    $accordions_collapsible = sanitize_text_field( $_POST['accordions_collapsible'] );
  	$accordions_expaned_other = sanitize_text_field( $_POST['accordions_expaned_other'] );		   
   	$accordions_heightStyle = sanitize_text_field( $_POST['accordions_heightStyle'] );	  
 
@@ -430,7 +519,7 @@ function meta_boxes_accordions_save( $post_id ) {
 	
 	$accordions_content_title = isset($_POST['accordions_content_title']) ? stripslashes_deep( $_POST['accordions_content_title'] ) : array();
 	$accordions_content_body = isset($_POST['accordions_content_body']) ? stripslashes_deep( $_POST['accordions_content_body'] ) : array();
-	
+
 
 
 	
