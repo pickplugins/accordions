@@ -10,6 +10,9 @@ jQuery(document).ready(function($){
         collapsible: true,
     });
 
+    $( ".settings-tabs [colorPicker]").wpColorPicker();
+
+
     $( ".settings-tabs .accordion[sortable='true']").sortable({
         axis: "y",
         handle: "h3",

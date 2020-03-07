@@ -7,7 +7,21 @@
 
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
+add_filter('the_content','accordions_preview_content');
 
+function accordions_preview_content($content){
+
+    if(is_singular('accordions')){
+
+        $post_id = get_the_id();
+
+        $content .= do_shortcode('[accordions id="'.$post_id.'"]');
+
+    }
+
+    return $content;
+
+}
 
 function accordions_ajax_import_json(){
 

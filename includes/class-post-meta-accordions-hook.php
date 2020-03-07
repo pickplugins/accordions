@@ -868,6 +868,7 @@ function accordions_metabox_content_content($post_id){
 
         );
 
+        $meta_fields = apply_filters('accordions_content_fields', $meta_fields);
 
         $args = array(
             'id'		=> 'content',
@@ -948,6 +949,205 @@ function accordions_metabox_content_custom_scripts($post_id){
 
 
 }
+
+
+
+add_action('accordions_metabox_content_help_support', 'accordions_metabox_content_help_support');
+
+if(!function_exists('accordions_metabox_content_help_support')) {
+    function accordions_metabox_content_help_support($tab){
+
+        $settings_tabs_field = new settings_tabs_field();
+
+        ?>
+        <div class="section">
+
+            <div class="section-title"><?php echo __('Get support', 'accordions'); ?></div>
+            <p class="description section-description"><?php echo __('Use following to get help and support from our expert team.', 'accordions'); ?></p>
+
+            <?php
+
+
+            ob_start();
+            ?>
+
+            <p><?php echo __('Ask question for free on our forum and get quick reply from our expert team members.', 'accordions'); ?></p>
+            <a class="button" href="https://www.pickplugins.com/create-support-ticket/"><?php echo __('Create support ticket', 'accordions'); ?></a>
+
+            <p><?php echo __('Read our documentation before asking your question.', 'accordions'); ?></p>
+            <a class="button" href="https://www.pickplugins.com/documentation/accordions/"><?php echo __('Documentation', 'accordions'); ?></a>
+
+            <p><?php echo __('Watch video tutorials.', 'accordions'); ?></p>
+            <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94ZPeQ83jOnteDDrOeDLBuFD"><i class="fab fa-youtube"></i> <?php echo __('All tutorials', 'accordions'); ?></a>
+
+            <!--            <ul>-->
+            <!--                <li><i class="far fa-dot-circle"></i> <a href="https://www.youtube.com/watch?v=SOe0D-Og3nQ&list=PL0QP7T2SN94atYZswlnBMhDuIYoqlmlxy&index=1">How to install plugin & setup</a></li>-->
+            <!---->
+            <!---->
+            <!--            </ul>-->
+
+
+
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'get_support',
+                //'parent'		=> '',
+                'title'		=> __('Ask question','accordions'),
+                'details'	=> '',
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+            ob_start();
+            ?>
+
+            <p class="">We wish your 2 minutes to write your feedback about the <b>PickPlugins Product Slider</b> plugin. give us <span style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
+
+            <a target="_blank" href="https://wordpress.org/plugins/accordions/#reviews" class="button"><i class="fab fa-wordpress"></i> Write a review</a>
+
+
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'reviews',
+                //'parent'		=> '',
+                'title'		=> __('Submit reviews','accordions'),
+                'details'	=> '',
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+            ob_start();
+            $accordions_plugin_info = get_option('accordions_plugin_info');
+
+            //delete_option('accordions_plugin_info');
+            //var_dump($accordions_plugin_info);
+
+            $migration_reset_stats = isset($accordions_plugin_info['migration_reset']) ? $accordions_plugin_info['migration_reset'] : '';
+
+
+            $actionurl = admin_url().'edit.php?post_type=accordions&page=settings&tab=help_support';
+            $actionurl = wp_nonce_url( $actionurl,  'accordions_reset_migration' );
+
+            $nonce = isset($_REQUEST['_wpnonce']) ? $_REQUEST['_wpnonce'] : '';
+
+            if ( wp_verify_nonce( $nonce, 'accordions_reset_migration' )  ){
+
+                $accordions_plugin_info['migration_reset'] = 'processing';
+                update_option('accordions_plugin_info', $accordions_plugin_info);
+
+                wp_schedule_event(time(), '1minute', 'accordions_cron_reset_migrate');
+
+
+                $migration_reset_stats = 'processing';
+            }
+
+            if($migration_reset_stats == 'processing'){
+
+                $url = admin_url().'edit.php?post_type=accordions&page=settings&tab=help_support';
+
+                ?>
+                <p style="color: #f00;"><i class="fas fa-spin fa-spinner"></i> Migration reset on process, please wait until complete.</p>
+                <p><a href="<?php echo $url; ?>">Refresh</a> to check Migration reset stats</p>
+
+                <script>
+                    setTimeout(function(){
+                        window.location.href = '<?php echo $url; ?>';
+                    }, 1000*30);
+
+                </script>
+
+
+            <?php
+            }elseif($migration_reset_stats == 'done'){
+            ?>
+                <p style="color: #22631a;font-weight: bold;"><i class="fas fa-check"></i> Migration reset completed.</p>
+                <?php
+            }else{
+
+            }
+
+
+
+            ?>
+
+            <p class="">Please click the button bellow to reset migration data, you can start over, Please use with caution, your new migrate data will deleted. you can use default <a href="<?php echo admin_url().'export.php'; ?>">export</a> menu to take your wcps, wcps layouts data saved.</p>
+
+            <p class="reset-migration"><a class="button  button-primary" href="<?php echo $actionurl; ?>">Reset migration</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
+
+            <script>
+                jQuery(document).ready(function($){
+                    $(document).on('click','.reset-migration a',function(event){
+
+                        event.preventDefault();
+
+                        is_confirm = $(this).attr('confirm');
+                        url = $(this).attr('href');
+
+                        if(is_confirm == 'ok'){
+                            window.location.href = url;
+                        }else{
+                            $(this).attr('confirm', 'ok');
+
+
+                        }
+                        $('.reset-migration span').fadeIn();
+
+                    })
+                })
+            </script>
+
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'reset_migrate',
+                //'parent'		=> '',
+                'title'		=> __('Reset migration','accordions'),
+                'details'	=> '',
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
+
+
+
+
+            ?>
+
+
+
+        </div>
+        <?php
+
+
+    }
+}
+
+
+
 
 
 

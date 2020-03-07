@@ -1603,8 +1603,7 @@ class settings_tabs_field{
 
         ob_start();
         ?>
-        <input name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" placeholder="<?php echo $placeholder; ?>" value="<?php echo $value; ?>" />
-        <script>jQuery(document).ready(function($) { $("#<?php echo $css_id; ?>").wpColorPicker();});</script>
+        <input colorPicker="" name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" placeholder="<?php echo $placeholder; ?>" value="<?php echo $value; ?>" />
         <?php
 
         $input_html = ob_get_clean();

@@ -9,6 +9,7 @@ function accordions_settings_content_general(){
     $accordions_settings = get_option('accordions_settings');
 
     $font_aw_version = isset($accordions_settings['font_aw_version']) ? $accordions_settings['font_aw_version'] : 'none';
+    $accordions_preview = isset($accordions_settings['accordions_preview']) ? $accordions_settings['accordions_preview'] : 'yes';
 
     //echo '<pre>'.var_export($accordions_settings, true).'</pre>';
 
@@ -34,7 +35,18 @@ function accordions_settings_content_general(){
 
         $settings_tabs_field->generate_field($args);
 
+        $args = array(
+            'id'		=> 'accordions_preview',
+            'parent'		=> 'accordions_settings',
+            'title'		=> __('Enable accordions preview','woocommerce-products-slider'),
+            'details'	=> __('You can enable preview accordions.','woocommerce-products-slider'),
+            'type'		=> 'select',
+            'value'		=> $accordions_preview,
+            'default'		=> 'yes',
+            'args'		=> array('yes'=>__('Yes','woocommerce-products-slider'), 'no'=>__('No','woocommerce-products-slider')  ),
+        );
 
+        $settings_tabs_field->generate_field($args);
         ?>
 
     </div>

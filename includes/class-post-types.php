@@ -28,7 +28,10 @@ class accordions_post_types{
 	 
 		$singular  = __( 'Accordions', 'accordions' );
 		$plural    = __( 'Accordions', 'accordions' );
-	 
+
+        $accordions_settings = get_option('accordions_settings');
+        $accordions_preview= isset($accordions_settings['accordions_preview']) ? $accordions_settings['accordions_preview'] : 'yes';
+
 
 		register_post_type( "accordions",
 			apply_filters( "team_posttype_accordions", array(
@@ -54,7 +57,7 @@ class accordions_post_types{
 				'show_ui' 				=> true,
 				'capability_type' 		=> 'post',
 				'map_meta_cap'          => true,
-				'publicly_queryable' 	=>  false,
+                'publicly_queryable' 	=> ($accordions_preview =='yes') ?true : false,
 				'exclude_from_search' 	=> false,
 				'hierarchical' 			=> false,
 				'rewrite' 				=> true,

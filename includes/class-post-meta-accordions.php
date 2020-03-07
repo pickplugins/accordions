@@ -41,8 +41,8 @@ class class_accordions_post_meta{
 
         $accordion_settings_tab = array();
         $accordions_options = get_post_meta($post_id,'accordions_options', true);
-        $current_tab = isset($accordions_options['current_tab']) ? $accordions_options['current_tab'] : 'query_member';
-        $view_type = !empty($accordions_options['view_type']) ? $accordions_options['view_type'] : 'grid';
+        $current_tab = isset($accordions_options['current_tab']) ? $accordions_options['current_tab'] : 'content';
+        $view_type = !empty($accordions_options['view_type']) ? $accordions_options['view_type'] : 'accordion';
 
         //var_dump($view_type);
 
@@ -50,21 +50,21 @@ class class_accordions_post_meta{
             'id' => 'shortcode',
             'title' => sprintf(__('%s Shortcode','accordions'),'<i class="fas fa-laptop-code"></i>'),
             'priority' => 1,
-            'active' => true,
+            'active' => ($current_tab == 'shortcode') ? true : false,
         );
 
         $accordion_settings_tab[] = array(
             'id' => 'general',
             'title' => sprintf(__('%s General','accordions'),'<i class="fa fa-cogs"></i>'),
             'priority' => 2,
-            'active' => false,
+            'active' => ($current_tab == 'general') ? true : false,
         );
 
         $accordion_settings_tab[] = array(
             'id' => 'accordion_options',
             'title' => sprintf(__('%s Accordion options','accordions'),'<i class="fa fa-cogs"></i>'),
             'priority' => 2,
-            'active' => false,
+            'active' => ($current_tab == 'accordion_options') ? true : false,
             'hidden' => ($view_type == 'tabs')? true : false ,
             'data_visible' => 'accordion',
         );
@@ -73,7 +73,7 @@ class class_accordions_post_meta{
             'id' => 'tabs_options',
             'title' => sprintf(__('%s Tabs options','accordions'),'<i class="fa fa-cogs"></i>'),
             'priority' => 2,
-            'active' => false,
+            'active' => ($current_tab == 'tabs_options') ? true : false,
             'hidden' => ($view_type == 'accordion')? true : false ,
             'data_visible' => 'tabs',
 
@@ -85,14 +85,14 @@ class class_accordions_post_meta{
             'id' => 'style',
             'title' => sprintf(__('%s Style','accordions'),'<i class="fas fa-palette"></i>'),
             'priority' => 3,
-            'active' => false,
+            'active' => ($current_tab == 'style') ? true : false,
         );
 
         $accordion_settings_tab[] = array(
             'id' => 'content',
             'title' => sprintf(__('%s Content','accordions'),'<i class="fas fa-qrcode"></i>'),
             'priority' => 4,
-            'active' => false,
+            'active' => ($current_tab == 'content') ? true : false,
         );
 
 
@@ -101,7 +101,22 @@ class class_accordions_post_meta{
             'id' => 'custom_scripts',
             'title' => sprintf(__('%s Custom scripts','accordions'),'<i class="far fa-file-code"></i>'),
             'priority' => 6,
-            'active' => false,
+            'active' => ($current_tab == 'buy_pro') ? true : false,
+        );
+
+        $accordion_settings_tab[] = array(
+            'id' => 'help_support',
+            'title' => sprintf(__('%s Help support','woocommerce-products-slider'),'<i class="fas fa-hands-helping"></i>'),
+            'priority' => 80,
+            'active' => ($current_tab == 'help_support') ? true : false,
+        );
+
+
+        $accordion_settings_tab[] = array(
+            'id' => 'buy_pro',
+            'title' => sprintf(__('%s Buy pro','woocommerce-products-slider'),'<i class="fas fa-store"></i>'),
+            'priority' => 90,
+            'active' => ($current_tab == 'buy_pro') ? true : false,
         );
 
 
