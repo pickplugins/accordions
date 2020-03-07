@@ -371,8 +371,8 @@ class settings_tabs_field{
                 ?>
             </div>
             <input class="media-input-value" type="hidden" name="<?php echo $field_name; ?>" id="media_input_<?php echo $css_id; ?>" value="<?php echo $value; ?>" />
-            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload','woocommerce-products-slider');?></div>
-            <div placeholder="<?php echo $placeholder; ?>" class="clear button" id="media_clear_<?php echo $css_id; ?>"><?php echo __('Clear','woocommerce-products-slider');?></div>
+            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload','accordions');?></div>
+            <div placeholder="<?php echo $placeholder; ?>" class="clear button" id="media_clear_<?php echo $css_id; ?>"><?php echo __('Clear','accordions');?></div>
             <div class="error-mgs"></div>
         </div>
 
@@ -452,8 +452,8 @@ class settings_tabs_field{
                 ?>
             </div>
             <input type="text" placeholder="<?php echo $placeholder; ?>" name="<?php echo $field_name; ?>" id="media_input_<?php echo $css_id; ?>" value="<?php echo $value; ?>" />
-            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload','woocommerce-products-slider');?></div>
-            <div class="clear button" id="media_clear_<?php echo $css_id; ?>"><?php echo __('Clear','woocommerce-products-slider');?></div>
+            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload','accordions');?></div>
+            <div class="clear button" id="media_clear_<?php echo $css_id; ?>"><?php echo __('Clear','accordions');?></div>
             <div class="error-mgs"></div>
         </div>
 
@@ -563,7 +563,7 @@ class settings_tabs_field{
         </script>
         <div id="input-wrapper-<?php echo $css_id; ?>" class=" input-wrapper field-repeatable-wrapper
             field-repeatable-wrapper-<?php echo $css_id; ?>">
-            <div class="add-repeat-field"><i class="far fa-plus-square"></i> <?php _e('Add','woocommerce-products-slider'); ?></div>
+            <div class="add-repeat-field"><i class="far fa-plus-square"></i> <?php _e('Add','accordions'); ?></div>
             <div class="repeatable-field-list sortable" id="<?php echo $css_id; ?>">
                 <?php
                 if(!empty($values)):
@@ -834,7 +834,7 @@ class settings_tabs_field{
         ?>
         <div  id="input-wrapper-<?php echo $id; ?>" class="input-wrapper input-text-multi-wrapper
             input-text-multi-wrapper-<?php echo $css_id; ?>">
-            <span data-placeholder="<?php echo esc_attr($placeholder); ?>" data-sort="<?php echo $sortable; ?>" data-clone="<?php echo $allow_clone; ?>" data-name="<?php echo $field_name; ?>[]" class="button add-item"><?php echo __('Add','woocommerce-products-slider'); ?></span>
+            <span data-placeholder="<?php echo esc_attr($placeholder); ?>" data-sort="<?php echo $sortable; ?>" data-clone="<?php echo $allow_clone; ?>" data-name="<?php echo $field_name; ?>[]" class="button add-item"><?php echo __('Add','accordions'); ?></span>
             <div class="field-list <?php if($sortable){ echo 'sortable'; }?>" id="<?php echo $css_id; ?>">
                 <?php
                 if(!empty($values)):

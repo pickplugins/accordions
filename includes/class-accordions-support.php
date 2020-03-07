@@ -85,73 +85,73 @@ if( ! class_exists( 'class_accordions_support' ) ) {
 
             $tutorials = array(
                 array(
-                    'title' => __('Customize content', 'woocommerce-products-slider'),
+                    'title' => __('Customize content', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=cRjaVwlih6Q&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
                 array(
-                    'title' => __('Enable search', 'woocommerce-products-slider'),
+                    'title' => __('Enable search', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=oLJw6kBHau0&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('Click header to scroll top', 'woocommerce-products-slider'),
+                    'title' => __('Click header to scroll top', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=CIcRBoQ5CO4&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
                 array(
-                    'title' => __('Enable lazy load', 'woocommerce-products-slider'),
+                    'title' => __('Enable lazy load', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=aKVK5gW1BKA&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
 
                 array(
-                    'title' => __('Hide edit link', 'woocommerce-products-slider'),
+                    'title' => __('Hide edit link', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=OvVolGXpnn0&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('Create nested or multi-level accordion', 'woocommerce-products-slider'),
+                    'title' => __('Create nested or multi-level accordion', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=Z_iKPNDMEBs&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('Customize header', 'woocommerce-products-slider'),
+                    'title' => __('Customize header', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=skU3J0JpcBU&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('Customize icons', 'woocommerce-products-slider'),
+                    'title' => __('Customize icons', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=-ATeH0j6-t4&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('Open/active via url', 'woocommerce-products-slider'),
+                    'title' => __('Open/active via url', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=PaxUawdnmfA&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
                 array(
-                    'title' => __('Open/active on page load', 'woocommerce-products-slider'),
+                    'title' => __('Open/active on page load', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=Dqd2zSpCQlo&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('How to create accordion', 'woocommerce-products-slider'),
+                    'title' => __('How to create accordion', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=9PS63kqe20M&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
                 array(
-                    'title' => __('How to install accordions', 'woocommerce-products-slider'),
+                    'title' => __('How to install accordions', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=ecYxS3Udjz4&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('WooCommerce product faq tab', 'woocommerce-products-slider'),
+                    'title' => __('WooCommerce product faq tab', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=1yeIpc52p2Y&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
                 array(
-                    'title' => __('Expand/collapse all button', 'woocommerce-products-slider'),
+                    'title' => __('Expand/collapse all button', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=Ah10F3co83o&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 
                 array(
-                    'title' => __('Accordions click track', 'woocommerce-products-slider'),
+                    'title' => __('Accordions click track', 'accordions'),
                     'video_url' => 'https://www.youtube.com/watch?v=qbCsynoaT_Q&list=PL2GPPfgLrfWzOWsRCgV5Qytg6aImGPbCE',
                 ),
 

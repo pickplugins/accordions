@@ -5,6 +5,26 @@ add_action('accordions_main', 'accordions_main_top');
 
 function accordions_main_top($atts){
 
+    $post_id = isset($atts['id']) ? $atts['id'] : '';
+    $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
+    $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
+
+    if($lazy_load=='yes'):
+        ?>
+        <p id="accordions-lazy-<?php echo $post_id; ?>" class="accordions-lazy">
+            <?php if(!empty($lazy_load_src)):?>
+                <img src="<?php echo $lazy_load_src; ?>" />
+            <?php endif;?>
+        </p>
+        <script>
+            jQuery(window).load(function(){
+                jQuery('#accordions-lazy-<?php echo $post_id; ?>').fadeOut();
+                jQuery('#accordions-<?php echo $post_id; ?>').fadeIn();
+            });
+        </script>
+    <?php
+    endif;
 }
 
 
@@ -23,18 +43,27 @@ function accordions_main_items($atts){
 
         foreach ($accordions_content as $index => $accordion){
 
-            $header = isset($accordion['header']) ? $accordion['header'] : '';
-            $body = isset($accordion['body']) ? $accordion['body'] : '';
+            $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
+            $accordion_body = isset($accordion['body']) ? $accordion['body'] : '';
 
+            $accordion_body = apply_filters( 'accordions_header', $accordion_body, $post_id );
+
+
+
+            if(has_shortcode($accordion_body, 'accordions')){
+                $accordion_body = str_replace('[accordions','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+            }
+
+
+            $accordion_body = apply_filters( 'accordions_content', $accordion_body, $post_id );
+            $accordion_body = do_shortcode(wpautop($accordion_body));
 
             ?>
             <div post_id="<?php echo $post_id; ?>" header_id="header-<?php echo $index; ?>" id="header-<?php echo $index; ?>" style="" class="accordions-head head<?php echo $index; ?>"  >
-                <div class="accordion-icons left accordion-plus fa <?php //echo $accordions_icons_plus; ?>"></div>
-                <div class="accordion-icons left accordion-minus fa <?php //echo $accordions_icons_minus; ?>"></div>
-                <div id="header-text-<?php echo $index; ?>"    class="accordions-head-title"><?php echo do_shortcode($header); ?></div>
+                <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
             </div>
             <div class="accordion-content content<?php echo $index; ?>">
-                <?php echo $body; ?>
+                <?php echo $accordion_body; ?>
             </div>
 
             <?php
@@ -48,6 +77,36 @@ function accordions_main_items($atts){
     <?php
 
 }
+
+
+add_action('accordions_main', 'accordions_main_edit_link');
+
+function accordions_main_edit_link($atts){
+
+    $post_id = isset($atts['id']) ? $atts['id'] : '';
+
+    $accordions_options = get_post_meta($post_id, 'accordions_options', true);
+    $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : 'yes';
+
+
+
+
+    if(current_user_can('administrator') && $hide_edit == 'no'){
+        $admin_url = admin_url();
+        $accordion_edit_url = apply_filters('accordion_edit_url', ''.$admin_url.'post.php?post='.$post_id.'&action=edit' );
+
+        ?>
+        <div class="accordion-edit"><a href="<?php echo $accordion_edit_url; ?>"><?php echo __('Edit this accordion','accordions'); ?></a>, <?php echo __("Only admin can see this.",'accordions')?></div>
+        <?php
+
+    }
+
+}
+
+
+
+
+
 
 
 add_action('accordions_main', 'accordions_main_scripts');
@@ -103,6 +162,7 @@ function accordions_main_scripts($atts){
 
     wp_enqueue_style('jquery-ui');
     wp_enqueue_style('accordions-themes');
+    wp_enqueue_style('fontawesome-5');
 
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'jquery-ui-core' );
@@ -115,37 +175,21 @@ function accordions_main_scripts($atts){
     ?>
     <script>
         jQuery(document).ready(function($){
-            wizard_accordion  = $("#accordions-<?php echo $post_id; ?>.accordions .items").accordion({
+            var icons = {
+                header: '<?php echo $icon_active?>',
+                activeHeader: '<?php echo $icon_inactive?>',
+            };
+            accordion_<?php echo $post_id; ?>  = $("#accordions-<?php echo $post_id; ?> .items").accordion({
                 event: "<?php echo $active_event;?>",
                 collapsible:<?php echo $collapsible; ?>,
                 heightStyle: "<?php echo $height_style; ?>",
                 animate: ("<?php echo $animation_style; ?>", <?php echo $animation_delay; ?>),
                 navigation: true,
                 active: <?php echo $active_accordion; ?>,
-                <?php
-                if($expanded_other == 'yes'){
-                    ?>
-                    beforeActivate: function(event, ui) {
-                        if (ui.newHeader[0]) {
-                            var currHeader  = ui.newHeader;
-                            var currContent = currHeader.next(".ui-accordion-content");
-                        } else {
-                            var currHeader  = ui.oldHeader;
-                            var currContent = currHeader.next(".ui-accordion-content");
-                        }
-                        var isPanelSelected = currHeader.attr("aria-selected") == "true";
-                        currHeader.toggleClass("ui-corner-all",isPanelSelected).toggleClass("accordion-header-active ui-state-active ui-corner-top",!isPanelSelected).attr("aria-selected",((!isPanelSelected).toString()));
-                        currHeader.children(".ui-icon").toggleClass("ui-icon-triangle-1-e",isPanelSelected).toggleClass("ui-icon-triangle-1-s",!isPanelSelected);
-                        currContent.toggleClass("accordion-content-active",!isPanelSelected)
-                        if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
-                        return false;
-                    },
-                    <?php
-                }
-
-                ?>
+                icons: icons,
             });
-        })</script>
+        })
+    </script>
     <?php
 
 
@@ -195,11 +239,17 @@ function accordions_main_scripts($atts){
 
     if($lazy_load=='yes'){
         ?>
-        /*#accordions-*/<?php //echo $post_id; ?>/*{display: none;}*/
+        #accordions-<?php echo $post_id; ?>{display: none;}
         <?php
     }
 
     ?>
+
+        .ui-icon, .ui-widget-content .ui-icon{
+            background-image: none !important;
+            text-indent: 0 !important;
+        }
+
         #accordions-<?php echo $post_id; ?> {
             text-align: <?php echo $container_text_align; ?>;
             background:<?php echo $container_background_color; ?> url(<?php echo $container_background_img; ?>) repeat scroll 0 0;
@@ -209,6 +259,7 @@ function accordions_main_scripts($atts){
             background:<?php echo $header_background_color; ?> none repeat scroll 0 0;
             margin:<?php echo $header_margin; ?>;
             padding:<?php echo $header_padding; ?>;
+            outline: none;
         }
         #accordions-<?php echo $post_id; ?> .accordions-head-title{
             color:<?php echo $header_color; ?>;
@@ -250,3 +301,6 @@ function accordions_main_scripts($atts){
 
 
 }
+
+
+

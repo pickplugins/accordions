@@ -9,9 +9,9 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_action('settings_tabs_content_shortcode', 'settings_tabs_content_shortcode',10, 2);
+add_action('accordions_metabox_content_shortcode', 'accordions_metabox_content_shortcode',10, 2);
 
-function settings_tabs_content_shortcode($tab, $post_id){
+function accordions_metabox_content_shortcode($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -159,9 +159,9 @@ function settings_tabs_content_shortcode($tab, $post_id){
 }
 
 
-add_action('settings_tabs_content_general', 'settings_tabs_content_general', 10, 2);
+add_action('accordions_metabox_content_general', 'accordions_metabox_content_general', 10);
 
-function settings_tabs_content_general($tab, $post_id){
+function accordions_metabox_content_general($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id, 'accordions_options', true);
@@ -169,6 +169,8 @@ function settings_tabs_content_general($tab, $post_id){
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : '';
+
+    //var_dump($lazy_load);
 
     ?>
 
@@ -181,6 +183,7 @@ function settings_tabs_content_general($tab, $post_id){
 
         $args = array(
             'id'		=> 'lazy_load',
+            'parent'		=> 'accordions_options',
             'title'		=> __('Enable lazy load','accordions'),
             'details'	=> __('Accordion content will be hidden until page load completed.','accordions'),
             'type'		=> 'select',
@@ -198,6 +201,7 @@ function settings_tabs_content_general($tab, $post_id){
         <?php
         $args = array(
             'id'		=> 'lazy_load_src',
+            'parent'		=> 'accordions_options',
             'title'		=> __('Lazy load image','accordions'),
             'details'	=> __('Set custom image source for lazy load icon.','accordions'),
             'type'		=> 'media_url',
@@ -216,6 +220,7 @@ function settings_tabs_content_general($tab, $post_id){
         <?php
         $args = array(
             'id'		=> 'hide_edit',
+            'parent'		=> 'accordions_options',
             'title'		=> __('Hide edit link','accordions'),
             'details'	=> __('You can display/hide accordion edit link on front-end','accordions'),
             'type'		=> 'select',
@@ -237,9 +242,9 @@ function settings_tabs_content_general($tab, $post_id){
 
 }
 
-add_action('settings_tabs_content_accordion_options', 'settings_tabs_content_accordion_options', 10, 2);
+add_action('accordions_metabox_content_accordion_options', 'accordions_metabox_content_accordion_options', 10);
 
-function settings_tabs_content_accordion_options($tab, $post_id){
+function accordions_metabox_content_accordion_options($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
@@ -331,9 +336,9 @@ function settings_tabs_content_accordion_options($tab, $post_id){
 }
 
 
-add_action('settings_tabs_content_tabs_options', 'settings_tabs_content_tabs_options', 10, 2);
+add_action('accordions_metabox_content_tabs_options', 'accordions_metabox_content_tabs_options', 10);
 
-function settings_tabs_content_tabs_options($tab, $post_id){
+function accordions_metabox_content_tabs_options($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
@@ -398,9 +403,9 @@ function settings_tabs_content_tabs_options($tab, $post_id){
 
 
 
-add_action('settings_tabs_content_style', 'settings_tabs_content_style', 10, 2);
+add_action('accordions_metabox_content_style', 'accordions_metabox_content_style', 10);
 
-function settings_tabs_content_style($tab, $post_id){
+function accordions_metabox_content_style($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
@@ -804,9 +809,9 @@ function settings_tabs_content_style($tab, $post_id){
 
 
 
-add_action('settings_tabs_content_content', 'settings_tabs_content_content', 10, 2);
+add_action('accordions_metabox_content_content', 'accordions_metabox_content_content', 10);
 
-function settings_tabs_content_content($tab, $post_id){
+function accordions_metabox_content_content($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
@@ -893,9 +898,9 @@ function settings_tabs_content_content($tab, $post_id){
 }
 
 
-add_action('settings_tabs_content_custom_scripts', 'settings_tabs_content_custom_scripts', 10, 2);
+add_action('accordions_metabox_content_custom_scripts', 'accordions_metabox_content_custom_scripts', 10);
 
-function settings_tabs_content_custom_scripts($tab, $post_id){
+function accordions_metabox_content_custom_scripts($post_id){
 
 
     $settings_tabs_field = new settings_tabs_field();
@@ -940,6 +945,19 @@ function settings_tabs_content_custom_scripts($tab, $post_id){
 
     </div>
     <?php
+
+
+}
+
+
+
+
+add_action('accordions_post_meta_save','accordions_post_meta_save');
+
+function accordions_post_meta_save($job_id){
+
+    $accordions_options = isset($_POST['accordions_options']) ? stripslashes_deep($_POST['accordions_options']) : '';
+    update_post_meta($job_id, 'accordions_options', $accordions_options);
 
 
 }

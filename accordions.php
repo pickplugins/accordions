@@ -24,19 +24,30 @@ class Accordions{
 		define('accordions_plugin_url', plugins_url('/', __FILE__)  );
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
         define('accordions_version', '2.1.18' );
+        define('accordions_plugin_name', 'Accordions' );
         define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
+
+
+        require_once( accordions_plugin_dir . 'includes/class-post-types.php');
+
+        require_once( accordions_plugin_dir . 'includes/class-post-meta-accordions.php');
+        require_once( accordions_plugin_dir . 'includes/class-post-meta-accordions-hook.php');
+
+        require_once( accordions_plugin_dir . 'includes/class-settings.php');
+        require_once( accordions_plugin_dir . 'includes/class-settings-hook.php');
+
+
 
         require_once( accordions_plugin_dir . 'includes/class-settings-tabs.php');
         require_once( accordions_plugin_dir . 'includes/class-accordions-support.php');
-		require_once( accordions_plugin_dir . 'includes/meta-new.php');
+		//require_once( accordions_plugin_dir . 'includes/meta-new.php');
 		require_once( accordions_plugin_dir . 'includes/functions.php');
 		require_once( accordions_plugin_dir . 'includes/functions-wc.php');
-        require_once( accordions_plugin_dir . 'includes/functions-meta.php');
 		require_once( accordions_plugin_dir . 'includes/class-functions.php');
 		require_once( accordions_plugin_dir . 'includes/class-shortcodes.php');
 		require_once( accordions_plugin_dir . 'includes/duplicate-post.php');
-        require_once( accordions_plugin_dir . 'includes/class-WPAdminSettings.php');
-        require_once( accordions_plugin_dir . 'includes/class-settings.php');
+        //require_once( accordions_plugin_dir . 'includes/class-WPAdminSettings.php');
+
 
 
         require_once( accordions_plugin_dir . 'templates/accordion/accordion-hook.php');
@@ -101,8 +112,8 @@ class Accordions{
 
 
         wp_register_style('accordions-tabs', plugins_url( 'assets/global/css/themesTabs.style.css', __FILE__ ));
-        wp_register_style('fontawesome-5',  accordions_plugin_url.'assets/global/css/fontawesome-5.min.css');
-        wp_register_style('fontawesome-4',  accordions_plugin_url.'assets/global/css/fontawesome-4.min.css');
+        wp_register_style('fontawesome-5',  accordions_plugin_url.'assets/global/css/font-awesome-5.css');
+        wp_register_style('fontawesome-4',  accordions_plugin_url.'assets/global/css/font-awesome-4.css');
         wp_register_style('jquery-ui',  accordions_plugin_url.'assets/frontend/css/jquery-ui.css');
         wp_register_style('accordions-themes',  accordions_plugin_url.'assets/global/css/themes.style.css');
 
