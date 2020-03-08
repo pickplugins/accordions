@@ -81,8 +81,8 @@ function accordions_cron_upgrade_accordions(){
 
             //echo $accordions_title.'<br/>';
 
-            $accordions_lazy_load       = get_post_meta( $accordions_id, 'accordions_lazy_load', true );
-            $accordions_options['lazy_load'] = $accordions_lazy_load;
+
+
 
 
             $accordions_lazy_load       = get_post_meta( $accordions_id, 'accordions_lazy_load', true );
@@ -136,14 +136,21 @@ function accordions_cron_upgrade_accordions(){
             $expand_collapse_text = get_post_meta( $accordions_id, 'expand_collapse_text', true );
             $accordions_options['accordion']['expand_collapse_text'] = $expand_collapse_text;
 
+            $accordions_child           = get_post_meta( $accordions_id, 'accordions_child', true );
+            $accordions_options['accordion']['is_child'] = $accordions_child;
+
             $accordions_width           = get_post_meta( $accordions_id, 'accordions_width', true );
             $accordions_width_large     = !empty($accordions_width['large']) ? $accordions_width['large'] : '100%';
             $accordions_width_medium    = !empty($accordions_width['medium']) ? $accordions_width['medium'] : '100%';
             $accordions_width_small     = !empty($accordions_width['small']) ? $accordions_width['small'] : '100%';
 
-            $accordions_options['accordion_width']['large'] = $accordions_width_large;
-            $accordions_options['accordion_width']['medium'] = $accordions_width_medium;
-            $accordions_options['accordion_width']['small'] = $accordions_width_small;
+            $accordions_options['accordion']['width_large'] = $accordions_width_large;
+            $accordions_options['accordion']['width_medium'] = $accordions_width_medium;
+            $accordions_options['accordion']['width_small'] = $accordions_width_small;
+
+            $accordions_themes = get_post_meta( $accordions_id, 'accordions_themes', true );
+            $accordions_options['accordion']['theme'] = $accordions_themes;
+
 
             $accordions_click_track = get_post_meta($accordions_id,'accordions_click_track', true);
             $accordions_options['enable_stats'] = $accordions_click_track;
@@ -186,6 +193,8 @@ function accordions_cron_upgrade_accordions(){
             $accordions_icons_bg_color = get_post_meta( $accordions_id, 'accordions_icons_bg_color', true );
             $accordions_options['icon']['background_color'] = $accordions_icons_bg_color;
 
+            $accordions_icons_padding = get_post_meta( $accordions_id, 'accordions_icons_padding', true );
+            $accordions_options['icon']['padding'] = $accordions_icons_padding;
 
             $accordions_active_bg_color = get_post_meta( $accordions_id, 'accordions_active_bg_color', true );
             $accordions_options['header']['active_background_color'] = $accordions_active_bg_color;
@@ -204,6 +213,9 @@ function accordions_cron_upgrade_accordions(){
 
             $accordions_items_title_font_size = get_post_meta( $accordions_id, 'accordions_items_title_font_size', true );
             $accordions_options['header']['font_size'] = $accordions_items_title_font_size;
+
+            $accordions_items_title_font_family = get_post_meta( $accordions_id, 'accordions_items_title_font_family', true );
+            $accordions_options['header']['font_family'] = $accordions_items_title_font_family;
 
             $accordions_items_title_padding = get_post_meta( $accordions_id, 'accordions_items_title_padding', true );
             $accordions_options['header']['padding'] = $accordions_items_title_padding;
@@ -266,6 +278,8 @@ function accordions_cron_upgrade_accordions(){
             $accordions_options['custom_scripts']['custom_js'] = $accordions_custom_js;
 
 
+            $track_header = get_post_meta($accordions_id, 'track_header', true);
+            $accordions_options['track_header'] = $track_header;
 
 
 

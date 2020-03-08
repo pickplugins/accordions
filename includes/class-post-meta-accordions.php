@@ -62,16 +62,22 @@ class class_accordions_post_meta{
 
         $accordion_settings_tab[] = array(
             'id' => 'accordion_options',
-            'title' => sprintf(__('%s Accordion options','accordions'),'<i class="fa fa-cogs"></i>'),
+            'title' => sprintf(__('%s Accordion options','accordions'),'<i class="fas fa-bars"></i>'),
             'priority' => 2,
             'active' => ($current_tab == 'accordion_options') ? true : false,
             'hidden' => ($view_type == 'tabs')? true : false ,
             'data_visible' => 'accordion',
         );
+        $accordion_settings_tab[] = array(
+            'id' => 'style',
+            'title' => sprintf(__('%s Style','accordions'),'<i class="fas fa-palette"></i>'),
+            'priority' => 3,
+            'active' => ($current_tab == 'style') ? true : false,
+        );
 
         $accordion_settings_tab[] = array(
             'id' => 'tabs_options',
-            'title' => sprintf(__('%s Tabs options','accordions'),'<i class="fa fa-cogs"></i>'),
+            'title' => sprintf(__('%s Tabs options','accordions'),'<i class="far fa-folder"></i>'),
             'priority' => 2,
             'active' => ($current_tab == 'tabs_options') ? true : false,
             'hidden' => ($view_type == 'accordion')? true : false ,
@@ -82,15 +88,8 @@ class class_accordions_post_meta{
 
 
         $accordion_settings_tab[] = array(
-            'id' => 'style',
-            'title' => sprintf(__('%s Style','accordions'),'<i class="fas fa-palette"></i>'),
-            'priority' => 3,
-            'active' => ($current_tab == 'style') ? true : false,
-        );
-
-        $accordion_settings_tab[] = array(
             'id' => 'content',
-            'title' => sprintf(__('%s Content','accordions'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Content','accordions'),'<i class="far fa-edit"></i>'),
             'priority' => 4,
             'active' => ($current_tab == 'content') ? true : false,
         );

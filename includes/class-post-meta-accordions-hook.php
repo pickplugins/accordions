@@ -399,6 +399,25 @@ function accordions_metabox_content_tabs_options($post_id){
 
 
 
+add_action('accordions_metabox_content_general_style', 'accordions_metabox_content_general_style', 10);
+
+function accordions_metabox_content_general_style($post_id){
+
+    $settings_tabs_field = new settings_tabs_field();
+    $accordions_options = get_post_meta($post_id,'accordions_options', true);
+
+
+    ?>
+
+
+
+    <?php
+
+
+}
+
+
+
 
 
 
@@ -424,6 +443,8 @@ function accordions_metabox_content_style($post_id){
     $header_color = isset($header['color']) ? $header['color'] : '';
     $header_color_hover = isset($header['color_hover']) ? $header['color_hover'] : '';
     $header_font_size = isset($header['font_size']) ? $header['font_size'] : '';
+    $header_font_family = isset($header['font_family']) ? $header['font_family'] : '';
+
     $header_padding = isset($header['padding']) ? $header['padding'] : '';
     $header_margin = isset($header['margin']) ? $header['margin'] : '';
 
@@ -433,6 +454,8 @@ function accordions_metabox_content_style($post_id){
     $body_color = isset($body['color']) ? $body['color'] : '';
     $body_color_hover = isset($body['color_hover']) ? $body['color_hover'] : '';
     $body_font_size = isset($body['font_size']) ? $body['font_size'] : '';
+    $body_font_family = isset($body['font_family']) ? $body['font_family'] : '';
+
     $body_padding = isset($body['padding']) ? $body['padding'] : '';
     $body_margin = isset($body['margin']) ? $body['margin'] : '';
 
@@ -601,6 +624,19 @@ function accordions_metabox_content_style($post_id){
 
         $settings_tabs_field->generate_field($args);
 
+
+        $args = array(
+            'id'		=> 'font_family',
+            'parent'		=> 'accordions_options[header]',
+            'title'		=> __('Font family','accordions'),
+            'details'	=> __('Choose font family for header text','accordions'),
+            'type'		=> 'text',
+            'value'		=> $header_font_family,
+            'placeholder' => 'Open Sans',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
         $args = array(
             'id'		=> 'padding',
             'parent'		=> 'accordions_options[header]',
@@ -665,6 +701,19 @@ function accordions_metabox_content_style($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'font_family',
+            'parent'		=> 'accordions_options[body]',
+            'title'		=> __('Font family','accordions'),
+            'details'	=> __('Choose font family for accordion content text','accordions'),
+            'type'		=> 'text',
+            'value'		=> $body_font_family,
+            'placeholder' => 'Open Sans',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
         ?>
 
         <?php
@@ -717,10 +766,9 @@ function accordions_metabox_content_style($post_id){
         ?>
     </div>
 
-
     <div class="section">
-        <div class="section-title"><?php echo __('Accordion container style','accordions'); ?></div>
-        <p class="description section-description"><?php echo __('Customize accordion container settings.','accordions'); ?></p>
+        <div class="section-title"><?php echo __('Container style','accordions'); ?></div>
+        <p class="description section-description"><?php echo __('Customize container style optons.','accordions'); ?></p>
 
         <?php
 
@@ -729,7 +777,6 @@ function accordions_metabox_content_style($post_id){
         $container_background_color = isset($container['background_color']) ? $container['background_color'] : '';
         $container_text_align = isset($container['text_align']) ? $container['text_align'] : '';
         $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
-
 
 
         $args = array(
@@ -745,10 +792,7 @@ function accordions_metabox_content_style($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
-        ?>
 
-
-        <?php
         $args = array(
             'id'		=> 'background_color',
             'parent'		=> 'accordions_options[container]',
@@ -762,9 +806,7 @@ function accordions_metabox_content_style($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
-        ?>
 
-        <?php
         $args = array(
             'id'		=> 'text_align',
             'parent'		=> 'accordions_options[container]',
@@ -784,9 +826,7 @@ function accordions_metabox_content_style($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
-        ?>
 
-        <?php
         $args = array(
             'id'		=> 'background_img',
             'parent'		=> 'accordions_options[container]',
@@ -803,6 +843,7 @@ function accordions_metabox_content_style($post_id){
         ?>
 
     </div>
+
     <?php
 
 }
