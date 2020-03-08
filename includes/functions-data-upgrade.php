@@ -63,7 +63,7 @@ function accordions_cron_upgrade_accordions(){
     $args = array(
         'post_type'=>'accordions',
         'post_status'=>'publish',
-        'posts_per_page'=> 5,
+        'posts_per_page'=> 10,
         'meta_query'=> $meta_query,
 
     );
@@ -289,6 +289,7 @@ function accordions_cron_upgrade_accordions(){
 
             $accordions_active_accordion = get_post_meta($accordions_id,'accordions_active_accordion', true);
 
+            if(!empty($accordions_content_title))
             foreach ($accordions_content_title as $index => $title){
 
                 $accordions_options['content'][$index]['header'] = $title;

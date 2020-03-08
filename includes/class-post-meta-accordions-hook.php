@@ -912,7 +912,7 @@ function accordions_metabox_content_content($post_id){
         <?php
 
 
-        echo '<pre>'.var_export($accordions_active_accordion, true).'</pre>';
+        //echo '<pre>'.var_export($accordions_active_accordion, true).'</pre>';
         //echo '<pre>'.var_export($accordions_content_body, true).'</pre>';
 
 

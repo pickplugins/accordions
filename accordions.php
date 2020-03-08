@@ -38,6 +38,7 @@ class Accordions{
 
         require_once( accordions_plugin_dir . 'includes/class-post-meta-product.php');
         require_once( accordions_plugin_dir . 'includes/class-admin-notices.php');
+        require_once( accordions_plugin_dir . 'includes/functions-data-upgrade.php');
 
 
 
@@ -135,7 +136,7 @@ class Accordions{
         wp_register_style('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.css');
         wp_register_script('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
 
-        wp_register_script('codemirror', accordions_plugin_url.'assets/admin/js/codemirror.js' , array( 'jquery' ));
+        //wp_register_script('codemirror', accordions_plugin_url.'assets/admin/js/codemirror.js' , array( 'jquery' ));
         wp_register_style('codemirror', accordions_plugin_url.'assets/admin/css/codemirror.css');
 
         wp_register_style('font-awesome-4', accordions_plugin_url.'assets/global/css/font-awesome-4.css');

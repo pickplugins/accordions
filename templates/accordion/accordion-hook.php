@@ -201,6 +201,7 @@ function accordions_main_items($atts){
 
         <?php
 
+        if(!empty($accordions_content)):
         foreach ($accordions_content as $index => $accordion){
 
             $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
@@ -241,10 +242,11 @@ function accordions_main_items($atts){
             </div>
 
             <?php
-            //var_dump($accordion);
-
         }
+        else:
 
+            do_action('accordions_main_no_content');
+        endif;
         ?>
 
     </div>
@@ -383,4 +385,12 @@ function accordions_main_scripts($atts){
 }
 
 
+add_action('accordions_main_no_content', 'accordions_main_no_content');
+function accordions_main_no_content(){
 
+
+    ?>
+    <p><?php echo __('Content missing',''); ?></p>
+    <?php
+
+}
