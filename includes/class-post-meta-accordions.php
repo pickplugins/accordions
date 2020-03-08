@@ -105,7 +105,7 @@ class class_accordions_post_meta{
 
         $accordion_settings_tab[] = array(
             'id' => 'help_support',
-            'title' => sprintf(__('%s Help support','woocommerce-products-slider'),'<i class="fas fa-hands-helping"></i>'),
+            'title' => sprintf(__('%s Help support','accordions'),'<i class="fas fa-hands-helping"></i>'),
             'priority' => 80,
             'active' => ($current_tab == 'help_support') ? true : false,
         );
@@ -113,7 +113,7 @@ class class_accordions_post_meta{
 
         $accordion_settings_tab[] = array(
             'id' => 'buy_pro',
-            'title' => sprintf(__('%s Buy pro','woocommerce-products-slider'),'<i class="fas fa-store"></i>'),
+            'title' => sprintf(__('%s Buy pro','accordions'),'<i class="fas fa-store"></i>'),
             'priority' => 90,
             'active' => ($current_tab == 'buy_pro') ? true : false,
         );
@@ -131,11 +131,16 @@ class class_accordions_post_meta{
         wp_enqueue_script('jquery-ui-sortable');
         wp_enqueue_script( 'jquery-ui-core' );
         wp_enqueue_script('jquery-ui-accordion');
+        wp_enqueue_script('wp-color-picker');
+        wp_enqueue_style( 'wp-color-picker' );
 
         wp_enqueue_style( 'jquery-ui');
         wp_enqueue_style( 'font-awesome-5' );
         wp_enqueue_style( 'settings-tabs' );
         wp_enqueue_script( 'settings-tabs' );
+
+
+        wp_enqueue_editor();
 
 
 

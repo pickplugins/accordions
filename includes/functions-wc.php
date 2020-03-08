@@ -10,14 +10,14 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_filter( 'woocommerce_product_tabs', 'woo_product_tab_accordions' );
-function woo_product_tab_accordions( $tabs ) {
+add_filter( 'woocommerce_product_tabs', 'accordions_product_tab' );
+function accordions_product_tab( $tabs ) {
 
 	$prouct_id = get_the_id();
 	$accordions_id = get_post_meta( $prouct_id, 'accordions_id', true );
 	$accordions_tab_title = get_post_meta( $prouct_id, 'accordions_tab_title', true );
 
-	if(empty($accordions_tab_title)) $accordions_tab_title = __( 'FAQ', 'accordions' );
+    $accordions_tab_title = !empty($accordions_tab_title) ? $accordions_tab_title : __( 'FAQ', 'accordions' );
 
 	if(!empty($accordions_id)):
 		$tabs['accordions_faq'] = array(

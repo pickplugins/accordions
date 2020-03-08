@@ -36,6 +36,9 @@ class Accordions{
         require_once( accordions_plugin_dir . 'includes/class-settings.php');
         require_once( accordions_plugin_dir . 'includes/class-settings-hook.php');
 
+        require_once( accordions_plugin_dir . 'includes/class-post-meta-product.php');
+        require_once( accordions_plugin_dir . 'includes/class-admin-notices.php');
+
 
 
         require_once( accordions_plugin_dir . 'includes/class-settings-tabs.php');
@@ -53,13 +56,14 @@ class Accordions{
         require_once( accordions_plugin_dir . 'templates/accordion/accordion-hook.php');
 
 
-        add_action( 'wp_enqueue_scripts', array( $this, 'accordions_front_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'accordions_admin_scripts' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, '_front_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, '_admin_scripts' ) );
 		
 		add_action( 'plugins_loaded', array( $this, 'accordions_load_textdomain' ));
-		
-		
-		require_once( accordions_plugin_dir . 'includes/class-widget-accordions.php');
+        add_filter('cron_schedules', array($this, 'cron_recurrence_interval'));
+
+
+        require_once( accordions_plugin_dir . 'includes/class-widget-accordions.php');
 				
 		add_action( 'widgets_init', array( $this, 'widget_register' ) );
 		
@@ -80,35 +84,36 @@ class Accordions{
         load_plugin_textdomain( 'accordions', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 
 		}
+
+    function cron_recurrence_interval($schedules){
+
+        $schedules['1minute'] = array(
+            'interval' => 120,
+            'display' => __('1 Minute', 'accordions')
+        );
+
+
+        return $schedules;
+    }
 	
-	
-	public function accordions_install(){
+	public function _install(){
 		
 		do_action( 'accordions_action_install' );
 		
 		}		
 		
-	public function accordions_uninstall(){
+	public function _uninstall(){
 		
 		do_action( 'accordions_action_uninstall' );
 		}		
 		
-	public function accordions_deactivation(){
+	public function _deactivation(){
 		
 		do_action( 'accordions_action_deactivation' );
 		}
 	
 	
-	public function accordions_front_scripts(){
-
-
-//		wp_enqueue_script( 'jquery' );
-//		wp_enqueue_script( 'jquery-ui-core' );
-//		wp_enqueue_script('jquery-ui-accordion');
-//		wp_enqueue_script('jquery-ui-tabs');
-//		wp_enqueue_script('jquery-effects-core');
-		//wp_enqueue_script('accordions_js', plugins_url( 'assets/frontend/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
-		//wp_localize_script( 'accordions_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
+	public function _front_scripts(){
 
 
         wp_register_style('accordions-tabs', plugins_url( 'assets/global/css/themesTabs.style.css', __FILE__ ));
@@ -122,7 +127,10 @@ class Accordions{
 
 		}
 
-	public function accordions_admin_scripts(){
+	public function _admin_scripts(){
+
+        wp_enqueue_script('accordions_admin_js', plugins_url( 'assets/admin/js/scripts.js' , __FILE__ ) , array( 'jquery' ),'20181018');
+        wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
         wp_register_style('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.css');
         wp_register_script('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
@@ -139,73 +147,38 @@ class Accordions{
         wp_enqueue_script('wp-theme-plugin-editor');
 
 
-        $screen = get_current_screen();
-        global $post;
-
-        if( !empty($post)){
-
-            if($post->post_type=='accordions'){
-
-                wp_enqueue_editor();
-                wp_enqueue_script('jquery');
-                wp_enqueue_script('jquery-ui-sortable');
-                wp_enqueue_script( 'jquery-ui-core' );
-                wp_enqueue_script('jquery-ui-accordion');
-                wp_enqueue_script('jquery-ui-tabs');
-                wp_enqueue_script('wp-color-picker');
-                wp_enqueue_style( 'wp-color-picker' );
-
-
-                wp_enqueue_script('accordions_admin_js', plugins_url( 'assets/admin/js/scripts.js' , __FILE__ ) , array( 'jquery' ),'20181018');
-                wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
-                wp_localize_script( 'accordions_admin_js', 'L10n_accordions', array(
-                    'confirm_text' => __( 'Confirm', 'accordions' )
-                ));
-
-                wp_register_style('accordions-themes',  accordions_plugin_url.'assets/global/css/themes.style.css');
-                wp_enqueue_style('accordions-themes');
-
-                wp_enqueue_style('accordions_admin_style', plugins_url( 'assets/admin/css/style.css', __FILE__ ),'','20181018');
+        wp_enqueue_editor();
 
 
 
-            }
-
-
-
-
-
-        }
-
-
-        if (  $screen->id == 'accordions_page_settings' ){
-            wp_enqueue_script('accordions_admin_js', plugins_url( 'assets/admin/js/scripts.js' , __FILE__ ) , array( 'jquery' ),'20181018');
-            wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
-
-        }
+        wp_enqueue_script('accordions_admin_js', plugins_url( 'assets/admin/js/scripts.js' , __FILE__ ) , array( 'jquery' ),'20181018');
+        wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
 
 
 
 
 
-
-
-
-
-		}
-
-    public function plugin_list_pro_link( $links ) {
-
-        return array_merge(
-            array(
-                'get_premium' => '<a target="_blank" class="" style=" font-weight:bold;" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard">'.__('Buy Premium!', 'accordions').'</a>'
-            ),
-            $links
-        );
 
     }
 
-	}
+    public function plugin_list_pro_link( $links ) {
+
+        $active_plugins = get_option('active_plugins');
+
+        if(!in_array( 'accordions-pro/accordions-pro.php', (array) $active_plugins )){
+            $links['get_premium'] = '<a target="_blank" class="" style=" font-weight:bold;" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard">'.__('Buy Premium!', 'accordions').'</a>';
+
+
+        }
+
+
+
+        return $links;
+
+    }
+
+
+}
 
 new Accordions();

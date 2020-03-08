@@ -192,6 +192,9 @@ function accordions_main_items($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
+    $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : 'yes';
+    $enable_wpautop = isset($accordions_options['enable_wpautop']) ? $accordions_options['enable_wpautop'] : 'yes';
+    $enable_autoembed = isset($accordions_options['enable_autoembed']) ? $accordions_options['enable_autoembed'] : 'yes';
 
     ?>
     <div class="items">
@@ -213,7 +216,21 @@ function accordions_main_items($atts){
 
 
             $accordion_body = apply_filters( 'accordions_content', $accordion_body, $post_id );
-            $accordion_body = do_shortcode(wpautop($accordion_body));
+
+
+            if($enable_autoembed =='yes'){
+                $WP_Embed = new WP_Embed();
+                $accordion_body = $WP_Embed->autoembed( $accordion_body);
+            }
+
+            if($enable_wpautop =='yes'){
+                $accordion_body = wpautop($accordion_body);
+            }
+
+            if($enable_shortcode =='yes'){
+                $accordion_body = do_shortcode($accordion_body);
+            }
+
 
             ?>
             <div post_id="<?php echo $post_id; ?>" header_id="header-<?php echo $index; ?>" id="header-<?php echo $index; ?>" style="" class="accordions-head head<?php echo $index; ?>"  >

@@ -38,12 +38,12 @@ function accordions_settings_content_general(){
         $args = array(
             'id'		=> 'accordions_preview',
             'parent'		=> 'accordions_settings',
-            'title'		=> __('Enable accordions preview','woocommerce-products-slider'),
-            'details'	=> __('You can enable preview accordions.','woocommerce-products-slider'),
+            'title'		=> __('Enable accordions preview','accordions'),
+            'details'	=> __('You can enable preview accordions.','accordions'),
             'type'		=> 'select',
             'value'		=> $accordions_preview,
             'default'		=> 'yes',
-            'args'		=> array('yes'=>__('Yes','woocommerce-products-slider'), 'no'=>__('No','woocommerce-products-slider')  ),
+            'args'		=> array('yes'=>__('Yes','accordions'), 'no'=>__('No','accordions')  ),
         );
 
         $settings_tabs_field->generate_field($args);

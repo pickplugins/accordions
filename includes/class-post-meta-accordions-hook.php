@@ -169,6 +169,9 @@ function accordions_metabox_content_general($post_id){
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : '';
+    $enable_autoembed = isset($accordions_options['enable_autoembed']) ? $accordions_options['enable_autoembed'] : '';
+    $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : '';
+    $enable_wpautop = isset($accordions_options['enable_wpautop']) ? $accordions_options['enable_wpautop'] : '';
 
     //var_dump($lazy_load);
 
@@ -179,8 +182,6 @@ function accordions_metabox_content_general($post_id){
         <p class="description section-description"><?php echo __('Some general options','accordions'); ?></p>
 
         <?php
-
-
         $args = array(
             'id'		=> 'lazy_load',
             'parent'		=> 'accordions_options',
@@ -196,9 +197,7 @@ function accordions_metabox_content_general($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
-        ?>
 
-        <?php
         $args = array(
             'id'		=> 'lazy_load_src',
             'parent'		=> 'accordions_options',
@@ -211,13 +210,7 @@ function accordions_metabox_content_general($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
-        ?>
 
-
-
-
-
-        <?php
         $args = array(
             'id'		=> 'hide_edit',
             'parent'		=> 'accordions_options',
@@ -225,6 +218,55 @@ function accordions_metabox_content_general($post_id){
             'details'	=> __('You can display/hide accordion edit link on front-end','accordions'),
             'type'		=> 'select',
             'value'		=> $hide_edit,
+            'default'		=> 'yes',
+            'args'		=> array(
+                'no'	=> __('No','accordions'),
+                'yes'	=> __('Yes','accordions'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+        $args = array(
+            'id'		=> 'enable_autoembed',
+            'parent'		=> 'accordions_options',
+            'title'		=> __('Enable autoembed','accordions'),
+            'details'	=> __('Enable autoembed for content.','accordions'),
+            'type'		=> 'select',
+            'value'		=> $enable_autoembed,
+            'default'		=> 'yes',
+            'args'		=> array(
+                'no'	=> __('No','accordions'),
+                'yes'	=> __('Yes','accordions'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'enable_shortcode',
+            'parent'		=> 'accordions_options',
+            'title'		=> __('Enable shortcode','accordions'),
+            'details'	=> __('Enable shortcode for content.','accordions'),
+            'type'		=> 'select',
+            'value'		=> $enable_shortcode,
+            'default'		=> 'yes',
+            'args'		=> array(
+                'no'	=> __('No','accordions'),
+                'yes'	=> __('Yes','accordions'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'enable_wpautop',
+            'parent'		=> 'accordions_options',
+            'title'		=> __('Enable wpautop','accordions'),
+            'details'	=> __('Enable wpautop for content.','accordions'),
+            'type'		=> 'select',
+            'value'		=> $enable_wpautop,
             'default'		=> 'yes',
             'args'		=> array(
                 'no'	=> __('No','accordions'),
@@ -858,6 +900,9 @@ function accordions_metabox_content_content($post_id){
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
 
+
+
+
     ?>
 
     <div class="section">
@@ -867,6 +912,8 @@ function accordions_metabox_content_content($post_id){
         <?php
 
 
+        echo '<pre>'.var_export($accordions_active_accordion, true).'</pre>';
+        //echo '<pre>'.var_export($accordions_content_body, true).'</pre>';
 
 
         $meta_fields = array(

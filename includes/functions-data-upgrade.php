@@ -15,19 +15,20 @@ function accordions_cron_upgrade_settings(){
 
     $accordions_license = get_option( 'accordions_license' );
     $license_key = isset($accordions_license['license_key']) ? $accordions_license['license_key'] : '';
-
     $accordions_settings['license_key'] = $license_key;
-    $accordions_settings['font_aw_version'] = 'v_5';
 
+    $fontawesome_ver = get_option( 'accordions_fontawesome_ver' );
 
-    $social_fields_new = array();
-    $social_fields_new[] = array('name'=> 'Email', 'media_id'=> 'email', 'icon'=> 'https://i.imgur.com/OS2saH8.png','font_icon'=> '',  'visibility'=> 1, 'share_url'=>'mailto:?subject=TITLE&body=URL'   );
-    $social_fields_new[] = array('name'=> 'Facebook', 'media_id'=> 'facebook', 'icon'=> 'https://i.imgur.com/IftZ9Ng.png','font_icon'=> '',  'visibility'=> 1, 'share_url'=>'https://www.facebook.com/sharer/sharer.php?u=URL'   );
-    $social_fields_new[] = array('name'=> 'Twitter', 'media_id'=> 'twitter', 'icon'=> 'https://i.imgur.com/JZDm0R5.png','font_icon'=> '',  'visibility'=> 1,'share_url'=>'https://twitter.com/intent/tweet?url=URL&text=TITLE'   );
-    $social_fields_new[] = array('name'=> 'Pinterest', 'media_id'=> 'pinterest', 'icon'=> 'https://i.imgur.com/VxUWxZC.png','font_icon'=> '',  'visibility'=> 0, 'share_url'=>'http://pinterest.com/pin/create/button/?url=URL&media=&description=TITLE'   );
-    $social_fields_new[] = array('name'=> 'Linkedin', 'media_id'=> 'linkedin', 'icon'=> 'https://i.imgur.com/8kuHCtD.png','font_icon'=> '',  'visibility'=> 0,'share_url'=>'https://www.linkedin.com/shareArticle?url=URL&title=TITLE&summary=&source='   );
+    if($fontawesome_ver== 'version-5'){
+        $fontawesome_ver = 'v_5';
+    }
+    elseif($fontawesome_ver== 'version-4'){
+        $fontawesome_ver = 'v_4';
+    }else{
+        $fontawesome_ver = 'none';
+    }
 
-    $accordions_settings['social_media_sites'] = $social_fields_new;
+    $accordions_settings['font_aw_version'] = $fontawesome_ver;
 
 
     update_option('accordions_settings', $accordions_settings);
@@ -80,10 +81,6 @@ function accordions_cron_upgrade_accordions(){
             $accordions_options = array();
 
             //echo $accordions_title.'<br/>';
-
-
-
-
 
             $accordions_lazy_load       = get_post_meta( $accordions_id, 'accordions_lazy_load', true );
             $accordions_options['lazy_load'] = $accordions_lazy_load;
@@ -280,6 +277,32 @@ function accordions_cron_upgrade_accordions(){
 
             $track_header = get_post_meta($accordions_id, 'track_header', true);
             $accordions_options['track_header'] = $track_header;
+
+            $accordions_content_title = get_post_meta($accordions_id,'accordions_content_title', true);
+            $accordions_content_body = get_post_meta($accordions_id,'accordions_content_body', true);
+            $accordions_content_title_toggled = get_post_meta($accordions_id,'accordions_content_title_toggled', true);
+            $accordions_section_icon_plus = get_post_meta($accordions_id,'accordions_section_icon_plus', true);
+            $accordions_section_icon_minus = get_post_meta($accordions_id,'accordions_section_icon_minus', true);
+            $accordions_hide = get_post_meta($accordions_id,'accordions_hide', true);
+            $accordions_bg_color = get_post_meta($accordions_id,'accordions_bg_color', true);
+            $accordions_header_bg_img = get_post_meta($accordions_id,'accordions_header_bg_img', true);
+
+            $accordions_active_accordion = get_post_meta($accordions_id,'accordions_active_accordion', true);
+
+            foreach ($accordions_content_title as $index => $title){
+
+                $accordions_options['content'][$index]['header'] = $title;
+                $accordions_options['content'][$index]['body'] = isset($accordions_content_body[$index]) ? $accordions_content_body[$index] : '';
+                $accordions_options['content'][$index]['hide'] = isset($accordions_hide[$index]) ? $accordions_hide[$index] : '';
+                $accordions_options['content'][$index]['toggled_text'] = isset($accordions_content_title_toggled[$index]) ? $accordions_content_title_toggled[$index] : '';
+                $accordions_options['content'][$index]['active_icon'] = isset($accordions_section_icon_plus[$index]) ? $accordions_section_icon_plus[$index] : '';
+                $accordions_options['content'][$index]['inactive_icon'] = isset($accordions_section_icon_minus[$index]) ? $accordions_section_icon_minus[$index] : '';
+                $accordions_options['content'][$index]['background_color'] = isset($accordions_bg_color[$index]) ? $accordions_bg_color[$index] : '';
+                $accordions_options['content'][$index]['background_img'] = isset($accordions_header_bg_img[$index]) ? $accordions_header_bg_img[$index] : '';
+
+
+            }
+
 
 
 
