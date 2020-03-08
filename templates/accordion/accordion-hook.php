@@ -12,6 +12,8 @@ function accordions_main_style($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
 
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
+
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
 
     $icon = isset($accordions_options['icon']) ? $accordions_options['icon'] : array();
@@ -21,6 +23,9 @@ function accordions_main_style($atts){
     $icon_color_hover = isset($icon['color_hover']) ? $icon['color_hover'] : '';
     $icon_font_size = isset($icon['font_size']) ? $icon['font_size'] : '';
     $icon_background_color = isset($icon['background_color']) ? $icon['background_color'] : '';
+    $icon_padding = isset($icon['padding']) ? $icon['padding'] : '0px';
+    $icon_margin = isset($icon['margin']) ? $icon['margin'] : '0px';
+
 
     $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
     $header_background_color = isset($header['background_color']) ? $header['background_color'] : '';
@@ -65,30 +70,7 @@ function accordions_main_style($atts){
     <style type='text/css'>
         <?php
 
-        if(!empty($accordions_bg_color)){
-            foreach ( $accordions_bg_color as $index=>$bg_color ){
 
-                if(!empty($accordions_header_bg_img[$index])){
-                    $header_bg_img = 'url('.$accordions_header_bg_img[$index].')';
-                }
-                else{
-                    $header_bg_img = '';
-                }
-
-                if(!empty($bg_color)){
-                    $bg_color_css = $bg_color;
-                }
-                else{
-                    $bg_color_css = '';
-                }
-
-                if(!empty($bg_color_css) || !empty($header_bg_img)){
-                    ?>
-        #accordions-<?php echo $post_id; ?> #header-<?php echo$index; ?>{background: <?php echo $bg_color_css; ?> <?php echo $header_bg_img; ?>;}
-        <?php
-    }
-}
-}
 
 
     if($lazy_load=='yes'){
@@ -114,6 +96,7 @@ function accordions_main_style($atts){
             margin:<?php echo $header_margin; ?>;
             padding:<?php echo $header_padding; ?>;
             outline: none;
+
         }
         #accordions-<?php echo $post_id; ?> .accordions-head-title{
             color:<?php echo $header_color; ?>;
@@ -139,6 +122,9 @@ function accordions_main_style($atts){
         #accordions-<?php echo $post_id; ?> .ui-icon{
             color:<?php echo $icon_color;?>;
             font-size:<?php echo $icon_font_size; ?>;
+            background:<?php echo $icon_background_color; ?> none repeat scroll 0 0;
+            padding:<?php echo $icon_padding;?>;
+            margin:<?php echo $icon_margin;?>;
         }
         #accordions-<?php echo $post_id; ?> .accordions-head:hover .ui-icon{
             color:<?php echo $icon_color_hover; ?>;
@@ -148,6 +134,23 @@ function accordions_main_style($atts){
         if(!empty($accordions_custom_css)){
         echo $accordions_custom_css;
         }
+
+        if(!empty($accordions_content)){
+            foreach ( $accordions_content as $index=>$accordion ){
+                $background_img = isset($accordion['background_img']) ? $accordion['background_img'] : '';
+                $background_color = isset($accordion['background_color']) ? $accordion['background_color'] : '';
+
+                $header_bg_img = !empty($background_img) ? 'url('.$background_img.')' : '';
+                $bg_color_css = !empty($background_color) ? $background_color : '';
+
+                if(!empty($bg_color_css) || !empty($header_bg_img)){
+                    ?>
+                    #accordions-<?php echo $post_id; ?> #header-<?php echo$index; ?>{background: <?php echo $bg_color_css; ?> <?php echo $header_bg_img; ?>;}
+                    <?php
+                }
+            }
+        }
+
         ?>
     </style>
     <?php
@@ -206,6 +209,11 @@ function accordions_main_items($atts){
 
             $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
             $accordion_body = isset($accordion['body']) ? $accordion['body'] : '';
+            $accordion_is_active = isset($accordion['is_active']) ? $accordion['is_active'] : '';
+            $toggled_text = isset($accordion['toggled_text']) ? $accordion['toggled_text'] : '';
+            $active_icon = isset($accordion['active_icon']) ? $accordion['active_icon'] : '';
+            $inactive_icon = isset($accordion['inactive_icon']) ? $accordion['inactive_icon'] : '';
+
 
             $accordion_body = apply_filters( 'accordions_header', $accordion_body, $post_id );
 
@@ -234,7 +242,7 @@ function accordions_main_items($atts){
 
 
             ?>
-            <div post_id="<?php echo $post_id; ?>" header_id="header-<?php echo $index; ?>" id="header-<?php echo $index; ?>" style="" class="accordions-head head<?php echo $index; ?>"  >
+            <div post_id="<?php echo $post_id; ?>" header_id="header-<?php echo $index; ?>" id="header-<?php echo $index; ?>" style="" class="accordions-head head<?php echo $index; ?>" toogle-text="<?php echo do_shortcode(esc_attr($toggled_text)); ?>" main-text="<?php echo do_shortcode(esc_attr($accordion_header)); ?>">
                 <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
             </div>
             <div class="accordion-content content<?php echo $index; ?>">
@@ -297,6 +305,10 @@ function accordions_main_scripts($atts){
     $expanded_other = isset($accordion['expanded_other']) ? $accordion['expanded_other'] : 'no';
     $height_style = isset($accordion['height_style']) ? $accordion['height_style'] : 'content';
     $active_event = isset($accordion['active_event']) ? $accordion['active_event'] : 'click';
+    $click_scroll_top = isset($accordion['click_scroll_top']) ? $accordion['click_scroll_top'] : '';
+    $click_scroll_top_offset = !empty($accordion['click_scroll_top_offset']) ? $accordion['click_scroll_top_offset'] : 100;
+    $header_toggle = !empty($accordion['header_toggle']) ? $accordion['header_toggle'] : 'no';
+
 
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
@@ -336,6 +348,7 @@ function accordions_main_scripts($atts){
     $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
 
 
+
     wp_enqueue_style('jquery-ui');
     wp_enqueue_style('accordions-themes');
     wp_enqueue_style('fontawesome-5');
@@ -363,7 +376,50 @@ function accordions_main_scripts($atts){
                 navigation: true,
                 active: <?php echo $active_accordion; ?>,
                 icons: icons,
+                beforeActivate: function(event, ui) {
+                    if (ui.newHeader[0]) {
+                        var currHeader  = ui.newHeader;
+                        var currContent = currHeader.next(".ui-accordion-content");
+                    } else {
+                        var currHeader  = ui.oldHeader;
+                        var currContent = currHeader.next(".ui-accordion-content");
+                    }
+                    var isPanelSelected = currHeader.attr("aria-selected") == "true";
+                    currHeader.toggleClass("ui-corner-all",isPanelSelected).toggleClass("accordion-header-active ui-state-active ui-corner-top",!isPanelSelected).attr("aria-selected",((!isPanelSelected).toString()));
+                    currHeader.children(".ui-icon").toggleClass("ui-icon-triangle-1-e",isPanelSelected).toggleClass("ui-icon-triangle-1-s",!isPanelSelected);
+                    currContent.toggleClass("accordion-content-active",!isPanelSelected)
+                    if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
+                    return false;
+                },
+                activate: function( event, ui ) {
+                    if(!$.isEmptyObject(ui.newHeader.offset())) {
+                        $("html:not(:animated), body:not(:animated)").animate({ scrollTop: ui.newHeader.offset().top + <?php echo $click_scroll_top_offset;?> }, "slow");
+                    }
+                },
+
             });
+            <?php
+            if($header_toggle == 'yes'):
+            ?>
+            $("#accordions-<?php echo $post_id; ?> .accordions-head").click(function () {
+                toogle_text = $(this).attr('toogle-text');
+                main_text = $(this).attr('main-text');
+                if( $(this).hasClass('ui-state-active') ){
+                    if( toogle_text != null && toogle_text != ''){
+                        $(this).children('.accordions-head-title').html(toogle_text);
+                    }
+                } else {
+                    if( main_text != null  && main_text != ''){
+                        $(this).children('.accordions-head-title').html(main_text);
+                    }
+                }
+                id = $(this).attr( 'id' );
+            });
+            <?php
+            endif;
+            ?>
+
+
         })
     </script>
     <?php

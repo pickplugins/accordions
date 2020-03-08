@@ -478,6 +478,9 @@ function accordions_metabox_content_style($post_id){
     $icon_color_hover = isset($icon['color_hover']) ? $icon['color_hover'] : '';
     $icon_font_size = isset($icon['font_size']) ? $icon['font_size'] : '';
     $icon_background_color = isset($icon['background_color']) ? $icon['background_color'] : '';
+    $icon_padding = isset($icon['padding']) ? $icon['padding'] : '';
+    $icon_margin = isset($icon['margin']) ? $icon['margin'] : '';
+
 
     $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
     $header_background_color = isset($header['background_color']) ? $header['background_color'] : '';
@@ -587,6 +590,34 @@ function accordions_metabox_content_style($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
+
+
+        $args = array(
+            'id'		=> 'padding',
+            'parent'		=> 'accordions_options[icon]',
+            'title'		=> __('Padding','accordions'),
+            'details'	=> __('Choose icon area padding','accordions'),
+            'type'		=> 'text',
+            'value'		=> $icon_padding,
+            'default'		=> '',
+            'placeholder' => '10px',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'margin',
+            'parent'		=> 'accordions_options[icon]',
+            'title'		=> __('Margin','accordions'),
+            'details'	=> __('Choose header area margin','accordions'),
+            'type'		=> 'text',
+            'value'		=> $icon_margin,
+            'default'		=> '',
+            'placeholder' => '5px',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
 
         ?>
     </div>
@@ -937,7 +968,6 @@ function accordions_metabox_content_content($post_id){
                 'default'		=> '',
                 'placeholder'		=> 'meta_key',
             ),
-
             array(
                 'id'		=> 'hide',
                 'css_id'		=> 'hide[INDEX]',
@@ -950,8 +980,6 @@ function accordions_metabox_content_content($post_id){
                     'true'	=> __('True','accordions'),
                     'false'	=> __('False','accordions'),
                 ),
-
-
             ),
 
         );
