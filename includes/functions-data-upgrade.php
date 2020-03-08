@@ -169,11 +169,12 @@ function accordions_cron_upgrade_accordions(){
             $accordions_options['tabs']['tabs_icon_toggle'] = $accordions_tabs_icon_toggle;
 
 
+
             $accordions_icons_plus = get_post_meta( $accordions_id, 'accordions_icons_plus', true );
-            $accordions_options['icon']['active'] = $accordions_icons_plus;
+            $accordions_options['icon']['active'] = 'fa '.$accordions_icons_plus;
 
             $accordions_icons_minus = get_post_meta( $accordions_id, 'accordions_icons_minus', true );
-            $accordions_options['icon']['inactive'] = $accordions_icons_minus;
+            $accordions_options['icon']['inactive'] = 'fa '.$accordions_icons_minus;
 
             $accordions_icons_position = get_post_meta( $accordions_id, 'accordions_icons_position', true );
             $accordions_options['icon']['position'] = $accordions_icons_position;

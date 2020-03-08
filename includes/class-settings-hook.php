@@ -47,6 +47,126 @@ function accordions_settings_content_general(){
         );
 
         $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
+        ob_start();
+
+
+
+
+        $meta_fields = array(
+            'accordions_options',
+        );
+
+
+        $wp_query = new WP_Query( array (
+            'post_type' => 'accordions',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+        ));
+
+        $post_data_exported = array();
+
+        if ( $wp_query->have_posts() ) :
+            while ( $wp_query->have_posts() ) : $wp_query->the_post();
+                foreach($meta_fields as $field){
+                    $fields_data[$field] = get_post_meta(get_the_ID(),$field, true);
+                }
+
+                $post_data_exported[get_the_ID()] = array(
+                    'title'=>get_the_title(),
+                    'meta_fields'=>$fields_data,
+                );
+
+
+            endwhile;
+            wp_reset_query();
+        else:
+
+            // echo __('Not  found');
+
+        endif;
+
+        $post_data_exported_json = json_encode($post_data_exported);
+
+
+        ?>
+
+        <textarea id="text-val" rows="4"><?php echo $post_data_exported_json; ?></textarea><br/>
+        <input type="button" class="button" id="dwn-btn" value="Download json"/>
+
+        <style type="text/css">
+            #text-val{
+                width: 260px;
+            }
+        </style>
+
+        <script>
+            function download(filename, text) {
+                var element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                element.setAttribute('download', filename);
+
+                element.style.display = 'none';
+                document.body.appendChild(element);
+
+                element.click();
+
+                document.body.removeChild(element);
+            }
+
+            // Start file download.
+            document.getElementById("dwn-btn").addEventListener("click", function(){
+                // Generate download of hello.txt file with some content
+                var text = document.getElementById("text-val").value;
+                var filename = "<?php echo date('Y-m-d-h').'-'.time(); ?>.txt";
+
+                download(filename, text);
+            }, false);
+        </script>
+
+
+        <?php
+        $html = ob_get_clean();
+        $args = array(
+            'id'		=> 'accordion_export',
+            'title'		=> __('Export','woocommerce-products-slider'),
+            'details'	=> 'Please download this json first and upload somewhere, you can import by using the url of json file.',
+            'type'		=> 'custom_html',
+            'html'		=> $html,
+        );
+        $settings_tabs_field->generate_field($args);
+
+
+
+
+        ob_start();
+
+
+        ?>
+
+        <input placeholder="json file url" type="text" class="json_file" name="json_file" value="">
+        <div class="accordions-import-json button">Import</div>
+        <?php
+        $html = ob_get_clean();
+        $args = array(
+            'id'		=> 'accordion_import',
+            'title'		=> __('Import','woocommerce-products-slider'),
+            'details'	=> 'Please put the url of json file where you uploaded the file.',
+            'type'		=> 'custom_html',
+            'html'		=> $html,
+        );
+        $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
         ?>
 
     </div>
