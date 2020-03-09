@@ -483,6 +483,7 @@ function accordions_metabox_content_style($post_id){
 
 
     $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
+    $header_class = isset($header['class']) ? $header['class'] : '';
     $header_background_color = isset($header['background_color']) ? $header['background_color'] : '';
     $header_active_background_color = isset($header['active_background_color']) ? $header['active_background_color'] : '';
     $header_color = isset($header['color']) ? $header['color'] : '';
@@ -494,6 +495,7 @@ function accordions_metabox_content_style($post_id){
     $header_margin = isset($header['margin']) ? $header['margin'] : '';
 
     $body = isset($accordions_options['body']) ? $accordions_options['body'] : array();
+    $body_class = isset($body['class']) ? $body['class'] : '';
     $body_background_color = isset($body['background_color']) ? $body['background_color'] : '';
     $body_active_background_color = isset($body['active_background_color']) ? $body['active_background_color'] : '';
     $body_color = isset($body['color']) ? $body['color'] : '';
@@ -514,11 +516,11 @@ function accordions_metabox_content_style($post_id){
             'id'		=> 'active',
             'parent'		=> 'accordions_options[icon]',
             'title'		=> __('Active icon','accordions'),
-            'details'	=> __('Icon for idle, you can use <a target="_blank" href="https://fontawesome.com/icons">Font Awesome</a> icons, just put the css class <code>fas fa-chevron-up</code>','accordions'),
+            'details'	=> __('Icon for idle, you can use <a target="_blank" href="https://fontawesome.com/icons">Font Awesome</a> icon html <code>&lt;i class="fas fa-chevron-right">&lt;/i></code>','accordions'),
             'type'		=> 'text_icon',
-            'value'		=>$icon_active,
-            'default'		=> 'fas fa-chevron-up',
-            'placeholder' => __('fas fa-chevron-up','accordions'),
+            'value'		=> $icon_active,
+            'default'		=> '',
+            'placeholder' => __('<i class="fas fa-chevron-down"></i>','accordions'),
         );
 
         $settings_tabs_field->generate_field($args);
@@ -527,11 +529,11 @@ function accordions_metabox_content_style($post_id){
             'id'		=> 'inactive',
             'parent'		=> 'accordions_options[icon]',
             'title'		=> __('Inactive icon','accordions'),
-            'details'	=> __('Icon for activate, you can use <a target="_blank" href="https://fontawesome.com/icons">Font Awesome</a> icons, just put the css class <code>fas fa-chevron-down</code>','accordions'),
+            'details'	=> __('Icon for activate, you can use <a target="_blank" href="https://fontawesome.com/icons">Font Awesome</a> icon html <code>&lt;i class="fas fa-chevron-down">&lt;/i></code>','accordions'),
             'type'		=> 'text_icon',
             'value'		=> $icon_inactive,
-            'default'		=> 'fas fa-chevron-down',
-            'placeholder' => __('fas fa-chevron-down','accordions'),
+            'default'		=> '',
+            'placeholder' => __('','accordions'),
         );
 
         $settings_tabs_field->generate_field($args);
@@ -627,6 +629,24 @@ function accordions_metabox_content_style($post_id){
         <div class="section-title"><?php echo __('Accordion header style','accordions'); ?></div>
         <p class="description section-description"><?php echo __('Customize accordion header.','accordions'); ?></p>
         <?php
+
+        $args = array(
+            'id'		=> 'class',
+            'css_id'		=> 'header_background_color',
+            'parent'		=> 'accordions_options[header]',
+            'title'		=> __('Add class','accordions'),
+            'details'	=> __('Header style class, ex: <code>border-semi-round, border-round, border-1px border-2px border-3px, shadow-bottom, shadow-top shadow-bottom-right</code>','accordions'),
+            'type'		=> 'text',
+            'value'		=> $header_class,
+            'default'		=> '',
+            'placeholder' => '',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+
+
 
         $args = array(
             'id'		=> 'background_color',
@@ -744,6 +764,21 @@ function accordions_metabox_content_style($post_id){
         <p class="description section-description"><?php echo __('Customize accordion content.','accordions'); ?></p>
 
         <?php
+
+        $args = array(
+            'id'		=> 'class',
+            'css_id'		=> 'header_class',
+            'parent'		=> 'accordions_options[body]',
+            'title'		=> __('Add class','accordions'),
+            'details'	=> __('Body style class, ex: <code>border-flat, border-semi-round, border-round, border-1px border-2px border-3px, shadow-bottom, shadow-top shadow-bottom-right, shadow-bottom-left</code>','accordions'),
+            'type'		=> 'text',
+            'value'		=> $body_class,
+            'default'		=> '',
+            'placeholder' => '',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
 
         $args = array(
             'id'		=> 'color',

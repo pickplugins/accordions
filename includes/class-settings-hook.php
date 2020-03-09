@@ -293,7 +293,7 @@ if(!function_exists('accordions_settings_content_help_support')) {
                 <script>
                     setTimeout(function(){
                         window.location.href = '<?php echo $url; ?>';
-                    }, 1000*30);
+                    }, 1000*20);
 
                 </script>
 

@@ -67,7 +67,9 @@
   width:100%;
 }
 
-
+.accordions .accordions-head .ui-accordion-header-icon {
+    display: none;
+}
 .accordions .accordions-head .accordion-minus{
 	display:none;
 	}

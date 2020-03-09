@@ -24,7 +24,7 @@ $url = admin_url().'edit.php?post_type=accordions&page=upgrade_status';
     <script>
         setTimeout(function(){
             window.location.href = '<?php echo $url; ?>';
-        }, 1000*80);
+        }, 1000*30);
 
     </script>
 

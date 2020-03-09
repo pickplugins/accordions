@@ -89,7 +89,7 @@ class Accordions{
     function cron_recurrence_interval($schedules){
 
         $schedules['1minute'] = array(
-            'interval' => 120,
+            'interval' => 60,
             'display' => __('1 Minute', 'accordions')
         );
 

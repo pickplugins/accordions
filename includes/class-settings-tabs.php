@@ -1050,7 +1050,7 @@ class settings_tabs_field{
         ob_start();
         ?>
         <div class="text-icon">
-            <span class="icon"><i class="<?php echo $option_value; ?>"></i></span><input type="text" class="" name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" placeholder="<?php echo $placeholder; ?>" value="<?php echo $option_value; ?>" />
+            <span class="icon"><?php echo $option_value; ?></span><input type="text" class="" name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" placeholder="<?php echo esc_attr($placeholder); ?>" value="<?php echo esc_attr($option_value); ?>" />
         </div>
         <style type="text/css">
             .text-icon{}
@@ -1071,7 +1071,7 @@ class settings_tabs_field{
                 $(document).on("keyup", ".text-icon input", function () {
                     val = $(this).val();
                     if(val){
-                        $(this).parent().children(".icon").html('<i class="'+val+'"></i>');
+                        $(this).parent().children(".icon").html(val);
                     }
                 })
             })
@@ -1603,7 +1603,7 @@ class settings_tabs_field{
 
         ob_start();
         ?>
-        <input colorPicker="" name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" placeholder="<?php echo $placeholder; ?>" value="<?php echo $value; ?>" />
+        <input colorPicker="" name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" placeholder="<?php echo esc_attr($placeholder); ?>" value="<?php echo esc_attr($value); ?>" />
         <?php
 
         $input_html = ob_get_clean();
