@@ -28,6 +28,106 @@ function accordions_main_top($atts){
 }
 
 
+add_action('accordions_main', 'accordions_main_expand_collapse');
+
+function accordions_main_expand_collapse($atts){
+
+    $post_id = isset($atts['id']) ? $atts['id'] : '';
+    $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordion = isset($accordions_options['accordion']) ? $accordions_options['accordion'] : array();
+
+    $expand_collapse_display = isset($accordion['expand_collapse_display']) ? $accordion['expand_collapse_display'] : '';
+    $expand_collapse_bg_color = isset($accordion['expand_collapse_bg_color']) ? $accordion['expand_collapse_bg_color'] : '';
+    $expand_collapse_text = isset($accordion['expand_collapse_text']) ? $accordion['expand_collapse_text'] : '';
+
+    if(!empty($expand_collapse_text)){
+        $expand_collapse_text_arr = explode('|', $expand_collapse_text);
+
+        $expand_all_text = isset($expand_collapse_text_arr[0]) ? $expand_collapse_text_arr[0] : __("Expand all", 'accordions');
+        $collapse_all_text = isset($expand_collapse_text_arr[1]) ? $expand_collapse_text_arr[1] : __("Collapse all", 'accordions');
+    }else{
+        $expand_all_text =  __("Expand all", 'accordions');
+        $collapse_all_text =  __("Collapse all", 'accordions');
+    }
+
+
+    if($expand_collapse_display=='yes'){
+        ?>
+        <div id="expand-collapse-<?php echo $post_id; ?>" class="expand-collapse" accordion-id="<?php echo $post_id; ?>">
+            <span class="expand"><i class="fas fa-expand"></i> <?php echo $expand_all_text; ?></span><span class="collapse"><i class="fas fa-compress"></i> <?php echo $collapse_all_text;?></span>
+        </div>
+        <script>
+            jQuery(document).ready(function($){
+
+                $("#accordions-<?php echo $post_id; ?> .expand-collapse").click(function() {
+                    if( $(this).hasClass("active") ) $(this).removeClass("active");
+                    else $(this).addClass("active");
+                    accordion_id = $(this).attr("accordion-id");
+                    $("#accordions-"+accordion_id+" .ui-accordion-header:not(.ui-state-active)").next().slideToggle();
+                });
+            })
+        </script>
+        <?php
+    }
+
+
+
+}
+
+
+add_action('accordions_main', 'accordions_main_search');
+
+function accordions_main_search($atts){
+
+    $post_id = isset($atts['id']) ? $atts['id'] : '';
+    $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordion = isset($accordions_options['accordion']) ? $accordions_options['accordion'] : array();
+
+    $enable_search = isset($accordion['enable_search']) ? $accordion['enable_search'] : 'no';
+    $search_placeholder_text = isset($accordion['search_placeholder_text']) ? $accordion['search_placeholder_text'] : '';
+
+    if($enable_search == 'yes'){
+        ?>
+        <div id="search-input-<?php echo $post_id; ?>" class="search-input-wrap" >
+            <input class="search-input" placeholder="<?php echo $search_placeholder_text; ?>" value="">
+        </div>
+        <script>
+        jQuery(document).ready(function($){
+            jQuery(document).on('keyup', '#search-input-<?php echo $post_id; ?> input.search-input', function(){
+                keyword = jQuery(this).val().toLowerCase();
+                content_head = [];
+                content_body = [];
+                $('#accordions-<?php echo $post_id; ?> .items  .accordions-head-title').each(function( index ) {
+                    content = $( this ).text().toLowerCase();
+                    content_head[index] = content;
+                    $( this ).parent().removeClass("accordion-header-active");
+                    $( this ).parent().removeClass("ui-state-active");
+                });
+                $('#accordions-<?php echo $post_id; ?> .items  .accordion-content').each(function( index ) {
+                    $( this ).hide();
+                    content = $( this ).text().toLowerCase();
+                    content_body[index] = content + ' ' + content_head[index];
+                    n = content_body[index].indexOf(keyword);
+                    if(n<0){
+                        $( this ).prev().hide();
+                    }else{
+                        $( this ).prev().show();
+                    }
+                });
+            })
+        })
+        </script>
+        <?php
+    }
+}
+
+
+
+
+
+
+
+
 add_action('accordions_main', 'accordions_main_style');
 
 function accordions_main_style($atts){
@@ -302,6 +402,9 @@ function accordions_main_items($atts){
         <?php
 
         if(!empty($accordions_content)):
+
+            $item_count = 0;
+            $active_index = array();
         foreach ($accordions_content as $index => $accordion){
 
             $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
@@ -319,6 +422,11 @@ function accordions_main_items($atts){
 
 
             $accordion_body = apply_filters( 'accordions_item_header', $accordion_body, $post_id );
+
+            if(($accordion_is_active =='yes')){
+                $active_index[$index] = $item_count;
+            }
+
 
 
 
@@ -374,15 +482,82 @@ function accordions_main_items($atts){
             </div>
 
             <?php
+            $item_count++;
         }
         else:
 
             do_action('accordions_main_no_content');
         endif;
-        ?>
 
+        ?>
     </div>
+    <script>
+        jQuery(document).ready(function($){
+            <?php
+                if(isset($_GET['accordion_index'])):
+                    $accordion_index = isset($_GET['accordion_index']) ? sanitize_text_field($_GET['accordion_index']) : '';
+                    $accordion_index = explode('-', $accordion_index);
+                    foreach ($accordion_index as $args){
+                    $args_arr = explode('|', $args);
+                    $accordion_id = isset($args_arr[0]) ? (int)$args_arr[0] : '';
+                    $accordion_indexes = isset($args_arr[1]) ? $args_arr[1] : '';
+                    $active_index = !empty($accordion_indexes) ? explode(',', $accordion_indexes) : array();
+                    $active_index_new = array();
+                    foreach ($active_index as $ind){
+                        $active_index_new[] = (int)$ind;
+                    }
+                    ?>
+                    accordions_active_index_<?php echo (int) $accordion_id; ?> = <?php echo json_encode($active_index_new); ?>;
+                    <?php
+                    }
+                else:
+                    ?>
+                        accordions_active_index_<?php echo $post_id; ?> = <?php echo json_encode($active_index); ?>;
+                    <?php
+                endif;
+            ?>
+        })
+    </script>
     <?php
+
+
+    $enable_schema = isset($accordions_options['enable_schema']) ? $accordions_options['enable_schema'] : 'yes';
+    if($enable_schema == 'no') return;
+    $accordions_count = count($accordions_content);
+
+    ob_start();
+    $i = 1;
+    foreach ($accordions_content as $index => $accordion) {
+        $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
+        if ($accordion_hide == 'true') continue;
+        $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
+        $accordion_body = isset($accordion['body']) ? $accordion['body'] : '';
+        ?>
+        {
+        "@type": "Question",
+        "name": "<?php echo esc_attr($accordion_header); ?>",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<?php echo esc_attr($accordion_body); ?>"
+        }
+        }<?php
+        if($accordions_count > $i ){
+            echo ',';
+        }
+        $i++;
+    }
+
+    $html = ob_get_clean();
+    ?>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [<?php echo $html; ?>]
+        }
+    </script>
+    <?php
+
 
 }
 
@@ -437,7 +612,7 @@ function accordions_main_scripts($atts){
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : '';
-
+    $enable_stats = isset($accordions_options['enable_stats']) ? $accordions_options['enable_stats'] : '';
 
     $icon = isset($accordions_options['icon']) ? $accordions_options['icon'] : array();
     $icon_active = isset($icon['active']) ? $icon['active'] : '';
@@ -489,6 +664,8 @@ function accordions_main_scripts($atts){
     <script>
         jQuery(document).ready(function($){
 
+
+
             accordion_<?php echo $post_id; ?>  = $("#accordions-<?php echo $post_id; ?> .items").accordion({
                 event: "<?php echo $active_event;?>",
                 collapsible:<?php echo $collapsible; ?>,
@@ -496,7 +673,15 @@ function accordions_main_scripts($atts){
                 animate: ("<?php echo $animation_style; ?>", <?php echo $animation_delay; ?>),
                 navigation: true,
                 active: <?php echo $active_accordion; ?>,
+                activate: function( event, ui ) {
+
+                    if(!$.isEmptyObject(ui.newHeader.offset())) {
+                        $("html:not(:animated), body:not(:animated)").animate({ scrollTop: ui.newHeader.offset().top + <?php echo $click_scroll_top_offset;?> }, "slow");
+                    }
+                },
                 beforeActivate: function(event, ui) {
+
+                    //alert('hello');
                     if (ui.newHeader[0]) {
                         var currHeader  = ui.newHeader;
                         var currContent = currHeader.next(".ui-accordion-content");
@@ -511,14 +696,48 @@ function accordions_main_scripts($atts){
                     if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
                     return false;
                 },
-                activate: function( event, ui ) {
-                    if(!$.isEmptyObject(ui.newHeader.offset())) {
-                        $("html:not(:animated), body:not(:animated)").animate({ scrollTop: ui.newHeader.offset().top + <?php echo $click_scroll_top_offset;?> }, "slow");
-                    }
-                },
 
             });
-            <?php
+
+
+
+
+
+
+            if(typeof accordions_active_index_<?php echo $post_id; ?> != 'undefined'){
+                accordions_active_index = accordions_active_index_<?php echo $post_id; ?>;
+                for (var index in accordions_active_index) {
+                    $("#accordions-<?php echo $post_id; ?> .items").accordion("option", "active", accordions_active_index[index]);
+                }
+            }
+
+
+
+
+        <?php
+
+            if($enable_stats =='yes'):
+                ?>
+                $("#accordions-<?php echo $post_id; ?> .accordions-head").click(function () {
+                    header_id = $(this).attr('header_id');
+                    post_id = $(this).attr('post_id');
+                    $.ajax({
+                        type: 'POST',
+                        context: this,
+                        url:accordions_ajax.accordions_ajaxurl,
+                        data: {
+                            "action" 	: "accordions_ajax_track_header",
+                            "header_id" : header_id,
+                            "post_id" : post_id,
+                        },
+                        success: function( data ) {
+                        }
+                    });
+                });
+
+                <?php
+            endif;
+
             if($header_toggle == 'yes'):
             ?>
             $("#accordions-<?php echo $post_id; ?> .accordions-head").click(function () {
@@ -568,5 +787,12 @@ function accordions_main_no_content(){
     ?>
     <p><?php echo __('Content missing',''); ?></p>
     <?php
+
+}
+
+add_action('accordions_main', 'accordions_main_schema');
+function accordions_main_schema($atts){
+    $post_id = isset($atts['id']) ? $atts['id'] : '';
+    $accordions_options = get_post_meta($post_id,'accordions_options', true);
 
 }

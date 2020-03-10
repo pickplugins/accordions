@@ -41,7 +41,7 @@ class class_accordions_shortcodes  {
 				ob_start();
 
 				?>
-                <div id="accordions-<?php echo $post_id; ?>" class="accordions-<?php echo $post_id; ?>">
+                <div id="accordions-<?php echo $post_id; ?>" class="accordions-<?php echo $post_id; ?> accordions">
                     <?php
                     do_action('accordions_main', $atts);
                     ?>

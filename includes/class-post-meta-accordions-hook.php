@@ -172,6 +172,7 @@ function accordions_metabox_content_general($post_id){
     $enable_autoembed = isset($accordions_options['enable_autoembed']) ? $accordions_options['enable_autoembed'] : '';
     $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : '';
     $enable_wpautop = isset($accordions_options['enable_wpautop']) ? $accordions_options['enable_wpautop'] : '';
+    $enable_schema = isset($accordions_options['enable_schema']) ? $accordions_options['enable_schema'] : '';
 
     //var_dump($lazy_load);
 
@@ -275,6 +276,23 @@ function accordions_metabox_content_general($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'enable_schema',
+            'parent'		=> 'accordions_options',
+            'title'		=> __('Enable schema','accordions'),
+            'details'	=> __('Enable schema for accordion or tabs.','accordions'),
+            'type'		=> 'select',
+            'value'		=> $enable_schema,
+            'default'		=> 'yes',
+            'args'		=> array(
+                'no'	=> __('No','accordions'),
+                'yes'	=> __('Yes','accordions'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args);
+
 
 
         ?>
