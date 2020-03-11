@@ -35,11 +35,8 @@ class class_accordions_shortcodes  {
 					), $atts);
 	
 				$post_id = $atts['id'];
-	
-				$accordions_themes = get_post_meta( $post_id, 'accordions_themes', true );
 
 				ob_start();
-
 				?>
                 <div id="accordions-<?php echo $post_id; ?>" class="accordions-<?php echo $post_id; ?> accordions">
                     <?php
@@ -48,40 +45,29 @@ class class_accordions_shortcodes  {
                 </div>
                 <?php
 
-
 				return ob_get_clean();
-				//return $html;
-
 		}
 
 	
 	public function accordions_tabs_display($atts, $content = null ) {
 
-
-
         $atts = shortcode_atts(
             array(
-
                 'id' => "",
-
-                ), $atts);
+                ),
+            $atts);
 
         $post_id = $atts['id'];
 
-        $accordions_tabs_themes = get_post_meta( $post_id, 'accordions_tabs_themes', true );
-
         ob_start();
-        include accordions_plugin_dir.'/templates/tabs/tabs.php';
 
-
-
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'jquery-ui-core' );
-		//wp_enqueue_script('jquery-ui-accordion');
-		wp_enqueue_script('jquery-ui-tabs');
-		wp_enqueue_script('jquery-effects-core');
-
-
+        ?>
+        <div id="accordions-tabs-<?php echo $post_id; ?>" class="accordions-tabs-<?php echo $post_id; ?> accordions-tabs">
+            <?php
+            do_action('accordions_tabs_main', $atts);
+            ?>
+        </div>
+        <?php
 
         return ob_get_clean();
 
