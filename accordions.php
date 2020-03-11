@@ -116,15 +116,16 @@ class Accordions{
 	
 	public function _front_scripts(){
 
-        wp_enqueue_script('accordions_js', plugins_url( 'assets/frontend/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
+        wp_enqueue_script('accordions_js', accordions_plugin_url. 'assets/frontend/js/scripts.js'  , array( 'jquery' ));
         wp_localize_script( 'accordions_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
-        wp_register_style('accordions-tabs', plugins_url( 'assets/global/css/themesTabs.style.css', __FILE__ ));
+        wp_register_style('accordions-style', accordions_plugin_url. 'assets/frontend/css/style.css');
+        wp_register_style('accordions-tabs', accordions_plugin_url. 'assets/global/css/themesTabs.style.css');
         wp_register_style('fontawesome-5',  accordions_plugin_url.'assets/global/css/font-awesome-5.css');
         wp_register_style('fontawesome-4',  accordions_plugin_url.'assets/global/css/font-awesome-4.css');
         wp_register_style('jquery-ui',  accordions_plugin_url.'assets/frontend/css/jquery-ui.css');
         wp_register_style('accordions-themes',  accordions_plugin_url.'assets/global/css/themes.style.css');
-        wp_register_style('animate', accordions_plugin_url.'assets/global/css/animate.css');
+        //wp_register_style('animate', accordions_plugin_url.'assets/global/css/animate.css');
 
 
 
@@ -133,7 +134,7 @@ class Accordions{
 
 	public function _admin_scripts(){
 
-        wp_enqueue_script('accordions_admin_js', plugins_url( 'assets/admin/js/scripts.js' , __FILE__ ) , array( 'jquery' ),'20181018');
+        wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
         wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
         wp_register_style('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.css');
@@ -155,7 +156,7 @@ class Accordions{
 
 
 
-        wp_enqueue_script('accordions_admin_js', plugins_url( 'assets/admin/js/scripts.js' , __FILE__ ) , array( 'jquery' ),'20181018');
+        wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
         wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
 

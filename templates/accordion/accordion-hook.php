@@ -182,6 +182,8 @@ function accordions_main_style($atts){
     $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
 
 
+    wp_enqueue_style('accordions-style');
+
     wp_enqueue_style('jquery-ui');
     wp_enqueue_style('accordions-themes');
     wp_enqueue_style('fontawesome-5');
@@ -191,162 +193,116 @@ function accordions_main_style($atts){
     wp_enqueue_script('jquery-ui-accordion');
     wp_enqueue_script('jquery-effects-core');
 
-    $active_accordion = isset($_GET['id']) ? (int)sanitize_text_field($_GET['id']) : 99999;
-    $animation_style = 'swing';
-    $animation_delay = 1000;
-
 
     ?>
     <style type='text/css'>
         <?php
-
-
-
-
-    if($lazy_load=='yes'){
-        ?>
-        #accordions-<?php echo $post_id; ?> .items {display: none;}
-        #accordions-<?php echo $post_id; ?> .accordions-lazy {
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        if($lazy_load=='yes'){
+            ?>
+            #accordions-<?php echo $post_id; ?> .items {display: none;}
+            #accordions-<?php echo $post_id; ?> .accordions-lazy {
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            <?php
         }
-        <?php
-    }
-
-    ?>
-
-
+        ?>
         #accordions-<?php echo $post_id; ?> {
+            <?php if(!empty($container_text_align)):?>
             text-align: <?php echo $container_text_align; ?>;
+            <?php endif; ?>
+            <?php if(!empty($container_background_color) || !empty($container_background_img)):?>
             background:<?php echo $container_background_color; ?> url(<?php echo $container_background_img; ?>) repeat scroll 0 0;
+            <?php endif; ?>
+            <?php if(!empty($container_padding)):?>
             padding: <?php echo $container_padding; ?>;
+            <?php endif; ?>
             position: relative;
         }
         #accordions-<?php echo $post_id; ?> .accordions-head{
+            <?php if(!empty($header_background_color)):?>
             background:<?php echo $header_background_color; ?> none repeat scroll 0 0;
+            <?php endif; ?>
+            <?php if(!empty($header_margin)):?>
             margin:<?php echo $header_margin; ?>;
+            <?php endif; ?>
+            <?php if(!empty($header_padding)):?>
             padding:<?php echo $header_padding; ?>;
+            <?php endif; ?>
             outline: none;
 
         }
         #accordions-<?php echo $post_id; ?> .accordions-head-title{
+            <?php if(!empty($header_color)):?>
             color:<?php echo $header_color; ?>;
+            <?php endif; ?>
+            <?php if(!empty($header_font_size)):?>
             font-size:<?php echo $header_font_size; ?>;
+            <?php endif; ?>
         }
         #accordions-<?php echo $post_id; ?> .accordions-head-title-toggle{
+            <?php if(!empty($header_color)):?>
             color:<?php echo $header_color; ?>;
+            <?php endif; ?>
+            <?php if(!empty($header_font_size)):?>
             font-size:<?php echo $header_font_size; ?>;
+            <?php endif; ?>
         }
         #accordions-<?php echo $post_id; ?> .accordions-head:hover .accordions-head-title{
+            <?php if(!empty($header_color_hover)):?>
             color:<?php echo $header_color_hover; ?>;
+            <?php endif; ?>
         }
         #accordions-<?php echo $post_id; ?> .ui-state-active{
+            <?php if(!empty($header_active_background_color)):?>
             background: <?php echo $header_active_background_color; ?>;
+            <?php endif; ?>
             border: none;
         }
         #accordions-<?php echo $post_id; ?> .accordion-content{
+            <?php if(!empty($body_background_color)):?>
             background:<?php echo $body_background_color; ?> none repeat scroll 0 0;
+            <?php endif; ?>
+            <?php if(!empty($body_color)):?>
             color:<?php echo $body_color; ?>;
+            <?php endif; ?>
+            <?php if(!empty($body_font_size)):?>
             font-size:<?php echo $body_font_size; ?>;
+            <?php endif; ?>
+            <?php if(!empty($body_margin)):?>
             margin:<?php echo $body_margin; ?>;
+            <?php endif; ?>
+            <?php if(!empty($body_padding)):?>
             padding:<?php echo $body_padding; ?>;
+            <?php endif; ?>
             border: none;
         }
         #accordions-<?php echo $post_id; ?> .accordion-icons{
+            <?php if(!empty($icon_color)):?>
             color:<?php echo $icon_color; ?>;
+            <?php endif; ?>
+            <?php if(!empty($icon_font_size)):?>
             font-size:<?php echo $icon_font_size; ?>;
+            <?php endif; ?>
+            <?php if(!empty($icon_background_color)):?>
             background:<?php echo $icon_background_color; ?> none repeat scroll 0 0;
+            <?php endif; ?>
+            <?php if(!empty($icon_padding)):?>
             padding:<?php echo $icon_padding; ?>;
+            <?php endif; ?>
+            <?php if(!empty($icon_margin)):?>
             margin:<?php echo $icon_margin; ?>;
+            <?php endif; ?>
         }
         #accordions-<?php echo $post_id; ?> .accordions-head:hover .accordion-icons span{
+            <?php if(!empty($icon_color_hover)):?>
             color:<?php echo $icon_color_hover; ?>;
+            <?php endif; ?>
         }
-
-        .border-semi-round{
-            border-radius: 10px !important;
-        }
-        .border-round {
-            border-radius: 50px !important;
-        }
-        .border-top-round {
-            border-top-left-radius: 10px !important;
-            border-top-right-radius: 10px !important;
-        }
-        .border-bottom-round {
-            border-bottom-left-radius: 10px !important;
-            border-bottom-right-radius: 10px !important;
-        }
-
-        .border-flat {
-            border-radius: 0px !important;
-        }
-
-        .border-none {
-            border: none !important;
-        }
-
-        .border-1px {
-            border-width: 1px !important;
-            border-color: #999 !important;
-        }
-
-        .border-2px {
-            border-width: 2px !important;
-            border-color: #999 !important;
-        }
-        .border-3px {
-            border-width: 3px !important;
-            border-color: #999 !important;
-        }
-        .shadow-bottom {
-            box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.29);
-        }
-        .shadow-top {
-            box-shadow: 0 -3px 4px -1px rgba(0, 0, 0, 0.29);
-        }
-        .shadow-bottom-right {
-            box-shadow: 3px 3px 4px -1px rgba(0, 0, 0, 0.29);
-        }
-        .shadow-bottom-left {
-            box-shadow: -3px 3px 4px -1px rgba(0, 0, 0, 0.29);
-        }
-        .shadow-top-right {
-            box-shadow: 3px -3px 4px -1px rgba(0, 0, 0, 0.29);
-        }
-        .shadow-top-left {
-            box-shadow: -3px -3px 4px -1px rgba(0, 0, 0, 0.29);
-        }
-
-        .border-bottom {
-            border-bottom: 2px solid #b3b3b3 !important;
-        }
-        .border-top {
-            border-top: 2px solid #b3b3b3 !important;
-        }
-        .border-bottom-right {
-            border-bottom: 3px solid #b3b3b3 !important;
-            border-right: 3px solid #b3b3b3 !important;
-        }
-        .border-bottom-left {
-            border-bottom: 3px solid #b3b3b3 !important;
-            border-left: 3px solid #b3b3b3 !important;
-        }
-        .border-top-right {
-            border-top: 3px solid #b3b3b3 !important;
-            border-right: 3px solid #b3b3b3 !important;
-        }
-        .border-top-left {
-            border-top: 3px solid #b3b3b3 !important;
-            border-left: 3px solid #b3b3b3 !important;
-        }
-
         <?php
-
-
         if(!empty($custom_css)){
             echo $custom_css;
         }
@@ -674,9 +630,6 @@ function accordions_main_scripts($atts){
     ?>
     <script>
         jQuery(document).ready(function($){
-
-
-
             accordion_<?php echo $post_id; ?>  = $("#accordions-<?php echo $post_id; ?> .items").accordion({
                 event: "<?php echo $active_event; ?>",
                 collapsible:<?php echo $collapsible; ?>,
@@ -686,7 +639,6 @@ function accordions_main_scripts($atts){
                 active: <?php echo $active_accordion; ?>,
                 <?php if($click_scroll_top == 'yes'):?>
                 activate: function( event, ui ) {
-
                     if(!$.isEmptyObject(ui.newHeader.offset())) {
                         $("html:not(:animated), body:not(:animated)").animate({ scrollTop: ui.newHeader.offset().top + <?php echo $click_scroll_top_offset; ?> }, "slow");
                     }
@@ -709,29 +661,14 @@ function accordions_main_scripts($atts){
                     return false;
                 },
                 <?php endif; ?>
-
-
-
-
             });
-
-
-
-
-
-
             if(typeof accordions_active_index_<?php echo $post_id; ?> != 'undefined'){
                 accordions_active_index = accordions_active_index_<?php echo $post_id; ?>;
                 for (var index in accordions_active_index) {
                     $("#accordions-<?php echo $post_id; ?> .items").accordion("option", "active", accordions_active_index[index]);
                 }
             }
-
-
-
-
         <?php
-
             if($enable_stats =='yes'):
                 ?>
                 $("#accordions-<?php echo $post_id; ?> .accordions-head").click(function () {
@@ -751,7 +688,6 @@ function accordions_main_scripts($atts){
                         }
                     });
                 });
-
                 <?php
             endif;
 
@@ -774,8 +710,6 @@ function accordions_main_scripts($atts){
             <?php
             endif;
             ?>
-
-
         })
     </script>
     <?php
