@@ -533,32 +533,28 @@ function accordions_main_items($atts){
         $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
         $accordion_body = isset($accordion['body']) ? $accordion['body'] : '';
         ?>
-        {
-        "@type": "Question",
-        "name": "<?php echo esc_attr($accordion_header); ?>",
-        "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "<?php echo esc_attr($accordion_body); ?>"
-        }
-        }<?php
-        if($accordions_count > $i ){
-            echo ',';
-        }
+{
+    "@type": "Question",
+    "name": "<?php echo esc_attr($accordion_header); ?>",
+    "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "<?php echo esc_attr($accordion_body); ?>"
+    }
+}<?php echo ($accordions_count > $i ) ? ',' :'';
+
         $i++;
     }
 
     $html = ob_get_clean();
     ?>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [<?php echo $html; ?>]
-        }
-    </script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [<?php echo $html; ?>]
+}
+</script>
     <?php
-
-
 }
 
 
@@ -790,9 +786,3 @@ function accordions_main_no_content(){
 
 }
 
-add_action('accordions_main', 'accordions_main_schema');
-function accordions_main_schema($atts){
-    $post_id = isset($atts['id']) ? $atts['id'] : '';
-    $accordions_options = get_post_meta($post_id,'accordions_options', true);
-
-}
