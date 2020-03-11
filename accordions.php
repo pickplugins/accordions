@@ -116,7 +116,7 @@ class Accordions{
 	
 	public function _front_scripts(){
 
-        //wp_enqueue_script('accordions_js', plugins_url( 'assets/frontend/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
+        wp_enqueue_script('accordions_js', plugins_url( 'assets/frontend/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
         wp_localize_script( 'accordions_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
         wp_register_style('accordions-tabs', plugins_url( 'assets/global/css/themesTabs.style.css', __FILE__ ));

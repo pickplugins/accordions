@@ -177,6 +177,10 @@ function accordions_main_style($atts){
     $container_text_align = isset($container['text_align']) ? $container['text_align'] : '';
     $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
 
+    $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
+    $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
+    $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
+
 
     wp_enqueue_style('jquery-ui');
     wp_enqueue_style('accordions-themes');
@@ -343,8 +347,8 @@ function accordions_main_style($atts){
         <?php
 
 
-        if(!empty($accordions_custom_css)){
-            echo $accordions_custom_css;
+        if(!empty($custom_css)){
+            echo $custom_css;
         }
 
         if(!empty($accordions_content)){
@@ -436,7 +440,7 @@ function accordions_main_items($atts){
 
 
             if(has_shortcode($accordion_body, 'accordions')){
-                //$accordion_body = str_replace('[accordions','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                $accordion_body = str_replace('[accordions','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
             }
 
 
@@ -611,12 +615,14 @@ function accordions_main_scripts($atts){
     $click_scroll_top = isset($accordion['click_scroll_top']) ? $accordion['click_scroll_top'] : '';
     $click_scroll_top_offset = !empty($accordion['click_scroll_top_offset']) ? $accordion['click_scroll_top_offset'] : 100;
     $header_toggle = !empty($accordion['header_toggle']) ? $accordion['header_toggle'] : 'no';
+    $animate_style = !empty($accordion['animate_style']) ? $accordion['animate_style'] : 'swing';
+    $animate_delay = !empty($accordion['animate_delay']) ? $accordion['animate_delay'] : 1000;
 
 
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : '';
-    $enable_stats = isset($accordions_options['enable_stats']) ? $accordions_options['enable_stats'] : '';
+    $enable_stats = isset($accordions_options['enable_stats']) ? $accordions_options['enable_stats'] : 'no';
 
     $icon = isset($accordions_options['icon']) ? $accordions_options['icon'] : array();
     $icon_active = isset($icon['active']) ? $icon['active'] : '';
@@ -650,6 +656,8 @@ function accordions_main_scripts($atts){
     $container_text_align = isset($container['text_align']) ? $container['text_align'] : '';
     $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
 
+    $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
+    $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
 
 
     wp_enqueue_style('jquery-ui');
@@ -662,8 +670,7 @@ function accordions_main_scripts($atts){
     wp_enqueue_script('jquery-effects-core');
 
     $active_accordion = isset($_GET['id']) ? (int)sanitize_text_field($_GET['id']) : 99999;
-    $animation_style = 'swing';
-    $animation_delay = 1000;
+
     ?>
     <script>
         jQuery(document).ready(function($){
@@ -674,7 +681,7 @@ function accordions_main_scripts($atts){
                 event: "<?php echo $active_event; ?>",
                 collapsible:<?php echo $collapsible; ?>,
                 heightStyle: "<?php echo $height_style; ?>",
-                animate: ("<?php echo $animation_style; ?>", <?php echo $animation_delay; ?>),
+                animate: ("<?php echo $animate_style; ?>", <?php echo $animate_delay; ?>),
                 navigation: true,
                 active: <?php echo $active_accordion; ?>,
                 <?php if($click_scroll_top == 'yes'):?>
@@ -685,6 +692,24 @@ function accordions_main_scripts($atts){
                     }
                 },
                 <?php endif; ?>
+                <?php if($expanded_other == 'yes'): ?>
+                beforeActivate: function(event, ui) {
+                    if (ui.newHeader[0]) {
+                        var currHeader  = ui.newHeader;
+                        var currContent = currHeader.next(".ui-accordion-content");
+                    } else {
+                        var currHeader  = ui.oldHeader;
+                        var currContent = currHeader.next(".ui-accordion-content");
+                    }
+                    var isPanelSelected = currHeader.attr("aria-selected") == "true";
+                    currHeader.toggleClass("ui-corner-all",isPanelSelected).toggleClass("accordion-header-active ui-state-active ui-corner-top",!isPanelSelected).attr("aria-selected",((!isPanelSelected).toString()));
+                    currHeader.children(".ui-icon").toggleClass("ui-icon-triangle-1-e",isPanelSelected).toggleClass("ui-icon-triangle-1-s",!isPanelSelected);
+                    currContent.toggleClass("accordion-content-active",!isPanelSelected)
+                    if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
+                    return false;
+                },
+                <?php endif; ?>
+
 
 
 
@@ -722,6 +747,7 @@ function accordions_main_scripts($atts){
                             "post_id" : post_id,
                         },
                         success: function( data ) {
+                            //console.log(data);
                         }
                     });
                 });
@@ -756,13 +782,12 @@ function accordions_main_scripts($atts){
 
 
 
-    if(!empty($accordions_custom_js)):
-
+    if(!empty($custom_js)):
 
         ?>
         <script>
             jQuery(document).ready(function($){
-                <?php echo $accordions_custom_js; ?>
+                <?php echo $custom_js; ?>
             })
         </script>
     <?php
