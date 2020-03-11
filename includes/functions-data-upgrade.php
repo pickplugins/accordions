@@ -137,17 +137,6 @@ function accordions_cron_upgrade_accordions(){
             $accordions_child           = get_post_meta( $accordions_id, 'accordions_child', true );
             $accordions_options['accordion']['is_child'] = $accordions_child;
 
-            $accordions_width           = get_post_meta( $accordions_id, 'accordions_width', true );
-            $accordions_width_large     = !empty($accordions_width['large']) ? $accordions_width['large'] : '100%';
-            $accordions_width_medium    = !empty($accordions_width['medium']) ? $accordions_width['medium'] : '100%';
-            $accordions_width_small     = !empty($accordions_width['small']) ? $accordions_width['small'] : '100%';
-
-            $accordions_options['accordion']['width_large'] = $accordions_width_large;
-            $accordions_options['accordion']['width_medium'] = $accordions_width_medium;
-            $accordions_options['accordion']['width_small'] = $accordions_width_small;
-
-
-
 
             $accordions_click_track = get_post_meta($accordions_id,'accordions_click_track', true);
             $accordions_options['enable_stats'] = $accordions_click_track;
@@ -199,7 +188,7 @@ function accordions_cron_upgrade_accordions(){
             $accordions_options['accordion']['theme'] = $accordions_themes;
 
             if($accordions_themes == 'flat'){
-                $header_class = '';
+                $header_class = 'border-none';
             }elseif($accordions_themes == 'rounded'){
                 $header_class = 'border-round';
             }elseif($accordions_themes == 'semi-rounded'){
@@ -283,10 +272,19 @@ function accordions_cron_upgrade_accordions(){
             $accordions_options['container']['background_opacity'] = $accordions_items_content_bg_opacity;
 
             $accordions_bg_img = get_post_meta( $accordions_id, 'accordions_bg_img', true );
-            $accordions_options['container']['background_img_url'] = $accordions_bg_img;
+            $accordions_options['container']['background_img'] = $accordions_bg_img;
 
             $accordions_container_text_align = get_post_meta( $accordions_id, 'accordions_container_text_align', true );
             $accordions_options['container']['text_align'] = $accordions_container_text_align;
+
+            $accordions_width           = get_post_meta( $accordions_id, 'accordions_width', true );
+            $accordions_width_large     = !empty($accordions_width['large']) ? $accordions_width['large'] : '100%';
+            $accordions_width_medium    = !empty($accordions_width['medium']) ? $accordions_width['medium'] : '100%';
+            $accordions_width_small     = !empty($accordions_width['small']) ? $accordions_width['small'] : '100%';
+
+            $accordions_options['container']['width_large'] = $accordions_width_large;
+            $accordions_options['container']['width_medium'] = $accordions_width_medium;
+            $accordions_options['container']['width_small'] = $accordions_width_small;
 
 
             // Custom Scripts
@@ -311,6 +309,8 @@ function accordions_cron_upgrade_accordions(){
 
             $accordions_active_accordion = get_post_meta($accordions_id,'accordions_active_accordion', true);
 
+            $i = 0;
+
             if(!empty($accordions_content_title))
             foreach ($accordions_content_title as $index => $title){
 
@@ -318,6 +318,9 @@ function accordions_cron_upgrade_accordions(){
                 $accordions_options['content'][$index]['body'] = isset($accordions_content_body[$index]) ? $accordions_content_body[$index] : '';
                 $accordions_options['content'][$index]['hide'] = isset($accordions_hide[$index]) ? $accordions_hide[$index] : '';
                 $accordions_options['content'][$index]['toggled_text'] = isset($accordions_content_title_toggled[$index]) ? $accordions_content_title_toggled[$index] : '';
+
+                $accordions_options['content'][$index]['is_active'] = ($accordions_active_accordion == $i) ? 'yes' : 'no';
+
 
                 $active_icon = !empty($accordions_section_icon_plus[$index]) ? '<i class="fa '.$accordions_section_icon_plus[$index].'"></i>' : '';
                 $inactive_icon = !empty($accordions_section_icon_minus[$index]) ? '<i class="fa '.$accordions_section_icon_minus[$index].'"></i>' : '';
@@ -328,7 +331,7 @@ function accordions_cron_upgrade_accordions(){
                 $accordions_options['content'][$index]['background_color'] = isset($accordions_bg_color[$index]) ? $accordions_bg_color[$index] : '';
                 $accordions_options['content'][$index]['background_img'] = isset($accordions_header_bg_img[$index]) ? $accordions_header_bg_img[$index] : '';
 
-
+                $i++;
             }
 
 

@@ -530,6 +530,7 @@ function accordions_metabox_content_style($post_id){
         <p class="description section-description"><?php echo __('Customize accordion icons.','accordions'); ?></p>
 
         <?php
+
         $args = array(
             'id'		=> 'active',
             'parent'		=> 'accordions_options[icon]',
@@ -904,6 +905,10 @@ function accordions_metabox_content_style($post_id){
         $container_text_align = isset($container['text_align']) ? $container['text_align'] : '';
         $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
 
+        $width_large = isset($container['width_large']) ? $container['width_large'] : '';
+        $width_medium = isset($container['width_medium']) ? $container['width_medium'] : '';
+        $width_small = isset($container['width_small']) ? $container['width_small'] : '';
+
 
         $args = array(
             'id'		=> 'padding',
@@ -966,6 +971,53 @@ function accordions_metabox_content_style($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
+
+
+
+        $args = array(
+            'id'		=> 'width',
+            'title'		=> __('Container width','woocommerce-products-slider'),
+            'details'	=> __('Set accordion width.','woocommerce-products-slider'),
+            'type'		=> 'option_group',
+            'options'		=> array(
+                array(
+                    'id'		=> 'width_large',
+                    'parent'		=> 'accordions_options[container]',
+                    'title'		=> __('In desktop','woocommerce-products-slider'),
+                    'details'	=> __('min-width: 1200px, ex: 3','woocommerce-products-slider'),
+                    'type'		=> 'text',
+                    'value'		=> $width_large,
+                    'default'		=> '',
+                    'placeholder'   => '',
+                ),
+                array(
+                    'id'		=> 'width_medium',
+                    'parent'		=> 'accordions_options[container]',
+                    'title'		=> __('In tablet & small desktop','woocommerce-products-slider'),
+                    'details'	=> __('min-width: 992px, ex: 2','woocommerce-products-slider'),
+                    'type'		=> 'text',
+                    'value'		=> $width_medium,
+                    'default'		=> '',
+                    'placeholder'   => '',
+                ),
+                array(
+                    'id'		=> 'width_small',
+                    'parent'		=> 'accordions_options[container]',
+                    'title'		=> __('In mobile','woocommerce-products-slider'),
+                    'details'	=> __('min-width: 576px, ex: 1','woocommerce-products-slider'),
+                    'type'		=> 'text',
+                    'value'		=> $width_small,
+                    'default'		=> '',
+                    'placeholder'   => '',
+                ),
+            ),
+
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+
         ?>
 
     </div>
