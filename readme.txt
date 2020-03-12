@@ -4,7 +4,7 @@
 	Tags: accordion, accordions, Responsive accordions, FAQ, WooCommerce FAQ, WooCommerce FAQ Tab, accordions plugin, jQuery accordions, accordions short-code, accordions Widget, accordions plugin wordpress, accordions plugin jquery, tabs, jquery tabs, tab, responsive tabs
 	Requires at least: 3.8
 	Tested up to: 5.3
-	Stable tag: 2.1.18
+	Stable tag: 2.2.0
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,22 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 == Changelog ==
+
+	= 2.2.0 =
+    * 13-03-2020 - add - accordions preview on frontend.
+    * 13-03-2020 - add - option to enable/disable shortcode
+    * 13-03-2020 - add - option to enable/disable autoembed
+    * 13-03-2020 - add - option to enable/disable wpautop
+    * 13-03-2020 - add - option to enable/disable schema
+    * 13-03-2020 - add - icon position left or right or none.
+    * 13-03-2020 - add - Custom class for accoridon header or tabs navs.
+    * 13-03-2020 - add - Custom class for accoridon content or tabs content.
+    * 13-03-2020 - add - Container width for different devices.
+    * 13-03-2020 - update - improved accordion content editor.
+    * 13-03-2020 - merge - accordion and tabs display under same shortcode by option selection.
+
+
+
 
 	= 2.1.18 =
     * 2020-02-07 - fix - settings tab broken style issue fixed.

@@ -644,7 +644,7 @@ function accordions_metabox_content_style($post_id){
         $args = array(
             'id'		=> 'position',
             'parent'		=> 'accordions_options[icon]',
-            'title'		=> __('position','accordions'),
+            'title'		=> __('Position','accordions'),
             'details'	=> __('Set icon position','accordions'),
             'type'		=> 'select',
             'value'		=> $icon_position,
