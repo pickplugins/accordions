@@ -499,10 +499,6 @@ class settings_tabs_field{
         ?>
         <script>
             jQuery(document).ready(function($) {
-
-
-
-
                 jQuery(document).on("click", ".field-repeatable-wrapper-<?php echo $css_id; ?> .add-repeat-field", function() {
 
 
@@ -593,7 +589,7 @@ class settings_tabs_field{
 
                             foreach ($fields as $field_index => $field):
                                 $fieldId = $field['id'];
-                                $field_css_id = isset($field['css_id']) ? str_replace('[INDEX]',$index, $field['css_id']) : '';
+                                $field_css_id = isset($field['css_id']) ? str_replace('TIMEINDEX', $index, $field['css_id']) : '';
 
                             //var_dump($field_css_id);
 

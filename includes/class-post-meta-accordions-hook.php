@@ -540,7 +540,7 @@ function accordions_metabox_content_style($post_id){
             'type'		=> 'text_icon',
             'value'		=> $icon_active,
             'default'		=> '',
-            'placeholder' => __('<i class="fas fa-chevron-down"></i>','accordions'),
+            'placeholder' => '',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -553,7 +553,7 @@ function accordions_metabox_content_style($post_id){
             'type'		=> 'text_icon',
             'value'		=> $icon_inactive,
             'default'		=> '',
-            'placeholder' => __('','accordions'),
+            'placeholder' => '',
         );
 
         $settings_tabs_field->generate_field($args);
@@ -1074,7 +1074,7 @@ function accordions_metabox_content_content($post_id){
         $meta_fields = array(
             array(
                 'id'		=> 'header',
-                'css_id'		=> 'header[INDEX]',
+                'css_id'		=> 'header_TIMEINDEX',
                 'title'		=> __('Header','team'),
                 'details'	=> __('Accordion header.','team'),
                 'type'		=> 'text',
@@ -1084,7 +1084,7 @@ function accordions_metabox_content_content($post_id){
             ),
             array(
                 'id'		=> 'body',
-                'css_id'		=> 'body[INDEX]',
+                'css_id'		=> 'body_TIMEINDEX',
                 'title'		=> __('Body','team'),
                 'details'	=> __('Accordion body content.','team'),
                 'type'		=> 'wp_editor',
@@ -1094,7 +1094,7 @@ function accordions_metabox_content_content($post_id){
             ),
             array(
                 'id'		=> 'hide',
-                'css_id'		=> 'hide[INDEX]',
+                'css_id'		=> 'hide_TIMEINDEX',
                 'title'		=> __('Hide','team'),
                 'details'	=> __('Hide this.','team'),
                 'type'		=> 'select',
