@@ -10,13 +10,14 @@
 .accordions-tabs .ui-tabs-nav {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: medium none;
-  border-radius: 0;
   margin: 0 !important;
   padding: 0 !important;
+
 }
 	
 .accordions-tabs .tabs-nav {
   border: none;
+  border-radius: 0px;
 }
 	
 .accordions-tabs .ui-tabs-nav li a {
@@ -24,20 +25,20 @@ outline: medium none;
   display: block;
 }
 
-.accordions-tabs .accordions-tab-icons {
+.accordions-tabs .accordion-icons {
   padding: 0 5px;
 }
 
-.accordions-tabs .accordions-tab-icons.accordions-tab-minus {
+.accordions-tabs .accordion-icon-inactive {
   display: none;
 }
 
 
-.accordions-tabs .ui-tabs-active .accordions-tab-plus{
+.accordions-tabs .ui-tabs-active .accordion-icon-active{
   display: none;
 }
 
-.accordions-tabs .ui-tabs-active .accordions-tab-minus{
+.accordions-tabs .ui-tabs-active .accordion-icon-inactive{
   display: inline-block;
 }
 

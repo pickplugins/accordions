@@ -121,7 +121,7 @@ class Accordions{
         wp_localize_script( 'accordions_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
         wp_register_style('accordions-style', accordions_plugin_url. 'assets/frontend/css/style.css');
-        wp_register_style('style-tabs', accordions_plugin_url. 'assets/frontend/css/style-tabs.css');
+        wp_register_style('style-tabs', accordions_plugin_url. 'assets/global/css/style-tabs.css');
 
         wp_register_style('accordions-tabs', accordions_plugin_url. 'assets/global/css/themesTabs.style.css');
         wp_register_style('fontawesome-5',  accordions_plugin_url.'assets/global/css/font-awesome-5.css');

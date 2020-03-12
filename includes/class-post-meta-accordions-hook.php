@@ -498,6 +498,7 @@ function accordions_metabox_content_style($post_id){
     $icon_background_color = isset($icon['background_color']) ? $icon['background_color'] : '';
     $icon_padding = isset($icon['padding']) ? $icon['padding'] : '';
     $icon_margin = isset($icon['margin']) ? $icon['margin'] : '';
+    $icon_position = isset($icon['position']) ? $icon['position'] : '';
 
 
     $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
@@ -639,6 +640,24 @@ function accordions_metabox_content_style($post_id){
 
         $settings_tabs_field->generate_field($args);
 
+
+        $args = array(
+            'id'		=> 'position',
+            'parent'		=> 'accordions_options[icon]',
+            'title'		=> __('position','accordions'),
+            'details'	=> __('Set icon position','accordions'),
+            'type'		=> 'select',
+            'value'		=> $icon_position,
+            'default'		=> 'left',
+            'args'		=> array(
+                'none'	=> __('None','accordions'),
+                'left'	=> __('Left','accordions'),
+                'right'	=> __('Right','accordions'),
+            ),
+
+        );
+
+        $settings_tabs_field->generate_field($args);
 
         ?>
     </div>

@@ -62,7 +62,7 @@ class class_accordions_shortcodes  {
         ob_start();
 
         ?>
-        <div id="accordions-tabs-<?php echo $post_id; ?>" class="accordions-tabs-<?php echo $post_id; ?> accordions-tabs">
+        <div id="accordions-tabs-<?php echo $post_id; ?>" class="accordions-tabs-<?php echo $post_id; ?> accordions-tabs accordions-tabs-themes">
             <?php
             do_action('accordions_tabs_main', $atts);
             ?>
