@@ -33,6 +33,159 @@ function accordions_tabs_main_top($atts){
 
 
 
+add_action('accordions_tabs_main', 'accordions_tabs_main_style');
+
+function accordions_tabs_main_style($atts){
+
+    $post_id = isset($atts['id']) ? $atts['id'] : '';
+
+    $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
+
+    $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
+
+    $icon = isset($accordions_options['icon']) ? $accordions_options['icon'] : array();
+    $icon_active = isset($icon['active']) ? $icon['active'] : '';
+    $icon_inactive = isset($icon['inactive']) ? $icon['inactive'] : '';
+    $icon_color = isset($icon['color']) ? $icon['color'] : '';
+    $icon_color_hover = isset($icon['color_hover']) ? $icon['color_hover'] : '';
+    $icon_font_size = isset($icon['font_size']) ? $icon['font_size'] : '';
+    $icon_background_color = isset($icon['background_color']) ? $icon['background_color'] : '';
+    $icon_padding = isset($icon['padding']) ? $icon['padding'] : '0px';
+    $icon_margin = isset($icon['margin']) ? $icon['margin'] : '0px';
+
+
+    $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
+    $header_style_class = isset($header['style_class']) ? $header['style_class'] : '';
+
+    $header_background_color = isset($header['background_color']) ? $header['background_color'] : '';
+    $header_active_background_color = isset($header['active_background_color']) ? $header['active_background_color'] : '';
+    $header_color = isset($header['color']) ? $header['color'] : '';
+    $header_color_hover = isset($header['color_hover']) ? $header['color_hover'] : '';
+    $header_font_size = isset($header['font_size']) ? $header['font_size'] : '';
+    $header_padding = isset($header['padding']) ? $header['padding'] : '';
+    $header_margin = isset($header['margin']) ? $header['margin'] : '';
+
+
+    $body = isset($accordions_options['body']) ? $accordions_options['body'] : array();
+    $body_background_color = isset($body['background_color']) ? $body['background_color'] : '';
+    $body_active_background_color = isset($body['active_background_color']) ? $body['active_background_color'] : '';
+    $body_color = isset($body['color']) ? $body['color'] : '';
+    $body_color_hover = isset($body['color_hover']) ? $body['color_hover'] : '';
+    $body_font_size = isset($body['font_size']) ? $body['font_size'] : '';
+    $body_padding = isset($body['padding']) ? $body['padding'] : '';
+    $body_margin = isset($body['margin']) ? $body['margin'] : '';
+
+    $container = isset($accordions_options['container']) ? $accordions_options['container'] : array();
+    $container_padding = isset($container['padding']) ? $container['padding'] : '';
+    $container_background_color = isset($container['background_color']) ? $container['background_color'] : '';
+    $container_text_align = isset($container['text_align']) ? $container['text_align'] : '';
+    $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
+
+    $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
+    $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
+    $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
+
+
+    $tabs = isset($accordions_options['tabs']) ? $accordions_options['tabs'] : '';
+
+
+    $tabs_is_vertical = isset($tabs['is_vertical']) ? $tabs['is_vertical'] : '';
+    $navs_width_ratio = isset($tabs['navs_width_ratio']) ? $tabs['navs_width_ratio'] : '';
+    $tabs_icon_toggle = isset($tabs['tabs_icon_toggle']) ? $tabs['tabs_icon_toggle'] : '';
+
+
+
+    wp_enqueue_style('style-tabs');
+    wp_enqueue_style('accordions-style');
+    wp_enqueue_style('jquery-ui');
+    wp_enqueue_style('fontawesome-5');
+
+    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'jquery-ui-core' );
+    wp_enqueue_script('jquery-ui-tabs');
+    wp_enqueue_script('jquery-effects-core');
+
+
+
+    ?>
+    <style type='text/css'>
+        #accordions-tabs-<?php echo $post_id; ?>{
+            text-align: <?php echo $container_text_align; ?>;
+        }
+        #accordions-tabs-<?php echo $post_id; ?>{
+            background:<?php echo $container_background_color; ?> url(<?php echo $container_background_img; ?>) repeat
+            scroll 0 0;
+            padding: <?php echo $container_padding; ?>;
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .tabs-nav{
+            background-color:<?php echo $header_background_color; ?>;
+            color:<?php echo $header_color; ?>;
+            font-size:<?php echo $header_font_size; ?>;
+            margin:<?php echo $header_margin; ?> !important;
+            padding:<?php echo $header_padding; ?> !important;
+            border: none;
+            border-radius: 0px;
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .accordions-head-title{
+            color:<?php echo $header_color; ?>;
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .ui-tabs-active{
+            background: <?php echo $header_active_background_color; ?>;
+
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .tabs-content{
+            background-color:<?php echo $body_background_color; ?>;
+            color:<?php echo $body_color; ?>;
+            font-size:<?php echo $body_font_size; ?>;
+            margin:<?php echo $body_margin; ?>;
+            padding:<?php echo $body_padding; ?>;
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .accordion-icons span{
+            color:<?php echo $icon_color; ?>;
+            font-size:<?php echo $icon_font_size; ?>;
+        }
+
+
+
+        <?php
+        if(!empty($accordions_custom_css)){
+            echo $accordions_custom_css;
+        }
+
+
+        if($tabs_icon_toggle=='yes'){
+            ?>
+        .accordions-tabs .ui-tabs-active .accordions-tab-plus {
+            display: none;
+        }
+        .accordions-tabs .ui-tabs-active .accordions-tab-minus {
+            display: inline;
+        }
+        <?php
+    }
+    if($tabs_is_vertical=='yes'){
+
+        $nav_width_ratio = ($navs_width_ratio + 5);
+        $panel_width_ratio = (100 - $nav_width_ratio);
+
+
+        ?>
+        .ui-tabs-vertical .ui-tabs-nav { float: left; width: <?php echo $navs_width_ratio; ?>%;overflow: hidden; }
+        .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; }
+        .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: left; width: <?php echo $panel_width_ratio; ?>%;}
+
+
+        <?php
+    }
+     ?>
+    </style>
+    <?php
+
+
+
+}
+
 
 
 
@@ -182,6 +335,35 @@ function accordions_tabs_main_items($atts){
 
     <?php echo $nav_content_html; ?>
 
+    <script>
+        jQuery(document).ready(function($){
+            <?php
+            if(isset($_GET['active_index'])):
+                $accordion_index = isset($_GET['active_index']) ? sanitize_text_field($_GET['active_index']) : '';
+
+                //var_dump($accordion_index);
+
+                $accordion_index = explode('-', $accordion_index);
+                foreach ($accordion_index as $args){
+                    $args_arr = explode('|', $args);
+                    $accordion_id = isset($args_arr[0]) ? $args_arr[0] : '';
+                    $accordion_indexes = isset($args_arr[1]) ? $args_arr[1] : '';
+
+                    ?>
+                    accordions_tabs_active_index_<?php echo $accordion_id; ?> = <?php echo $accordion_indexes; ?>;
+                    <?php
+                }
+                else:
+                    ?>
+                    accordions_tabs_active_index_<?php echo $post_id; ?> = <?php echo json_encode($active_index); ?>;
+                    <?php
+            endif;
+            ?>
+        })
+    </script>
+
+
+
     <?php
 
 }
@@ -231,7 +413,7 @@ function accordions_tabs_main_scripts($atts){
 
 
 
-    $active_accordion = isset($_GET['id']) ? (int)sanitize_text_field($_GET['id']) : 1;
+    $active_tab = isset($_GET['id']) ? (int)sanitize_text_field($_GET['id']) : 1;
 
 
 
@@ -242,6 +424,7 @@ function accordions_tabs_main_scripts($atts){
     ?>
     <script>
         jQuery(document).ready(function($){
+
             <?php
 
             if($tabs_is_vertical=='yes'){
@@ -255,9 +438,15 @@ function accordions_tabs_main_scripts($atts){
 
 
 
-            $("#accordions-tabs-<?php echo $post_id; ?>" ).tabs();
+            $("#accordions-tabs-<?php echo $post_id; ?>" ).tabs({
+                collapsible: <?php echo $collapsible; ?>,
+                event: "<?php echo $active_event; ?>",
+                active: "<?php echo $active_tab; ?>",
+            });
 
-
+            if(typeof accordions_tabs_active_index_<?php echo $post_id; ?> != 'undefined'){
+                $("#accordions-tabs-<?php echo $post_id; ?>").tabs("option", "active", accordions_tabs_active_index_<?php echo $post_id; ?>);
+            }
 
 
         })
@@ -290,156 +479,3 @@ function accordions_tabs_main_no_content(){
 
 }
 
-
-add_action('accordions_tabs_main', 'accordions_tabs_main_style');
-
-function accordions_tabs_main_style($atts){
-
-    $post_id = isset($atts['id']) ? $atts['id'] : '';
-
-    $accordions_options = get_post_meta($post_id,'accordions_options', true);
-    $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
-
-    $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
-
-    $icon = isset($accordions_options['icon']) ? $accordions_options['icon'] : array();
-    $icon_active = isset($icon['active']) ? $icon['active'] : '';
-    $icon_inactive = isset($icon['inactive']) ? $icon['inactive'] : '';
-    $icon_color = isset($icon['color']) ? $icon['color'] : '';
-    $icon_color_hover = isset($icon['color_hover']) ? $icon['color_hover'] : '';
-    $icon_font_size = isset($icon['font_size']) ? $icon['font_size'] : '';
-    $icon_background_color = isset($icon['background_color']) ? $icon['background_color'] : '';
-    $icon_padding = isset($icon['padding']) ? $icon['padding'] : '0px';
-    $icon_margin = isset($icon['margin']) ? $icon['margin'] : '0px';
-
-
-    $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
-    $header_style_class = isset($header['style_class']) ? $header['style_class'] : '';
-
-    $header_background_color = isset($header['background_color']) ? $header['background_color'] : '';
-    $header_active_background_color = isset($header['active_background_color']) ? $header['active_background_color'] : '';
-    $header_color = isset($header['color']) ? $header['color'] : '';
-    $header_color_hover = isset($header['color_hover']) ? $header['color_hover'] : '';
-    $header_font_size = isset($header['font_size']) ? $header['font_size'] : '';
-    $header_padding = isset($header['padding']) ? $header['padding'] : '';
-    $header_margin = isset($header['margin']) ? $header['margin'] : '';
-
-
-    $body = isset($accordions_options['body']) ? $accordions_options['body'] : array();
-    $body_background_color = isset($body['background_color']) ? $body['background_color'] : '';
-    $body_active_background_color = isset($body['active_background_color']) ? $body['active_background_color'] : '';
-    $body_color = isset($body['color']) ? $body['color'] : '';
-    $body_color_hover = isset($body['color_hover']) ? $body['color_hover'] : '';
-    $body_font_size = isset($body['font_size']) ? $body['font_size'] : '';
-    $body_padding = isset($body['padding']) ? $body['padding'] : '';
-    $body_margin = isset($body['margin']) ? $body['margin'] : '';
-
-    $container = isset($accordions_options['container']) ? $accordions_options['container'] : array();
-    $container_padding = isset($container['padding']) ? $container['padding'] : '';
-    $container_background_color = isset($container['background_color']) ? $container['background_color'] : '';
-    $container_text_align = isset($container['text_align']) ? $container['text_align'] : '';
-    $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
-
-    $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
-    $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
-    $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
-
-
-    $tabs = isset($accordions_options['tabs']) ? $accordions_options['tabs'] : '';
-
-
-    $tabs_is_vertical = isset($tabs['is_vertical']) ? $tabs['is_vertical'] : '';
-    $navs_width_ratio = isset($tabs['navs_width_ratio']) ? $tabs['navs_width_ratio'] : '';
-    $tabs_icon_toggle = isset($tabs['tabs_icon_toggle']) ? $tabs['tabs_icon_toggle'] : '';
-
-
-
-    wp_enqueue_style('style-tabs');
-
-    wp_enqueue_style('jquery-ui');
-    wp_enqueue_style('fontawesome-5');
-
-    wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'jquery-ui-core' );
-    wp_enqueue_script('jquery-ui-tabs');
-    wp_enqueue_script('jquery-effects-core');
-
-
-
-    ?>
-    <style type='text/css'>
-        #accordions-tabs-<?php echo $post_id; ?>{
-            text-align: <?php echo $container_text_align; ?>;
-        }
-        #accordions-tabs-<?php echo $post_id; ?>{
-            background:<?php echo $container_background_color; ?> url(<?php echo $container_background_img; ?>) repeat
-            scroll 0 0;
-            padding: <?php echo $container_padding; ?>;
-        }
-        #accordions-tabs-<?php echo $post_id; ?> .tabs-nav{
-            background-color:<?php echo $header_background_color; ?>;
-            color:<?php echo $header_color; ?>;
-            font-size:<?php echo $header_font_size; ?>;
-            margin:<?php echo $header_margin; ?> !important;
-            padding:<?php echo $header_padding; ?> !important;
-            border: none;
-            border-radius: 0px;
-        }
-        #accordions-tabs-<?php echo $post_id; ?> .accordions-head-title{
-            color:<?php echo $header_color; ?>;
-        }
-        #accordions-tabs-<?php echo $post_id; ?> .ui-tabs-active{
-            background: <?php echo $header_active_background_color; ?>;
-
-        }
-        #accordions-tabs-<?php echo $post_id; ?> .tabs-content{
-            background-color:<?php echo $body_background_color; ?>;
-            color:<?php echo $body_color; ?>;
-            font-size:<?php echo $body_font_size; ?>;
-            margin:<?php echo $body_margin; ?>;
-            padding:<?php echo $body_padding; ?>;
-        }
-        #accordions-tabs-<?php echo $post_id; ?> .accordion-icons span{
-            color:<?php echo $icon_color; ?>;
-            font-size:<?php echo $icon_font_size; ?>;
-        }
-
-
-
-        <?php
-        if(!empty($accordions_custom_css)){
-            echo $accordions_custom_css;
-        }
-
-
-        if($tabs_icon_toggle=='yes'){
-            ?>
-        .accordions-tabs .ui-tabs-active .accordions-tab-plus {
-            display: none;
-        }
-        .accordions-tabs .ui-tabs-active .accordions-tab-minus {
-            display: inline;
-        }
-        <?php
-    }
-    if($tabs_is_vertical=='yes'){
-
-        $nav_width_ratio = ($navs_width_ratio + 5);
-        $panel_width_ratio = (100 - $nav_width_ratio);
-
-
-        ?>
-        .ui-tabs-vertical .ui-tabs-nav { float: left; width: <?php echo $navs_width_ratio; ?>%;overflow: hidden; }
-        .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; }
-        .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: left; width: <?php echo $panel_width_ratio; ?>%;}
-
-
-        <?php
-    }
-     ?>
-    </style>
-    <?php
-
-
-
-}

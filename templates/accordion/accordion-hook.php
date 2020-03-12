@@ -459,8 +459,8 @@ function accordions_main_items($atts){
     <script>
         jQuery(document).ready(function($){
             <?php
-                if(isset($_GET['accordion_index'])):
-                    $accordion_index = isset($_GET['accordion_index']) ? sanitize_text_field($_GET['accordion_index']) : '';
+                if(isset($_GET['active_index'])):
+                    $accordion_index = isset($_GET['active_index']) ? sanitize_text_field($_GET['active_index']) : '';
 
                     //var_dump($accordion_index);
 
@@ -668,7 +668,7 @@ function accordions_main_scripts($atts){
                     $("#accordions-<?php echo $post_id; ?> .items").accordion("option", "active", accordions_active_index[index]);
                 }
             }
-        <?php
+            <?php
             if($enable_stats =='yes'):
                 ?>
                 $("#accordions-<?php echo $post_id; ?> .accordions-head").click(function () {
@@ -692,24 +692,34 @@ function accordions_main_scripts($atts){
             endif;
 
             if($header_toggle == 'yes'):
-            ?>
-            $("#accordions-<?php echo $post_id; ?> .accordions-head").click(function () {
-                toogle_text = $(this).attr('toggle-text');
-                main_text = $(this).attr('main-text');
-                if( $(this).hasClass('ui-state-active') ){
-                    if( toogle_text != null && toogle_text != ''){
-                        $(this).children('.accordions-head-title').html(toogle_text);
+                ?>
+                $("#accordions-<?php echo $post_id; ?> .accordions-head").click(function () {
+                    toogle_text = $(this).attr('toggle-text');
+                    main_text = $(this).attr('main-text');
+                    if( $(this).hasClass('ui-state-active') ){
+                        if( toogle_text != null && toogle_text != ''){
+                            $(this).children('.accordions-head-title').html(toogle_text);
+                        }
+                    } else {
+                        if( main_text != null  && main_text != ''){
+                            $(this).children('.accordions-head-title').html(main_text);
+                        }
                     }
-                } else {
-                    if( main_text != null  && main_text != ''){
-                        $(this).children('.accordions-head-title').html(main_text);
-                    }
-                }
-                id = $(this).attr( 'id' );
-            });
-            <?php
+                    id = $(this).attr( 'id' );
+                });
+                <?php
             endif;
             ?>
+
+            var hash = window.location.hash;
+            if (hash) {
+                index = $("#accordions-<?php echo $post_id; ?> "+hash).attr('aria-controls');
+                index = index.replace('ui-id-','');
+                console.log(parseInt(index));
+                $("#accordions-<?php echo $post_id; ?> .items").accordion("option", "active", parseInt(index));
+            }
+
+
         })
     </script>
     <?php
