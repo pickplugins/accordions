@@ -134,7 +134,7 @@ function accordions_settings_content_general(){
         $html = ob_get_clean();
         $args = array(
             'id'		=> 'accordion_export',
-            'title'		=> __('Export','woocommerce-products-slider'),
+            'title'		=> __('Export','accordions'),
             'details'	=> 'Please download this json first and upload somewhere, you can import by using the url of json file.',
             'type'		=> 'custom_html',
             'html'		=> $html,
@@ -155,7 +155,7 @@ function accordions_settings_content_general(){
         $html = ob_get_clean();
         $args = array(
             'id'		=> 'accordion_import',
-            'title'		=> __('Import','woocommerce-products-slider'),
+            'title'		=> __('Import','accordions'),
             'details'	=> 'Please put the url of json file where you uploaded the file.',
             'type'		=> 'custom_html',
             'html'		=> $html,

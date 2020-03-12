@@ -673,7 +673,7 @@ function accordions_metabox_content_style($post_id){
             'css_id'		=> 'header_background_color',
             'parent'		=> 'accordions_options[header]',
             'title'		=> __('Add class','accordions'),
-            'details'	=> __('Header style class, ex: <code>border-semi-round, border-round, border-1px border-2px border-3px, shadow-bottom, shadow-top shadow-bottom-right</code>','accordions'),
+            'details'	=> __('Header style class, ex: <code>border-flat, border-semi-round, border-round, border-1px border-2px border-3px, shadow-bottom, shadow-top shadow-bottom-right, shadow-bottom-left</code>','accordions'),
             'type'		=> 'text',
             'value'		=> $header_class,
             'default'		=> '',
@@ -995,15 +995,15 @@ function accordions_metabox_content_style($post_id){
 
         $args = array(
             'id'		=> 'width',
-            'title'		=> __('Container width','woocommerce-products-slider'),
-            'details'	=> __('Set accordion width.','woocommerce-products-slider'),
+            'title'		=> __('Container width','accordions'),
+            'details'	=> __('Set accordion width.','accordions'),
             'type'		=> 'option_group',
             'options'		=> array(
                 array(
                     'id'		=> 'width_large',
                     'parent'		=> 'accordions_options[container]',
-                    'title'		=> __('In desktop','woocommerce-products-slider'),
-                    'details'	=> __('min-width: 1200px, ex: 3','woocommerce-products-slider'),
+                    'title'		=> __('In desktop','accordions'),
+                    'details'	=> __('min-width: 1200px, ex: 300px','accordions'),
                     'type'		=> 'text',
                     'value'		=> $width_large,
                     'default'		=> '',
@@ -1012,8 +1012,8 @@ function accordions_metabox_content_style($post_id){
                 array(
                     'id'		=> 'width_medium',
                     'parent'		=> 'accordions_options[container]',
-                    'title'		=> __('In tablet & small desktop','woocommerce-products-slider'),
-                    'details'	=> __('min-width: 992px, ex: 2','woocommerce-products-slider'),
+                    'title'		=> __('In tablet & small desktop','accordions'),
+                    'details'	=> __('min-width: 992px, ex: 90%','accordions'),
                     'type'		=> 'text',
                     'value'		=> $width_medium,
                     'default'		=> '',
@@ -1022,8 +1022,8 @@ function accordions_metabox_content_style($post_id){
                 array(
                     'id'		=> 'width_small',
                     'parent'		=> 'accordions_options[container]',
-                    'title'		=> __('In mobile','woocommerce-products-slider'),
-                    'details'	=> __('min-width: 576px, ex: 1','woocommerce-products-slider'),
+                    'title'		=> __('In mobile','accordions'),
+                    'details'	=> __('min-width: 576px, ex: 90%','accordions'),
                     'type'		=> 'text',
                     'value'		=> $width_small,
                     'default'		=> '',
