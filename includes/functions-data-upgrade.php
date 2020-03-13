@@ -187,6 +187,8 @@ function accordions_cron_upgrade_accordions(){
             $accordions_themes = get_post_meta( $accordions_id, 'accordions_themes', true );
             $accordions_options['accordion']['theme'] = $accordions_themes;
 
+            $header_class = 'border-none';
+
             if($accordions_themes == 'flat'){
                 $header_class = 'border-none';
             }elseif($accordions_themes == 'rounded'){
@@ -347,12 +349,12 @@ function accordions_cron_upgrade_accordions(){
             wp_reset_postdata();
         endwhile;
     else:
-        wp_clear_scheduled_hook('accordions_cron_upgrade_accordions');
 
         $accordions_plugin_info = get_option('accordions_plugin_info');
         $accordions_plugin_info['accordions_upgrade'] = 'done';
         update_option('accordions_plugin_info', $accordions_plugin_info);
 
+        wp_clear_scheduled_hook('accordions_cron_upgrade_accordions');
 
 
     endif;

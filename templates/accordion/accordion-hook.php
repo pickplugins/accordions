@@ -296,7 +296,10 @@ function accordions_main_items($atts){
     $icon_inactive = !empty($icon['inactive']) ? $icon['inactive'] : '<i class="fas fa-chevron-right"></i>';
     $icon_position = !empty($icon['position']) ? $icon['position'] : 'left';
 
+    $active_plugins = get_option('active_plugins');
 
+
+    $active_index = array();
     ?>
     <div class="items">
 
@@ -305,7 +308,7 @@ function accordions_main_items($atts){
         if(!empty($accordions_content)):
 
             $item_count = 0;
-            $active_index = array();
+
         foreach ($accordions_content as $index => $accordion){
 
             $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
@@ -329,11 +332,15 @@ function accordions_main_items($atts){
             }
 
 
-
-
-            if(has_shortcode($accordion_body, 'accordions')){
-                $accordion_body = str_replace('[accordions','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+            if(!in_array( 'accordions-pro/accordions-pro.php', (array) $active_plugins )){
+                if(has_shortcode($accordion_body, 'accordions') || has_shortcode($accordion_body, 'accordions_pickplguins') || has_shortcode($accordion_body, 'accordions_pplugins')   ){
+                    $accordion_body = str_replace('[accordions','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                    $accordion_body = str_replace('[accordions_pickplguins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                    $accordion_body = str_replace('[accordions_pplugins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                }
             }
+
+
 
 
             $accordion_body = apply_filters( 'accordions_item_body', $accordion_body, $post_id );

@@ -35,7 +35,7 @@ class class_accordions_notices{
             ?>
             <div class="update-nag">
                 <?php
-                echo sprintf(__('Data migration required for <b>Accordions by PickPlugins</b> plugin, please <a class="button button-primary" href="%s">click to start</a> migration. Watch this <a target="_blank" href="https://youtu.be/kn3skEwh5t4">video</a>  first', 'accordions'), $actionurl);
+                echo sprintf(__('Data migration required for <b>Accordions by PickPlugins</b> plugin, please <a class="button button-primary" href="%s">click to start</a> migration. Watch this <a target="_blank" href="https://youtu.be/DDKMWphWLGI">video</a>  first', 'accordions'), $actionurl);
                 ?>
             </div>
             <?php
