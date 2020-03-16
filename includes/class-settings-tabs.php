@@ -86,6 +86,7 @@ class settings_tabs_field{
         elseif( isset($option['type']) && $option['type'] === 'option_group')	    $this->field_option_group( $option );
         elseif( isset($option['type']) && $option['type'] === 'option_group_accordion')	    $this->field_option_group_accordion( $option );
         elseif( isset($option['type']) && $option['type'] === 'wp_editor')	    $this->field_wp_editor( $option );
+        elseif( isset($option['type']) && $option['type'] === 'textarea_editor')	    $this->field_textarea_editor( $option );
 
 
 
@@ -1176,10 +1177,42 @@ class settings_tabs_field{
 
         echo sprintf($field_template, $title, $input_html, $details);
 
+    }
 
 
 
+    public function field_textarea_editor( $option ){
 
+        $id 			= isset( $option['id'] ) ? $option['id'] : "";
+        $css_id 			= isset( $option['css_id'] ) ? $option['css_id'] : $id;
+        $parent 			= isset( $option['parent'] ) ? $option['parent'] : "";
+        $field_template 	= isset( $option['field_template'] ) ? $option['field_template'] : $this->field_template($option);
+        $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
+        $value 	= isset( $option['value'] ) ? $option['value'] : '';
+        $default 	= isset( $option['default'] ) ? $option['default'] : '';
+        $value = !empty($value) ? $value : $default;
+
+        $is_pro 	= isset( $option['is_pro'] ) ? $option['is_pro'] : false;
+        $pro_text 	= isset( $option['pro_text'] ) ? $option['pro_text'] : '';
+
+        $title			= isset( $option['title'] ) ? $option['title'] : "";
+        $details 			= isset( $option['details'] ) ? $option['details'] : "";
+
+        $field_name = !empty($parent) ? $parent.'['.$id.']' : $id;
+
+        if($is_pro == true){
+            $details = '<span class="pro-feature">'.$pro_text.'</span> '.$details;
+        }
+
+
+        ob_start();
+        ?>
+        <textarea editor_enabled="no" class="textarea-editor" name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" cols="40" rows="5" placeholder="<?php echo $placeholder; ?>"><?php echo $value; ?></textarea>
+        <?php
+
+        $input_html = ob_get_clean();
+
+        echo sprintf($field_template, $title, $input_html, $details);
 
     }
 

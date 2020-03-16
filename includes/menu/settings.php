@@ -13,7 +13,12 @@ $accordions_settings_tab[] = array(
     'active' => ($current_tab == 'general') ? true : false,
 );
 
-
+$accordions_settings_tab[] = array(
+    'id' => '3rd_party_import',
+    'title' => sprintf(__('%s 3rd party import','accordions'),'<i class="fas fa-download"></i>'),
+    'priority' => 2,
+    'active' => ($current_tab == '3rd_party_import') ? true : false,
+);
 
 $accordions_settings_tab[] = array(
     'id' => 'help_support',

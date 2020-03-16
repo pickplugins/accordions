@@ -406,6 +406,7 @@ function accordions_metabox_content_tabs_options($post_id){
     $tabs = isset($accordions_options['tabs']) ? $accordions_options['tabs'] : array();
     $collapsible = isset($tabs['collapsible']) ? $tabs['collapsible'] : 'true';
     $active_event = isset($tabs['active_event']) ? $tabs['active_event'] : 'click';
+    $navs_alignment = isset($tabs['navs_alignment']) ? $tabs['navs_alignment'] : 'left';
 
 
     ?>
@@ -447,6 +448,24 @@ function accordions_metabox_content_tabs_options($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'navs_alignment',
+            'parent'		=> 'accordions_options[tabs]',
+            'title'		=> __('Navs alignment','accordions'),
+            'details'	=> __('Set navs alignment','accordions'),
+            'type'		=> 'select',
+            'value'		=> $navs_alignment,
+            'default'		=> 'left',
+            'args'		=> array(
+                'left'	=> __('Left','accordions'),
+                'right'	=> __('Right','accordions'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
         ?>
 
     </div>
@@ -1087,10 +1106,10 @@ function accordions_metabox_content_content($post_id){
                 'css_id'		=> 'body_TIMEINDEX',
                 'title'		=> __('Body','team'),
                 'details'	=> __('Accordion body content.','team'),
-                'type'		=> 'wp_editor',
+                'type'		=> 'textarea_editor',
                 'value'		=> '',
                 'default'		=> '',
-                'placeholder'		=> 'meta_key',
+                'placeholder'		=> '',
             ),
             array(
                 'id'		=> 'hide',

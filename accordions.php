@@ -3,7 +3,7 @@
 Plugin Name: Accordions by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard
 Description: Fully responsive and mobile ready accordion grid for wordpress.
-Version: 2.2.1
+Version: 2.2.4
 WC requires at least: 3.0.0
 WC tested up to: 3.6
 Author: PickPlugins
@@ -23,7 +23,7 @@ class Accordions{
 
 		define('accordions_plugin_url', plugins_url('/', __FILE__)  );
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
-        define('accordions_version', '2.2.1' );
+        define('accordions_version', '2.2.4' );
         define('accordions_plugin_name', 'Accordions' );
         define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
 
@@ -56,6 +56,21 @@ class Accordions{
 
         require_once( accordions_plugin_dir . 'templates/accordion/accordion-hook.php');
         require_once( accordions_plugin_dir . 'templates/tabs/tabs-hook.php');
+
+        //require_once( accordions_plugin_dir . 'includes/3rd-party/arconix-faq/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/easy-accordion-free/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/responsive-accordion-and-collapse/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/responsive-tabs/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/easy-responsive-tabs/functions-data-import.php');
+
+
+//
+//
+//
+//
+        //require_once( accordions_plugin_dir . 'includes/3rd-party/vc-tabs/functions-data-import.php');
+
+
 
 
         add_action( 'wp_enqueue_scripts', array( $this, '_front_scripts' ) );

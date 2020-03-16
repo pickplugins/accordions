@@ -6,7 +6,7 @@ $accordions_settings_upgrade = isset($accordions_plugin_info['settings_upgrade']
 $accordions_upgrade = isset($accordions_plugin_info['accordions_upgrade']) ? $accordions_plugin_info['accordions_upgrade'] : '';
 
 //echo '<pre>'.var_export($accordions_upgrade, true).'</pre>';
-
+wp_enqueue_style('font-awesome-5');
 
 $url = admin_url().'edit.php?post_type=accordions&page=upgrade_status';
 
@@ -24,7 +24,7 @@ $url = admin_url().'edit.php?post_type=accordions&page=upgrade_status';
     <script>
         setTimeout(function(){
             window.location.href = '<?php echo $url; ?>';
-        }, 1000*30);
+        }, 1000*50);
 
     </script>
 
@@ -101,7 +101,7 @@ $url = admin_url().'edit.php?post_type=accordions&page=upgrade_status';
 
 
 
-    <p><a class="button" href="<?php echo admin_url().'edit.php?post_type=accordions&page=upgrade_status'; ?>">Refresh</a> to check Migration stats.</p>
+    <p><a class="button" href="<?php echo admin_url().'edit.php?post_type=accordions&page=upgrade_status'; ?>">Refresh</a> to check Migration stats. <i class="fas fa-spin fa-spinner"></i></p>
 
 
 

@@ -1,6 +1,118 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
+
+//add_filter('the_content','accordions_get_shortcode');
+function accordions_get_shortcode($content){
+
+
+    if(strpos($content, '[restabs')){
+        $tabs = accordions_str_between_all($content, "[restabs", "[/restabs]");
+
+        foreach ($tabs as $tab_content){
+
+            $shortcode_content = accordions_nested_shortcode_content($tab_content, $child_tag='restab');
+            echo '<pre>'.var_export('#####', true).'</pre>';
+            echo '<pre>'.var_export($shortcode_content, true).'</pre>';
+        }
+    }
+
+    return $content;
+}
+
+
+
+
+function accordions_str_between_all($string, $start, $end, $includeDelimiters = false,  &$offset = 0){
+    $strings = [];
+    $length = strlen($string);
+
+    while ($offset < $length)
+    {
+        $found = accordions_str_between($string, $start, $end, $includeDelimiters, $offset);
+        if ($found === null) break;
+
+        $strings[] = $found;
+        $offset += strlen($includeDelimiters ? $found : $start . $found . $end); // move offset to the end of the newfound string
+    }
+
+    return $strings;
+}
+
+function accordions_str_between($string, $start, $end, $includeDelimiters = false, &$offset = 0){
+    if ($string === '' || $start === '' || $end === '') return null;
+
+    $startLength = strlen($start);
+    $endLength = strlen($end);
+
+    $startPos = strpos($string, $start, $offset);
+    if ($startPos === false) return null;
+
+    $endPos = strpos($string, $end, $startPos + $startLength);
+    if ($endPos === false) return null;
+
+    $length = $endPos - $startPos + ($includeDelimiters ? $endLength : -$startLength);
+    if (!$length) return '';
+
+    $offset = $startPos + ($includeDelimiters ? 0 : $startLength);
+
+    $result = substr($string, $offset, $length);
+
+    return ($result !== false ? $result : null);
+}
+
+
+
+
+
+
+
+
+
+function accordions_nested_shortcode_content($string, $child_tag='restab'){
+
+    $accordion_content = array();
+
+    //echo '<pre>'.var_export($tabs, true).'</pre>';
+
+
+    $tabs = explode('['.$child_tag, $string);
+    unset($tabs[0]);
+
+    $i = 0;
+    foreach ($tabs as $tab){
+        $tab = str_replace('[/'.$child_tag.']','', $tab);
+        $tab = str_replace(' active="active"','', $tab);
+
+        $title_content = explode(']', $tab);
+        $title = isset($title_content[0]) ? $title_content[0] : '';
+        $title = str_replace('title="','', $title);
+        $title = str_replace('"','', $title);
+        $acc_title = ltrim($title);
+
+        $acc_content = isset($title_content[1]) ? $title_content[1] : '';
+
+        $accordion_content[$i]['title'] = $acc_title;
+        $accordion_content[$i]['content'] = $acc_content;
+
+        $i++;
+    }
+
+    //echo '<pre>'.var_export($accordion_content, true).'</pre>';
+
+
+
+
+    return $accordion_content;
+}
+
+
+
+
+
+
+
+
 add_filter('the_content','accordions_preview_content');
 function accordions_preview_content($content){
     if(is_singular('accordions')){

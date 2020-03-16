@@ -81,6 +81,9 @@ function accordions_tabs_main_style($atts){
     $container_background_color = isset($container['background_color']) ? $container['background_color'] : '';
     $container_text_align = isset($container['text_align']) ? $container['text_align'] : '';
     $container_background_img = isset($container['background_img']) ? $container['background_img'] : '';
+    $width_large = isset($container['width_large']) ? $container['width_large'] : '';
+    $width_medium = isset($container['width_medium']) ? $container['width_medium'] : '';
+    $width_small = isset($container['width_small']) ? $container['width_small'] : '';
 
     $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
     $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
@@ -93,13 +96,25 @@ function accordions_tabs_main_style($atts){
     $tabs_is_vertical = isset($tabs['is_vertical']) ? $tabs['is_vertical'] : '';
     $navs_width_ratio = isset($tabs['navs_width_ratio']) ? $tabs['navs_width_ratio'] : '';
     $tabs_icon_toggle = isset($tabs['tabs_icon_toggle']) ? $tabs['tabs_icon_toggle'] : '';
+    $navs_alignment = isset($tabs['navs_alignment']) ? $tabs['navs_alignment'] : 'left';
+
+    $accordions_settings = get_option('accordions_settings');
+    $font_aw_version = isset($accordions_settings['font_aw_version']) ? $accordions_settings['font_aw_version'] : 'none';
 
 
 
+    wp_enqueue_style('accordions-style');
     wp_enqueue_style('style-tabs');
     wp_enqueue_style('accordions-style');
     wp_enqueue_style('jquery-ui');
-    wp_enqueue_style('fontawesome-5');
+
+    if($font_aw_version =='v_5'){
+        wp_enqueue_style('fontawesome-5');
+    }elseif($font_aw_version =='v_4'){
+        wp_enqueue_style('fontawesome-4');
+    }else{
+
+    }
 
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'jquery-ui-core' );
@@ -110,40 +125,136 @@ function accordions_tabs_main_style($atts){
 
     ?>
     <style type='text/css'>
-        #accordions-tabs-<?php echo $post_id; ?>{
-            text-align: <?php echo $container_text_align; ?>;
+        @media only screen and (min-width: 1024px ){
+            #accordions-tabs-<?php echo $post_id; ?> {
+            <?php if(!empty($width_large)):?>
+                width: <?php echo $width_large; ?>;
+            <?php endif; ?>
+            }
+        }
+        @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+            #accordions-tabs-<?php echo $post_id; ?> {
+            <?php if(!empty($width_medium)):?>
+                width: <?php echo $width_medium; ?>;
+            <?php endif; ?>
+            }
+        }
+        @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+            #accordions-tabs-<?php echo $post_id; ?> {
+            <?php if(!empty($width_small)):?>
+                width: <?php echo $width_small; ?>;
+            <?php endif; ?>
+            }
         }
         #accordions-tabs-<?php echo $post_id; ?>{
-            background:<?php echo $container_background_color; ?> url(<?php echo $container_background_img; ?>) repeat
-            scroll 0 0;
+        <?php if(!empty($container_text_align)):?>
+            text-align: <?php echo $container_text_align; ?>;
+        <?php endif; ?>
+        }
+        #accordions-tabs-<?php echo $post_id; ?>{
+        <?php if(!empty($container_background_color)):?>
+            background-color:<?php echo $container_background_color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($container_background_img)):?>
+            background-image: url(<?php echo $container_background_img; ?>);
+        <?php endif; ?>
+
+        <?php if(!empty($container_padding)):?>
             padding: <?php echo $container_padding; ?>;
+        <?php endif; ?>
         }
         #accordions-tabs-<?php echo $post_id; ?> .tabs-nav{
+        <?php if(!empty($header_background_color)):?>
             background-color:<?php echo $header_background_color; ?>;
-            color:<?php echo $header_color; ?>;
-            font-size:<?php echo $header_font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($header_margin)):?>
             margin:<?php echo $header_margin; ?> !important;
+        <?php endif; ?>
+        <?php if(!empty($header_padding)):?>
             padding:<?php echo $header_padding; ?> !important;
+        <?php endif; ?>
+        <?php if(!empty($navs_alignment)):?>
+            float:<?php echo $navs_alignment; ?> !important;
+        <?php endif; ?>
             border: none;
-            border-radius: 0px;
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .tabs-nav:hover{
+        <?php if(!empty($header_active_background_color)):?>
+            background-color: <?php echo $header_active_background_color; ?>;
+        <?php else:?>
+            background-color: rgba(0,0,0,0);
+        <?php endif; ?>
+        }
+
+
+        #accordions-tabs-<?php echo $post_id; ?> .ui-tabs-anchor{
+        <?php if(!empty($header_color)):?>
+            color:<?php echo $header_color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($header_font_size)):?>
+            font-size:<?php echo $header_font_size; ?>;
+        <?php endif; ?>
+            margin:0px !important;
+            padding:0px !important;
         }
         #accordions-tabs-<?php echo $post_id; ?> .accordions-head-title{
+        <?php if(!empty($header_color)):?>
             color:<?php echo $header_color; ?>;
+        <?php endif; ?>
         }
         #accordions-tabs-<?php echo $post_id; ?> .ui-tabs-active{
-            background: <?php echo $header_active_background_color; ?>;
-
+        <?php if(!empty($header_active_background_color)):?>
+            background-color: <?php echo $header_active_background_color; ?>;
+        <?php else:?>
+            background-color: rgba(0,0,0,0);
+        <?php endif; ?>
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .accordion-icons{
+        <?php if(!empty($icon_color)):?>
+            color:<?php echo $icon_color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($icon_font_size)):?>
+            font-size:<?php echo $icon_font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($icon_background_color)):?>
+            background:<?php echo $icon_background_color; ?> none repeat scroll 0 0;
+        <?php endif; ?>
+        <?php if(!empty($icon_padding)):?>
+            padding:<?php echo $icon_padding; ?>;
+        <?php endif; ?>
+        <?php if(!empty($icon_margin)):?>
+            margin:<?php echo $icon_margin; ?>;
+        <?php endif; ?>
+        }
+        #accordions-tabs-<?php echo $post_id; ?> .tabs-nav:hover .accordion-icons span{
+        <?php if(!empty($icon_color_hover)):?>
+            color:<?php echo $icon_color_hover; ?>;
+        <?php endif; ?>
         }
         #accordions-tabs-<?php echo $post_id; ?> .tabs-content{
+        <?php if(!empty($body_background_color)):?>
             background-color:<?php echo $body_background_color; ?>;
+            <?php endif; ?>
+        <?php if(!empty($body_color)):?>
             color:<?php echo $body_color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($body_font_size)):?>
             font-size:<?php echo $body_font_size; ?>;
+            <?php endif; ?>
+        <?php if(!empty($body_margin)):?>
             margin:<?php echo $body_margin; ?>;
+            <?php endif; ?>
+        <?php if(!empty($body_padding)):?>
             padding:<?php echo $body_padding; ?>;
+        <?php endif; ?>
         }
         #accordions-tabs-<?php echo $post_id; ?> .accordion-icons span{
+        <?php if(!empty($icon_color)):?>
             color:<?php echo $icon_color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($icon_font_size)):?>
             font-size:<?php echo $icon_font_size; ?>;
+        <?php endif; ?>
         }
 
 
@@ -215,6 +326,7 @@ function accordions_tabs_main_items($atts){
     $icon_inactive = !empty($icon['inactive']) ? $icon['inactive'] : '<i class="fas fa-chevron-right"></i>';
     $icon_position = !empty($icon['position']) ? $icon['position'] : 'left';
 
+    $active_plugins = get_option('active_plugins');
 
     //var_dump($icon_position);
 
@@ -250,13 +362,13 @@ function accordions_tabs_main_items($atts){
 
 
 
-
-                if(has_shortcode($accordion_body, 'accordions_tabs') ||  has_shortcode($accordion_body, 'accordions_tabs_pplugins') ){
-                    $accordion_body = str_replace('[accordions_tabs','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
-                    $accordion_body = str_replace('[accordions_tabs_pplugins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
-
-
+                if(!in_array( 'accordions-pro/accordions-pro.php', (array) $active_plugins )){
+                    if(has_shortcode($accordion_body, 'accordions_tabs') ||  has_shortcode($accordion_body, 'accordions_tabs_pplugins') ){
+                        $accordion_body = str_replace('[accordions_tabs','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
+                        $accordion_body = str_replace('[accordions_tabs_pplugins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
+                    }
                 }
+
 
 
                 $accordion_body = apply_filters( 'accordions_item_body', $accordion_body, $post_id );

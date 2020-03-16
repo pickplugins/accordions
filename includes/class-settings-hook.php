@@ -312,8 +312,9 @@ if(!function_exists('accordions_settings_content_help_support')) {
             ?>
 
             <p class="">Please click the button bellow to reset migration data, you can start over, Please use with caution, your new migrate data will deleted. you can use default <a href="<?php echo admin_url().'export.php'; ?>">export</a> menu to take your wcps, wcps layouts data saved.</p>
+            <p>Please <a target="_blank" href="https://www.pickplugins.com/question/accordions-latest-version-data-migration-doesnt-work-here-is-the-solution/"><b>read this</b></a> if you have any issue on data migration</p>
 
-            <p class="reset-migration"><a class="button  button-primary" href="<?php echo $actionurl; ?>">Reset migration</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
+            <p class="reset-migration"><a  class="button  button-primary" href="<?php echo $actionurl; ?>">Reset migration</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
 
             <script>
                 jQuery(document).ready(function($){
@@ -372,6 +373,133 @@ if(!function_exists('accordions_settings_content_help_support')) {
     }
 }
 
+
+
+
+add_action('accordions_settings_content_3rd_party_import', 'accordions_settings_content_3rd_party_import');
+
+if(!function_exists('accordions_settings_content_3rd_party_import')) {
+    function accordions_settings_content_3rd_party_import($tab){
+
+        $settings_tabs_field = new settings_tabs_field();
+
+
+        ?>
+        <div class="section">
+            <div class="section-title"><?php echo __('3rd party plugin data import', 'accordions'); ?></div>
+            <p class="description section-description"><?php echo __('Import from 3rd party plugin data for accordion and tabs.', 'accordions'); ?></p>
+
+            <?php
+
+
+
+            ob_start();
+            $accordions_plugin_info = get_option('accordions_plugin_info');
+
+            //delete_option('accordions_plugin_info');
+            //var_dump($accordions_plugin_info);
+
+            $_3rd_party_import_stats = isset($accordions_plugin_info['3rd_party_import']) ? $accordions_plugin_info['3rd_party_import'] : '';
+
+
+            $actionurl = admin_url().'edit.php?post_type=accordions&page=settings&tab=3rd_party_import';
+            $actionurl = wp_nonce_url( $actionurl,  '3rd_party_import' );
+
+            $nonce = isset($_REQUEST['_wpnonce']) ? $_REQUEST['_wpnonce'] : '';
+
+            if ( wp_verify_nonce( $nonce, '3rd_party_import' )  ){
+
+                $source = isset($_REQUEST['source']) ? $_REQUEST['source'] : '';
+
+                $accordions_plugin_info['3rd_party_import'] = 'processing';
+                update_option('accordions_plugin_info', $accordions_plugin_info);
+
+                if($source == 'arconix-faq'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_arconix_faq');
+                }elseif($source == 'easy-accordion-free'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_easy_accordion_free');
+                }elseif($source == 'responsive-accordion-and-collapse'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_wpsm_ac');
+                }elseif($source == 'responsive-tabs'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_responsive_tabs');
+                }elseif($source == 'vc-tabs'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_vc_tabs');
+                }elseif($source == 'tabs-responsive'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabs_responsive');
+                }elseif($source == 'tabby-responsive-tabs'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabs_responsive');
+                }elseif($source == 'easy-responsive-tabs'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_easy_responsive_tabs');
+                }
+
+
+                $_3rd_party_import_stats = 'processing';
+            }
+
+            if($_3rd_party_import_stats == 'processing'){
+
+                $url = admin_url().'edit.php?post_type=accordions&page=settings&tab=3rd_party_import';
+
+                ?>
+                <p style="color: #f00;"><i class="fas fa-spin fa-spinner"></i> Data import on process, please wait until complete.</p>
+                <p><a href="<?php echo $url; ?>">Refresh</a> to check import stats</p>
+
+
+
+                <?php
+            }else{
+                ?>
+                <p style="color: #22631a;"><i class="fas fa-check"></i> Data import done.</p>
+
+
+
+                <?php
+            }
+
+
+
+            ?>
+
+<!--            <p class="">Arconix FAQ - <a  class="button  button-primary" href="--><?php //echo $actionurl.'&source=arconix-faq'; ?><!--">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>-->
+            <p class="">Easy Accordion By ShapedPlugin - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=easy-accordion-free'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
+            <p class="">Responsive Accordion And Collapse By wpshopmart  - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=responsive-accordion-and-collapse'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
+            <p class="">Tabs Responsive By wpshopmart - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabs-responsive'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
+            <p class="">Responsive Tabs By WP Darko  - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=responsive-tabs'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
+<!--            <p class="">Tabs By Biplob Adhikari - <a  class="button  button-primary" href="--><?php //echo $actionurl.'&source=vc-tabs'; ?><!--">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>-->
+            <p class="">Easy Responsive Tabs By oscitas - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=easy-responsive-tabs'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
+
+
+
+
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'reset_migrate',
+                //'parent'		=> '',
+                'title'		=> __('Import data','accordions'),
+                'details'	=> '',
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+
+
+            ?>
+
+
+        </div>
+
+        <?php
+
+
+    }
+}
 
 
 

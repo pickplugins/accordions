@@ -30,6 +30,31 @@ jQuery(document).ready(function($){
 
     $(".settings-tabs .sortable" ).sortable({ handle: ".sort" });
 
+    $(document).on('click','.settings-tabs .textarea-editor',function(){
+
+        id = $(this).attr('id');
+        editor_enabled = $(this).attr('editor_enabled');
+
+
+        console.log(typeof wp.editor);
+
+        if(editor_enabled == 'no' && typeof wp.editor != 'undefined'){
+            wp.editor.initialize( id, {
+                mediaButtons: true,
+                tinymce:      {
+                    toolbar1: 'bold,italic,bullist,numlist,link,blockquote,alignleft,aligncenter,alignright,strikethrough,hr,forecolor,pastetext,removeformat,codeformat,undo,redo'
+                },
+                quicktags:    true,
+            } );
+
+            $(this).attr('editor_enabled','yes');
+        }
+
+
+
+
+    })
+
 	$(document).on('click','.settings-tabs .tab-nav',function(){
 
 		$(this).parent().parent().children('.tab-navs').children('.tab-nav').removeClass('active');

@@ -91,12 +91,24 @@ function accordions_main_style($atts){
     $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
     $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
 
+    $accordions_settings = get_option('accordions_settings');
+    $font_aw_version = isset($accordions_settings['font_aw_version']) ? $accordions_settings['font_aw_version'] : 'none';
+
 
     wp_enqueue_style('accordions-style');
 
     wp_enqueue_style('jquery-ui');
     wp_enqueue_style('accordions-themes');
-    wp_enqueue_style('fontawesome-5');
+
+    if($font_aw_version =='v_5'){
+        wp_enqueue_style('fontawesome-5');
+    }elseif($font_aw_version =='v_4'){
+        wp_enqueue_style('fontawesome-4');
+    }else{
+
+    }
+
+
 
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'jquery-ui-core' );
@@ -106,7 +118,6 @@ function accordions_main_style($atts){
 
     ?>
     <style type='text/css'>
-
         @media only screen and (min-width: 1024px ){
             #accordions-<?php echo $post_id; ?> {
             <?php if(!empty($width_large)):?>
@@ -114,7 +125,6 @@ function accordions_main_style($atts){
             <?php endif; ?>
             }
         }
-
         @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
             #accordions-<?php echo $post_id; ?> {
             <?php if(!empty($width_medium)):?>
@@ -122,7 +132,6 @@ function accordions_main_style($atts){
             <?php endif; ?>
             }
         }
-
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
             #accordions-<?php echo $post_id; ?> {
             <?php if(!empty($width_small)):?>
@@ -130,8 +139,6 @@ function accordions_main_style($atts){
             <?php endif; ?>
             }
         }
-
-
         <?php
         if($lazy_load=='yes'){
             ?>
@@ -507,7 +514,7 @@ function accordions_main_scripts($atts){
 
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
     $accordion = isset($accordions_options['accordion']) ? $accordions_options['accordion'] : array();
-    $collapsible = isset($accordion['collapsible']) ? $accordion['collapsible'] : 'true';
+    $collapsible = !empty($accordion['collapsible']) ? $accordion['collapsible'] : 'true';
     $height_style = isset($accordion['height_style']) ? $accordion['height_style'] : 'content';
     $active_event = isset($accordion['active_event']) ? $accordion['active_event'] : 'click';
 
@@ -555,14 +562,6 @@ function accordions_main_scripts($atts){
     $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
 
 
-    wp_enqueue_style('jquery-ui');
-    wp_enqueue_style('accordions-themes');
-    wp_enqueue_style('fontawesome-5');
-
-    wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'jquery-ui-core' );
-    wp_enqueue_script('jquery-ui-accordion');
-    wp_enqueue_script('jquery-effects-core');
 
 
     ?>
