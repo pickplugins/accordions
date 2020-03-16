@@ -430,6 +430,16 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabs_responsive');
                 }elseif($source == 'easy-responsive-tabs'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_easy_responsive_tabs');
+                }elseif($source == 'everest-tab-lite'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_everest_tab_lite');
+                }elseif($source == 'quick-and-easy-faqs'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_quick_easy_faqs');
+                }elseif($source == 'shortcodes-ultimate'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_shortcodes_ultimate');
+                }elseif($source == 'sp-faq'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_sp_faq');
+                }elseif($source == 'squelch-tabs-and-accordions-shortcodes'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_squelch_tabs_accordions');
                 }
 
 
@@ -460,16 +470,115 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
 
             ?>
 
+            <div class="import-source">
+                <div class="item">
+                    <img src="https://ps.w.org/easy-accordion-free/assets/banner-772x250.png?rev=2031404">
+                    <div class="">Easy Accordion</span></div>
+                    <div class="">By ShapedPlugin</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=easy-accordion-free'; ?>">Import data</a></p>
+                </div>
+                <div class="item">
+                    <img src="https://ps.w.org/responsive-accordion-and-collapse/assets/banner-772x250.png?rev=2031404">
+                    <div class="">Responsive Accordion And Collapse </div>
+                    <div class="">By wpshopmart</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=responsive-accordion-and-collapse'; ?>">Import data</a></p>
+
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/tabs-responsive/assets/banner-772x250.png?rev=2031404">
+                    <div class="">Tabs Responsive  </div>
+                    <div class="">By wpshopmart</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabs-responsive'; ?>">Import data</a></p>
+
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/responsive-tabs/assets/banner-772x250.png?rev=2031404">
+                    <div class="">Responsive Tabs</div>
+                    <div class="">By WP Darko</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=responsive-tabs'; ?>">Import data</a></p>
+
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/easy-responsive-tabs/assets/banner-772x250.jpg?rev=789170">
+                    <div class="">Easy Responsive Tabs </div>
+                    <div class="">By oscitas</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=easy-responsive-tabs'; ?>">Import data</a></p>
+
+                </div>
+
+
+                <div class="item">
+                    <img src="https://ps.w.org/everest-tab-lite/assets/banner-772x250.png?rev=1810732">
+                    <div class="">Everest Tab Lite</div>
+                    <div class="">By AccessPress Themes</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=everest-tab-lite'; ?>">Import data</a></p>
+
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/quick-and-easy-faqs/assets/banner-772x250.png?rev=2255173">
+                    <div class="">Quick and Easy FAQs</div>
+                    <div class="">By Inspiry Themes</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=quick-and-easy-faqs'; ?>">Import data</a></p>
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/shortcodes-ultimate/assets/banner-772x250.jpg?rev=1760590">
+                    <div class="">Shortcodes Ultimate</div>
+                    <div class="">By Vladimir Anokhin</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=shortcodes-ultimate'; ?>">Import data</a></p>
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/sp-faq/assets/banner-772x250.png?rev=1988830">
+                    <div class="">WP responsive FAQ with category plugin</div>
+                    <div class="">By WP OnlineSupport</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=sp-faq'; ?>">Import data</a></p>
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/squelch-tabs-and-accordions-shortcodes/assets/banner-772x250.png?rev=1988830">
+                    <div class="">Squelch Tabs and Accordions Shortcodes</div>
+                    <div class="">By Matt Lowe</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=squelch-tabs-and-accordions-shortcodes'; ?>">Import data</a></p>
+                </div>
+
+
+
+            </div>
+            
 <!--            <p class="">Arconix FAQ - <a  class="button  button-primary" href="--><?php //echo $actionurl.'&source=arconix-faq'; ?><!--">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>-->
-            <p class="">Easy Accordion By ShapedPlugin - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=easy-accordion-free'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
-            <p class="">Responsive Accordion And Collapse By wpshopmart  - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=responsive-accordion-and-collapse'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
-            <p class="">Tabs Responsive By wpshopmart - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabs-responsive'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
-            <p class="">Responsive Tabs By WP Darko  - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=responsive-tabs'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
 <!--            <p class="">Tabs By Biplob Adhikari - <a  class="button  button-primary" href="--><?php //echo $actionurl.'&source=vc-tabs'; ?><!--">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>-->
-            <p class="">Easy Responsive Tabs By oscitas - <a  class="button  button-primary" href="<?php echo $actionurl.'&source=easy-responsive-tabs'; ?>">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>
 
 
 
+            <style type="text/css">
+                .import-source{}
+                .import-source .item{
+                    width: 270px;
+                    overflow: hidden;
+                    display: inline-block;
+                    margin: 10px;
+                }
+                .import-source .item img{
+                    width: 100%;
+                }
+
+
+            </style>
 
             <?php
 

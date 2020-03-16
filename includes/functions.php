@@ -86,8 +86,13 @@ function accordions_nested_shortcode_content($string, $child_tag='restab'){
 
         $title_content = explode(']', $tab);
         $title = isset($title_content[0]) ? $title_content[0] : '';
-        $title = str_replace('title="','', $title);
-        $title = str_replace('"','', $title);
+
+        preg_match('/title="(.*?)"/', $title, $output_array);
+
+        $title = $output_array[1];
+
+        //$title = str_replace('title="','', $title);
+        //$title = str_replace('"','', $title);
         $acc_title = ltrim($title);
 
         $acc_content = isset($title_content[1]) ? $title_content[1] : '';

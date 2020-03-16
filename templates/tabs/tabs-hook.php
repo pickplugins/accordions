@@ -533,7 +533,7 @@ function accordions_tabs_main_scripts($atts){
 
 
     $tabs = isset($accordions_options['tabs']) ? $accordions_options['tabs'] : array();
-    $collapsible = isset($tabs['collapsible']) ? $tabs['collapsible'] : 'true';
+    $collapsible = !empty($tabs['collapsible']) ? $tabs['collapsible'] : 'true';
     $active_event = isset($tabs['active_event']) ? $tabs['active_event'] : 'click';
     $tabs_is_vertical = isset($tabs['is_vertical']) ? $tabs['is_vertical'] : '';
     ?>

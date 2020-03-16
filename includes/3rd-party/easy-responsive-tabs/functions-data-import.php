@@ -21,7 +21,7 @@ function accordions_import_cron_easy_responsive_tabs(){
     );
 
     $args = array(
-        'post_type'=> array( 'page' ),
+        'post_type'=> array( 'page','post' ),
         'post_status'=>'publish',
         'posts_per_page'=> 20,
         'meta_query'=> $meta_query,
@@ -110,7 +110,7 @@ function accordions_import_cron_easy_responsive_tabs(){
 
 
 
-            if(strpos($post_content, '[restabs')){
+            if(strpos($post_content, '[restabs') !== false){
                 $tabs = accordions_str_between_all($post_content, "[restabs", "[/restabs]");
 
                 foreach ($tabs as $tab_content){
@@ -190,6 +190,8 @@ function accordions_import_cron_easy_responsive_tabs(){
 
 
                 }
+            }else{
+                update_post_meta($post_id, 'import_done', 'done');
             }
 
 

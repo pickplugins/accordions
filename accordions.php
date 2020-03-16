@@ -62,6 +62,12 @@ class Accordions{
         require_once( accordions_plugin_dir . 'includes/3rd-party/responsive-accordion-and-collapse/functions-data-import.php');
         require_once( accordions_plugin_dir . 'includes/3rd-party/responsive-tabs/functions-data-import.php');
         require_once( accordions_plugin_dir . 'includes/3rd-party/easy-responsive-tabs/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/everest-tab-lite/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/quick-and-easy-faqs/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/shortcodes-ultimate/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/sp-faq/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/squelch-tabs-and-accordions-shortcodes/functions-data-import.php');
+        require_once( accordions_plugin_dir . 'includes/3rd-party/tabby-responsive-tabs/functions-data-import.php');
 
 
 //

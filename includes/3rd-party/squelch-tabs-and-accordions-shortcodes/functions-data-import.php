@@ -6,11 +6,11 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_shortcode('accordions_import_cron_tabby_responsive_tabs', 'accordions_import_cron_tabby_responsive_tabs');
-add_action('accordions_import_cron_tabby_responsive_tabs', 'accordions_import_cron_tabby_responsive_tabs');
+add_shortcode('accordions_import_cron_squelch_tabs_accordions', 'accordions_import_cron_squelch_tabs_accordions');
+add_action('accordions_import_cron_squelch_tabs_accordions', 'accordions_import_cron_squelch_tabs_accordions');
 
 
-function accordions_import_cron_tabby_responsive_tabs(){
+function accordions_import_cron_squelch_tabs_accordions(){
 
     $accordions_plugin_info = get_option('accordions_plugin_info');
     $meta_query = array();
@@ -21,10 +21,10 @@ function accordions_import_cron_tabby_responsive_tabs(){
     );
 
     $args = array(
-        'post_type'=> array( 'page'  ),
+        'post_type'=> array( 'page', 'post'  ),
         'post_status'=>'publish',
-        'posts_per_page'=> 3,
-        //'meta_query'=> $meta_query,
+        'posts_per_page'=> 10,
+        'meta_query'=> $meta_query,
     );
 
 
@@ -110,15 +110,13 @@ function accordions_import_cron_tabby_responsive_tabs(){
 
             //echo '<pre>'.var_export($post_content, true).'</pre>';
 
-            if( strpos($post_content, '[tabbyending') !== false){
-                $tabs = accordions_str_between_all($post_content, "[tabby", "[tabbyending]");
-
-                echo '<pre>'.var_export($tabs, true).'</pre>';
+            if( strpos($post_content, '[accordions') !== false){
+                $tabs = accordions_str_between_all($post_content, "[accordions", "[/accordions]");
 
                 if(!empty($tabs))
                 foreach ($tabs as $tab_content){
 
-                    $shortcode_content = accordions_nested_shortcode_content($tab_content, $child_tag='tabby');
+                    $shortcode_content = accordions_nested_shortcode_content($tab_content, $child_tag='accordion');
 
                     $i = 0;
 
@@ -146,7 +144,7 @@ function accordions_import_cron_tabby_responsive_tabs(){
 
                     $accordions_id = wp_insert_post(
                         array(
-                            'post_title'    => 'tabby responsive tabs',
+                            'post_title'    => 'squelch accordion',
                             'post_content'  => '',
                             'post_status'   => 'publish',
                             'post_type'   	=> 'accordions',
@@ -162,6 +160,103 @@ function accordions_import_cron_tabby_responsive_tabs(){
 
 
 
+            if( strpos($post_content, '[tabs') !== false){
+                $tabs = accordions_str_between_all($post_content, "[tabs", "[/tabs]");
+
+                if(!empty($tabs))
+                    foreach ($tabs as $tab_content){
+
+                        $shortcode_content = accordions_nested_shortcode_content($tab_content, $child_tag='tab');
+
+                        $i = 0;
+
+                        if(!empty($shortcode_content))
+                            foreach ($shortcode_content as $index => $accordion_single_data){
+
+                                $acc_title = isset($accordion_single_data['title']) ? $accordion_single_data['title'] : '';
+                                $acc_content = isset($accordion_single_data['content']) ? $accordion_single_data['content'] : '';
+
+                                $accordions_options['content'][$index]['header'] = $acc_title;
+                                $accordions_options['content'][$index]['body'] = $acc_content;
+                                $accordions_options['content'][$index]['hide'] = 'no';
+                                $accordions_options['content'][$index]['toggled_text'] = '';
+                                $accordions_options['content'][$index]['is_active'] = '';
+
+                                $active_icon =  '';
+                                $inactive_icon =  '';
+                                $accordions_options['content'][$index]['active_icon'] = $active_icon;
+                                $accordions_options['content'][$index]['inactive_icon'] = $inactive_icon;
+                                $accordions_options['content'][$index]['background_color'] =  '';
+                                $accordions_options['content'][$index]['background_img'] =  '';
+
+                                $i++;
+                            }
+
+                        $accordions_id = wp_insert_post(
+                            array(
+                                'post_title'    => 'squelch tabs',
+                                'post_content'  => '',
+                                'post_status'   => 'publish',
+                                'post_type'   	=> 'accordions',
+                                'post_author'   => 1,
+                            )
+                        );
+
+                        update_post_meta($accordions_id, 'accordions_options', $accordions_options);
+
+
+                    }
+            }
+
+
+
+            if( strpos($post_content, '[haccordions') !== false){
+                $tabs = accordions_str_between_all($post_content, "[haccordions", "[/haccordions]");
+
+                if(!empty($tabs))
+                    foreach ($tabs as $tab_content){
+
+                        $shortcode_content = accordions_nested_shortcode_content($tab_content, $child_tag='haccordion');
+
+                        $i = 0;
+
+                        if(!empty($shortcode_content))
+                            foreach ($shortcode_content as $index => $accordion_single_data){
+
+                                $acc_title = isset($accordion_single_data['title']) ? $accordion_single_data['title'] : '';
+                                $acc_content = isset($accordion_single_data['content']) ? $accordion_single_data['content'] : '';
+
+                                $accordions_options['content'][$index]['header'] = $acc_title;
+                                $accordions_options['content'][$index]['body'] = $acc_content;
+                                $accordions_options['content'][$index]['hide'] = 'no';
+                                $accordions_options['content'][$index]['toggled_text'] = '';
+                                $accordions_options['content'][$index]['is_active'] = '';
+
+                                $active_icon =  '';
+                                $inactive_icon =  '';
+                                $accordions_options['content'][$index]['active_icon'] = $active_icon;
+                                $accordions_options['content'][$index]['inactive_icon'] = $inactive_icon;
+                                $accordions_options['content'][$index]['background_color'] =  '';
+                                $accordions_options['content'][$index]['background_img'] =  '';
+
+                                $i++;
+                            }
+
+                        $accordions_id = wp_insert_post(
+                            array(
+                                'post_title'    => 'squelch haccordion',
+                                'post_content'  => '',
+                                'post_status'   => 'publish',
+                                'post_type'   	=> 'accordions',
+                                'post_author'   => 1,
+                            )
+                        );
+
+                        update_post_meta($accordions_id, 'accordions_options', $accordions_options);
+
+
+                    }
+            }
 
 
 
@@ -177,7 +272,7 @@ function accordions_import_cron_tabby_responsive_tabs(){
         $accordions_plugin_info['3rd_party_import'] = 'done';
         update_option('accordions_plugin_info', $accordions_plugin_info);
 
-        wp_clear_scheduled_hook('accordions_import_cron_tabby_responsive_tabs');
+        wp_clear_scheduled_hook('accordions_import_cron_squelch_tabs_accordions');
 
 
     endif;

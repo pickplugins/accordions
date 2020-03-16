@@ -516,7 +516,7 @@ function accordions_main_scripts($atts){
     $accordion = isset($accordions_options['accordion']) ? $accordions_options['accordion'] : array();
     $collapsible = !empty($accordion['collapsible']) ? $accordion['collapsible'] : 'true';
     $height_style = isset($accordion['height_style']) ? $accordion['height_style'] : 'content';
-    $active_event = isset($accordion['active_event']) ? $accordion['active_event'] : 'click';
+    $active_event = !empty($accordion['active_event']) ? $accordion['active_event'] : 'click';
 
     $animate_style = !empty($accordion['animate_style']) ? $accordion['animate_style'] : 'swing';
     $animate_delay = !empty($accordion['animate_delay']) ? $accordion['animate_delay'] : 1000;
