@@ -427,7 +427,7 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                 }elseif($source == 'tabs-responsive'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabs_responsive');
                 }elseif($source == 'tabby-responsive-tabs'){
-                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabs_responsive');
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabby_responsive_tabs');
                 }elseif($source == 'easy-responsive-tabs'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_easy_responsive_tabs');
                 }elseif($source == 'everest-tab-lite'){
@@ -556,7 +556,13 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                     <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=squelch-tabs-and-accordions-shortcodes'; ?>">Import data</a></p>
                 </div>
 
+                <div class="item">
+                    <img src="https://ps.w.org/tabby-responsive-tabs/assets/banner-772x250.jpg?rev=1485141">
+                    <div class="">Tabby Responsive Tabs</div>
+                    <div class="">By cubecolour</div>
 
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabby-responsive-tabs'; ?>">Import data</a></p>
+                </div>
 
             </div>
             

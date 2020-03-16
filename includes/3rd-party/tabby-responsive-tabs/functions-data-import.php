@@ -21,10 +21,10 @@ function accordions_import_cron_tabby_responsive_tabs(){
     );
 
     $args = array(
-        'post_type'=> array( 'page'  ),
+        'post_type'=> array( 'page','post' ),
         'post_status'=>'publish',
         'posts_per_page'=> 3,
-        //'meta_query'=> $meta_query,
+        'meta_query'=> $meta_query,
     );
 
 
@@ -118,7 +118,24 @@ function accordions_import_cron_tabby_responsive_tabs(){
                 if(!empty($tabs))
                 foreach ($tabs as $tab_content){
 
-                    $shortcode_content = accordions_nested_shortcode_content($tab_content, $child_tag='tabby');
+                    //$shortcode_content = accordions_nested_shortcode_content($tab_content, $child_tag='tabby');
+
+
+                    $tab_content = explode('title=', $tab_content);
+                    unset($tab_content[0]);
+
+                    //
+                    $i = 0;
+                    foreach ($tab_content as $tab){
+                        $tab_content = explode(']', $tab);
+                        $tab_content = str_replace('[tabby','', $tab_content);
+
+                        //echo '<pre>'.var_export($tab_content, true).'</pre>';
+                        $shortcode_content[$i]['title'] = str_replace('"','',$tab_content[0]);
+                        $shortcode_content[$i]['content'] = $tab_content[1];
+                        $i++;
+                    }
+
 
                     $i = 0;
 
