@@ -2,6 +2,51 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
+function accordions_old_content($post_id){
+
+    $accordions_content_title = get_post_meta( $post_id, 'accordions_content_title', true );
+    $accordions_content_title_toggled = get_post_meta( $post_id, 'accordions_content_title_toggled', true );
+    $accordions_content_body = get_post_meta( $post_id, 'accordions_content_body', true );
+    $accordions_hide = get_post_meta( $post_id, 'accordions_hide', true );
+    $accordions_section_icon_plus = get_post_meta( $post_id, 'accordions_section_icon_plus', true );
+    $accordions_section_icon_minus = get_post_meta( $post_id, 'accordions_section_icon_minus', true );
+    $accordions_active_accordion = get_post_meta( $post_id, 'accordions_active_accordion', true );
+
+    $accordions_data = array();
+
+    $i = 0;
+
+    if(!empty($accordions_content_title))
+    foreach ($accordions_content_title as $index => $item){
+
+
+        $accordions_data[$index]['header'] = $item;
+        $accordions_data[$index]['body'] = isset($accordions_content_body[$index]) ? $accordions_content_body[$index] : '';
+
+        $is_active = ($accordions_active_accordion == $i) ? array($i) : array();
+        $accordions_data[$index]['is_active'] = $is_active;
+        $accordions_data[$index]['toggled_text'] = isset($accordions_content_title_toggled[$index]) ? $accordions_content_title_toggled[$index] : '';
+
+        $active_icon = !empty($accordions_section_icon_plus[$index]) ? '<i class="fa '.$accordions_section_icon_plus[$index].'"></i>' : '';
+        $inactive_icon = !empty($accordions_section_icon_minus[$index]) ? '<i class="fa '.$accordions_section_icon_minus[$index].'"></i>' : '';
+
+
+
+        $accordions_data[$index]['active_icon'] = $active_icon;
+        $accordions_data[$index]['inactive_icon'] = $inactive_icon;
+        $accordions_data[$index]['hide'] = !empty($accordions_hide[$index]) ? 'yes' : 'no';
+
+
+        $i++;
+    }
+
+    return $accordions_data;
+
+}
+
+
+
+
 //add_filter('the_content','accordions_get_shortcode');
 function accordions_get_shortcode($content){
 

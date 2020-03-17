@@ -304,6 +304,17 @@ function accordions_main_items($atts){
     $icon_position = !empty($icon['position']) ? $icon['position'] : 'left';
 
     $active_plugins = get_option('active_plugins');
+    $accordions_plugin_info = get_option('accordions_plugin_info');
+    $accordions_upgrade = isset($accordions_plugin_info['accordions_upgrade']) ? $accordions_plugin_info['accordions_upgrade'] : '';
+
+
+
+
+    if($accordions_upgrade != 'done'){
+
+        $accordions_content = accordions_old_content($post_id);
+
+    }
 
 
     $active_index = array();
