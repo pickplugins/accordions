@@ -41,9 +41,12 @@ class class_accordions_post_meta_product{
 
         <select style="width: 100%;" id="accordions_id" name="accordions_id">
             <option>Select accordion</option>
+            <?php if(!empty($accordions_id)): ?>
             <option value="<?php echo $accordions_id; ?>" selected><?php echo get_the_title($accordions_id); ?></option>
+            <?php endif; ?>
         </select>
 
+        <span class="clear-faq-tab button">CLear</span>
 
         <p>
             <input style="width: 100%;" type="text" placeholder="Tab title" value="<?php echo $accordions_tab_title; ?>" name="accordions_tab_title">
@@ -52,7 +55,9 @@ class class_accordions_post_meta_product{
 
         <script>
             jQuery(document).ready(function($) {
-
+                $(document).on('click', ".clear-faq-tab", function() {
+                    $('#accordions_id').select2('destroy').val('').select2();
+                })
 
 
                 $('#accordions_id').select2({
@@ -82,7 +87,8 @@ class class_accordions_post_meta_product{
                         },
                         cache: true
                     },
-                    minimumInputLength: 3 // the minimum of symbols to input before perform a search
+                    minimumInputLength: 3, // the minimum of symbols to input before perform a search
+                    allowClear: true,
                 });
             })
 
