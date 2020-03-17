@@ -6,35 +6,37 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_shortcode('accordions_import_cron_arconix_faq', 'accordions_import_cron_arconix_faq');
-add_action('accordions_import_cron_arconix_faq', 'accordions_import_cron_arconix_faq');
+add_shortcode('accordions_import_cron_wonderplugin_tabs_trial', 'accordions_import_cron_wonderplugin_tabs_trial');
+add_action('accordions_import_cron_wonderplugin_tabs_trial', 'accordions_import_cron_wonderplugin_tabs_trial');
 
 
-function accordions_import_cron_arconix_faq(){
+function accordions_import_cron_wonderplugin_tabs_trial(){
     $accordions_plugin_info = get_option('accordions_plugin_info');
 
-    $meta_query = array();
-
-    $meta_query[] = array(
-        'key' => 'import_done',
-        'compare' => 'NOT EXISTS'
-    );
-
-    $args = array(
-        'post_type'=>'faq',
-        'post_status'=>'publish',
-        'posts_per_page'=> -1,
-        'meta_query'=> $meta_query,
-    );
 
 
-    $wp_query = new WP_Query($args);
+    global $wpdb;
+    $table_name = $wpdb->prefix . "wonderplugin_tabs";
+    $item_row = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $table_name") );
+    $results = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
+
+    //echo '<pre>'.var_export($results, true).'</pre>';
+    //echo '<pre>'.var_export('#########$results', true).'</pre>';
 
 
-    if ( $wp_query->have_posts() ) :
+
+    foreach ($results as $result){
+
+        $id = $result['id'];
+        $name = $result['name'];
+        $data= $result['data'];
+        $data = json_decode(trim($data));
+        $slides = $data->slides;
 
         $accordions_options = array();
 
+        //echo '<pre>'.var_export($slides, true).'</pre>';
+        //echo '<pre>'.var_export('#########$slides', true).'</pre>';
 
         $accordions_icons_plus = 'plus';
         $accordions_icons_minus = 'minus';
@@ -82,12 +84,13 @@ function accordions_import_cron_arconix_faq(){
 
 
 
-        $accordions_options['lazy_load'] = !empty($eap_preloader) ? 'yes' : 'no';
+        $accordions_options['lazy_load'] ='yes';
         $accordions_options['lazy_load_src'] = '';
         $accordions_options['hide_edit'] = '';
         $accordions_options['accordion']['collapsible'] =  'true';
-        $accordions_options['accordion']['expanded_other'] = !empty($eap_mutliple_collapse) ? 'yes' : 'no';
-        $accordions_options['accordion']['height_style'] = !empty($eap_accordion_fillspace) ? 'content' : '';
+        $accordions_options['accordion']['expanded_other'] = '';
+        $accordions_options['accordion']['height_style'] = 'content';
+
 
 
         $accordions_options['accordion']['active_event'] = '';
@@ -104,45 +107,35 @@ function accordions_import_cron_arconix_faq(){
         $accordions_options['accordion']['is_child'] = '';
 
 
+        //echo '<pre>'.var_export($slides, true).'</pre>';
+
+
+        foreach ($slides as $index=> $slide){
 
 
 
+            $tabtitle = $slide->tabtitle;
+            $tabcontent = $slide->tabcontent;
+
+            //echo '<pre>'.var_export($tabtitle, true).'</pre>';
 
 
 
-        $index = 0;
-        while ( $wp_query->have_posts() ) : $wp_query->the_post();
-
-            $post_id = get_the_id();
-            $post_title = get_the_title();
-            $post_content = get_the_content();
-
-
-            $accordions_options['content'][$index]['header'] = $post_title;
-            $accordions_options['content'][$index]['body'] = $post_content;
+            $accordions_options['content'][$index]['header'] = $tabtitle;
+            $accordions_options['content'][$index]['body'] = $tabcontent;
             $accordions_options['content'][$index]['hide'] = 'no';
             $accordions_options['content'][$index]['toggled_text'] = '';
-
-
             $accordions_options['content'][$index]['is_active'] = '';
-
-
             $accordions_options['content'][$index]['active_icon'] = '';
             $accordions_options['content'][$index]['inactive_icon'] = '';
-
             $accordions_options['content'][$index]['background_color'] =  '';
             $accordions_options['content'][$index]['background_img'] =  '';
-
-            update_post_meta($post_id, 'import_done', 'done');
-
-            $index++;
-        endwhile;
+        }
 
         echo '<pre>'.var_export($accordions_options, true).'</pre>';
 
-
         $post_data = array(
-            'post_title'    => 'FAQ',
+            'post_title'    => $name,
             'post_content'  => '',
             'post_status'   => 'publish',
             'post_type'   	=> 'accordions',
@@ -150,29 +143,21 @@ function accordions_import_cron_arconix_faq(){
         );
 
         $accordions_id = wp_insert_post($post_data);
-
-
         update_post_meta($accordions_id, 'accordions_options', $accordions_options);
 
 
-        echo '##################';
-        echo '<br/>';
-        echo 'import done: '.$post_title;
-        echo '<br/>';
 
 
-        wp_reset_query();
-        wp_reset_postdata();
-
-    else:
-
-        $accordions_plugin_info['3rd_party_import'] = 'done';
-        update_option('accordions_plugin_info', $accordions_plugin_info);
-
-        wp_clear_scheduled_hook('accordions_import_cron_arconix_faq');
+    }
 
 
-    endif;
+
+    $accordions_plugin_info['3rd_party_import'] = 'done';
+    update_option('accordions_plugin_info', $accordions_plugin_info);
+
+    wp_clear_scheduled_hook('accordions_import_cron_wonderplugin_tabs_trial');
+
+
 
 
 }

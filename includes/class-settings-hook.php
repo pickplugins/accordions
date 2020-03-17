@@ -422,8 +422,6 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_wpsm_ac');
                 }elseif($source == 'responsive-tabs'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_responsive_tabs');
-                }elseif($source == 'vc-tabs'){
-                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_vc_tabs');
                 }elseif($source == 'tabs-responsive'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabs_responsive');
                 }elseif($source == 'tabby-responsive-tabs'){
@@ -440,7 +438,23 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_sp_faq');
                 }elseif($source == 'squelch-tabs-and-accordions-shortcodes'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_squelch_tabs_accordions');
+                }elseif($source == 'ultimate-faqs'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_ultimate_faqs');
+                }elseif($source == 'tabs-shortcode'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_tabs_shortcode');
+                }elseif($source == 'wonderplugin-tabs-trial'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_wonderplugin_tabs_trial');
+                }elseif($source == 'accordion-shortcodes'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_accordion_shortcodes');
+                }elseif($source == 'wp-shortcode'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_wp_shortcode');
+                }elseif($source == 'meks-flexible-shortcodes'){
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_meks_flexible_shortcodes');
                 }
+
+
+
+
 
 
                 $_3rd_party_import_stats = 'processing';
@@ -564,6 +578,88 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                     <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabby-responsive-tabs'; ?>">Import data</a></p>
                 </div>
 
+                <div class="item">
+                    <img src="https://ps.w.org/ultimate-faqs/assets/banner-772x250.png?rev=1805913">
+                    <div class="">Ultimate FAQ</div>
+                    <div class="">By Etoile Web Design</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=ultimate-faqs'; ?>">Import data</a></p>
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/tabs-pro/assets/banner-772x250.png?rev=1570543">
+                    <div class="">Tab</div>
+                    <div class="">By themepoints</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabs-pro'; ?>">Import data</a></p>
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/accordion-shortcodes/assets/banner-772x250.png?rev=1570543">
+                    <div class="">Accordion Shortcodes</div>
+                    <div class="">By Phil Buchanan</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=accordion-shortcodes'; ?>">Import data</a></p>
+                </div>
+
+
+                <div class="item">
+                    <img src="https://ps.w.org/wc-shortcodes/assets/banner-772x250.jpg?rev=1585251">
+                    <div class="">Shortcodes by Angie Makes</div>
+                    <div class="">By Chris Baldelomar</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=wc-shortcodes'; ?>">Import data</a></p>
+                </div>
+
+
+                <div class="item">
+                    <img src="https://ps.w.org/wp-shortcode/assets/banner-772x250.png?rev=865700">
+                    <div class="">WP Shortcode</div>
+                    <div class="">By MyThemeShop</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=wp-shortcode'; ?>">Import data</a></p>
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/arconix-faq/assets/banner-772x250.png?rev=1063597">
+                    <div class="">Arconix FAQ</div>
+                    <div class="">By Tyche Softwares</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=arconix-faq'; ?>">Import data</a></p>
+                </div>
+
+                <div class="item">
+                    <img src="https://ps.w.org/meks-flexible-shortcodes/assets/banner-772x250.jpg?rev=1927393">
+                    <div class="">Meks Flexible Shortcodes</div>
+                    <div class="">By Meks</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=meks-flexible-shortcodes'; ?>">Import data</a></p>
+                </div>
+
+
+                <div class="item">
+                    <img src="https://i.imgur.com/B79SCcW.png">
+                    <div class="">Tabs Shortcode</div>
+                    <div class="">By CTLT</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabs-shortcode'; ?>">Import data</a></p>
+                </div>
+
+
+
+                <div class="item">
+                    <img src="https://i.imgur.com/LEUcSIV.png">
+                    <div class="">Wonder Tabs Trial</div>
+                    <div class="">By Magic Hills Pty Ltd</div>
+
+                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=wonderplugin-tabs-trial'; ?>">Import data</a></p>
+                </div>
+
+
+
+
+
+
             </div>
             
 <!--            <p class="">Arconix FAQ - <a  class="button  button-primary" href="--><?php //echo $actionurl.'&source=arconix-faq'; ?><!--">Import data</a> <span style="display: none; color: #f2433f; margin: 0 5px"> Click again to confirm!</span></p>-->
@@ -574,10 +670,13 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
             <style type="text/css">
                 .import-source{}
                 .import-source .item{
-                    width: 270px;
+                    width: 255px;
                     overflow: hidden;
                     display: inline-block;
                     margin: 10px;
+                    background: #306c9e;
+                    padding: 10px;
+                    color: #fff;
                 }
                 .import-source .item img{
                     width: 100%;
@@ -594,7 +693,7 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                 'id'		=> 'reset_migrate',
                 //'parent'		=> '',
                 'title'		=> __('Import data','accordions'),
-                'details'	=> '',
+                'details'	=> __('Please contact our support form to add new 3rd party plugin source.','accordions'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 

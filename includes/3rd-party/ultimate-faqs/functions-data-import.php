@@ -6,11 +6,11 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_shortcode('accordions_import_cron_arconix_faq', 'accordions_import_cron_arconix_faq');
-add_action('accordions_import_cron_arconix_faq', 'accordions_import_cron_arconix_faq');
+add_shortcode('accordions_import_cron_ultimate_faqs', 'accordions_import_cron_ultimate_faqs');
+add_action('accordions_import_cron_ultimate_faqs', 'accordions_import_cron_ultimate_faqs');
 
 
-function accordions_import_cron_arconix_faq(){
+function accordions_import_cron_ultimate_faqs(){
     $accordions_plugin_info = get_option('accordions_plugin_info');
 
     $meta_query = array();
@@ -21,10 +21,10 @@ function accordions_import_cron_arconix_faq(){
     );
 
     $args = array(
-        'post_type'=>'faq',
+        'post_type'=>'ufaq',
         'post_status'=>'publish',
         'posts_per_page'=> -1,
-        'meta_query'=> $meta_query,
+        //'meta_query'=> $meta_query,
     );
 
 
@@ -142,7 +142,7 @@ function accordions_import_cron_arconix_faq(){
 
 
         $post_data = array(
-            'post_title'    => 'FAQ',
+            'post_title'    => 'Ultimate FAQ',
             'post_content'  => '',
             'post_status'   => 'publish',
             'post_type'   	=> 'accordions',
@@ -169,7 +169,7 @@ function accordions_import_cron_arconix_faq(){
         $accordions_plugin_info['3rd_party_import'] = 'done';
         update_option('accordions_plugin_info', $accordions_plugin_info);
 
-        wp_clear_scheduled_hook('accordions_import_cron_arconix_faq');
+        wp_clear_scheduled_hook('accordions_import_cron_ultimate_faqs');
 
 
     endif;
