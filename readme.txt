@@ -4,7 +4,7 @@
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
 	Tested up to: 5.3
-	Stable tag: 2.2.4
+	Stable tag: 2.2.5
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,10 @@ You can change container background color, background image, text align and padd
 You can create accordion content with WP Editor, you can add text, image andother media like youtube video, self hosted
 video and etc. Section can be drag & drop sorting. delete any section without
 loading the page and can hide without deleting it on front-end.
+
+**Import 3rd party plugin data**
+You can import accordion and tabs data from 3rd party plugin source.
+
 
 ###Premium Features
 
@@ -134,6 +138,9 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 == Changelog ==
+
+	= 2.2.5 =
+    * 2020-03-17 - add - 20 3rd party plugin to import accordion and tabs data.
 
 	= 2.2.4 =
     * 16-03-2020 - fix - font awesome version compatibility issue fixed.
