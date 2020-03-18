@@ -1094,8 +1094,8 @@ function accordions_metabox_content_content($post_id){
             array(
                 'id'		=> 'header',
                 'css_id'		=> 'header_TIMEINDEX',
-                'title'		=> __('Header','team'),
-                'details'	=> __('Accordion header.','team'),
+                'title'		=> __('Header','accordions'),
+                'details'	=> __('Accordion header.','accordions'),
                 'type'		=> 'text',
                 'value'		=> '',
                 'default'		=> '',
@@ -1104,8 +1104,8 @@ function accordions_metabox_content_content($post_id){
             array(
                 'id'		=> 'body',
                 'css_id'		=> 'body_TIMEINDEX',
-                'title'		=> __('Body','team'),
-                'details'	=> __('Accordion body content.','team'),
+                'title'		=> __('Body','accordions'),
+                'details'	=> __('Accordion body content.','accordions'),
                 'type'		=> 'textarea_editor',
                 'value'		=> '',
                 'default'		=> '',
@@ -1114,8 +1114,8 @@ function accordions_metabox_content_content($post_id){
             array(
                 'id'		=> 'hide',
                 'css_id'		=> 'hide_TIMEINDEX',
-                'title'		=> __('Hide','team'),
-                'details'	=> __('Hide this.','team'),
+                'title'		=> __('Hide','accordions'),
+                'details'	=> __('Hide this.','accordions'),
                 'type'		=> 'select',
                 'value'		=> '',
                 'default'		=> 'false',
@@ -1239,11 +1239,11 @@ if(!function_exists('accordions_metabox_content_help_support')) {
             <p><?php echo __('Watch video tutorials.', 'accordions'); ?></p>
             <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94ZPeQ83jOnteDDrOeDLBuFD"><i class="fab fa-youtube"></i> <?php echo __('All tutorials', 'accordions'); ?></a>
 
-            <!--            <ul>-->
-            <!--                <li><i class="far fa-dot-circle"></i> <a href="https://www.youtube.com/watch?v=SOe0D-Og3nQ&list=PL0QP7T2SN94atYZswlnBMhDuIYoqlmlxy&index=1">How to install plugin & setup</a></li>-->
-            <!---->
-            <!---->
-            <!--            </ul>-->
+            <ul>
+                <li><i class="far fa-dot-circle"></i> <a href="https://www.youtube.com/watch?v=4ZGMA6hOoxs">Accordions - data migration</a></li>
+
+
+            </ul>
 
 
 
@@ -1267,7 +1267,7 @@ if(!function_exists('accordions_metabox_content_help_support')) {
             ob_start();
             ?>
 
-            <p class="">We wish your 2 minutes to write your feedback about the <b>PickPlugins Product Slider</b> plugin. give us <span style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
+            <p class="">We wish your 2 minutes to write your feedback about the <b>Accordions</b> plugin. give us <span style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
 
             <a target="_blank" href="https://wordpress.org/plugins/accordions/#reviews" class="button"><i class="fab fa-wordpress"></i> Write a review</a>
 

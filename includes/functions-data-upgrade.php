@@ -62,7 +62,7 @@ function accordions_cron_upgrade_accordions(){
 
     $args = array(
         'post_type'=>'accordions',
-        'post_status'=>'publish',
+        'post_status'=>'any',
         'posts_per_page'=> 10,
         'meta_query'=> $meta_query,
 

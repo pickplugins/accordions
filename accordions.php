@@ -3,9 +3,9 @@
 Plugin Name: Accordions by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard
 Description: Fully responsive and mobile ready accordion grid for wordpress.
-Version: 2.2.6
+Version: 2.2.10
 WC requires at least: 3.0.0
-WC tested up to: 3.6
+WC tested up to: 4.0
 Author: PickPlugins
 Author URI: http://pickplugins.com
 Text Domain: accordions
@@ -23,7 +23,7 @@ class Accordions{
 
 		define('accordions_plugin_url', plugins_url('/', __FILE__)  );
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
-        define('accordions_version', '2.2.6' );
+        define('accordions_version', '2.2.10' );
         define('accordions_plugin_name', 'Accordions' );
         define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
 
@@ -43,14 +43,10 @@ class Accordions{
 
 
         require_once( accordions_plugin_dir . 'includes/class-settings-tabs.php');
-        require_once( accordions_plugin_dir . 'includes/class-accordions-support.php');
-		//require_once( accordions_plugin_dir . 'includes/meta-new.php');
 		require_once( accordions_plugin_dir . 'includes/functions.php');
 		require_once( accordions_plugin_dir . 'includes/functions-wc.php');
-		require_once( accordions_plugin_dir . 'includes/class-functions.php');
 		require_once( accordions_plugin_dir . 'includes/class-shortcodes.php');
 		require_once( accordions_plugin_dir . 'includes/duplicate-post.php');
-        //require_once( accordions_plugin_dir . 'includes/class-WPAdminSettings.php');
 
 
 
@@ -162,7 +158,7 @@ class Accordions{
 	public function _admin_scripts(){
 
         wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
-        wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
+        wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php'), 'nonce' => wp_create_nonce('accordions_nonce')));
 
         wp_register_style('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.css');
         wp_register_script('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
@@ -183,8 +179,8 @@ class Accordions{
 
 
 
-        wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
-        wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
+        //wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
+        //wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
 
 
 

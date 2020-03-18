@@ -34,7 +34,7 @@ class accordions_post_types{
 
 
 		register_post_type( "accordions",
-			apply_filters( "team_posttype_accordions", array(
+			apply_filters( "accordions_posttype", array(
 				'labels' => array(
 					'name' 					=> $plural,
 					'singular_name' 		=> $singular,
@@ -42,7 +42,7 @@ class accordions_post_types{
 					'all_items'             => sprintf( __( 'All %s', 'accordions' ), $plural ),
 					'add_new' 				=> __( 'Add New', 'accordions' ),
 					'add_new_item' 			=> sprintf( __( 'Add %s', 'accordions' ), $singular ),
-					'edit' 					=> __( 'Edit', 'team' ),
+					'edit' 					=> __( 'Edit', 'accordions' ),
 					'edit_item' 			=> sprintf( __( 'Edit %s', 'accordions' ), $singular ),
 					'new_item' 				=> sprintf( __( 'New %s', 'accordions' ), $singular ),
 					'view' 					=> sprintf( __( 'View %s', 'accordions' ), $singular ),

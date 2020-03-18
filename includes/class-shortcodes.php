@@ -16,15 +16,14 @@ class class_accordions_shortcodes  {
 
 
 		add_shortcode( 'accordions', array( $this, 'accordions_display' ) );
-		add_shortcode( 'accordions_pplugins', array( $this, 'accordions_display' ) );	// avoid conflict
 		add_shortcode( 'accordions_pickplguins', array( $this, 'accordions_display' ) );
 		
-		add_shortcode( 'accordions_tabs', array( $this, 'accordions_tabs_display' ) );		
-		add_shortcode( 'accordions_tabs_pplugins', array( $this, 'accordions_tabs_display' ) );	 // avoid conflict
+		add_shortcode( 'accordions_tabs', array( $this, 'accordions_tabs_display' ) );
+        add_shortcode( 'accordions_tabs_pickplguins', array( $this, 'accordions_tabs_display' ) );
 
 
 
-		}
+    }
 
 	
 	public function accordions_display($atts, $content = null ) {

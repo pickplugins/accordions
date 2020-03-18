@@ -65,7 +65,7 @@ function accordions_settings_content_general(){
 
         $wp_query = new WP_Query( array (
             'post_type' => 'accordions',
-            'post_status' => 'publish',
+            'post_status' => 'any',
             'posts_per_page' => -1,
         ));
 
@@ -207,11 +207,11 @@ if(!function_exists('accordions_settings_content_help_support')) {
             <p><?php echo __('Watch video tutorials.', 'accordions'); ?></p>
             <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94ZPeQ83jOnteDDrOeDLBuFD"><i class="fab fa-youtube"></i> <?php echo __('All tutorials', 'accordions'); ?></a>
 
-<!--            <ul>-->
-<!--                <li><i class="far fa-dot-circle"></i> <a href="https://www.youtube.com/watch?v=SOe0D-Og3nQ&list=PL0QP7T2SN94atYZswlnBMhDuIYoqlmlxy&index=1">How to install plugin & setup</a></li>-->
-<!---->
-<!---->
-<!--            </ul>-->
+            <ul>
+                <li><i class="far fa-dot-circle"></i> <a href="https://www.youtube.com/watch?v=4ZGMA6hOoxs">Accordions - data migration</a></li>
+
+
+            </ul>
 
 
 
@@ -235,7 +235,7 @@ if(!function_exists('accordions_settings_content_help_support')) {
             ob_start();
             ?>
 
-            <p class="">We wish your 2 minutes to write your feedback about the <b>PickPlugins Product Slider</b> plugin. give us <span style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
+            <p class="">We wish your 2 minutes to write your feedback about the <b>Accordions</b> plugin. give us <span style="color: #ffae19"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></p>
 
             <a target="_blank" href="https://wordpress.org/plugins/accordions/#reviews" class="button"><i class="fab fa-wordpress"></i> Write a review</a>
 
@@ -356,10 +356,29 @@ if(!function_exists('accordions_settings_content_help_support')) {
 
 
 
+            ob_start();
+            ?>
+
+            <p class="">You can install older version by uninstalling current version, your data still on database, don't worry if you see content missing on frontend.</p>
+
+            <a target="_blank" href="https://wordpress.org/plugins/accordions/advanced/#plugin-download-history-stats" class="button"><i class="fab fa-wordpress"></i> Download older version</a>
 
 
+            <?php
 
+            $html = ob_get_clean();
 
+            $args = array(
+                'id'		=> 'old_version',
+                //'parent'		=> '',
+                'title'		=> __('Older version','accordions'),
+                'details'	=> '',
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
 
@@ -595,7 +614,6 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                 </div>
 
                 <div class="item">
-                    <img src="https://ps.w.org/accordion-shortcodes/assets/banner-772x250.png?rev=1570543">
                     <div class="">Accordion Shortcodes</div>
                     <div class="">By Phil Buchanan</div>
 

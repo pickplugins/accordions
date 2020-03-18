@@ -354,7 +354,7 @@ function accordions_tabs_main_items($atts){
                 $inactive_icon = !empty($accordion['inactive_icon']) ? $accordion['inactive_icon'] : $icon_inactive;
 
 
-                $accordion_body = apply_filters( 'accordions_item_header', $accordion_body, $post_id );
+                $accordion_header = apply_filters( 'accordions_item_header', $accordion_header, $post_id );
 
                 if(($accordion_is_active =='yes')){
                     $active_index[$index] = $item_count;
@@ -439,7 +439,7 @@ function accordions_tabs_main_items($atts){
             }
         else:
 
-            do_action('accordions_tabs_main_no_content');
+            do_action('accordions_tabs_main_no_content', $post_id);
         endif;
 
         ?>
@@ -498,7 +498,7 @@ function accordions_tabs_main_edit_link($atts){
 
     if(current_user_can('administrator') && $hide_edit == 'no'){
         $admin_url = admin_url();
-        $accordion_edit_url = apply_filters('accordion_edit_url', ''.$admin_url.'post.php?post='.$post_id.'&action=edit' );
+        $accordion_edit_url = apply_filters('accordions_edit_url', ''.$admin_url.'post.php?post='.$post_id.'&action=edit' );
 
         ?>
         <div class="accordion-edit"><a href="<?php echo $accordion_edit_url; ?>"><?php echo __('Edit this accordion','accordions'); ?></a>, <?php echo __("Only admin can see this.",'accordions')?></div>

@@ -2,6 +2,40 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
+//add_action('accordions_metabox_content_custom', 'accordions_metabox_content_custom_18032020', 10);
+
+function accordions_metabox_content_custom_18032020($post_id){
+
+
+    ?>
+
+    <?php
+}
+
+//add_filter('accordions_metabox_navs', 'accordions_metabox_navs_18032020', 10);
+
+function accordions_metabox_navs_18032020($tabs){
+
+
+
+    return $tabs;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function accordions_old_content($post_id){
 
     $accordions_content_title = get_post_meta( $post_id, 'accordions_content_title', true );
@@ -179,39 +213,46 @@ function accordions_preview_content($content){
 function accordions_ajax_import_json(){
 
 	$response = array();
-	$json_file = isset($_POST['json_file']) ? $_POST['json_file'] : '';
-	$string = file_get_contents($json_file);
-	$json_a = json_decode($string,true);
 
 
-	foreach ($json_a as $post_id=>$post_data){
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field($_POST['nonce']) : '';
+    if(wp_verify_nonce( $nonce, 'accordions_nonce' )) {
 
-	    $meta_fields = $post_data['meta_fields'];
-		$title = $post_data['title'];
+        if(current_user_can( 'manage_options' )){
 
-		// Create post object
-		$my_post = array(
-			'post_title'    => $title,
-			'post_type' => 'accordions',
-			'post_status'   => 'publish',
+            $json_file = isset($_POST['json_file']) ? $_POST['json_file'] : '';
+            $string = file_get_contents($json_file);
+            $json_a = json_decode($string,true);
 
-		);
 
-		$post_inserted_id = wp_insert_post( $my_post );
+            foreach ($json_a as $post_id=>$post_data){
 
-		foreach ($meta_fields as $meta_key=>$meta_value){
-			update_post_meta( $post_inserted_id, $meta_key, $meta_value );
+                $meta_fields = $post_data['meta_fields'];
+                $title = $post_data['title'];
+
+                // Create post object
+                $my_post = array(
+                    'post_title'    => $title,
+                    'post_type' => 'accordions',
+                    'post_status'   => 'publish',
+
+                );
+
+                $post_inserted_id = wp_insert_post( $my_post );
+
+                foreach ($meta_fields as $meta_key=>$meta_value){
+                    update_post_meta( $post_inserted_id, $meta_key, $meta_value );
+                }
+            }
+
+
+            //$response['json_a'] = $json_a;
+            $response['message'] = __('Impor done','');
         }
 
-
-
-
+    }else{
+        $response['message'] = __('You do not have permission','');
     }
-
-
-	$response['json_a'] = $json_a;
-	//$response['string'] = $string;
-	//$response['json_file'] = $json_file;
 
 
 
