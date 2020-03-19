@@ -105,8 +105,6 @@ You can display vertical style tabs.
 
 # Screenshot
 
-**Accordion Editing content**
-[![Edit Accordion](https://ps.w.org/accordions/assets/screenshot-7.gif?rev=1747755)](https://ps.w.org/accordions/assets/screenshot-7.gif?rev=1747755)
 
 **Accordion on front-end**
 [![Edit Accordion](https://ps.w.org/accordions/assets/screenshot-2.png?rev=1747749)](https://ps.w.org/accordions/assets/screenshot-2.png?rev=1747749)
