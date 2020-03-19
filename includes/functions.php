@@ -2,38 +2,6 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
-//add_action('accordions_metabox_content_custom', 'accordions_metabox_content_custom_18032020', 10);
-
-function accordions_metabox_content_custom_18032020($post_id){
-
-
-    ?>
-
-    <?php
-}
-
-//add_filter('accordions_metabox_navs', 'accordions_metabox_navs_18032020', 10);
-
-function accordions_metabox_navs_18032020($tabs){
-
-
-
-    return $tabs;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function accordions_old_content($post_id){

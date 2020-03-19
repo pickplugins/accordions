@@ -397,6 +397,10 @@ function accordions_main_items($atts){
                         <span class="accordion-icon-active accordion-plus"><?php echo $active_icon; ?></span>
                         <span class="accordion-icon-inactive accordion-minus"><?php echo $inactive_icon; ?></span>
                     </span>
+                    <?php
+                else:
+                    ?>
+                    <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
                 <?php
                 endif;
                 ?>
@@ -586,6 +590,7 @@ function accordions_main_scripts($atts){
                 navigation: true,
                 active: 999,
             });
+
         })
     </script>
     <?php
