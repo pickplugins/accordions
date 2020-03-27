@@ -310,11 +310,13 @@ function accordions_main_items($atts){
 
 
 
-    if($accordions_upgrade != 'done'){
+    if(empty($accordions_content)){
 
         $accordions_content = accordions_old_content($post_id);
+        //var_dump($accordions_content);
 
     }
+
 
 
     $active_index = array();

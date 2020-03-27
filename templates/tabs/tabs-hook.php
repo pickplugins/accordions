@@ -330,6 +330,15 @@ function accordions_tabs_main_items($atts){
 
     //var_dump($icon_position);
 
+
+
+    if(empty($accordions_content)){
+
+        $accordions_content = accordions_old_content($post_id);
+        //var_dump($accordions_content);
+
+    }
+
     $nav_html = '';
     $nav_content_html = '';
     $active_index = array();
