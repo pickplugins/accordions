@@ -81,6 +81,8 @@ function accordions_cron_upgrade_accordions(){
             $accordions_title = get_the_title();
             $accordions_options = array();
 
+            $accordions_options_is_saved = get_post_meta( $accordions_id, 'accordions_options', true );
+
             //echo $accordions_title.'<br/>';
 
             $accordions_lazy_load       = get_post_meta( $accordions_id, 'accordions_lazy_load', true );
@@ -339,8 +341,11 @@ function accordions_cron_upgrade_accordions(){
 
 
 
+            if(empty($accordions_options_is_saved)){
+                update_post_meta($accordions_id, 'accordions_options', $accordions_options);
+            }
 
-            update_post_meta($accordions_id, 'accordions_options', $accordions_options);
+
             update_post_meta($accordions_id, 'accordions_upgrade_status', 'done');
 
 

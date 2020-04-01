@@ -571,7 +571,7 @@ class settings_tabs_field{
                     //var_dump($index);
 
                         ?>
-                        <div class="item-wrap <?php if($collapsible) echo 'collapsible'; ?>">
+                        <div class="item-wrap <?php if($collapsible) echo 'collapsible'; ?>" index="<?php echo $index; ?>">
                             <?php if($collapsible):?>
                             <div class="header">
                                 <?php endif; ?>
@@ -579,6 +579,10 @@ class settings_tabs_field{
                                 <?php if($sortable):?>
                                     <span class="sort"><i class="fas fa-arrows-alt"></i></span>
                                 <?php endif; ?>
+
+                                    <span class="duplicate"><i class="fas fa-copy"></i></span>
+
+
 
                                 <span class="title-text"><?php echo $title_field_val; ?></span>
                                 <?php if($collapsible):?>

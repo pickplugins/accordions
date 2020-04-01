@@ -7,6 +7,9 @@ function accordions_tabs_main_top($atts){
 
     $post_id = isset($atts['id']) ? $atts['id'] : '';
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
 
@@ -40,6 +43,9 @@ function accordions_tabs_main_style($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
 
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
 
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
@@ -309,6 +315,9 @@ function accordions_tabs_main_items($atts){
 
     $post_id = isset($atts['id']) ? $atts['id'] : '';
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
     $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : 'yes';
     $enable_wpautop = isset($accordions_options['enable_wpautop']) ? $accordions_options['enable_wpautop'] : 'yes';
@@ -500,6 +509,9 @@ function accordions_tabs_main_edit_link($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
 
     $accordions_options = get_post_meta($post_id, 'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : 'yes';
 
 
@@ -530,6 +542,7 @@ function accordions_tabs_main_scripts($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
 
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
 
     $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
     $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';

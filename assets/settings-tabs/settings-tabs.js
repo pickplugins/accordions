@@ -239,7 +239,35 @@ jQuery(document).ready(function($){
 
 
 
-    jQuery(document).on("click", ".settings-tabs .field-repeatable-wrapper .clone", function() {
+    jQuery(document).on("click", ".settings-tabs .field-repeatable-wrapper .duplicate", function() {
+
+        index = $(this).parent().parent().attr('index');
+        console.log(index);
+
+        item_wrap = $(this).parent().parent();
+        console.log(item_wrap);
+
+        item_wrap_list = $(this).parent().parent().parent();
+
+
+        now = $.now();
+        //fieldHtml.replace(/index/g, now);
+
+        cloned = item_wrap.clone();
+        console.log(cloned);
+
+        console.log(typeof  cloned);
+
+        //cloned.replace(/"+index+"/g, now);
+        item_wrap.clone().attr('id', 'copied'+now).appendTo(item_wrap_list);
+
+
+        pasted = $('#copied'+now);
+
+        console.log( pasted);
+        //pasted.replace('1585533602077', now);
+
+
 
 
 

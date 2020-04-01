@@ -290,6 +290,16 @@
     padding: 5px 10px;
     border-radius: 3px;
 }
+
+.field-repeatable-wrapper .duplicate{
+    background: rgba(87, 99, 117, 0.48) none repeat scroll 0 0;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
 .field-repeatable-wrapper .title-text{
     cursor: pointer;
 }

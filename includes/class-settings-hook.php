@@ -29,7 +29,7 @@ function accordions_settings_content_general(){
             'details'	=> __('Choose font awesome version you want to load.','accordions'),
             'type'		=> 'select',
             'value'		=> $font_aw_version,
-            'default'		=> '',
+            'default'		=> 'v_5',
             'args'		=> array('v_5'=>__('Version 5+','accordions'), 'v_4'=>__('Version 4+','accordions'), 'none'=>__('None','accordions')  ),
         );
 

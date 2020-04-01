@@ -7,6 +7,9 @@ function accordions_main_top($atts){
 
     $post_id = isset($atts['id']) ? $atts['id'] : '';
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
 
@@ -42,6 +45,8 @@ function accordions_main_style($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
 
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
 
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
@@ -92,7 +97,7 @@ function accordions_main_style($atts){
     $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
 
     $accordions_settings = get_option('accordions_settings');
-    $font_aw_version = isset($accordions_settings['font_aw_version']) ? $accordions_settings['font_aw_version'] : 'none';
+    $font_aw_version = isset($accordions_settings['font_aw_version']) ? $accordions_settings['font_aw_version'] : 'v_5';
 
 
     wp_enqueue_style('accordions-style');
@@ -286,6 +291,9 @@ function accordions_main_items($atts){
 
     $post_id = isset($atts['id']) ? $atts['id'] : '';
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
     $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : 'yes';
     $enable_wpautop = isset($accordions_options['enable_wpautop']) ? $accordions_options['enable_wpautop'] : 'yes';
@@ -309,16 +317,6 @@ function accordions_main_items($atts){
 
 
 
-
-    if(empty($accordions_content)){
-
-        $accordions_content = accordions_old_content($post_id);
-        //var_dump($accordions_content);
-
-    }
-
-
-
     $active_index = array();
     ?>
     <div class="items">
@@ -329,93 +327,93 @@ function accordions_main_items($atts){
 
             $item_count = 0;
 
-        foreach ($accordions_content as $index => $accordion){
+            foreach ($accordions_content as $index => $accordion){
 
-            $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
+                $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
 
-            if($accordion_hide == 'true') continue;
-
-
-            $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
-            $accordion_body = isset($accordion['body']) ? $accordion['body'] : '';
-
-            $accordion_is_active = isset($accordion['is_active']) ? $accordion['is_active'] : '';
-            $toggled_text = isset($accordion['toggled_text']) ? $accordion['toggled_text'] : '';
-            $active_icon = !empty($accordion['active_icon']) ? $accordion['active_icon'] : $icon_active;
-            $inactive_icon = !empty($accordion['inactive_icon']) ? $accordion['inactive_icon'] : $icon_inactive;
+                if($accordion_hide == 'true') continue;
 
 
-            $accordion_header = apply_filters( 'accordions_item_header', $accordion_header, $post_id );
+                $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
+                $accordion_body = isset($accordion['body']) ? $accordion['body'] : '';
 
-            if(($accordion_is_active =='yes')){
-                $active_index[$index] = $item_count;
-            }
+                $accordion_is_active = isset($accordion['is_active']) ? $accordion['is_active'] : '';
+                $toggled_text = isset($accordion['toggled_text']) ? $accordion['toggled_text'] : '';
+                $active_icon = !empty($accordion['active_icon']) ? $accordion['active_icon'] : $icon_active;
+                $inactive_icon = !empty($accordion['inactive_icon']) ? $accordion['inactive_icon'] : $icon_inactive;
 
 
-            if(!in_array( 'accordions-pro/accordions-pro.php', (array) $active_plugins )){
-                if(has_shortcode($accordion_body, 'accordions') || has_shortcode($accordion_body, 'accordions_pickplguins') || has_shortcode($accordion_body, 'accordions_pplugins')   ){
-                    $accordion_body = str_replace('[accordions','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
-                    $accordion_body = str_replace('[accordions_pickplguins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
-                    $accordion_body = str_replace('[accordions_pplugins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                $accordion_header = apply_filters( 'accordions_item_header', $accordion_header, $post_id );
+
+                if(($accordion_is_active =='yes')){
+                    $active_index[$index] = $item_count;
                 }
-            }
+
+
+                if(!in_array( 'accordions-pro/accordions-pro.php', (array) $active_plugins )){
+                    if(has_shortcode($accordion_body, 'accordions') || has_shortcode($accordion_body, 'accordions_pickplguins') || has_shortcode($accordion_body, 'accordions_pplugins')   ){
+                        $accordion_body = str_replace('[accordions','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                        $accordion_body = str_replace('[accordions_pickplguins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                        $accordion_body = str_replace('[accordions_pplugins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
+                    }
+                }
 
 
 
 
-            $accordion_body = apply_filters( 'accordions_item_body', $accordion_body, $post_id );
+                $accordion_body = apply_filters( 'accordions_item_body', $accordion_body, $post_id );
 
 
-            if($enable_autoembed =='yes'){
-                $WP_Embed = new WP_Embed();
-                $accordion_body = $WP_Embed->autoembed( $accordion_body);
-            }
+                if($enable_autoembed =='yes'){
+                    $WP_Embed = new WP_Embed();
+                    $accordion_body = $WP_Embed->autoembed( $accordion_body);
+                }
 
-            if($enable_wpautop =='yes'){
-                $accordion_body = wpautop($accordion_body);
-            }
+                if($enable_wpautop =='yes'){
+                    $accordion_body = wpautop($accordion_body);
+                }
 
-            if($enable_shortcode =='yes'){
-                $accordion_body = do_shortcode($accordion_body);
-            }
+                if($enable_shortcode =='yes'){
+                    $accordion_body = do_shortcode($accordion_body);
+                }
 
 
-            ?>
-            <div post_id="<?php echo $post_id; ?>" header_id="header-<?php echo $index; ?>" id="header-<?php echo $index; ?>" style="" class="accordions-head head<?php echo $index; ?> <?php echo $header_class; ?>" toggle-text="<?php echo do_shortcode(esc_attr($toggled_text)); ?>" main-text="<?php echo do_shortcode(esc_attr($accordion_header)); ?>">
-
-                <?php
-                if($icon_position == 'left'):
-                    ?>
-                    <span id="accordion-icons-<?php echo $index; ?>" class="accordion-icons">
-                        <span class="accordion-icon-active accordion-plus"><?php echo $active_icon; ?></span>
-                        <span class="accordion-icon-inactive accordion-minus"><?php echo $inactive_icon; ?></span>
-                    </span>
-                    <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
-                    <?php
-                elseif ($icon_position == 'right'):
-                    ?>
-                    <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
-                    <span id="accordion-icons-<?php echo $index; ?>" class="accordion-icons">
-                        <span class="accordion-icon-active accordion-plus"><?php echo $active_icon; ?></span>
-                        <span class="accordion-icon-inactive accordion-minus"><?php echo $inactive_icon; ?></span>
-                    </span>
-                    <?php
-                else:
-                    ?>
-                    <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
-                <?php
-                endif;
                 ?>
+                <div post_id="<?php echo $post_id; ?>" header_id="header-<?php echo $index; ?>" id="header-<?php echo $index; ?>" style="" class="accordions-head head<?php echo $index; ?> <?php echo $header_class; ?>" toggle-text="<?php echo do_shortcode(esc_attr($toggled_text)); ?>" main-text="<?php echo do_shortcode(esc_attr($accordion_header)); ?>">
+
+                    <?php
+                    if($icon_position == 'left'):
+                        ?>
+                        <span id="accordion-icons-<?php echo $index; ?>" class="accordion-icons">
+                            <span class="accordion-icon-active accordion-plus"><?php echo $active_icon; ?></span>
+                            <span class="accordion-icon-inactive accordion-minus"><?php echo $inactive_icon; ?></span>
+                        </span>
+                        <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
+                        <?php
+                    elseif ($icon_position == 'right'):
+                        ?>
+                        <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
+                        <span id="accordion-icons-<?php echo $index; ?>" class="accordion-icons">
+                            <span class="accordion-icon-active accordion-plus"><?php echo $active_icon; ?></span>
+                            <span class="accordion-icon-inactive accordion-minus"><?php echo $inactive_icon; ?></span>
+                        </span>
+                        <?php
+                    else:
+                        ?>
+                        <span id="header-text-<?php echo $index; ?>" class="accordions-head-title"><?php echo do_shortcode($accordion_header); ?></span>
+                    <?php
+                    endif;
+                    ?>
 
 
-            </div>
-            <div class="accordion-content content<?php echo $index; ?> <?php echo $body_class; ?>">
-                <?php echo $accordion_body; ?>
-            </div>
+                </div>
+                <div class="accordion-content content<?php echo $index; ?> <?php echo $body_class; ?>">
+                    <?php echo $accordion_body; ?>
+                </div>
 
-            <?php
-            $item_count++;
-        }
+                <?php
+                $item_count++;
+            }
         else:
 
             do_action('accordions_main_no_content', $post_id);
@@ -500,6 +498,8 @@ function accordions_main_edit_link($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
 
     $accordions_options = get_post_meta($post_id, 'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : 'yes';
 
 
@@ -530,6 +530,9 @@ function accordions_main_scripts($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
 
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $accordion = isset($accordions_options['accordion']) ? $accordions_options['accordion'] : array();
     $collapsible = !empty($accordion['collapsible']) ? $accordion['collapsible'] : 'true';
     $height_style = isset($accordion['height_style']) ? $accordion['height_style'] : 'content';

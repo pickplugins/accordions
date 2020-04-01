@@ -165,6 +165,8 @@ function accordions_metabox_content_general($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id, 'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
 
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
@@ -308,6 +310,9 @@ function accordions_metabox_content_accordion_options($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
+
     $accordion = isset($accordions_options['accordion']) ? $accordions_options['accordion'] : array();
     $collapsible = isset($accordion['collapsible']) ? $accordion['collapsible'] : 'true';
     $expanded_other = isset($accordion['expanded_other']) ? $accordion['expanded_other'] : 'no';
@@ -402,6 +407,8 @@ function accordions_metabox_content_tabs_options($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
 
     $tabs = isset($accordions_options['tabs']) ? $accordions_options['tabs'] : array();
     $collapsible = isset($tabs['collapsible']) ? $tabs['collapsible'] : 'true';
@@ -477,36 +484,13 @@ function accordions_metabox_content_tabs_options($post_id){
 
 
 
-
-add_action('accordions_metabox_content_general_style', 'accordions_metabox_content_general_style', 10);
-
-function accordions_metabox_content_general_style($post_id){
-
-    $settings_tabs_field = new settings_tabs_field();
-    $accordions_options = get_post_meta($post_id,'accordions_options', true);
-
-
-    ?>
-
-
-
-    <?php
-
-
-}
-
-
-
-
-
-
-
 add_action('accordions_metabox_content_style', 'accordions_metabox_content_style', 10);
 
 function accordions_metabox_content_style($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
 
     $icon = isset($accordions_options['icon']) ? $accordions_options['icon'] : array();
     $icon_active = isset($icon['active']) ? $icon['active'] : '';
@@ -1072,9 +1056,9 @@ function accordions_metabox_content_content($post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
+
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
-
-
 
 
     ?>
@@ -1166,6 +1150,7 @@ function accordions_metabox_content_custom_scripts($post_id){
     $settings_tabs_field = new settings_tabs_field();
 
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
 
     $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
     $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
