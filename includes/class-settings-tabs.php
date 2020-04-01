@@ -580,10 +580,6 @@ class settings_tabs_field{
                                     <span class="sort"><i class="fas fa-arrows-alt"></i></span>
                                 <?php endif; ?>
 
-                                    <span class="duplicate"><i class="fas fa-copy"></i></span>
-
-
-
                                 <span class="title-text"><?php echo $title_field_val; ?></span>
                                 <?php if($collapsible):?>
                             </div>
