@@ -4,12 +4,40 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 if( ! class_exists( 'settings_tabs_field' ) ) {
 class settings_tabs_field{
 
+//    public $asset_dir_url = '';
+    public $textdomain = 'settings-tabs';
+
     public function __construct(){
-        //add_action( 'wp_enqueue_scripts', array( $this, '_front_scripts' ) );
-        add_action( 'admin_enqueue_scripts', array( $this, '_admin_scripts' ) );
+
+//        $this->asset_dir_url = isset($args['asset_dir_url']) ? $args['asset_dir_url'] : '';
+//        $this->textdomain = isset($args['textdomain']) ? $args['textdomain'] : '';
+
     }
 
 
+    function admin_scripts(){
+
+
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('jquery-ui-sortable');
+        wp_enqueue_script( 'jquery-ui-core' );
+        wp_enqueue_script('jquery-ui-accordion');
+        wp_enqueue_style( 'jquery-ui');
+
+        wp_enqueue_script('wp-color-picker');
+        wp_enqueue_style( 'wp-color-picker' );
+
+
+        wp_enqueue_style( 'font-awesome-5' );
+
+        wp_enqueue_style( 'settings-tabs' );
+        wp_enqueue_script( 'settings-tabs' );
+
+        wp_enqueue_script( 'code-editor' );
+        wp_enqueue_style( 'code-editor' );
+
+        wp_enqueue_editor();
+    }
 
     function field_template($option){
 
@@ -38,10 +66,7 @@ class settings_tabs_field{
 
 
 
-    function _admin_scripts(){
 
-
-    }
 
 
     function generate_field($option){
@@ -316,7 +341,7 @@ class settings_tabs_field{
 
         $media_url	= wp_get_attachment_url( $value );
         $media_type	= get_post_mime_type( $value );
-        $media_title = !empty($value) ? get_the_title( $value ) : __('Placeholder.jpg','settings-tabs');
+        $media_title = !empty($value) ? get_the_title( $value ) : __('Placeholder.jpg', $this->textdomain);
 
 
         $media_url = !empty($media_url) ? $media_url : $default;
@@ -372,8 +397,8 @@ class settings_tabs_field{
                 ?>
             </div>
             <input class="media-input-value" type="hidden" name="<?php echo $field_name; ?>" id="media_input_<?php echo $css_id; ?>" value="<?php echo $value; ?>" />
-            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload','accordions');?></div>
-            <div placeholder="<?php echo $placeholder; ?>" class="clear button" id="media_clear_<?php echo $css_id; ?>"><?php echo __('Clear','accordions');?></div>
+            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload', $this->textdomain);?></div>
+            <div placeholder="<?php echo $placeholder; ?>" class="clear button" id="media_clear_<?php echo $css_id; ?>"><?php echo __('Clear', $this->textdomain);?></div>
             <div class="error-mgs"></div>
         </div>
 
@@ -453,7 +478,7 @@ class settings_tabs_field{
                 ?>
             </div>
             <input type="text" placeholder="<?php echo $placeholder; ?>" name="<?php echo $field_name; ?>" id="media_input_<?php echo $css_id; ?>" value="<?php echo $value; ?>" />
-            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload','accordions');?></div>
+            <div class="media-upload button" id="media_upload_<?php echo $css_id; ?>"><?php echo __('Upload', $this->textdomain);?></div>
             <div class="clear button" id="media_clear_<?php echo $css_id; ?>"><?php echo __('Clear','accordions');?></div>
             <div class="error-mgs"></div>
         </div>
@@ -831,7 +856,7 @@ class settings_tabs_field{
         ?>
         <div  id="input-wrapper-<?php echo $id; ?>" class="input-wrapper input-text-multi-wrapper
             input-text-multi-wrapper-<?php echo $css_id; ?>">
-            <span data-placeholder="<?php echo esc_attr($placeholder); ?>" data-sort="<?php echo $sortable; ?>" data-clone="<?php echo $allow_clone; ?>" data-name="<?php echo $field_name; ?>[]" class="button add-item"><?php echo __('Add','accordions'); ?></span>
+            <span data-placeholder="<?php echo esc_attr($placeholder); ?>" data-sort="<?php echo $sortable; ?>" data-clone="<?php echo $allow_clone; ?>" data-name="<?php echo $field_name; ?>[]" class="button add-item"><?php echo __('Add', $this->textdomain); ?></span>
             <div class="field-list <?php if($sortable){ echo 'sortable'; }?>" id="<?php echo $css_id; ?>">
                 <?php
                 if(!empty($values)):
@@ -1237,6 +1262,9 @@ class settings_tabs_field{
 
         $field_name = !empty($parent) ? $parent.'['.$id.']' : $id;
 
+        $settings = wp_enqueue_code_editor( array( 'type' => 'text/javascript' ) );
+        $code_editor = wp_json_encode( $settings );
+
 
         ob_start();
         ?>
@@ -1244,10 +1272,7 @@ class settings_tabs_field{
 
         <script>
             jQuery(document).ready(function($){
-
-                wp.codeEditor.initialize($('#<?php echo $css_id; ?>'), cm_settings);
-
-
+                wp.codeEditor.initialize($('#<?php echo $css_id; ?>'), <?php echo $code_editor; ?>);
             })
         </script>
         <?php
@@ -1280,7 +1305,8 @@ class settings_tabs_field{
         $title			= isset( $option['title'] ) ? $option['title'] : "";
         $details 		= isset( $option['details'] ) ? $option['details'] : "";
 
-
+        $settings = wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
+        $code_editor = wp_json_encode( $settings );
 
         $field_name = !empty($parent) ? $parent.'['.$id.']' : $id;
         ?>
@@ -1295,7 +1321,7 @@ class settings_tabs_field{
 
             jQuery(document).ready(function($){
 
-                wp.codeEditor.initialize($('#<?php echo $css_id; ?>'), cm_settings);
+                wp.codeEditor.initialize($('#<?php echo $css_id; ?>'), <?php echo $code_editor; ?>);
 
 
             })

@@ -127,22 +127,6 @@ class class_accordions_post_meta{
         foreach ($accordion_settings_tab as $page_key => $tab) $tabs_sorted[$page_key] = isset( $tab['priority'] ) ? $tab['priority'] : 0;
         array_multisort($tabs_sorted, SORT_ASC, $accordion_settings_tab);
 
-        wp_enqueue_script('jquery');
-        wp_enqueue_script('jquery-ui-sortable');
-        wp_enqueue_script( 'jquery-ui-core' );
-        wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('wp-color-picker');
-        wp_enqueue_style( 'wp-color-picker' );
-
-        wp_enqueue_style( 'jquery-ui');
-        wp_enqueue_style( 'font-awesome-5' );
-        wp_enqueue_style( 'settings-tabs' );
-        wp_enqueue_script( 'settings-tabs' );
-
-
-        wp_enqueue_editor();
-
-
 
 		?>
 

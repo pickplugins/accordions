@@ -148,14 +148,12 @@ class Accordions{
         wp_register_style('fontawesome-4',  accordions_plugin_url.'assets/global/css/font-awesome-4.css');
         wp_register_style('jquery-ui',  accordions_plugin_url.'assets/frontend/css/jquery-ui.css');
         wp_register_style('accordions-themes',  accordions_plugin_url.'assets/global/css/themes.style.css');
-        //wp_register_style('animate', accordions_plugin_url.'assets/global/css/animate.css');
-
-
-
 
 		}
 
 	public function _admin_scripts(){
+
+
 
         wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
         wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php'), 'nonce' => wp_create_nonce('accordions_nonce')));
@@ -163,29 +161,11 @@ class Accordions{
         wp_register_style('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.css');
         wp_register_script('settings-tabs', accordions_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
 
-        //wp_register_script('codemirror', accordions_plugin_url.'assets/admin/js/codemirror.js' , array( 'jquery' ));
-        wp_register_style('codemirror', accordions_plugin_url.'assets/admin/css/codemirror.css');
-
         wp_register_style('font-awesome-4', accordions_plugin_url.'assets/global/css/font-awesome-4.css');
         wp_register_style('font-awesome-5', accordions_plugin_url.'assets/global/css/font-awesome-5.css');
 
-
-        $cm_settings['codeEditor'] = wp_enqueue_code_editor(array('type' => 'text/css'));
-        wp_localize_script('jquery', 'cm_settings', $cm_settings);
-        wp_enqueue_script('wp-theme-plugin-editor');
-
-
-        wp_enqueue_editor();
-
-
-
-        //wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
-        //wp_localize_script( 'accordions_admin_js', 'accordions_ajax', array( 'accordions_ajaxurl' => admin_url( 'admin-ajax.php')));
-
-
-
-
-
+        $settings_tabs_field = new settings_tabs_field();
+        $settings_tabs_field->admin_scripts();
 
 
     }

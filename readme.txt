@@ -142,6 +142,7 @@ then paste this shortcode anywhere in your page to display accordions<br />
 	= 2.2.12=
     * 2020-04-01 - fix - default font-awesome version set to 5+ if not set.
     * 2020-04-01 - fix - load old data and option if data migration not completed.
+    * 2020-04-01 - fix - codemirror issue fixed.
 
 
 
