@@ -99,6 +99,7 @@ function accordions_main_style($atts){
     $accordions_settings = get_option('accordions_settings');
     $font_aw_version = isset($accordions_settings['font_aw_version']) ? $accordions_settings['font_aw_version'] : 'v_5';
 
+    //var_dump($custom_css);
 
     wp_enqueue_style('accordions-style');
 
@@ -250,6 +251,10 @@ function accordions_main_style($atts){
             color:<?php echo $icon_color_hover; ?>;
             <?php endif; ?>
         }
+
+
+
+
         <?php
         if(!empty($custom_css)){
             echo $custom_css;
@@ -595,7 +600,6 @@ function accordions_main_scripts($atts){
                 navigation: true,
                 active: 999,
             });
-
         })
     </script>
     <?php

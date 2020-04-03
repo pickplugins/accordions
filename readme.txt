@@ -3,7 +3,7 @@
 	Donate link: https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
-	Tested up to: 5.3
+	Tested up to: 5.4
 	Stable tag: 2.2.12
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
