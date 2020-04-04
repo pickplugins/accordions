@@ -208,7 +208,7 @@ if(!function_exists('accordions_settings_content_help_support')) {
             <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94ZPeQ83jOnteDDrOeDLBuFD"><i class="fab fa-youtube"></i> <?php echo __('All tutorials', 'accordions'); ?></a>
 
             <ul>
-                <li><i class="far fa-dot-circle"></i> <a href="https://www.youtube.com/watch?v=4ZGMA6hOoxs">Accordions - data migration</a></li>
+<!--                <li><i class="far fa-dot-circle"></i> <a href="https://www.youtube.com/watch?v=4ZGMA6hOoxs">Accordions - data migration</a></li>-->
 
 
             </ul>
@@ -352,7 +352,7 @@ if(!function_exists('accordions_settings_content_help_support')) {
 
             );
 
-            $settings_tabs_field->generate_field($args);
+            //$settings_tabs_field->generate_field($args);
 
 
 

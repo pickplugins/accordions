@@ -21,8 +21,7 @@ class accordions_class_settings{
         add_submenu_page( 'edit.php?post_type=accordions', __( 'Settings', 'accordions' ), __( 'Settings', 'accordions' ), 'manage_options', 'settings', array( $this, 'settings' ) );
 
         if($accordions_upgrade != 'done'){
-            add_submenu_page( 'edit.php?post_type=accordions', __( 'Upgrade status', 'accordions' ), __( 'Upgrade status', 'accordions' ), 'manage_options', 'upgrade_status', array( $this, 'upgrade_status' ) );
-
+            //add_submenu_page( 'edit.php?post_type=accordions', __( 'Upgrade status', 'accordions' ), __( 'Upgrade status', 'accordions' ), 'manage_options', 'upgrade_status', array( $this, 'upgrade_status' ) );
         }
 	}
 	

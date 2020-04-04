@@ -182,7 +182,6 @@ function accordions_main_style($atts){
             padding:<?php echo $header_padding; ?>;
             <?php endif; ?>
             outline: none;
-
         }
         #accordions-<?php echo $post_id; ?> .accordions-head-title{
             <?php if(!empty($header_color)):?>
@@ -251,10 +250,6 @@ function accordions_main_style($atts){
             color:<?php echo $icon_color_hover; ?>;
             <?php endif; ?>
         }
-
-
-
-
         <?php
         if(!empty($custom_css)){
             echo $custom_css;
@@ -275,13 +270,9 @@ function accordions_main_style($atts){
                 }
             }
         }
-
         ?>
     </style>
     <?php
-
-
-
 }
 
 
@@ -297,7 +288,6 @@ function accordions_main_items($atts){
     $post_id = isset($atts['id']) ? $atts['id'] : '';
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
     $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
-
 
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
     $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : 'yes';
@@ -320,12 +310,9 @@ function accordions_main_items($atts){
     $accordions_plugin_info = get_option('accordions_plugin_info');
     $accordions_upgrade = isset($accordions_plugin_info['accordions_upgrade']) ? $accordions_plugin_info['accordions_upgrade'] : '';
 
-
-
     $active_index = array();
     ?>
     <div class="items">
-
         <?php
 
         if(!empty($accordions_content)):
@@ -347,7 +334,6 @@ function accordions_main_items($atts){
                 $active_icon = !empty($accordion['active_icon']) ? $accordion['active_icon'] : $icon_active;
                 $inactive_icon = !empty($accordion['inactive_icon']) ? $accordion['inactive_icon'] : $icon_inactive;
 
-
                 $accordion_header = apply_filters( 'accordions_item_header', $accordion_header, $post_id );
 
                 if(($accordion_is_active =='yes')){
@@ -362,9 +348,6 @@ function accordions_main_items($atts){
                         $accordion_body = str_replace('[accordions_pplugins','**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested accordion</strong></a>**', $accordion_body);
                     }
                 }
-
-
-
 
                 $accordion_body = apply_filters( 'accordions_item_body', $accordion_body, $post_id );
 
@@ -382,10 +365,8 @@ function accordions_main_items($atts){
                     $accordion_body = do_shortcode($accordion_body);
                 }
 
-
                 ?>
                 <div post_id="<?php echo $post_id; ?>" header_id="header-<?php echo $index; ?>" id="header-<?php echo $index; ?>" style="" class="accordions-head head<?php echo $index; ?> <?php echo $header_class; ?>" toggle-text="<?php echo do_shortcode(esc_attr($toggled_text)); ?>" main-text="<?php echo do_shortcode(esc_attr($accordion_header)); ?>">
-
                     <?php
                     if($icon_position == 'left'):
                         ?>
@@ -409,13 +390,10 @@ function accordions_main_items($atts){
                     <?php
                     endif;
                     ?>
-
-
                 </div>
                 <div class="accordion-content content<?php echo $index; ?> <?php echo $body_class; ?>">
                     <?php echo $accordion_body; ?>
                 </div>
-
                 <?php
                 $item_count++;
             }
@@ -423,7 +401,6 @@ function accordions_main_items($atts){
 
             do_action('accordions_main_no_content', $post_id);
         endif;
-
         ?>
     </div>
     <script>
@@ -508,8 +485,6 @@ function accordions_main_edit_link($atts){
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : 'yes';
 
 
-
-
     if(current_user_can('administrator') && $hide_edit == 'no'){
         $admin_url = admin_url();
         $accordion_edit_url = apply_filters('accordions_edit_url', ''.$admin_url.'post.php?post='.$post_id.'&action=edit', $post_id );
@@ -517,9 +492,7 @@ function accordions_main_edit_link($atts){
         ?>
         <div class="accordion-edit"><a href="<?php echo $accordion_edit_url; ?>"><?php echo __('Edit this accordion','accordions'); ?></a>, <?php echo __("Only admin can see this.",'accordions')?></div>
         <?php
-
     }
-
 }
 
 
@@ -537,7 +510,6 @@ function accordions_main_scripts($atts){
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
     $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
 
-
     $accordion = isset($accordions_options['accordion']) ? $accordions_options['accordion'] : array();
     $collapsible = !empty($accordion['collapsible']) ? $accordion['collapsible'] : 'true';
     $height_style = isset($accordion['height_style']) ? $accordion['height_style'] : 'content';
@@ -545,7 +517,6 @@ function accordions_main_scripts($atts){
 
     $animate_style = !empty($accordion['animate_style']) ? $accordion['animate_style'] : 'swing';
     $animate_delay = !empty($accordion['animate_delay']) ? $accordion['animate_delay'] : 1000;
-
 
     $lazy_load = isset($accordions_options['lazy_load']) ? $accordions_options['lazy_load'] : 'yes';
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
@@ -586,9 +557,6 @@ function accordions_main_scripts($atts){
     $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
     $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
 
-
-
-
     ?>
     <script>
         jQuery(document).ready(function($){
@@ -604,10 +572,7 @@ function accordions_main_scripts($atts){
     </script>
     <?php
 
-
-
     if(!empty($custom_js)):
-
         ?>
         <script>
             jQuery(document).ready(function($){
@@ -616,17 +581,14 @@ function accordions_main_scripts($atts){
         </script>
     <?php
     endif;
-
 }
 
 
 add_action('accordions_main_no_content', 'accordions_main_no_content', 50);
 function accordions_main_no_content(){
 
-
     ?>
     <p><?php echo __('Content missing',''); ?></p>
     <?php
-
 }
 

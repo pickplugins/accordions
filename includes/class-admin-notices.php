@@ -4,8 +4,7 @@ if ( ! defined('ABSPATH')) exit; // if direct access
 class class_accordions_notices{
 
     public function __construct(){
-        add_action('admin_notices', array( $this, 'data_upgrade' ));
-
+        //add_action('admin_notices', array( $this, 'data_upgrade' ));
     }
 
     public function data_upgrade(){

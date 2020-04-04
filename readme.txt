@@ -139,16 +139,21 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 == Changelog ==
 
+	= 2.2.13=
+    * 2020-04-04 - fix - minor script issue fixed.
+    * 2020-04-04 - remove - remove data migration, load old option if new options not saved.
+    * 2020-04-04 - remove - remove reset data migration.
+    * 2020-04-04 - remove - remove empty line break from scipts to avoid wpautop conflict.
+
+
+
 	= 2.2.12=
     * 2020-04-01 - fix - default font-awesome version set to 5+ if not set.
     * 2020-04-01 - fix - load old data and option if data migration not completed.
     * 2020-04-01 - fix - codemirror issue fixed.
 
-
-
 	= 2.2.11=
     * 2020-03-19 - fix - display old content if data migration not completed
-
 
 	= 2.2.10=
     * 2020-03-19 - add - data migration tutorial update and linked help section
@@ -157,8 +162,6 @@ then paste this shortcode anywhere in your page to display accordions<br />
     * 2020-03-18 - update - data migration post status to any.
     * 2020-03-18 - update - import accordion any post status
     * 2020-03-18 - fix - security issue on import accordion fixed.
-
-
 
 	= 2.2.8=
     * 2020-03-18 - fix - minor security issue fixed.

@@ -191,8 +191,6 @@ function accordions_tabs_main_style($atts){
             background-color: rgba(0,0,0,0);
         <?php endif; ?>
         }
-
-
         #accordions-tabs-<?php echo $post_id; ?> .ui-tabs-anchor{
         <?php if(!empty($header_color)):?>
             color:<?php echo $header_color; ?>;
@@ -262,15 +260,10 @@ function accordions_tabs_main_style($atts){
             font-size:<?php echo $icon_font_size; ?>;
         <?php endif; ?>
         }
-
-
-
         <?php
         if(!empty($accordions_custom_css)){
             echo $accordions_custom_css;
         }
-
-
         if($tabs_icon_toggle=='yes'){
             ?>
         .accordions-tabs .ui-tabs-active .accordions-tab-plus {
@@ -291,16 +284,11 @@ function accordions_tabs_main_style($atts){
         .ui-tabs-vertical .ui-tabs-nav { float: left; width: <?php echo $navs_width_ratio; ?>%;overflow: hidden; }
         .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; }
         .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: left; width: <?php echo $panel_width_ratio; ?>%;}
-
-
         <?php
     }
      ?>
     </style>
     <?php
-
-
-
 }
 
 
@@ -429,7 +417,7 @@ function accordions_tabs_main_items($atts){
                             <span id="accordion-icons-<?php echo $index; ?>" class="accordion-icons">
                                 <span class="accordion-icon-active accordion-plus"><?php echo $active_icon; ?></span>
                                 <span class="accordion-icon-inactive accordion-minus"><?php echo $inactive_icon; ?></span>
-                        </span>
+                            </span>
                         </a>
 
                     <?php
@@ -465,23 +453,17 @@ function accordions_tabs_main_items($atts){
     <ul>
         <?php echo $nav_html; ?>
     </ul>
-
     <?php echo $nav_content_html; ?>
-
     <script>
         jQuery(document).ready(function($){
             <?php
             if(isset($_GET['active_index'])):
                 $accordion_index = isset($_GET['active_index']) ? sanitize_text_field($_GET['active_index']) : '';
-
-                //var_dump($accordion_index);
-
                 $accordion_index = explode('-', $accordion_index);
                 foreach ($accordion_index as $args){
                     $args_arr = explode('|', $args);
                     $accordion_id = isset($args_arr[0]) ? $args_arr[0] : '';
                     $accordion_indexes = isset($args_arr[1]) ? $args_arr[1] : '';
-
                     ?>
                     accordions_tabs_active_index_<?php echo $accordion_id; ?> = <?php echo $accordion_indexes; ?>;
                     <?php
@@ -494,9 +476,6 @@ function accordions_tabs_main_items($atts){
             ?>
         })
     </script>
-
-
-
     <?php
 
 }
@@ -547,12 +526,7 @@ function accordions_tabs_main_scripts($atts){
     $custom_scripts = isset($accordions_options['custom_scripts']) ? $accordions_options['custom_scripts'] : array();
     $custom_js = isset($custom_scripts['custom_js']) ? $custom_scripts['custom_js'] : '';
 
-
-
-
     $active_tab = isset($_GET['id']) ? (int)sanitize_text_field($_GET['id']) : 1;
-
-
 
     $tabs = isset($accordions_options['tabs']) ? $accordions_options['tabs'] : array();
     $collapsible = !empty($tabs['collapsible']) ? $tabs['collapsible'] : 'true';
@@ -561,39 +535,26 @@ function accordions_tabs_main_scripts($atts){
     ?>
     <script>
         jQuery(document).ready(function($){
-
             <?php
-
             if($tabs_is_vertical=='yes'){
                  ?>
-
                 $( "#accordions-tabs-<?php echo $post_id; ?>" ).addClass( "ui-tabs-vertical ui-helper-clearfix" );
                 $( "#accordions-tabs-<?php echo $post_id; ?> li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
                 <?php
             }
             ?>
-
-
-
             $("#accordions-tabs-<?php echo $post_id; ?>" ).tabs({
                 collapsible: <?php echo $collapsible; ?>,
                 event: "<?php echo $active_event; ?>",
                 active: "<?php echo $active_tab; ?>",
             });
-
             if(typeof accordions_tabs_active_index_<?php echo $post_id; ?> != 'undefined'){
                 $("#accordions-tabs-<?php echo $post_id; ?>").tabs("option", "active", accordions_tabs_active_index_<?php echo $post_id; ?>);
             }
-
-
         })
     </script>
     <?php
-
-
-
     if(!empty($custom_js)):
-
         ?>
         <script>
             jQuery(document).ready(function($){
@@ -602,13 +563,11 @@ function accordions_tabs_main_scripts($atts){
         </script>
     <?php
     endif;
-
 }
 
 
 add_action('accordions_tabs_main_no_content', 'accordions_tabs_main_no_content');
 function accordions_tabs_main_no_content(){
-
 
     ?>
     <p><?php echo __('Content missing',''); ?></p>
