@@ -238,7 +238,7 @@ function accordions_metabox_content_general($post_id){
             'details'	=> __('Enable autoembed for content.','accordions'),
             'type'		=> 'select',
             'value'		=> $enable_autoembed,
-            'default'		=> 'yes',
+            'default'		=> 'no',
             'args'		=> array(
                 'no'	=> __('No','accordions'),
                 'yes'	=> __('Yes','accordions'),
@@ -254,7 +254,7 @@ function accordions_metabox_content_general($post_id){
             'details'	=> __('Enable shortcode for content.','accordions'),
             'type'		=> 'select',
             'value'		=> $enable_shortcode,
-            'default'		=> 'yes',
+            'default'		=> 'no',
             'args'		=> array(
                 'no'	=> __('No','accordions'),
                 'yes'	=> __('Yes','accordions'),
@@ -270,7 +270,7 @@ function accordions_metabox_content_general($post_id){
             'details'	=> __('Enable wpautop for content.','accordions'),
             'type'		=> 'select',
             'value'		=> $enable_wpautop,
-            'default'		=> 'yes',
+            'default'		=> 'no',
             'args'		=> array(
                 'no'	=> __('No','accordions'),
                 'yes'	=> __('Yes','accordions'),
@@ -286,7 +286,7 @@ function accordions_metabox_content_general($post_id){
             'details'	=> __('Enable schema for accordion or tabs.','accordions'),
             'type'		=> 'select',
             'value'		=> $enable_schema,
-            'default'		=> 'yes',
+            'default'		=> 'no',
             'args'		=> array(
                 'no'	=> __('No','accordions'),
                 'yes'	=> __('Yes','accordions'),

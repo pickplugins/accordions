@@ -14,8 +14,7 @@ function accordions_main_top($atts){
     $lazy_load_src = isset($accordions_options['lazy_load_src']) ? $accordions_options['lazy_load_src'] : '';
 
     if($lazy_load=='yes'):
-        ?>
-        <div id="accordions-lazy-<?php echo $post_id; ?>" class="accordions-lazy">
+        ?><div id="accordions-lazy-<?php echo $post_id; ?>" class="accordions-lazy">
             <?php if(!empty($lazy_load_src)):?>
                 <img src="<?php echo $lazy_load_src; ?>" />
             <?php endif; ?>
@@ -25,16 +24,9 @@ function accordions_main_top($atts){
                 jQuery('#accordions-lazy-<?php echo $post_id; ?>').fadeOut();
                 jQuery('#accordions-<?php echo $post_id; ?> .items').fadeIn();
             });
-        </script>
-    <?php
+        </script><?php
     endif;
 }
-
-
-
-
-
-
 
 
 
@@ -122,8 +114,7 @@ function accordions_main_style($atts){
     wp_enqueue_script('jquery-effects-core');
 
 
-    ?>
-    <style type='text/css'>
+    ?><style type='text/css'>
         @media only screen and (min-width: 1024px ){
             #accordions-<?php echo $post_id; ?> {
             <?php if(!empty($width_large)):?>
@@ -158,8 +149,7 @@ function accordions_main_style($atts){
             }
             <?php
         }
-        ?>
-        #accordions-<?php echo $post_id; ?> {
+        ?>#accordions-<?php echo $post_id; ?> {
             <?php if(!empty($container_text_align)):?>
             text-align: <?php echo $container_text_align; ?>;
             <?php endif; ?>
@@ -311,8 +301,7 @@ function accordions_main_items($atts){
     $accordions_upgrade = isset($accordions_plugin_info['accordions_upgrade']) ? $accordions_plugin_info['accordions_upgrade'] : '';
 
     $active_index = array();
-    ?>
-    <div class="items">
+    ?><div class="items">
         <?php
 
         if(!empty($accordions_content)):
@@ -404,8 +393,7 @@ function accordions_main_items($atts){
         ?>
     </div>
     <script>
-        jQuery(document).ready(function($){
-            <?php
+        jQuery(document).ready(function($){<?php
                 if(isset($_GET['active_index'])):
                     $accordion_index = isset($_GET['active_index']) ? sanitize_text_field($_GET['active_index']) : '';
 
@@ -421,55 +409,51 @@ function accordions_main_items($atts){
                         foreach ($active_index as $ind){
                             $active_index_new[] = (int)$ind;
                         }
-                        ?>
-                        accordions_active_index_<?php echo $accordion_id; ?> = <?php echo json_encode($active_index_new); ?>;
-                        <?php
+                        ?>accordions_active_index_<?php echo $accordion_id; ?> = <?php echo json_encode($active_index_new); ?>;<?php
                     }
                 else:
-                    ?>
-                        accordions_active_index_<?php echo $post_id; ?> = <?php echo json_encode($active_index); ?>;
-                    <?php
+                    ?>accordions_active_index_<?php echo $post_id; ?> = <?php echo json_encode($active_index); ?>;<?php
                 endif;
             ?>
         })
-    </script>
-    <?php
+    </script><?php
 
 
     $enable_schema = isset($accordions_options['enable_schema']) ? $accordions_options['enable_schema'] : 'yes';
+
     if($enable_schema == 'no') return;
     $accordions_count = count($accordions_content);
 
     ob_start();
     $i = 1;
-    foreach ($accordions_content as $index => $accordion) {
+    foreach ($accordions_content as $index => $accordion){
         $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
         if ($accordion_hide == 'true') continue;
-        $accordion_header = isset($accordion['header']) ? $accordion['header'] : '';
-        $accordion_body = isset($accordion['body']) ? $accordion['body'] : '';
-        ?>
-{
-    "@type": "Question",
-    "name": "<?php echo esc_attr($accordion_header); ?>",
-    "acceptedAnswer": {
-    "@type": "Answer",
-    "text": "<?php echo esc_attr($accordion_body); ?>"
-    }
-}<?php echo ($accordions_count > $i ) ? ',' :'';
+
+        $accordion_header = isset($accordion['header']) ? wp_strip_all_tags(strip_shortcodes($accordion['header'])) : '';
+        $accordion_body = isset($accordion['body']) ? wp_strip_all_tags(strip_shortcodes($accordion['body'])) : '';
+
+        ?>{
+        "@type": "Question",
+        "name": "<?php echo $accordion_header; ?>",
+        "acceptedAnswer":{
+        "@type": "Answer",
+        "text": "<?php echo $accordion_body; ?>"
+        }
+        }<?php echo ($accordions_count > $i ) ? ',' :'';
 
         $i++;
     }
 
     $html = ob_get_clean();
-    ?>
-<script type="application/ld+json">
+    ?><script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [<?php echo $html; ?>]
 }
-</script>
-    <?php
+</script><?php
+
 }
 
 
@@ -582,6 +566,7 @@ function accordions_main_scripts($atts){
     <?php
     endif;
 }
+
 
 
 add_action('accordions_main_no_content', 'accordions_main_no_content', 50);
