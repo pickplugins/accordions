@@ -1498,6 +1498,7 @@ class settings_tabs_field{
                     if(!empty($thumb)):
                         ?>
                             <img style="width: <?php echo $width; ?>;" alt="<?php echo $name; ?>" src="<?php echo $thumb; ?>">
+                            <div style="padding: 5px;" class="name"><?php echo $name; ?></div>
 
                         <?php
                     else:
@@ -1569,13 +1570,13 @@ class settings_tabs_field{
             .radio-img label .link{
                 background: hsl(200, 7%, 42%);
                 position: absolute;
-                top: 10%;
-                left: 90%;
-                transform: translate(-50%,-50%);
+                top: 2px;
+                /* transform: translate(0%,-50%); */
                 padding: 3px 14px;
                 text-decoration: none;
                 font-size: 14px;
                 color: #fff;
+                right: 2px;
 
             }
 

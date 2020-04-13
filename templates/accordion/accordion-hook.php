@@ -428,18 +428,28 @@ function accordions_main_items($atts){
     $i = 1;
     foreach ($accordions_content as $index => $accordion){
         $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
-        if ($accordion_hide == 'true') continue;
+        if ($accordion_hide == 'true'){
+            $i++;
+            continue;
+        }
 
         $accordion_header = isset($accordion['header']) ? wp_strip_all_tags(strip_shortcodes($accordion['header'])) : '';
+        $accordion_header = esc_attr($accordion_header);
+
         $accordion_body = isset($accordion['body']) ? wp_strip_all_tags(strip_shortcodes($accordion['body'])) : '';
+
+
+
+        $accordion_body = esc_attr($accordion_body);
+
 
         ?>{
         "@type": "Question",
-        "name": "<?php echo $accordion_header; ?>",
+        "name": "<?php echo $i.' - '.$accordion_header; ?>",
         "acceptedAnswer":{
-        "@type": "Answer",
-        "text": "<?php echo $accordion_body; ?>"
-        }
+            "@type": "Answer",
+            "text": "<?php echo $accordion_body; ?>"
+            }
         }<?php echo ($accordions_count > $i ) ? ',' :'';
 
         $i++;
