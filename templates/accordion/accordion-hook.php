@@ -57,13 +57,13 @@ function accordions_main_style($atts){
     $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
     $header_style_class = isset($header['style_class']) ? $header['style_class'] : '';
 
-    $header_background_color = isset($header['background_color']) ? $header['background_color'] : '';
-    $header_active_background_color = isset($header['active_background_color']) ? $header['active_background_color'] : '';
-    $header_color = isset($header['color']) ? $header['color'] : '';
-    $header_color_hover = isset($header['color_hover']) ? $header['color_hover'] : '';
-    $header_font_size = isset($header['font_size']) ? $header['font_size'] : '';
-    $header_padding = isset($header['padding']) ? $header['padding'] : '';
-    $header_margin = isset($header['margin']) ? $header['margin'] : '';
+    $header_background_color = !empty($header['background_color']) ? $header['background_color'] : '#1e73be';
+    $header_active_background_color = !empty($header['active_background_color']) ? $header['active_background_color'] : '#174e7f';
+    $header_color = !empty($header['color']) ? $header['color'] : '#ffffff';
+    $header_color_hover = !empty($header['color_hover']) ? $header['color_hover'] : '#ffffff';
+    $header_font_size = !empty($header['font_size']) ? $header['font_size'] : '16px';
+    $header_padding = !empty($header['padding']) ? $header['padding'] : '';
+    $header_margin = !empty($header['margin']) ? $header['margin'] : '';
 
 
     $body = isset($accordions_options['body']) ? $accordions_options['body'] : array();

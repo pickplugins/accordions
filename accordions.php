@@ -3,7 +3,7 @@
 Plugin Name: Accordions by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard
 Description: Fully responsive and mobile ready accordion grid for wordpress.
-Version: 2.2.14
+Version: 2.2.15
 WC requires at least: 3.0.0
 WC tested up to: 4.0
 Author: PickPlugins
@@ -23,7 +23,7 @@ class Accordions{
 
 		define('accordions_plugin_url', plugins_url('/', __FILE__)  );
 		define('accordions_plugin_dir', plugin_dir_path( __FILE__ ) );
-        define('accordions_version', '2.2.14' );
+        define('accordions_version', '2.2.15' );
         define('accordions_plugin_name', 'Accordions' );
         define('accordions_plugin_basename', plugin_basename( __FILE__ ) );
 
@@ -131,7 +131,9 @@ class Accordions{
 		}
 
 	public function _admin_scripts(){
+        $screen = get_current_screen();
 
+        //var_dump($screen);
 
 
         wp_enqueue_script('accordions_admin_js', accordions_plugin_url. 'assets/admin/js/scripts.js'  , array( 'jquery' ),'20181018');
@@ -143,8 +145,12 @@ class Accordions{
         wp_register_style('font-awesome-4', accordions_plugin_url.'assets/global/css/font-awesome-4.css');
         wp_register_style('font-awesome-5', accordions_plugin_url.'assets/global/css/font-awesome-5.css');
 
-        $settings_tabs_field = new settings_tabs_field();
-        $settings_tabs_field->admin_scripts();
+        if($screen->id =='accordions' || $screen->id =='accordions_page_settings'){
+            $settings_tabs_field = new settings_tabs_field();
+            $settings_tabs_field->admin_scripts();
+        }
+
+
 
 
     }
