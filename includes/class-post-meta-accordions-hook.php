@@ -1088,7 +1088,7 @@ function accordions_metabox_content_content($post_id){
             array(
                 'id'		=> 'body',
                 'css_id'		=> 'body_TIMEINDEX',
-                'title'		=> __('Body','accordions'),
+                'title'		=> __('Accordion body','accordions'),
                 'details'	=> __('Accordion body content.','accordions'),
                 'type'		=> 'textarea_editor',
                 'value'		=> '',

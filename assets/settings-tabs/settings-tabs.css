@@ -305,6 +305,16 @@
     margin-bottom: 15px;
 }
 
+
+.settings-tabs .field-media-wrapper .media-upload, .field-media-wrapper .clear {
+    display: inline-block;
+    background: #ddd;
+    padding: 2px 10px;
+    border-radius: 3px;
+    border: 1px solid #999;
+}
+
+
 /*input*/
 
 .settings-tabs input[type="text"], .settings-tabs .range-slider, .settings-tabs input[type="email"],.settings-tabs textarea, .settings-tabs select, .settings-tabs input[type="range"]{
