@@ -4,7 +4,7 @@
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.2.16
+	Stable tag: 2.2.17
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,25 +139,25 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 == Changelog ==
 
-	= 2.2.16=
+	= 2.2.17 =
+    * 2020-04-18 - fix - Keep expanded others issue fixed.
+
+
+	= 2.2.16 =
     * 2020-04-16 - fix - accordion content editor issue fixed.
 
-
-	= 2.2.15=
+	= 2.2.15 =
     * 2020-04-13 - fix - schema content convert quotes to characters,
     * 2020-04-13 - fix - schema count issue fixed when hide set to true.
     * 2020-04-13 - update - default tabs style update
 
-
-
-
-	= 2.2.14=
+	= 2.2.14 =
     * 2020-04-08 - fix - schema error issue fixed.
     * 2020-04-08 - remove - remove shortcode from schema content.
     * 2020-04-08 - remove - remove html from schema content.
 
 
-	= 2.2.13=
+	= 2.2.13 =
     * 2020-04-04 - fix - minor script issue fixed.
     * 2020-04-04 - remove - remove data migration, load old option if new options not saved.
     * 2020-04-04 - remove - remove reset data migration.
@@ -165,29 +165,29 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 
-	= 2.2.12=
+	= 2.2.12 =
     * 2020-04-01 - fix - default font-awesome version set to 5+ if not set.
     * 2020-04-01 - fix - load old data and option if data migration not completed.
     * 2020-04-01 - fix - codemirror issue fixed.
 
-	= 2.2.11=
+	= 2.2.11 =
     * 2020-03-19 - fix - display old content if data migration not completed
 
-	= 2.2.10=
+	= 2.2.10 =
     * 2020-03-19 - add - data migration tutorial update and linked help section
 
-	= 2.2.9=
+	= 2.2.9 =
     * 2020-03-18 - update - data migration post status to any.
     * 2020-03-18 - update - import accordion any post status
     * 2020-03-18 - fix - security issue on import accordion fixed.
 
-	= 2.2.8=
+	= 2.2.8 =
     * 2020-03-18 - fix - minor security issue fixed.
 
-	= 2.2.7=
+	= 2.2.7 =
     * 2020-03-18 - add - older version plugin link added under help section.
 
-	= 2.2.6=
+	= 2.2.6 =
     * 2020-03-17 - fix - WooCommerce product FAQ tab remove issue fixed.
 
 	= 2.2.5 =

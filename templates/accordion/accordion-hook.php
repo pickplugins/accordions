@@ -102,8 +102,6 @@ function accordions_main_style($atts){
         wp_enqueue_style('fontawesome-5');
     }elseif($font_aw_version =='v_4'){
         wp_enqueue_style('fontawesome-4');
-    }else{
-
     }
 
 
@@ -508,6 +506,7 @@ function accordions_main_scripts($atts){
     $collapsible = !empty($accordion['collapsible']) ? $accordion['collapsible'] : 'true';
     $height_style = isset($accordion['height_style']) ? $accordion['height_style'] : 'content';
     $active_event = !empty($accordion['active_event']) ? $accordion['active_event'] : 'click';
+    $expanded_other = !empty($accordion['expanded_other']) ? $accordion['expanded_other'] : 'no';
 
     $animate_style = !empty($accordion['animate_style']) ? $accordion['animate_style'] : 'swing';
     $animate_delay = !empty($accordion['animate_delay']) ? $accordion['animate_delay'] : 1000;
@@ -561,6 +560,28 @@ function accordions_main_scripts($atts){
                 animate: ("<?php echo $animate_style; ?>", <?php echo $animate_delay; ?>),
                 navigation: true,
                 active: 999,
+                <?php
+                if($expanded_other == 'yes'){
+                ?>
+                beforeActivate: function(event, ui) {
+                    if (ui.newHeader[0]) {
+                        var currHeader  = ui.newHeader;
+                        var currContent = currHeader.next(".ui-accordion-content");
+                    } else {
+                        var currHeader  = ui.oldHeader;
+                        var currContent = currHeader.next(".ui-accordion-content");
+                    }
+                    var isPanelSelected = currHeader.attr("aria-selected") == "true";
+                    currHeader.toggleClass("ui-corner-all",isPanelSelected).toggleClass("accordion-header-active ui-state-active ui-corner-top",!isPanelSelected).attr("aria-selected",((!isPanelSelected).toString()));
+                    currHeader.children(".ui-icon").toggleClass("ui-icon-triangle-1-e",isPanelSelected).toggleClass("ui-icon-triangle-1-s",!isPanelSelected);
+                    currContent.toggleClass("accordion-content-active",!isPanelSelected)
+                    if (isPanelSelected) { currContent.slideUp(); }  else { currContent.slideDown(); }
+                    return false;
+                },
+                <?php
+                }
+
+                ?>
             });
         })
     </script>
