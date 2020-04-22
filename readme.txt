@@ -4,7 +4,7 @@
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.2.17
+	Stable tag: 2.2.18
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,11 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 == Changelog ==
+
+	= 2.2.18 =
+    * 2020-04-22 - fix - accordion header font-family issue fixed.
+    * 2020-04-22 - fix - accordion body font-family issue fixed.
+
 
 	= 2.2.17 =
     * 2020-04-18 - fix - Keep expanded others issue fixed.

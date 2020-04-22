@@ -64,6 +64,7 @@ function accordions_main_style($atts){
     $header_font_size = !empty($header['font_size']) ? $header['font_size'] : '16px';
     $header_padding = !empty($header['padding']) ? $header['padding'] : '';
     $header_margin = !empty($header['margin']) ? $header['margin'] : '';
+    $header_font_family = !empty($header['font_family']) ? $header['font_family'] : '';
 
 
     $body = isset($accordions_options['body']) ? $accordions_options['body'] : array();
@@ -74,6 +75,8 @@ function accordions_main_style($atts){
     $body_font_size = isset($body['font_size']) ? $body['font_size'] : '';
     $body_padding = isset($body['padding']) ? $body['padding'] : '';
     $body_margin = isset($body['margin']) ? $body['margin'] : '';
+    $body_font_family = isset($body['font_family']) ? $body['font_family'] : '';
+
 
     $container = isset($accordions_options['container']) ? $accordions_options['container'] : array();
     $container_padding = isset($container['padding']) ? $container['padding'] : '';
@@ -149,71 +152,77 @@ function accordions_main_style($atts){
         }
         ?>#accordions-<?php echo $post_id; ?> {
             <?php if(!empty($container_text_align)):?>
-            text-align: <?php echo $container_text_align; ?>;
+                text-align: <?php echo $container_text_align; ?>;
             <?php endif; ?>
             <?php if(!empty($container_background_color) || !empty($container_background_img)):?>
-            background:<?php echo $container_background_color; ?> url(<?php echo $container_background_img; ?>) repeat scroll 0 0;
+                background:<?php echo $container_background_color; ?> url(<?php echo $container_background_img; ?>) repeat scroll 0 0;
             <?php endif; ?>
             <?php if(!empty($container_padding)):?>
-            padding: <?php echo $container_padding; ?>;
+                padding: <?php echo $container_padding; ?>;
             <?php endif; ?>
             position: relative;
         }
         #accordions-<?php echo $post_id; ?> .accordions-head{
-            <?php if(!empty($header_background_color)):?>
+        <?php if(!empty($header_background_color)):?>
             background:<?php echo $header_background_color; ?> none repeat scroll 0 0;
-            <?php endif; ?>
-            <?php if(!empty($header_margin)):?>
+        <?php endif; ?>
+        <?php if(!empty($header_margin)):?>
             margin:<?php echo $header_margin; ?>;
-            <?php endif; ?>
-            <?php if(!empty($header_padding)):?>
+        <?php endif; ?>
+        <?php if(!empty($header_padding)):?>
             padding:<?php echo $header_padding; ?>;
-            <?php endif; ?>
+        <?php endif; ?>
             outline: none;
         }
         #accordions-<?php echo $post_id; ?> .accordions-head-title{
-            <?php if(!empty($header_color)):?>
+        <?php if(!empty($header_font_family)):?>
+            font-family:<?php echo $header_font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($header_color)):?>
             color:<?php echo $header_color; ?>;
-            <?php endif; ?>
-            <?php if(!empty($header_font_size)):?>
+        <?php endif; ?>
+        <?php if(!empty($header_font_size)):?>
             font-size:<?php echo $header_font_size; ?>;
-            <?php endif; ?>
+        <?php endif; ?>
         }
         #accordions-<?php echo $post_id; ?> .accordions-head-title-toggle{
-            <?php if(!empty($header_color)):?>
+        <?php if(!empty($header_color)):?>
             color:<?php echo $header_color; ?>;
-            <?php endif; ?>
-            <?php if(!empty($header_font_size)):?>
+        <?php endif; ?>
+        <?php if(!empty($header_font_size)):?>
             font-size:<?php echo $header_font_size; ?>;
-            <?php endif; ?>
+        <?php endif; ?>
         }
         #accordions-<?php echo $post_id; ?> .accordions-head:hover .accordions-head-title{
-            <?php if(!empty($header_color_hover)):?>
+        <?php if(!empty($header_color_hover)):?>
             color:<?php echo $header_color_hover; ?>;
-            <?php endif; ?>
+        <?php endif; ?>
         }
         #accordions-<?php echo $post_id; ?> .ui-state-active{
-            <?php if(!empty($header_active_background_color)):?>
+        <?php if(!empty($header_active_background_color)):?>
             background: <?php echo $header_active_background_color; ?>;
-            <?php endif; ?>
+        <?php endif; ?>
             border: none;
         }
         #accordions-<?php echo $post_id; ?> .accordion-content{
-            <?php if(!empty($body_background_color)):?>
+        <?php if(!empty($body_font_family)):?>
+            font-family:<?php echo $body_font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($body_background_color)):?>
             background:<?php echo $body_background_color; ?> none repeat scroll 0 0;
-            <?php endif; ?>
-            <?php if(!empty($body_color)):?>
+        <?php endif; ?>
+        <?php if(!empty($body_color)):?>
             color:<?php echo $body_color; ?>;
-            <?php endif; ?>
-            <?php if(!empty($body_font_size)):?>
+        <?php endif; ?>
+        <?php if(!empty($body_font_size)):?>
             font-size:<?php echo $body_font_size; ?>;
-            <?php endif; ?>
-            <?php if(!empty($body_margin)):?>
+        <?php endif; ?>
+        <?php if(!empty($body_margin)):?>
             margin:<?php echo $body_margin; ?>;
-            <?php endif; ?>
-            <?php if(!empty($body_padding)):?>
+        <?php endif; ?>
+        <?php if(!empty($body_padding)):?>
             padding:<?php echo $body_padding; ?>;
-            <?php endif; ?>
+        <?php endif; ?>
             border: none;
         }
         #accordions-<?php echo $post_id; ?> .accordion-icons{
@@ -583,6 +592,9 @@ function accordions_main_scripts($atts){
 
                 ?>
             });
+
+
+
         })
     </script>
     <?php
@@ -597,6 +609,8 @@ function accordions_main_scripts($atts){
     <?php
     endif;
 }
+
+
 
 
 
