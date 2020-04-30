@@ -247,8 +247,11 @@ jQuery(document).ready(function($){
             if(el_attr == 'no' && typeof wp.editor != 'undefined'){
                 wp.editor.initialize( el_id, {
                     mediaButtons: true,
-                    tinymce:      {
-                        toolbar1: 'bold,italic,bullist,numlist,link,blockquote,alignleft,aligncenter,alignright,strikethrough,hr,forecolor,pastetext,removeformat,codeformat,undo,redo'
+                    tinymce: {
+                        wpautop: true,
+                        toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen |  wp_adv',
+                        toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap table | outdent indent | undo redo | wp_help',
+
                     },
                     quicktags:    true,
                 } );
@@ -274,8 +277,10 @@ jQuery(document).ready(function($){
         if(editor_enabled == 'no' && typeof wp.editor != 'undefined'){
             wp.editor.initialize( id, {
                 mediaButtons: true,
-                tinymce:      {
-                    toolbar1: 'bold,italic,bullist,numlist,link,blockquote,alignleft,aligncenter,alignright,strikethrough,hr,forecolor,pastetext,removeformat,codeformat,undo,redo'
+                tinymce: {
+                    wpautop: true,
+                    toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv',
+                    toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap table | outdent indent | undo redo | wp_help'
                 },
                 quicktags:    true,
             } );

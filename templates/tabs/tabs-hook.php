@@ -546,7 +546,7 @@ function accordions_tabs_main_scripts($atts){
             $("#accordions-tabs-<?php echo $post_id; ?>" ).tabs({
                 collapsible: <?php echo $collapsible; ?>,
                 event: "<?php echo $active_event; ?>",
-                active: "<?php echo $active_tab; ?>",
+                active: <?php echo $active_tab; ?>,
             });
             if(typeof accordions_tabs_active_index_<?php echo $post_id; ?> != 'undefined'){
                 $("#accordions-tabs-<?php echo $post_id; ?>").tabs("option", "active", accordions_tabs_active_index_<?php echo $post_id; ?>);
