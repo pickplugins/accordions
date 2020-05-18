@@ -1109,6 +1109,20 @@ function accordions_metabox_content_content($post_id){
                 ),
             ),
 
+            array(
+                'id'		=> 'hide_schema',
+                'css_id'		=> 'hide_TIMEINDEX',
+                'title'		=> __('Hide schema','accordions'),
+                'details'	=> __('Hide schema for this.','accordions'),
+                'type'		=> 'select',
+                'value'		=> '',
+                'default'		=> 'false',
+                'args'		=> array(
+                    'true'	=> __('True','accordions'),
+                    'false'	=> __('False','accordions'),
+                ),
+            ),
+
         );
 
         $meta_fields = apply_filters('accordions_content_fields', $meta_fields);

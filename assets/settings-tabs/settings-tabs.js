@@ -56,28 +56,6 @@ jQuery(document).ready(function($){
 
 
 
-    // $(document).on('click','.settings-tabs .media-upload',function(){
-    //
-    //     dataId = $(this).attr('data-id');
-    //
-    //
-    //
-    //     var send_attachment_bkp = wp.media.editor.send.attachment;
-    //
-    //     wp.media.editor.send.attachment = function(props, attachment) {
-    //         $("#media_preview_"+dataId).attr("src", attachment.url);
-    //         $("#media_input_"+dataId).val(attachment.id);
-    //         wp.media.editor.send.attachment = send_attachment_bkp;
-    //     }
-    //     wp.media.editor.open($(this));
-    //     return false;
-    // });
-    //
-    // $("#media_clear_<?php echo $id; ?>").click(function() {
-    //     $("#media_input_<?php echo $id; ?>").val("");
-    //     $("#media_preview_<?php echo $id; ?>").attr("src","");
-    // })
-
     $(document).on('click','.settings-tabs .field-media-wrapper .clear ',function(e){
 
         $(this).parent().children().children('.media-preview').attr('src', '');
@@ -198,8 +176,6 @@ jQuery(document).ready(function($){
         jQuery(this).parent().children('.field-list').append(html);
 
 
-       // $(".sortable" ).sortable({ handle: ".sort" });
-
 
     })
 
@@ -290,16 +266,6 @@ jQuery(document).ready(function($){
 
     })
 
-
-
-
-
-
-    jQuery(document).on("click", ".settings-tabs .field-repeatable-wrapper .clone", function() {
-
-
-
-    })
 
 
 

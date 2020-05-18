@@ -284,12 +284,17 @@ function accordions_main_items($atts){
 
     $post_id = isset($atts['id']) ? $atts['id'] : '';
     $accordions_options = get_post_meta($post_id,'accordions_options', true);
+    //var_dump($post_id);
+
+
     $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
 
     $accordions_content = isset($accordions_options['content']) ? $accordions_options['content'] : array();
     $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : 'yes';
     $enable_wpautop = isset($accordions_options['enable_wpautop']) ? $accordions_options['enable_wpautop'] : 'yes';
     $enable_autoembed = isset($accordions_options['enable_autoembed']) ? $accordions_options['enable_autoembed'] : 'yes';
+
+
 
     $header = isset($accordions_options['header']) ? $accordions_options['header'] : array();
     $header_class = isset($header['class']) ? $header['class'] : '';
@@ -435,7 +440,9 @@ function accordions_main_items($atts){
     $i = 1;
     foreach ($accordions_content as $index => $accordion){
         $accordion_hide = isset($accordion['hide']) ? $accordion['hide'] : '';
-        if ($accordion_hide == 'true'){
+        $accordion_hide_schema = isset($accordion['hide_schema']) ? $accordion['hide_schema'] : '';
+
+        if ($accordion_hide_schema == 'true'){
             $i++;
             continue;
         }
