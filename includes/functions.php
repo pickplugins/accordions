@@ -424,12 +424,6 @@ function accordions_nested_shortcode_content($string, $child_tag='restab'){
 }
 
 
-
-
-
-
-
-
 add_filter('the_content','accordions_preview_content');
 function accordions_preview_content($content){
     if(is_singular('accordions')){
@@ -439,8 +433,6 @@ function accordions_preview_content($content){
 
     return $content;
 }
-
-
 
 
 function accordions_ajax_import_json(){
