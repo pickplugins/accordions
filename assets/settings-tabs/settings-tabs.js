@@ -147,6 +147,12 @@ jQuery(document).ready(function($){
     })
 
 
+    $(document).on('click','.settings-tabs .field-media-url-wrapper .clear',function(e){
+        $(this).parent().children('.media-preview-wrap').children('img').attr('src','');
+        $(this).parent().children('input').val('');
+
+
+    })
 
     jQuery(document).on('click', '.settings-tabs .input-text-multi-wrapper .add-item',function(){
 
@@ -280,22 +286,13 @@ jQuery(document).ready(function($){
 
 
 
-
-
-
-
-
-
-
-
     $(document).on('click', '.settings-tabs .expandable .expand', function(){
-        if($(this).parent().parent().hasClass('active'))
-        {
-            $(this).parent().parent().removeClass('active');
-        }
-        else
-        {
-            $(this).parent().parent().addClass('active');
+        if($(this).parent().parent().children('.options').hasClass('active')){
+            //$(this).parent().parent().removeClass('active');
+            $(this).parent().parent().children('.options').removeClass('active');
+        }else {
+            //$(this).parent().parent().addClass('active');
+            $(this).parent().parent().children('.options').addClass('active');
         }
 
 
