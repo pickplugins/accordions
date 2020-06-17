@@ -438,7 +438,7 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                 }elseif($source == 'easy-accordion-free'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_easy_accordion_free');
                 }elseif($source == 'responsive-accordion-and-collapse'){
-                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_wpsm_ac');
+                    wp_schedule_event(time(), '1minute', 'accordions_import_cron_responsive_accordion_collapse');
                 }elseif($source == 'responsive-tabs'){
                     wp_schedule_event(time(), '1minute', 'accordions_import_cron_responsive_tabs');
                 }elseif($source == 'tabs-responsive'){
@@ -605,13 +605,13 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                     <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=ultimate-faqs'; ?>">Import data</a></p>
                 </div>
 
-                <div class="item">
-                    <img src="https://ps.w.org/tabs-pro/assets/banner-772x250.png?rev=1570543">
-                    <div class="">Tab</div>
-                    <div class="">By themepoints</div>
-
-                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=tabs-pro'; ?>">Import data</a></p>
-                </div>
+<!--                <div class="item">-->
+<!--                    <img src="https://ps.w.org/tabs-pro/assets/banner-772x250.png?rev=1570543">-->
+<!--                    <div class="">Tab</div>-->
+<!--                    <div class="">By themepoints</div>-->
+<!---->
+<!--                    <p class=""><a  class="button  button-primary" href="--><?php //echo $actionurl.'&source=tabs-pro'; ?><!--">Import data</a></p>-->
+<!--                </div>-->
 
                 <div class="item">
                     <div class="">Accordion Shortcodes</div>
@@ -621,13 +621,13 @@ if(!function_exists('accordions_settings_content_3rd_party_import')) {
                 </div>
 
 
-                <div class="item">
-                    <img src="https://ps.w.org/wc-shortcodes/assets/banner-772x250.jpg?rev=1585251">
-                    <div class="">Shortcodes by Angie Makes</div>
-                    <div class="">By Chris Baldelomar</div>
-
-                    <p class=""><a  class="button  button-primary" href="<?php echo $actionurl.'&source=wc-shortcodes'; ?>">Import data</a></p>
-                </div>
+<!--                <div class="item">-->
+<!--                    <img src="https://ps.w.org/wc-shortcodes/assets/banner-772x250.jpg?rev=1585251">-->
+<!--                    <div class="">Shortcodes by Angie Makes</div>-->
+<!--                    <div class="">By Chris Baldelomar</div>-->
+<!---->
+<!--                    <p class=""><a  class="button  button-primary" href="--><?php //echo $actionurl.'&source=wc-shortcodes'; ?><!--">Import data</a></p>-->
+<!--                </div>-->
 
 
                 <div class="item">

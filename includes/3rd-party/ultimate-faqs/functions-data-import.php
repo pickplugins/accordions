@@ -24,7 +24,7 @@ function accordions_import_cron_ultimate_faqs(){
         'post_type'=>'ufaq',
         'post_status'=>'publish',
         'posts_per_page'=> -1,
-        //'meta_query'=> $meta_query,
+        'meta_query'=> $meta_query,
     );
 
 
@@ -138,7 +138,7 @@ function accordions_import_cron_ultimate_faqs(){
             $index++;
         endwhile;
 
-        echo '<pre>'.var_export($accordions_options, true).'</pre>';
+        //echo '<pre>'.var_export($accordions_options, true).'</pre>';
 
 
         $post_data = array(
@@ -155,10 +155,10 @@ function accordions_import_cron_ultimate_faqs(){
         update_post_meta($accordions_id, 'accordions_options', $accordions_options);
 
 
-        echo '##################';
-        echo '<br/>';
-        echo 'import done: '.$post_title;
-        echo '<br/>';
+//        echo '##################';
+//        echo '<br/>';
+//        echo 'import done: '.$post_title;
+//        echo '<br/>';
 
 
         wp_reset_query();

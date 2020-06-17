@@ -70,7 +70,7 @@ function accordions_import_cron_vc_tabs(){
 
 
 
-            echo '<pre>'.var_export($acc_sec_title, ture).'</pre>';
+            echo '<pre>'.var_export($acc_sec_title, true).'</pre>';
 
             $accordions_icons_plus = 'plus';
             $accordions_icons_minus = 'minus';

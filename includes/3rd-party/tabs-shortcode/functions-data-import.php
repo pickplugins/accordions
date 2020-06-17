@@ -24,7 +24,7 @@ function accordions_import_cron_tabs_shortcode(){
         'post_type'=> array( 'page', 'post'  ),
         'post_status'=>'publish',
         'posts_per_page'=> 10,
-        //'meta_query'=> $meta_query,
+        'meta_query'=> $meta_query,
     );
 
 
@@ -171,7 +171,7 @@ function accordions_import_cron_tabs_shortcode(){
         $accordions_plugin_info['3rd_party_import'] = 'done';
         update_option('accordions_plugin_info', $accordions_plugin_info);
 
-        wp_clear_scheduled_hook('accordions_import_cron_shortcodes_ultimate');
+        wp_clear_scheduled_hook('accordions_import_cron_tabs_shortcode');
 
 
     endif;

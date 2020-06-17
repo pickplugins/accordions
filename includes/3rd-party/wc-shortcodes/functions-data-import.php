@@ -41,7 +41,7 @@ function accordions_import_cron_wc_shortcodes(){
 
             $accordions_options = array();
 
-            echo '<pre>'.var_export($post_title, true).'</pre>';
+            //echo '<pre>'.var_export($post_title, true).'</pre>';
 
             $accordions_icons_plus = 'plus';
             $accordions_icons_minus = 'minus';

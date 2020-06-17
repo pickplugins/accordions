@@ -42,7 +42,7 @@ function accordions_import_cron_tabs_pro(){
             //echo $accordions_title.'<br/>';
             $custom_accordion_wordpresspro_columns       = get_post_meta( $post_id, 'custom_accordion_wordpresspro_columns' );
 
-            echo '<pre>'.var_export($custom_accordion_wordpresspro_columns, ture).'</pre>';
+            echo '<pre>'.var_export($custom_accordion_wordpresspro_columns, true).'</pre>';
 
             $accordions_icons_plus = 'plus';
             $accordions_icons_minus = 'minus';
@@ -143,7 +143,7 @@ function accordions_import_cron_tabs_pro(){
                 }
 
 
-            echo '<pre>'.var_export($accordions_options, ture).'</pre>';
+            echo '<pre>'.var_export($accordions_options, true).'</pre>';
 
 
             $post_data = array(

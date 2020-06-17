@@ -45,7 +45,7 @@ function accordions_import_cron_responsive_tabs(){
 
 
 
-            echo '<pre>'.var_export($_rtbs_tabs_head, ture).'</pre>';
+            echo '<pre>'.var_export($_rtbs_tabs_head, true).'</pre>';
 
 
 

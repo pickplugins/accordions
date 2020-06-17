@@ -4,7 +4,7 @@
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.2.22
+	Stable tag: 2.2.24
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,9 +139,17 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 == Changelog ==
 
+	= 2.2.24 =
+    * 2020-06-17 - fix - Ultimate FAQ import issue fixed.
+    * 2020-06-17 - fix - Responsive Accordion And Collapse import issue fixed.
+    * 2020-06-17 - fix - Quick and Easy FAQs import issue fixed.
+
+	= 2.2.23 =
+    * 2020-06-10 - fix - minor js issue fixed.
+
 	= 2.2.22 =
     * 2020-06-09 - update - WooCommerce tested version update.
-    * 2020-06-09 - add - accoridon items count attribute added.
+    * 2020-06-09 - add - accordion items count attribute added.
 
 	= 2.2.21 =
     * 2020-05-23 - update - Enable autoembed default to Yes

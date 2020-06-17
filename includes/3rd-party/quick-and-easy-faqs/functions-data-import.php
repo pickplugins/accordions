@@ -24,7 +24,7 @@ function accordions_import_cron_quick_easy_faqs(){
         'post_type'=>'faq',
         'post_status'=>'publish',
         'posts_per_page'=> -1,
-        //'meta_query'=> $meta_query,
+        'meta_query'=> $meta_query,
     );
 
 
@@ -104,12 +104,6 @@ function accordions_import_cron_quick_easy_faqs(){
         $accordions_options['accordion']['is_child'] = '';
 
 
-
-
-
-
-
-
         $index = 0;
         while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
@@ -133,7 +127,7 @@ function accordions_import_cron_quick_easy_faqs(){
             $accordions_options['content'][$index]['background_color'] =  '';
             $accordions_options['content'][$index]['background_img'] =  '';
 
-            //update_post_meta($post_id, 'import_done', 'done');
+            update_post_meta($post_id, 'import_done', 'done');
 
             $index++;
         endwhile;

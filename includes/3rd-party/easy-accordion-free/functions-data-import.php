@@ -47,7 +47,7 @@ function accordions_import_cron_easy_accordion_free(){
             $accordion_content_source = $sp_eap_upload_options['accordion_content_source'];
 
 
-            echo '<pre>'.var_export($accordion_content_source, ture).'</pre>';
+            echo '<pre>'.var_export($accordion_content_source, true).'</pre>';
 
 
             $eap_accordion_event = $sp_eap_shortcode_options['eap_accordion_event'];

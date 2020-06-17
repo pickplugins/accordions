@@ -25,7 +25,6 @@ function accordions_import_cron_tabs_responsive(){
         'post_status'=>'publish',
         'posts_per_page'=> 1,
         'meta_query'=> $meta_query,
-
     );
 
 
@@ -75,7 +74,7 @@ function accordions_import_cron_tabs_responsive(){
 
 
 
-            echo '<pre>'.var_export($tabs_sec_title, ture).'</pre>';
+            echo '<pre>'.var_export($tabs_sec_title, true).'</pre>';
 
             $accordions_icons_plus = 'plus';
             $accordions_icons_minus = 'minus';
@@ -183,10 +182,6 @@ function accordions_import_cron_tabs_responsive(){
                     $i++;
                 }
 
-
-
-
-
             $accordions_id = wp_insert_post(
                 array(
                     'post_title'    => $post_title,
@@ -196,17 +191,6 @@ function accordions_import_cron_tabs_responsive(){
                     'post_author'   => 1,
                 )
             );
-
-
-
-
-
-
-
-
-
-
-
 
             update_post_meta($accordions_id, 'accordions_options', $accordions_options);
             update_post_meta($post_id, 'import_done', 'done');

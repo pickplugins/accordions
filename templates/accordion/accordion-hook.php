@@ -596,12 +596,8 @@ function accordions_main_scripts($atts){
                 },
                 <?php
                 }
-
                 ?>
             });
-
-
-
         })
     </script>
     <?php

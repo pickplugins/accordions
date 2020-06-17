@@ -44,7 +44,7 @@ function accordions_import_cron_everest_tab_lite(){
             $et_tab_settings       = get_post_meta( $post_id, 'et_tab_settings', true );
 
 
-            echo '<pre>'.var_export($et_tab_settings, ture).'</pre>';
+            echo '<pre>'.var_export($et_tab_settings, true).'</pre>';
 
             $tab_items = $et_main_settings['tab_items'];
 

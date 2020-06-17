@@ -24,7 +24,7 @@ function accordions_import_cron_sp_faq(){
         'post_type'=>'sp_faq',
         'post_status'=>'publish',
         'posts_per_page'=> -1,
-        //'meta_query'=> $meta_query,
+        'meta_query'=> $meta_query,
     );
 
 
@@ -133,12 +133,12 @@ function accordions_import_cron_sp_faq(){
             $accordions_options['content'][$index]['background_color'] =  '';
             $accordions_options['content'][$index]['background_img'] =  '';
 
-            //update_post_meta($post_id, 'import_done', 'done');
+            update_post_meta($post_id, 'import_done', 'done');
 
             $index++;
         endwhile;
 
-        echo '<pre>'.var_export($accordions_options, true).'</pre>';
+        //echo '<pre>'.var_export($accordions_options, true).'</pre>';
 
 
         $post_data = array(
