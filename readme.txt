@@ -4,7 +4,7 @@
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.2.24
+	Stable tag: 2.2.25
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,9 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 == Changelog ==
+
+	= 2.2.25 =
+    * 2020-06-26 - fix - schema header text count text removed.
 
 	= 2.2.24 =
     * 2020-06-17 - fix - Ultimate FAQ import issue fixed.

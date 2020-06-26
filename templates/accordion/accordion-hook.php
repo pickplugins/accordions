@@ -459,7 +459,7 @@ function accordions_main_items($atts){
 
         ?>{
         "@type": "Question",
-        "name": "<?php echo $i.' - '.$accordion_header; ?>",
+        "name": "<?php echo $accordion_header; ?>",
         "acceptedAnswer":{
             "@type": "Answer",
             "text": "<?php echo $accordion_body; ?>"
