@@ -233,7 +233,6 @@ jQuery(document).ready(function($){
                         wpautop: true,
                         toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen |  wp_adv',
                         toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap table | outdent indent | undo redo | wp_help',
-
                     },
                     quicktags:    true,
                 } );
