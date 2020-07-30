@@ -175,6 +175,7 @@ function accordions_metabox_content_general($post_id){
     $enable_shortcode = isset($accordions_options['enable_shortcode']) ? $accordions_options['enable_shortcode'] : '';
     $enable_wpautop = isset($accordions_options['enable_wpautop']) ? $accordions_options['enable_wpautop'] : '';
     $enable_schema = isset($accordions_options['enable_schema']) ? $accordions_options['enable_schema'] : '';
+    $edit_link_access_role = isset($accordions_options['edit_link_access_role']) ? $accordions_options['edit_link_access_role'] : array();
 
     //var_dump($lazy_load);
 
@@ -229,6 +230,22 @@ function accordions_metabox_content_general($post_id){
         );
 
         $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'edit_link_access_role',
+            'parent'		=> 'accordions_options',
+            'title'		=> __('Who can see edit link','accordions'),
+            'details'	=> __('Select which user role can access to edit link.','accordions'),
+            'type'		=> 'select',
+            'multiple'		=> true,
+            'value'		=> $edit_link_access_role,
+            'default'		=> array('administrator'),
+            'args'		=> accordions_all_user_roles(),
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
 
 
         $args = array(

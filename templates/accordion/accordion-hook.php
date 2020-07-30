@@ -490,17 +490,45 @@ function accordions_main_edit_link($atts){
     $accordions_options = get_post_meta($post_id, 'accordions_options', true);
     $accordions_options = !empty($accordions_options) ? $accordions_options : accordions_old_options($post_id);
 
+
     $hide_edit = isset($accordions_options['hide_edit']) ? $accordions_options['hide_edit'] : 'yes';
 
+    if($hide_edit =='yes') return;
 
-    if(current_user_can('administrator') && $hide_edit == 'no'){
-        $admin_url = admin_url();
-        $accordion_edit_url = apply_filters('accordions_edit_url', ''.$admin_url.'post.php?post='.$post_id.'&action=edit', $post_id );
+    //var_dump($hide_edit);
 
-        ?>
-        <div class="accordion-edit"><a href="<?php echo $accordion_edit_url; ?>"><?php echo __('Edit this accordion','accordions'); ?></a>, <?php echo __("Only admin can see this.",'accordions')?></div>
-        <?php
-    }
+    $edit_link_access_role = isset($accordions_options['edit_link_access_role']) ? $accordions_options['edit_link_access_role'] : array('administrator');
+
+
+
+    $user = wp_get_current_user();
+    $user_roles = !empty($user->roles) ? $user->roles : array();
+
+    //echo '<pre>'.var_export($user_roles, true).'</pre>';
+
+
+    if(!empty($edit_link_access_role))
+        foreach ($edit_link_access_role as $role):
+            //echo '<pre>'.var_export($role, true).'</pre>';
+
+            if(in_array($role, $user_roles)){
+                $admin_url = admin_url();
+                $accordion_edit_url = apply_filters('accordions_edit_url', ''.$admin_url.'post.php?post='.$post_id.'&action=edit', $post_id );
+
+                ?>
+                <div class="accordion-edit"><a href="<?php echo $accordion_edit_url; ?>"><?php echo __('Edit this accordion','accordions'); ?></a>, <?php echo __("Only admin can see this.",'accordions')?></div>
+                <?php
+
+                return;
+            }else{
+                continue;
+            }
+
+        endforeach;
+
+
+
+
 }
 
 

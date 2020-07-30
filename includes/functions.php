@@ -1,7 +1,18 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
+function accordions_all_user_roles() {
 
+    $wp_roles = new WP_Roles();
+
+    //var_dump($wp_roles);
+    $roles = $wp_roles->get_names();
+
+    return  $roles;
+    // Below code will print the all list of roles.
+    //echo '<pre>'.var_export($wp_roles, true).'</pre>';
+
+}
 
 
 function accordions_old_content($post_id){
