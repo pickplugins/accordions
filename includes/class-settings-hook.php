@@ -758,7 +758,7 @@ if(!function_exists('accordions_settings_content_buy_pro')) {
 
             <p><?php echo __('If you love our plugin and want more feature please consider to buy pro version.', 'accordions'); ?></p>
             <a class="button" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashobard"><?php echo __('Buy premium', 'accordions'); ?></a>
-            <a class="button" href="http://www.pickplugins.com/demo/accordions/?ref=dashobard"><?php echo __('See all demo', 'accordions'); ?></a>
+            <a class="button" href="https://www.pickplugins.com/demo/accordions/?ref=dashobard"><?php echo __('See all demo', 'accordions'); ?></a>
 
             <h2><?php echo __('See the differences','accordions'); ?></h2>
 
