@@ -1,6 +1,103 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
+
+
+function recherche_avancee( $query ) {
+
+
+    var_dump(serialize(get_search_query()));
+
+    if ( !is_admin() && $query->is_search ) {
+
+        $meta_query = array(
+                array(
+                    'key' => 'accordions_options',
+                    'value' => serialize(get_search_query()),
+                    'compare' => 'LIKE'
+                ),
+
+        );
+
+        $query->set("meta_query", $meta_query);
+    }
+}
+//add_action( 'pre_get_posts', 'recherche_avancee');
+
+
+
+
+
+function latest_articles_of_platform($query){
+
+    if ( !is_admin() && $query->is_search ) {
+        $search = get_search_query();
+
+        global $wpdb;
+        $getallposts = $wpdb->get_results( "SELECT $wpdb->posts.* FROM $wpdb->posts WHERE $wpdb->posts.post_type = 'accordions'", OBJECT );
+        $postsin = array();
+
+        if ($getallposts){
+
+
+            foreach ($getallposts as $looppost)   {
+
+                $accordions_options = get_post_meta($looppost->ID,'accordions_options',true);
+
+                if(isset($accordions_options['content'])){
+                    //echo '<pre>'.var_export($platformsofposts['content'], true).'</pre>';
+                    echo '<pre>'.var_export(serialize($accordions_options['content']), true).'</pre>';
+
+                    $content = serialize($accordions_options['content']);
+
+                    if (strpos($content, $search) !== false) {
+                        //echo 'true';
+                        $postsin[] = $looppost->ID;
+                    }
+
+                }
+
+
+
+            }
+        }
+
+        var_dump($postsin);
+        var_dump($search);
+
+
+
+        $query->set('post__in', $postsin);
+
+    }
+
+
+
+
+}
+//add_action( 'pre_get_posts', 'latest_articles_of_platform' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function accordions_all_user_roles() {
 
     $wp_roles = new WP_Roles();
