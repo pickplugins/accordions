@@ -1090,6 +1090,13 @@ function accordions_metabox_content_content($post_id){
         //echo '<pre>'.var_export($accordions_active_accordion, true).'</pre>';
         //echo '<pre>'.var_export($accordions_content_body, true).'</pre>';
 
+        $field_name = 'dummy';
+        $value = '';
+        $css_id = 'dummy';
+
+        $editor_settings= isset( $option['editor_settings'] ) ? $option['editor_settings'] : array('textarea_name'=>$field_name,'tinymce' => true, 'textarea_rows' => 15, );
+
+        echo wp_editor( $value, $css_id, $editor_settings);
 
         $meta_fields = array(
             array(

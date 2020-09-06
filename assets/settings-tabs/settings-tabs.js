@@ -213,6 +213,8 @@ jQuery(document).ready(function($){
     function textarea_to_editor(){
 
         //textarea = $('.textarea-editor');
+        //console.log(tinymce);
+
 
         var textarea = document.getElementsByClassName("textarea-editor");
 
@@ -223,19 +225,26 @@ jQuery(document).ready(function($){
 
             //editor_enabled = $(this).attr('editor_enabled');
 
-
-            //console.log(typeof wp.editor);
+            //console.log(typeof wp.editor.getDefaultSettings);
 
             if(el_attr == 'no' && typeof wp.editor != 'undefined'){
                 wp.editor.initialize( el_id, {
                     mediaButtons: true,
                     tinymce: {
                         wpautop: true,
-                        toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen |  wp_adv',
-                        toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap table | outdent indent | undo redo | wp_help',
+                        menubar: "file edit view insert format tools table tc help",
+                        toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv',
+                        toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap table | outdent indent | undo redo | wp_help'
                     },
                     quicktags:    true,
                 } );
+
+
+
+
+
+
+
 
                 textarea[i].setAttribute('editor_enabled','yes')
                 //$(this).attr('editor_enabled','yes');

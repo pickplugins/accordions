@@ -1012,7 +1012,6 @@ class settings_tabs_field{
 
         $field_name = !empty($parent) ? $parent.'['.$id.']' : $id;
 
-        $editor_settings= isset( $option['editor_settings'] ) ? $option['editor_settings'] : array('textarea_name'=>$field_name,'tinymce' => true, 'textarea_rows' => 15, );
 
         ob_start();
 
@@ -1021,6 +1020,8 @@ class settings_tabs_field{
         <div id="field-wrapper-<?php echo $id; ?>" class="<?php if(!empty($depends)) echo 'dependency-field'; ?> field-wrapper field-wp_editor-wrapper
             field-wp_editor-wrapper-<?php echo $id; ?>">
             <?php
+            $editor_settings= isset( $option['editor_settings'] ) ? $option['editor_settings'] : array('textarea_name'=>$field_name,'tinymce' => true, 'textarea_rows' => 15, );
+
             wp_editor( $value, $css_id, $editor_settings);
             ?>
             <div class="error-mgs"></div>
@@ -1227,6 +1228,9 @@ class settings_tabs_field{
 
 
         ob_start();
+//        $editor_settings= isset( $option['editor_settings'] ) ? $option['editor_settings'] : array('textarea_name'=>$field_name,'tinymce' => true, 'textarea_rows' => 15, );
+//
+//        wp_editor( $value, $css_id, $editor_settings);
         ?>
         <textarea editor_enabled="no" class="textarea-editor" name="<?php echo $field_name; ?>" id="<?php echo $css_id; ?>" cols="40" rows="5" placeholder="<?php echo $placeholder; ?>"><?php echo $value; ?></textarea>
         <?php
