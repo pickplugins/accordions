@@ -3,7 +3,24 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-function recherche_avancee( $query ) {
+
+function accordions_custom_mime_types( $mimes ) {
+
+    // New allowed mime types.
+    $mimes['txt'] = 'text/plain';
+    //$mimes['svgz'] = 'image/svg+xml';
+    //$mimes['doc'] = 'application/msword';
+//    ["txt|asc|c|cc|h|srt"]=> "text/plain"
+
+    // Optional. Remove a mime type.
+    //unset( $mimes['exe'] );
+
+    return $mimes;
+}
+add_filter( 'upload_mimes', 'accordions_custom_mime_types' );
+
+
+function accordions_recherche_avancee( $query ) {
 
 
     var_dump(serialize(get_search_query()));
@@ -28,7 +45,7 @@ function recherche_avancee( $query ) {
 
 
 
-function latest_articles_of_platform($query){
+function accordions_latest_articles_of_platform($query){
 
     if ( !is_admin() && $query->is_search ) {
         $search = get_search_query();
