@@ -69,6 +69,7 @@ class class_accordions_post_meta_product{
                             return {
                                 q: params.term, // search query
                                 action: 'accordions_ajax_wc_get_accordions' // AJAX action for admin-ajax.php
+                                "nonce" : accordions_ajax.nonce,
                             };
                         },
                         processResults: function( data ) {
