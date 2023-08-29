@@ -1,9 +1,9 @@
-=== Accordions Combo ===
+=== Accordion ===
 	Contributors: PickPlugins
-	Donate link: https://www.pickplugins.com/accordions
+	Donate link: https://pickplugins.com/accordions/
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
-	Tested up to: 6.2
+	Tested up to: 6.3
 	Stable tag: 2.2.87
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ Accordions is easy and powerful tool to create accordion, faq, tabs, tab content
 
 ### Accordions by http://pickplugins.com
 
-* [Accordions - Premium &raquo;](https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org)
+* [Accordions - Premium &raquo;](https://pickplugins.com/accordions/)
 * [Live Demo &raquo;](https://www.pickplugins.com/demo/accordions/?ref=wordpress.org)
 * [Support &raquo;](https://www.pickplugins.com/support/?ref=wordpress.org)
 * [Documentation &raquo;](https://www.pickplugins.com/documentation/accordions/?ref=wordpress.org)
