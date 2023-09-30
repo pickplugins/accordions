@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var animateStyle = accordionsDataObj.animateStyle;
             var animateDelay = accordionsDataObj.animateDelay;
             var navigation = accordionsDataObj.navigation;
+            var URLHash = accordionsDataObj.URLHash;
+
+            console.log(accordionsDataObj);
 
 
 
@@ -89,9 +92,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+            console.log(URLHash);
 
 
+            if (URLHash) {
+                var hash = window.location.hash;
+                if (hash) {
+                    index = jQuery("#accordions-" + accordionsId + " " + hash).attr('itemcount');
+                    if (index) {
+                        //index = index.replace('ui-id-','');
+                        //header = jQuery("#accordions-" + accordionsId + " "+hash);
+                        index = parseInt(index);
+                        //jQuery("html:not(:animated), body:not(:animated)").animate({ scrollTop: header.offset().top + 800 }, "slow");
+                        jQuery("#accordions-" + accordionsId + " .items").accordion("option", "active", index);
+                    }
+                }
 
+            }
 
 
 

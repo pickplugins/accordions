@@ -36,16 +36,16 @@ class class_accordions_shortcodes
 
 
         $post_id = isset($atts['id']) ?  $atts['id'] : '';
-$post_id = str_replace('"', "", $post_id);
-$post_id = str_replace("'", "", $post_id);
-$post_id = str_replace("&#039;", "", $post_id);
-$post_id = str_replace("&quot;", "", $post_id);	
+        $post_id = str_replace('"', "", $post_id);
+        $post_id = str_replace("'", "", $post_id);
+        $post_id = str_replace("&#039;", "", $post_id);
+        $post_id = str_replace("&quot;", "", $post_id);
 
         $accordions_options = get_post_meta($post_id, 'accordions_options', true);
         $view_type = isset($accordions_options['view_type']) ? $accordions_options['view_type'] : 'accordion';
 
-        global $accordionsAttrData;
-
+        //global $accordionsAttrData;
+        $accordionsAttrData = [];
 
 
 
@@ -58,8 +58,8 @@ $post_id = str_replace("&quot;", "", $post_id);
 
 
 
-        $accordionsAttrData[$post_id]['lazyLoad'] = ($lazy_load == 'yes') ? true : false;
-        $accordionsAttrData[$post_id]['id'] = $post_id;
+        $accordionsAttrData['lazyLoad'] = ($lazy_load == 'yes') ? true : false;
+        $accordionsAttrData['id'] = $post_id;
         //$accordionsAttrData['activeIndex'] = $activeHead;
 
 
@@ -71,13 +71,13 @@ $post_id = str_replace("&quot;", "", $post_id);
             $active_event = isset($tabs['active_event']) ? $tabs['active_event'] : 'click';
             $active_tab = isset($_GET['id']) ? absint($_GET['id']) : 0;
 
-            $accordionsAttrData[$post_id]['event'] = $active_event;
-            $accordionsAttrData[$post_id]['collapsible'] = $collapsible;
-            $accordionsAttrData[$post_id]['active'] = $active_tab;
-            $accordionsAttrData[$post_id]['vertical'] = 0;
+            $accordionsAttrData['event'] = $active_event;
+            $accordionsAttrData['collapsible'] = $collapsible;
+            $accordionsAttrData['active'] = $active_tab;
+            $accordionsAttrData['vertical'] = 0;
 
 
-?><div id="accordions-tabs-<?php echo esc_attr($post_id); ?>" class="accordions-tabs-<?php echo esc_attr($post_id); ?> accordions-tabs accordions" accordionstabsdata='<?php echo esc_attr(json_encode($accordionsAttrData[$post_id])); ?>'>
+?><div id="accordions-tabs-<?php echo esc_attr($post_id); ?>" class="accordions-tabs-<?php echo esc_attr($post_id); ?> accordions-tabs accordions" accordionstabsdata='<?php echo esc_attr(json_encode($accordionsAttrData)); ?>'>
                 <?php
                 do_action('accordions_tabs_main', $atts);
                 ?>
@@ -96,19 +96,25 @@ $post_id = str_replace("&quot;", "", $post_id);
                     $animate_style = !empty($accordion['animate_style']) ? $accordion['animate_style'] : 'swing';
                     $animate_delay = !empty($accordion['animate_delay']) ? $accordion['animate_delay'] : 1000;
 
-                    $accordionsAttrData[$post_id]['event'] = $active_event;
-                    $accordionsAttrData[$post_id]['collapsible'] = $collapsible;
-                    $accordionsAttrData[$post_id]['heightStyle'] = $height_style;
-                    $accordionsAttrData[$post_id]['animateStyle'] = $animate_style;
-                    $accordionsAttrData[$post_id]['animateDelay'] = $animate_delay;
-
-                    $accordionsAttrData[$post_id]['navigation'] = true;
-                    $accordionsAttrData[$post_id]['active'] = 999;
-                    $accordionsAttrData[$post_id]['expandedOther'] = $expanded_other;
 
 
+                    $accordionsAttrData['event'] = $active_event;
+                    $accordionsAttrData['collapsible'] = $collapsible;
+                    $accordionsAttrData['heightStyle'] = $height_style;
+                    $accordionsAttrData['animateStyle'] = $animate_style;
+                    $accordionsAttrData['animateDelay'] = $animate_delay;
 
-                    ?><div id="accordions-<?php echo esc_attr($post_id); ?>" class="accordions-<?php echo esc_attr($post_id); ?> accordions" accordionsdata=<?php echo esc_attr(json_encode($accordionsAttrData[$post_id])); ?>>
+                    $accordionsAttrData['navigation'] = true;
+                    $accordionsAttrData['active'] = 999;
+                    $accordionsAttrData['expandedOther'] = $expanded_other;
+
+
+
+
+                    $accordionsAttrData = apply_filters('accordionsAttrData', $accordionsAttrData, $post_id)
+
+
+                    ?><div id="accordions-<?php echo esc_attr($post_id); ?>" class="accordions-<?php echo esc_attr($post_id); ?> accordions" accordionsdata=<?php echo esc_attr(json_encode($accordionsAttrData)); ?>>
                 <?php
                     do_action('accordions_main', $atts);
                 ?>
@@ -129,12 +135,12 @@ $post_id = str_replace("&quot;", "", $post_id);
                     $atts
                 );
 
-        $post_id = isset($atts['id']) ?  $atts['id'] : '';
+                $post_id = isset($atts['id']) ?  $atts['id'] : '';
 
-$post_id = str_replace('"', "", $post_id);
-$post_id = str_replace("'", "", $post_id);
-$post_id = str_replace("&#039;", "", $post_id);
-$post_id = str_replace("&quot;", "", $post_id);	
+                $post_id = str_replace('"', "", $post_id);
+                $post_id = str_replace("'", "", $post_id);
+                $post_id = str_replace("&#039;", "", $post_id);
+                $post_id = str_replace("&quot;", "", $post_id);
 
                 ob_start();
 
