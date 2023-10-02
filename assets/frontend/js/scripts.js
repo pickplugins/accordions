@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-            jQuery(accordionitemsWrap).accordion({
+            var accordionHandle = jQuery(accordionitemsWrap).accordion({
                 event: accordionsDataObj.event,
                 collapsible: collapsible,
                 heightStyle: heightStyle,
@@ -92,10 +92,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-            console.log(URLHash);
+            // console.log(URLHash);
+            // console.log(accordionsId);
+            // console.log(accordionHandle);
 
 
-            if (URLHash) {
+            if (URLHash == 'yes') {
                 var hash = window.location.hash;
                 if (hash) {
                     index = jQuery("#accordions-" + accordionsId + " " + hash).attr('itemcount');
@@ -104,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         //header = jQuery("#accordions-" + accordionsId + " "+hash);
                         index = parseInt(index);
                         //jQuery("html:not(:animated), body:not(:animated)").animate({ scrollTop: header.offset().top + 800 }, "slow");
-                        jQuery("#accordions-" + accordionsId + " .items").accordion("option", "active", index);
+                        accordionHandle.accordion("option", "active", index);
                     }
                 }
 
