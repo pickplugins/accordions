@@ -131,65 +131,84 @@ function accordions_main_style($atts)
     wp_enqueue_script('accordions_js');
     wp_localize_script('accordions_js', 'accordions_ajax', array('accordions_ajaxurl' => admin_url('admin-ajax.php')));
 
-ob_start();
+    ob_start();
 
     ?><style type='text/css'>
         @media only screen and (min-width: 1024px) {
-            <?php echo esc_attr('#accordions-' . $post_id); ?>{
+            <?php echo esc_attr('#accordions-' . $post_id); ?> {
                 <?php if (!empty($width_large)) : ?>width: <?php echo esc_attr($width_large); ?>;
                 <?php endif; ?>
             }
         }
+
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            <?php echo esc_attr('#accordions-' . $post_id); ?>{
+            <?php echo esc_attr('#accordions-' . $post_id); ?> {
                 <?php if (!empty($width_medium)) : ?>width: <?php echo esc_attr($width_medium); ?>;
                 <?php endif; ?>
             }
         }
+
         @media only screen and (min-width: 0px) and (max-width: 767px) {
-            <?php echo esc_attr('#accordions-' . $post_id); ?>  {
+            <?php echo esc_attr('#accordions-' . $post_id); ?> {
                 <?php if (!empty($width_small)) : ?>width: <?php echo esc_attr($width_small); ?>;
                 <?php endif; ?>
             }
         }
+
         <?php
         if ($lazy_load == 'yes') {
-        ?>
-        <?php echo esc_attr('#accordions-' . $post_id.' .accordions-lazy'); ?>{ text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        ?><?php echo esc_attr('#accordions-' . $post_id . ' .accordions-lazy'); ?> {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         <?php
         }
-        ?><?php echo esc_attr('#accordions-' . $post_id); ?>{position: relative;
+        ?><?php echo esc_attr('#accordions-' . $post_id); ?> {
+            position: relative;
             <?php if (!empty($container_text_align)) : ?>text-align: <?php echo esc_attr($container_text_align); ?>;
             <?php endif; ?><?php if (!empty($container_background_color) || !empty($container_background_img)) : ?>background: <?php echo esc_attr($container_background_color); ?> url(<?php echo esc_url_raw($container_background_img); ?>) repeat scroll 0 0;
             <?php endif; ?><?php if (!empty($container_padding)) : ?>padding: <?php echo esc_attr($container_padding); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id.' .accordions-head'); ?>  {outline: none;
+
+        <?php echo esc_attr('#accordions-' . $post_id . ' .accordions-head'); ?> {
+            outline: none;
             <?php if (!empty($header_background_color)) : ?>background: <?php echo esc_attr($header_background_color); ?> none repeat scroll 0 0;
             <?php endif; ?><?php if (!empty($header_margin)) : ?>margin: <?php echo esc_attr($header_margin); ?>;
             <?php endif; ?><?php if (!empty($header_padding)) : ?>padding: <?php echo esc_attr($header_padding); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id.'  .accordions-head-title'); ?> {
+
+        <?php echo esc_attr('#accordions-' . $post_id . '  .accordions-head-title'); ?> {
             <?php if (!empty($header_font_family)) : ?>font-family: <?php echo esc_attr($header_font_family); ?>;
             <?php endif; ?><?php if (!empty($header_color)) : ?>color: <?php echo esc_attr($header_color); ?>;
             <?php endif; ?><?php if (!empty($header_font_size)) : ?>font-size: <?php echo esc_attr($header_font_size); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id.' .accordions-head-title-toggle'); ?> {
+
+        <?php echo esc_attr('#accordions-' . $post_id . ' .accordions-head-title-toggle'); ?> {
             <?php if (!empty($header_color)) : ?>color: <?php echo esc_attr($header_color); ?>;
             <?php endif; ?><?php if (!empty($header_font_size)) : ?>font-size: <?php echo esc_attr($header_font_size); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id.'  .accordions-head:hover .accordions-head-title'); ?> {
+
+        <?php echo esc_attr('#accordions-' . $post_id . '  .accordions-head:hover .accordions-head-title'); ?> {
             <?php if (!empty($header_color_hover)) : ?>color: <?php echo esc_attr($header_color_hover); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id. '  .ui-state-active'); ?> {border: none;
+
+        <?php echo esc_attr('#accordions-' . $post_id . '  .ui-state-active'); ?> {
+            border: none;
             <?php if (!empty($header_active_background_color)) : ?>background: <?php echo esc_attr($header_active_background_color); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id. ' .accordion-content'); ?>  {border: none;
+
+        <?php echo esc_attr('#accordions-' . $post_id . ' .accordion-content'); ?> {
+            border: none;
             <?php if (!empty($body_font_family)) : ?>font-family: <?php echo esc_attr($body_font_family); ?>;
             <?php endif; ?><?php if (!empty($body_background_color)) : ?>background: <?php echo esc_attr($body_background_color); ?> none repeat scroll 0 0;
             <?php endif; ?><?php if (!empty($body_color)) : ?>color: <?php echo esc_attr($body_color); ?>;
@@ -198,7 +217,8 @@ ob_start();
             <?php endif; ?><?php if (!empty($body_padding)) : ?>padding: <?php echo esc_attr($body_padding); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id.'  .accordion-icons'); ?> {
+
+        <?php echo esc_attr('#accordions-' . $post_id . '  .accordion-icons'); ?> {
             <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color); ?>;
             <?php endif; ?><?php if (!empty($icon_font_size)) : ?>font-size: <?php echo esc_attr($icon_font_size); ?>;
             <?php endif; ?><?php if (!empty($icon_background_color)) : ?>background: <?php echo esc_attr($icon_background_color); ?> none repeat scroll 0 0;
@@ -206,10 +226,12 @@ ob_start();
             <?php endif; ?><?php if (!empty($icon_margin)) : ?>margin: <?php echo esc_attr($icon_margin); ?>;
             <?php endif; ?>
         }
-        <?php echo esc_attr('#accordions-' . $post_id.'  .accordions-head:hover .accordion-icons span'); ?> {
+
+        <?php echo esc_attr('#accordions-' . $post_id . '  .accordions-head:hover .accordion-icons span'); ?> {
             <?php if (!empty($icon_color_hover)) : ?>color: <?php echo esc_attr($icon_color_hover); ?>;
             <?php endif; ?>
         }
+
         <?php
         if (!empty($custom_css)) {
             echo wp_specialchars_decode($custom_css, ENT_QUOTES);
@@ -223,8 +245,9 @@ ob_start();
                 $bg_color_css = !empty($background_color) ? $background_color : '';
 
                 if (!empty($bg_color_css) || !empty($header_bg_img)) {
-        ?><?php echo esc_attr('#accordions-' . $post_id. ' #header-' . $index); ?>  {
-            background: <?php echo esc_attr($bg_color_css); ?> <?php echo esc_url_raw($header_bg_img); ?>;}
+        ?><?php echo esc_attr('#accordions-' . $post_id . ' #header-' . $index); ?> {
+            background: <?php echo esc_attr($bg_color_css); ?> <?php echo $header_bg_img; ?>;
+        }
 
         <?php
                 }
@@ -234,9 +257,7 @@ ob_start();
     </style>
 <?php
 
-$accordionsCss .= ob_get_clean();
-
-
+    $accordionsCss .= ob_get_clean();
 }
 
 
