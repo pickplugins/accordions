@@ -77,7 +77,7 @@ class class_accordions_shortcodes
             $accordionsAttrData['vertical'] = 0;
 
 
-?><div id="accordions-tabs-<?php echo esc_attr($post_id); ?>" class="accordions-tabs-<?php echo esc_attr($post_id); ?> accordions-tabs accordions" accordionstabsdata='<?php echo esc_attr(json_encode($accordionsAttrData)); ?>'>
+?><div id="accordions-tabs-<?php echo esc_attr($post_id); ?>" class="accordions-tabs-<?php echo esc_attr($post_id); ?> accordions-tabs accordions" data-accordionstabs='<?php echo esc_attr(json_encode($accordionsAttrData)); ?>'>
                 <?php
                 do_action('accordions_tabs_main', $atts);
                 ?>
@@ -114,7 +114,7 @@ class class_accordions_shortcodes
                     $accordionsAttrData = apply_filters('accordionsAttrData', $accordionsAttrData, $post_id)
 
 
-                    ?><div id="accordions-<?php echo esc_attr($post_id); ?>" class="accordions-<?php echo esc_attr($post_id); ?> accordions" accordionsdata=<?php echo esc_attr(json_encode($accordionsAttrData)); ?>>
+                    ?><div id="accordions-<?php echo esc_attr($post_id); ?>" class="accordions-<?php echo esc_attr($post_id); ?> accordions" data-accordions=<?php echo esc_attr(json_encode($accordionsAttrData)); ?>>
                 <?php
                     do_action('accordions_main', $atts);
                 ?>

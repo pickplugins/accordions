@@ -3,8 +3,8 @@
 	Donate link: https://pickplugins.com/accordions/
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
 	Requires at least: 3.8
-	Tested up to: 6.3
-	Stable tag: 2.2.90
+	Tested up to: 6.4
+	Stable tag: 2.2.91
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,9 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 
+
+	= 2.2.91 =
+    * 2023-11-07 - add - data attribute issue fixed.
 
 	= 2.2.90 =
     * 2023-10-24 - add - double escape url issue fixed.

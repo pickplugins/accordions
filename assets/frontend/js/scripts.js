@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    var accordions = document.querySelectorAll('[accordionsdata]');
+    var accordions = document.querySelectorAll('[data-accordions]');
 
 
 
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         accordions.forEach(accordionsWrap => {
 
 
-            var accordionsData = accordionsWrap.getAttribute('accordionsdata');
+            var accordionsData = accordionsWrap.getAttribute('data-accordions');
 
 
             if (accordionsData == null) return;
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-    var accordionstabs = document.querySelectorAll('[accordionstabsdata]');
+    var accordionstabs = document.querySelectorAll('[data-accordionstabs]');
 
 
 
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     if (accordionstabs != null) {
         accordionstabs.forEach(accordionsWrap => {
 
-            var accordionsData = accordionsWrap.getAttribute('accordionstabsdata');
+            var accordionsData = accordionsWrap.getAttribute('data-accordionstabs');
 
 
             if (accordionsData == null) return;
