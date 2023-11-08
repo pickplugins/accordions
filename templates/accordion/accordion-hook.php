@@ -184,7 +184,7 @@ function accordions_main_style($atts)
         }
 
         <?php echo esc_attr('#accordions-' . $post_id . '  .accordions-head-title'); ?> {
-            <?php if (!empty($header_font_family)) : ?>font-family: <?php echo esc_attr($header_font_family); ?>;
+            <?php if (!empty($header_font_family)) : ?>font-family: <?php echo wp_specialchars_decode($header_font_family, ENT_QUOTES); ?>;
             <?php endif; ?><?php if (!empty($header_color)) : ?>color: <?php echo esc_attr($header_color); ?>;
             <?php endif; ?><?php if (!empty($header_font_size)) : ?>font-size: <?php echo esc_attr($header_font_size); ?>;
             <?php endif; ?>
@@ -209,7 +209,7 @@ function accordions_main_style($atts)
 
         <?php echo esc_attr('#accordions-' . $post_id . ' .accordion-content'); ?> {
             border: none;
-            <?php if (!empty($body_font_family)) : ?>font-family: <?php echo esc_attr($body_font_family); ?>;
+            <?php if (!empty($body_font_family)) : ?>font-family: <?php echo wp_specialchars_decode($body_font_family, ENT_QUOTES); ?>;
             <?php endif; ?><?php if (!empty($body_background_color)) : ?>background: <?php echo esc_attr($body_background_color); ?> none repeat scroll 0 0;
             <?php endif; ?><?php if (!empty($body_color)) : ?>color: <?php echo esc_attr($body_color); ?>;
             <?php endif; ?><?php if (!empty($body_font_size)) : ?>font-size: <?php echo esc_attr($body_font_size); ?>;
