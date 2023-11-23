@@ -142,7 +142,7 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 
-	= 2.2.94 =
+	= 2.2.95 =
     * 2023-11-23 - fix - Accordion content delete confirmation issue fixed.
 
 	= 2.2.94 =
