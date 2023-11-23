@@ -615,7 +615,7 @@ if (!class_exists('settings_tabs_field')) {
         ?>
             <div class="item-wrap collapsible">
                 <div class="header">
-                    <span class="remove" onclick="jQuery(this).parent().parent().remove()">
+                    <span class="remove" onclick="confirm('Are you')">
                         <?php echo accordions_wp_kses($remove_text); ?>
                     </span>
                     <?php
@@ -686,7 +686,7 @@ if (!class_exists('settings_tabs_field')) {
                                 <?php if ($collapsible) : ?>
                                     <div class="header">
                                     <?php endif; ?>
-                                    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><?php echo accordions_wp_kses($remove_text); ?></span>
+                                    <span class="remove" onclick="confirm('Are you sure?') ? jQuery(this).parent().parent().remove() :  '';"><?php echo accordions_wp_kses($remove_text); ?></span>
                                     <?php if ($sortable) : ?>
                                         <span class="sort"><i class="fas fa-arrows-alt"></i></span>
                                     <?php endif; ?>
