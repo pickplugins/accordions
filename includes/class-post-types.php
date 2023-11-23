@@ -57,7 +57,7 @@ class accordions_post_types
 				'hierarchical' 			=> false,
 				'rewrite' 				=> true,
 				'query_var' 			=> true,
-				'supports' 				=> array('title',),
+				'supports' 				=> array('title', 'revisions'),
 				'show_in_nav_menus' 	=> true,
 				//'show_in_menu' 	=> 'edit.php?post_type=team',	
 				'menu_icon' => 'dashicons-align-center',
