@@ -17,6 +17,7 @@ class class_accordions_post_meta
     {
 
         add_meta_box('metabox-accordions', __('Accordions data', 'accordions'), array($this, 'meta_box_accordions_data'), 'accordions', 'normal', 'high');
+        // add_meta_box('metabox-accordions-new', __('Accordions data - New', 'accordions'), array($this, 'meta_box_accordions_data_new'), 'accordions', 'normal', 'high');
     }
 
 
@@ -164,6 +165,12 @@ class class_accordions_post_meta
             })(jQuery);
         </script>
 
+        <div class="notice notice-success">
+            <p>
+                We have added blocks for Accordions and Tabs.
+            </p>
+        </div>
+
         <div class="settings-tabs vertical">
             <input class="current_tab" type="hidden" name="accordions_options[current_tab]" value="<?php echo esc_attr($current_tab); ?>">
             <div class="view-types">
@@ -220,6 +227,28 @@ class class_accordions_post_meta
             ?>
         </div>
         <div class="clear clearfix"></div>
+
+    <?php
+    }
+
+
+    public function meta_box_accordions_data_new($post)
+    {
+
+        // Add an nonce field so we can check for it later.
+        wp_nonce_field('accordions_nonce_check', 'accordions_nonce_check_value');
+
+        // Use get_post_meta to retrieve an existing value from the database.
+        // $accordions_data = get_post_meta($post -> ID, 'accordions_data', true);
+
+        $post_id = $post->ID;
+
+
+
+    ?>
+
+
+
 
 <?php
     }
