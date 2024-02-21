@@ -471,23 +471,16 @@ function accordions_ajax_import_json()
 
                 // Create post object
                 $my_post = array(
+                    'ID'    => $post_id,
                     'post_title'    => $title,
                     'post_type' => 'accordions',
                     'post_status'   => 'publish',
 
                 );
 
-                if (get_post_status($post_id)) {
-                    $post_inserted_id = $post_id;
-                } else {
-                    $post_inserted_id = wp_insert_post($my_post);
+                $post_inserted_id = wp_insert_post($my_post);
 
-                    global $wpdb;
-                    $sql = "UPDATE `wp_posts` SET `ID`='$post_inserted_id' WHERE `ID`=$post_id";
-
-                    $wpdb->get_results($sql);
-                }
-
+                $post_inserted_id = !empty($post_inserted_id) ? $post_inserted_id : $post_id;
 
 
                 foreach ($meta_fields as $meta_key => $meta_value) {
