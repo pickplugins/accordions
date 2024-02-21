@@ -15,8 +15,8 @@ class PGBlockAccordionNested
 
   function front_scripts($attributes)
   {
-    wp_register_script('pgaccordionnested_front_script', post_grid_plugin_url . 'includes/blocks/accordion-nested/front-scripts.js', [], '', true);
-    //wp_register_script('pgaccordionnested_accorion', post_grid_plugin_url . 'includes/blocks/accordion-nested/accordion.js', [], '', true);
+    wp_register_script('pgaccordionnested_front_script', accordions_plugin_url . 'includes/blocks/accordion-nested/front-scripts.js', [], '', true);
+    //wp_register_script('pgaccordionnested_accorion', accordions_plugin_url . 'includes/blocks/accordion-nested/accordion.js', [], '', true);
 
     if (has_block('post-grid/accordion-nested')) {
 
@@ -35,8 +35,8 @@ class PGBlockAccordionNested
   // loading src files in the gutenberg editor screen
   function register_scripts()
   {
-    //wp_register_style('editor_style', post_grid_plugin_url . 'includes/blocks/layers/index.css');
-    //wp_register_script('editor_script', post_grid_plugin_url . 'includes/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
+    //wp_register_style('editor_style', accordions_plugin_url . 'includes/blocks/layers/index.css');
+    //wp_register_script('editor_script', accordions_plugin_url . 'includes/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
     register_block_type(

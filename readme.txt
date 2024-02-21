@@ -1,4 +1,4 @@
-=== FAQ, Accordion, Nested Accordion, Tabs, Collapse, Toggle Content, Knowledge Base - Combo Accordion ===
+=== Accordion ===
 	Contributors: PickPlugins
 	Donate link: https://pickplugins.com/accordions/
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab

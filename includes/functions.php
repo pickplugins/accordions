@@ -466,7 +466,6 @@ function accordions_ajax_import_json()
 
                 $meta_fields = accordions_recursive_sanitize_arr($post_data['meta_fields']);
 
-
                 $title = sanitize_text_field($post_data['title']);
 
                 // Create post object
@@ -477,7 +476,13 @@ function accordions_ajax_import_json()
 
                 );
 
-                $post_inserted_id = wp_insert_post($my_post);
+                if (get_post_status($post_id)) {
+                    $post_inserted_id = wp_insert_post($my_post);
+                } else {
+                    $post_inserted_id = $post_id;
+                }
+
+
 
                 foreach ($meta_fields as $meta_key => $meta_value) {
                     update_post_meta($post_inserted_id, $meta_key, $meta_value);

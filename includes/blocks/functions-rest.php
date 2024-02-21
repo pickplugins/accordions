@@ -511,7 +511,7 @@ class BlockPostGridRest
 				//$post->post_content = $post->post_content;
 				$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id));
 				$thumb_url = isset($thumb[0]) ? $thumb[0] : '';
-				$post->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/images/placeholder.png';
+				$post->thumb_url = !empty($thumb_url) ? $thumb_url : accordions_plugin_url . 'assets/images/placeholder.png';
 
 				$post->is_pro = false;
 
@@ -1365,7 +1365,7 @@ class BlockPostGridRest
 		// $post->post_content = $post->post_content;
 		// $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id));
 		// $thumb_url = isset($thumb[0]) ? $thumb[0] : '';
-		// $post->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/images/placeholder.png';
+		// $post->thumb_url = !empty($thumb_url) ? $thumb_url : accordions_plugin_url . 'assets/images/placeholder.png';
 
 		if ($post->post_type == 'product') {
 
@@ -1932,7 +1932,7 @@ class BlockPostGridRest
 				$post->post_content = $post->post_content;
 				$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id));
 				$thumb_url = isset($thumb[0]) ? $thumb[0] : '';
-				$post->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/images/placeholder.png';
+				$post->thumb_url = !empty($thumb_url) ? $thumb_url : accordions_plugin_url . 'assets/images/placeholder.png';
 
 				$post->is_pro = ($post_id % 2 == 0) ? true : false;
 
