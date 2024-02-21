@@ -481,6 +481,11 @@ function accordions_ajax_import_json()
                     $post_inserted_id = $post_id;
                 } else {
                     $post_inserted_id = wp_insert_post($my_post);
+
+                    global $wpdb;
+                    $sql = "UPDATE `wp_posts` SET `ID`='$post_inserted_id' WHERE `ID`=$post_id";
+
+                    $wpdb->get_results($sql);
                 }
 
 
