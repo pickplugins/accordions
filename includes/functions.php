@@ -471,7 +471,6 @@ function accordions_ajax_import_json()
 
                 // Create post object
                 $my_post = array(
-                    'ID'    => $post_id,
                     'post_title'    => $title,
                     'post_type' => 'accordions',
                     'post_status'   => 'publish',
@@ -479,9 +478,6 @@ function accordions_ajax_import_json()
                 );
 
                 $post_inserted_id = wp_insert_post($my_post);
-
-                $post_inserted_id = !empty($post_inserted_id) ? $post_inserted_id : $post_id;
-
 
                 foreach ($meta_fields as $meta_key => $meta_value) {
                     update_post_meta($post_inserted_id, $meta_key, $meta_value);

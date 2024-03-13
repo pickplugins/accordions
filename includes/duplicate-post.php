@@ -28,6 +28,11 @@ function accordions_duplicate_post_as_draft()
 	 */
 	$post = get_post($post_id);
 
+
+	if ($post->post_type != 'accordions') {
+		return;
+	}
+
 	/*
 	 * if you don't want current user to be the new post author,
 	 * then change next couple of lines to this: $new_post_author = $post->post_author;
