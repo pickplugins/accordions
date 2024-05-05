@@ -1,7 +1,7 @@
 === Accordion ===
 	Contributors: PickPlugins
 	Donate link: https://pickplugins.com/accordions/
-	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordion short-code, accordions widget,  tab
+	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordions
 	Requires at least: 3.8
 	Tested up to: 6.5
 	Stable tag: 2.2.97
