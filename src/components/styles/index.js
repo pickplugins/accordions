@@ -266,10 +266,8 @@ function Html(props) {
 	const [styles, setStyles] = useState({});
 
 	const [cssAtts, setcssAtts] = useState({});
-	const [breakPointLocal, setbreakPointLocal] = useState(
-		myStore.getBreakPoint()
-	);
-	var breakPointX = myStore.getBreakPoint();
+	const [breakPointLocal, setbreakPointLocal] = useState("Desktop");
+	var breakPointX = breakPointLocal;
 
 	let isProFeature = applyFilters("isProFeature", true);
 
