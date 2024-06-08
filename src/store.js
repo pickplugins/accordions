@@ -584,6 +584,10 @@ var selectors = {
 	},
 
 	generateBlockCss(state, items, blockId) {
+
+		console.log(items);
+
+
 		const { blockCss } = state;
 		var reponsiveCssGroups = {};
 
@@ -679,6 +683,9 @@ var selectors = {
 
 		var reponsiveCss =
 			reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+
+		console.log(reponsiveCss);
+
 
 		var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 

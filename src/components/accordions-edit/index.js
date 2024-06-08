@@ -44,10 +44,13 @@ function Html(props) {
 
 	var onChange = props.onChange;
 
+	var breakPointX = "Desktop";
+
+
 	var defaultPostData = {
 		wrapper: {
 			options: {
-				class: "",
+				class: "wrapper",
 			},
 			styles: {
 				color: {
@@ -150,11 +153,12 @@ function Html(props) {
 				content: { text: "Accordion content 3" },
 			},
 		],
+		blockCssY: { items: [] }
 	};
 
 	var accordionDataX =
 		props.accordionData.post_content == null ||
-		props.accordionData.post_content.length == 0
+			props.accordionData.post_content.length == 0
 			? defaultPostData
 			: props.accordionData;
 
@@ -168,8 +172,19 @@ function Html(props) {
 	var [content, setcontent] = useState(defaultPostData.content);
 	var [icon, seticon] = useState(defaultPostData.icon);
 	var [iconToggle, seticonToggle] = useState(defaultPostData.iconToggle);
+	var [blockCssY, setblockCssY] = useState(defaultPostData.blockCssY);
 
-	var wrapperSelector = wrapper.options.class;
+	var wrapperSelector = "." + wrapper.options.class;
+
+	var blockId = '';
+
+	useEffect(() => {
+
+		console.log(blockCssY);
+
+
+		myStore.generateBlockCss(blockCssY.items, blockId);
+	}, [blockCssY]);
 
 	function onChangeStyleWrapper(sudoScource, newVal, attr) {
 		var path = [sudoScource, attr, breakPointX];
@@ -177,10 +192,12 @@ function Html(props) {
 		let obj = { ...wrapper };
 		const object = myStore.updatePropertyDeep(obj, path, newVal);
 
-		setAttributes({ wrapper: object });
+		setwrapper(object);
 
 		var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 		var cssPropty = myStore.cssAttrParse(attr);
+
+
 
 		let itemsX = Object.assign({}, blockCssY.items);
 
@@ -189,13 +206,15 @@ function Html(props) {
 		}
 
 		// if (blockCssY.items[elementSelector] == undefined) {
-		//     blockCssY.items[elementSelector] = {};
-		//   }
+		// 	blockCssY.items[elementSelector] = {};
+		// }
 
 		var cssPath = [elementSelector, cssPropty, breakPointX];
 		const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
-		setAttributes({ blockCssY: { items: cssItems } });
+
+
+		setblockCssY({ items: cssItems });
 	}
 
 	// function onRemoveStyleText(sudoScource, key) {
@@ -291,10 +310,15 @@ function Html(props) {
 	// 	setAttributes({ text: obj });
 	// }
 
-	
+
 
 	return (
 		<div className="p-5">
+
+			{JSON.stringify(wrapper)}
+			{JSON.stringify(blockCssY)}
+
+
 			<PanelBody
 				className="font-medium text-slate-900 "
 				title="Wrapper"
@@ -303,7 +327,7 @@ function Html(props) {
 					activeTab="options"
 					orientation="horizontal"
 					activeClass="active-tab"
-					onSelect={(tabName) => {}}
+					onSelect={(tabName) => { }}
 					tabs={[
 						{
 							name: "options",
@@ -345,10 +369,10 @@ function Html(props) {
 						<PGStyles
 							obj={wrapper}
 							onChange={onChangeStyleWrapper}
-							// onAdd={onAddStyleText}
-							// onRemove={onRemoveStyleText}
-							// onBulkAdd={onBulkAddText}
-							// onReset={onResetText}
+						// onAdd={onAddStyleText}
+						// onRemove={onRemoveStyleText}
+						// onBulkAdd={onBulkAddText}
+						// onReset={onResetText}
 						/>
 					</PGtab>
 				</PGtabs>
@@ -361,7 +385,7 @@ function Html(props) {
 					activeTab="options"
 					orientation="horizontal"
 					activeClass="active-tab"
-					onSelect={(tabName) => {}}
+					onSelect={(tabName) => { }}
 					tabs={[
 						{
 							name: "options",
@@ -402,11 +426,11 @@ function Html(props) {
 					<PGtab name="styles">
 						<PGStyles
 							obj={wrapper}
-							// onChange={onChangeStyleText}
-							// onAdd={onAddStyleText}
-							// onRemove={onRemoveStyleText}
-							// onBulkAdd={onBulkAddText}
-							// onReset={onResetText}
+						// onChange={onChangeStyleText}
+						// onAdd={onAddStyleText}
+						// onRemove={onRemoveStyleText}
+						// onBulkAdd={onBulkAddText}
+						// onReset={onResetText}
 						/>
 					</PGtab>
 				</PGtabs>

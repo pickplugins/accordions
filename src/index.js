@@ -3,6 +3,8 @@
 // import { createHigherOrderComponent } from "@wordpress/compose";
 // import { subscribe, select } from "@wordpress/data";
 
+import "./store";
 
 import "./dashboard";
+
 
