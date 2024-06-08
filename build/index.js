@@ -521,7 +521,6 @@ function Html(props) {
   }, [blockCssY]);
   function onChangeStyleWrapper(sudoScource, newVal, attr) {
     var path = [sudoScource, attr, breakPointX];
-    //let obj = Object.assign({}, wrapper);
     let obj = {
       ...wrapper
     };
@@ -533,11 +532,6 @@ function Html(props) {
     if (itemsX[elementSelector] == undefined) {
       itemsX[elementSelector] = {};
     }
-
-    // if (blockCssY.items[elementSelector] == undefined) {
-    // 	blockCssY.items[elementSelector] = {};
-    // }
-
     var cssPath = [elementSelector, cssPropty, breakPointX];
     const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
     setblockCssY({

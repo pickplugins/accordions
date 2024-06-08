@@ -188,7 +188,6 @@ function Html(props) {
 
 	function onChangeStyleWrapper(sudoScource, newVal, attr) {
 		var path = [sudoScource, attr, breakPointX];
-		//let obj = Object.assign({}, wrapper);
 		let obj = { ...wrapper };
 		const object = myStore.updatePropertyDeep(obj, path, newVal);
 
@@ -205,9 +204,7 @@ function Html(props) {
 			itemsX[elementSelector] = {};
 		}
 
-		// if (blockCssY.items[elementSelector] == undefined) {
-		// 	blockCssY.items[elementSelector] = {};
-		// }
+
 
 		var cssPath = [elementSelector, cssPropty, breakPointX];
 		const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
