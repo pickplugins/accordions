@@ -1,4 +1,6 @@
-const { Component } = wp.element;
+const { Component, useState, useEffect } = wp.element;
+import apiFetch from '@wordpress/api-fetch';
+
 import {
 	Icon,
 	styles,
@@ -25,6 +27,8 @@ import {
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import AccordionsList from "../../components/accordions";
+import AccordionsView from "../../components/accordions-view";
+import AccordionsEdit from "../../components/accordions-edit";
 
 
 
@@ -32,6 +36,56 @@ function Html(props) {
 	if (!props.warn) {
 		return null;
 	}
+
+	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
+	var [postData, setpostData] = useState(null); // Using the hook.
+	var [isLoading, setisLoading] = useState(false); // Using the hook.
+
+
+	function selectAccordion(args) {
+
+		console.log(args);
+		setActiveAccordion(args)
+	}
+
+
+	function onChangeAccordion(args) {
+
+		console.log(args);
+		//setaccordionData(args)
+	}
+
+
+	useEffect(() => {
+
+		setisLoading(true);
+
+
+		apiFetch({
+			path: "/accordions/v2/accordions_data",
+			method: "POST",
+			data: {
+				postId: activeAccordion,
+				_wpnonce: post_grid_editor_js._wpnonce,
+
+			},
+		}).then((res) => {
+
+			setisLoading(false);
+
+			console.log(res);
+
+
+			setpostData(res);
+
+		});
+
+
+
+
+
+
+	}, [activeAccordion]);
 
 
 
@@ -142,17 +196,17 @@ function Html(props) {
 
 						]}>
 						<PGtab name="accordions">
-							<div className="relative">
-								<AccordionsList />
+							<div className="relative p-5">
+								<AccordionsList selectAccordion={selectAccordion} activeAccordion={activeAccordion} />
 							</div>
 						</PGtab>
 						<PGtab name="edit">
-							<div className="flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font ">
-								edit
+							<div className=" ">
+								<AccordionsEdit onChange={onChangeAccordion} accordionData={postData} />
 							</div>
 						</PGtab>
 						<PGtab name="templates">
-							<div className="flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font ">
+							<div className=" ">
 								templates
 							</div>
 						</PGtab>
@@ -170,7 +224,12 @@ function Html(props) {
 					</PGtabs>
 
 				</div>
-				<div></div>
+				<div className="w-full">
+					<div className="  relative">
+						<AccordionsView id={activeAccordion} />
+					</div>
+
+				</div>
 			</div>
 
 

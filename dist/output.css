@@ -312,6 +312,10 @@
   margin-top: 70px;
 }
 
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1154,6 +1158,10 @@
   padding-left: 160px;
 }
 
+.pr-5 {
+  padding-right: 1.25rem;
+}
+
 .pr-\[320px\] {
   padding-right: 320px;
 }
@@ -1182,6 +1190,10 @@
   text-align: justify;
 }
 
+.align-middle {
+  vertical-align: middle;
+}
+
 .\!text-\[13px\] {
   font-size: 13px !important;
 }
@@ -1194,11 +1206,6 @@
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .text-\[13px\] {

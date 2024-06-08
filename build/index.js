@@ -81,10 +81,41 @@ const category = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress
 
 /***/ }),
 
-/***/ "./src/components/accordions/index.js":
-/*!********************************************!*\
-  !*** ./src/components/accordions/index.js ***!
-  \********************************************/
+/***/ "./node_modules/@wordpress/icons/build-module/library/check.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/check.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const check = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (check);
+//# sourceMappingURL=check.js.map
+
+/***/ }),
+
+/***/ "./src/components/accordions-edit/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/accordions-edit/index.js ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -116,7 +147,329 @@ function Html(props) {
   if (!props.warn) {
     return null;
   }
+  var onChange = props.onChange;
+  var defaultPostData = {
+    wrapper: {
+      class: ""
+    },
+    header: {
+      class: ""
+    },
+    headerActive: {
+      class: ""
+    },
+    headerLabel: {
+      class: ""
+    },
+    labelIcon: {
+      class: "",
+      position: "before"
+    },
+    labelCounter: {
+      class: "",
+      position: "before"
+    },
+    content: {
+      class: ""
+    },
+    icon: {
+      class: "",
+      position: "before"
+    },
+    iconToggle: {
+      class: ""
+    },
+    items: [{
+      header: {
+        label: "Label 1",
+        labelToggle: "Label 1 Toggle",
+        icon: "",
+        iconToggle: ""
+      },
+      content: {
+        text: "Accordion content 1"
+      }
+    }, {
+      header: {
+        label: "Label 2"
+      },
+      content: {
+        text: "Accordion content 3"
+      }
+    }]
+  };
+  var accordionDataX = props.accordionData.post_content == null || props.accordionData.post_content.length == 0 ? defaultPostData : props.accordionData;
+  var [accordionData, setaccordionData] = useState(accordionDataX); // Using the hook.
+  var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
+
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-5"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    className: "font-medium text-slate-900 ",
+    title: "Wrapper",
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: "",
+    className: "font-medium text-slate-900 "
+  }, "Wrapper Class"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    value: wrapper.class,
+    onChange: newVal => {
+      var accordionDataX = {
+        ...accordionData
+      };
+      accordionDataX.wrapper.class = newVal;
+      setaccordionData(accordionDataX);
+    }
+  }))), JSON.stringify(accordionData));
+}
+class AccordionsEdit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true,
+      isLoaded: false
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState(state => ({
+        isLoaded: !state.isLoaded
+      }));
+    }, 1000);
+  }
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+  render() {
+    var {
+      onChange,
+      accordionData
+    } = this.props;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+      onChange: onChange,
+      accordionData: accordionData,
+      warn: this.state.showWarning,
+      isLoaded: this.state.isLoaded
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccordionsEdit);
+
+/***/ }),
+
+/***/ "./src/components/accordions-view/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/accordions-view/index.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-sortablejs */ "./node_modules/react-sortablejs/dist/index.js");
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_sortablejs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__);
+
+const {
+  Component,
+  RawHTML,
+  useState,
+  useEffect
+} = wp.element;
+
+
+
+
+var myStore = wp.data.select('postgrid-shop');
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
+  var id = props.id;
+  var [isLoading, setisLoading] = useState(false); // Using the hook.
+  var [postData, setpostData] = useState(null); // Using the hook.
+  var [viewType, setviewType] = useState('accordion'); // Using the hook.
+  var [items, setitems] = useState(null); // Using the hook.
+
+  var defaultPostData = {
+    wrapper: {
+      class: ""
+    },
+    header: {
+      class: ""
+    },
+    headerActive: {
+      class: ""
+    },
+    headerLabel: {
+      class: ""
+    },
+    labelIcon: {
+      class: "",
+      position: "before"
+    },
+    labelCounter: {
+      class: "",
+      position: "before"
+    },
+    content: {
+      class: ""
+    },
+    icon: {
+      class: "",
+      position: "before"
+    },
+    iconToggle: {
+      class: ""
+    },
+    items: [{
+      header: {
+        label: "Label 1",
+        labelToggle: "Label 1 Toggle",
+        icon: "",
+        iconToggle: ""
+      },
+      content: {
+        text: "Accordion content 1"
+      }
+    }, {
+      header: {
+        label: "Label 2"
+      },
+      content: {
+        text: "Accordion content 3"
+      }
+    }]
+  };
+  useEffect(() => {
+    setisLoading(true);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
+      path: "/accordions/v2/accordions_data",
+      method: "POST",
+      data: {
+        postId: id,
+        _wpnonce: post_grid_editor_js._wpnonce
+      }
+    }).then(res => {
+      setisLoading(false);
+      console.log(res);
+      setpostData(res);
+      var post_content = res.post_content == null || res.post_content.length == 0 ? defaultPostData.items : res.post_content;
+      setitems(post_content);
+    });
+  }, [id]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "ml-5"
+  }, isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "absolute top-0 left-0 bg-slate-500"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center justify-between align-middle bg-white p-5  mb-5"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-5"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "pr-5"
+  }, "View Type: "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: viewType == 'accordion' ? 'bg-slate-500 text-white p-3 py-2' : 'p-3 py-2 bg-slate-400',
+    onClick: ev => {
+      setviewType("accordion");
+    }
+  }, "Accordion"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: viewType == 'tabs' ? 'bg-slate-500 text-white p-3 py-2' : 'p-3 py-2 bg-slate-400',
+    onClick: ev => {
+      setviewType("tabs");
+    }
+  }, "Tabs"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, postData?.post_title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "You are editing: ", postData.post_title))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-3 py-2 bg-slate-500 inline-block",
+    onClick: ev => {}
+  }, "Add"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-5"
+  }, items?.map(item => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "p-3 bg-white border-b border-solid border-0"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Icon"), item.header.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "bg-white p-3"
+    }, item.content.text));
+  })));
+}
+class AccordionsView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+  render() {
+    var {
+      onChange,
+      id
+    } = this.props;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+      onChange: onChange,
+      id: id,
+      warn: this.state.showWarning
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccordionsView);
+
+/***/ }),
+
+/***/ "./src/components/accordions/index.js":
+/*!********************************************!*\
+  !*** ./src/components/accordions/index.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-sortablejs */ "./node_modules/react-sortablejs/dist/index.js");
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_sortablejs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/check.js");
+
+const {
+  Component,
+  RawHTML,
+  useState,
+  useEffect
+} = wp.element;
+
+
+
+
+var myStore = wp.data.select('postgrid-shop');
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
   var isLoaded = props.isLoaded;
+  var selectAccordion = props.selectAccordion;
+  var activeAccordion = props.activeAccordion;
   var [posts, setPosts] = useState(null); // Using the hook.
   var [pagination, setPagination] = useState({
     currentPage: 1
@@ -124,7 +477,6 @@ function Html(props) {
   var [dataLoaded, setdataLoaded] = useState(false); // Using the hook.
   var [isLoading, setisLoading] = useState(false); // Using the hook.
 
-  var isLoaded = props.isLoaded;
   var queryArgs = [{
     "id": "postType",
     "val": ["accordions"]
@@ -139,7 +491,7 @@ function Html(props) {
     "val": ["date"]
   }, {
     "id": "postsPerPage",
-    "val": "3"
+    "val": "10"
   }, {
     "id": "paged",
     "val": "1"
@@ -153,7 +505,6 @@ function Html(props) {
         item.val = pagination.currentPage;
       }
     });
-    console.log(queryArgs);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
       path: "/accordions/v2/accordions_list",
       method: "POST",
@@ -162,7 +513,6 @@ function Html(props) {
         _wpnonce: post_grid_editor_js._wpnonce
       }
     }).then(res => {
-      console.log(res);
       setisLoading(false);
       setPosts(res.posts);
     });
@@ -173,10 +523,13 @@ function Html(props) {
     className: "absolute top-0 left-0 bg-slate-500"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null)), posts != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map(item => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "p-3 border-0 border-b border-solid hover:bg-slate-300 cursor-pointer"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "text-sm"
-    }, item.post_title));
+      className: "flex justify-between p-3 border-0 border-b border-solid hover:bg-slate-300 cursor-pointer",
+      onClick: ev => {
+        selectAccordion(item.ID);
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, item.post_title), activeAccordion == item.ID && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"]
+    })));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex py-5 justify-between px-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -222,10 +575,12 @@ class AccordionsList extends Component {
   }
   render() {
     var {
-      onChange
+      selectAccordion,
+      activeAccordion
     } = this.props;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
-      onChange: onChange,
+      selectAccordion: selectAccordion,
+      activeAccordion: activeAccordion,
       warn: this.state.showWarning,
       isLoaded: this.state.isLoaded
     });
@@ -248,14 +603,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/category.js");
-/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
-/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
-/* harmony import */ var _components_accordions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/accordions */ "./src/components/accordions/index.js");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/category.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_accordions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/accordions */ "./src/components/accordions/index.js");
+/* harmony import */ var _components_accordions_view__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/accordions-view */ "./src/components/accordions-view/index.js");
+/* harmony import */ var _components_accordions_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accordions-edit */ "./src/components/accordions-edit/index.js");
 
 const {
-  Component
+  Component,
+  useState,
+  useEffect
 } = wp.element;
+
+
+
 
 
 
@@ -264,6 +628,33 @@ function Html(props) {
   if (!props.warn) {
     return null;
   }
+  var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
+  var [postData, setpostData] = useState(null); // Using the hook.
+  var [isLoading, setisLoading] = useState(false); // Using the hook.
+
+  function selectAccordion(args) {
+    console.log(args);
+    setActiveAccordion(args);
+  }
+  function onChangeAccordion(args) {
+    console.log(args);
+    //setaccordionData(args)
+  }
+  useEffect(() => {
+    setisLoading(true);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: "/accordions/v2/accordions_data",
+      method: "POST",
+      data: {
+        postId: activeAccordion,
+        _wpnonce: post_grid_editor_js._wpnonce
+      }
+    }).then(res => {
+      setisLoading(false);
+      console.log(res);
+      setpostData(res);
+    });
+  }, [activeAccordion]);
   var optionDataDefault = {
     customFonts: [],
     googleFonts: [],
@@ -349,7 +740,7 @@ function Html(props) {
     className: "flex "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-[400px]"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_2__["default"], {
     activeTab: "accordions",
     orientation: "",
     contentClass: " bg-white w-full",
@@ -360,32 +751,44 @@ function Html(props) {
     tabs: [{
       name: "accordions",
       title: "Accordions",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "edit",
       title: "Edit",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "templates",
       title: "Templates",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
       className: "tab-disable-blocks"
     }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
     name: "accordions"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "relative"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions__WEBPACK_IMPORTED_MODULE_3__["default"], null))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "relative p-5"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    selectAccordion: selectAccordion,
+    activeAccordion: activeAccordion
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font "
-  }, "edit")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: " "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onChange: onChangeAccordion,
+    accordionData: postData
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font "
-  }, "templates")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)));
+    className: " "
+  }, "templates")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "w-full"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "  relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    id: activeAccordion
+  })))));
 }
 class PGDashboard extends Component {
   constructor(props) {

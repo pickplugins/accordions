@@ -2,11 +2,30 @@
 
 const { Component, RawHTML, useState, useEffect } = wp.element;
 
-import { Icon, close, settings, cloud, plus } from '@wordpress/icons';
 import { ReactSortable } from "react-sortablejs";
 import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, Spinner, CustomSelectControl, Popover, __experimentalInputControl as InputControl, } from '@wordpress/components'
 import apiFetch from '@wordpress/api-fetch';
-
+import {
+	Icon,
+	styles,
+	close,
+	plus,
+	key,
+	check,
+	typography,
+	textColor,
+	lockSmall,
+	category,
+	atSymbol,
+	settings,
+	upload,
+	color,
+	plusCircle,
+	download,
+	arrowRight,
+	brush,
+	code,
+} from "@wordpress/icons";
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -19,6 +38,8 @@ function Html(props) {
 	}
 
 	var isLoaded = props.isLoaded;
+	var selectAccordion = props.selectAccordion;
+	var activeAccordion = props.activeAccordion;
 
 
 
@@ -35,7 +56,6 @@ function Html(props) {
 
 
 
-	var isLoaded = props.isLoaded;
 
 
 	var queryArgs = [
@@ -63,7 +83,7 @@ function Html(props) {
 		},
 		{
 			"id": "postsPerPage",
-			"val": "3"
+			"val": "10"
 		},
 		{
 			"id": "paged",
@@ -90,7 +110,6 @@ function Html(props) {
 
 		})
 
-		console.log(queryArgs);
 
 
 
@@ -105,7 +124,6 @@ function Html(props) {
 			},
 		}).then((res) => {
 
-			console.log(res);
 
 
 			setisLoading(false);
@@ -140,14 +158,27 @@ function Html(props) {
 				</div>
 			)}
 
+
 			{posts != null && (
 				<>
 					{posts.map(item => {
 
 						return (
-							<div className='p-3 border-0 border-b border-solid hover:bg-slate-300 cursor-pointer'>
+							<div className='flex justify-between p-3 border-0 border-b border-solid hover:bg-slate-300 cursor-pointer' onClick={ev => {
+								selectAccordion(item.ID)
+							}}>
 
-								<div className='text-sm'>{item.post_title}</div>
+
+
+
+
+								<span>{item.post_title}</span>
+
+								{activeAccordion == item.ID && (
+									<span><Icon icon={check} /></span>
+								)}
+
+
 
 							</div>
 						)
@@ -223,8 +254,8 @@ class AccordionsList extends Component {
 	render() {
 
 		var {
-			onChange,
-
+			selectAccordion,
+			activeAccordion
 
 		} = this.props;
 
@@ -237,7 +268,7 @@ class AccordionsList extends Component {
 		return (
 
 
-			<Html onChange={onChange} warn={this.state.showWarning} isLoaded={this.state.isLoaded} />
+			<Html selectAccordion={selectAccordion} activeAccordion={activeAccordion} warn={this.state.showWarning} isLoaded={this.state.isLoaded} />
 
 
 		)

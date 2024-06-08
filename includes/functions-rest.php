@@ -73,6 +73,32 @@ class AccordionsRest
 
 			)
 		);
+		register_rest_route(
+			'accordions/v2',
+			'/accordions_data',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'accordions_data'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+
+			)
+		);
+		register_rest_route(
+			'accordions/v2',
+			'/update_post_data',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'update_post_data'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+
+			)
+		);
+
+
 
 
 
@@ -325,6 +351,111 @@ class AccordionsRest
 
 		die(wp_json_encode($response));
 	}
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function accordions_data($post_data)
+	{
+
+		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
+
+		$response = new stdClass();
+
+
+		$post = get_post($postId);
+
+
+		$response->ID = $post->ID;
+		$response->post_title = $post->post_title;
+		$response->post_content = $post->post_content;
+
+		$taxonomies = get_object_taxonomies(get_post_type($postId));
+
+
+
+		if (!empty($taxonomies))
+			foreach ($taxonomies as $taxonomy) {
+
+				$terms = get_the_terms($postId, $taxonomy);
+
+				$termsData = [];
+
+				if (!empty($terms))
+					foreach ($terms as $index => $term) {
+
+						$termsData[$index]['term_id'] = $term->term_id;
+						$termsData[$index]['name'] = $term->name;
+						$termsData[$index]['slug'] = $term->slug;
+						$termsData[$index]['count'] = $term->count;
+						$termsData[$index]['url'] = get_term_link($term->term_id);
+					}
+
+
+				if (!empty($termsData))
+					$response->$taxonomy = $termsData;
+			}
+
+
+		// $post_id = $post->ID;
+		// $post->post_id = $post->ID;
+		// $post->post_title = $post->post_title;
+
+		//$post->post_content = !empty($post->post_content) ? $post->post_content : null;
+
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function update_post_data($post_data)
+	{
+
+		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
+		$content = isset($post_data['content']) ? $post_data['content'] : '';
+
+		$response = new stdClass();
+
+
+
+
+		$my_post = array(
+			'ID'           => $postId,
+			'post_content' => $content,
+		);
+
+		// Update the post into the database
+		wp_update_post($my_post);
+
+
+		die(wp_json_encode($response));
+	}
+
+
+
+
+
+
+
+
+
 
 
 
