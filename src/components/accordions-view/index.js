@@ -40,7 +40,7 @@ function Html(props) {
 	var defaultPostData = {
 		wrapper: {
 			options: {
-				class: "",
+				class: "wrapper",
 			},
 			styles: {
 				color: {
@@ -179,7 +179,7 @@ function Html(props) {
 	var [content, setcontent] = useState(defaultPostData.content);
 	var [icon, seticon] = useState(defaultPostData.icon);
 	var [iconToggle, seticonToggle] = useState(defaultPostData.iconToggle);
-	
+
 	var [active, setactive] = useState("0");
 	const handleActive = (index) => {
 		setactive(index);
@@ -230,7 +230,7 @@ function Html(props) {
 				<div>
 					<div
 						className="p-3 py-2 bg-slate-500 inline-block"
-						onClick={(ev) => {}}>
+						onClick={(ev) => { }}>
 						Add
 					</div>
 				</div>
@@ -243,9 +243,8 @@ function Html(props) {
 					return (
 						<>
 							<div
-								className={`${header.options.class} ${
-									active == index ? headerActive.options.class : ""
-								}  p-3 bg-white border-b border-solid border-0`}
+								className={`${header.options.class} ${active == index ? headerActive.options.class : ""
+									}  p-3 bg-white border-b border-solid border-0`}
 								onClick={() => handleActive(index)}>
 								{icon.options.position == "before" && <span>Icon</span>}
 								<span>
