@@ -50,7 +50,7 @@ function Html(props) {
 		},
 		header: {
 			options: {
-				class: "",
+				class: "header",
 			},
 			styles: {
 				color: {
@@ -60,7 +60,7 @@ function Html(props) {
 		},
 		headerActive: {
 			options: {
-				class: "",
+				class: "header-active",
 			},
 			styles: {
 				color: {
@@ -70,7 +70,7 @@ function Html(props) {
 		},
 		headerLabel: {
 			options: {
-				class: "",
+				class: "header-label",
 			},
 			styles: {
 				color: {
@@ -85,21 +85,20 @@ function Html(props) {
 				srcType: "class",
 				iconSrc: "fas fa-check-circle",
 				position: "beforeText",
-				class: "text-icon",
+				class: "label-icon",
 			},
 			styles: {},
 		},
 		labelCounter: {
 			options: {
-				enable: false,
 				position: "beforeText",
-				class: "text-icon",
+				class: "label-counter",
 			},
 			styles: {},
 		},
 		content: {
 			options: {
-				class: "",
+				class: "content",
 			},
 			styles: {
 				color: {
@@ -114,13 +113,13 @@ function Html(props) {
 				srcType: "class",
 				iconSrc: "fas fa-check-circle",
 				position: "beforeText",
-				class: "text-icon",
+				class: "icon",
 			},
 			styles: {},
 		},
 		iconToggle: {
 			options: {
-				class: "",
+				class: "icon-toggle",
 			},
 			styles: {
 				color: {
@@ -243,29 +242,42 @@ function Html(props) {
 					return (
 						<>
 							<div
-								className={`${header.options.class} ${active == index ? headerActive.options.class : ""
-									}  p-3 bg-white border-b border-solid border-0`}
+								className={`${header.options.class} ${
+									active == index ? headerActive.options.class : ""
+								}  p-3 border-b border-solid border-0`}
 								onClick={() => handleActive(index)}>
-								{icon.options.position == "before" && <span>Icon</span>}
-								<span>
-									{labelCounter.enable && labelCounter.position == "before" && (
-										<>{index + 1}</>
-									)}
-									{labelIcon.enable && labelIcon.position == "before" && (
-										<>labelIcon</>
-									)}
+								{icon.options.position == "before" && (
+									<span className={`${icon.options.class}`}>Icon</span>
+								)}
+								{labelCounter.enable && labelCounter.position == "before" && (
+									<span className={`${labelCounter.options.class}`}>
+										{index + 1}
+									</span>
+								)}
+								{labelIcon.enable && labelIcon.position == "before" && (
+									<span className={`${labelIcon.options.class}`}>
+										labelIcon
+									</span>
+								)}
+								<span className={`${headerLabel.options.class}`}>
 									{item.header.label}
-									{labelIcon.enable && labelIcon.position == "after" && (
-										<>labelIcon</>
-									)}
-									{labelCounter.enable && labelCounter.position == "after" && (
-										<>{index + 1}</>
-									)}
 								</span>
-								{icon.options.position == "after" && <span>Icon</span>}
+								{labelIcon.enable && labelIcon.position == "after" && (
+									<span className={`${labelIcon.options.class}`}>
+										labelIcon
+									</span>
+								)}
+								{labelCounter.enable && labelCounter.position == "after" && (
+									<span className={`${labelCounter.options.class}`}>
+										{index + 1}
+									</span>
+								)}
+								{icon.options.position == "after" && (
+									<span className={`${labelCounter.options.class}`}>Icon</span>
+								)}
 							</div>
 							<div
-								className={`${active == index ? "" : "hidden"} bg-white p-3`}>
+								className={`${active == index ? "" : "hidden"} ${content.options.class} bg-white p-3`}>
 								{item.content.text}
 							</div>
 						</>
