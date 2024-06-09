@@ -83,15 +83,15 @@ function Html(props) {
 				enable: true,
 				library: "fontAwesome",
 				srcType: "class",
-				iconSrc: "fas fa-check-circle",
-				position: "beforeText",
+				iconSrc: "",
+				position: "",
 				class: "label-icon",
 			},
 			styles: {},
 		},
 		labelCounter: {
 			options: {
-				position: "beforeText",
+				position: "before",
 				class: "label-counter",
 			},
 			styles: {},
@@ -111,8 +111,8 @@ function Html(props) {
 				enable: true,
 				library: "fontAwesome",
 				srcType: "class",
-				iconSrc: "fas fa-check-circle",
-				position: "beforeText",
+				iconSrc: "fas fa-angle-right",
+				position: "before",
 				class: "icon",
 			},
 			styles: {},
@@ -120,6 +120,9 @@ function Html(props) {
 		iconToggle: {
 			options: {
 				class: "icon-toggle",
+				library: "fontAwesome",
+				srcType: "class",
+				iconSrc: "fas fa-angle-down",
 			},
 			styles: {
 				color: {
@@ -143,6 +146,7 @@ function Html(props) {
 				content: { text: "Accordion content 3" },
 			},
 		],
+		blockCssY: { items: [] },
 	};
 
 	useEffect(() => {
@@ -182,7 +186,30 @@ function Html(props) {
 	var [active, setactive] = useState("0");
 	const handleActive = (index) => {
 		setactive(index);
-	}
+	};
+	const [iconHtml, setIconHtml] = useState("");
+	const [iconToggleHtml, seticonToggleHtml] = useState("");
+	const [labelIconHtml, setlabelIconHtml] = useState("");
+
+	//Icon update from nested item
+
+	useEffect(() => {
+		var iconSrc = icon.options.iconSrc;
+		var iconHtml = `<span class="${icon.options.class} ${iconSrc}"></span>`;
+		setIconHtml(iconHtml);
+	}, [icon, icon.options.iconSrc]);
+
+	useEffect(() => {
+		var iconSrc = iconToggle.options.iconSrc;
+		var iconHtml = `<span class="${iconToggle.options.class} ${iconSrc}"></span>`;
+		seticonToggleHtml(iconHtml);
+	}, [iconToggle, iconToggle.options.iconSrc]);
+
+	useEffect(() => {
+		var iconSrc = labelIcon.options.iconSrc;
+		var iconHtml = `<span class="${labelIcon.options.class}  ${iconSrc}"></span>`;
+		setlabelIconHtml(iconHtml);
+	}, [labelIcon, labelIcon.options.iconSrc]);
 
 	return (
 		<div className="ml-5">
@@ -229,7 +256,7 @@ function Html(props) {
 				<div>
 					<div
 						className="p-3 py-2 bg-slate-500 inline-block"
-						onClick={(ev) => { }}>
+						onClick={(ev) => {}}>
 						Add
 					</div>
 				</div>
@@ -247,7 +274,22 @@ function Html(props) {
 								}  p-3 border-b border-solid border-0`}
 								onClick={() => handleActive(index)}>
 								{icon.options.position == "before" && (
-									<span className={`${icon.options.class}`}>Icon</span>
+									<>
+										{/* <span className={`${icon.options.class}`}> */}
+										{active == index && (
+											<span
+												className={`${iconToggle.options.class}`}
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
+										)}
+										{active != index && (
+											<span
+												className={`${icon.options.class}`}
+												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+										)}
+										{/* </span> */}
+									</>
 								)}
 								{labelCounter.enable && labelCounter.position == "before" && (
 									<span className={`${labelCounter.options.class}`}>
@@ -255,17 +297,21 @@ function Html(props) {
 									</span>
 								)}
 								{labelIcon.enable && labelIcon.position == "before" && (
-									<span className={`${labelIcon.options.class}`}>
-										labelIcon
-									</span>
+									<span
+										className={`${labelIcon.options.class}`}
+										dangerouslySetInnerHTML={{
+											__html: labelIconHtml,
+										}}></span>
 								)}
 								<span className={`${headerLabel.options.class}`}>
 									{item.header.label}
 								</span>
 								{labelIcon.enable && labelIcon.position == "after" && (
-									<span className={`${labelIcon.options.class}`}>
-										labelIcon
-									</span>
+									<span
+										className={`${labelIcon.options.class}`}
+										dangerouslySetInnerHTML={{
+											__html: labelIconHtml,
+										}}></span>
 								)}
 								{labelCounter.enable && labelCounter.position == "after" && (
 									<span className={`${labelCounter.options.class}`}>
@@ -273,11 +319,28 @@ function Html(props) {
 									</span>
 								)}
 								{icon.options.position == "after" && (
-									<span className={`${labelCounter.options.class}`}>Icon</span>
+									<>
+										{/* <span className={`${icon.options.class}`}> */}
+										{active == index && (
+											<span
+												className={`${iconToggle.options.class}`}
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
+										)}
+										{active != index && (
+											<span
+												className={`${icon.options.class}`}
+												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+										)}
+										{/* </span> */}
+									</>
 								)}
 							</div>
 							<div
-								className={`${active == index ? "" : "hidden"} ${content.options.class} bg-white p-3`}>
+								className={`${active == index ? "" : "hidden"} ${
+									content.options.class
+								} bg-white p-3`}>
 								{item.content.text}
 							</div>
 						</>

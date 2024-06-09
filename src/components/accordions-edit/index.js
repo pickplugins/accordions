@@ -34,6 +34,7 @@ import apiFetch from "@wordpress/api-fetch";
 import PGtabs from "../tabs";
 import PGtab from "../tab";
 import PGStyles from "../styles";
+import PGIconPicker from "../icon-picker";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -92,15 +93,15 @@ function Html(props) {
 				enable: true,
 				library: "fontAwesome",
 				srcType: "class",
-				iconSrc: "fas fa-check-circle",
-				position: "beforeText",
+				iconSrc: "",
+				position: "before",
 				class: "label-icon",
 			},
 			styles: {},
 		},
 		labelCounter: {
 			options: {
-				position: "beforeText",
+				position: "before",
 				class: "label-counter",
 			},
 			styles: {},
@@ -120,7 +121,7 @@ function Html(props) {
 				enable: true,
 				library: "fontAwesome",
 				srcType: "class",
-				iconSrc: "fas fa-check-circle",
+				iconSrc: "fas fa-angle-right",
 				position: "beforeText",
 				class: "icon",
 			},
@@ -129,6 +130,9 @@ function Html(props) {
 		iconToggle: {
 			options: {
 				class: "icon-toggle",
+				library: "fontAwesome",
+				srcType: "class",
+				iconSrc: "fas fa-angle-down",
 			},
 			styles: {
 				color: {
@@ -163,15 +167,15 @@ function Html(props) {
 
 	var [accordionData, setaccordionData] = useState(accordionDataX); // Using the hook.
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
-	var [header, setheader] = useState(defaultPostData.header);
-	var [headerActive, setheaderActive] = useState(defaultPostData.headerActive);
-	var [headerLabel, setheaderLabel] = useState(defaultPostData.headerLabel);
-	var [labelIcon, setlabelIcon] = useState(defaultPostData.labelIcon);
-	var [labelCounter, setlabelCounter] = useState(defaultPostData.labelCounter);
-	var [content, setcontent] = useState(defaultPostData.content);
-	var [icon, seticon] = useState(defaultPostData.icon);
-	var [iconToggle, seticonToggle] = useState(defaultPostData.iconToggle);
-	var [blockCssY, setblockCssY] = useState(defaultPostData.blockCssY);
+	var [header, setheader] = useState(accordionData.header);
+	var [headerActive, setheaderActive] = useState(accordionData.headerActive);
+	var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
+	var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
+	var [content, setcontent] = useState(accordionData.content);
+	var [icon, seticon] = useState(accordionData.icon);
+	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
+	var [blockCssY, setblockCssY] = useState(accordionData.blockCssY);
 
 	var wrapperSelector = "." + wrapper.options.class;
 	var headerSelector = "." + header.options.class;
@@ -186,8 +190,6 @@ function Html(props) {
 	var blockId = "";
 
 	useEffect(() => {
-		console.log(blockCssY);
-
 		myStore.generateBlockCss(blockCssY.items, blockId);
 	}, [blockCssY]);
 
@@ -904,6 +906,109 @@ function Html(props) {
 		setcontent(obj);
 	}
 
+	// //labelIcon
+
+	function onChangeStylelabelIcon(sudoScource, newVal, attr) {
+		var path = [sudoScource, attr, breakPointX];
+		let obj = { ...labelIcon };
+		const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+		setlabelIcon(object);
+
+		var elementSelector = myStore.getElementSelector(
+			sudoScource,
+			labelIconSelector
+		);
+		var cssPropty = myStore.cssAttrParse(attr);
+
+		let itemsX = Object.assign({}, blockCssY.items);
+
+		if (itemsX[elementSelector] == undefined) {
+			itemsX[elementSelector] = {};
+		}
+
+		var cssPath = [elementSelector, cssPropty, breakPointX];
+		const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+		setblockCssY({ items: cssItems });
+	}
+
+	function onRemoveStylelabelIcon(sudoScource, key) {
+		let obj = { ...labelIcon };
+		var object = myStore.deletePropertyDeep(obj, [
+			sudoScource,
+			key,
+			breakPointX,
+		]);
+
+		setlabelIcon(object);
+
+		setblockCssY({ items: cssItems });
+	}
+
+	function onAddStylelabelIcon(sudoScource, key) {
+		var path = [sudoScource, key, breakPointX];
+		let obj = { ...labelIcon };
+
+		const object = myStore.addPropertyDeep(obj, path, "");
+		setlabelIcon(object);
+	}
+
+	function onBulkAddlabelIcon(sudoScource, cssObj) {
+		let obj = { ...labelIcon };
+		obj[sudoScource] = cssObj;
+
+		setlabelIcon(obj);
+
+		var selector = myStore.getElementSelector(
+			sudoScource,
+			labelIconSelector
+		);
+		var stylesObj = {};
+
+		Object.entries(cssObj).map((args) => {
+			var attr = args[0];
+			var cssPropty = myStore.cssAttrParse(attr);
+
+			if (stylesObj[selector] == undefined) {
+				stylesObj[selector] = {};
+			}
+
+			if (stylesObj[selector][cssPropty] == undefined) {
+				stylesObj[selector][cssPropty] = {};
+			}
+
+			stylesObj[selector][cssPropty] = args[1];
+		});
+
+		var cssItems = { ...blockCssY.items };
+
+		setblockCssY({ items: cssItems });
+	}
+
+	function onResetlabelIcon(sudoSources) {
+		let obj = { ...labelIcon };
+
+		Object.entries(sudoSources).map((args) => {
+			var sudoScource = args[0];
+			if (obj[sudoScource] == undefined) {
+			} else {
+				obj[sudoScource] = {};
+				var elementSelector = myStore.getElementSelector(
+					sudoScource,
+					labelIconSelector
+				);
+
+				var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+					elementSelector,
+				]);
+				setblockCssY({ items: cssObject });
+			}
+		});
+
+		setlabelIcon(obj);
+	}
+
 	// //icon
 
 	function onChangeStyleicon(sudoScource, newVal, attr) {
@@ -1110,10 +1215,41 @@ function Html(props) {
 		seticonToggle(obj);
 	}
 
+	function onChangeIcon(arg) {
+		var options = {
+			...icon.options,
+			srcType: arg.srcType,
+			library: arg.library,
+			iconSrc: arg.iconSrc,
+		};
+		
+		seticon({ ...icon, options: options  });
+	}
+	function onChangeIconToggle(arg) {
+		var options = {
+			...iconToggle.options,
+			srcType: arg.srcType,
+			library: arg.library,
+			iconSrc: arg.iconSrc,
+		};
+
+		seticonToggle({ ...iconToggle, options: options });
+	}
+	function onChangeLabelIcon(arg) {
+		var options = {
+			...labelIcon.options,
+			srcType: arg.srcType,
+			library: arg.library,
+			iconSrc: arg.iconSrc,
+		};
+
+		setlabelIcon({ ...labelIcon, options: options });
+	}
+
 	return (
 		<div className="p-5">
-			{JSON.stringify(wrapper)}
-			{JSON.stringify(blockCssY)}
+			{/* {JSON.stringify(icon)}
+			{JSON.stringify(blockCssY)} */}
 
 			<PanelBody
 				className="font-medium text-slate-900 "
@@ -1396,6 +1532,32 @@ function Html(props) {
 								}}
 							/>
 						</div>
+						<PanelRow>
+							<label htmlFor="" className="font-medium text-slate-900 ">
+								Icon position
+							</label>
+
+							<SelectControl
+								label=""
+								value={labelCounter.options.position}
+								options={[
+									{ label: "Choose Position", value: "" },
+
+									{ label: "Before", value: "before" },
+									{ label: "After", value: "after" },
+									// { label: "Before Prefix", value: "beforePrefix" },
+									// { label: "After Prefix", value: "afterPrefix" },
+									// { label: "Before Postfix", value: "beforePostfix" },
+									// { label: "After Postfix", value: "afterPostfix" },
+									// { label: "Before Link", value: "beforeLink" },
+									// { label: "After Link", value: "afterLink" },
+								]}
+								onChange={(newVal) => {
+									var options = { ...labelCounter.options, position: newVal };
+									setlabelCounter({ ...labelCounter, options: options });
+								}}
+							/>
+						</PanelRow>
 					</PGtab>
 					<PGtab name="styles">
 						<PGStyles
@@ -1405,6 +1567,104 @@ function Html(props) {
 							onRemove={onRemoveStylelabelCounter}
 							onBulkAdd={onBulkAddlabelCounter}
 							onReset={onResetlabelCounter}
+						/>
+					</PGtab>
+				</PGtabs>
+			</PanelBody>
+			{/* //*labelIcon  */}
+			<PanelBody
+				className="font-medium text-slate-900 "
+				title="Label Icon"
+				initialOpen={false}>
+				<PGtabs
+					activeTab="options"
+					orientation="horizontal"
+					activeClass="active-tab"
+					onSelect={(tabName) => {}}
+					tabs={[
+						{
+							name: "options",
+							title: "Options",
+							icon: settings,
+							className: "tab-settings",
+						},
+						{
+							name: "styles",
+							title: "Styles",
+							icon: brush,
+							className: "tab-style",
+						},
+						// {
+						// 	name: "css",
+						// 	title: "CSS Library",
+						// 	icon: mediaAndText,
+						// 	className: "tab-css",
+						// },
+					]}>
+					<PGtab name="options">
+						<div>
+							<label htmlFor="" className="font-medium text-slate-900 ">
+								Label Icon Class
+							</label>
+							<InputControl
+								value={labelIcon.options.class}
+								onChange={(newVal) => {
+									var accordionDataX = { ...accordionData };
+
+									accordionDataX.labelIcon.options.class = newVal;
+
+									setaccordionData(accordionDataX);
+								}}
+							/>
+						</div>
+						<PanelRow>
+							<label htmlFor="" className="font-medium text-slate-900 ">
+								Choose Icon
+							</label>
+
+							<PGIconPicker
+								library={labelIcon.options.library}
+								srcType={labelIcon.options.srcType}
+								iconSrc={labelIcon.options.iconSrc}
+								onChange={onChangeLabelIcon}
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<label htmlFor="" className="font-medium text-slate-900 ">
+								Icon position
+							</label>
+
+							<SelectControl
+								label=""
+								value={icon.options.position}
+								options={[
+									{ label: "Choose Position", value: "" },
+
+									{ label: "Before", value: "before" },
+									{ label: "After", value: "after" },
+									// { label: "Before Prefix", value: "beforePrefix" },
+									// { label: "After Prefix", value: "afterPrefix" },
+									// { label: "Before Postfix", value: "beforePostfix" },
+									// { label: "After Postfix", value: "afterPostfix" },
+									// { label: "Before Link", value: "beforeLink" },
+									// { label: "After Link", value: "afterLink" },
+								]}
+								onChange={(newVal) => {
+									var options = { ...labelIcon.options, position: newVal };
+									setlabelIcon({ ...labelIcon, options: options });
+								}}
+							/>
+						</PanelRow>
+					</PGtab>
+					<PGtab name="styles">
+						<PGStyles
+							obj={labelIcon}
+							onChange={onChangeStylelabelIcon}
+							onAdd={onAddStylelabelIcon}
+							onRemove={onRemoveStylelabelIcon}
+							onBulkAdd={onBulkAddlabelIcon}
+							onReset={onResetlabelIcon}
 						/>
 					</PGtab>
 				</PGtabs>
@@ -1468,6 +1728,7 @@ function Html(props) {
 					</PGtab>
 				</PGtabs>
 			</PanelBody>
+
 			{/* //*icon  */}
 			<PanelBody
 				className="font-medium text-slate-900 "
@@ -1514,6 +1775,45 @@ function Html(props) {
 								}}
 							/>
 						</div>
+						<PanelRow>
+							<label htmlFor="" className="font-medium text-slate-900 ">
+								Choose Icon
+							</label>
+
+							<PGIconPicker
+								library={icon.options.library}
+								srcType={icon.options.srcType}
+								iconSrc={icon.options.iconSrc}
+								onChange={onChangeIcon}
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<label htmlFor="" className="font-medium text-slate-900 ">
+								Icon position
+							</label>
+
+							<SelectControl
+								label=""
+								value={icon.options.position}
+								options={[
+									{ label: "Choose Position", value: "" },
+
+									{ label: "Before", value: "before" },
+									{ label: "After", value: "after" },
+									// { label: "Before Prefix", value: "beforePrefix" },
+									// { label: "After Prefix", value: "afterPrefix" },
+									// { label: "Before Postfix", value: "beforePostfix" },
+									// { label: "After Postfix", value: "afterPostfix" },
+									// { label: "Before Link", value: "beforeLink" },
+									// { label: "After Link", value: "afterLink" },
+								]}
+								onChange={(newVal) => {
+									var options = { ...icon.options, position: newVal };
+									seticon({ ...icon, options: options });
+								}}
+							/>
+						</PanelRow>
 					</PGtab>
 					<PGtab name="styles">
 						<PGStyles
@@ -1573,6 +1873,18 @@ function Html(props) {
 								}}
 							/>
 						</div>
+						<PanelRow>
+							<label htmlFor="" className="font-medium text-slate-900 ">
+								Choose Icon
+							</label>
+
+							<PGIconPicker
+								library={iconToggle.options.library}
+								srcType={iconToggle.options.srcType}
+								iconSrc={iconToggle.options.iconSrc}
+								onChange={onChangeIconToggle}
+							/>
+						</PanelRow>
 					</PGtab>
 					<PGtab name="styles">
 						<PGStyles
@@ -1587,7 +1899,7 @@ function Html(props) {
 				</PGtabs>
 			</PanelBody>
 
-			{JSON.stringify(accordionData)}
+			{/* {JSON.stringify(accordionData)} */}
 		</div>
 	);
 }
