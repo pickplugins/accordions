@@ -19,9 +19,9 @@ Accordions is easy and powerful tool to create accordion, faq, tabs, tab content
 ### Accordions by http://pickplugins.com
 
 * [Accordions - Premium &raquo;](https://pickplugins.com/accordions/)
-* [Live Demo &raquo;](https://www.pickplugins.com/demo/accordions/?ref=wordpress.org)
-* [Support &raquo;](https://www.pickplugins.com/support/?ref=wordpress.org)
-* [Documentation &raquo;](https://www.pickplugins.com/documentation/accordions/?ref=wordpress.org)
+* [Live Demo &raquo;](https://www.pickplugins.com/demo/accordions/)
+* [Support &raquo;](https://www.pickplugins.com/support/)
+* [Documentation &raquo;](https://www.pickplugins.com/documentation/accordions/)
 
 
 ###Plugin Features
@@ -142,6 +142,7 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 	= 2.2.99 =
     * 2024-07-28 - fix - compatibility with 6.6 issue checked
+    * 2024-07-28 - update - Plugin page link updated
 
 	= 2.2.98 =
     * 2024-05-05 - fix - compatibility with 6.5 issue checked

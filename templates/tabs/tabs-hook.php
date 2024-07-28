@@ -352,8 +352,8 @@ function accordions_tabs_main_items($atts)
 
       if (!in_array('accordions-pro/accordions-pro.php', (array) $active_plugins)) {
         if (has_shortcode($accordion_body, 'accordions_tabs') ||  has_shortcode($accordion_body, 'accordions_tabs_pplugins')) {
-          $accordion_body = str_replace('[accordions_tabs', '**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
-          $accordion_body = str_replace('[accordions_tabs_pplugins', '**<a target="_blank" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=wordpress.org"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
+          $accordion_body = str_replace('[accordions_tabs', '**<a target="_blank" href="https://pickplugins.com/accordions/"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
+          $accordion_body = str_replace('[accordions_tabs_pplugins', '**<a target="_blank" href="https://pickplugins.com/accordions/"> <strong>Please buy pro to create nested tabs</strong></a>**', $accordion_body);
         }
       }
 

@@ -185,7 +185,7 @@ class Accordions
     $active_plugins = get_option('active_plugins');
 
     if (!in_array('accordions-pro/accordions-pro.php', (array) $active_plugins)) {
-      $links['get_premium'] = '<a target="_blank" class="" style=" font-weight:bold;" href="https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/?ref=dashboard">' . __('Buy Premium!', 'accordions') . '</a>';
+      $links['get_premium'] = '<a target="_blank" class="" style=" font-weight:bold;" href="https://pickplugins.com/accordions/?ref=dashboard">' . __('Buy Premium!', 'accordions') . '</a>';
     }
 
 
