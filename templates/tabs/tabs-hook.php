@@ -162,7 +162,7 @@ function accordions_tabs_main_style($atts)
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.tabs-nav {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .tabs-nav'; ?> {
       border: none;
       <?php if (!empty($header_background_color)) : ?>background-color: <?php echo esc_attr($header_background_color); ?>;
       <?php endif; ?><?php if (!empty($header_margin)) : ?>margin: <?php echo esc_attr($header_margin); ?> !important;
@@ -171,13 +171,13 @@ function accordions_tabs_main_style($atts)
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.tabs-nav:hover {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .tabs-nav:hover'; ?> {
       <?php if (!empty($header_active_background_color)) : ?>background-color: <?php echo esc_attr($header_active_background_color); ?>;
       <?php else : ?>background-color: rgba(0, 0, 0, 0);
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.ui-tabs-anchor {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .ui-tabs-anchor'; ?> {
       padding: 0px !important;
       margin: 0px !important;
       <?php if (!empty($header_color)) : ?>color: <?php echo esc_attr($header_color); ?>;
@@ -185,18 +185,18 @@ function accordions_tabs_main_style($atts)
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.accordions-head-title {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .accordions-head-title'; ?> {
       <?php if (!empty($header_color)) : ?>color: <?php echo esc_attr($header_color); ?>;
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.ui-tabs-active {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .ui-tabs-active'; ?> {
       <?php if (!empty($header_active_background_color)) : ?>background-color: <?php echo esc_attr($header_active_background_color); ?>;
       <?php else : ?>background-color: rgba(0, 0, 0, 0);
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.accordion-icons {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .accordion-icons'; ?> {
       <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color); ?>;
       <?php endif; ?><?php if (!empty($icon_font_size)) : ?>font-size: <?php echo esc_attr($icon_font_size); ?>;
       <?php endif; ?><?php if (!empty($icon_background_color)) : ?>background: <?php echo esc_attr($icon_background_color); ?> none repeat scroll 0 0;
@@ -205,12 +205,12 @@ function accordions_tabs_main_style($atts)
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.tabs-nav:hover .accordion-icons span {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .tabs-nav:hover .accordion-icons span'; ?> {
       <?php if (!empty($icon_color_hover)) : ?>color: <?php echo esc_attr($icon_color_hover); ?>;
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.tabs-content {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .tabs-content'; ?> {
       <?php if (!empty($body_background_color)) : ?>background-color: <?php echo esc_attr($body_background_color); ?>;
       <?php endif; ?><?php if (!empty($body_color)) : ?>color: <?php echo esc_attr($body_color); ?>;
       <?php endif; ?><?php if (!empty($body_font_size)) : ?>font-size: <?php echo esc_attr($body_font_size); ?>;
@@ -219,7 +219,7 @@ function accordions_tabs_main_style($atts)
       <?php endif; ?>
     }
 
-    <?php echo esc_attr('#accordions-tabs-' . $post_id); ?>.accordion-icons span {
+    <?php echo esc_attr('#accordions-tabs-' . $post_id) . ' .accordion-icons span'; ?> {
       <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color); ?>;
       <?php endif; ?><?php if (!empty($icon_font_size)) : ?>font-size: <?php echo esc_attr($icon_font_size); ?>;
       <?php endif; ?>
@@ -418,7 +418,7 @@ function accordions_tabs_main_items($atts)
 
 
       <div class="tabs-content tabs-content<?php echo esc_attr($index); ?> <?php echo esc_attr($body_class); ?>" id="tabs-<?php echo esc_attr($index); ?>">
-        <?php echo  $accordion_body; ?>
+        <?php echo  wp_kses_post($accordion_body); ?>
       </div>
 
   <?php
