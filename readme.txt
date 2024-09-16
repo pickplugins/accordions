@@ -4,7 +4,7 @@
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordions
 	Requires at least: 3.8
 	Tested up to: 6.6
-	Stable tag: 2.2.100
+	Stable tag: 2.3.0
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,8 +139,17 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 == Changelog ==
 
+	= 2.2.100 =
+    * 2024-09-16 - fix - Only administrator can access to accordions post types
+    * 2024-09-16 - fix - 3rd party shortcode display issue fixed.
+    * 2024-09-16 - fix - Tabs custom CSS issue fixed.
+
+	= 2.2.100 =
+    * 2024-08-20 - fix - XSS security issue fixed.
 
 
+	= 2.2.99 =
+    * 2024-08-20 - fix - XSS security issue fixed.
 
 	= 2.2.99 =
     * 2024-08-20 - fix - XSS security issue fixed.

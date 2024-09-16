@@ -423,7 +423,12 @@ function accordions_main_items($atts)
                 ?>
             </div>
             <div class="accordion-content content<?php echo esc_attr($index); ?> <?php echo esc_attr($body_class); ?>">
-                <?php echo wp_kses_post($accordion_body); ?>
+                <?php
+
+                $allowed = wp_kses_allowed_html('post');
+                global $allowedposttags, $allowedtags, $allowedentitynames;
+
+                echo ($accordion_body); ?>
             </div>
     <?php
             $item_count++;

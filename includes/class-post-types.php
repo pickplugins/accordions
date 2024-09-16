@@ -11,8 +11,20 @@ class accordions_post_types
 	public function __construct()
 	{
 		add_action('init', array($this, '_posttype_accordions'), 0);
+		add_action('admin_init', array($this, 'add_capability'));
 	}
+	public function add_capability()
+	{
+		$role = get_role('administrator');
 
+		$role->add_cap('publish_accordionss');
+		$role->add_cap('edit_accordionss');
+		$role->add_cap('edit_others_accordionss');
+		$role->add_cap('read_private_accordionss');
+		$role->add_cap('edit_accordions');
+		$role->add_cap('read_accordions');
+		$role->add_cap('delete_accordions', false);
+	}
 
 	public function _posttype_accordions()
 	{
@@ -51,6 +63,15 @@ class accordions_post_types
 				'public' 				=> false,
 				'show_ui' 				=> true,
 				'capability_type' 		=> 'post',
+				'capabilities' => array(
+					'publish_posts' => 'publish_accordionss',
+					'edit_posts' => 'edit_accordionss',
+					'edit_others_posts' => 'edit_others_accordionss',
+					'read_private_posts' => 'read_private_accordionss',
+					'edit_post' => 'edit_accordions',
+					'delete_post' => 'delete_accordions',
+					'read_post' => 'read_accordions',
+				),
 				'map_meta_cap'          => true,
 				'publicly_queryable' 	=> ($accordions_preview == 'yes') ? true : false,
 				'exclude_from_search' 	=> false,

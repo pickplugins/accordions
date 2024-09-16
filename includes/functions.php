@@ -755,13 +755,13 @@ function accordions_global_scripts()
 
     ?>
     <style>
-        <?php echo $accordionsCss; ?><?php echo $accordionsCustomCss; ?>
+        <?php echo wp_strip_all_tags($accordionsCss); ?><?php echo wp_strip_all_tags($accordionsCustomCss); ?>
     </style>
 
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
             <?php
-            echo wp_unslash(esc_js($accordionsCustomScripts));
+            echo wp_unslash(($accordionsCustomScripts));
             ?>
         });
     </script>
