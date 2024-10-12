@@ -25,7 +25,7 @@ class accordions_post_types
 		$roles = $wp_roles->get_names();
 
 
-		error_log(serialize($roles));
+		//error_log(serialize($roles));
 
 
 		if (!empty($roles)) {
