@@ -15,15 +15,46 @@ class accordions_post_types
 	}
 	public function add_capability()
 	{
-		$role = get_role('administrator');
+		$accordions_settings = get_option('accordions_settings');
 
-		$role->add_cap('publish_accordionss');
-		$role->add_cap('edit_accordionss');
-		$role->add_cap('edit_others_accordionss');
-		$role->add_cap('read_private_accordionss');
-		$role->add_cap('edit_accordions');
-		$role->add_cap('read_accordions');
-		$role->add_cap('delete_accordions', false);
+		$user_roles = isset($accordions_settings['user_roles']) ? $accordions_settings['user_roles'] : array("administrator");
+
+		//error_log(serialize($user_roles));
+
+		$wp_roles = new WP_Roles();
+		$roles = $wp_roles->get_names();
+
+
+		error_log(serialize($roles));
+
+
+		if (!empty($roles)) {
+			foreach ($roles as $index => $user_role) {
+				$role = get_role($index);
+
+				$role->remove_cap('publish_accordionss');
+				$role->remove_cap('edit_accordionss');
+				$role->remove_cap('edit_others_accordionss');
+				$role->remove_cap('read_private_accordionss');
+				$role->remove_cap('edit_accordions');
+				$role->remove_cap('read_accordions');
+				$role->remove_cap('delete_accordions', false);
+			}
+		}
+
+		if (!empty($user_roles)) {
+			foreach ($user_roles as $user_role) {
+				$role = get_role($user_role);
+
+				$role->add_cap('publish_accordionss');
+				$role->add_cap('edit_accordionss');
+				$role->add_cap('edit_others_accordionss');
+				$role->add_cap('read_private_accordionss');
+				$role->add_cap('edit_accordions');
+				$role->add_cap('read_accordions');
+				$role->add_cap('delete_accordions', false);
+			}
+		}
 	}
 
 	public function _posttype_accordions()

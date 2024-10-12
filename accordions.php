@@ -3,7 +3,7 @@
 Plugin Name: Accordions Combo
 Plugin URI: https://pickplugins.com/accordions/
 Description: Fully responsive and mobile ready accordion grid for wordpress.
-Version: 2.3.0
+Version: 2.3.1
 Author: PickPlugins
 Author URI: http://pickplugins.com
 Text Domain: accordions
@@ -23,7 +23,7 @@ class Accordions
 
     define('accordions_plugin_url', plugins_url('/', __FILE__));
     define('accordions_plugin_dir', plugin_dir_path(__FILE__));
-    define('accordions_version', '2.3.0');
+    define('accordions_version', '2.3.1');
     define('accordions_plugin_name', 'Accordions Combo');
     define('accordions_plugin_basename', plugin_basename(__FILE__));
 
@@ -82,10 +82,18 @@ class Accordions
     require_once(accordions_plugin_dir . 'includes/class-widget-accordions.php');
 
     add_action('widgets_init', array($this, 'widget_register'));
+    add_action('before_woocommerce_init', array($this, 'high_performance_order_storage'));
 
     // Display shortcode in widgets
     add_filter('widget_text', 'do_shortcode');
     add_filter('plugin_action_links_' . accordions_plugin_basename, array($this, 'plugin_list_pro_link'));
+  }
+
+  function high_performance_order_storage()
+  {
+    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+      \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    }
   }
 
   public function widget_register()

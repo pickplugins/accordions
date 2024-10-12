@@ -1,6 +1,18 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
 
+function accordions_user_roles()
+{
+
+    $wp_roles = new WP_Roles();
+
+    $roles = $wp_roles->get_names();
+
+    return  $roles;
+    // Below code will print the all list of roles.
+
+}
+
 add_action('accordions_settings_content_general', 'accordions_settings_content_general');
 
 function accordions_settings_content_general()
@@ -12,6 +24,7 @@ function accordions_settings_content_general()
     $font_aw_version = isset($accordions_settings['font_aw_version']) ? $accordions_settings['font_aw_version'] : 'none';
     $accordions_preview = isset($accordions_settings['accordions_preview']) ? $accordions_settings['accordions_preview'] : 'yes';
     $allow_iframe = isset($accordions_settings['allow_iframe']) ? $accordions_settings['allow_iframe'] : 'yes';
+    $user_roles = isset($accordions_settings['user_roles']) ? $accordions_settings['user_roles'] : array();
 
 
 ?>
@@ -21,7 +34,21 @@ function accordions_settings_content_general()
 
         <?php
 
+        $args = array(
+            'id'        => 'user_roles',
+            'parent'        => 'accordions_settings',
+            'title'        => __('Allow access by roles', 'user-verification'),
+            'details'    => __('Allow access to edit by user roles', 'user-verification'),
+            'type'        => 'select2',
+            'multiple'        => true,
+            'value'        => $user_roles,
+            'default'        => array('administrator'),
+            'attributes'        => array(),
 
+            'args'        => accordions_user_roles(),
+        );
+
+        $settings_tabs_field->generate_field($args);
 
         $args = array(
             'id'        => 'font_aw_version',
