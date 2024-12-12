@@ -3351,16 +3351,16 @@ function Html(props) {
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
   var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-  var [content, setitemsWrap] = useState(accordionDataX.content);
+  var [content, setcontent] = useState(accordionDataX.content);
   var [item, setitem] = useState(accordionDataX.item);
-  var [accOptions, setsliderOptions] = useState(accordionDataX.accOptions);
-  var [header, setnavsWrap] = useState(accordionDataX.header);
-  var [headerActive, setprev] = useState(accordionDataX.headerActive);
-  var [headerLabel, setnext] = useState(accordionDataX.headerLabel);
-  var [labelCounter, setprevIcon] = useState(accordionDataX.labelCounter);
-  var [labelIcon, setnextIcon] = useState(accordionDataX.labelIcon);
-  var [icon, setpaginationWrap] = useState(accordionDataX.icon);
-  var [iconToggle, setpaginationActive] = useState(accordionDataX.iconToggle);
+  var [accOptions, setaccOptions] = useState(accordionDataX.accOptions);
+  var [header, setheader] = useState(accordionDataX.header);
+  var [headerActive, setheaderActive] = useState(accordionDataX.headerActive);
+  var [headerLabel, setheaderLabel] = useState(accordionDataX.headerLabel);
+  var [labelCounter, setlabelCounter] = useState(accordionDataX.labelCounter);
+  var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
+  var [icon, seticon] = useState(accordionDataX.icon);
+  var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
   var [pagination, setpagination] = useState(accordionDataX.pagination);
   const gapValue = accOptions?.gap || "0px";
   const [number, setNumber] = useState(parseInt(gapValue));
@@ -3816,29 +3816,12 @@ function Html(props) {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.item = item;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var itemCss = generateElementCss(item, headerSelector);
-    Object.entries(itemCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
-  }, [item]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
     postDataX.post_content.header = header;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var navsWrapCss = generateElementCss(header, iconSelector);
+    var navsWrapCss = generateElementCss(header, headerSelector);
     Object.entries(navsWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
@@ -3855,7 +3838,7 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var prevCss = generateElementCss(headerActive, headerLabelSelector);
+    var prevCss = generateElementCss(headerActive, headerActiveSelector);
     Object.entries(prevCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
@@ -3872,7 +3855,7 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var nextCss = generateElementCss(headerLabel, headerActiveSelector);
+    var nextCss = generateElementCss(headerLabel, headerLabelSelector);
     Object.entries(nextCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
@@ -3889,7 +3872,7 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var prevIconCss = generateElementCss(labelCounter, labelIconSelector);
+    var prevIconCss = generateElementCss(labelCounter, labelCounterSelector);
     Object.entries(prevIconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
@@ -3906,7 +3889,7 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var nextIconCss = generateElementCss(labelIcon, labelCounterSelector);
+    var nextIconCss = generateElementCss(labelIcon, labelIconSelector);
     Object.entries(nextIconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
@@ -3923,7 +3906,7 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var paginationWrapCss = generateElementCss(icon, iconToggleSelector);
+    var paginationWrapCss = generateElementCss(icon, iconSelector);
     Object.entries(paginationWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
@@ -3931,6 +3914,23 @@ function Html(props) {
     });
     setstyleObj(styleObjX);
   }, [icon]);
+  useEffect(() => {
+    var postDataX = {
+      ...postData
+    };
+    postDataX.post_content.iconToggle = iconToggle;
+    onChange(postDataX);
+    var styleObjX = {
+      ...styleObj
+    };
+    var paginationWrapCss = generateElementCss(iconToggle, iconToggleSelector);
+    Object.entries(paginationWrapCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    setstyleObj(styleObjX);
+  }, [iconToggle]);
   var RemoveSliderArg = function ({
     index
   }) {
@@ -3941,7 +3941,7 @@ function Html(props) {
           ...accOptions
         };
         delete sliderOptionsX[index];
-        setsliderOptions(sliderOptionsX);
+        setaccOptions(sliderOptionsX);
       }
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"]
@@ -3986,157 +3986,10 @@ function Html(props) {
     var objectX = isEmpty ? myStore.deletePropertyDeep(object, [sudoScource, key]) : object;
     setProperty(objectX);
   }
-  var sliderOptionsArgs = {
+  var accOptionsAArgs = {
     autoplay: {
       label: "Auto play",
       value: 1
-    },
-    interval: {
-      label: "Interval",
-      value: "500"
-    },
-    pauseOnHover: {
-      label: "Pause On Hover",
-      value: 1
-    },
-    pauseOnFocus: {
-      label: "Pause On Focus",
-      value: 1
-    },
-    lazyLoad: {
-      label: "Lazy Load",
-      value: 1
-    },
-    preloadPages: {
-      label: "Preload Pages",
-      value: 1
-    },
-    keyboard: {
-      label: "Keyboard",
-      value: 1
-    },
-    wheel: {
-      label: "Wheel",
-      value: 1
-    },
-    releaseWheel: {
-      label: "Release Wheel",
-      value: 1
-    },
-    direction: {
-      label: "Direction",
-      value: "ltr"
-    },
-    cover: {
-      label: "Cover",
-      value: 0
-    },
-    rewind: {
-      label: "Rewind",
-      value: 0
-    },
-    speed: {
-      label: "Speed",
-      value: 400
-    },
-    rewindSpeed: {
-      label: "Rewind Speed",
-      value: 400
-    },
-    rewindByDrag: {
-      label: "Rewind By Drag",
-      value: 0
-    },
-    type: {
-      label: "Slider Type",
-      value: "slide"
-    },
-    width: {
-      label: "Width",
-      value: ""
-    },
-    height: {
-      label: "Height",
-      value: ""
-    },
-    fixedWidth: {
-      label: "Fixed Width",
-      value: ""
-    },
-    fixedHeight: {
-      label: "Fixed Height",
-      value: ""
-    },
-    heightRatio: {
-      label: "Height Ratio",
-      value: ""
-    },
-    autoWidth: {
-      label: "Auto Width",
-      value: 0
-    },
-    autoHeight: {
-      label: "Auto Height",
-      value: 0
-    },
-    start: {
-      label: "Start",
-      value: 0
-    },
-    perPage: {
-      label: "Per Page",
-      value: 3
-    },
-    perMove: {
-      label: "Per Move",
-      value: 3
-    },
-    focus: {
-      label: "Focus",
-      value: "center"
-    },
-    gap: {
-      label: "Gap",
-      value: "1em",
-      unit: "em",
-      number: "1"
-    },
-    padding: {
-      label: "Padding",
-      value: ""
-    },
-    arrows: {
-      label: "Arrows",
-      value: 1
-    },
-    pagination: {
-      label: "Pagination",
-      value: 1
-    },
-    //easing: { label: 'Easing', value: 'cubic-bezier(0.25, 1, 0.5, 1)' },
-    paginationKeyboard: {
-      label: "Pagination Keyboard",
-      value: 1
-    },
-    paginationDirection: {
-      label: "Pagination Direction",
-      value: "paginationDirectltrion"
-    },
-    drag: {
-      label: "Drag",
-      value: 1
-    },
-    noDrag: {
-      label: "No Drag",
-      value: "input, textarea, .rich-text"
-    },
-    snap: {
-      label: "Snap",
-      value: 1
-    },
-    mediaQuery: {
-      label: "Media Query",
-      value: "max"
     }
   };
   var sliderForArgs = {
@@ -4159,7 +4012,7 @@ function Html(props) {
     className: "p-3 text-center"
   }, "Please select WCPS first"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "fixed top-20 right-0 w-[400px] z-50"
-  }, "   "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
+  }, " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
     className: "break-all\tp-4 block"
   }, JSON.stringify(styleObj)), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
@@ -4173,28 +4026,28 @@ function Html(props) {
         ...accOptions
       };
       sliderOptionsX.sliderFor = option.value;
-      setsliderOptions(sliderOptionsX);
+      setaccOptions(sliderOptionsX);
     },
     values: ""
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Slider Settings",
+    title: "Accordion Settings",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "normal"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "my-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slider Options", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Accordion Options", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
     variant: "secondary",
     buttonTitle: "Choose",
-    options: sliderOptionsArgs,
+    options: accOptionsAArgs,
     onChange: (option, index) => {
       var sliderOptionsX = {
         ...accOptions
       };
       sliderOptionsX[index] = option.value;
-      setsliderOptions(sliderOptionsX);
+      setaccOptions(sliderOptionsX);
     },
     values: ""
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
@@ -4223,58 +4076,10 @@ function Html(props) {
           ...accOptions
         };
         sliderOptionsX[id] = newVal;
-        setsliderOptions(sliderOptionsX);
+        setaccOptions(sliderOptionsX);
       }
     })));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    className: "font-medium text-slate-900 ",
-    title: "Query Items",
-    initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "presets",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "presets",
-      title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
-      className: "tab-presets"
-    }, {
-      name: "custom",
-      title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-custom"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "presets"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "custom"
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    className: "font-medium text-slate-900 ",
-    title: "Layouts",
-    initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "presets",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "presets",
-      title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
-      className: "tab-presets"
-    }, {
-      name: "custom",
-      title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-custom"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "presets"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "custom"
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Wrapper",
     initialOpen: false
@@ -4313,7 +4118,7 @@ function Html(props) {
     onReset: sudoSources => onResetStyle(sudoSources, wrapper, setwrapper)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Loop Wrap",
+    title: "Content",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4337,67 +4142,13 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: content,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, content, setitemsWrap),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, content, setitemsWrap),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, content, setitemsWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, content, setitemsWrap)
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, content, setcontent),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, content, setcontent),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, content, setcontent),
+    onReset: sudoSources => onResetStyle(sudoSources, content, setcontent)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Item",
-    initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "options",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "options",
-      title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
-      className: "tab-settings"
-    }, {
-      name: "styles",
-      title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-style"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "styles"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: item,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, item, setitem),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, item, setitem),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, item, setitem),
-    onReset: sudoSources => onResetStyle(sudoSources, item, setitem)
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    className: "font-medium text-slate-900 ",
-    title: "Navigation",
-    initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "presets",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "presets",
-      title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
-      className: "tab-presets"
-    }, {
-      name: "custom",
-      title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-custom"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "presets"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "custom"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    className: "font-medium text-slate-900 ",
-    title: "Navs Wrap",
+    title: "Header",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4421,13 +4172,13 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: header,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, header, setnavsWrap),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, header, setnavsWrap),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, header, setnavsWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, header, setnavsWrap)
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, header, setheader),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, header, setheader),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, header, setheader),
+    onReset: sudoSources => onResetStyle(sudoSources, header, setheader)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Prev Button",
+    title: "Header Active",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4451,13 +4202,13 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: headerActive,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerActive, setprev),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerActive, setprev),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerActive, setprev),
-    onReset: sudoSources => onResetStyle(sudoSources, headerActive, setprev)
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerActive, setheaderActive),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerActive, setheaderActive),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerActive, setheaderActive),
+    onReset: sudoSources => onResetStyle(sudoSources, headerActive, setheaderActive)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Next Button",
+    title: "Header Label",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4481,13 +4232,13 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: headerLabel,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerLabel, setnext),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerLabel, setnext),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerLabel, setnext),
-    onReset: sudoSources => onResetStyle(sudoSources, headerLabel, setnext)
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerLabel, setheaderLabel),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerLabel, setheaderLabel),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerLabel, setheaderLabel),
+    onReset: sudoSources => onResetStyle(sudoSources, headerLabel, setheaderLabel)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Prev Icon",
+    title: "Label Counter",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4511,13 +4262,13 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: labelCounter,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelCounter, setprevIcon),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelCounter, setprevIcon),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelCounter, setprevIcon),
-    onReset: sudoSources => onResetStyle(sudoSources, labelCounter, setprevIcon)
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelCounter, setlabelCounter),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelCounter, setlabelCounter),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelCounter, setlabelCounter),
+    onReset: sudoSources => onResetStyle(sudoSources, labelCounter, setlabelCounter)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Next Icon",
+    title: "Label Icon",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4541,37 +4292,13 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: labelIcon,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelIcon, setnextIcon),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelIcon, setnextIcon),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelIcon, setnextIcon),
-    onReset: sudoSources => onResetStyle(sudoSources, labelIcon, setnextIcon)
-  })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelIcon, setlabelIcon),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelIcon, setlabelIcon),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelIcon, setlabelIcon),
+    onReset: sudoSources => onResetStyle(sudoSources, labelIcon, setlabelIcon)
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Pagination/Dots",
-    initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "presets",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "presets",
-      title: "presets",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
-      className: "tab-presets"
-    }, {
-      name: "custom",
-      title: "Custom",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-custom"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "presets"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "custom"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    className: "font-medium text-slate-900 ",
-    title: "Pagination Wrap",
+    title: "Icon",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4595,13 +4322,13 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: icon,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, icon, setpaginationWrap),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, icon, setpaginationWrap),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, icon, setpaginationWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, icon, setpaginationWrap)
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, icon, seticon),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, icon, seticon),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, icon, seticon),
+    onReset: sudoSources => onResetStyle(sudoSources, icon, seticon)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Pagination Active",
+    title: "Icon Toggle",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "options",
@@ -4625,41 +4352,11 @@ function Html(props) {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
     obj: iconToggle,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, iconToggle, setpaginationActive),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, iconToggle, setpaginationActive),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, iconToggle, setpaginationActive),
-    onReset: sudoSources => onResetStyle(sudoSources, iconToggle, setpaginationActive)
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    className: "font-medium text-slate-900 ",
-    title: "Pagination",
-    initialOpen: false
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "options",
-    orientation: "horizontal",
-    activeClass: "active-tab",
-    onSelect: tabName => {},
-    tabs: [{
-      name: "options",
-      title: "Options",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
-      className: "tab-settings"
-    }, {
-      name: "styles",
-      title: "Styles",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
-      className: "tab-style"
-    }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "options"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "styles"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: pagination,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, pagination, setpagination),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, pagination, setpagination),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, pagination, setpagination),
-    onReset: sudoSources => onResetStyle(sudoSources, pagination, setpagination)
-  }))))))))));
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, iconToggle, seticonToggle),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, iconToggle, seticonToggle),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, iconToggle, seticonToggle),
+    onReset: sudoSources => onResetStyle(sudoSources, iconToggle, seticonToggle)
+  }))))));
 }
 class AccordionsEdit extends Component {
   constructor(props) {
@@ -4768,7 +4465,7 @@ function Html(props) {
       label: "Label 2"
     },
     content: {
-      text: "Accordion content 3"
+      text: "Accordion content 2"
     }
   }];
   const [prevIconHtml, setPrevIconHtml] = useState("");
