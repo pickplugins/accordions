@@ -41,7 +41,7 @@ function Html(props) {
 
 
 	var defaultPostData = {
-		sliderFor: "products",
+		viewType: "accordion",
 
 		"wrapper": {
 
@@ -61,7 +61,7 @@ function Html(props) {
 			"options": {
 				"tag": "div",
 				"class": "accordion-content",
-				"overrideChild": true
+
 			},
 			"styles": {}
 
@@ -72,7 +72,7 @@ function Html(props) {
 			"options": {
 				"tag": "div",
 				"class": "accordion-header",
-				"overrideChild": true
+
 			},
 			"styles": {}
 
@@ -94,7 +94,7 @@ function Html(props) {
 				"text": "Accordion Header",
 				"tag": "div",
 				"class": "accordion-header-label",
-				"overrideChild": true
+
 			},
 			"styles": {}
 
@@ -107,7 +107,7 @@ function Html(props) {
 				"position": "",
 				"tag": "div",
 				"class": "accordion-label-counter",
-				"overrideChild": true
+
 			},
 			"styles": {}
 
@@ -121,7 +121,7 @@ function Html(props) {
 				"iconSrc": "",
 				"position": "",
 				"class": "accordion-label-icon",
-				"overrideChild": true
+
 			},
 			"styles": {}
 
@@ -135,7 +135,7 @@ function Html(props) {
 				"iconSrc": "fas fa-angle-down",
 				"position": "left",
 				"class": "accordion-icon",
-				"overrideChild": true
+
 			},
 			"styles": {}
 
@@ -261,8 +261,10 @@ function Html(props) {
 						]}>
 						<PGtab name="accordions">
 							<div className="relative p-3">
+								{postData.post_content == null && (
+									<div className="p-3 my-5 bg-orange-400">Please choose an accordion first.</div>
+								)}
 
-								<p>Please select accordions first.</p>
 								<WCPSList selectAccordion={selectAccordion} activeAccordion={activeAccordion} />
 							</div>
 						</PGtab>

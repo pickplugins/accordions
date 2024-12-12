@@ -18,6 +18,7 @@ import {
 	ToolsPanelItem,
 	ComboboxControl,
 	Spinner,
+	ToggleControl,
 	CustomSelectControl,
 	Popover,
 	__experimentalInputControl as InputControl,
@@ -31,9 +32,11 @@ import PGDropdown from '../../components/dropdown'
 var myStore = wp.data.select("postgrid-shop");
 
 function Html(props) {
+
 	if (!props.warn) {
 		return null;
 	}
+
 
 	var id = props.id;
 	var isLoading = props.isLoading;
@@ -42,16 +45,21 @@ function Html(props) {
 	var postData = props.postData;
 	var accordionDataX = postData.post_content;
 
+	if (accordionDataX == null) {
+		return null;
+	}
 
 	var wrapper = accordionDataX?.wrapper;
 	var header = accordionDataX?.header;
 	var headerActive = accordionDataX?.headerActive;
 	var labelCounter = accordionDataX?.labelCounter;
 	var labelIcon = accordionDataX?.labelIcon;
+	var headerLabel = accordionDataX?.headerLabel;
 	var sliderOptions = accordionDataX?.sliderOptions;
 	var prev = accordionDataX?.prev;
 	var next = accordionDataX?.next;
 	var icon = accordionDataX?.icon;
+	var iconToggle = accordionDataX?.iconToggle;
 	var prevIcon = accordionDataX?.prevIcon;
 	var nextIcon = accordionDataX?.nextIcon;
 
@@ -70,20 +78,29 @@ function Html(props) {
 			content: { text: "Accordion content 2" },
 		},
 	];
+	const [toggled, setToggled] = useState(false);
+	const [labelIconHtml, setlabelIconHtml] = useState("");
 
-	const [prevIconHtml, setPrevIconHtml] = useState("");
-	const [nextIconHtml, setNextIconHtml] = useState("");
+	const [iconHtml, seticonHtml] = useState("");
+	const [iconToggleHtml, seticonToggleHtml] = useState("");
 
 	useEffect(() => {
-		var iconSrc = nextIcon?.options?.iconSrc;
+		var iconSrc = iconToggle?.options?.iconSrc;
 		var iconHtml = `<span class="${iconSrc}"></span>`;
-		setNextIconHtml(iconHtml);
-	}, [nextIcon?.options]);
+		seticonToggleHtml(iconHtml);
+	}, [iconToggle?.options]);
+
 	useEffect(() => {
-		var iconSrc = prevIcon?.options?.iconSrc;
+		var iconSrc = icon?.options?.iconSrc;
 		var iconHtml = `<span class="${iconSrc}"></span>`;
-		setPrevIconHtml(iconHtml);
-	}, [prevIcon?.options]);
+		seticonHtml(iconHtml);
+	}, [icon?.options]);
+
+	useEffect(() => {
+		var iconSrc = labelIcon?.options?.iconSrc;
+		var iconHtml = `<span class="${iconSrc}"></span>`;
+		setlabelIconHtml(iconHtml);
+	}, [labelIcon?.options]);
 
 
 	var [active, setactive] = useState("0");
@@ -92,7 +109,8 @@ function Html(props) {
 	}
 
 
-
+	var blockId = "";
+	var blockIdX = "";
 
 
 
@@ -138,31 +156,104 @@ function Html(props) {
 					return (
 						<>
 							<div
-								className={`${header?.options?.class} ${active == index ? headerActive?.options.class : ""
-									}  p-3 bg-white border-b border-solid border-0`}
-								onClick={() => handleActive(index)}>
-								{icon?.options.position == "before" && <span>Icon</span>}
-								<span>
-									{labelCounter?.enable && labelCounter?.position == "before" && (
-										<>{index + 1}</>
+								className={`${blockId}-accordion-header ${blockIdX}  ${header.options.class
+									} ${toggled ? "accordion-header-active" : ""}`}
+								onClick={(ev) => {
+									setToggled(!toggled);
+								}}>
+								{labelCounter.options.position == "left" && (
+									<span
+										className={`${blockId}-accordion-label-counter accordion-label-counter`}>
+										{index}
+									</span>
+								)}
+								{icon.options.position == "left" && (
+									<>
+										{!toggled && (
+											<span
+												className={`${blockId}-accordion-icon accordion-icon`}
+												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+										)}
+										{toggled && (
+											<span
+												className={`${blockId}-accordion-icon-toggle accordion-icon accordion-icon-toggle}`}
+												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
+										)}
+									</>
+								)}
+								{labelIcon.options.position == "beforeLabel" && (
+									<span
+										className={`${blockId}-accordion-label-icon accordion-label-icon`}
+										dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+								)}
+								<div
+									className={`${blockId}-accordion-header-label accordion-header-label`}
+									onClick={(e) => {
+										return;
+									}}>
+									{labelCounter.options.position == "beforeLabelText" && (
+										<span
+											className={`${blockId}-accordion-label-counter accordion-label-counter`}>
+											{index}
+										</span>
 									)}
-									{labelIcon?.enable && labelIcon?.position == "before" && (
-										<>labelIcon</>
+									{labelIcon.options.position == "beforeLabelText" && (
+										<span
+											className={`${blockId}-accordion-label-icon accordion-label-icon`}
+											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
 									)}
-									{item.header.label}
-									{labelIcon?.enable && labelIcon?.position == "after" && (
-										<>labelIcon</>
+									{headerLabel.options.text.length > 0 ? (
+										<span
+
+											dangerouslySetInnerHTML={{ __html: headerLabel.options.text }}
+										/>
+									) : (
+										"Start Writing..."
 									)}
-									{labelCounter?.enable && labelCounter?.position == "after" && (
-										<>{index + 1}</>
+									{labelIcon.options.position == "afterLabelText" && (
+										<span
+											className={`${blockId}-accordion-label-icon accordion-label-icon`}
+											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
 									)}
-								</span>
-								{icon?.options?.position == "after" && <span>Icon</span>}
+									{labelCounter.options.position == "afterLabelText" && (
+										<span
+											className={`${blockId}-accordion-label-counter accordion-label-counter`}>
+											{index}
+										</span>
+									)}
+								</div>
+								{labelIcon.options.position == "afterLabel" && (
+									<span
+										className={`${blockId}-accordion-label-icon accordion-label-icon`}
+										dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+								)}
+								{labelCounter.options.position == "right" && (
+									<span
+										className={`${blockId}-accordion-label-counter accordion-label-counter`}>
+										{index}
+									</span>
+								)}
+								{icon.options.position == "right" && (
+									<>
+										{!toggled && (
+											<span
+												className={`${blockId}-accordion-icon accordion-icon`}
+												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+										)}
+										{toggled && (
+											<span
+												className={`${blockId}-accordion-icon-toggle accordion-icon-toggle`}
+												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
+										)}
+									</>
+								)}
 							</div>
-							<div
-								className={`${active == index ? "" : "hidden"} bg-white p-3`}>
-								{item.content.text}
-							</div>
+							{toggled && (
+								<div
+									className={`${blockId}-accordion-content accordion-content`}>
+									Content
+								</div>
+							)}
 						</>
 					);
 				})}

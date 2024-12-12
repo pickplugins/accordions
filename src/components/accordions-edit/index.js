@@ -6,6 +6,7 @@ import {
 	PanelBody,
 	PanelRow,
 	SelectControl,
+	ToggleControl,
 } from "@wordpress/components";
 import { brush, close, settings } from "@wordpress/icons";
 
@@ -14,6 +15,7 @@ import PGDropdown from "../dropdown";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
+import PGIconPicker from "../icon-picker";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -24,6 +26,13 @@ function Html(props) {
 
 	var onChange = props.onChange;
 	var postData = props.postData;
+
+	if (postData.post_content == null) {
+		return (
+			<div className="p-3 my-5 bg-orange-400">Please choose an accordion first.</div>
+
+		);
+	}
 
 	var breakPointX = "Desktop";
 
@@ -684,24 +693,21 @@ function Html(props) {
 		setProperty(objectX);
 	}
 
-	var accOptionsAArgs = {
+	var accOptionsArgs = {
 		autoplay: { label: "Auto play", value: 1 },
 	};
 
-	var sliderForArgs = {
-		Products: { label: "Products", value: "products" },
-		terms: { label: "Terms", value: "terms" },
-		dokanShops: { label: "Dokan Shops", value: "dokanShops" },
+	var viewTypeArgs = {
+		accordion: { label: "accordion", value: "accordion" },
+		tabs: { label: "tabs", value: "tabs" },
+		tabsVertical: { label: "tabsVertical", value: "tabsVertical" },
 	};
 
 	return (
 		<div className="">
-			{props.postData.post_content == null && (
-				<div className="p-3 text-center">Please select WCPS first</div>
-			)}
-			<div className="fixed top-20 right-0 w-[400px] z-50"> </div>
 
-			<code className="break-all	p-4 block">{JSON.stringify(styleObj)}</code>
+			{JSON.stringify(icon)}
+
 
 			{props.postData.post_content != null && (
 				<>
@@ -709,11 +715,11 @@ function Html(props) {
 						<PGDropdown
 							position="bottom right"
 							variant="secondary"
-							buttonTitle={"Slider For"}
-							options={sliderForArgs}
+							buttonTitle={"Choose View Type"}
+							options={viewTypeArgs}
 							onChange={(option, index) => {
 								var sliderOptionsX = { ...accOptions };
-								sliderOptionsX.sliderFor = option.value;
+								sliderOptionsX.viewType = option.value;
 								setaccOptions(sliderOptionsX);
 							}}
 							values=""></PGDropdown>
@@ -729,7 +735,7 @@ function Html(props) {
 									position="bottom right"
 									variant="secondary"
 									buttonTitle={"Choose"}
-									options={accOptionsAArgs}
+									options={accOptionsArgs}
 									onChange={(option, index) => {
 										var sliderOptionsX = { ...accOptions };
 										sliderOptionsX[index] = option.value;
@@ -779,7 +785,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -835,7 +841,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -885,7 +891,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -929,7 +935,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -984,7 +990,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1034,7 +1040,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1049,7 +1055,48 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+
+
+								<PanelRow>
+									<label htmlFor="" className="font-medium text-slate-900 ">
+										{__("Counter position", "post-grid")}
+									</label>
+									<SelectControl
+										label=""
+										value={labelCounter.options.position}
+										options={[
+											{
+												label: __("Choose Position", "post-grid"),
+												value: "",
+											},
+											{ label: __("Left", "post-grid"), value: "left" },
+											{ label: __("Right", "post-grid"), value: "right" },
+											{
+												label: __("Before Label Text", "post-grid"),
+												value: "beforeLabelText",
+											},
+											{
+												label: __("After Label Text", "post-grid"),
+												value: "afterLabelText",
+											},
+										]}
+										onChange={(newVal) => {
+											var labelCounterX = { ...labelCounter }
+
+											var optionsX = {
+												...labelCounterX.options,
+												position: newVal,
+
+											};
+
+											labelCounterX.options = optionsX;
+											setlabelCounter(labelCounterX);
+										}}
+									/>
+								</PanelRow>
+
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={labelCounter}
@@ -1089,7 +1136,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1104,7 +1151,86 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+
+								<PanelRow>
+									<label htmlFor="" className="font-medium text-slate-900 ">
+										{__("Choose Label Icon", "post-grid")}
+									</label>
+									<PGIconPicker
+										library={labelIcon.options.library}
+										srcType={labelIcon.options.srcType}
+										iconSrc={labelIcon.options.iconSrc}
+										onChange={(arg) => {
+
+
+											var labelIconX = { ...labelIcon }
+
+											var optionsX = {
+												...labelIconX.options,
+												srcType: arg.srcType,
+												library: arg.library,
+												iconSrc: arg.iconSrc,
+											};
+
+											labelIconX.options = optionsX;
+											setlabelIcon(labelIconX);
+										}}
+									/>
+								</PanelRow>
+
+								<PanelRow>
+									<label htmlFor="" className="font-medium text-slate-900 ">
+										{__("Icon position", "post-grid")}
+									</label>
+									<SelectControl
+										label=""
+										value={labelIcon.options.position}
+										options={[
+											{
+												label: __("Choose Position", "post-grid"),
+												value: "",
+											},
+											{
+												label: __("Before Label", "post-grid"),
+												value: "beforeLabel",
+											},
+											{
+												label: __("After Label", "post-grid"),
+												value: "afterLabel",
+											},
+											{
+												label: __("Before Label Text", "post-grid"),
+												value: "beforeLabelText",
+											},
+											{
+												label: __("After Label Text", "post-grid"),
+												value: "afterLabelText",
+											},
+										]}
+										onChange={(newVal) => {
+
+											var labelIconX = { ...labelIcon }
+
+											var optionsX = {
+												...labelIconX.options,
+												position: newVal,
+
+											};
+
+											labelIconX.options = optionsX;
+											setlabelIcon(labelIconX);
+
+
+
+
+
+										}}
+									/>
+								</PanelRow>
+
+
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={labelIcon}
@@ -1168,7 +1294,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1183,7 +1309,103 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+
+
+								<PanelRow>
+									<label htmlFor="" className="font-medium text-slate-900 ">
+										{__("Choose Icon", "post-grid")}
+									</label>
+									<PGIconPicker
+										library={icon.options.library}
+										srcType={icon.options.srcType}
+										iconSrc={icon.options.iconSrc}
+										onChange={(arg) => {
+
+
+											var iconX = { ...icon }
+
+											var optionsX = {
+												...iconX.options,
+												srcType: arg.srcType,
+												library: arg.library,
+												iconSrc: arg.iconSrc,
+											};
+
+											iconX.options = optionsX;
+											seticon(iconX);
+										}}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="" className="font-medium text-slate-900 ">
+										{__("Choose Toggle Icon", "post-grid")}
+									</label>
+									<PGIconPicker
+										library={iconToggle.options.library}
+										srcType={iconToggle.options.srcType}
+										iconSrc={iconToggle.options.iconSrc}
+										onChange={(arg) => {
+
+
+											var iconToggleX = { ...iconToggle }
+
+											var optionsX = {
+												...iconToggleX.options,
+												srcType: arg.srcType,
+												library: arg.library,
+												iconSrc: arg.iconSrc,
+											};
+
+											iconToggleX.options = optionsX;
+											seticonToggle(iconToggleX);
+										}}
+									/>
+								</PanelRow>
+
+
+
+
+
+
+
+								<PanelRow>
+									<label htmlFor="" className="font-medium text-slate-900 ">
+										{__("Icon position", "post-grid")}
+									</label>
+									<SelectControl
+										label=""
+										value={icon.options.position}
+										options={[
+											{
+												label: __("Choose Position", "post-grid"),
+												value: "",
+											},
+											{ label: __("Left", "post-grid"), value: "left" },
+											{ label: __("Right", "post-grid"), value: "right" },
+										]}
+										onChange={(newVal) => {
+
+											var iconX = { ...icon }
+
+											var optionsX = {
+												...iconX.options,
+												position: newVal,
+
+											};
+
+											iconX.options = optionsX;
+											seticon(iconX);
+
+
+
+
+
+										}}
+									/>
+								</PanelRow>
+
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={icon}
@@ -1212,7 +1434,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1227,7 +1449,15 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+
+
+
+
+
+
+
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={iconToggle}
@@ -1282,6 +1512,9 @@ class AccordionsEdit extends Component {
 
 	render() {
 		var { onChange, postData } = this.props;
+
+		console.log(postData);
+
 
 		return (
 			<Html
