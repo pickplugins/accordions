@@ -3351,16 +3351,16 @@ function Html(props) {
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
   var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-  var [itemsWrap, setitemsWrap] = useState(accordionDataX.itemsWrap);
+  var [content, setitemsWrap] = useState(accordionDataX.content);
   var [item, setitem] = useState(accordionDataX.item);
   var [accOptions, setsliderOptions] = useState(accordionDataX.accOptions);
-  var [navsWrap, setnavsWrap] = useState(accordionDataX.navsWrap);
-  var [prev, setprev] = useState(accordionDataX.prev);
-  var [next, setnext] = useState(accordionDataX.next);
-  var [prevIcon, setprevIcon] = useState(accordionDataX.prevIcon);
-  var [nextIcon, setnextIcon] = useState(accordionDataX.nextIcon);
-  var [paginationWrap, setpaginationWrap] = useState(accordionDataX.paginationWrap);
-  var [paginationActive, setpaginationActive] = useState(accordionDataX.paginationActive);
+  var [header, setnavsWrap] = useState(accordionDataX.header);
+  var [headerActive, setprev] = useState(accordionDataX.headerActive);
+  var [headerLabel, setnext] = useState(accordionDataX.headerLabel);
+  var [labelCounter, setprevIcon] = useState(accordionDataX.labelCounter);
+  var [labelIcon, setnextIcon] = useState(accordionDataX.labelIcon);
+  var [icon, setpaginationWrap] = useState(accordionDataX.icon);
+  var [iconToggle, setpaginationActive] = useState(accordionDataX.iconToggle);
   var [pagination, setpagination] = useState(accordionDataX.pagination);
   const gapValue = accOptions?.gap || "0px";
   const [number, setNumber] = useState(parseInt(gapValue));
@@ -3378,18 +3378,16 @@ function Html(props) {
       value: breakPointItem.id
     });
   }
-  var blockClass = ".wcps-content-slider";
-  var wrapperSelector = blockClass + " .splide";
-  var itemsWrapSelector = blockClass + " .splide__track";
-  var itemSelector = blockClass + " .pg-content-slider-item";
-  var nextSelector = blockClass + " .splide__arrow--next";
-  var prevSelector = blockClass + " .splide__arrow--prev";
-  var nextIconSelector = blockClass + " .splide__arrow--next .icon";
-  var prevIconSelector = blockClass + " .splide__arrow--prev .icon";
-  var navsWrapSelector = blockClass + " .splide__arrows";
-  var paginationWrapSelector = blockClass + " .splide__pagination";
-  var paginationSelector = blockClass + " .splide__pagination__page";
-  var paginationActiveSelector = blockClass + " .splide__pagination__page.is-active";
+  var blockClass = ".pg-accordion-nested";
+  var wrapperSelector = blockClass + "";
+  var contentSelector = blockClass + " .accordion-content";
+  var headerSelector = blockClass + " .accordion-header";
+  var headerActiveSelector = blockClass + " .accordion-header-active";
+  var headerLabelSelector = blockClass + " .accordion-header-label";
+  var labelCounterSelector = blockClass + " .accordion-label-counter";
+  var labelIconSelector = blockClass + " .accordion-label-icon";
+  var iconSelector = blockClass + " .accordion-icon";
+  var iconToggleSelector = blockClass + " .accordion-icon-toggle";
   var blockId = postData.ID;
   function getElementSelector(sudoScource, mainSelector) {
     var elementSelector = mainSelector;
@@ -3801,19 +3799,19 @@ function Html(props) {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.itemsWrap = itemsWrap;
+    postDataX.post_content.content = content;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var itemsWrapCss = generateElementCss(itemsWrap, itemsWrapSelector);
+    var itemsWrapCss = generateElementCss(content, contentSelector);
     Object.entries(itemsWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
-  }, [itemsWrap]);
+  }, [content]);
   useEffect(() => {
     var postDataX = {
       ...postData
@@ -3823,7 +3821,7 @@ function Html(props) {
     var styleObjX = {
       ...styleObj
     };
-    var itemCss = generateElementCss(item, itemSelector);
+    var itemCss = generateElementCss(item, headerSelector);
     Object.entries(itemCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
@@ -3835,138 +3833,104 @@ function Html(props) {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.navsWrap = navsWrap;
+    postDataX.post_content.header = header;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var navsWrapCss = generateElementCss(navsWrap, navsWrapSelector);
+    var navsWrapCss = generateElementCss(header, iconSelector);
     Object.entries(navsWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
-  }, [navsWrap]);
+  }, [header]);
   useEffect(() => {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.prev = prev;
+    postDataX.post_content.headerActive = headerActive;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var prevCss = generateElementCss(prev, prevSelector);
+    var prevCss = generateElementCss(headerActive, headerLabelSelector);
     Object.entries(prevCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
-  }, [prev]);
+  }, [headerActive]);
   useEffect(() => {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.next = next;
+    postDataX.post_content.headerLabel = headerLabel;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var nextCss = generateElementCss(next, nextSelector);
+    var nextCss = generateElementCss(headerLabel, headerActiveSelector);
     Object.entries(nextCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
-  }, [next]);
+  }, [headerLabel]);
   useEffect(() => {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.prevIcon = prevIcon;
+    postDataX.post_content.labelCounter = labelCounter;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var prevIconCss = generateElementCss(prevIcon, prevIconSelector);
+    var prevIconCss = generateElementCss(labelCounter, labelIconSelector);
     Object.entries(prevIconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
-  }, [prevIcon]);
+  }, [labelCounter]);
   useEffect(() => {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.nextIcon = nextIcon;
+    postDataX.post_content.labelIcon = labelIcon;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var nextIconCss = generateElementCss(nextIcon, nextIconSelector);
+    var nextIconCss = generateElementCss(labelIcon, labelCounterSelector);
     Object.entries(nextIconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
-  }, [nextIcon]);
+  }, [labelIcon]);
   useEffect(() => {
     var postDataX = {
       ...postData
     };
-    postDataX.post_content.paginationWrap = paginationWrap;
+    postDataX.post_content.icon = icon;
     onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var paginationWrapCss = generateElementCss(paginationWrap, paginationWrapSelector);
+    var paginationWrapCss = generateElementCss(icon, iconToggleSelector);
     Object.entries(paginationWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
     setstyleObj(styleObjX);
-  }, [paginationWrap]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.pagination = pagination;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var paginationCss = generateElementCss(pagination, paginationSelector);
-    Object.entries(paginationCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
-  }, [pagination]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.paginationActive = paginationActive;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var paginationActiveCss = generateElementCss(paginationActive, paginationActiveSelector);
-    Object.entries(paginationActiveCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
-  }, [paginationActive]);
+  }, [icon]);
   var RemoveSliderArg = function ({
     index
   }) {
@@ -4007,7 +3971,7 @@ function Html(props) {
         obj[sudoScource] = {};
         // var elementSelector = myStore.getElementSelector(
         // 	sudoScource,
-        // 	itemsWrapSelector // Replace this selector if needed
+        // 	contentSelector // Replace this selector if needed
         // );
       }
     });
@@ -4372,11 +4336,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: itemsWrap,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, itemsWrap, setitemsWrap),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, itemsWrap, setitemsWrap),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, itemsWrap, setitemsWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, itemsWrap, setitemsWrap)
+    obj: content,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, content, setitemsWrap),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, content, setitemsWrap),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, content, setitemsWrap),
+    onReset: sudoSources => onResetStyle(sudoSources, content, setitemsWrap)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Item",
@@ -4456,11 +4420,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: navsWrap,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, navsWrap, setnavsWrap),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, navsWrap, setnavsWrap),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, navsWrap, setnavsWrap)
+    obj: header,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, header, setnavsWrap),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, header, setnavsWrap),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, header, setnavsWrap),
+    onReset: sudoSources => onResetStyle(sudoSources, header, setnavsWrap)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Prev Button",
@@ -4486,11 +4450,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: prev,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, prev, setprev),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, prev, setprev),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, prev, setprev),
-    onReset: sudoSources => onResetStyle(sudoSources, prev, setprev)
+    obj: headerActive,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerActive, setprev),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerActive, setprev),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerActive, setprev),
+    onReset: sudoSources => onResetStyle(sudoSources, headerActive, setprev)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Next Button",
@@ -4516,11 +4480,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: next,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, next, setnext),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, next, setnext),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, next, setnext),
-    onReset: sudoSources => onResetStyle(sudoSources, next, setnext)
+    obj: headerLabel,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerLabel, setnext),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerLabel, setnext),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerLabel, setnext),
+    onReset: sudoSources => onResetStyle(sudoSources, headerLabel, setnext)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Prev Icon",
@@ -4546,11 +4510,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: prevIcon,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, prevIcon, setprevIcon),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, prevIcon, setprevIcon),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, prevIcon, setprevIcon),
-    onReset: sudoSources => onResetStyle(sudoSources, prevIcon, setprevIcon)
+    obj: labelCounter,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelCounter, setprevIcon),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelCounter, setprevIcon),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelCounter, setprevIcon),
+    onReset: sudoSources => onResetStyle(sudoSources, labelCounter, setprevIcon)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Next Icon",
@@ -4576,11 +4540,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: nextIcon,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, nextIcon, setnextIcon),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, nextIcon, setnextIcon),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, nextIcon, setnextIcon),
-    onReset: sudoSources => onResetStyle(sudoSources, nextIcon, setnextIcon)
+    obj: labelIcon,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelIcon, setnextIcon),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelIcon, setnextIcon),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelIcon, setnextIcon),
+    onReset: sudoSources => onResetStyle(sudoSources, labelIcon, setnextIcon)
   })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination/Dots",
@@ -4630,11 +4594,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: paginationWrap,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, paginationWrap, setpaginationWrap),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationWrap, setpaginationWrap),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationWrap, setpaginationWrap),
-    onReset: sudoSources => onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+    obj: icon,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, icon, setpaginationWrap),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, icon, setpaginationWrap),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, icon, setpaginationWrap),
+    onReset: sudoSources => onResetStyle(sudoSources, icon, setpaginationWrap)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination Active",
@@ -4660,11 +4624,11 @@ function Html(props) {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    obj: paginationActive,
-    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, paginationActive, setpaginationActive),
-    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, paginationActive, setpaginationActive),
-    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive),
-    onReset: sudoSources => onResetStyle(sudoSources, paginationActive, setpaginationActive)
+    obj: iconToggle,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, iconToggle, setpaginationActive),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, iconToggle, setpaginationActive),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, iconToggle, setpaginationActive),
+    onReset: sudoSources => onResetStyle(sudoSources, iconToggle, setpaginationActive)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Pagination",

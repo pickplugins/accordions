@@ -36,16 +36,16 @@ function Html(props) {
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
 	var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-	var [itemsWrap, setitemsWrap] = useState(accordionDataX.itemsWrap);
+	var [content, setitemsWrap] = useState(accordionDataX.content);
 	var [item, setitem] = useState(accordionDataX.item);
 	var [accOptions, setsliderOptions] = useState(accordionDataX.accOptions);
-	var [navsWrap, setnavsWrap] = useState(accordionDataX.navsWrap);
-	var [prev, setprev] = useState(accordionDataX.prev);
-	var [next, setnext] = useState(accordionDataX.next);
-	var [prevIcon, setprevIcon] = useState(accordionDataX.prevIcon);
-	var [nextIcon, setnextIcon] = useState(accordionDataX.nextIcon);
-	var [paginationWrap, setpaginationWrap] = useState(accordionDataX.paginationWrap);
-	var [paginationActive, setpaginationActive] = useState(accordionDataX.paginationActive);
+	var [header, setnavsWrap] = useState(accordionDataX.header);
+	var [headerActive, setprev] = useState(accordionDataX.headerActive);
+	var [headerLabel, setnext] = useState(accordionDataX.headerLabel);
+	var [labelCounter, setprevIcon] = useState(accordionDataX.labelCounter);
+	var [labelIcon, setnextIcon] = useState(accordionDataX.labelIcon);
+	var [icon, setpaginationWrap] = useState(accordionDataX.icon);
+	var [iconToggle, setpaginationActive] = useState(accordionDataX.iconToggle);
 	var [pagination, setpagination] = useState(accordionDataX.pagination);
 
 
@@ -67,21 +67,19 @@ function Html(props) {
 
 
 
-	var blockClass = ".wcps-content-slider";
+	var blockClass = ".pg-accordion-nested";
 
 
-	var wrapperSelector = blockClass + " .splide";
-	var itemsWrapSelector = blockClass + " .splide__track";
-	var itemSelector = blockClass + " .pg-content-slider-item";
-	var nextSelector = blockClass + " .splide__arrow--next";
-	var prevSelector = blockClass + " .splide__arrow--prev";
-	var nextIconSelector = blockClass + " .splide__arrow--next .icon";
-	var prevIconSelector = blockClass + " .splide__arrow--prev .icon";
-	var navsWrapSelector = blockClass + " .splide__arrows";
-	var paginationWrapSelector = blockClass + " .splide__pagination";
-	var paginationSelector = blockClass + " .splide__pagination__page";
-	var paginationActiveSelector =
-		blockClass + " .splide__pagination__page.is-active";
+	var wrapperSelector = blockClass + "";
+	var contentSelector = blockClass + " .accordion-content";
+	var headerSelector = blockClass + " .accordion-header";
+	var headerActiveSelector = blockClass + " .accordion-header-active";
+	var headerLabelSelector = blockClass + " .accordion-header-label";
+	var labelCounterSelector = blockClass + " .accordion-label-counter";
+	var labelIconSelector = blockClass + " .accordion-label-icon";
+	var iconSelector = blockClass + " .accordion-icon";
+	var iconToggleSelector = blockClass + " .accordion-icon-toggle";
+
 
 
 
@@ -549,11 +547,11 @@ function Html(props) {
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.itemsWrap = itemsWrap;
+		postDataX.post_content.content = content;
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var itemsWrapCss = generateElementCss(itemsWrap, itemsWrapSelector)
+		var itemsWrapCss = generateElementCss(content, contentSelector)
 		Object.entries(itemsWrapCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
@@ -562,7 +560,7 @@ function Html(props) {
 		setstyleObj(styleObjX)
 
 
-	}, [itemsWrap]);
+	}, [content]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
@@ -570,7 +568,7 @@ function Html(props) {
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var itemCss = generateElementCss(item, itemSelector)
+		var itemCss = generateElementCss(item, headerSelector)
 		Object.entries(itemCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
@@ -584,123 +582,97 @@ function Html(props) {
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.navsWrap = navsWrap;
+		postDataX.post_content.header = header;
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var navsWrapCss = generateElementCss(navsWrap, navsWrapSelector)
+		var navsWrapCss = generateElementCss(header, iconSelector)
 		Object.entries(navsWrapCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
 		setstyleObj(styleObjX)
-	}, [navsWrap]);
+	}, [header]);
 
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.prev = prev;
+		postDataX.post_content.headerActive = headerActive;
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var prevCss = generateElementCss(prev, prevSelector)
+		var prevCss = generateElementCss(headerActive, headerLabelSelector)
 		Object.entries(prevCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
 		setstyleObj(styleObjX)
-	}, [prev]);
+	}, [headerActive]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.next = next;
+		postDataX.post_content.headerLabel = headerLabel;
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var nextCss = generateElementCss(next, nextSelector)
+		var nextCss = generateElementCss(headerLabel, headerActiveSelector)
 		Object.entries(nextCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
 		setstyleObj(styleObjX)
-	}, [next]);
+	}, [headerLabel]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.prevIcon = prevIcon;
+		postDataX.post_content.labelCounter = labelCounter;
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var prevIconCss = generateElementCss(prevIcon, prevIconSelector)
+		var prevIconCss = generateElementCss(labelCounter, labelIconSelector)
 		Object.entries(prevIconCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
 		setstyleObj(styleObjX)
-	}, [prevIcon]);
+	}, [labelCounter]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.nextIcon = nextIcon;
+		postDataX.post_content.labelIcon = labelIcon;
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var nextIconCss = generateElementCss(nextIcon, nextIconSelector)
+		var nextIconCss = generateElementCss(labelIcon, labelCounterSelector)
 		Object.entries(nextIconCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
 		setstyleObj(styleObjX)
-	}, [nextIcon]);
+	}, [labelIcon]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.paginationWrap = paginationWrap;
+		postDataX.post_content.icon = icon;
 		onChange(postDataX)
 
 		var styleObjX = { ...styleObj }
-		var paginationWrapCss = generateElementCss(paginationWrap, paginationWrapSelector)
+		var paginationWrapCss = generateElementCss(icon, iconToggleSelector)
 		Object.entries(paginationWrapCss).map(selectors => {
 			var selector = selectors[0]
 			var selectorData = selectors[1]
 			styleObjX[selector] = selectorData;
 		})
 		setstyleObj(styleObjX)
-	}, [paginationWrap]);
+	}, [icon]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.pagination = pagination;
-		onChange(postDataX)
 
-		var styleObjX = { ...styleObj }
-		var paginationCss = generateElementCss(pagination, paginationSelector)
-		Object.entries(paginationCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
-	}, [pagination]);
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.paginationActive = paginationActive;
-		onChange(postDataX)
 
-		var styleObjX = { ...styleObj }
-		var paginationActiveCss = generateElementCss(paginationActive, paginationActiveSelector)
-		Object.entries(paginationActiveCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
-	}, [paginationActive]);
 
 
 
@@ -748,7 +720,7 @@ function Html(props) {
 				obj[sudoScource] = {};
 				// var elementSelector = myStore.getElementSelector(
 				// 	sudoScource,
-				// 	itemsWrapSelector // Replace this selector if needed
+				// 	contentSelector // Replace this selector if needed
 				// );
 			}
 		});
@@ -1058,24 +1030,24 @@ function Html(props) {
 							<PGtab name="options"></PGtab>
 							<PGtab name="styles">
 								<PGStyles
-									obj={itemsWrap}
+									obj={content}
 									onChange={(sudoScource, newVal, attr) =>
 										onChangeStyle(
 											sudoScource,
 											newVal,
 											attr,
-											itemsWrap,
+											content,
 											setitemsWrap
 										)
 									}
 									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, itemsWrap, setitemsWrap)
+										onAddStyle(sudoScource, key, content, setitemsWrap)
 									}
 									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, itemsWrap, setitemsWrap)
+										onRemoveStyle(sudoScource, key, content, setitemsWrap)
 									}
 									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, itemsWrap, setitemsWrap)
+										onResetStyle(sudoSources, content, setitemsWrap)
 									}
 								/>
 							</PGtab>
@@ -1176,18 +1148,18 @@ function Html(props) {
 											<PGtab name="options"></PGtab>
 											<PGtab name="styles">
 												<PGStyles
-													obj={navsWrap}
+													obj={header}
 													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, navsWrap, setnavsWrap)
+														onChangeStyle(sudoScource, newVal, attr, header, setnavsWrap)
 													}
 													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
+														onAddStyle(sudoScource, key, header, setnavsWrap)
 													}
 													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
+														onRemoveStyle(sudoScource, key, header, setnavsWrap)
 													}
 													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, navsWrap, setnavsWrap)
+														onResetStyle(sudoSources, header, setnavsWrap)
 													}
 												/>
 											</PGtab>
@@ -1219,18 +1191,18 @@ function Html(props) {
 											<PGtab name="options"></PGtab>
 											<PGtab name="styles">
 												<PGStyles
-													obj={prev}
+													obj={headerActive}
 													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, prev, setprev)
+														onChangeStyle(sudoScource, newVal, attr, headerActive, setprev)
 													}
 													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, prev, setprev)
+														onAddStyle(sudoScource, key, headerActive, setprev)
 													}
 													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, prev, setprev)
+														onRemoveStyle(sudoScource, key, headerActive, setprev)
 													}
 													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, prev, setprev)
+														onResetStyle(sudoSources, headerActive, setprev)
 													}
 												/>
 											</PGtab>
@@ -1262,18 +1234,18 @@ function Html(props) {
 											<PGtab name="options"></PGtab>
 											<PGtab name="styles">
 												<PGStyles
-													obj={next}
+													obj={headerLabel}
 													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, next, setnext)
+														onChangeStyle(sudoScource, newVal, attr, headerLabel, setnext)
 													}
 													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, next, setnext)
+														onAddStyle(sudoScource, key, headerLabel, setnext)
 													}
 													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, next, setnext)
+														onRemoveStyle(sudoScource, key, headerLabel, setnext)
 													}
 													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, next, setnext)
+														onResetStyle(sudoSources, headerLabel, setnext)
 													}
 												/>
 											</PGtab>
@@ -1305,24 +1277,24 @@ function Html(props) {
 											<PGtab name="options"></PGtab>
 											<PGtab name="styles">
 												<PGStyles
-													obj={prevIcon}
+													obj={labelCounter}
 													onChange={(sudoScource, newVal, attr) =>
 														onChangeStyle(
 															sudoScource,
 															newVal,
 															attr,
-															prevIcon,
+															labelCounter,
 															setprevIcon
 														)
 													}
 													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, prevIcon, setprevIcon)
+														onAddStyle(sudoScource, key, labelCounter, setprevIcon)
 													}
 													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, prevIcon, setprevIcon)
+														onRemoveStyle(sudoScource, key, labelCounter, setprevIcon)
 													}
 													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, prevIcon, setprevIcon)
+														onResetStyle(sudoSources, labelCounter, setprevIcon)
 													}
 												/>
 											</PGtab>
@@ -1354,24 +1326,24 @@ function Html(props) {
 											<PGtab name="options"></PGtab>
 											<PGtab name="styles">
 												<PGStyles
-													obj={nextIcon}
+													obj={labelIcon}
 													onChange={(sudoScource, newVal, attr) =>
 														onChangeStyle(
 															sudoScource,
 															newVal,
 															attr,
-															nextIcon,
+															labelIcon,
 															setnextIcon
 														)
 													}
 													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, nextIcon, setnextIcon)
+														onAddStyle(sudoScource, key, labelIcon, setnextIcon)
 													}
 													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, nextIcon, setnextIcon)
+														onRemoveStyle(sudoScource, key, labelIcon, setnextIcon)
 													}
 													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, nextIcon, setnextIcon)
+														onResetStyle(sudoSources, labelIcon, setnextIcon)
 													}
 												/>
 											</PGtab>
@@ -1434,13 +1406,13 @@ function Html(props) {
 											<PGtab name="options"></PGtab>
 											<PGtab name="styles">
 												<PGStyles
-													obj={paginationWrap}
+													obj={icon}
 													onChange={(sudoScource, newVal, attr) =>
 														onChangeStyle(
 															sudoScource,
 															newVal,
 															attr,
-															paginationWrap,
+															icon,
 															setpaginationWrap
 														)
 													}
@@ -1448,7 +1420,7 @@ function Html(props) {
 														onAddStyle(
 															sudoScource,
 															key,
-															paginationWrap,
+															icon,
 															setpaginationWrap
 														)
 													}
@@ -1456,12 +1428,12 @@ function Html(props) {
 														onRemoveStyle(
 															sudoScource,
 															key,
-															paginationWrap,
+															icon,
 															setpaginationWrap
 														)
 													}
 													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, paginationWrap, setpaginationWrap)
+														onResetStyle(sudoSources, icon, setpaginationWrap)
 													}
 												/>
 											</PGtab>
@@ -1493,24 +1465,24 @@ function Html(props) {
 											<PGtab name="options"></PGtab>
 											<PGtab name="styles">
 												<PGStyles
-													obj={paginationActive}
+													obj={iconToggle}
 													onChange={(sudoScource, newVal, attr) =>
 														onChangeStyle(
 															sudoScource,
 															newVal,
 															attr,
-															paginationActive,
+															iconToggle,
 															setpaginationActive
 														)
 													}
 													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, paginationActive, setpaginationActive)
+														onAddStyle(sudoScource, key, iconToggle, setpaginationActive)
 													}
 													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, paginationActive, setpaginationActive)
+														onRemoveStyle(sudoScource, key, iconToggle, setpaginationActive)
 													}
 													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, paginationActive, setpaginationActive)
+														onResetStyle(sudoSources, iconToggle, setpaginationActive)
 													}
 												/>
 											</PGtab>
