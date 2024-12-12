@@ -67,7 +67,7 @@ function Html(props) {
 		},
 		{
 			header: { label: "Label 2" },
-			content: { text: "Accordion content 3" },
+			content: { text: "Accordion content 2" },
 		},
 	];
 

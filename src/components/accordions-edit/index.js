@@ -3,7 +3,6 @@ import { __ } from "@wordpress/i18n";
 
 import {
 	Icon,
-	__experimentalInputControl as InputControl,
 	PanelBody,
 	PanelRow,
 	SelectControl,
@@ -28,27 +27,22 @@ function Html(props) {
 
 	var breakPointX = "Desktop";
 
-
 	var accordionDataX = postData.post_content;
-
-
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
 	var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-	var [content, setitemsWrap] = useState(accordionDataX.content);
+	var [content, setcontent] = useState(accordionDataX.content);
 	var [item, setitem] = useState(accordionDataX.item);
-	var [accOptions, setsliderOptions] = useState(accordionDataX.accOptions);
-	var [header, setnavsWrap] = useState(accordionDataX.header);
-	var [headerActive, setprev] = useState(accordionDataX.headerActive);
-	var [headerLabel, setnext] = useState(accordionDataX.headerLabel);
-	var [labelCounter, setprevIcon] = useState(accordionDataX.labelCounter);
-	var [labelIcon, setnextIcon] = useState(accordionDataX.labelIcon);
-	var [icon, setpaginationWrap] = useState(accordionDataX.icon);
-	var [iconToggle, setpaginationActive] = useState(accordionDataX.iconToggle);
+	var [accOptions, setaccOptions] = useState(accordionDataX.accOptions);
+	var [header, setheader] = useState(accordionDataX.header);
+	var [headerActive, setheaderActive] = useState(accordionDataX.headerActive);
+	var [headerLabel, setheaderLabel] = useState(accordionDataX.headerLabel);
+	var [labelCounter, setlabelCounter] = useState(accordionDataX.labelCounter);
+	var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
+	var [icon, seticon] = useState(accordionDataX.icon);
+	var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
 	var [pagination, setpagination] = useState(accordionDataX.pagination);
-
-
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -64,11 +58,7 @@ function Html(props) {
 		});
 	}
 
-
-
-
 	var blockClass = ".pg-accordion-nested";
-
 
 	var wrapperSelector = blockClass + "";
 	var contentSelector = blockClass + " .accordion-content";
@@ -80,20 +70,9 @@ function Html(props) {
 	var iconSelector = blockClass + " .accordion-icon";
 	var iconToggleSelector = blockClass + " .accordion-icon-toggle";
 
-
-
-
-
-
-
-
-
-
-
 	var blockId = postData.ID;
 
 	function getElementSelector(sudoScource, mainSelector) {
-
 		var elementSelector = mainSelector;
 		if (sudoScource == "styles") {
 			elementSelector = mainSelector;
@@ -368,9 +347,7 @@ function Html(props) {
 	}
 
 	function generateElementCss(obj, elementSelector) {
-
 		if (obj == null) {
-
 			return {};
 		}
 
@@ -380,11 +357,7 @@ function Html(props) {
 			var sudoSrc = args[0];
 			var sudoArgs = args[1];
 			if (sudoSrc != "options" && sudoArgs != null) {
-				var selector = getElementSelector(
-
-					sudoSrc,
-					elementSelector
-				);
+				var selector = getElementSelector(sudoSrc, elementSelector);
 				Object.entries(args[1]).map((x) => {
 					var attr = x[0];
 					var propVal = x[1];
@@ -411,11 +384,7 @@ function Html(props) {
 		return cssObj;
 	}
 
-
-
-
 	function generateBlockCss(items) {
-
 		var reponsiveCssGroups = {};
 		for (var selector in items) {
 			var attrs = items[selector];
@@ -488,7 +457,8 @@ function Html(props) {
 			}
 			reponsiveCssMobile += "}";
 		}
-		var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+		var reponsiveCss =
+			reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
 
 		var wpfooter = document.getElementById("wpfooter");
 		var divWrap = document.getElementById("css-block");
@@ -501,187 +471,159 @@ function Html(props) {
 		var csswrappg = document.getElementById("css-block");
 		var str = "" + reponsiveCss + "";
 		csswrappg.insertAdjacentHTML("beforeend", str);
-
-
 	}
 
-
-
-
-
-
-
-
-
 	useEffect(() => {
-
 		console.log(styleObj);
-		generateBlockCss(styleObj)
-
+		generateBlockCss(styleObj);
 	}, [styleObj]);
-
-
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.accOptions = accOptions;
-		onChange(postDataX)
+		onChange(postDataX);
 	}, [accOptions]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.wrapper = wrapper;
-		onChange(postDataX)
+		onChange(postDataX);
 
-
-		var styleObjX = { ...styleObj }
-		var wrapperCss = generateElementCss(wrapper, wrapperSelector)
-		Object.entries(wrapperCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var wrapperCss = generateElementCss(wrapper, wrapperSelector);
+		Object.entries(wrapperCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
-
+		});
+		setstyleObj(styleObjX);
 	}, [wrapper]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.content = content;
-		onChange(postDataX)
+		onChange(postDataX);
 
-		var styleObjX = { ...styleObj }
-		var itemsWrapCss = generateElementCss(content, contentSelector)
-		Object.entries(itemsWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var itemsWrapCss = generateElementCss(content, contentSelector);
+		Object.entries(itemsWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
-
-
+		});
+		setstyleObj(styleObjX);
 	}, [content]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
-		postDataX.post_content.item = item;
-		onChange(postDataX)
-
-		var styleObjX = { ...styleObj }
-		var itemCss = generateElementCss(item, headerSelector)
-		Object.entries(itemCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
-			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
-	}, [item]);
-
-
-
-
-	useEffect(() => {
-		var postDataX = { ...postData };
 		postDataX.post_content.header = header;
-		onChange(postDataX)
+		onChange(postDataX);
 
-		var styleObjX = { ...styleObj }
-		var navsWrapCss = generateElementCss(header, iconSelector)
-		Object.entries(navsWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var navsWrapCss = generateElementCss(header, headerSelector);
+		Object.entries(navsWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+		});
+		setstyleObj(styleObjX);
 	}, [header]);
-
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.headerActive = headerActive;
-		onChange(postDataX)
+		onChange(postDataX);
 
-		var styleObjX = { ...styleObj }
-		var prevCss = generateElementCss(headerActive, headerLabelSelector)
-		Object.entries(prevCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var prevCss = generateElementCss(headerActive, headerActiveSelector);
+		Object.entries(prevCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+		});
+		setstyleObj(styleObjX);
 	}, [headerActive]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.headerLabel = headerLabel;
-		onChange(postDataX)
+		onChange(postDataX);
 
-		var styleObjX = { ...styleObj }
-		var nextCss = generateElementCss(headerLabel, headerActiveSelector)
-		Object.entries(nextCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var nextCss = generateElementCss(
+			headerLabel,
+			headerLabelSelector
+		);
+		Object.entries(nextCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+		});
+		setstyleObj(styleObjX);
 	}, [headerLabel]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.labelCounter = labelCounter;
-		onChange(postDataX)
+		onChange(postDataX);
 
-		var styleObjX = { ...styleObj }
-		var prevIconCss = generateElementCss(labelCounter, labelIconSelector)
-		Object.entries(prevIconCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var prevIconCss = generateElementCss(
+			labelCounter,
+			labelCounterSelector
+		);
+		Object.entries(prevIconCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+		});
+		setstyleObj(styleObjX);
 	}, [labelCounter]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.labelIcon = labelIcon;
-		onChange(postDataX)
+		onChange(postDataX);
 
-		var styleObjX = { ...styleObj }
-		var nextIconCss = generateElementCss(labelIcon, labelCounterSelector)
-		Object.entries(nextIconCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var nextIconCss = generateElementCss(labelIcon, labelIconSelector);
+		Object.entries(nextIconCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+		});
+		setstyleObj(styleObjX);
 	}, [labelIcon]);
 
 	useEffect(() => {
 		var postDataX = { ...postData };
 		postDataX.post_content.icon = icon;
-		onChange(postDataX)
+		onChange(postDataX);
 
-		var styleObjX = { ...styleObj }
-		var paginationWrapCss = generateElementCss(icon, iconToggleSelector)
-		Object.entries(paginationWrapCss).map(selectors => {
-			var selector = selectors[0]
-			var selectorData = selectors[1]
+		var styleObjX = { ...styleObj };
+		var paginationWrapCss = generateElementCss(icon, iconSelector);
+		Object.entries(paginationWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
-		})
-		setstyleObj(styleObjX)
+		});
+		setstyleObj(styleObjX);
 	}, [icon]);
 
+	useEffect(() => {
+		var postDataX = { ...postData };
+		postDataX.post_content.iconToggle = iconToggle;
+		onChange(postDataX);
 
-
-
-
-
-
-
-
-
-
-
+		var styleObjX = { ...styleObj };
+		var paginationWrapCss = generateElementCss(iconToggle, iconToggleSelector);
+		Object.entries(paginationWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+		setstyleObj(styleObjX);
+	}, [iconToggle]);
 
 	var RemoveSliderArg = function ({ index }) {
 		return (
@@ -690,7 +632,7 @@ function Html(props) {
 				onClick={(ev) => {
 					var sliderOptionsX = { ...accOptions };
 					delete sliderOptionsX[index];
-					setsliderOptions(sliderOptionsX);
+					setaccOptions(sliderOptionsX);
 				}}>
 				<Icon icon={close} />
 			</span>
@@ -742,72 +684,27 @@ function Html(props) {
 		setProperty(objectX);
 	}
 
-	var sliderOptionsArgs = {
+	var accOptionsAArgs = {
 		autoplay: { label: "Auto play", value: 1 },
-		interval: { label: "Interval", value: "500" },
-		pauseOnHover: { label: "Pause On Hover", value: 1 },
-		pauseOnFocus: { label: "Pause On Focus", value: 1 },
-		lazyLoad: { label: "Lazy Load", value: 1 },
-		preloadPages: { label: "Preload Pages", value: 1 },
-		keyboard: { label: "Keyboard", value: 1 },
-		wheel: { label: "Wheel", value: 1 },
-		releaseWheel: { label: "Release Wheel", value: 1 },
-		direction: { label: "Direction", value: "ltr" },
-		cover: { label: "Cover", value: 0 },
-		rewind: { label: "Rewind", value: 0 },
-		speed: { label: "Speed", value: 400 },
-		rewindSpeed: { label: "Rewind Speed", value: 400 },
-		rewindByDrag: { label: "Rewind By Drag", value: 0 },
-		type: { label: "Slider Type", value: "slide" },
-		width: { label: "Width", value: "" },
-		height: { label: "Height", value: "" },
-		fixedWidth: { label: "Fixed Width", value: "" },
-		fixedHeight: { label: "Fixed Height", value: "" },
-		heightRatio: { label: "Height Ratio", value: "" },
-		autoWidth: { label: "Auto Width", value: 0 },
-		autoHeight: { label: "Auto Height", value: 0 },
-		start: { label: "Start", value: 0 },
-		perPage: { label: "Per Page", value: 3 },
-		perMove: { label: "Per Move", value: 3 },
-		focus: { label: "Focus", value: "center" },
-		gap: { label: "Gap", value: "1em", unit: "em", number: "1" },
-		padding: { label: "Padding", value: "" },
-		arrows: { label: "Arrows", value: 1 },
-		pagination: { label: "Pagination", value: 1 },
-		//easing: { label: 'Easing', value: 'cubic-bezier(0.25, 1, 0.5, 1)' },
-		paginationKeyboard: { label: "Pagination Keyboard", value: 1 },
-		paginationDirection: {
-			label: "Pagination Direction",
-			value: "paginationDirectltrion",
-		},
-		drag: { label: "Drag", value: 1 },
-		noDrag: { label: "No Drag", value: "input, textarea, .rich-text" },
-		snap: { label: "Snap", value: 1 },
-		mediaQuery: { label: "Media Query", value: "max" },
 	};
-
 
 	var sliderForArgs = {
 		Products: { label: "Products", value: "products" },
 		terms: { label: "Terms", value: "terms" },
 		dokanShops: { label: "Dokan Shops", value: "dokanShops" },
-	}
+	};
 
 	return (
 		<div className="">
 			{props.postData.post_content == null && (
 				<div className="p-3 text-center">Please select WCPS first</div>
 			)}
-			<div className="fixed top-20 right-0 w-[400px] z-50">			</div>
+			<div className="fixed top-20 right-0 w-[400px] z-50"> </div>
 
-			<code className="break-all	p-4 block">
-				{JSON.stringify(styleObj)}
-			</code>
-
+			<code className="break-all	p-4 block">{JSON.stringify(styleObj)}</code>
 
 			{props.postData.post_content != null && (
 				<>
-
 					<div className="my-4 p-3">
 						<PGDropdown
 							position="bottom right"
@@ -815,37 +712,32 @@ function Html(props) {
 							buttonTitle={"Slider For"}
 							options={sliderForArgs}
 							onChange={(option, index) => {
-
-
 								var sliderOptionsX = { ...accOptions };
 								sliderOptionsX.sliderFor = option.value;
-								setsliderOptions(sliderOptionsX);
+								setaccOptions(sliderOptionsX);
 							}}
 							values=""></PGDropdown>
 					</div>
-
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Slider Settings"
+						title="Accordion Settings"
 						initialOpen={false}>
 						<PGtab name="normal">
 							<PanelRow className="my-3">
-								<label>{__("Slider Options", "post-grid")}</label>
+								<label>{__("Accordion Options", "post-grid")}</label>
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
 									buttonTitle={"Choose"}
-									options={sliderOptionsArgs}
+									options={accOptionsAArgs}
 									onChange={(option, index) => {
 										var sliderOptionsX = { ...accOptions };
 										sliderOptionsX[index] = option.value;
-										setsliderOptions(sliderOptionsX);
+										setaccOptions(sliderOptionsX);
 									}}
 									values=""></PGDropdown>
 							</PanelRow>
-							<PanelRow className="justify-start gap-4 mb-3">
-
-							</PanelRow>
+							<PanelRow className="justify-start gap-4 mb-3"></PanelRow>
 							{Object.entries(accOptions).map((item, index) => {
 								var id = item[0];
 								var value = item[1];
@@ -867,80 +759,18 @@ function Html(props) {
 													onChange={(newVal) => {
 														var sliderOptionsX = { ...accOptions };
 														sliderOptionsX[id] = newVal;
-														setsliderOptions(sliderOptionsX);
+														setaccOptions(sliderOptionsX);
 													}}
 												/>
 											</PanelRow>
 										)}
-
 									</div>
 								);
 							})}
 						</PGtab>
-						<div>
-
-						</div>
+						<div></div>
 					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Query Items"
-						initialOpen={false}>
-						<div>
-							<PGtabs
-								activeTab="presets"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "presets",
-										title: "presets",
-										icon: settings,
-										className: "tab-presets",
-									},
-									{
-										name: "custom",
-										title: "Custom",
-										icon: brush,
-										className: "tab-custom",
-									},
-								]}>
-								<PGtab name="presets"></PGtab>
-								<PGtab name="custom"></PGtab>
-							</PGtabs>
-						</div>
-					</PanelBody>
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Layouts"
-						initialOpen={false}>
-						<div>
-							<PGtabs
-								activeTab="presets"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "presets",
-										title: "presets",
-										icon: settings,
-										className: "tab-presets",
-									},
-									{
-										name: "custom",
-										title: "Custom",
-										icon: brush,
-										className: "tab-custom",
-									},
-								]}>
-								<PGtab name="presets"></PGtab>
-								<PGtab name="custom"></PGtab>
-							</PGtabs>
-						</div>
-					</PanelBody>
-
+					{/* ////////////wrapper */}
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Wrapper"
@@ -949,7 +779,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -972,14 +802,6 @@ function Html(props) {
 							]}>
 							<PGtab name="options"></PGtab>
 							<PGtab name="styles">
-								{/* <PGStyles
-									obj={wrapper}
-									onChange={onChangeStyleWrapper}
-									onAdd={onAddStyleWrapper}
-									onRemove={onRemoveStyleWrapper}
-									// onBulkAdd={onBulkAddText}
-									onReset={onResetWrapper}
-								/> */}
 								<PGStyles
 									obj={wrapper}
 									onChange={(sudoScource, newVal, attr) =>
@@ -1004,15 +826,16 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+					{/* /////////content */}
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Loop Wrap"
+						title="Content"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1037,31 +860,32 @@ function Html(props) {
 											newVal,
 											attr,
 											content,
-											setitemsWrap
+											setcontent
 										)
 									}
 									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, content, setitemsWrap)
+										onAddStyle(sudoScource, key, content, setcontent)
 									}
 									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, content, setitemsWrap)
+										onRemoveStyle(sudoScource, key, content, setcontent)
 									}
 									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, content, setitemsWrap)
+										onResetStyle(sudoSources, content, setcontent)
 									}
 								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+					{/* /////////header */}
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Item"
+						title="Header"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1079,24 +903,234 @@ function Html(props) {
 							<PGtab name="options"></PGtab>
 							<PGtab name="styles">
 								<PGStyles
-									obj={item}
+									obj={header}
 									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(sudoScource, newVal, attr, item, setitem)
+										onChangeStyle(sudoScource, newVal, attr, header, setheader)
 									}
 									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, item, setitem)
+										onAddStyle(sudoScource, key, header, setheader)
 									}
 									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, item, setitem)
+										onRemoveStyle(sudoScource, key, header, setheader)
 									}
 									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, item, setitem)
+										onResetStyle(sudoSources, header, setheader)
 									}
 								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+					{/* ////////headerActive */}
 					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Header Active"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={headerActive}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											headerActive,
+											setheaderActive
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, headerActive, setheaderActive)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(
+											sudoScource,
+											key,
+											headerActive,
+											setheaderActive
+										)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, headerActive, setheaderActive)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					{/* /////////headerLabel */}
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Header Label"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={headerLabel}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											headerLabel,
+											setheaderLabel
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, headerLabel, setheaderLabel)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, headerLabel, setheaderLabel)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, headerLabel, setheaderLabel)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					{/* ///////////labelCounter */}
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Label Counter"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={labelCounter}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											labelCounter,
+											setlabelCounter
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, labelCounter, setlabelCounter)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(
+											sudoScource,
+											key,
+											labelCounter,
+											setlabelCounter
+										)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, labelCounter, setlabelCounter)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					{/* ////////LabelIcon */}
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Label Icon"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={labelIcon}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											labelIcon,
+											setlabelIcon
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, labelIcon, setlabelIcon)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, labelIcon, setlabelIcon)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, labelIcon, setlabelIcon)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					{/* <PanelBody
 						className="font-medium text-slate-900 "
 						title="Navigation"
 						initialOpen={false}>
@@ -1105,7 +1139,7 @@ function Html(props) {
 								activeTab="presets"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "presets",
@@ -1121,425 +1155,103 @@ function Html(props) {
 									},
 								]}>
 								<PGtab name="presets"></PGtab>
-								<PGtab name="custom">
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Navs Wrap"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={header}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, header, setnavsWrap)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, header, setnavsWrap)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, header, setnavsWrap)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, header, setnavsWrap)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Prev Button"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={headerActive}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, headerActive, setprev)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, headerActive, setprev)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, headerActive, setprev)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, headerActive, setprev)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Next Button"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={headerLabel}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(sudoScource, newVal, attr, headerLabel, setnext)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, headerLabel, setnext)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, headerLabel, setnext)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, headerLabel, setnext)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Prev Icon"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={labelCounter}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															labelCounter,
-															setprevIcon
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, labelCounter, setprevIcon)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, labelCounter, setprevIcon)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, labelCounter, setprevIcon)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Next Icon"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={labelIcon}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															labelIcon,
-															setnextIcon
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, labelIcon, setnextIcon)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, labelIcon, setnextIcon)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, labelIcon, setnextIcon)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-
-								</PGtab>
+								<PGtab name="custom"></PGtab>
 							</PGtabs>
 						</div>
-					</PanelBody>
+					</PanelBody> */}
+					{/* ///////////Icon  */}
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Pagination/Dots"
+						title="Icon"
 						initialOpen={false}>
-						<div>
-							<PGtabs
-								activeTab="presets"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "presets",
-										title: "presets",
-										icon: settings,
-										className: "tab-presets",
-									},
-									{
-										name: "custom",
-										title: "Custom",
-										icon: brush,
-										className: "tab-custom",
-									},
-								]}>
-								<PGtab name="presets"></PGtab>
-								<PGtab name="custom">
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Pagination Wrap"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={icon}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															icon,
-															setpaginationWrap
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(
-															sudoScource,
-															key,
-															icon,
-															setpaginationWrap
-														)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(
-															sudoScource,
-															key,
-															icon,
-															setpaginationWrap
-														)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, icon, setpaginationWrap)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Pagination Active"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={iconToggle}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															iconToggle,
-															setpaginationActive
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, iconToggle, setpaginationActive)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, iconToggle, setpaginationActive)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, iconToggle, setpaginationActive)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-									<PanelBody
-										className="font-medium text-slate-900 "
-										title="Pagination"
-										initialOpen={false}>
-										<PGtabs
-											activeTab="options"
-											orientation="horizontal"
-											activeClass="active-tab"
-											onSelect={(tabName) => { }}
-											tabs={[
-												{
-													name: "options",
-													title: "Options",
-													icon: settings,
-													className: "tab-settings",
-												},
-												{
-													name: "styles",
-													title: "Styles",
-													icon: brush,
-													className: "tab-style",
-												},
-											]}>
-											<PGtab name="options"></PGtab>
-											<PGtab name="styles">
-												<PGStyles
-													obj={pagination}
-													onChange={(sudoScource, newVal, attr) =>
-														onChangeStyle(
-															sudoScource,
-															newVal,
-															attr,
-															pagination,
-															setpagination
-														)
-													}
-													onAdd={(sudoScource, key) =>
-														onAddStyle(sudoScource, key, pagination, setpagination)
-													}
-													onRemove={(sudoScource, key) =>
-														onRemoveStyle(sudoScource, key, pagination, setpagination)
-													}
-													onReset={(sudoSources) =>
-														onResetStyle(sudoSources, pagination, setpagination)
-													}
-												/>
-											</PGtab>
-										</PGtabs>
-									</PanelBody>
-								</PGtab>
-							</PGtabs>
-						</div>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={icon}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(sudoScource, newVal, attr, icon, seticon)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, icon, seticon)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, icon, seticon)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, icon, seticon)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					{/* ///////////Icon Toggle  */}
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Icon Toggle"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options"></PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={iconToggle}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											iconToggle,
+											seticonToggle
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, iconToggle, seticonToggle)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, iconToggle, seticonToggle)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, iconToggle, seticonToggle)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
 					</PanelBody>
 				</>
 			)}
