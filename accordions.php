@@ -54,7 +54,7 @@ class Accordions
     require_once(accordions_plugin_dir . 'includes/class-admin-notices.php');
     require_once(accordions_plugin_dir . 'includes/functions-data-upgrade.php');
 
-
+    require_once(accordions_plugin_dir . 'includes/functions-rest.php');
 
     require_once(accordions_plugin_dir . 'includes/class-settings-tabs.php');
     require_once(accordions_plugin_dir . 'includes/functions.php');
