@@ -45,38 +45,87 @@ function Html(props) {
 	var postData = props.postData;
 	var accordionDataX = postData.post_content;
 
+	console.log(accordionDataX);
+
+
+
 	if (accordionDataX == null) {
 		return null;
 	}
 
+
+
+	var items = accordionDataX?.items;
 	var wrapper = accordionDataX?.wrapper;
 	var header = accordionDataX?.header;
 	var headerActive = accordionDataX?.headerActive;
 	var labelCounter = accordionDataX?.labelCounter;
 	var labelIcon = accordionDataX?.labelIcon;
 	var headerLabel = accordionDataX?.headerLabel;
-	var sliderOptions = accordionDataX?.sliderOptions;
-	var prev = accordionDataX?.prev;
-	var next = accordionDataX?.next;
+
 	var icon = accordionDataX?.icon;
 	var iconToggle = accordionDataX?.iconToggle;
-	var prevIcon = accordionDataX?.prevIcon;
-	var nextIcon = accordionDataX?.nextIcon;
+
 
 	var items = [
 		{
-			header: {
-				label: "Label 1",
-				labelToggle: "Label 1 Toggle",
-				icon: "",
-				iconToggle: "",
+			headerLabel: {
+				"options": {
+					"text": "Accordion Header 1",
+					"tag": "",
+					"class": "accordion-header-label",
+				},
 			},
-			content: { text: "Accordion content 1" },
+			content: {
+				"options": {
+					"tag": "",
+					"class": "accordion-content",
+					text: "Accordion content 1"
+				},
+			},
 		},
 		{
-			header: { label: "Label 2" },
-			content: { text: "Accordion content 2" },
+			headerLabel: {
+				"options": {
+					"text": "Accordion Header 2",
+					"tag": "",
+					"class": "accordion-header-label",
+				},
+			},
+			content: {
+				"options": {
+					"tag": "",
+					"class": "accordion-content",
+					text: "Accordion content 2"
+				},
+			},
 		},
+		{
+			headerLabel: {
+				"options": {
+					"text": "Accordion Header 3",
+					"tag": "",
+					"class": "accordion-header-label",
+				},
+			},
+			content: {
+				"options": {
+					"tag": "",
+					"class": "accordion-content",
+					text: "Accordion content 3"
+				},
+			},
+		},
+
+
+
+
+
+
+
+
+
+
 	];
 	const [toggled, setToggled] = useState(false);
 	const [labelIconHtml, setlabelIconHtml] = useState("");
@@ -153,6 +202,11 @@ function Html(props) {
 
 			<div className={`my-5 ${wrapper?.options?.class} `}>
 				{items?.map((item, index) => {
+
+					console.log(item);
+
+
+
 					return (
 						<>
 							<div
@@ -205,7 +259,7 @@ function Html(props) {
 									{headerLabel.options.text.length > 0 ? (
 										<span
 
-											dangerouslySetInnerHTML={{ __html: headerLabel.options.text }}
+											dangerouslySetInnerHTML={{ __html: item?.headerLabel.options.text }}
 										/>
 									) : (
 										"Start Writing..."
@@ -251,7 +305,7 @@ function Html(props) {
 							{toggled && (
 								<div
 									className={`${blockId}-accordion-content accordion-content`}>
-									Content
+									{item?.content.options.text}
 								</div>
 							)}
 						</>

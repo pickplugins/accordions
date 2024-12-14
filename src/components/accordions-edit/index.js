@@ -36,22 +36,20 @@ function Html(props) {
 
 	var breakPointX = "Desktop";
 
-	var accordionDataX = postData.post_content;
 
+	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
-	var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-	var [content, setcontent] = useState(accordionDataX.content);
-	var [item, setitem] = useState(accordionDataX.item);
-	var [accOptions, setaccOptions] = useState(accordionDataX.accOptions);
-	var [header, setheader] = useState(accordionDataX.header);
-	var [headerActive, setheaderActive] = useState(accordionDataX.headerActive);
-	var [headerLabel, setheaderLabel] = useState(accordionDataX.headerLabel);
-	var [labelCounter, setlabelCounter] = useState(accordionDataX.labelCounter);
-	var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
-	var [icon, seticon] = useState(accordionDataX.icon);
-	var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
-	var [pagination, setpagination] = useState(accordionDataX.pagination);
+	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
+	var [content, setcontent] = useState(accordionData.content);
+	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
+	var [header, setheader] = useState(accordionData.header);
+	var [headerActive, setheaderActive] = useState(accordionData.headerActive);
+	var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+	var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
+	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
+	var [icon, seticon] = useState(accordionData.icon);
+	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -483,155 +481,184 @@ function Html(props) {
 	}
 
 	useEffect(() => {
-		console.log(styleObj);
 		generateBlockCss(styleObj);
 	}, [styleObj]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.accOptions = accOptions;
-		onChange(postDataX);
-	}, [accOptions]);
-
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.wrapper = wrapper;
-		onChange(postDataX);
-
 		var styleObjX = { ...styleObj };
-		var wrapperCss = generateElementCss(wrapper, wrapperSelector);
+
+
+		var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
 		Object.entries(wrapperCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-		setstyleObj(styleObjX);
-	}, [wrapper]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.content = content;
-		onChange(postDataX);
 
-		var styleObjX = { ...styleObj };
-		var itemsWrapCss = generateElementCss(content, contentSelector);
-		Object.entries(itemsWrapCss).map((selectors) => {
+		var contentCss = generateElementCss(content, contentSelector);
+		Object.entries(contentCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-		setstyleObj(styleObjX);
-	}, [content]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.header = header;
-		onChange(postDataX);
-
-		var styleObjX = { ...styleObj };
-		var navsWrapCss = generateElementCss(header, headerSelector);
-		Object.entries(navsWrapCss).map((selectors) => {
+		var headerCss = generateElementCss(header, headerSelector);
+		Object.entries(headerCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-		setstyleObj(styleObjX);
-	}, [header]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.headerActive = headerActive;
-		onChange(postDataX);
-
-		var styleObjX = { ...styleObj };
-		var prevCss = generateElementCss(headerActive, headerActiveSelector);
-		Object.entries(prevCss).map((selectors) => {
+		var headerActiveCss = generateElementCss(headerActive, headerActiveSelector);
+		Object.entries(headerActiveCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-		setstyleObj(styleObjX);
-	}, [headerActive]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.headerLabel = headerLabel;
-		onChange(postDataX);
-
-		var styleObjX = { ...styleObj };
-		var nextCss = generateElementCss(
+		var headerLabelCss = generateElementCss(
 			headerLabel,
 			headerLabelSelector
 		);
-		Object.entries(nextCss).map((selectors) => {
+		Object.entries(headerLabelCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-		setstyleObj(styleObjX);
-	}, [headerLabel]);
 
-	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.labelCounter = labelCounter;
-		onChange(postDataX);
 
-		var styleObjX = { ...styleObj };
-		var prevIconCss = generateElementCss(
+
+		var labelCounterCss = generateElementCss(
 			labelCounter,
 			labelCounterSelector
 		);
-		Object.entries(prevIconCss).map((selectors) => {
+		Object.entries(labelCounterCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-		setstyleObj(styleObjX);
+
+		var labelIconCss = generateElementCss(labelIcon, labelIconSelector);
+		Object.entries(labelIconCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+
+
+		var iconCss = generateElementCss(icon, iconSelector);
+		Object.entries(iconCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+
+		var iconToggleCss = generateElementCss(iconToggle, iconToggleSelector);
+		Object.entries(iconToggleCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+
+		setstyleObj(styleObjX)
+
+
+
+	}, [accordionData]);
+
+
+
+
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionData.accOptions = accOptions;
+		setaccordionData(accordionDataX);
+	}, [accOptions]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionData.wrapper = wrapper;
+		setaccordionData(accordionDataX);
+
+
+	}, [wrapper]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionData.content = content;
+		setaccordionData(accordionDataX);
+
+
+	}, [content]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionData.header = header;
+		setaccordionData(accordionDataX);
+
+
+
+
+	}, [header]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionData.headerActive = headerActive;
+		setaccordionData(accordionDataX);
+
+
+
+
+	}, [headerActive]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionData.headerLabel = headerLabel;
+		setaccordionData(accordionDataX);
+
+
+
+
+	}, [headerLabel]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionData.labelCounter = labelCounter;
+		setaccordionData(accordionDataX);
+
+
+
+
 	}, [labelCounter]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.labelIcon = labelIcon;
-		onChange(postDataX);
+		var accordionDataX = { ...accordionData };
+		accordionData.labelIcon = labelIcon;
+		setaccordionData(accordionDataX);
 
-		var styleObjX = { ...styleObj };
-		var nextIconCss = generateElementCss(labelIcon, labelIconSelector);
-		Object.entries(nextIconCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-		setstyleObj(styleObjX);
 	}, [labelIcon]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.icon = icon;
-		onChange(postDataX);
+		var accordionDataX = { ...accordionData };
+		accordionData.icon = icon;
+		setaccordionData(accordionDataX);
 
-		var styleObjX = { ...styleObj };
-		var paginationWrapCss = generateElementCss(icon, iconSelector);
-		Object.entries(paginationWrapCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-		setstyleObj(styleObjX);
+
+
+
 	}, [icon]);
 
 	useEffect(() => {
-		var postDataX = { ...postData };
-		postDataX.post_content.iconToggle = iconToggle;
-		onChange(postDataX);
+		var accordionDataX = { ...accordionData };
+		accordionData.iconToggle = iconToggle;
+		setaccordionData(accordionDataX);
 
-		var styleObjX = { ...styleObj };
-		var paginationWrapCss = generateElementCss(iconToggle, iconToggleSelector);
-		Object.entries(paginationWrapCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-		setstyleObj(styleObjX);
+
 	}, [iconToggle]);
 
 	var RemoveSliderArg = function ({ index }) {
@@ -706,7 +733,7 @@ function Html(props) {
 	return (
 		<div className="">
 
-			{JSON.stringify(icon)}
+			{JSON.stringify(content)}
 
 
 			{props.postData.post_content != null && (
