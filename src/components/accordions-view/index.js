@@ -2,7 +2,7 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
 import { RichText } from '@wordpress/block-editor'
 
-import { Icon, close, settings, cloud, plus } from "@wordpress/icons";
+import { Icon, close, settings, cloud, plus, post } from "@wordpress/icons";
 import { ReactSortable } from "react-sortablejs";
 import {
 	PanelBody,
@@ -46,7 +46,6 @@ function Html(props) {
 	var postData = props.postData;
 	var accordionDataX = postData.post_content;
 
-	console.log(accordionDataX);
 
 
 	// var [accordionDasdasd, setaccordionDasdasd] = useState(postData.post_content); // Using the hook.
@@ -56,6 +55,7 @@ function Html(props) {
 		return null;
 	}
 
+	var [postData, setpostData] = useState(postData); // Using the hook.
 	var [accordionData, setaccordionData] = useState(accordionDataX); // Using the hook.
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
@@ -71,17 +71,6 @@ function Html(props) {
 	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
 	var [icon, seticon] = useState(accordionData.icon);
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
-
-
-	// var wrapper = accordionDataX?.wrapper;
-	// var header = accordionDataX?.header;
-	// var headerActive = accordionDataX?.headerActive;
-	// var labelCounter = accordionDataX?.labelCounter;
-	// var labelIcon = accordionDataX?.labelIcon;
-	// var headerLabel = accordionDataX?.headerLabel;
-
-	// var icon = accordionDataX?.icon;
-	// var iconToggle = accordionDataX?.iconToggle;
 
 
 
@@ -625,6 +614,14 @@ function Html(props) {
 	}, [accordionData]);
 
 
+
+
+
+
+
+
+
+
 	return (
 		<div className="ml-5">
 
@@ -839,10 +836,8 @@ function Html(props) {
 				})}
 			</div>
 
-			<code>
-				{JSON.stringify(active)}
-				{JSON.stringify(items)}
-			</code>
+			<code>{JSON.stringify(postData)}</code>
+
 		</div>
 	);
 }
@@ -860,10 +855,18 @@ class AccordionsView extends Component {
 		}));
 	}
 
+
 	render() {
 		var { postData, id, isLoading } = this.props;
 
-		return <Html isLoading={isLoading} postData={postData} id={id} warn={this.state.showWarning} />;
+		return (
+			<Html
+				isLoading={isLoading}
+				postData={postData}
+				id={id}
+				warn={this.state.showWarning}
+			/>
+		);
 	}
 }
 

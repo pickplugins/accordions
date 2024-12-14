@@ -541,6 +541,10 @@
   max-width: 3rem;
 }
 
+.max-w-\[400px\] {
+  max-width: 400px;
+}
+
 .max-w-\[calc\(100\%_-_50px\)\] {
   max-width: calc(100% - 50px);
 }
@@ -772,6 +776,10 @@
   border-width: 1px !important;
 }
 
+.\!border-2 {
+  border-width: 2px !important;
+}
+
 .border {
   border-width: 1px;
 }
@@ -810,6 +818,11 @@
 
 .border-none {
   border-style: none;
+}
+
+.\!border-\[\#8c8f94\] {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(140 143 148 / var(--tw-border-opacity, 1)) !important;
 }
 
 .\!border-gray-300 {
