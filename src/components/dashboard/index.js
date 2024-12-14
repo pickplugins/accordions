@@ -47,8 +47,7 @@ function Html(props) {
 
 
 			"options": {
-				"content": "",
-				"tag": "div",
+
 				"class": "pg-accordion-nested"
 			},
 			"styles": {}
@@ -59,6 +58,7 @@ function Html(props) {
 				headerLabel: {
 					"options": {
 						"text": "Accordion Header 1",
+						"slug": "",
 						"tag": "",
 						"class": "accordion-header-label",
 					},
@@ -107,9 +107,8 @@ function Html(props) {
 		],
 		"content": {
 
-
 			"options": {
-				"tag": "div",
+
 				"class": "accordion-content",
 
 			},
@@ -131,7 +130,7 @@ function Html(props) {
 
 
 			"options": {
-				"tag": "div",
+
 				"class": "accordion-header-active"
 			},
 			"styles": {}
@@ -141,8 +140,7 @@ function Html(props) {
 
 
 			"options": {
-				"text": "Accordion Header",
-				"tag": "div",
+				"tag": "span",
 				"class": "accordion-header-label",
 
 			},
@@ -151,11 +149,10 @@ function Html(props) {
 		},
 		"labelCounter": {
 
-
 			"options": {
 				"enable": false,
 				"position": "",
-				"tag": "div",
+
 				"class": "accordion-label-counter",
 
 			},
@@ -289,7 +286,7 @@ function Html(props) {
 						tabs={[
 							{
 								name: "accordions",
-								title: "accordions",
+								title: "Accordions",
 								icon: columns,
 								className: "tab-disable-blocks",
 							},
@@ -348,7 +345,7 @@ function Html(props) {
 					<div className="  relative">
 
 
-						<AccordionsView isLoading={isLoading} postData={postData} id={activeAccordion} />
+						<AccordionsView isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} />
 
 					</div>
 

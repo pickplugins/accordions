@@ -18,6 +18,7 @@ import PGtabs from "../tabs";
 import PGIconPicker from "../icon-picker";
 
 var myStore = wp.data.select("postgrid-shop");
+import { RichText } from '@wordpress/block-editor'
 
 function Html(props) {
 	if (!props.warn) {
@@ -41,6 +42,7 @@ function Html(props) {
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
+	var [items, setwrapper] = useState(accordionData.items); // Using the hook.
 	var [content, setcontent] = useState(accordionData.content);
 	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
 	var [header, setheader] = useState(accordionData.header);
@@ -481,7 +483,7 @@ function Html(props) {
 	}
 
 	useEffect(() => {
-		generateBlockCss(styleObj);
+		//generateBlockCss(styleObj);
 	}, [styleObj]);
 
 	useEffect(() => {
@@ -859,7 +861,10 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					{/* /////////content */}
+
+
+
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Content"
