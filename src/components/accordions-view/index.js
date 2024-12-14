@@ -1,7 +1,7 @@
 
 const { Component, RawHTML, useState, useEffect } = wp.element;
 
-import { Icon, close, settings, cloud, plus } from "@wordpress/icons";
+import { Icon, close, settings, cloud, plus, post } from "@wordpress/icons";
 import { ReactSortable } from "react-sortablejs";
 import {
 	PanelBody,
@@ -46,8 +46,6 @@ function Html(props) {
 	var accordionDataX = postData.post_content;
 
 	console.log(accordionDataX);
-
-
 
 	if (accordionDataX == null) {
 		return null;
@@ -160,7 +158,6 @@ function Html(props) {
 
 	var blockId = "";
 	var blockIdX = "";
-
 
 
 	return (
@@ -333,10 +330,18 @@ class AccordionsView extends Component {
 		}));
 	}
 
+	
 	render() {
 		var { postData, id, isLoading } = this.props;
 
-		return <Html isLoading={isLoading} postData={postData} id={id} warn={this.state.showWarning} />;
+		return (
+			<Html
+				isLoading={isLoading}
+				postData={postData}
+				id={id}
+				warn={this.state.showWarning}
+			/>
+		);
 	}
 }
 

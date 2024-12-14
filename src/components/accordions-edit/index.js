@@ -16,6 +16,7 @@ import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
 import PGIconPicker from "../icon-picker";
+import PGinputText from "../input-text";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -732,9 +733,7 @@ function Html(props) {
 
 	return (
 		<div className="">
-
-			{JSON.stringify(content)}
-
+			{JSON.stringify(wrapper)}
 
 			{props.postData.post_content != null && (
 				<>
@@ -812,7 +811,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -833,7 +832,27 @@ function Html(props) {
 								// 	className: "tab-css",
 								// },
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={wrapper.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...wrapper,
+												options: {
+													...wrapper.options,
+													class: newVal.target.value,
+												},
+											};
+											setwrapper(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={wrapper}
@@ -868,7 +887,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -883,7 +902,27 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={content.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													class: newVal.target.value,
+												},
+											};
+											setcontent(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={content}
@@ -918,7 +957,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -933,7 +972,27 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={header.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...header,
+												options: {
+													...header.options,
+													class: newVal.target.value,
+												},
+											};
+											setheader(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={header}
@@ -962,7 +1021,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -977,7 +1036,27 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={headerActive.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...headerActive,
+												options: {
+													...headerActive.options,
+													class: newVal.target.value,
+												},
+											};
+											setheaderActive(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={headerActive}
@@ -1017,7 +1096,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1032,7 +1111,27 @@ function Html(props) {
 									className: "tab-style",
 								},
 							]}>
-							<PGtab name="options"></PGtab>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={headerLabel.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...headerLabel,
+												options: {
+													...headerLabel.options,
+													class: newVal.target.value,
+												},
+											};
+											setheaderLabel(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
 									obj={headerLabel}
@@ -1067,7 +1166,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1083,8 +1182,6 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-
-
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
 										{__("Counter position", "post-grid")}
@@ -1109,12 +1206,11 @@ function Html(props) {
 											},
 										]}
 										onChange={(newVal) => {
-											var labelCounterX = { ...labelCounter }
+											var labelCounterX = { ...labelCounter };
 
 											var optionsX = {
 												...labelCounterX.options,
 												position: newVal,
-
 											};
 
 											labelCounterX.options = optionsX;
@@ -1122,7 +1218,25 @@ function Html(props) {
 										}}
 									/>
 								</PanelRow>
-
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={labelCounter.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...labelCounter,
+												options: {
+													...labelCounter.options,
+													class: newVal.target.value,
+												},
+											};
+											setlabelCounter(optionsX);
+										}}
+									/>
+								</div>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -1163,7 +1277,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1179,7 +1293,6 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
 										{__("Choose Label Icon", "post-grid")}
@@ -1189,9 +1302,7 @@ function Html(props) {
 										srcType={labelIcon.options.srcType}
 										iconSrc={labelIcon.options.iconSrc}
 										onChange={(arg) => {
-
-
-											var labelIconX = { ...labelIcon }
+											var labelIconX = { ...labelIcon };
 
 											var optionsX = {
 												...labelIconX.options,
@@ -1236,27 +1347,37 @@ function Html(props) {
 											},
 										]}
 										onChange={(newVal) => {
-
-											var labelIconX = { ...labelIcon }
+											var labelIconX = { ...labelIcon };
 
 											var optionsX = {
 												...labelIconX.options,
 												position: newVal,
-
 											};
 
 											labelIconX.options = optionsX;
 											setlabelIcon(labelIconX);
-
-
-
-
-
 										}}
 									/>
 								</PanelRow>
-
-
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={labelIcon.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...labelIcon,
+												options: {
+													...labelIcon.options,
+													class: newVal.target.value,
+												},
+											};
+											setlabelIcon(optionsX);
+										}}
+									/>
+								</div>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -1321,7 +1442,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1337,8 +1458,6 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-
-
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
 										{__("Choose Icon", "post-grid")}
@@ -1348,9 +1467,7 @@ function Html(props) {
 										srcType={icon.options.srcType}
 										iconSrc={icon.options.iconSrc}
 										onChange={(arg) => {
-
-
-											var iconX = { ...icon }
+											var iconX = { ...icon };
 
 											var optionsX = {
 												...iconX.options,
@@ -1373,9 +1490,7 @@ function Html(props) {
 										srcType={iconToggle.options.srcType}
 										iconSrc={iconToggle.options.iconSrc}
 										onChange={(arg) => {
-
-
-											var iconToggleX = { ...iconToggle }
+											var iconToggleX = { ...iconToggle };
 
 											var optionsX = {
 												...iconToggleX.options,
@@ -1389,12 +1504,6 @@ function Html(props) {
 										}}
 									/>
 								</PanelRow>
-
-
-
-
-
-
 
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
@@ -1412,26 +1521,37 @@ function Html(props) {
 											{ label: __("Right", "post-grid"), value: "right" },
 										]}
 										onChange={(newVal) => {
-
-											var iconX = { ...icon }
+											var iconX = { ...icon };
 
 											var optionsX = {
 												...iconX.options,
 												position: newVal,
-
 											};
 
 											iconX.options = optionsX;
 											seticon(iconX);
-
-
-
-
-
 										}}
 									/>
 								</PanelRow>
-
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={icon.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...icon,
+												options: {
+													...icon.options,
+													class: newVal.target.value,
+												},
+											};
+											seticon(optionsX);
+										}}
+									/>
+								</div>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -1461,7 +1581,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1477,13 +1597,25 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-
-
-
-
-
-
-
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={iconToggle.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...iconToggle,
+												options: {
+													...iconToggle.options,
+													class: newVal.target.value,
+												},
+											};
+											seticonToggle(optionsX);
+										}}
+									/>
+								</div>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
