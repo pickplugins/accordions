@@ -3385,21 +3385,19 @@ function Html(props) {
     }, "Please choose an accordion first.");
   }
   var breakPointX = "Desktop";
-  var accordionDataX = postData.post_content;
+  var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
-  var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-  var [content, setcontent] = useState(accordionDataX.content);
-  var [item, setitem] = useState(accordionDataX.item);
-  var [accOptions, setaccOptions] = useState(accordionDataX.accOptions);
-  var [header, setheader] = useState(accordionDataX.header);
-  var [headerActive, setheaderActive] = useState(accordionDataX.headerActive);
-  var [headerLabel, setheaderLabel] = useState(accordionDataX.headerLabel);
-  var [labelCounter, setlabelCounter] = useState(accordionDataX.labelCounter);
-  var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
-  var [icon, seticon] = useState(accordionDataX.icon);
-  var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
-  var [pagination, setpagination] = useState(accordionDataX.pagination);
+  var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
+  var [content, setcontent] = useState(accordionData.content);
+  var [accOptions, setaccOptions] = useState(accordionData.accOptions);
+  var [header, setheader] = useState(accordionData.header);
+  var [headerActive, setheaderActive] = useState(accordionData.headerActive);
+  var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+  var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
+  var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
+  var [icon, seticon] = useState(accordionData.icon);
+  var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
   const gapValue = accOptions?.gap || "0px";
   const [number, setNumber] = useState(parseInt(gapValue));
   const [unit, setUnit] = useState(gapValue.replace(number, ""));
@@ -3806,168 +3804,137 @@ function Html(props) {
     csswrappg.insertAdjacentHTML("beforeend", str);
   }
   useEffect(() => {
-    console.log(styleObj);
     generateBlockCss(styleObj);
   }, [styleObj]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.accOptions = accOptions;
-    onChange(postDataX);
-  }, [accOptions]);
-  useEffect(() => {
-    var postDataX = {
-      ...postData
-    };
-    postDataX.post_content.wrapper = wrapper;
-    onChange(postDataX);
     var styleObjX = {
       ...styleObj
     };
-    var wrapperCss = generateElementCss(wrapper, wrapperSelector);
+    var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
     Object.entries(wrapperCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
+    var contentCss = generateElementCss(content, contentSelector);
+    Object.entries(contentCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var headerCss = generateElementCss(header, headerSelector);
+    Object.entries(headerCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var headerActiveCss = generateElementCss(headerActive, headerActiveSelector);
+    Object.entries(headerActiveCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var headerLabelCss = generateElementCss(headerLabel, headerLabelSelector);
+    Object.entries(headerLabelCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var labelCounterCss = generateElementCss(labelCounter, labelCounterSelector);
+    Object.entries(labelCounterCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var labelIconCss = generateElementCss(labelIcon, labelIconSelector);
+    Object.entries(labelIconCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var iconCss = generateElementCss(icon, iconSelector);
+    Object.entries(iconCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var iconToggleCss = generateElementCss(iconToggle, iconToggleSelector);
+    Object.entries(iconToggleCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
+  }, [accordionData]);
+  useEffect(() => {
+    var accordionDataX = {
+      ...accordionData
+    };
+    accordionData.accOptions = accOptions;
+    setaccordionData(accordionDataX);
+  }, [accOptions]);
+  useEffect(() => {
+    var accordionDataX = {
+      ...accordionData
+    };
+    accordionData.wrapper = wrapper;
+    setaccordionData(accordionDataX);
   }, [wrapper]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.content = content;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var itemsWrapCss = generateElementCss(content, contentSelector);
-    Object.entries(itemsWrapCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.content = content;
+    setaccordionData(accordionDataX);
   }, [content]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.header = header;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var navsWrapCss = generateElementCss(header, headerSelector);
-    Object.entries(navsWrapCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.header = header;
+    setaccordionData(accordionDataX);
   }, [header]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.headerActive = headerActive;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var prevCss = generateElementCss(headerActive, headerActiveSelector);
-    Object.entries(prevCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.headerActive = headerActive;
+    setaccordionData(accordionDataX);
   }, [headerActive]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.headerLabel = headerLabel;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var nextCss = generateElementCss(headerLabel, headerLabelSelector);
-    Object.entries(nextCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.headerLabel = headerLabel;
+    setaccordionData(accordionDataX);
   }, [headerLabel]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.labelCounter = labelCounter;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var prevIconCss = generateElementCss(labelCounter, labelCounterSelector);
-    Object.entries(prevIconCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.labelCounter = labelCounter;
+    setaccordionData(accordionDataX);
   }, [labelCounter]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.labelIcon = labelIcon;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var nextIconCss = generateElementCss(labelIcon, labelIconSelector);
-    Object.entries(nextIconCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.labelIcon = labelIcon;
+    setaccordionData(accordionDataX);
   }, [labelIcon]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.icon = icon;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var paginationWrapCss = generateElementCss(icon, iconSelector);
-    Object.entries(paginationWrapCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.icon = icon;
+    setaccordionData(accordionDataX);
   }, [icon]);
   useEffect(() => {
-    var postDataX = {
-      ...postData
+    var accordionDataX = {
+      ...accordionData
     };
-    postDataX.post_content.iconToggle = iconToggle;
-    onChange(postDataX);
-    var styleObjX = {
-      ...styleObj
-    };
-    var paginationWrapCss = generateElementCss(iconToggle, iconToggleSelector);
-    Object.entries(paginationWrapCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
+    accordionData.iconToggle = iconToggle;
+    setaccordionData(accordionDataX);
   }, [iconToggle]);
   var RemoveSliderArg = function ({
     index
@@ -4046,7 +4013,7 @@ function Html(props) {
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
-  }, JSON.stringify(icon), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, JSON.stringify(content), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
@@ -4625,38 +4592,63 @@ function Html(props) {
   var isLoading = props.isLoading;
   var postData = props.postData;
   var accordionDataX = postData.post_content;
+  console.log(accordionDataX);
   if (accordionDataX == null) {
     return null;
   }
+  var items = accordionDataX?.items;
   var wrapper = accordionDataX?.wrapper;
   var header = accordionDataX?.header;
   var headerActive = accordionDataX?.headerActive;
   var labelCounter = accordionDataX?.labelCounter;
   var labelIcon = accordionDataX?.labelIcon;
   var headerLabel = accordionDataX?.headerLabel;
-  var sliderOptions = accordionDataX?.sliderOptions;
-  var prev = accordionDataX?.prev;
-  var next = accordionDataX?.next;
   var icon = accordionDataX?.icon;
   var iconToggle = accordionDataX?.iconToggle;
-  var prevIcon = accordionDataX?.prevIcon;
-  var nextIcon = accordionDataX?.nextIcon;
   var items = [{
-    header: {
-      label: "Label 1",
-      labelToggle: "Label 1 Toggle",
-      icon: "",
-      iconToggle: ""
+    headerLabel: {
+      "options": {
+        "text": "Accordion Header 1",
+        "tag": "",
+        "class": "accordion-header-label"
+      }
     },
     content: {
-      text: "Accordion content 1"
+      "options": {
+        "tag": "",
+        "class": "accordion-content",
+        text: "Accordion content 1"
+      }
     }
   }, {
-    header: {
-      label: "Label 2"
+    headerLabel: {
+      "options": {
+        "text": "Accordion Header 2",
+        "tag": "",
+        "class": "accordion-header-label"
+      }
     },
     content: {
-      text: "Accordion content 2"
+      "options": {
+        "tag": "",
+        "class": "accordion-content",
+        text: "Accordion content 2"
+      }
+    }
+  }, {
+    headerLabel: {
+      "options": {
+        "text": "Accordion Header 3",
+        "tag": "",
+        "class": "accordion-header-label"
+      }
+    },
+    content: {
+      "options": {
+        "tag": "",
+        "class": "accordion-content",
+        text: "Accordion content 3"
+      }
     }
   }];
   const [toggled, setToggled] = useState(false);
@@ -4695,6 +4687,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `my-5 ${wrapper?.options?.class} `
   }, items?.map((item, index) => {
+    console.log(item);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `${blockId}-accordion-header ${blockIdX}  ${header.options.class} ${toggled ? "accordion-header-active" : ""}`,
       onClick: ev => {
@@ -4731,7 +4724,7 @@ function Html(props) {
       }
     }), headerLabel.options.text.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       dangerouslySetInnerHTML: {
-        __html: headerLabel.options.text
+        __html: item?.headerLabel.options.text
       }
     }) : "Start Writing...", labelIcon.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: `${blockId}-accordion-label-icon accordion-label-icon`,
@@ -4759,7 +4752,7 @@ function Html(props) {
       }
     }))), toggled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `${blockId}-accordion-content accordion-content`
-    }, "Content"));
+    }, item?.content.options.text));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, JSON.stringify(wrapper)));
 }
 class AccordionsView extends Component {
@@ -27565,19 +27558,91 @@ function Html(props) {
       },
       "styles": {}
     },
+    "items": [{
+      headerLabel: {
+        "options": {
+          "text": "Accordion Header 1",
+          "tag": "",
+          "class": "accordion-header-label"
+        }
+      },
+      content: {
+        "options": {
+          "tag": "",
+          "class": "accordion-content",
+          text: "Accordion content 1"
+        }
+      }
+    }, {
+      headerLabel: {
+        "options": {
+          "text": "Accordion Header 2",
+          "tag": "",
+          "class": "accordion-header-label"
+        }
+      },
+      content: {
+        "options": {
+          "tag": "",
+          "class": "accordion-content",
+          text: "Accordion content 2"
+        }
+      }
+    }, {
+      headerLabel: {
+        "options": {
+          "text": "Accordion Header 3",
+          "tag": "",
+          "class": "accordion-header-label"
+        }
+      },
+      content: {
+        "options": {
+          "tag": "",
+          "class": "accordion-content",
+          text: "Accordion content 3"
+        }
+      }
+    }],
     "content": {
       "options": {
         "tag": "div",
         "class": "accordion-content"
       },
-      "styles": {}
+      "styles": {
+        "padding": {
+          "Desktop": "15px 15px 15px 15px"
+        },
+        "backgroundColor": {
+          "Desktop": "#d5d4d9"
+        }
+      }
     },
     "header": {
       "options": {
         "tag": "div",
         "class": "accordion-header"
       },
-      "styles": {}
+      "styles": {
+        "display": {
+          "Desktop": "flex"
+        },
+        "gap": {
+          "Desktop": "1em"
+        },
+        "padding": {
+          "Desktop": "12px 12px 12px 12px"
+        },
+        "backgroundColor": {
+          "Desktop": "#9DD6DF"
+        },
+        "margin": {
+          "Desktop": "0px 0px 1px 0px"
+        },
+        "fontSize": {
+          "Desktop": "16px"
+        }
+      }
     },
     "headerActive": {
       "options": {
@@ -27639,7 +27704,6 @@ function Html(props) {
     }
   };
   var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-  console.log(activeAccordion);
   var [postData, setpostData] = useState(defaultPostData); // Using the hook.
   var [isLoading, setisLoading] = useState(false); // Using the hook.
 

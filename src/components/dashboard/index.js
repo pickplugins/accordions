@@ -54,7 +54,57 @@ function Html(props) {
 			"styles": {}
 
 		},
+		"items": [
+			{
+				headerLabel: {
+					"options": {
+						"text": "Accordion Header 1",
+						"tag": "",
+						"class": "accordion-header-label",
+					},
+				},
+				content: {
+					"options": {
+						"tag": "",
+						"class": "accordion-content",
+						text: "Accordion content 1"
+					},
+				},
+			},
+			{
+				headerLabel: {
+					"options": {
+						"text": "Accordion Header 2",
+						"tag": "",
+						"class": "accordion-header-label",
+					},
+				},
+				content: {
+					"options": {
+						"tag": "",
+						"class": "accordion-content",
+						text: "Accordion content 2"
+					},
+				},
+			},
+			{
+				headerLabel: {
+					"options": {
+						"text": "Accordion Header 3",
+						"tag": "",
+						"class": "accordion-header-label",
+					},
+				},
+				content: {
+					"options": {
+						"tag": "",
+						"class": "accordion-content",
+						text: "Accordion content 3"
+					},
+				},
+			},
 
+		],
 		"content": {
 
 
@@ -63,7 +113,7 @@ function Html(props) {
 				"class": "accordion-content",
 
 			},
-			"styles": {}
+			"styles": { "padding": { "Desktop": "15px 15px 15px 15px" }, "backgroundColor": { "Desktop": "#d5d4d9" } }
 
 		},
 		"header": {
@@ -74,7 +124,7 @@ function Html(props) {
 				"class": "accordion-header",
 
 			},
-			"styles": {}
+			"styles": { "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "padding": { "Desktop": "12px 12px 12px 12px" }, "backgroundColor": { "Desktop": "#9DD6DF" }, "margin": { "Desktop": "0px 0px 1px 0px" }, "fontSize": { "Desktop": "16px" } }
 
 		},
 		"headerActive": {
@@ -163,7 +213,6 @@ function Html(props) {
 	};
 
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-	console.log(activeAccordion);
 	var [postData, setpostData] = useState(defaultPostData); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 
@@ -261,6 +310,9 @@ function Html(props) {
 						]}>
 						<PGtab name="accordions">
 							<div className="relative p-3">
+
+
+
 								{postData.post_content == null && (
 									<div className="p-3 my-5 bg-orange-400">Please choose an accordion first.</div>
 								)}
@@ -297,6 +349,7 @@ function Html(props) {
 
 
 						<AccordionsView isLoading={isLoading} postData={postData} id={activeAccordion} />
+
 					</div>
 
 				</div>
