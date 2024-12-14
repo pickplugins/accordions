@@ -20,7 +20,15 @@ function Html(props) {
 
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
 	var [postData, setpostData] = useState(accordionDefaultData); // Using the hook.
+	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
+
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
+
+
+
+
+
+
 
 	function selectAccordion(args) {
 		setActiveAccordion(args);
@@ -57,6 +65,14 @@ function Html(props) {
 			setpostData(res);
 		});
 	}, [activeAccordion]);
+
+
+
+
+
+
+
+
 
 	// ! hello
 	return (
@@ -120,7 +136,6 @@ function Html(props) {
 				</div>
 				<div className="w-full sticky top-0">
 					<div className="  relative">
-
 
 						<AccordionsView isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} />
 

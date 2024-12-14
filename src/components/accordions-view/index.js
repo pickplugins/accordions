@@ -836,7 +836,6 @@ function Html(props) {
 				})}
 			</div>
 
-			<code>{JSON.stringify(postData)}</code>
 
 		</div>
 	);
