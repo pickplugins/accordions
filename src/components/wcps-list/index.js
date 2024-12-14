@@ -124,8 +124,6 @@ function Html(props) {
 			},
 		}).then((res) => {
 
-			console.log(res)
-
 			setisLoading(false);
 
 			setPosts(res.posts);
@@ -164,11 +162,11 @@ function Html(props) {
 					{posts.map(item => {
 
 						return (
-							<div className='flex justify-between items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer' onClick={ev => {
+							<div className='flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer' onClick={ev => {
 								selectAccordion(item.ID)
 							}}>
 
-								<span>{item.post_title}</span>
+								<span>{item.post_title} <span className="text-sm">{`(#${item.ID})`}</span></span>
 								{activeAccordion == item.ID && (
 									<span><Icon icon={check} /></span>
 								)}
