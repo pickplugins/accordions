@@ -3394,7 +3394,7 @@ function Html(props) {
 
   var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
   var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
-  var [items, setwrapper] = useState(accordionData.items); // Using the hook.
+  var [items, setitems] = useState(accordionData.items); // Using the hook.
   var [content, setcontent] = useState(accordionData.content);
   var [accOptions, setaccOptions] = useState(accordionData.accOptions);
   var [header, setheader] = useState(accordionData.header);
@@ -3557,6 +3557,13 @@ function Html(props) {
     var objectX = isEmpty ? myStore.deletePropertyDeep(object, [sudoScource, key]) : object;
     setProperty(objectX);
   }
+  function onBulkAddStyle(sudoSource, cssObj, propertyType, setProperty) {
+    let obj = {
+      ...propertyType
+    };
+    obj[sudoSource] = cssObj;
+    setProperty(obj);
+  }
   var accOptionsArgs = {
     autoplay: {
       label: "Auto play",
@@ -3565,26 +3572,22 @@ function Html(props) {
   };
   var viewTypeArgs = {
     accordion: {
-      label: "accordion",
+      label: "Accordion",
       value: "accordion"
-    },
-    tabs: {
-      label: "Tabs",
-      value: "tabs"
-    },
-    tabsVertical: {
-      label: "Tabs Vertical",
-      value: "tabsVertical"
     }
+    // tabs: { label: "Tabs", value: "tabs" },
+    // tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "View Type?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
     variant: "secondary",
-    buttonTitle: "Choose View Type",
+    buttonTitle: viewTypeArgs[globalOptions.viewType]?.label,
     options: viewTypeArgs,
     onChange: (option, index) => {
       var globalOptionsX = {
@@ -3594,57 +3597,108 @@ function Html(props) {
       setglobalOptions(globalOptionsX);
     },
     values: ""
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Accordion Settings",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "normal"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-    className: "my-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Accordion Options", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    position: "bottom right",
-    variant: "secondary",
-    buttonTitle: "Choose",
-    options: accOptionsArgs,
-    onChange: (option, index) => {
-      var sliderOptionsX = {
-        ...accOptions
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "Enable lazyLoad"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: "",
+    value: globalOptions?.lazyLoad,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
       };
-      sliderOptionsX[index] = option.value;
-      setaccOptions(sliderOptionsX);
-    },
-    values: ""
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-    className: "justify-start gap-4 mb-3"
-  }), Object.entries(accOptions).map((item, index) => {
-    var id = item[0];
-    var value = item[1];
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      key: index
-    }, id == "collapsible" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex items-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveSliderArg, {
-      index: id
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("collapsible?", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-      label: "",
-      value: value,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
-        value: 1
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
-        value: 0
-      }],
-      onChange: newVal => {
-        var sliderOptionsX = {
-          ...accOptions
-        };
-        sliderOptionsX[id] = newVal;
-        setaccOptions(sliderOptionsX);
-      }
-    })));
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      globalOptionsX.lazyLoad = newVal;
+      setglobalOptions(globalOptionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "Enable Autoembed"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: "",
+    value: globalOptions?.autoembed,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.autoembed = newVal;
+      setglobalOptions(globalOptionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "Enable Shortcodes"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: "",
+    value: globalOptions?.shortcodes,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.shortcodes = newVal;
+      setglobalOptions(globalOptionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "Enable wpautop"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: "",
+    value: globalOptions?.wpautop,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.wpautop = newVal;
+      setglobalOptions(globalOptionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "Enable Schema"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: "",
+    value: globalOptions?.schema,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("True", "post-grid"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("False", "post-grid"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.schema = newVal;
+      setglobalOptions(globalOptionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Wrapper",
     initialOpen: false
@@ -3698,7 +3752,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, wrapper, setwrapper),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, wrapper, setwrapper),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, wrapper, setwrapper),
-    onReset: sudoSources => onResetStyle(sudoSources, wrapper, setwrapper)
+    onReset: sudoSources => onResetStyle(sudoSources, wrapper, setwrapper),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, wrapper, setwrapper)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Content",
@@ -3746,7 +3801,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, content, setcontent),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, content, setcontent),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, content, setcontent),
-    onReset: sudoSources => onResetStyle(sudoSources, content, setcontent)
+    onReset: sudoSources => onResetStyle(sudoSources, content, setcontent),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, content, setcontent)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Header",
@@ -3794,7 +3850,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, header, setheader),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, header, setheader),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, header, setheader),
-    onReset: sudoSources => onResetStyle(sudoSources, header, setheader)
+    onReset: sudoSources => onResetStyle(sudoSources, header, setheader),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, header, setheader)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Header Active",
@@ -3842,7 +3899,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerActive, setheaderActive),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerActive, setheaderActive),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerActive, setheaderActive),
-    onReset: sudoSources => onResetStyle(sudoSources, headerActive, setheaderActive)
+    onReset: sudoSources => onResetStyle(sudoSources, headerActive, setheaderActive),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, headerActive, setheaderActive)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Header Label",
@@ -3890,7 +3948,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, headerLabel, setheaderLabel),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, headerLabel, setheaderLabel),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, headerLabel, setheaderLabel),
-    onReset: sudoSources => onResetStyle(sudoSources, headerLabel, setheaderLabel)
+    onReset: sudoSources => onResetStyle(sudoSources, headerLabel, setheaderLabel),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, headerLabel, setheaderLabel)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Label Counter",
@@ -3971,7 +4030,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelCounter, setlabelCounter),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelCounter, setlabelCounter),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelCounter, setlabelCounter),
-    onReset: sudoSources => onResetStyle(sudoSources, labelCounter, setlabelCounter)
+    onReset: sudoSources => onResetStyle(sudoSources, labelCounter, setlabelCounter),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, labelCounter, setlabelCounter)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Label Icon",
@@ -4072,7 +4132,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, labelIcon, setlabelIcon),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, labelIcon, setlabelIcon),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, labelIcon, setlabelIcon),
-    onReset: sudoSources => onResetStyle(sudoSources, labelIcon, setlabelIcon)
+    onReset: sudoSources => onResetStyle(sudoSources, labelIcon, setlabelIcon),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, labelIcon, setlabelIcon)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Icon",
@@ -4187,7 +4248,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, icon, seticon),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, icon, seticon),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, icon, seticon),
-    onReset: sudoSources => onResetStyle(sudoSources, icon, seticon)
+    onReset: sudoSources => onResetStyle(sudoSources, icon, seticon),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, icon, seticon)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Icon Toggle",
@@ -4235,7 +4297,8 @@ function Html(props) {
     onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, iconToggle, seticonToggle),
     onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, iconToggle, seticonToggle),
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, iconToggle, seticonToggle),
-    onReset: sudoSources => onResetStyle(sudoSources, iconToggle, seticonToggle)
+    onReset: sudoSources => onResetStyle(sudoSources, iconToggle, seticonToggle),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, iconToggle, seticonToggle)
   }))))));
 }
 class AccordionsEdit extends Component {
@@ -4321,40 +4384,53 @@ function Html(props) {
     return null;
   }
   var id = props.id;
+  var onChange = props.onChange;
   var isLoading = props.isLoading;
-  var postData = props.postData;
-  var accordionDataX = postData.post_content;
-
-  // var [accordionDasdasd, setaccordionDasdasd] = useState(postData.post_content); // Using the hook.
-
+  var onUpdate = props.onUpdate;
+  var pleaseUpdate = props.pleaseUpdate;
+  var postDataX = props.postData;
+  var accordionDataX = postDataX.post_content;
   if (accordionDataX == null) {
     return null;
   }
-  var [postData, setpostData] = useState(postData); // Using the hook.
+  var [pleaseUpdateX, setpleaseUpdateX] = useState(props.pleaseUpdate); // Using the hook.
+  var [postData, setpostData] = useState(props.postData); // Using the hook.
   var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
-  var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
-  var [items, setitems] = useState(accordionData.items); // Using the hook.
-  var [content, setcontent] = useState(accordionData.content);
-  var [accOptions, setaccOptions] = useState(accordionData.accOptions);
-  var [header, setheader] = useState(accordionData.header);
-  var [headerActive, setheaderActive] = useState(accordionData.headerActive);
-  var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
-  var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
-  var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
-  var [icon, seticon] = useState(accordionData.icon);
-  var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
+  var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
+  var [items, setitems] = useState(accordionDataX.items); // Using the hook.
+  var [content, setcontent] = useState(accordionDataX.content);
+  var [accOptions, setaccOptions] = useState(accordionDataX.accOptions);
+  var [header, setheader] = useState(accordionDataX.header);
+  var [headerActive, setheaderActive] = useState(accordionDataX.headerActive);
+  var [headerLabel, setheaderLabel] = useState(accordionDataX.headerLabel);
+  var [labelCounter, setlabelCounter] = useState(accordionDataX.labelCounter);
+  var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
+  var [icon, seticon] = useState(accordionDataX.icon);
+  var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
   const [toggled, setToggled] = useState(false);
   const [labelIconHtml, setlabelIconHtml] = useState("");
   const [iconHtml, seticonHtml] = useState("");
   const [iconToggleHtml, seticonToggleHtml] = useState("");
   useEffect(() => {
-    setaccordionData(accordionDataX);
-    console.log("Hello 1");
-  }, [accordionDataX]);
-  useEffect(() => {}, [header]);
+    setpostData(props.postData);
+  }, [props.postData]);
+  useEffect(() => {
+    setaccordionData(postData.post_content);
+    setitems(postData.post_content.items);
+  }, [postData]);
+  useEffect(() => {
+    var accordionDataX = {
+      ...accordionData
+    };
+    accordionDataX.items = items;
+    onChange(accordionDataX);
+  }, [items]);
+  useEffect(() => {
+    setpleaseUpdateX(pleaseUpdate);
+  }, [pleaseUpdate]);
   useEffect(() => {
     var iconSrc = iconToggle?.options?.iconSrc;
     var iconHtml = `<span class="${iconSrc}"></span>`;
@@ -4371,470 +4447,15 @@ function Html(props) {
     setlabelIconHtml(iconHtml);
   }, [labelIcon?.options]);
   var [active, setactive] = useState(0);
-  var blockId = "";
-  var blockIdX = "";
-  var blockClass = ".pg-accordion-nested";
-  var wrapperSelector = blockClass + "";
-  var contentSelector = blockClass + " .accordion-content";
-  var headerSelector = blockClass + " .accordion-header";
-  var headerActiveSelector = blockClass + " .accordion-header-active";
-  var headerLabelSelector = blockClass + " .accordion-header-label";
-  var labelCounterSelector = blockClass + " .accordion-label-counter";
-  var labelIconSelector = blockClass + " .accordion-label-icon";
-  var iconSelector = blockClass + " .accordion-icon";
-  var iconToggleSelector = blockClass + " .accordion-icon-toggle";
-  var blockId = postData.ID;
-  function getElementSelector(sudoScource, mainSelector) {
-    var elementSelector = mainSelector;
-    if (sudoScource == "styles") {
-      elementSelector = mainSelector;
-    } else if (sudoScource == "hover") {
-      elementSelector = mainSelector + ":hover";
-    } else if (sudoScource == "after") {
-      elementSelector = mainSelector + "::after";
-    } else if (sudoScource == "before") {
-      elementSelector = mainSelector + "::before";
-    } else if (sudoScource == "first-child") {
-      elementSelector = mainSelector + ":first-child";
-    } else if (sudoScource == "last-child") {
-      elementSelector = mainSelector + ":last-child";
-    } else if (sudoScource == "visited") {
-      elementSelector = mainSelector + ":visited";
-    } else if (sudoScource == "selection") {
-      elementSelector = mainSelector + "::selection";
-    } else if (sudoScource == "first-letter") {
-      elementSelector = mainSelector + "::first-letter";
-    } else if (sudoScource == "first-line") {
-      elementSelector = mainSelector + "::first-line";
-    } else {
-      elementSelector = mainSelector + ":" + sudoScource;
-    }
-    return elementSelector;
-  }
-  function cssAttrParse(key) {
-    var cssProp = "";
-    if (key == "alignContent") {
-      cssProp = "align-content";
-    } else if (key == "alignItems") {
-      cssProp = "align-items";
-    } else if (key == "animationName") {
-      cssProp = "animation-name";
-    } else if (key == "alignSelf") {
-      cssProp = "align-self";
-    } else if (key == "aspectRatio") {
-      cssProp = "aspect-ratio";
-    } else if (key == "backfaceVisibility") {
-      cssProp = "backface-visibility";
-    } else if (key == "backgroundAttachment") {
-      cssProp = "background-attachment";
-    } else if (key == "backgroundBlendMode") {
-      cssProp = "background-blend-mode";
-    } else if (key == "backgroundClip") {
-      cssProp = "background-clip";
-    } else if (key == "bgColor") {
-      cssProp = "background-color";
-    } else if (key == "backgroundColor") {
-      cssProp = "background-color";
-    } else if (key == "backgroundOrigin") {
-      cssProp = "background-origin";
-    } else if (key == "backgroundRepeat") {
-      cssProp = "background-repeat";
-    } else if (key == "backgroundSize") {
-      cssProp = "background-size";
-    } else if (key == "backgroundPosition") {
-      cssProp = "background-position";
-    } else if (key == "backgroundImage") {
-      cssProp = "background-image";
-    } else if (key == "border") {
-      cssProp = "border";
-    } else if (key == "borderTop") {
-      cssProp = "border-top";
-    } else if (key == "borderRight") {
-      cssProp = "border-right";
-    } else if (key == "borderBottom") {
-      cssProp = "border-bottom";
-    } else if (key == "borderLeft") {
-      cssProp = "border-left";
-    } else if (key == "borderRadius") {
-      cssProp = "border-radius";
-    } else if (key == "borderCollapse") {
-      cssProp = "border-collapse";
-    } else if (key == "borderSpacing") {
-      cssProp = "border-spacing";
-    } else if (key == "borderImage") {
-      cssProp = "border-image";
-    } else if (key == "boxShadow") {
-      cssProp = "box-shadow";
-    } else if (key == "backdropFilter") {
-      cssProp = "backdrop-filter";
-    } else if (key == "bottom" || key == "top" || key == "left" || key == "right" || key == "clear" || key == "color" || key == "filter" || key == "float") {
-      cssProp = key;
-    } else if (key == "boxSizing") {
-      cssProp = "box-sizing";
-    } else if (key == "cursor") {
-      cssProp = "cursor";
-    } else if (key == "content") {
-      cssProp = "content";
-    } else if (key == "counterIncrement") {
-      cssProp = "counter-increment";
-    } else if (key == "counterReset") {
-      cssProp = "counter-reset";
-    } else if (key == "counterSet") {
-      cssProp = "counter-set";
-    } else if (key == "columnCount") {
-      cssProp = "column-count";
-    } else if (key == "columnRule") {
-      cssProp = "column-rule";
-    } else if (key == "direction") {
-      cssProp = "direction";
-    } else if (key == "fontFamily") {
-      cssProp = "font-family";
-    } else if (key == "fontSize") {
-      cssProp = "font-size";
-    } else if (key == "fontStyle") {
-      cssProp = "font-style";
-    } else if (key == "fontStretch") {
-      cssProp = "font-stretch";
-    } else if (key == "fontWeight") {
-      cssProp = "font-weight";
-    } else if (key == "fontVariantCaps") {
-      cssProp = "font-variant-caps";
-    } else if (key == "flexWrap") {
-      cssProp = "flex-wrap";
-    } else if (key == "flexDirection") {
-      cssProp = "flex-direction";
-    } else if (key == "flexGrow") {
-      cssProp = "flex-grow";
-    } else if (key == "flexShrink") {
-      cssProp = "flex-shrink";
-    } else if (key == "flexBasis") {
-      cssProp = "flex-basis";
-    } else if (key == "flexFlow") {
-      cssProp = "flex-flow";
-    } else if (key == "letterSpacing") {
-      cssProp = "letter-spacing";
-    } else if (key == "gridAutoFlow") {
-      cssProp = "grid-auto-flow";
-    } else if (key == "gridColumnEnd") {
-      cssProp = "grid-column-end";
-    } else if (key == "gridColumnStart") {
-      cssProp = "grid-column-start";
-    } else if (key == "gridRowEnd") {
-      cssProp = "grid-row-end";
-    } else if (key == "gridRowStart") {
-      cssProp = "grid-row-start";
-    } else if (key == "gridTemplateColumns") {
-      cssProp = "grid-template-columns";
-    } else if (key == "gridTemplateRows") {
-      cssProp = "grid-template-rows";
-    } else if (key == "listStyle") {
-      cssProp = "list-style";
-    } else if (key == "lineHeight") {
-      cssProp = "line-height";
-    } else if (key == "justifyContent") {
-      cssProp = "justify-content";
-    } else if (key == "maskImage") {
-      cssProp = "mask-image";
-    } else if (key == "objectFit") {
-      cssProp = "object-fit";
-    } else if (key == "opacity") {
-      cssProp = "opacity";
-    } else if (key == "outline") {
-      cssProp = "outline";
-    } else if (key == "order") {
-      cssProp = "order";
-    } else if (key == "outlineOffset") {
-      cssProp = "outline-offset";
-    } else if (key == "position") {
-      cssProp = "position";
-    } else if (key == "textIndent") {
-      cssProp = "text-indent";
-    } else if (key == "textJustify") {
-      cssProp = "text-justify";
-    } else if (key == "textTransform") {
-      cssProp = "text-transform";
-    } else if (key == "textDecoration") {
-      cssProp = "text-decoration";
-    } else if (key == "textOverflow") {
-      cssProp = "text-overflow";
-    } else if (key == "textShadow") {
-      cssProp = "text-shadow";
-    } else if (key == "textAlign") {
-      cssProp = "text-align";
-    } else if (key == "visibility") {
-      cssProp = "visibility";
-    } else if (key == "wordBreak") {
-      cssProp = "word-break";
-    } else if (key == "wordSpacing") {
-      cssProp = "word-spacing";
-    } else if (key == "zIndex") {
-      cssProp = "z-index";
-    } else if (key == "padding") {
-      cssProp = "padding";
-    } else if (key == "paddingTop") {
-      cssProp = "padding-top";
-    } else if (key == "paddingRight") {
-      cssProp = "padding-right";
-    } else if (key == "paddingBottom") {
-      cssProp = "padding-bottom";
-    } else if (key == "paddingLeft") {
-      cssProp = "padding-left";
-    } else if (key == "placeItems") {
-      cssProp = "place-items";
-    } else if (key == "margin") {
-      cssProp = "margin";
-    } else if (key == "marginTop") {
-      cssProp = "margin-top";
-    } else if (key == "marginRight") {
-      cssProp = "margin-right";
-    } else if (key == "marginBottom") {
-      cssProp = "margin-bottom";
-    } else if (key == "marginLeft") {
-      cssProp = "margin-left";
-    } else if (key == "display") {
-      cssProp = "display";
-    } else if (key == "width") {
-      cssProp = "width";
-    } else if (key == "height") {
-      cssProp = "height";
-    } else if (key == "verticalAlign") {
-      cssProp = "vertical-align";
-    } else if (key == "overflow") {
-      cssProp = "overflow";
-    } else if (key == "overflowX") {
-      cssProp = "overflow-x";
-    } else if (key == "overflowY") {
-      cssProp = "overflow-y";
-    } else if (key == "writingMode") {
-      cssProp = "writing-mode";
-    } else if (key == "wordWrap") {
-      cssProp = "word-wrap";
-    } else if (key == "perspective") {
-      cssProp = "perspective";
-    } else if (key == "minWidth") {
-      cssProp = "min-width";
-    } else if (key == "minHeight") {
-      cssProp = "min-height";
-    } else if (key == "maxHeight") {
-      cssProp = "max-height";
-    } else if (key == "maxWidth") {
-      cssProp = "max-width";
-    } else if (key == "transition") {
-      cssProp = "transition";
-    } else if (key == "transform") {
-      cssProp = "transform";
-    } else if (key == "transformOrigin") {
-      cssProp = "transform-origin";
-    } else if (key == "transformStyle") {
-      cssProp = "transform-style";
-    } else if (key == "tableLayout") {
-      cssProp = "table-layout";
-    } else if (key == "emptyCells") {
-      cssProp = "empty-cells";
-    } else if (key == "captionSide") {
-      cssProp = "caption-side";
-    } else if (key == "gap") {
-      cssProp = "gap";
-    } else if (key == "rowGap") {
-      cssProp = "row-gap";
-    } else if (key == "columnGap") {
-      cssProp = "column-gap";
-    } else if (key == "userSelect") {
-      cssProp = "user-select";
-    } else if (key == "-webkit-text-fill-color") {
-      cssProp = "-webkit-text-fill-color";
-    } else {
-      cssProp = key;
-    }
-    return cssProp;
-  }
-  function generateElementCss(obj, elementSelector) {
-    if (obj == null) {
-      return {};
-    }
-    var cssObj = {};
-    Object.entries(obj).map(args => {
-      var sudoSrc = args[0];
-      var sudoArgs = args[1];
-      if (sudoSrc != "options" && sudoArgs != null) {
-        var selector = getElementSelector(sudoSrc, elementSelector);
-        Object.entries(args[1]).map(x => {
-          var attr = x[0];
-          var propVal = x[1];
-          var cssPropty = cssAttrParse(attr);
-          var found = Object.entries(propVal).reduce((a, [k, v]) => v ? (a[k] = v, a) : a, {});
-          if (Object.keys(found).length > 0) {
-            if (cssObj[selector] == undefined) {
-              cssObj[selector] = {};
-            }
-            if (cssObj[selector][cssPropty] == undefined) {
-              cssObj[selector][cssPropty] = {};
-            }
-            cssObj[selector][cssPropty] = x[1];
-          }
-        });
-      }
-    });
-    return cssObj;
-  }
-  function generateBlockCss(items) {
-    var reponsiveCssGroups = {};
-    for (var selector in items) {
-      var attrs = items[selector];
-      for (var attr in attrs) {
-        var breakpoints = attrs[attr];
-        for (var device in breakpoints) {
-          var attrValue = breakpoints[device];
-          if (reponsiveCssGroups[device] == undefined) {
-            reponsiveCssGroups[device] = [];
-          }
-          if (reponsiveCssGroups[device] == undefined) {
-            reponsiveCssGroups[device] = [];
-          }
-          if (reponsiveCssGroups[device][selector] == undefined) {
-            reponsiveCssGroups[device][selector] = [];
-          }
-          if (typeof attrValue == "string") {
-            attrValue = attrValue.replaceAll("u0022", '"');
-            reponsiveCssGroups[device][selector].push({
-              attr: attr,
-              val: attrValue
-            });
-          }
-        }
-      }
-    }
-    var reponsiveCssDesktop = "";
-    if (reponsiveCssGroups["Desktop"] != undefined) {
-      for (var selector in reponsiveCssGroups["Desktop"]) {
-        var attrs = reponsiveCssGroups["Desktop"][selector];
-        reponsiveCssDesktop += selector + "{";
-        for (var index in attrs) {
-          var attr = attrs[index];
-          var attrName = attr.attr;
-          var attrValue = attr.val;
-          reponsiveCssDesktop += attrName + ":" + attrValue + ";";
-        }
-        reponsiveCssDesktop += "}";
-      }
-    }
-    var reponsiveCssTablet = "";
-    if (reponsiveCssGroups["Tablet"] != undefined) {
-      reponsiveCssTablet += "@media(max-width: 991px){";
-      for (var selector in reponsiveCssGroups["Tablet"]) {
-        var attrs = reponsiveCssGroups["Tablet"][selector];
-        reponsiveCssTablet += selector + "{";
-        for (var index in attrs) {
-          var attr = attrs[index];
-          var attrName = attr.attr;
-          var attrValue = attr.val;
-          reponsiveCssTablet += attrName + ":" + attrValue + ";";
-        }
-        reponsiveCssTablet += "}";
-      }
-      reponsiveCssTablet += "}";
-    }
-    var reponsiveCssMobile = "";
-    if (reponsiveCssGroups["Mobile"] != undefined) {
-      reponsiveCssMobile += "@media(max-width:767px){";
-      for (var selector in reponsiveCssGroups["Mobile"]) {
-        var attrs = reponsiveCssGroups["Mobile"][selector];
-        reponsiveCssMobile += selector + "{";
-        for (var index in attrs) {
-          var attr = attrs[index];
-          var attrName = attr.attr;
-          var attrValue = attr.val;
-          reponsiveCssMobile += attrName + ":" + attrValue + ";";
-        }
-        reponsiveCssMobile += "}";
-      }
-      reponsiveCssMobile += "}";
-    }
-    var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
-    var wpfooter = document.getElementById("wpfooter");
-    var divWrap = document.getElementById("css-block");
-    if (divWrap != undefined) {
-      document.getElementById("css-block").outerHTML = "";
-    }
-    var divWrap = '<style id="css-block"></style>';
-    wpfooter.insertAdjacentHTML("beforeend", divWrap);
-    var csswrappg = document.getElementById("css-block");
-    var str = "" + reponsiveCss + "";
-    csswrappg.insertAdjacentHTML("beforeend", str);
-  }
-  useEffect(() => {
-    generateBlockCss(styleObj);
-    console.log("Hello 3");
-  }, [styleObj]);
-  useEffect(() => {
-    var styleObjX = {
-      ...styleObj
-    };
-    var wrapperCss = generateElementCss(accordionDataX.wrapper, wrapperSelector);
-    Object.entries(wrapperCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var contentCss = generateElementCss(accordionDataX.content, contentSelector);
-    Object.entries(contentCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var headerCss = generateElementCss(accordionDataX.header, headerSelector);
-    Object.entries(headerCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var headerActiveCss = generateElementCss(accordionDataX.headerActive, headerActiveSelector);
-    Object.entries(headerActiveCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var headerLabelCss = generateElementCss(accordionDataX.headerLabel, headerLabelSelector);
-    Object.entries(headerLabelCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var labelCounterCss = generateElementCss(accordionDataX.labelCounter, labelCounterSelector);
-    Object.entries(labelCounterCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var labelIconCss = generateElementCss(accordionDataX.labelIcon, labelIconSelector);
-    Object.entries(labelIconCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var iconCss = generateElementCss(accordionDataX.icon, iconSelector);
-    Object.entries(iconCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var iconToggleCss = generateElementCss(accordionDataX.iconToggle, iconToggleSelector);
-    Object.entries(iconToggleCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    console.log(styleObjX);
-    setstyleObj(styleObjX);
-    console.log("Hello 1");
-  }, [accordionDataX]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "ml-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-between align-middle bg-white p-5  mb-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-5"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, postData?.post_title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "You are editing: ", postData.post_title))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, postData?.post_title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "You are editing: ", postData.post_title))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center align-middle gap-3"
+  }, isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-slate-400 px-5 py-2 cursor-pointer hover:bg-slate-300",
@@ -4859,41 +4480,46 @@ function Html(props) {
       });
       setitems(itemsX);
     }
-  }, "Add New"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Add New"), pleaseUpdateX && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-slate-400 px-5 py-2 cursor-pointer hover:bg-slate-300",
+    onClick: ev => {
+      onUpdate(true);
+    }
+  }, "Save"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `my-5 ${wrapper?.options?.class} `
   }, items?.map((item, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `${blockId}-accordion-header ${blockIdX}  ${header.options.class} ${active == index ? "accordion-header-active" : ""}`,
+      className: `accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""}`,
       onClick: ev => {
         setToggled(!toggled);
         setactive(index);
       }
     }, labelCounter.options.position == "left" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-counter accordion-label-counter`
+      className: ` accordion-label-counter`
     }, index), icon.options.position == "left" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !toggled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-icon accordion-icon`,
+      className: ` accordion-icon`,
       dangerouslySetInnerHTML: {
         __html: iconHtml
       }
     }), toggled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-icon-toggle accordion-icon accordion-icon-toggle}`,
+      className: ` accordion-icon accordion-icon-toggle}`,
       dangerouslySetInnerHTML: {
         __html: iconToggleHtml
       }
     })), labelIcon.options.position == "beforeLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-icon accordion-label-icon`,
+      className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `${blockId}-accordion-header-label accordion-header-label`,
+      className: ` accordion-header-label`,
       onClick: e => {
         return;
       }
     }, labelCounter.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-counter accordion-label-counter`
+      className: ` accordion-label-counter`
     }, index), labelIcon.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-icon accordion-label-icon`,
+      className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
@@ -4909,26 +4535,26 @@ function Html(props) {
       },
       placeholder: ""
     })) : "Start Writing...", labelIcon.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-icon accordion-label-icon`,
+      className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
     }), labelCounter.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-counter accordion-label-counter`
+      className: ` accordion-label-counter`
     }, index)), labelIcon.options.position == "afterLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-icon accordion-label-icon`,
+      className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
     }), labelCounter.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-label-counter accordion-label-counter`
+      className: ` accordion-label-counter`
     }, index), icon.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !toggled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-icon accordion-icon`,
+      className: ` accordion-icon`,
       dangerouslySetInnerHTML: {
         __html: iconHtml
       }
     }), toggled && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${blockId}-accordion-icon-toggle accordion-icon-toggle`,
+      className: ` accordion-icon-toggle`,
       dangerouslySetInnerHTML: {
         __html: iconToggleHtml
       }
@@ -4942,7 +4568,7 @@ function Html(props) {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"], {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"]
     }))), active == index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
-      className: `${blockId}-accordion-content accordion-content`,
+      className: `accordion-content`,
       tagName: "div",
       value: item?.content.options.text,
       allowedFormats: ["core/bold", "core/italic", "core/link"],
@@ -4954,7 +4580,7 @@ function Html(props) {
       },
       placeholder: "Write details about your design..."
     })));
-  })), JSON.stringify(accordionData));
+  })));
 }
 class AccordionsView extends Component {
   constructor(props) {
@@ -4973,12 +4599,18 @@ class AccordionsView extends Component {
     var {
       postData,
       id,
-      isLoading
+      isLoading,
+      onChange,
+      pleaseUpdate,
+      onUpdate
     } = this.props;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       isLoading: isLoading,
       postData: postData,
       id: id,
+      onUpdate: onUpdate,
+      pleaseUpdate: pleaseUpdate,
+      onChange: onChange,
       warn: this.state.showWarning
     });
   }
@@ -28006,7 +27638,7 @@ var accordionTemplates = [{
         "tag": "div",
         "class": "pg-accordion-nested"
       },
-      "styles": {}
+      "styles": []
     },
     "content": {
       "options": {
@@ -28028,23 +27660,41 @@ var accordionTemplates = [{
         "class": "accordion-header"
       },
       "styles": {
+        "justifyContent": {
+          "Desktop": "start"
+        },
+        "backgroundColor": {
+          "Desktop": "#3079ff"
+        },
+        "color": {
+          "Desktop": "#ffffff"
+        },
+        "margin": {
+          "Desktop": "10px 0px 0px 0px"
+        },
         "display": {
           "Desktop": "flex"
+        },
+        "alignItems": {
+          "Desktop": "center"
+        },
+        "fontSize": {
+          "Desktop": "18px"
+        },
+        "fontFamily": {
+          "Desktop": "Courgette"
+        },
+        "fontWeight": {
+          "Desktop": "500"
         },
         "gap": {
           "Desktop": "1em"
         },
+        "cursor": {
+          "Desktop": "pointer"
+        },
         "padding": {
-          "Desktop": "12px 12px 12px 12px"
-        },
-        "backgroundColor": {
-          "Desktop": "#774360"
-        },
-        "margin": {
-          "Desktop": "0px 0px 1px 0px"
-        },
-        "fontSize": {
-          "Desktop": "16px"
+          "Desktop": "10px 10px 10px 10px"
         }
       }
     },
@@ -28053,7 +27703,7 @@ var accordionTemplates = [{
         "tag": "div",
         "class": "accordion-header-active"
       },
-      "styles": {}
+      "styles": []
     },
     "headerLabel": {
       "options": {
@@ -28061,7 +27711,7 @@ var accordionTemplates = [{
         "tag": "div",
         "class": "accordion-header-label"
       },
-      "styles": {}
+      "styles": []
     },
     "labelCounter": {
       "options": {
@@ -28070,7 +27720,7 @@ var accordionTemplates = [{
         "tag": "div",
         "class": "accordion-label-counter"
       },
-      "styles": {}
+      "styles": []
     },
     "labelIcon": {
       "options": {
@@ -28080,7 +27730,7 @@ var accordionTemplates = [{
         "position": "",
         "class": "accordion-label-icon"
       },
-      "styles": {}
+      "styles": []
     },
     "icon": {
       "options": {
@@ -28090,7 +27740,7 @@ var accordionTemplates = [{
         "position": "left",
         "class": "accordion-icon"
       },
-      "styles": {}
+      "styles": []
     },
     "iconToggle": {
       "options": {
@@ -28099,7 +27749,7 @@ var accordionTemplates = [{
         "iconSrc": " fas fa-angle-up",
         "class": "accordion-icon-toggle"
       },
-      "styles": {}
+      "styles": []
     }
   }
 }, {
@@ -28218,6 +27868,553 @@ var accordionTemplates = [{
 
 /***/ }),
 
+/***/ "./src/components/dashboard/generate-css.js":
+/*!**************************************************!*\
+  !*** ./src/components/dashboard/generate-css.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-sortablejs */ "./node_modules/react-sortablejs/dist/index.js");
+/* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_sortablejs__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _splidejs_react_splide__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @splidejs/react-splide */ "./node_modules/@splidejs/react-splide/dist/js/react-splide.esm.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+
+const {
+  Component,
+  RawHTML,
+  useState,
+  useEffect
+} = wp.element;
+
+
+
+
+
+
+
+var myStore = wp.data.select("postgrid-shop");
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
+  var postDataX = props.postData;
+  var [postData, setpostData] = useState(props.postData); // Using the hook.
+  var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
+
+  var [styleObj, setstyleObj] = useState({}); // Using the hook.
+
+  var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
+  var [content, setcontent] = useState(accordionData.content);
+  var [accOptions, setaccOptions] = useState(accordionData.accOptions);
+  var [header, setheader] = useState(accordionData.header);
+  var [headerActive, setheaderActive] = useState(accordionData.headerActive);
+  var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+  var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
+  var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
+  var [icon, seticon] = useState(accordionData.icon);
+  var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
+  useEffect(() => {
+    console.log(props.postData);
+    setpostData(props.postData);
+  }, [props.postData]);
+  useEffect(() => {
+    setaccordionData(postData.post_content);
+  }, [postData]);
+  var blockClass = ".pg-accordion-nested";
+  var wrapperSelector = blockClass + "";
+  var contentSelector = blockClass + " .accordion-content";
+  var headerSelector = blockClass + " .accordion-header";
+  var headerActiveSelector = blockClass + " .accordion-header-active";
+  var headerLabelSelector = blockClass + " .accordion-header-label";
+  var labelCounterSelector = blockClass + " .accordion-label-counter";
+  var labelIconSelector = blockClass + " .accordion-label-icon";
+  var iconSelector = blockClass + " .accordion-icon";
+  var iconToggleSelector = blockClass + " .accordion-icon-toggle";
+  function getElementSelector(sudoScource, mainSelector) {
+    var elementSelector = mainSelector;
+    if (sudoScource == "styles") {
+      elementSelector = mainSelector;
+    } else if (sudoScource == "hover") {
+      elementSelector = mainSelector + ":hover";
+    } else if (sudoScource == "after") {
+      elementSelector = mainSelector + "::after";
+    } else if (sudoScource == "before") {
+      elementSelector = mainSelector + "::before";
+    } else if (sudoScource == "first-child") {
+      elementSelector = mainSelector + ":first-child";
+    } else if (sudoScource == "last-child") {
+      elementSelector = mainSelector + ":last-child";
+    } else if (sudoScource == "visited") {
+      elementSelector = mainSelector + ":visited";
+    } else if (sudoScource == "selection") {
+      elementSelector = mainSelector + "::selection";
+    } else if (sudoScource == "first-letter") {
+      elementSelector = mainSelector + "::first-letter";
+    } else if (sudoScource == "first-line") {
+      elementSelector = mainSelector + "::first-line";
+    } else {
+      elementSelector = mainSelector + ":" + sudoScource;
+    }
+    return elementSelector;
+  }
+  function cssAttrParse(key) {
+    var cssProp = "";
+    if (key == "alignContent") {
+      cssProp = "align-content";
+    } else if (key == "alignItems") {
+      cssProp = "align-items";
+    } else if (key == "animationName") {
+      cssProp = "animation-name";
+    } else if (key == "alignSelf") {
+      cssProp = "align-self";
+    } else if (key == "aspectRatio") {
+      cssProp = "aspect-ratio";
+    } else if (key == "backfaceVisibility") {
+      cssProp = "backface-visibility";
+    } else if (key == "backgroundAttachment") {
+      cssProp = "background-attachment";
+    } else if (key == "backgroundBlendMode") {
+      cssProp = "background-blend-mode";
+    } else if (key == "backgroundClip") {
+      cssProp = "background-clip";
+    } else if (key == "bgColor") {
+      cssProp = "background-color";
+    } else if (key == "backgroundColor") {
+      cssProp = "background-color";
+    } else if (key == "backgroundOrigin") {
+      cssProp = "background-origin";
+    } else if (key == "backgroundRepeat") {
+      cssProp = "background-repeat";
+    } else if (key == "backgroundSize") {
+      cssProp = "background-size";
+    } else if (key == "backgroundPosition") {
+      cssProp = "background-position";
+    } else if (key == "backgroundImage") {
+      cssProp = "background-image";
+    } else if (key == "border") {
+      cssProp = "border";
+    } else if (key == "borderTop") {
+      cssProp = "border-top";
+    } else if (key == "borderRight") {
+      cssProp = "border-right";
+    } else if (key == "borderBottom") {
+      cssProp = "border-bottom";
+    } else if (key == "borderLeft") {
+      cssProp = "border-left";
+    } else if (key == "borderRadius") {
+      cssProp = "border-radius";
+    } else if (key == "borderCollapse") {
+      cssProp = "border-collapse";
+    } else if (key == "borderSpacing") {
+      cssProp = "border-spacing";
+    } else if (key == "borderImage") {
+      cssProp = "border-image";
+    } else if (key == "boxShadow") {
+      cssProp = "box-shadow";
+    } else if (key == "backdropFilter") {
+      cssProp = "backdrop-filter";
+    } else if (key == "bottom" || key == "top" || key == "left" || key == "right" || key == "clear" || key == "color" || key == "filter" || key == "float") {
+      cssProp = key;
+    } else if (key == "boxSizing") {
+      cssProp = "box-sizing";
+    } else if (key == "cursor") {
+      cssProp = "cursor";
+    } else if (key == "content") {
+      cssProp = "content";
+    } else if (key == "counterIncrement") {
+      cssProp = "counter-increment";
+    } else if (key == "counterReset") {
+      cssProp = "counter-reset";
+    } else if (key == "counterSet") {
+      cssProp = "counter-set";
+    } else if (key == "columnCount") {
+      cssProp = "column-count";
+    } else if (key == "columnRule") {
+      cssProp = "column-rule";
+    } else if (key == "direction") {
+      cssProp = "direction";
+    } else if (key == "fontFamily") {
+      cssProp = "font-family";
+    } else if (key == "fontSize") {
+      cssProp = "font-size";
+    } else if (key == "fontStyle") {
+      cssProp = "font-style";
+    } else if (key == "fontStretch") {
+      cssProp = "font-stretch";
+    } else if (key == "fontWeight") {
+      cssProp = "font-weight";
+    } else if (key == "fontVariantCaps") {
+      cssProp = "font-variant-caps";
+    } else if (key == "flexWrap") {
+      cssProp = "flex-wrap";
+    } else if (key == "flexDirection") {
+      cssProp = "flex-direction";
+    } else if (key == "flexGrow") {
+      cssProp = "flex-grow";
+    } else if (key == "flexShrink") {
+      cssProp = "flex-shrink";
+    } else if (key == "flexBasis") {
+      cssProp = "flex-basis";
+    } else if (key == "flexFlow") {
+      cssProp = "flex-flow";
+    } else if (key == "letterSpacing") {
+      cssProp = "letter-spacing";
+    } else if (key == "gridAutoFlow") {
+      cssProp = "grid-auto-flow";
+    } else if (key == "gridColumnEnd") {
+      cssProp = "grid-column-end";
+    } else if (key == "gridColumnStart") {
+      cssProp = "grid-column-start";
+    } else if (key == "gridRowEnd") {
+      cssProp = "grid-row-end";
+    } else if (key == "gridRowStart") {
+      cssProp = "grid-row-start";
+    } else if (key == "gridTemplateColumns") {
+      cssProp = "grid-template-columns";
+    } else if (key == "gridTemplateRows") {
+      cssProp = "grid-template-rows";
+    } else if (key == "listStyle") {
+      cssProp = "list-style";
+    } else if (key == "lineHeight") {
+      cssProp = "line-height";
+    } else if (key == "justifyContent") {
+      cssProp = "justify-content";
+    } else if (key == "maskImage") {
+      cssProp = "mask-image";
+    } else if (key == "objectFit") {
+      cssProp = "object-fit";
+    } else if (key == "opacity") {
+      cssProp = "opacity";
+    } else if (key == "outline") {
+      cssProp = "outline";
+    } else if (key == "order") {
+      cssProp = "order";
+    } else if (key == "outlineOffset") {
+      cssProp = "outline-offset";
+    } else if (key == "position") {
+      cssProp = "position";
+    } else if (key == "textIndent") {
+      cssProp = "text-indent";
+    } else if (key == "textJustify") {
+      cssProp = "text-justify";
+    } else if (key == "textTransform") {
+      cssProp = "text-transform";
+    } else if (key == "textDecoration") {
+      cssProp = "text-decoration";
+    } else if (key == "textOverflow") {
+      cssProp = "text-overflow";
+    } else if (key == "textShadow") {
+      cssProp = "text-shadow";
+    } else if (key == "textAlign") {
+      cssProp = "text-align";
+    } else if (key == "visibility") {
+      cssProp = "visibility";
+    } else if (key == "wordBreak") {
+      cssProp = "word-break";
+    } else if (key == "wordSpacing") {
+      cssProp = "word-spacing";
+    } else if (key == "zIndex") {
+      cssProp = "z-index";
+    } else if (key == "padding") {
+      cssProp = "padding";
+    } else if (key == "paddingTop") {
+      cssProp = "padding-top";
+    } else if (key == "paddingRight") {
+      cssProp = "padding-right";
+    } else if (key == "paddingBottom") {
+      cssProp = "padding-bottom";
+    } else if (key == "paddingLeft") {
+      cssProp = "padding-left";
+    } else if (key == "placeItems") {
+      cssProp = "place-items";
+    } else if (key == "margin") {
+      cssProp = "margin";
+    } else if (key == "marginTop") {
+      cssProp = "margin-top";
+    } else if (key == "marginRight") {
+      cssProp = "margin-right";
+    } else if (key == "marginBottom") {
+      cssProp = "margin-bottom";
+    } else if (key == "marginLeft") {
+      cssProp = "margin-left";
+    } else if (key == "display") {
+      cssProp = "display";
+    } else if (key == "width") {
+      cssProp = "width";
+    } else if (key == "height") {
+      cssProp = "height";
+    } else if (key == "verticalAlign") {
+      cssProp = "vertical-align";
+    } else if (key == "overflow") {
+      cssProp = "overflow";
+    } else if (key == "overflowX") {
+      cssProp = "overflow-x";
+    } else if (key == "overflowY") {
+      cssProp = "overflow-y";
+    } else if (key == "writingMode") {
+      cssProp = "writing-mode";
+    } else if (key == "wordWrap") {
+      cssProp = "word-wrap";
+    } else if (key == "perspective") {
+      cssProp = "perspective";
+    } else if (key == "minWidth") {
+      cssProp = "min-width";
+    } else if (key == "minHeight") {
+      cssProp = "min-height";
+    } else if (key == "maxHeight") {
+      cssProp = "max-height";
+    } else if (key == "maxWidth") {
+      cssProp = "max-width";
+    } else if (key == "transition") {
+      cssProp = "transition";
+    } else if (key == "transform") {
+      cssProp = "transform";
+    } else if (key == "transformOrigin") {
+      cssProp = "transform-origin";
+    } else if (key == "transformStyle") {
+      cssProp = "transform-style";
+    } else if (key == "tableLayout") {
+      cssProp = "table-layout";
+    } else if (key == "emptyCells") {
+      cssProp = "empty-cells";
+    } else if (key == "captionSide") {
+      cssProp = "caption-side";
+    } else if (key == "gap") {
+      cssProp = "gap";
+    } else if (key == "rowGap") {
+      cssProp = "row-gap";
+    } else if (key == "columnGap") {
+      cssProp = "column-gap";
+    } else if (key == "userSelect") {
+      cssProp = "user-select";
+    } else if (key == "-webkit-text-fill-color") {
+      cssProp = "-webkit-text-fill-color";
+    } else {
+      cssProp = key;
+    }
+    return cssProp;
+  }
+  function generateElementCss(obj, elementSelector) {
+    if (obj == null) {
+      return {};
+    }
+    var cssObj = {};
+    Object.entries(obj).map(args => {
+      var sudoSrc = args[0];
+      var sudoArgs = args[1];
+      if (sudoSrc != "options" && sudoArgs != null) {
+        var selector = getElementSelector(sudoSrc, elementSelector);
+        Object.entries(args[1]).map(x => {
+          var attr = x[0];
+          var propVal = x[1];
+          var cssPropty = cssAttrParse(attr);
+          var found = Object.entries(propVal).reduce((a, [k, v]) => v ? (a[k] = v, a) : a, {});
+          if (Object.keys(found).length > 0) {
+            if (cssObj[selector] == undefined) {
+              cssObj[selector] = {};
+            }
+            if (cssObj[selector][cssPropty] == undefined) {
+              cssObj[selector][cssPropty] = {};
+            }
+            cssObj[selector][cssPropty] = x[1];
+          }
+        });
+      }
+    });
+    return cssObj;
+  }
+  function generateBlockCss(items) {
+    var reponsiveCssGroups = {};
+    for (var selector in items) {
+      var attrs = items[selector];
+      for (var attr in attrs) {
+        var breakpoints = attrs[attr];
+        for (var device in breakpoints) {
+          var attrValue = breakpoints[device];
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = [];
+          }
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = [];
+          }
+          if (reponsiveCssGroups[device][selector] == undefined) {
+            reponsiveCssGroups[device][selector] = [];
+          }
+          if (typeof attrValue == "string") {
+            attrValue = attrValue.replaceAll("u0022", '"');
+            reponsiveCssGroups[device][selector].push({
+              attr: attr,
+              val: attrValue
+            });
+          }
+        }
+      }
+    }
+    var reponsiveCssDesktop = "";
+    if (reponsiveCssGroups["Desktop"] != undefined) {
+      for (var selector in reponsiveCssGroups["Desktop"]) {
+        var attrs = reponsiveCssGroups["Desktop"][selector];
+        reponsiveCssDesktop += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssDesktop += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssDesktop += "}";
+      }
+    }
+    var reponsiveCssTablet = "";
+    if (reponsiveCssGroups["Tablet"] != undefined) {
+      reponsiveCssTablet += "@media(max-width: 991px){";
+      for (var selector in reponsiveCssGroups["Tablet"]) {
+        var attrs = reponsiveCssGroups["Tablet"][selector];
+        reponsiveCssTablet += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssTablet += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssTablet += "}";
+      }
+      reponsiveCssTablet += "}";
+    }
+    var reponsiveCssMobile = "";
+    if (reponsiveCssGroups["Mobile"] != undefined) {
+      reponsiveCssMobile += "@media(max-width:767px){";
+      for (var selector in reponsiveCssGroups["Mobile"]) {
+        var attrs = reponsiveCssGroups["Mobile"][selector];
+        reponsiveCssMobile += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssMobile += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssMobile += "}";
+      }
+      reponsiveCssMobile += "}";
+    }
+    var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+    var wpfooter = document.getElementById("wpfooter");
+    var divWrap = document.getElementById("css-block");
+    if (divWrap != undefined) {
+      document.getElementById("css-block").outerHTML = "";
+    }
+    var divWrap = '<style id="css-block"></style>';
+    wpfooter.insertAdjacentHTML("beforeend", divWrap);
+    var csswrappg = document.getElementById("css-block");
+    var str = "" + reponsiveCss + "";
+    csswrappg.insertAdjacentHTML("beforeend", str);
+  }
+  useEffect(() => {
+    generateBlockCss(styleObj);
+  }, [styleObj]);
+  useEffect(() => {
+    var styleObjX = {
+      ...styleObj
+    };
+    var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
+    Object.entries(wrapperCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var contentCss = generateElementCss(accordionData.content, contentSelector);
+    Object.entries(contentCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var headerCss = generateElementCss(accordionData.header, headerSelector);
+    Object.entries(headerCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var headerActiveCss = generateElementCss(accordionData.headerActive, headerActiveSelector);
+    Object.entries(headerActiveCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var headerLabelCss = generateElementCss(accordionData.headerLabel, headerLabelSelector);
+    Object.entries(headerLabelCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var labelCounterCss = generateElementCss(accordionData.labelCounter, labelCounterSelector);
+    Object.entries(labelCounterCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var labelIconCss = generateElementCss(accordionData.labelIcon, labelIconSelector);
+    Object.entries(labelIconCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var iconCss = generateElementCss(accordionData.icon, iconSelector);
+    Object.entries(iconCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var iconToggleCss = generateElementCss(accordionData.iconToggle, iconToggleSelector);
+    Object.entries(iconToggleCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    setstyleObj(styleObjX);
+  }, [accordionData]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "ml-5"
+  });
+}
+class AccordionsGenerateCss extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+  render() {
+    var {
+      postData
+    } = this.props;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+      postData: postData,
+      warn: this.state.showWarning
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccordionsGenerateCss);
+
+/***/ }),
+
 /***/ "./src/components/dashboard/index.js":
 /*!*******************************************!*\
   !*** ./src/components/dashboard/index.js ***!
@@ -28233,17 +28430,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/category.js");
-/* harmony import */ var _accordion_default_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./accordion-default-data */ "./src/components/dashboard/accordion-default-data.js");
-/* harmony import */ var _tabs_default_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tabs-default-data */ "./src/components/dashboard/tabs-default-data.js");
-/* harmony import */ var _accordion_templates__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./accordion-templates */ "./src/components/dashboard/accordion-templates.js");
-/* harmony import */ var _components_accordions_edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/accordions-edit */ "./src/components/accordions-edit/index.js");
-/* harmony import */ var _components_accordions_view__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accordions-view */ "./src/components/accordions-view/index.js");
-/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
-/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
-/* harmony import */ var _components_wcps_list__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/wcps-list */ "./src/components/wcps-list/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/category.js");
+/* harmony import */ var _generate_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./generate-css */ "./src/components/dashboard/generate-css.js");
+/* harmony import */ var _accordion_default_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./accordion-default-data */ "./src/components/dashboard/accordion-default-data.js");
+/* harmony import */ var _tabs_default_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tabs-default-data */ "./src/components/dashboard/tabs-default-data.js");
+/* harmony import */ var _accordion_templates__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./accordion-templates */ "./src/components/dashboard/accordion-templates.js");
+/* harmony import */ var _components_accordions_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accordions-edit */ "./src/components/accordions-edit/index.js");
+/* harmony import */ var _components_accordions_view__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/accordions-view */ "./src/components/accordions-view/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_wcps_list__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/wcps-list */ "./src/components/wcps-list/index.js");
 
 const {
   Component,
@@ -28260,19 +28458,21 @@ const {
 
 
 
+
 function Html(props) {
   if (!props.warn) {
     return null;
   }
   var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
   var [postData, setpostData] = useState({
-    ID: 125777,
-    post_content: _accordion_default_data__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ID: null,
+    post_content: _accordion_default_data__WEBPACK_IMPORTED_MODULE_3__["default"],
     post_title: ""
   }); // Using the hook.
   var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
   var [isLoading, setisLoading] = useState(false); // Using the hook.
+  var [pleaseUpdate, setpleaseUpdate] = useState(false); // Using the hook.
 
   function selectAccordion(args) {
     setActiveAccordion(args);
@@ -28283,9 +28483,27 @@ function Html(props) {
     };
     postDataX.post_content = args;
     setpostData(postDataX);
+    setaccordionData(args);
+    setpleaseUpdate(true);
+  }
+  function onUpdateAccordion() {
+    setisLoading(true);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: "/accordions/v2/update_post_data",
+      method: "POST",
+      data: {
+        postId: activeAccordion,
+        content: accordionData,
+        _wpnonce: post_grid_editor_js._wpnonce
+      }
+    }).then(res => {
+      setisLoading(false);
+      setpleaseUpdate(false);
+    });
   }
   useEffect(() => {
     setisLoading(true);
+    if (activeAccordion == null) return;
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: "/accordions/v2/accordions_data",
       method: "POST",
@@ -28296,22 +28514,19 @@ function Html(props) {
     }).then(res => {
       setisLoading(false);
       if (res?.post_content?.length == 0) {
-        res.post_content = _accordion_default_data__WEBPACK_IMPORTED_MODULE_2__["default"];
+        res.post_content = _accordion_default_data__WEBPACK_IMPORTED_MODULE_3__["default"];
       }
       setpostData(res);
       setaccordionData(res.post_content);
     });
   }, [activeAccordion]);
-  useEffect(() => {}, [accordionData]);
-
-  // ! hello
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pg-setting-input-text pg-dashboard"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex "
+    className: "flex h-[800px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-[450px] overflow-y-scroll light-scrollbar"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_9__["default"], {
     activeTab: "accordions",
     orientation: "",
     contentClass: " bg-white w-full",
@@ -28322,40 +28537,40 @@ function Html(props) {
     tabs: [{
       name: "accordions",
       title: "Accordions",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "edit",
       title: "Edit",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "templates",
       title: "Templates",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_13__["default"],
       className: "tab-disable-blocks"
     }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
     name: "accordions"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "relative p-3"
   }, postData.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3 my-5 bg-orange-400"
-  }, "Please choose an accordion first."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wcps_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, "Please choose an accordion first."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wcps_list__WEBPACK_IMPORTED_MODULE_10__["default"], {
     selectAccordion: selectAccordion,
     activeAccordion: activeAccordion
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onChange: onChangeAccordion,
     postData: postData
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3"
-  }, _accordion_templates__WEBPACK_IMPORTED_MODULE_4__["default"].map(preset => {
+  }, _accordion_templates__WEBPACK_IMPORTED_MODULE_5__["default"].map(preset => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       onClick: ev => {
         var data = preset.data;
@@ -28373,20 +28588,24 @@ function Html(props) {
         });
         var accordionDataX = {
           ...accordionData,
-          presetClean
+          ...presetClean
         };
         onChangeAccordion(accordionDataX);
       }
     }, preset.label);
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full sticky top-0"
+    className: "w-full sticky top-0 overflow-y-scroll"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "  relative"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    pleaseUpdate: pleaseUpdate,
+    onUpdate: onUpdateAccordion,
     isLoading: isLoading,
     onChange: onChangeAccordion,
     postData: postData,
     id: activeAccordion
+  }), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_generate_css__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    postData: postData
   })))));
 }
 class PGDashboard extends Component {

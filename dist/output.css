@@ -433,6 +433,10 @@
   height: 100%;
 }
 
+.h-\[800px\] {
+  height: 800px;
+}
+
 .max-h-\[350px\] {
   max-height: 350px;
 }

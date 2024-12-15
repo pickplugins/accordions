@@ -47,7 +47,7 @@ function Html(props) {
 
 	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
-	var [items, setwrapper] = useState(accordionData.items); // Using the hook.
+	var [items, setitems] = useState(accordionData.items); // Using the hook.
 	var [content, setcontent] = useState(accordionData.content);
 	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
 	var [header, setheader] = useState(accordionData.header);
@@ -251,18 +251,26 @@ function Html(props) {
 		setProperty(objectX);
 	}
 
+	function onBulkAddStyle(sudoSource, cssObj, propertyType, setProperty) {
+		let obj = { ...propertyType };
+		obj[sudoSource] = cssObj;
+		setProperty(obj);
+	}
+
+
 	var accOptionsArgs = {
 		autoplay: { label: "Auto play", value: 1 },
 	};
 
 	var viewTypeArgs = {
-		accordion: { label: "accordion", value: "accordion" },
-		tabs: { label: "Tabs", value: "tabs" },
-		tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
+		accordion: { label: "Accordion", value: "accordion" },
+		// tabs: { label: "Tabs", value: "tabs" },
+		// tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
 	};
 
 	return (
 		<div className="">
+
 
 			{/* <div>{`{`}</div>
 			<div>{`"wrapper":${JSON.stringify(wrapper)}`},</div>
@@ -280,67 +288,119 @@ function Html(props) {
 			{props.postData.post_content != null && (
 				<>
 					<div className="my-4 p-3">
-						<PGDropdown
-							position="bottom right"
-							variant="secondary"
-							buttonTitle={"Choose View Type"}
-							options={viewTypeArgs}
-							onChange={(option, index) => {
-								var globalOptionsX = { ...globalOptions };
-								globalOptionsX.viewType = option.value;
-								setglobalOptions(globalOptionsX);
-							}}
-							values=""></PGDropdown>
+						<PanelRow>
+							<label for="">View Type?</label>
+							<PGDropdown
+								position="bottom right"
+								variant="secondary"
+								buttonTitle={viewTypeArgs[globalOptions.viewType]?.label}
+								options={viewTypeArgs}
+								onChange={(option, index) => {
+									var globalOptionsX = { ...globalOptions };
+									globalOptionsX.viewType = option.value;
+									setglobalOptions(globalOptionsX);
+								}}
+								values=""></PGDropdown>
+						</PanelRow>
+
 					</div>
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Accordion Settings"
 						initialOpen={false}>
 						<PGtab name="normal">
-							<PanelRow className="my-3">
-								<label>{__("Accordion Options", "post-grid")}</label>
-								<PGDropdown
-									position="bottom right"
-									variant="secondary"
-									buttonTitle={"Choose"}
-									options={accOptionsArgs}
-									onChange={(option, index) => {
-										var sliderOptionsX = { ...accOptions };
-										sliderOptionsX[index] = option.value;
-										setaccOptions(sliderOptionsX);
+
+							<PanelRow>
+								<label for="">Enable lazyLoad</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.lazyLoad}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.lazyLoad = newVal;
+										setglobalOptions(globalOptionsX);
 									}}
-									values=""></PGDropdown>
+								/>
 							</PanelRow>
-							<PanelRow className="justify-start gap-4 mb-3"></PanelRow>
-							{Object.entries(accOptions).map((item, index) => {
-								var id = item[0];
-								var value = item[1];
-								return (
-									<div key={index}>
-										{id == "collapsible" && (
-											<PanelRow>
-												<div className="flex items-center">
-													<RemoveSliderArg index={id} />
-													<span>{__("collapsible?", "post-grid")}</span>
-												</div>
-												<SelectControl
-													label=""
-													value={value}
-													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
-													]}
-													onChange={(newVal) => {
-														var sliderOptionsX = { ...accOptions };
-														sliderOptionsX[id] = newVal;
-														setaccOptions(sliderOptionsX);
-													}}
-												/>
-											</PanelRow>
-										)}
-									</div>
-								);
-							})}
+							<PanelRow>
+								<label for="">Enable Autoembed</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.autoembed}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.autoembed = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+
+							<PanelRow>
+								<label for="">Enable Shortcodes</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.shortcodes}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.shortcodes = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Enable wpautop</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.wpautop}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.wpautop = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Enable Schema</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.schema}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.schema = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+
+
+
+
+
 						</PGtab>
 						<div></div>
 					</PanelBody>
@@ -417,6 +477,9 @@ function Html(props) {
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, wrapper, setwrapper)
 									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, wrapper, setwrapper)
+									}
 								/>
 							</PGtab>
 						</PGtabs>
@@ -490,6 +553,9 @@ function Html(props) {
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, content, setcontent)
 									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, content, setcontent)
+									}
 								/>
 							</PGtab>
 						</PGtabs>
@@ -554,7 +620,9 @@ function Html(props) {
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, header, setheader)
 									}
-
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, header, setheader)
+									}
 
 
 								/>
@@ -632,6 +700,9 @@ function Html(props) {
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, headerActive, setheaderActive)
 									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, headerActive, setheaderActive)
+									}
 								/>
 							</PGtab>
 						</PGtabs>
@@ -701,6 +772,9 @@ function Html(props) {
 									}
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, headerLabel, setheaderLabel)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, headerLabel, setheaderLabel)
 									}
 								/>
 							</PGtab>
@@ -812,6 +886,9 @@ function Html(props) {
 									}
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, labelCounter, setlabelCounter)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, labelCounter, setlabelCounter)
 									}
 								/>
 							</PGtab>
@@ -948,6 +1025,9 @@ function Html(props) {
 									}
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, labelIcon, setlabelIcon)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, labelIcon, setlabelIcon)
 									}
 								/>
 							</PGtab>
@@ -1117,6 +1197,9 @@ function Html(props) {
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, icon, seticon)
 									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, icon, seticon)
+									}
 								/>
 							</PGtab>
 						</PGtabs>
@@ -1186,6 +1269,9 @@ function Html(props) {
 									}
 									onReset={(sudoSources) =>
 										onResetStyle(sudoSources, iconToggle, seticonToggle)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, iconToggle, seticonToggle)
 									}
 								/>
 							</PGtab>
