@@ -5,6 +5,7 @@ import { brush, category, columns } from "@wordpress/icons";
 
 import accordionDefaultData from "./accordion-default-data";
 import tabsDefaultData from "./tabs-default-data";
+import accordionTemplates from "./accordion-templates";
 import AccordionsEdit from "../../components/accordions-edit";
 import AccordionsView from "../../components/accordions-view";
 import PGtab from "../../components/tab";
@@ -19,7 +20,7 @@ function Html(props) {
 
 
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-	var [postData, setpostData] = useState(accordionDefaultData); // Using the hook.
+	var [postData, setpostData] = useState({ ID: 125777, post_content: accordionDefaultData, post_title: "" }); // Using the hook.
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
@@ -35,8 +36,6 @@ function Html(props) {
 	}
 
 	function onChangeAccordion(args) {
-
-		console.log(args);
 
 
 		var postDataX = { ...postData }
@@ -63,8 +62,14 @@ function Html(props) {
 
 
 			setpostData(res);
+			setaccordionData(res.post_content)
+
 		});
 	}, [activeAccordion]);
+
+	useEffect(() => {
+
+	}, [accordionData]);
 
 
 
@@ -130,7 +135,41 @@ function Html(props) {
 							</div>
 						</PGtab>
 						<PGtab name="templates">
-							<div className="p-3">Coming Soon</div>
+							<div className="p-3">
+
+
+								{accordionTemplates.map((preset) => {
+
+									return (
+										<div onClick={ev => {
+											var data = preset.data
+											var presetClean = {};
+
+
+											Object.entries(data).map(item => {
+												var itemIndex = item[0]
+												var itemArg = item[1]
+
+												if (itemArg.options) {
+													delete itemArg.options
+												}
+
+												presetClean[itemIndex] = { ...accordionData[itemIndex], ...itemArg };
+
+
+
+											})
+
+
+											var accordionDataX = { ...accordionData, presetClean }
+											onChangeAccordion(accordionDataX)
+
+										}}>{preset.label}</div>
+									)
+
+								})}
+
+							</div>
 						</PGtab>
 					</PGtabs>
 				</div>
@@ -138,6 +177,7 @@ function Html(props) {
 					<div className="  relative">
 
 						<AccordionsView isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} />
+
 
 
 

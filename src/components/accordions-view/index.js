@@ -56,7 +56,7 @@ function Html(props) {
 	}
 
 	var [postData, setpostData] = useState(postData); // Using the hook.
-	var [accordionData, setaccordionData] = useState(accordionDataX); // Using the hook.
+	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
@@ -79,6 +79,21 @@ function Html(props) {
 
 	const [iconHtml, seticonHtml] = useState("");
 	const [iconToggleHtml, seticonToggleHtml] = useState("");
+
+
+
+	useEffect(() => {
+		setaccordionData(accordionDataX)
+
+		console.log("Hello 1");
+
+
+	}, [accordionDataX]);
+
+	useEffect(() => {
+
+	}, [header]);
+
 
 	useEffect(() => {
 		var iconSrc = iconToggle?.options?.iconSrc;
@@ -524,6 +539,7 @@ function Html(props) {
 
 	useEffect(() => {
 		generateBlockCss(styleObj);
+		console.log("Hello 3");
 	}, [styleObj]);
 
 
@@ -531,7 +547,9 @@ function Html(props) {
 		var styleObjX = { ...styleObj };
 
 
-		var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
+
+
+		var wrapperCss = generateElementCss(accordionDataX.wrapper, wrapperSelector);
 		Object.entries(wrapperCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
@@ -539,21 +557,21 @@ function Html(props) {
 		});
 
 
-		var contentCss = generateElementCss(content, contentSelector);
+		var contentCss = generateElementCss(accordionDataX.content, contentSelector);
 		Object.entries(contentCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
 
-		var headerCss = generateElementCss(header, headerSelector);
+		var headerCss = generateElementCss(accordionDataX.header, headerSelector);
 		Object.entries(headerCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
 
-		var headerActiveCss = generateElementCss(headerActive, headerActiveSelector);
+		var headerActiveCss = generateElementCss(accordionDataX.headerActive, headerActiveSelector);
 		Object.entries(headerActiveCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
@@ -561,7 +579,7 @@ function Html(props) {
 		});
 
 		var headerLabelCss = generateElementCss(
-			headerLabel,
+			accordionDataX.headerLabel,
 			headerLabelSelector
 		);
 		Object.entries(headerLabelCss).map((selectors) => {
@@ -573,7 +591,7 @@ function Html(props) {
 
 
 		var labelCounterCss = generateElementCss(
-			labelCounter,
+			accordionDataX.labelCounter,
 			labelCounterSelector
 		);
 		Object.entries(labelCounterCss).map((selectors) => {
@@ -582,7 +600,7 @@ function Html(props) {
 			styleObjX[selector] = selectorData;
 		});
 
-		var labelIconCss = generateElementCss(labelIcon, labelIconSelector);
+		var labelIconCss = generateElementCss(accordionDataX.labelIcon, labelIconSelector);
 		Object.entries(labelIconCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
@@ -591,7 +609,7 @@ function Html(props) {
 
 
 
-		var iconCss = generateElementCss(icon, iconSelector);
+		var iconCss = generateElementCss(accordionDataX.icon, iconSelector);
 		Object.entries(iconCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
@@ -599,20 +617,20 @@ function Html(props) {
 		});
 
 
-		var iconToggleCss = generateElementCss(iconToggle, iconToggleSelector);
+		var iconToggleCss = generateElementCss(accordionDataX.iconToggle, iconToggleSelector);
 		Object.entries(iconToggleCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
 
+		console.log(styleObjX);
 
 		setstyleObj(styleObjX)
 
+		console.log("Hello 1");
 
-
-	}, [accordionData]);
-
+	}, [accordionDataX]);
 
 
 
@@ -835,6 +853,8 @@ function Html(props) {
 					);
 				})}
 			</div>
+
+			{JSON.stringify(accordionData)}
 
 
 		</div>
