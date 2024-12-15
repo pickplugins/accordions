@@ -849,7 +849,7 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					{/* /////////content */}
+					
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Content"
