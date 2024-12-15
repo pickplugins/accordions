@@ -3502,460 +3502,6 @@ function Html(props) {
     accordionDataX.iconToggle = iconToggle;
     setaccordionData(accordionDataX);
   }, [iconToggle]);
-  var blockId = "";
-  var blockIdX = "";
-  var blockClass = ".pg-accordion-nested";
-  var wrapperSelector = blockClass + "";
-  var contentSelector = blockClass + " .accordion-content";
-  var headerSelector = blockClass + " .accordion-header";
-  var headerActiveSelector = blockClass + " .accordion-header-active";
-  var headerLabelSelector = blockClass + " .accordion-header-label";
-  var labelCounterSelector = blockClass + " .accordion-label-counter";
-  var labelIconSelector = blockClass + " .accordion-label-icon";
-  var iconSelector = blockClass + " .accordion-icon";
-  var iconToggleSelector = blockClass + " .accordion-icon-toggle";
-  var blockId = postData.ID;
-  function getElementSelector(sudoScource, mainSelector) {
-    var elementSelector = mainSelector;
-    if (sudoScource == "styles") {
-      elementSelector = mainSelector;
-    } else if (sudoScource == "hover") {
-      elementSelector = mainSelector + ":hover";
-    } else if (sudoScource == "after") {
-      elementSelector = mainSelector + "::after";
-    } else if (sudoScource == "before") {
-      elementSelector = mainSelector + "::before";
-    } else if (sudoScource == "first-child") {
-      elementSelector = mainSelector + ":first-child";
-    } else if (sudoScource == "last-child") {
-      elementSelector = mainSelector + ":last-child";
-    } else if (sudoScource == "visited") {
-      elementSelector = mainSelector + ":visited";
-    } else if (sudoScource == "selection") {
-      elementSelector = mainSelector + "::selection";
-    } else if (sudoScource == "first-letter") {
-      elementSelector = mainSelector + "::first-letter";
-    } else if (sudoScource == "first-line") {
-      elementSelector = mainSelector + "::first-line";
-    } else {
-      elementSelector = mainSelector + ":" + sudoScource;
-    }
-    return elementSelector;
-  }
-  function cssAttrParse(key) {
-    var cssProp = "";
-    if (key == "alignContent") {
-      cssProp = "align-content";
-    } else if (key == "alignItems") {
-      cssProp = "align-items";
-    } else if (key == "animationName") {
-      cssProp = "animation-name";
-    } else if (key == "alignSelf") {
-      cssProp = "align-self";
-    } else if (key == "aspectRatio") {
-      cssProp = "aspect-ratio";
-    } else if (key == "backfaceVisibility") {
-      cssProp = "backface-visibility";
-    } else if (key == "backgroundAttachment") {
-      cssProp = "background-attachment";
-    } else if (key == "backgroundBlendMode") {
-      cssProp = "background-blend-mode";
-    } else if (key == "backgroundClip") {
-      cssProp = "background-clip";
-    } else if (key == "bgColor") {
-      cssProp = "background-color";
-    } else if (key == "backgroundColor") {
-      cssProp = "background-color";
-    } else if (key == "backgroundOrigin") {
-      cssProp = "background-origin";
-    } else if (key == "backgroundRepeat") {
-      cssProp = "background-repeat";
-    } else if (key == "backgroundSize") {
-      cssProp = "background-size";
-    } else if (key == "backgroundPosition") {
-      cssProp = "background-position";
-    } else if (key == "backgroundImage") {
-      cssProp = "background-image";
-    } else if (key == "border") {
-      cssProp = "border";
-    } else if (key == "borderTop") {
-      cssProp = "border-top";
-    } else if (key == "borderRight") {
-      cssProp = "border-right";
-    } else if (key == "borderBottom") {
-      cssProp = "border-bottom";
-    } else if (key == "borderLeft") {
-      cssProp = "border-left";
-    } else if (key == "borderRadius") {
-      cssProp = "border-radius";
-    } else if (key == "borderCollapse") {
-      cssProp = "border-collapse";
-    } else if (key == "borderSpacing") {
-      cssProp = "border-spacing";
-    } else if (key == "borderImage") {
-      cssProp = "border-image";
-    } else if (key == "boxShadow") {
-      cssProp = "box-shadow";
-    } else if (key == "backdropFilter") {
-      cssProp = "backdrop-filter";
-    } else if (key == "bottom" || key == "top" || key == "left" || key == "right" || key == "clear" || key == "color" || key == "filter" || key == "float") {
-      cssProp = key;
-    } else if (key == "boxSizing") {
-      cssProp = "box-sizing";
-    } else if (key == "cursor") {
-      cssProp = "cursor";
-    } else if (key == "content") {
-      cssProp = "content";
-    } else if (key == "counterIncrement") {
-      cssProp = "counter-increment";
-    } else if (key == "counterReset") {
-      cssProp = "counter-reset";
-    } else if (key == "counterSet") {
-      cssProp = "counter-set";
-    } else if (key == "columnCount") {
-      cssProp = "column-count";
-    } else if (key == "columnRule") {
-      cssProp = "column-rule";
-    } else if (key == "direction") {
-      cssProp = "direction";
-    } else if (key == "fontFamily") {
-      cssProp = "font-family";
-    } else if (key == "fontSize") {
-      cssProp = "font-size";
-    } else if (key == "fontStyle") {
-      cssProp = "font-style";
-    } else if (key == "fontStretch") {
-      cssProp = "font-stretch";
-    } else if (key == "fontWeight") {
-      cssProp = "font-weight";
-    } else if (key == "fontVariantCaps") {
-      cssProp = "font-variant-caps";
-    } else if (key == "flexWrap") {
-      cssProp = "flex-wrap";
-    } else if (key == "flexDirection") {
-      cssProp = "flex-direction";
-    } else if (key == "flexGrow") {
-      cssProp = "flex-grow";
-    } else if (key == "flexShrink") {
-      cssProp = "flex-shrink";
-    } else if (key == "flexBasis") {
-      cssProp = "flex-basis";
-    } else if (key == "flexFlow") {
-      cssProp = "flex-flow";
-    } else if (key == "letterSpacing") {
-      cssProp = "letter-spacing";
-    } else if (key == "gridAutoFlow") {
-      cssProp = "grid-auto-flow";
-    } else if (key == "gridColumnEnd") {
-      cssProp = "grid-column-end";
-    } else if (key == "gridColumnStart") {
-      cssProp = "grid-column-start";
-    } else if (key == "gridRowEnd") {
-      cssProp = "grid-row-end";
-    } else if (key == "gridRowStart") {
-      cssProp = "grid-row-start";
-    } else if (key == "gridTemplateColumns") {
-      cssProp = "grid-template-columns";
-    } else if (key == "gridTemplateRows") {
-      cssProp = "grid-template-rows";
-    } else if (key == "listStyle") {
-      cssProp = "list-style";
-    } else if (key == "lineHeight") {
-      cssProp = "line-height";
-    } else if (key == "justifyContent") {
-      cssProp = "justify-content";
-    } else if (key == "maskImage") {
-      cssProp = "mask-image";
-    } else if (key == "objectFit") {
-      cssProp = "object-fit";
-    } else if (key == "opacity") {
-      cssProp = "opacity";
-    } else if (key == "outline") {
-      cssProp = "outline";
-    } else if (key == "order") {
-      cssProp = "order";
-    } else if (key == "outlineOffset") {
-      cssProp = "outline-offset";
-    } else if (key == "position") {
-      cssProp = "position";
-    } else if (key == "textIndent") {
-      cssProp = "text-indent";
-    } else if (key == "textJustify") {
-      cssProp = "text-justify";
-    } else if (key == "textTransform") {
-      cssProp = "text-transform";
-    } else if (key == "textDecoration") {
-      cssProp = "text-decoration";
-    } else if (key == "textOverflow") {
-      cssProp = "text-overflow";
-    } else if (key == "textShadow") {
-      cssProp = "text-shadow";
-    } else if (key == "textAlign") {
-      cssProp = "text-align";
-    } else if (key == "visibility") {
-      cssProp = "visibility";
-    } else if (key == "wordBreak") {
-      cssProp = "word-break";
-    } else if (key == "wordSpacing") {
-      cssProp = "word-spacing";
-    } else if (key == "zIndex") {
-      cssProp = "z-index";
-    } else if (key == "padding") {
-      cssProp = "padding";
-    } else if (key == "paddingTop") {
-      cssProp = "padding-top";
-    } else if (key == "paddingRight") {
-      cssProp = "padding-right";
-    } else if (key == "paddingBottom") {
-      cssProp = "padding-bottom";
-    } else if (key == "paddingLeft") {
-      cssProp = "padding-left";
-    } else if (key == "placeItems") {
-      cssProp = "place-items";
-    } else if (key == "margin") {
-      cssProp = "margin";
-    } else if (key == "marginTop") {
-      cssProp = "margin-top";
-    } else if (key == "marginRight") {
-      cssProp = "margin-right";
-    } else if (key == "marginBottom") {
-      cssProp = "margin-bottom";
-    } else if (key == "marginLeft") {
-      cssProp = "margin-left";
-    } else if (key == "display") {
-      cssProp = "display";
-    } else if (key == "width") {
-      cssProp = "width";
-    } else if (key == "height") {
-      cssProp = "height";
-    } else if (key == "verticalAlign") {
-      cssProp = "vertical-align";
-    } else if (key == "overflow") {
-      cssProp = "overflow";
-    } else if (key == "overflowX") {
-      cssProp = "overflow-x";
-    } else if (key == "overflowY") {
-      cssProp = "overflow-y";
-    } else if (key == "writingMode") {
-      cssProp = "writing-mode";
-    } else if (key == "wordWrap") {
-      cssProp = "word-wrap";
-    } else if (key == "perspective") {
-      cssProp = "perspective";
-    } else if (key == "minWidth") {
-      cssProp = "min-width";
-    } else if (key == "minHeight") {
-      cssProp = "min-height";
-    } else if (key == "maxHeight") {
-      cssProp = "max-height";
-    } else if (key == "maxWidth") {
-      cssProp = "max-width";
-    } else if (key == "transition") {
-      cssProp = "transition";
-    } else if (key == "transform") {
-      cssProp = "transform";
-    } else if (key == "transformOrigin") {
-      cssProp = "transform-origin";
-    } else if (key == "transformStyle") {
-      cssProp = "transform-style";
-    } else if (key == "tableLayout") {
-      cssProp = "table-layout";
-    } else if (key == "emptyCells") {
-      cssProp = "empty-cells";
-    } else if (key == "captionSide") {
-      cssProp = "caption-side";
-    } else if (key == "gap") {
-      cssProp = "gap";
-    } else if (key == "rowGap") {
-      cssProp = "row-gap";
-    } else if (key == "columnGap") {
-      cssProp = "column-gap";
-    } else if (key == "userSelect") {
-      cssProp = "user-select";
-    } else if (key == "-webkit-text-fill-color") {
-      cssProp = "-webkit-text-fill-color";
-    } else {
-      cssProp = key;
-    }
-    return cssProp;
-  }
-  function generateElementCss(obj, elementSelector) {
-    if (obj == null) {
-      return {};
-    }
-    var cssObj = {};
-    Object.entries(obj).map(args => {
-      var sudoSrc = args[0];
-      var sudoArgs = args[1];
-      if (sudoSrc != "options" && sudoArgs != null) {
-        var selector = getElementSelector(sudoSrc, elementSelector);
-        Object.entries(args[1]).map(x => {
-          var attr = x[0];
-          var propVal = x[1];
-          var cssPropty = cssAttrParse(attr);
-          var found = Object.entries(propVal).reduce((a, [k, v]) => v ? (a[k] = v, a) : a, {});
-          if (Object.keys(found).length > 0) {
-            if (cssObj[selector] == undefined) {
-              cssObj[selector] = {};
-            }
-            if (cssObj[selector][cssPropty] == undefined) {
-              cssObj[selector][cssPropty] = {};
-            }
-            cssObj[selector][cssPropty] = x[1];
-          }
-        });
-      }
-    });
-    return cssObj;
-  }
-  function generateBlockCss(items) {
-    var reponsiveCssGroups = {};
-    for (var selector in items) {
-      var attrs = items[selector];
-      for (var attr in attrs) {
-        var breakpoints = attrs[attr];
-        for (var device in breakpoints) {
-          var attrValue = breakpoints[device];
-          if (reponsiveCssGroups[device] == undefined) {
-            reponsiveCssGroups[device] = [];
-          }
-          if (reponsiveCssGroups[device] == undefined) {
-            reponsiveCssGroups[device] = [];
-          }
-          if (reponsiveCssGroups[device][selector] == undefined) {
-            reponsiveCssGroups[device][selector] = [];
-          }
-          if (typeof attrValue == "string") {
-            attrValue = attrValue.replaceAll("u0022", '"');
-            reponsiveCssGroups[device][selector].push({
-              attr: attr,
-              val: attrValue
-            });
-          }
-        }
-      }
-    }
-    var reponsiveCssDesktop = "";
-    if (reponsiveCssGroups["Desktop"] != undefined) {
-      for (var selector in reponsiveCssGroups["Desktop"]) {
-        var attrs = reponsiveCssGroups["Desktop"][selector];
-        reponsiveCssDesktop += selector + "{";
-        for (var index in attrs) {
-          var attr = attrs[index];
-          var attrName = attr.attr;
-          var attrValue = attr.val;
-          reponsiveCssDesktop += attrName + ":" + attrValue + ";";
-        }
-        reponsiveCssDesktop += "}";
-      }
-    }
-    var reponsiveCssTablet = "";
-    if (reponsiveCssGroups["Tablet"] != undefined) {
-      reponsiveCssTablet += "@media(max-width: 991px){";
-      for (var selector in reponsiveCssGroups["Tablet"]) {
-        var attrs = reponsiveCssGroups["Tablet"][selector];
-        reponsiveCssTablet += selector + "{";
-        for (var index in attrs) {
-          var attr = attrs[index];
-          var attrName = attr.attr;
-          var attrValue = attr.val;
-          reponsiveCssTablet += attrName + ":" + attrValue + ";";
-        }
-        reponsiveCssTablet += "}";
-      }
-      reponsiveCssTablet += "}";
-    }
-    var reponsiveCssMobile = "";
-    if (reponsiveCssGroups["Mobile"] != undefined) {
-      reponsiveCssMobile += "@media(max-width:767px){";
-      for (var selector in reponsiveCssGroups["Mobile"]) {
-        var attrs = reponsiveCssGroups["Mobile"][selector];
-        reponsiveCssMobile += selector + "{";
-        for (var index in attrs) {
-          var attr = attrs[index];
-          var attrName = attr.attr;
-          var attrValue = attr.val;
-          reponsiveCssMobile += attrName + ":" + attrValue + ";";
-        }
-        reponsiveCssMobile += "}";
-      }
-      reponsiveCssMobile += "}";
-    }
-    var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
-    var wpfooter = document.getElementById("wpfooter");
-    var divWrap = document.getElementById("css-block");
-    if (divWrap != undefined) {
-      document.getElementById("css-block").outerHTML = "";
-    }
-    var divWrap = '<style id="css-block"></style>';
-    wpfooter.insertAdjacentHTML("beforeend", divWrap);
-    var csswrappg = document.getElementById("css-block");
-    var str = "" + reponsiveCss + "";
-    csswrappg.insertAdjacentHTML("beforeend", str);
-  }
-  useEffect(() => {
-    generateBlockCss(styleObj);
-  }, [styleObj]);
-  useEffect(() => {
-    var styleObjX = {
-      ...styleObj
-    };
-    var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
-    Object.entries(wrapperCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var contentCss = generateElementCss(content, contentSelector);
-    Object.entries(contentCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var headerCss = generateElementCss(header, headerSelector);
-    Object.entries(headerCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var headerActiveCss = generateElementCss(headerActive, headerActiveSelector);
-    Object.entries(headerActiveCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var headerLabelCss = generateElementCss(headerLabel, headerLabelSelector);
-    Object.entries(headerLabelCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var labelCounterCss = generateElementCss(labelCounter, labelCounterSelector);
-    Object.entries(labelCounterCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var labelIconCss = generateElementCss(labelIcon, labelIconSelector);
-    Object.entries(labelIconCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var iconCss = generateElementCss(icon, iconSelector);
-    Object.entries(iconCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    var iconToggleCss = generateElementCss(iconToggle, iconToggleSelector);
-    Object.entries(iconToggleCss).map(selectors => {
-      var selector = selectors[0];
-      var selectorData = selectors[1];
-      styleObjX[selector] = selectorData;
-    });
-    setstyleObj(styleObjX);
-  }, [accordionData]);
   var RemoveSliderArg = function ({
     index
   }) {
@@ -4785,7 +4331,7 @@ function Html(props) {
     return null;
   }
   var [postData, setpostData] = useState(postData); // Using the hook.
-  var [accordionData, setaccordionData] = useState(accordionDataX); // Using the hook.
+  var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
@@ -4804,6 +4350,11 @@ function Html(props) {
   const [labelIconHtml, setlabelIconHtml] = useState("");
   const [iconHtml, seticonHtml] = useState("");
   const [iconToggleHtml, seticonToggleHtml] = useState("");
+  useEffect(() => {
+    setaccordionData(accordionDataX);
+    console.log("Hello 1");
+  }, [accordionDataX]);
+  useEffect(() => {}, [header]);
   useEffect(() => {
     var iconSrc = iconToggle?.options?.iconSrc;
     var iconHtml = `<span class="${iconSrc}"></span>`;
@@ -5213,67 +4764,70 @@ function Html(props) {
   }
   useEffect(() => {
     generateBlockCss(styleObj);
+    console.log("Hello 3");
   }, [styleObj]);
   useEffect(() => {
     var styleObjX = {
       ...styleObj
     };
-    var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
+    var wrapperCss = generateElementCss(accordionDataX.wrapper, wrapperSelector);
     Object.entries(wrapperCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var contentCss = generateElementCss(content, contentSelector);
+    var contentCss = generateElementCss(accordionDataX.content, contentSelector);
     Object.entries(contentCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var headerCss = generateElementCss(header, headerSelector);
+    var headerCss = generateElementCss(accordionDataX.header, headerSelector);
     Object.entries(headerCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var headerActiveCss = generateElementCss(headerActive, headerActiveSelector);
+    var headerActiveCss = generateElementCss(accordionDataX.headerActive, headerActiveSelector);
     Object.entries(headerActiveCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var headerLabelCss = generateElementCss(headerLabel, headerLabelSelector);
+    var headerLabelCss = generateElementCss(accordionDataX.headerLabel, headerLabelSelector);
     Object.entries(headerLabelCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var labelCounterCss = generateElementCss(labelCounter, labelCounterSelector);
+    var labelCounterCss = generateElementCss(accordionDataX.labelCounter, labelCounterSelector);
     Object.entries(labelCounterCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var labelIconCss = generateElementCss(labelIcon, labelIconSelector);
+    var labelIconCss = generateElementCss(accordionDataX.labelIcon, labelIconSelector);
     Object.entries(labelIconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var iconCss = generateElementCss(icon, iconSelector);
+    var iconCss = generateElementCss(accordionDataX.icon, iconSelector);
     Object.entries(iconCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
-    var iconToggleCss = generateElementCss(iconToggle, iconToggleSelector);
+    var iconToggleCss = generateElementCss(accordionDataX.iconToggle, iconToggleSelector);
     Object.entries(iconToggleCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
+    console.log(styleObjX);
     setstyleObj(styleObjX);
-  }, [accordionData]);
+    console.log("Hello 1");
+  }, [accordionDataX]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "ml-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -5400,7 +4954,7 @@ function Html(props) {
       },
       placeholder: "Write details about your design..."
     })));
-  })));
+  })), JSON.stringify(accordionData));
 }
 class AccordionsView extends Component {
   constructor(props) {
@@ -28327,6 +27881,343 @@ var accordionDefaultData = {
 
 /***/ }),
 
+/***/ "./src/components/dashboard/accordion-templates.js":
+/*!*********************************************************!*\
+  !*** ./src/components/dashboard/accordion-templates.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var accordionTemplates = [{
+  label: "Template 1",
+  data: {
+    "wrapper": {
+      "options": {
+        "content": "",
+        "tag": "div",
+        "class": "pg-accordion-nested"
+      },
+      "styles": {}
+    },
+    "content": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-content"
+      },
+      "styles": {
+        "padding": {
+          "Desktop": "15px 15px 15px 15px"
+        },
+        "backgroundColor": {
+          "Desktop": "#d5d4d9"
+        }
+      }
+    },
+    "header": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-header"
+      },
+      "styles": {
+        "display": {
+          "Desktop": "flex"
+        },
+        "gap": {
+          "Desktop": "1em"
+        },
+        "padding": {
+          "Desktop": "12px 12px 12px 12px"
+        },
+        "backgroundColor": {
+          "Desktop": "#A084CF"
+        },
+        "margin": {
+          "Desktop": "0px 0px 1px 0px"
+        },
+        "fontSize": {
+          "Desktop": "16px"
+        }
+      }
+    },
+    "headerActive": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-header-active"
+      },
+      "styles": {}
+    },
+    "headerLabel": {
+      "options": {
+        "text": "Accordion Header",
+        "tag": "div",
+        "class": "accordion-header-label"
+      },
+      "styles": {}
+    },
+    "labelCounter": {
+      "options": {
+        "enable": false,
+        "position": "",
+        "tag": "div",
+        "class": "accordion-label-counter"
+      },
+      "styles": {}
+    },
+    "labelIcon": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": "",
+        "position": "",
+        "class": "accordion-label-icon"
+      },
+      "styles": {}
+    },
+    "icon": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": "fas fa-angle-down",
+        "position": "left",
+        "class": "accordion-icon"
+      },
+      "styles": {}
+    },
+    "iconToggle": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": " fas fa-angle-up",
+        "class": "accordion-icon-toggle"
+      },
+      "styles": {}
+    }
+  }
+}, {
+  label: "Template 2",
+  data: {
+    "wrapper": {
+      "options": {
+        "content": "",
+        "tag": "div",
+        "class": "pg-accordion-nested"
+      },
+      "styles": {}
+    },
+    "content": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-content"
+      },
+      "styles": {
+        "padding": {
+          "Desktop": "15px 15px 15px 15px"
+        },
+        "backgroundColor": {
+          "Desktop": "#d5d4d9"
+        }
+      }
+    },
+    "header": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-header"
+      },
+      "styles": {
+        "display": {
+          "Desktop": "flex"
+        },
+        "gap": {
+          "Desktop": "1em"
+        },
+        "padding": {
+          "Desktop": "12px 12px 12px 12px"
+        },
+        "backgroundColor": {
+          "Desktop": "#774360"
+        },
+        "margin": {
+          "Desktop": "0px 0px 1px 0px"
+        },
+        "fontSize": {
+          "Desktop": "16px"
+        }
+      }
+    },
+    "headerActive": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-header-active"
+      },
+      "styles": {}
+    },
+    "headerLabel": {
+      "options": {
+        "text": "Accordion Header",
+        "tag": "div",
+        "class": "accordion-header-label"
+      },
+      "styles": {}
+    },
+    "labelCounter": {
+      "options": {
+        "enable": false,
+        "position": "",
+        "tag": "div",
+        "class": "accordion-label-counter"
+      },
+      "styles": {}
+    },
+    "labelIcon": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": "",
+        "position": "",
+        "class": "accordion-label-icon"
+      },
+      "styles": {}
+    },
+    "icon": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": "fas fa-angle-down",
+        "position": "left",
+        "class": "accordion-icon"
+      },
+      "styles": {}
+    },
+    "iconToggle": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": " fas fa-angle-up",
+        "class": "accordion-icon-toggle"
+      },
+      "styles": {}
+    }
+  }
+}, {
+  label: "Template 3",
+  data: {
+    "wrapper": {
+      "options": {
+        "content": "",
+        "tag": "div",
+        "class": "pg-accordion-nested"
+      },
+      "styles": {}
+    },
+    "content": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-content"
+      },
+      "styles": {
+        "padding": {
+          "Desktop": "15px 15px 15px 15px"
+        },
+        "backgroundColor": {
+          "Desktop": "#d5d4d9"
+        }
+      }
+    },
+    "header": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-header"
+      },
+      "styles": {
+        "display": {
+          "Desktop": "flex"
+        },
+        "gap": {
+          "Desktop": "1em"
+        },
+        "padding": {
+          "Desktop": "12px 12px 12px 12px"
+        },
+        "backgroundColor": {
+          "Desktop": "#774360"
+        },
+        "margin": {
+          "Desktop": "0px 0px 1px 0px"
+        },
+        "fontSize": {
+          "Desktop": "16px"
+        },
+        "borderRadius": {
+          "Desktop": "5px 5px 5px 5px"
+        },
+        "color": {
+          "Desktop": "#ffffff"
+        }
+      }
+    },
+    "headerActive": {
+      "options": {
+        "tag": "div",
+        "class": "accordion-header-active"
+      },
+      "styles": {}
+    },
+    "headerLabel": {
+      "options": {
+        "text": "Accordion Header",
+        "tag": "div",
+        "class": "accordion-header-label"
+      },
+      "styles": {}
+    },
+    "labelCounter": {
+      "options": {
+        "enable": false,
+        "position": "",
+        "tag": "div",
+        "class": "accordion-label-counter"
+      },
+      "styles": {}
+    },
+    "labelIcon": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": "",
+        "position": "",
+        "class": "accordion-label-icon"
+      },
+      "styles": {}
+    },
+    "icon": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": "fas fa-angle-down",
+        "position": "left",
+        "class": "accordion-icon"
+      },
+      "styles": {}
+    },
+    "iconToggle": {
+      "options": {
+        "library": "fontAwesome",
+        "srcType": "class",
+        "iconSrc": " fas fa-angle-up",
+        "class": "accordion-icon-toggle"
+      },
+      "styles": {}
+    }
+  }
+}];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (accordionTemplates);
+
+/***/ }),
+
 /***/ "./src/components/dashboard/index.js":
 /*!*******************************************!*\
   !*** ./src/components/dashboard/index.js ***!
@@ -28342,16 +28233,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/category.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/category.js");
 /* harmony import */ var _accordion_default_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./accordion-default-data */ "./src/components/dashboard/accordion-default-data.js");
 /* harmony import */ var _tabs_default_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tabs-default-data */ "./src/components/dashboard/tabs-default-data.js");
-/* harmony import */ var _components_accordions_edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/accordions-edit */ "./src/components/accordions-edit/index.js");
-/* harmony import */ var _components_accordions_view__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/accordions-view */ "./src/components/accordions-view/index.js");
-/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
-/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
-/* harmony import */ var _components_wcps_list__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/wcps-list */ "./src/components/wcps-list/index.js");
+/* harmony import */ var _accordion_templates__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./accordion-templates */ "./src/components/dashboard/accordion-templates.js");
+/* harmony import */ var _components_accordions_edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/accordions-edit */ "./src/components/accordions-edit/index.js");
+/* harmony import */ var _components_accordions_view__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accordions-view */ "./src/components/accordions-view/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_wcps_list__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/wcps-list */ "./src/components/wcps-list/index.js");
 
 const {
   Component,
@@ -28367,12 +28259,17 @@ const {
 
 
 
+
 function Html(props) {
   if (!props.warn) {
     return null;
   }
   var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-  var [postData, setpostData] = useState(_accordion_default_data__WEBPACK_IMPORTED_MODULE_2__["default"]); // Using the hook.
+  var [postData, setpostData] = useState({
+    ID: 125777,
+    post_content: _accordion_default_data__WEBPACK_IMPORTED_MODULE_2__["default"],
+    post_title: ""
+  }); // Using the hook.
   var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
   var [isLoading, setisLoading] = useState(false); // Using the hook.
@@ -28381,7 +28278,6 @@ function Html(props) {
     setActiveAccordion(args);
   }
   function onChangeAccordion(args) {
-    console.log(args);
     var postDataX = {
       ...postData
     };
@@ -28403,8 +28299,10 @@ function Html(props) {
         res.post_content = _accordion_default_data__WEBPACK_IMPORTED_MODULE_2__["default"];
       }
       setpostData(res);
+      setaccordionData(res.post_content);
     });
   }, [activeAccordion]);
+  useEffect(() => {}, [accordionData]);
 
   // ! hello
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -28413,7 +28311,7 @@ function Html(props) {
     className: "flex "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-[450px] overflow-y-scroll light-scrollbar"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_8__["default"], {
     activeTab: "accordions",
     orientation: "",
     contentClass: " bg-white w-full",
@@ -28424,44 +28322,67 @@ function Html(props) {
     tabs: [{
       name: "accordions",
       title: "Accordions",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "edit",
       title: "Edit",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "templates",
       title: "Templates",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
       className: "tab-disable-blocks"
     }]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "accordions"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "relative p-3"
   }, postData.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3 my-5 bg-orange-400"
-  }, "Please choose an accordion first."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wcps_list__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "Please choose an accordion first."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wcps_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
     selectAccordion: selectAccordion,
     activeAccordion: activeAccordion
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onChange: onChangeAccordion,
     postData: postData
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3"
-  }, "Coming Soon")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, _accordion_templates__WEBPACK_IMPORTED_MODULE_4__["default"].map(preset => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      onClick: ev => {
+        var data = preset.data;
+        var presetClean = {};
+        Object.entries(data).map(item => {
+          var itemIndex = item[0];
+          var itemArg = item[1];
+          if (itemArg.options) {
+            delete itemArg.options;
+          }
+          presetClean[itemIndex] = {
+            ...accordionData[itemIndex],
+            ...itemArg
+          };
+        });
+        var accordionDataX = {
+          ...accordionData,
+          presetClean
+        };
+        onChangeAccordion(accordionDataX);
+      }
+    }, preset.label);
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full sticky top-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "  relative"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_6__["default"], {
     isLoading: isLoading,
     onChange: onChangeAccordion,
     postData: postData,
