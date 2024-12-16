@@ -3,6 +3,7 @@ import apiFetch from "@wordpress/api-fetch";
 
 import { brush, category, columns } from "@wordpress/icons";
 
+import PGNotify from "./notify";
 import AccordionsGenerateCss from "./generate-css";
 import accordionDefaultData from "./accordion-default-data";
 import tabsDefaultData from "./tabs-default-data";
@@ -27,10 +28,37 @@ function Html(props) {
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 	var [pleaseUpdate, setpleaseUpdate] = useState(false); // Using the hook.
 
+	// var notificationsX = [
+	// 	{ content: "Hello notifications 1", type: "warnning" },
+	// 	{ content: "Hello notifications 2", type: "error" },
+	// 	{ content: "Hello notifications 3", type: "success" },
+	// ]
+
+	var [notifications, setnotifications] = useState([]); // Using the hook.
+
+
+
+	useEffect(() => {
+
+		setnotifications(notifications)
+
+		setTimeout(() => {
+			setnotifications([])
+		}, 5000)
+
+
+
+	}, [notifications]);
 
 
 
 
+	function getNotifications(notification) {
+
+		var notificationsX = [...notifications]
+		notificationsX.push(notification)
+		setnotifications(notificationsX);
+	}
 
 
 	function selectAccordion(args) {
@@ -155,6 +183,7 @@ function Html(props) {
 								{postData.ID != null && (
 									<AccordionsEdit
 										onChange={onChangeAccordion}
+										getNotifications={getNotifications}
 										postData={postData}
 									/>
 								)}
@@ -169,7 +198,7 @@ function Html(props) {
 								{accordionTemplates.map((preset) => {
 
 									return (
-										<div onClick={ev => {
+										<div className="my-5 bg-slate-400 hover:bg-slate-500 p-3 rounded-sm cursor-pointer" onClick={ev => {
 											var data = preset.data
 											var presetClean = {};
 
@@ -195,7 +224,14 @@ function Html(props) {
 
 											onChangeAccordion(accordionDataX)
 
-										}}>{preset.label}</div>
+										}}>
+
+											<img className="w-full" src={preset.thumb} alt="" />
+											<div className="text-lg mt-3 text-white">
+												{preset.label}
+											</div>
+
+										</div>
 									)
 
 								})}
@@ -209,10 +245,11 @@ function Html(props) {
 
 
 						{postData.ID != null && (
-							<AccordionsView pleaseUpdate={pleaseUpdate} onUpdate={onUpdateAccordion} isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} />
+							<AccordionsView pleaseUpdate={pleaseUpdate} onUpdate={onUpdateAccordion} isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} getNotifications={getNotifications} />
 						)}
 						{postData.ID != null && (
 							<AccordionsGenerateCss postData={postData} />
+
 						)}
 
 
@@ -225,6 +262,9 @@ function Html(props) {
 					</div>
 				</div>
 			</div>
+
+
+			<PGNotify notifications={notifications} />
 		</div>
 	);
 }

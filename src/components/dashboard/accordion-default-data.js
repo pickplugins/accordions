@@ -3,8 +3,9 @@
 var accordionDefaultData = {
 	globalOptions: {
 		viewType: "accordion",
-
+		itemSource: "manual",
 	},
+	itemQueryArgs: [],
 
 	wrapper: {
 		options: {

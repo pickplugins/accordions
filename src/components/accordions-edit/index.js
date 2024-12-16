@@ -1,5 +1,8 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
 import { __ } from "@wordpress/i18n";
+import { useSelect, select, useDispatch, dispatch } from "@wordpress/data";
+import { store as coreStore } from "@wordpress/core-data";
+import apiFetch from "@wordpress/api-fetch";
 
 import {
 	Icon,
@@ -7,6 +10,7 @@ import {
 	PanelRow,
 	SelectControl,
 	ToggleControl,
+	Popover,
 } from "@wordpress/components";
 import { brush, close, settings } from "@wordpress/icons";
 
@@ -17,6 +21,9 @@ import PGtab from "../tab";
 import PGtabs from "../tabs";
 import PGIconPicker from "../icon-picker";
 import PGinputText from "../input-text";
+import PGinputSelect from "../input-select";
+import PGcssOpenaiPrompts from "../openai-prompts";
+
 
 var myStore = wp.data.select("postgrid-shop");
 import { RichText } from '@wordpress/block-editor'
@@ -27,6 +34,8 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
+	var getNotifications = props.getNotifications;
+
 	var postData = props.postData;
 
 
@@ -46,6 +55,10 @@ function Html(props) {
 
 
 	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
+
+
+	var [itemQueryArgs, setitemQueryArgs] = useState(accordionData.itemQueryArgs); // Using the hook.
+
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
 	var [items, setitems] = useState(accordionData.items); // Using the hook.
 	var [content, setcontent] = useState(accordionData.content);
@@ -59,10 +72,16 @@ function Html(props) {
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
+	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
 	const [unit, setUnit] = useState(gapValue.replace(number, ""));
+	const [itemActive, setitemActive] = useState(99999);
+	const [AIautoUpdate, setAIautoUpdate] = useState(false);
+	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
+	var formattedPrompt = "Respond only with question answer as json array and no other text. Do not include any explanations, introductions, or concluding remarks.";
+
 
 	var breakPointList = [{ label: "Select..", icon: "", value: "" }];
 	for (var x in breakPoints) {
@@ -74,7 +93,36 @@ function Html(props) {
 		});
 	}
 
+	var postTypes = [];
+	const postTypesData = useSelect(
+		(select) => select(coreStore).getPostTypes({ per_page: -1 }),
+		[]
+	);
+	postTypesData !== null &&
+		postTypesData.map((x) => {
+			postTypes.push({ value: x.slug, label: x.name });
+		});
+	console.log(postTypes);
 
+
+
+
+
+	useEffect(() => {
+
+		apiFetch({
+			path: "/post-grid/v2/post_type_objects",
+			method: "POST",
+			data: { postTypes: [] },
+		}).then((res) => {
+			var taxonomies = [];
+			res.map((item) => {
+				taxonomies.push({ label: item.label, value: item.id });
+			});
+			setTaxonomiesObjects(taxonomies);
+		});
+
+	}, []);
 
 
 	useEffect(() => {
@@ -261,12 +309,191 @@ function Html(props) {
 	var accOptionsArgs = {
 		autoplay: { label: "Auto play", value: 1 },
 	};
+	var postQueryArgs = {
+		postType: {
+			value: ["post"],
+
+			id: "postType",
+			label: "Post types",
+			description: "Select Post Types to Query",
+		},
+		s: {
+			value: "",
+
+			id: "s",
+			label: "Keyword",
+			description: "Search keyword, ex: hello",
+		},
+		postStatus: {
+			value: [],
+
+			id: "postStatus",
+			label: "Post status",
+			description: "Query post by post status",
+		},
+		order: {
+			value: "",
+
+			id: "order",
+			label: "Order",
+			description: "Post query order",
+		},
+		orderby: {
+			value: [],
+
+			id: "orderby",
+			label: "Orderby",
+			description: "Post query orderby",
+		},
+		metaKey: {
+			value: "",
+
+			id: "metaKey",
+			label: "Meta fields key",
+			description: "Post query by meta fields key",
+		},
+		metaValue: {
+			value: "",
+
+			id: "metaValue",
+			label: "Meta Value",
+			description: "Post query by custom field value",
+		},
+		metaValueNum: {
+			value: "",
+
+			id: "metaValueNum",
+			label: "Meta Value Num",
+			description: "Post query by custom field value for number types",
+		},
+		metaCompare: {
+			value: "",
+
+			id: "metaCompare",
+			label: "Meta Compare",
+			description: "Meta query compare",
+		},
+	};
+	var termQueryArgs = {
+		taxonomy: {
+			value: "category",
+
+			id: "taxonomy",
+			label: __("Taxonomy", "post-grid"),
+			description: "Select Taxonomy to Query",
+			longDescription:
+				"Taxonomy name, or array of taxonomy names, to which results should be limited.",
+		},
+		orderby: {
+			value: "name",
+
+			id: "orderby",
+			label: "Order By",
+			description: "Search keyword, ex: hello",
+		},
+		order: {
+			value: "ASC",
+
+			id: "order",
+			label: "Order",
+			description: "Whether to order terms in ascending or descending order.",
+		},
+		hide_empty: {
+			value: true,
+
+			id: "hide_empty",
+			label: "Hide Empty",
+			description: "Accepts true or false value.",
+			longDescription:
+				"Whether to hide terms not assigned to any posts. Accepts 1|true or 0|false.",
+		},
+		number: {
+			value: false,
+
+			id: "number",
+			label: "Number",
+			description: "Accepts 0 (all) or any positive number.",
+			longDescription:
+				"Maximum number of terms to return. Accepts ''|0 (all) or any positive number. Default ''|0 (all). Note that $number may not return accurate results when coupled with $object_ids.",
+		},
+		include: {
+			value: "category",
+
+			id: "include",
+			//isPro: true,
+			label: "Include",
+			description: "Comma-separated string of term IDs to include.",
+			longDescription:
+				"Array or comma/space-separated string of term IDs to include. Default empty array.",
+			placeholder: "Comma-separated string of term IDs to include.",
+		},
+		exclude: {
+			value: "",
+
+			id: "exclude",
+			//isPro: true,
+			label: "Exclude",
+			description: "Comma-separated string of term IDs to exclude.",
+			longDescription:
+				"Array or comma/space-separated string of term IDs to exclude. If $include is non-empty, $exclude is ignored. Default empty array.",
+			placeholder: "Comma-separated string of term IDs to exclude.",
+		},
+		child_of: {
+			value: "",
+
+			id: "child_of",
+			//isPro: true,
+			label: "Child of",
+			description: "Term ID to retrieve child terms of.",
+			longDescription:
+				"Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0.",
+		},
+		parent: {
+			value: "",
+
+			id: "parent",
+			//isPro: true,
+			label: "Parent",
+			description:
+				"Add {ID} to add Parent term ID to retrieve direct-child terms of.",
+			longDescription: "Parent term ID to retrieve direct-child terms of.",
+		},
+		meta_key: {
+			value: "",
+
+			id: "meta_key",
+			//isPro: true,
+			label: "Meta key",
+			description: "Comma-separated keys to return term(s) for.",
+			longDescription: "Meta key or keys to filter by.",
+		},
+		meta_value: {
+			value: "",
+
+			id: "meta_value",
+			//isPro: true,
+			label: "Meta value",
+			description: "Comma-separated keys to return term(s) for.",
+			longDescription: "Meta value or values to filter by.",
+		},
+	};
+
+
+
 
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
 		// tabs: { label: "Tabs", value: "tabs" },
 		// tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
 	};
+	var itemSources = {
+		manual: { label: "Manual", value: "manual" },
+		posts: { label: "Posts", value: "posts", isPro: 0 },
+		terms: { label: "Terms", value: "terms", isPro: 0 },
+
+	};
+
+
 
 	return (
 		<div className="">
@@ -303,7 +530,453 @@ function Html(props) {
 								values=""></PGDropdown>
 						</PanelRow>
 
+
+
+
+
 					</div>
+
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Items"
+						initialOpen={true}>
+
+						<div className="my-4 flex items-center justify-between ">
+
+							<div className=" flex items-center  gap-2" >
+
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={globalOptions.itemSource == undefined ? "Item Source" : itemSources[globalOptions.itemSource]?.label}
+									options={itemSources}
+									onChange={(option, index) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.itemSource = option.value;
+										setglobalOptions(globalOptionsX);
+									}}
+									values=""></PGDropdown>
+
+
+
+
+
+							</div>
+
+							<div className="flex items-center  gap-2">
+
+								{globalOptions?.itemSource == "posts" && (
+
+									<>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Add Query"}
+											options={postQueryArgs}
+											onChange={(option, index) => {
+
+												console.log(option);
+
+												var itemQueryArgsX = [...itemQueryArgs];
+												itemQueryArgsX.push({ id: option.id, value: option.value });
+												setitemQueryArgs(itemQueryArgsX);
+											}}
+											values=""></PGDropdown>
+									</>
+								)}
+								{globalOptions?.itemSource == "terms" && (
+
+									<>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Add Query"}
+											options={termQueryArgs}
+											onChange={(option, index) => {
+
+												console.log(option);
+
+												var itemQueryArgsX = [...itemQueryArgs];
+												itemQueryArgsX.push({ id: option.id, value: option.value });
+												setitemQueryArgs(itemQueryArgsX);
+											}}
+											values=""></PGDropdown>
+									</>
+								)}
+
+
+
+
+
+
+
+
+
+
+
+
+								{globalOptions?.itemSource == "manual" && (
+									<>
+										<div className='bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600' onClick={ev => {
+											var itemsX = [...items]
+
+											itemsX.push({
+												active: 0,
+												hideOnSchema: 0,
+												headerLabel: {
+													"options": {
+														"text": "Accordion Header",
+														"toggledText": "Accordion Header Toggled",
+														"slug": "",
+														"tag": "",
+														"class": "accordion-header-label",
+													},
+												},
+												content: {
+													"options": {
+														"tag": "",
+														"class": "accordion-content",
+														text: "Accordion content"
+													},
+												},
+												icon: {
+													options: {
+														library: "fontAwesome",
+														srcType: "class",
+														iconSrc: "fas fa-angle-down",
+														position: "left",
+														class: "accordion-icon",
+													},
+													styles: {},
+												},
+												iconToggle: {
+													options: {
+														library: "fontAwesome",
+														srcType: "class",
+														iconSrc: " fas fa-angle-up",
+														class: "accordion-icon-toggle",
+													},
+													styles: {},
+												},
+											});
+											setitems(itemsX)
+
+											getNotifications({ content: "Item Added", type: "success" })
+
+
+										}}>Add New</div>
+										<div className="cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-700	 text-white font-medium rounded hover:bg-gray-600	 focus:outline-none focus:bg-gray-600" onClick={(ev) => {
+											ev.preventDefault();
+											ev.stopPropagation();
+											setAIWriter(!AIWriter)
+										}}>AI</div>
+										{AIWriter && (
+											<Popover position="bottom right">
+												<div className="w-[800px] p-3">
+
+
+
+													<PGcssOpenaiPrompts value={""} formattedPrompt={formattedPrompt} promptsAgs={{ action: 'write', aiModel: 'gpt-4-turbo', objective: "generateFAQ", }} autoUpdate={AIautoUpdate}
+														onResponseLoaded={(value, autoUpdate) => {
+
+
+
+															// if (autoUpdate) {
+															// 	var options = { ...text.options, content: value };
+															// 	setAttributes({ text: { ...text, options: options } });
+															// }
+
+
+														}}
+														clickHandle={(value, action) => {
+
+															var valueObj = JSON.parse(value)
+
+															if (action == "prepend") {
+
+															}
+															if (action == "append") {
+
+
+																valueObj.map(item => {
+
+
+																	var answer = item.answer
+																	var question = item.question
+
+
+
+																})
+
+															}
+															if (action == "replace") {
+
+
+																var blocksX = [];
+
+																valueObj.map(item => {
+
+
+																	var answer = item.answer
+																	var question = item.question
+
+
+																})
+
+
+
+
+
+
+
+
+
+
+
+															}
+
+
+
+
+
+
+
+
+															//setAttributes({ itemsX: { ...itemsX, items: itemx } });
+
+
+
+
+														}}
+
+													/>
+												</div>
+											</Popover>
+										)}
+
+
+									</>
+								)}
+
+
+
+
+
+
+							</div>
+
+						</div>
+						{globalOptions?.itemSource == "posts" && (
+							<div>
+								{JSON.stringify(itemQueryArgs)}
+
+								{itemQueryArgs?.map((item, index) => {
+
+									return (
+										<div key={index}>
+											{item.id == "postType" && (
+												<div>
+													<label for="">Post Type</label>
+													<PGinputSelect
+														val={item.value}
+														options={postTypes}
+														multiple={true}
+														onChange={(newVal) => {
+															var itemQueryArgsX = [...itemQueryArgs];
+															itemQueryArgsX[index].value = newVal
+															setitemQueryArgs(itemQueryArgsX);
+
+															//updateQueryPram(newVal, index);
+														}}
+													/>
+
+
+												</div>
+											)}
+										</div>
+									);
+								})}
+
+							</div>
+						)}
+						{globalOptions?.itemSource == "terms" && (
+							<div>
+
+								{JSON.stringify(itemQueryArgs)}
+
+
+								{itemQueryArgs?.map((item, index) => {
+
+									return (
+										<div key={index}>
+											{item.id == "taxonomy" && (
+												<div>
+													<label for="">Taxonomy</label>
+													<PGinputSelect
+														val={item.value}
+														options={taxonomiesObjects}
+														multiple={true}
+														onChange={(newVal) => {
+															var itemQueryArgsX = [...itemQueryArgs];
+															itemQueryArgsX[index].value = newVal
+															setitemQueryArgs(itemQueryArgsX);
+
+															//updateQueryPram(newVal, index);
+														}}
+													/>
+
+
+												</div>
+											)}
+										</div>
+									);
+								})}
+
+							</div>
+						)}
+
+
+
+
+						{globalOptions?.itemSource == "manual" && (
+							<div>
+								{items?.map((item, index) => {
+									return (
+										<>
+											<div className="">
+
+												<div className="bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400" onClick={(ev) => {
+													setitemActive(index == itemActive ? 999 : index)
+												}}>
+													<div>
+														{item?.headerLabel.options.text}
+													</div>
+
+													<span
+														className="cursor-pointer hover:bg-red-500 hover:text-white "
+														onClick={(ev) => {
+															ev.stopPropagation();
+															var itemsX = [...items]
+
+															itemsX.splice(index, 1);
+															setitems(itemsX)
+														}}>
+														<Icon icon={close} />
+													</span>
+
+												</div>
+
+												{itemActive == index && (
+													<div className="py-2 w-full">
+
+														<div className="mb-3">
+															<RichText
+																className="bg-slate-100 p-3 "
+																tagName={"div"}
+																value={item?.headerLabel.options.text}
+																allowedFormats={["core/bold", "core/italic", "core/link"]}
+																onChange={(content) => {
+																	var itemsX = [...items]
+
+																	itemsX[index].headerLabel.options.text = content;
+																	setitems(itemsX)
+
+																}}
+																placeholder={""}
+															/>
+														</div>
+														<div className="mb-3">
+															<RichText
+																className={`bg-slate-100 p-3 min-h-24`}
+																tagName={"div"}
+																value={item?.content.options.text}
+																allowedFormats={["core/bold", "core/italic", "core/link"]}
+																onChange={(content) => {
+																	var itemsX = [...items]
+
+																	itemsX[index].content.options.text = content;
+																	setitems(itemsX)
+																	//setsearchPrams({ ...searchPrams, content: content });
+																}}
+																placeholder={"Write details"}
+															/>
+														</div>
+														<div className="mb-3">
+															<PanelRow>
+																<label for="">Active</label>
+																<SelectControl
+																	label=""
+																	value={globalOptions?.active}
+																	options={[
+																		{ label: __("True", "post-grid"), value: 1 },
+																		{ label: __("False", "post-grid"), value: 0 },
+																	]}
+																	onChange={(newVal) => {
+																		var itemsX = [...items]
+
+																		itemsX[index].active = newVal;
+																		setitems(itemsX)
+																	}}
+																/>
+															</PanelRow>
+														</div>
+														<div className="mb-3">
+															<PanelRow>
+																<label for="">Enable lazyLoad</label>
+																<SelectControl
+																	label=""
+																	value={globalOptions?.hideOnSchema}
+																	options={[
+																		{ label: __("True", "post-grid"), value: 1 },
+																		{ label: __("False", "post-grid"), value: 0 },
+																	]}
+																	onChange={(newVal) => {
+																		var itemsX = [...items]
+
+																		itemsX[index].hideOnSchema = newVal;
+																		setitems(itemsX)
+																	}}
+																/>
+															</PanelRow>
+														</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+													</div>
+												)}
+
+
+
+
+
+											</div>
+
+
+
+
+
+
+										</>
+									);
+								})}
+							</div>
+						)}
+
+
+
+					</PanelBody>
+
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Accordion Settings"
@@ -391,6 +1064,186 @@ function Html(props) {
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.schema = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Enable Toggle Text</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.toggleText}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.toggleText = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Enable expand/collapse all</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.expandCollapseAll}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.expandCollapseAll = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Expand All Text</label>
+
+								<PGinputText
+									label=""
+									value={globalOptions?.expandAllText}
+
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.expandAllText = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Collapse All Text</label>
+
+								<PGinputText
+									label=""
+									value={globalOptions?.collapseAllText}
+
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.collapseAllText = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Enable Stats</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.stats}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.stats = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+
+
+
+
+							<PanelRow>
+
+								<label for="">Active Event</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.activeEvent}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.activeEvent = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Enable URL Hash</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.urlHash}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.urlHash = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Click To Scroll Top</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.clickToScrollTop}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.clickToScrollTop = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Click To Scroll Top Offset</label>
+								<PGinputText
+									label=""
+									value={globalOptions?.clickToScrollTopOffset}
+
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.clickToScrollTopOffset = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Animation Name</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.animationName}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.animationName = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label for="">Animation delay</label>
+								<PGinputText
+									label=""
+									value={globalOptions?.animationDelay}
+
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.animationDelay = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
@@ -1307,13 +2160,14 @@ class AccordionsEdit extends Component {
 	}
 
 	render() {
-		var { onChange, postData } = this.props;
+		var { onChange, postData, getNotifications } = this.props;
 
 
 
 		return (
 			<Html
 				onChange={onChange}
+				getNotifications={getNotifications}
 				postData={postData}
 				warn={this.state.showWarning}
 				isLoaded={this.state.isLoaded}

@@ -4,6 +4,7 @@ var accordionTemplates = [
 
 	{
 		label: "Template 1",
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
 		data: {
 			"wrapper": { "options": { "content": "", "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "15px 15px 15px 15px" }, "backgroundColor": { "Desktop": "#d5d4d9" } } },
@@ -18,6 +19,7 @@ var accordionTemplates = [
 	},
 	{
 		label: "Template 2",
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/wp-optimize-alternatives.png",
 		data: {
 			"wrapper": { "options": { "content": "", "tag": "div", "class": "pg-accordion-nested" }, "styles": [] },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "15px 15px 15px 15px" }, "backgroundColor": { "Desktop": "#d5d4d9" } } },
@@ -32,6 +34,7 @@ var accordionTemplates = [
 	},
 	{
 		label: "Template 3",
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/cache-enabler-alternatives.png",
 		data: {
 			"wrapper": { "options": { "content": "", "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "15px 15px 15px 15px" }, "backgroundColor": { "Desktop": "#d5d4d9" } } },

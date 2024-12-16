@@ -41,6 +41,8 @@ function Html(props) {
 
 	var id = props.id;
 	var onChange = props.onChange;
+	var getNotifications = props.getNotifications;
+
 	var isLoading = props.isLoading;
 	var onUpdate = props.onUpdate;
 	var pleaseUpdate = props.pleaseUpdate;
@@ -81,7 +83,13 @@ function Html(props) {
 	const [iconHtml, seticonHtml] = useState("");
 	const [iconToggleHtml, seticonToggleHtml] = useState("");
 
+	const copyData = (data) => {
 
+		navigator.clipboard.writeText(data).then(() => {
+			getNotifications({ content: "Copied to clipboard!", type: "success" })
+		})
+			.catch((err) => { });
+	};
 
 	useEffect(() => {
 		setpostData(props.postData)
@@ -140,7 +148,7 @@ function Html(props) {
 	}, [labelIcon?.options]);
 
 
-	var [active, setactive] = useState(0);
+	var [active, setactive] = useState(9999);
 
 
 
@@ -163,6 +171,19 @@ function Html(props) {
 
 				<div className='flex items-center align-middle gap-3'>
 
+					<div>
+						<input type="text" className='w-52 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4' value={`[accordions id="${id}"]`}
+							onClick={() => {
+
+								var str = `[accordions id="${id}"]`;
+
+								copyData(str);
+
+
+							}}
+
+						/>
+					</div>
 
 					{isLoading && (
 						<div className="">
@@ -171,31 +192,9 @@ function Html(props) {
 					)}
 
 
-					<div className='bg-slate-400 px-5 py-2 cursor-pointer hover:bg-slate-300' onClick={ev => {
-						var itemsX = [...items]
-
-						itemsX.push({
-							headerLabel: {
-								"options": {
-									"text": "Accordion Header",
-									"slug": "",
-									"tag": "",
-									"class": "accordion-header-label",
-								},
-							},
-							content: {
-								"options": {
-									"tag": "",
-									"class": "accordion-content",
-									text: "Accordion content"
-								},
-							},
-						});
-						setitems(itemsX)
-					}}>Add New</div>
 
 					{pleaseUpdateX && (
-						<div className='bg-slate-400 px-5 py-2 cursor-pointer hover:bg-slate-300' onClick={ev => {
+						<div className='bg-slate-400 px-5 py-3 cursor-pointer hover:bg-slate-300' onClick={ev => {
 							onUpdate(true)
 						}}>Save</div>
 					)}
@@ -216,7 +215,7 @@ function Html(props) {
 									} ${active == index ? "accordion-header-active" : ""}`}
 								onClick={(ev) => {
 									setToggled(!toggled);
-									setactive(index)
+									setactive(index == active ? 999 : index)
 								}}>
 								{labelCounter.options.position == "left" && (
 									<span
@@ -226,12 +225,12 @@ function Html(props) {
 								)}
 								{icon.options.position == "left" && (
 									<>
-										{!toggled && (
+										{active != index && (
 											<span
 												className={` accordion-icon`}
 												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
 										)}
-										{toggled && (
+										{active == index && (
 											<span
 												className={` accordion-icon accordion-icon-toggle}`}
 												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
@@ -306,12 +305,12 @@ function Html(props) {
 								)}
 								{icon.options.position == "right" && (
 									<>
-										{!toggled && (
+										{active != index && (
 											<span
 												className={` accordion-icon`}
 												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
 										)}
-										{toggled && (
+										{active == index && (
 											<span
 												className={` accordion-icon-toggle`}
 												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
@@ -319,17 +318,6 @@ function Html(props) {
 									</>
 								)}
 
-
-								<span
-									className="cursor-pointer hover:bg-red-500 hover:text-white "
-									onClick={(ev) => {
-										var itemsX = [...items]
-
-										itemsX.splice(index, 1);
-										setitems(itemsX)
-									}}>
-									<Icon icon={close} />
-								</span>
 
 
 							</div>
@@ -379,7 +367,7 @@ class AccordionsView extends Component {
 
 
 	render() {
-		var { postData, id, isLoading, onChange, pleaseUpdate, onUpdate } = this.props;
+		var { postData, id, isLoading, onChange, pleaseUpdate, onUpdate, getNotifications } = this.props;
 
 		return (
 			<Html
@@ -389,6 +377,7 @@ class AccordionsView extends Component {
 				onUpdate={onUpdate}
 				pleaseUpdate={pleaseUpdate}
 				onChange={onChange}
+				getNotifications={getNotifications}
 				warn={this.state.showWarning}
 			/>
 		);
