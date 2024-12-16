@@ -1438,6 +1438,10 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
+
+								{JSON.stringify(header.options.class)}
+
+
 								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
 										{__("Class", "accordions")}

@@ -13897,7 +13897,7 @@ function Html(props) {
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_9__["default"], {
     name: "options"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, JSON.stringify(header.options.class), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "",
@@ -14538,10 +14538,10 @@ function Html(props) {
     className: "flex items-center align-middle gap-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    className: "w-52 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4",
-    value: `[accordions id="${id}"]`,
+    className: "w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4",
+    value: `[accordions_builder id="${id}"]`,
     onClick: () => {
-      var str = `[accordions id="${id}"]`;
+      var str = `[accordions_builder id="${id}"]`;
       copyData(str);
     }
   })), isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -40229,7 +40229,7 @@ class PGinputText extends Component {
       onChange
     } = this.props;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
-      val: value,
+      value: value,
       name: name,
       id: id,
       size: size,

@@ -172,10 +172,10 @@ function Html(props) {
 				<div className='flex items-center align-middle gap-3'>
 
 					<div>
-						<input type="text" className='w-52 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4' value={`[accordions id="${id}"]`}
+						<input type="text" className='w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4' value={`[accordions_builder id="${id}"]`}
 							onClick={() => {
 
-								var str = `[accordions id="${id}"]`;
+								var str = `[accordions_builder id="${id}"]`;
 
 								copyData(str);
 

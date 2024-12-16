@@ -1,4 +1,4 @@
-=== Accordion ===
+=== Accordions - AI FAQ, Post Accordion, Category Accordion, Product FAQ, FAQ Builder ===
 	Contributors: PickPlugins, nafismahmudayon
 	Donate link: https://pickplugins.com/accordions/
 	Tags: accordion, tabs, FAQ, WooCommerce FAQ Tab, accordions
