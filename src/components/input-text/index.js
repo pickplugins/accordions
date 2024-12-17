@@ -92,7 +92,7 @@ class PGinputText extends Component {
     return (
 
 
-      <Html val={value} name={name} id={id} size={size} placeholder={placeholder} className={className} minlength={minlength} maxlength={maxlength} required={required} disabled={disabled} onChange={onChange} warn={this.state.showWarning} />
+      <Html value={value} name={name} id={id} size={size} placeholder={placeholder} className={className} minlength={minlength} maxlength={maxlength} required={required} disabled={disabled} onChange={onChange} warn={this.state.showWarning} />
 
 
     )
