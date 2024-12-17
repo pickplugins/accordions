@@ -66,6 +66,7 @@ class Accordions
 
     require_once(accordions_plugin_dir . 'templates/accordion/accordion-hook.php');
     require_once(accordions_plugin_dir . 'templates/tabs/tabs-hook.php');
+    require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-hook.php');
 
     require_once(accordions_plugin_dir . 'includes/3rd-party/3rd-party.php');
 
@@ -153,6 +154,7 @@ class Accordions
 
   public function _front_scripts()
   {
+    wp_enqueue_script('accordions_front_scripts', accordions_plugin_url . 'templates/accordions-builder/front-scripts.js', array('jquery'), '20181018');
 
     wp_register_script('accordions_js', accordions_plugin_url . 'assets/frontend/js/scripts.js', array('jquery'), time(), true);
     wp_register_style('accordions-style', accordions_plugin_url . 'assets/frontend/css/style.css');
@@ -163,6 +165,10 @@ class Accordions
     wp_register_style('fontawesome-4',  accordions_plugin_url . 'assets/global/css/font-awesome-4.css');
     wp_register_style('jquery-ui',  accordions_plugin_url . 'assets/frontend/css/jquery-ui.css');
     wp_register_style('accordions-themes',  accordions_plugin_url . 'assets/global/css/themes.style.css');
+
+    wp_register_style('bootstrap-icons', accordions_plugin_url . 'assets/css/bootstrap-icons/bootstrap-icons.css');
+    wp_register_style('fontawesome-icons', accordions_plugin_url . 'assets/css/fontawesome/css/all.min.css');
+    wp_register_style('icofont-icons', accordions_plugin_url . 'assets/css/icofont/icofont.min.css');
   }
 
   public function _admin_scripts()
@@ -170,6 +176,7 @@ class Accordions
     $screen = get_current_screen();
 
     //var_dump($screen);
+
 
 
     wp_enqueue_script('accordions_admin_js', accordions_plugin_url . 'assets/admin/js/scripts.js', array('jquery'), '20181018');

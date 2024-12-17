@@ -13178,9 +13178,15 @@ function Html(props) {
     accordion: {
       label: "Accordion",
       value: "accordion"
+    },
+    tabs: {
+      label: "Tabs",
+      value: "tabs"
+    },
+    tabsVertical: {
+      label: "Tabs Vertical",
+      value: "tabsVertical"
     }
-    // tabs: { label: "Tabs", value: "tabs" },
-    // tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
   };
   var itemSources = {
     manual: {
@@ -14000,7 +14006,7 @@ function Html(props) {
       var globalOptionsX = {
         ...globalOptions
       };
-      globalOptionsX.expandAllText = newVal;
+      globalOptionsX.expandAllText = "";
       setglobalOptions(globalOptionsX);
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
@@ -37793,9 +37799,10 @@ var accordionDefaultData = {
     itemSource: "manual"
   },
   itemQueryArgs: [],
+  styleObj: {},
+  reponsiveCss: "",
   wrapper: {
     options: {
-      content: "",
       tag: "div",
       class: "pg-accordion-nested"
     },
@@ -38350,6 +38357,7 @@ function Html(props) {
   if (!props.warn) {
     return null;
   }
+  var onChange = props.onChange;
   var postDataX = props.postData;
   var [postData, setpostData] = useState(props.postData); // Using the hook.
   var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
@@ -38367,12 +38375,12 @@ function Html(props) {
   var [icon, seticon] = useState(accordionData.icon);
   var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
   useEffect(() => {
-    console.log(props.postData);
     setpostData(props.postData);
   }, [props.postData]);
   useEffect(() => {
     setaccordionData(postData.post_content);
   }, [postData]);
+  useEffect(() => {}, [accordionData]);
   var blockClass = ".pg-accordion-nested";
   var wrapperSelector = blockClass + "";
   var contentSelector = blockClass + " .accordion-content";
@@ -38750,6 +38758,11 @@ function Html(props) {
       reponsiveCssMobile += "}";
     }
     var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+    return reponsiveCss;
+  }
+  useEffect(() => {
+    var reponsiveCss = generateBlockCss(styleObj);
+    onChange(reponsiveCss);
     var wpfooter = document.getElementById("wpfooter");
     var divWrap = document.getElementById("css-block");
     if (divWrap != undefined) {
@@ -38760,9 +38773,6 @@ function Html(props) {
     var csswrappg = document.getElementById("css-block");
     var str = "" + reponsiveCss + "";
     csswrappg.insertAdjacentHTML("beforeend", str);
-  }
-  useEffect(() => {
-    generateBlockCss(styleObj);
   }, [styleObj]);
   useEffect(() => {
     var styleObjX = {
@@ -38843,10 +38853,12 @@ class AccordionsGenerateCss extends Component {
   }
   render() {
     var {
-      postData
+      postData,
+      onChange
     } = this.props;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       postData: postData,
+      onChange: onChange,
       warn: this.state.showWarning
     });
   }
@@ -38937,6 +38949,14 @@ function Html(props) {
   }
   function selectAccordion(args) {
     setActiveAccordion(args);
+  }
+  function onChangeStyle(args) {
+    console.log(args);
+    var accordionDataX = {
+      ...accordionData
+    };
+    accordionDataX.reponsiveCss = args;
+    setaccordionData(accordionDataX);
   }
   function onChangeAccordion(args) {
     var postDataX = {
@@ -39075,8 +39095,9 @@ function Html(props) {
     id: activeAccordion,
     getNotifications: getNotifications
   }), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_generate_css__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    postData: postData
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_notify__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    postData: postData,
+    onChange: onChangeStyle
+  }), JSON.stringify(accordionData), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "postData"), JSON.stringify(postData)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_notify__WEBPACK_IMPORTED_MODULE_2__["default"], {
     notifications: notifications
   }));
 }
@@ -42366,8 +42387,8 @@ function Html(props) {
     },
     "focus-within": {
       label: "Focus-within",
-      value: "focus-within",
-      isPro: true
+      value: "focus-within"
+      //isPro: true,
     },
     target: {
       label: "target",
@@ -42424,8 +42445,8 @@ function Html(props) {
     },
     "first-letter": {
       label: "First-letter",
-      value: "first-letter",
-      isPro: true
+      value: "first-letter"
+      //isPro: true,
     },
     "first-line": {
       label: "First-line",
@@ -42579,18 +42600,18 @@ function Html(props) {
     //background: { id: 'background', label: 'Background' },
     backgroundAttachment: {
       id: "backgroundAttachment",
-      label: "Background Attachment",
-      isPro: true
+      label: "Background Attachment"
+      //isPro: true,
     },
     backgroundBlendMode: {
       id: "backgroundBlendMode",
-      label: "Background Blend Mode",
-      isPro: true
+      label: "Background Blend Mode"
+      //isPro: true,
     },
     backgroundClip: {
       id: "backgroundClip",
-      label: "Background Clip",
-      isPro: true
+      label: "Background Clip"
+      //isPro: true,
     },
     backgroundColor: {
       id: "backgroundColor",
@@ -42638,8 +42659,8 @@ function Html(props) {
     },
     borderCollapse: {
       id: "borderCollapse",
-      label: "Border Collapse",
-      isPro: true
+      label: "Border Collapse"
+      //isPro: true,
     },
     borderImage: {
       id: "borderImage",
@@ -42652,8 +42673,8 @@ function Html(props) {
     },
     borderSpacing: {
       id: "borderSpacing",
-      label: "Border Spacing",
-      isPro: true
+      label: "Border Spacing"
+      //isPro: true,
     },
     backdropFilter: {
       id: "backdropFilter",
@@ -42703,8 +42724,8 @@ function Html(props) {
     },
     counterIncrement: {
       id: "counterIncrement",
-      label: "Counter Increment",
-      isPro: true
+      label: "Counter Increment"
+      //isPro: true,
     },
     counterReset: {
       id: "counterReset",
@@ -42793,8 +42814,8 @@ function Html(props) {
     },
     fontVariantCaps: {
       id: "fontVariantCaps",
-      label: "Font VariantCaps",
-      isPro: true
+      label: "Font VariantCaps"
+      //isPro: true,
     },
     fontWeight: {
       id: "fontWeight",
@@ -42842,8 +42863,8 @@ function Html(props) {
     },
     letterSpacing: {
       id: "letterSpacing",
-      label: "Letter Spacing",
-      isPro: true
+      label: "Letter Spacing"
+      //isPro: true,
     },
     lineHeight: {
       id: "lineHeight",
@@ -43005,8 +43026,8 @@ function Html(props) {
     },
     textDecoration: {
       id: "textDecoration",
-      label: "Text Decoration",
-      isPro: true
+      label: "Text Decoration"
+      //isPro: true,
     },
     textIndent: {
       id: "textIndent",
@@ -43029,8 +43050,8 @@ function Html(props) {
     },
     transformOrigin: {
       id: "transformOrigin",
-      label: "Transform Origin",
-      isPro: true
+      label: "Transform Origin"
+      //isPro: true,
     },
     tableLayout: {
       id: "tableLayout",
@@ -43046,8 +43067,8 @@ function Html(props) {
     },
     textTransform: {
       id: "textTransform",
-      label: "Text Transform",
-      isPro: true
+      label: "Text Transform"
+      //isPro: true,
     },
     wordBreak: {
       id: "wordBreak",
@@ -43071,8 +43092,8 @@ function Html(props) {
     },
     "-webkit-text-fill-color": {
       id: "-webkit-text-fill-color",
-      label: "Webkit Text Fill Color",
-      isPro: true
+      label: "Webkit Text Fill Color"
+      //isPro: true,
     }
   };
   let cssProps = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.applyFilters)("cssProps", cssPropsBasic);
@@ -49965,11 +49986,15 @@ class APIClient {
         if (signal)
             signal.addEventListener('abort', () => controller.abort());
         const timeout = setTimeout(() => controller.abort(), ms);
-        return (
-        // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
-        this.fetch.call(undefined, url, { signal: controller.signal, ...options }).finally(() => {
+        return (this.getRequestClient()
+            // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
+            .fetch.call(undefined, url, { signal: controller.signal, ...options })
+            .finally(() => {
             clearTimeout(timeout);
         }));
+    }
+    getRequestClient() {
+        return { fetch: this.fetch };
     }
     shouldRetry(response) {
         // Note this is not a standard header.
@@ -56049,7 +56074,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.76.1'; // x-release-please-version
+const VERSION = '4.74.0'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })

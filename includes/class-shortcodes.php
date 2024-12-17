@@ -20,9 +20,64 @@ class class_accordions_shortcodes
 
         add_shortcode('accordions_tabs', array($this, 'accordions_tabs_display'));
         add_shortcode('accordions_tabs_pickplguins', array($this, 'accordions_tabs_display'));
+
+        add_shortcode('accordions_builder', array($this, 'accordions_builder'));
     }
 
 
+    public function accordions_builder($atts, $content = null)
+    {
+
+        $atts = shortcode_atts(
+            array(
+                'id' => "",
+            ),
+            $atts
+        );
+
+
+
+        $post_id = isset($atts['id']) ?  $atts['id'] : '';
+        $post_id = str_replace('"', "", $post_id);
+        $post_id = str_replace("'", "", $post_id);
+        $post_id = str_replace("&#039;", "", $post_id);
+        $post_id = str_replace("&quot;", "", $post_id);
+
+        $post_data = get_post($post_id);
+        $post_content = isset($post_data->post_content) ? $post_data->post_content : "";
+
+        $accordionData = (is_serialized($post_content)) ? unserialize($post_content) : [];
+
+
+        $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
+        $viewType = isset($accordionData["viewType"]) ? $accordionData["viewType"] : "accordion";
+
+
+
+        $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
+
+        $wrapper = isset($accordionData["wrapper"]) ? $accordionData["wrapper"] : [];
+        $content = isset($accordionData["content"]) ? $accordionData["content"] : [];
+        $header = isset($accordionData["header"]) ? $accordionData["header"] : [];
+        $headerActive = isset($accordionData["headerActive"]) ? $accordionData["headerActive"] : [];
+        $headerLabel = isset($accordionData["headerLabel"]) ? $accordionData["headerLabel"] : [];
+        $labelCounter = isset($accordionData["labelCounter"]) ? $accordionData["labelCounter"] : [];
+        $labelIcon = isset($accordionData["labelIcon"]) ? $accordionData["labelIcon"] : [];
+        $icon = isset($accordionData["icon"]) ? $accordionData["icon"] : [];
+        $iconToggle = isset($accordionData["iconToggle"]) ? $accordionData["iconToggle"] : [];
+
+
+
+        ob_start();
+
+
+        do_action("accordions_builder_" . $viewType, $accordionData);
+
+
+        wp_enqueue_script('accordions_front_scripts');
+
+        return ob_get_clean();
+    }
     public function accordions_display($atts, $content = null)
     {
 

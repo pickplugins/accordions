@@ -424,7 +424,7 @@ function Html(props) {
 		},
 	};
 
-  const updateTermQueryArgs = (newVal, index) => {
+	const updateTermQueryArgs = (newVal, index) => {
 		var itemQueryArgsX = [...itemQueryArgs];
 		itemQueryArgsX[index].value = newVal;
 		setitemQueryArgs(itemQueryArgsX);
@@ -432,8 +432,8 @@ function Html(props) {
 
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
-		// tabs: { label: "Tabs", value: "tabs" },
-		// tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
+		tabs: { label: "Tabs", value: "tabs" },
+		tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
@@ -1294,7 +1294,7 @@ function Html(props) {
 									value={globalOptions?.expandAllText}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.expandAllText = newVal;
+										globalOptionsX.expandAllText = "";
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
@@ -1435,7 +1435,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1514,7 +1514,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1587,7 +1587,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1656,7 +1656,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1739,7 +1739,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1817,7 +1817,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1936,7 +1936,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2104,7 +2104,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2246,7 +2246,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2358,7 +2358,6 @@ class AccordionsEdit extends Component {
 }
 
 export default AccordionsEdit;
-
 
 
 
