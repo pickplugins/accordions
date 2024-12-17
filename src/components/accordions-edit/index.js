@@ -5,6 +5,7 @@ import { store as coreStore } from "@wordpress/core-data";
 import apiFetch from "@wordpress/api-fetch";
 
 import {
+	__experimentalInputControl as InputControl,
 	Icon,
 	PanelBody,
 	PanelRow,
@@ -24,9 +25,8 @@ import PGinputText from "../input-text";
 import PGinputSelect from "../input-select";
 import PGcssOpenaiPrompts from "../openai-prompts";
 
-
 var myStore = wp.data.select("postgrid-shop");
-import { RichText } from '@wordpress/block-editor'
+import { RichText } from "@wordpress/block-editor";
 
 function Html(props) {
 	if (!props.warn) {
@@ -38,24 +38,19 @@ function Html(props) {
 
 	var postData = props.postData;
 
-
-
 	if (postData.post_content == null) {
 		return (
-			<div className="p-3 my-5 bg-orange-400">Please choose an accordion first.</div>
-
+			<div className="p-3 my-5 bg-orange-400">
+				Please choose an accordion first.
+			</div>
 		);
 	}
 
 	var breakPointX = "Desktop";
 
-
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
-
-
 	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
-
 
 	var [itemQueryArgs, setitemQueryArgs] = useState(accordionData.itemQueryArgs); // Using the hook.
 
@@ -80,8 +75,8 @@ function Html(props) {
 	const [itemActive, setitemActive] = useState(99999);
 	const [AIautoUpdate, setAIautoUpdate] = useState(false);
 	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
-	var formattedPrompt = "Respond only with question answer as json array and no other text. Do not include any explanations, introductions, or concluding remarks.";
-
+	var formattedPrompt =
+		"Respond only with question answer as json array and no other text. Do not include any explanations, introductions, or concluding remarks.";
 
 	var breakPointList = [{ label: "Select..", icon: "", value: "" }];
 	for (var x in breakPoints) {
@@ -102,14 +97,8 @@ function Html(props) {
 		postTypesData.map((x) => {
 			postTypes.push({ value: x.slug, label: x.name });
 		});
-	console.log(postTypes);
-
-
-
-
 
 	useEffect(() => {
-
 		apiFetch({
 			path: "/post-grid/v2/post_type_objects",
 			method: "POST",
@@ -121,15 +110,11 @@ function Html(props) {
 			});
 			setTaxonomiesObjects(taxonomies);
 		});
-
 	}, []);
 
-
 	useEffect(() => {
-		onChange(accordionData)
-
+		onChange(accordionData);
 	}, [accordionData]);
-
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -143,95 +128,59 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [accOptions]);
 
-
-
-
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.wrapper = wrapper;
 		setaccordionData(accordionDataX);
-
 	}, [wrapper]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.content = content;
 		setaccordionData(accordionDataX);
-
-
 	}, [content]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.header = header;
 		setaccordionData(accordionDataX);
-
-
-
-
 	}, [header]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.headerActive = headerActive;
 		setaccordionData(accordionDataX);
-
-
-
-
 	}, [headerActive]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.headerLabel = headerLabel;
 		setaccordionData(accordionDataX);
-
-
-
-
 	}, [headerLabel]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.labelCounter = labelCounter;
 		setaccordionData(accordionDataX);
-
-
-
-
 	}, [labelCounter]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.labelIcon = labelIcon;
 		setaccordionData(accordionDataX);
-
 	}, [labelIcon]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.icon = icon;
 		setaccordionData(accordionDataX);
-
-
-
-
 	}, [icon]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.iconToggle = iconToggle;
 		setaccordionData(accordionDataX);
-
-
 	}, [iconToggle]);
-
-
-
-
-
-
-
 
 	var RemoveSliderArg = function ({ index }) {
 		return (
@@ -277,13 +226,6 @@ function Html(props) {
 		setProperty(obj);
 	}
 
-
-
-
-
-
-
-
 	function onRemoveStyle(sudoScource, key, propertyType, setProperty) {
 		let obj = { ...propertyType };
 		var object = myStore.deletePropertyDeep(obj, [
@@ -304,7 +246,6 @@ function Html(props) {
 		obj[sudoSource] = cssObj;
 		setProperty(obj);
 	}
-
 
 	var accOptionsArgs = {
 		autoplay: { label: "Auto play", value: 1 },
@@ -373,6 +314,11 @@ function Html(props) {
 			label: "Meta Compare",
 			description: "Meta query compare",
 		},
+	};
+	const updatePostQueryArgs = (newVal, index) => {
+		var itemQueryArgsX = [...itemQueryArgs];
+		itemQueryArgsX[index].value = newVal;
+		setitemQueryArgs(itemQueryArgsX);
 	};
 	var termQueryArgs = {
 		taxonomy: {
@@ -478,27 +424,25 @@ function Html(props) {
 		},
 	};
 
-
-
+	const updateTermQueryArgs = (newVal, index) => {
+		var itemQueryArgsX = [...itemQueryArgs];
+		itemQueryArgsX[index].value = newVal;
+		setitemQueryArgs(itemQueryArgsX);
+	};
 
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
-		// tabs: { label: "Tabs", value: "tabs" },
-		// tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
+		tabs: { label: "Tabs", value: "tabs" },
+		tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
 		posts: { label: "Posts", value: "posts", isPro: 0 },
 		terms: { label: "Terms", value: "terms", isPro: 0 },
-
 	};
-
-
 
 	return (
 		<div className="">
-
-
 			{/* <div>{`{`}</div>
 			<div>{`"wrapper":${JSON.stringify(wrapper)}`},</div>
 			<div>{`"content":${JSON.stringify(content)}`},</div>
@@ -511,12 +455,11 @@ function Html(props) {
 			<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
 			<div>{`}`}</div> */}
 
-
 			{props.postData.post_content != null && (
 				<>
 					<div className="my-4 p-3">
 						<PanelRow>
-							<label for="">View Type?</label>
+							<label htmlFor="">View Type?</label>
 							<PGDropdown
 								position="bottom right"
 								variant="secondary"
@@ -529,26 +472,22 @@ function Html(props) {
 								}}
 								values=""></PGDropdown>
 						</PanelRow>
-
-
-
-
-
 					</div>
 
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Items"
 						initialOpen={true}>
-
 						<div className="my-4 flex items-center justify-between ">
-
-							<div className=" flex items-center  gap-2" >
-
+							<div className=" flex items-center  gap-2">
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
-									buttonTitle={globalOptions.itemSource == undefined ? "Item Source" : itemSources[globalOptions.itemSource]?.label}
+									buttonTitle={
+										globalOptions.itemSource == undefined
+											? "Item Source"
+											: itemSources[globalOptions.itemSource]?.label
+									}
 									options={itemSources}
 									onChange={(option, index) => {
 										var globalOptionsX = { ...globalOptions };
@@ -556,17 +495,10 @@ function Html(props) {
 										setglobalOptions(globalOptionsX);
 									}}
 									values=""></PGDropdown>
-
-
-
-
-
 							</div>
 
 							<div className="flex items-center  gap-2">
-
 								{globalOptions?.itemSource == "posts" && (
-
 									<>
 										<PGDropdown
 											position="bottom right"
@@ -574,18 +506,19 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={postQueryArgs}
 											onChange={(option, index) => {
-
 												console.log(option);
 
 												var itemQueryArgsX = [...itemQueryArgs];
-												itemQueryArgsX.push({ id: option.id, value: option.value });
+												itemQueryArgsX.push({
+													id: option.id,
+													value: option.value,
+												});
 												setitemQueryArgs(itemQueryArgsX);
 											}}
 											values=""></PGDropdown>
 									</>
 								)}
 								{globalOptions?.itemSource == "terms" && (
-
 									<>
 										<PGDropdown
 											position="bottom right"
@@ -593,250 +526,514 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-
 												console.log(option);
 
 												var itemQueryArgsX = [...itemQueryArgs];
-												itemQueryArgsX.push({ id: option.id, value: option.value });
+												itemQueryArgsX.push({
+													id: option.id,
+													value: option.value,
+												});
 												setitemQueryArgs(itemQueryArgsX);
 											}}
 											values=""></PGDropdown>
 									</>
 								)}
 
-
-
-
-
-
-
-
-
-
-
-
 								{globalOptions?.itemSource == "manual" && (
 									<>
-										<div className='bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600' onClick={ev => {
-											var itemsX = [...items]
+										<div
+											className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+											onClick={(ev) => {
+												var itemsX = [...items];
 
-											itemsX.push({
-												active: 0,
-												hideOnSchema: 0,
-												headerLabel: {
-													"options": {
-														"text": "Accordion Header",
-														"toggledText": "Accordion Header Toggled",
-														"slug": "",
-														"tag": "",
-														"class": "accordion-header-label",
+												itemsX.push({
+													active: 0,
+													hideOnSchema: 0,
+													headerLabel: {
+														options: {
+															text: "Accordion Header",
+															toggledText: "Accordion Header Toggled",
+															slug: "",
+															tag: "",
+															class: "accordion-header-label",
+														},
 													},
-												},
-												content: {
-													"options": {
-														"tag": "",
-														"class": "accordion-content",
-														text: "Accordion content"
+													content: {
+														options: {
+															tag: "",
+															class: "accordion-content",
+															text: "Accordion content",
+														},
 													},
-												},
-												icon: {
-													options: {
-														library: "fontAwesome",
-														srcType: "class",
-														iconSrc: "fas fa-angle-down",
-														position: "left",
-														class: "accordion-icon",
+													icon: {
+														options: {
+															library: "fontAwesome",
+															srcType: "class",
+															iconSrc: "fas fa-angle-down",
+															position: "left",
+															class: "accordion-icon",
+														},
+														styles: {},
 													},
-													styles: {},
-												},
-												iconToggle: {
-													options: {
-														library: "fontAwesome",
-														srcType: "class",
-														iconSrc: " fas fa-angle-up",
-														class: "accordion-icon-toggle",
+													iconToggle: {
+														options: {
+															library: "fontAwesome",
+															srcType: "class",
+															iconSrc: " fas fa-angle-up",
+															class: "accordion-icon-toggle",
+														},
+														styles: {},
 													},
-													styles: {},
-												},
-											});
-											setitems(itemsX)
+												});
+												setitems(itemsX);
 
-											getNotifications({ content: "Item Added", type: "success" })
+												getNotifications({
+													content: "Item Added",
+													type: "success",
+												});
+											}}>
+											Add New
+										</div>
+										<div
+											className="cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+											onClick={(ev) => {
+												ev.preventDefault();
+												ev.stopPropagation();
+												setAIWriter(!AIWriter);
+											}}>
+											AI
+											{AIWriter && (
+												<Popover position="bottom right">
+													<div className="w-[800px] p-3">
+														<PGcssOpenaiPrompts
+															value={""}
+															formattedPrompt={formattedPrompt}
+															promptsAgs={{
+																action: "write",
+																aiModel: "gpt-4-turbo",
+																objective: "generateFAQ",
+															}}
+															autoUpdate={AIautoUpdate}
+															onResponseLoaded={(value, autoUpdate) => {
+																// if (autoUpdate) {
+																// 	var options = { ...text.options, content: value };
+																// 	setAttributes({ text: { ...text, options: options } });
+																// }
+															}}
+															clickHandle={(value, action) => {
+																var valueObj = JSON.parse(value);
 
+																if (action == "prepend") {
+																}
+																if (action == "append") {
+																	valueObj.map((item) => {
+																		var answer = item.answer;
+																		var question = item.question;
+																	});
+																}
+																if (action == "replace") {
+																	var blocksX = [];
 
-										}}>Add New</div>
-										<div className="cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-700	 text-white font-medium rounded hover:bg-gray-600	 focus:outline-none focus:bg-gray-600" onClick={(ev) => {
-											ev.preventDefault();
-											ev.stopPropagation();
-											setAIWriter(!AIWriter)
-										}}>AI</div>
-										{AIWriter && (
-											<Popover position="bottom right">
-												<div className="w-[800px] p-3">
+																	valueObj.map((item) => {
+																		var answer = item.answer;
+																		var question = item.question;
+																	});
+																}
 
-
-
-													<PGcssOpenaiPrompts value={""} formattedPrompt={formattedPrompt} promptsAgs={{ action: 'write', aiModel: 'gpt-4-turbo', objective: "generateFAQ", }} autoUpdate={AIautoUpdate}
-														onResponseLoaded={(value, autoUpdate) => {
-
-
-
-															// if (autoUpdate) {
-															// 	var options = { ...text.options, content: value };
-															// 	setAttributes({ text: { ...text, options: options } });
-															// }
-
-
-														}}
-														clickHandle={(value, action) => {
-
-															var valueObj = JSON.parse(value)
-
-															if (action == "prepend") {
-
-															}
-															if (action == "append") {
-
-
-																valueObj.map(item => {
-
-
-																	var answer = item.answer
-																	var question = item.question
-
-
-
-																})
-
-															}
-															if (action == "replace") {
-
-
-																var blocksX = [];
-
-																valueObj.map(item => {
-
-
-																	var answer = item.answer
-																	var question = item.question
-
-
-																})
-
-
-
-
-
-
-
-
-
-
-
-															}
-
-
-
-
-
-
-
-
-															//setAttributes({ itemsX: { ...itemsX, items: itemx } });
-
-
-
-
-														}}
-
-													/>
-												</div>
-											</Popover>
-										)}
-
-
+																//setAttributes({ itemsX: { ...itemsX, items: itemx } });
+															}}
+														/>
+													</div>
+												</Popover>
+											)}
+										</div>
 									</>
 								)}
-
-
-
-
-
-
 							</div>
-
 						</div>
 						{globalOptions?.itemSource == "posts" && (
 							<div>
 								{JSON.stringify(itemQueryArgs)}
 
 								{itemQueryArgs?.map((item, index) => {
-
 									return (
-										<div key={index}>
+										<div key={index} className="my-4">
 											{item.id == "postType" && (
 												<div>
-													<label for="">Post Type</label>
+													<label htmlFor="">Post Type</label>
 													<PGinputSelect
 														val={item.value}
 														options={postTypes}
 														multiple={true}
 														onChange={(newVal) => {
-															var itemQueryArgsX = [...itemQueryArgs];
-															itemQueryArgsX[index].value = newVal
-															setitemQueryArgs(itemQueryArgsX);
-
-															//updateQueryPram(newVal, index);
+															updatePostQueryArgs(newVal, index);
 														}}
 													/>
-
-
+												</div>
+											)}
+											{item.id == "postStatus" && (
+												<div
+													className={item.id == "postStatus" ? "" : "hidden"}>
+													<label htmlFor="">Post Status</label>
+													<PGinputSelect
+														val={item.value}
+														options={[
+															{ label: "Publish", value: "publish" },
+															{ label: "Pending", value: "pending" },
+															{ label: "Draft", value: "draft" },
+															{ label: "Auto draft", value: "auto-draft" },
+															{ label: "Future", value: "future" },
+															{ label: "Private", value: "private" },
+															{ label: "Inherit", value: "inherit" },
+															{ label: "Trash", value: "trash" },
+															{ label: "Any", value: "any" },
+														]}
+														multiple={true}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "order" && (
+												<div className={item.id == "order" ? "" : "hidden"}>
+													<label htmlFor="">Order</label>
+													<SelectControl
+														style={{ margin: 0 }}
+														label=""
+														value={item.value}
+														options={[
+															{ label: "Ascending", value: "ASC" },
+															{ label: "Descending", value: "DESC" },
+														]}
+														onChange={(newVal) =>
+															updatePostQueryArgs(newVal, index)
+														}
+													/>
+												</div>
+											)}
+											{item.id == "orderby" && (
+												<div className={item.id == "orderby" ? "" : "hidden"}>
+													<label htmlFor="">Order By</label>
+													<PGinputSelect
+														val={item.value}
+														options={[
+															{ label: __("None", "post-grid"), value: "none" },
+															{ label: "ID", value: "ID" },
+															{ label: "Author", value: "author" },
+															{ label: "Title", value: "title" },
+															{ label: "Name", value: "name" },
+															{ label: "Type", value: "type" },
+															{ label: "Date", value: "date" },
+															{ label: "Modified", value: "modified" },
+															{ label: "Parent", value: "parent" },
+															{ label: "Random", value: "rand" },
+															{
+																label: "Comment Count",
+																value: "comment_count",
+															},
+															{ label: "Relevance", value: "relevance" },
+															{ label: "Menu Order", value: "menu_order" },
+															{
+																label: "Meta Value(String)",
+																value: "meta_value",
+															},
+															{
+																label: "Meta Value(Number)",
+																value: "meta_value_num",
+															},
+															{ label: "post__in", value: "post__in" },
+															{
+																label: "post_name__in",
+																value: "post_name__in",
+															},
+															{
+																label: "post_parent__in",
+																value: "post_parent__in",
+															},
+														]}
+														multiple={true}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaKey" && (
+												<div>
+													<label htmlFor="">Meta Key</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaValue" && (
+												<div>
+													<label htmlFor="">Meta Value</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaValueNum" && (
+												<div>
+													<label htmlFor="">Meta Value Number</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "s" && (
+												<div>
+													<label htmlFor="">Keyword</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaCompare" && (
+												<div>
+													<label htmlFor="">Meta Compare</label>
+													<SelectControl
+														style={{ margin: 0 }}
+														label=""
+														value={item.value}
+														options={[
+															{ label: "=", value: "=" },
+															{ label: "!=", value: "!=" },
+															{ label: ">", value: ">" },
+															{ label: ">=", value: ">=" },
+															{ label: "<", value: "<" },
+															{ label: "<=", value: "<=" },
+															{ label: "LIKE", value: "LIKE" },
+															{ label: "NOT LIKE", value: "NOT LIKE" },
+															{ label: "IN", value: "IN" },
+															{ label: "NOT IN", value: "NOT IN" },
+															{ label: "BETWEEN", value: "BETWEEN" },
+															{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
+															{ label: "NOT EXISTS", value: "NOT EXISTS" },
+															{ label: "REGEXP", value: "REGEXP" },
+															{ label: "NOT REGEXP", value: "NOT REGEXP" },
+															{ label: "RLIKE", value: "RLIKE" },
+														]}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
 												</div>
 											)}
 										</div>
 									);
 								})}
-
 							</div>
 						)}
 						{globalOptions?.itemSource == "terms" && (
 							<div>
-
 								{JSON.stringify(itemQueryArgs)}
 
-
 								{itemQueryArgs?.map((item, index) => {
-
 									return (
-										<div key={index}>
+										<div key={index} className="my-4">
 											{item.id == "taxonomy" && (
 												<div>
-													<label for="">Taxonomy</label>
+													<label htmlFor="">Taxonomy</label>
 													<PGinputSelect
 														val={item.value}
 														options={taxonomiesObjects}
 														multiple={true}
 														onChange={(newVal) => {
 															var itemQueryArgsX = [...itemQueryArgs];
-															itemQueryArgsX[index].value = newVal
+															itemQueryArgsX[index].value = newVal;
 															setitemQueryArgs(itemQueryArgsX);
 
-															//updateQueryPram(newVal, index);
+															//updatePostQueryArgs(newVal, index);
 														}}
 													/>
-
-
+												</div>
+											)}
+											{item.id == "orderby" && (
+												<div className={item.id == "orderby" ? "" : "hidden"}>
+													<label htmlFor="">Order By</label>
+													<SelectControl
+														value={item.value}
+														options={[
+															{ label: __("None", "post-grid"), value: "none" },
+															{ label: "ID", value: "ID" },
+															{ label: "Author", value: "author" },
+															{ label: "Title", value: "title" },
+															{ label: "Name", value: "name" },
+															{ label: "Type", value: "type" },
+															{ label: "Date", value: "date" },
+															{ label: "Modified", value: "modified" },
+															{ label: "Parent", value: "parent" },
+															{ label: "Random", value: "rand" },
+															{
+																label: "Comment Count",
+																value: "comment_count",
+															},
+															{ label: "Relevance", value: "relevance" },
+															{ label: "Menu Order", value: "menu_order" },
+															{
+																label: "Meta Value(String)",
+																value: "meta_value",
+															},
+															{
+																label: "Meta Value(Number)",
+																value: "meta_value_num",
+															},
+															{ label: "post__in", value: "post__in" },
+															{
+																label: "post_name__in",
+																value: "post_name__in",
+															},
+															{
+																label: "post_parent__in",
+																value: "post_parent__in",
+															},
+														]}
+														multiple={true}
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "order" && (
+												<div className={item.id == "order" ? "" : "hidden"}>
+													<label htmlFor="">Order</label>
+													<SelectControl
+														style={{ margin: 0 }}
+														label=""
+														value={item.value}
+														options={[
+															{ label: "Ascending", value: "ASC" },
+															{ label: "Descending", value: "DESC" },
+														]}
+														onChange={(newVal) =>
+															updateTermQueryArgs(newVal, index)
+														}
+													/>
+												</div>
+											)}
+											{item.id == "number" && (
+												<div className={item.id == "number" ? "" : "hidden"}>
+													<label htmlFor="">Number</label>
+													<InputControl
+														value={item.value}
+														type="number"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "include" && (
+												<div className={item.id == "include" ? "" : "hidden"}>
+													<label htmlFor="">Include</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "exclude" && (
+												<div className={item.id == "exclude" ? "" : "hidden"}>
+													<label htmlFor="">Exclude</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "child_of" && (
+												<div className={item.id == "child_of" ? "" : "hidden"}>
+													<label htmlFor="">Child Of</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "parent" && (
+												<div className={item.id == "parent" ? "" : "hidden"}>
+													<label htmlFor="">Parent</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "meta_key" && (
+												<div className={item.id == "meta_key" ? "" : "hidden"}>
+													<label htmlFor="">Meta Key</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "meta_value" && (
+												<div
+													className={item.id == "meta_value" ? "" : "hidden"}>
+													<label htmlFor="">Meta Value</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "hide_empty" && (
+												<div>
+													<ToggleControl
+														label={termQueryArgs[item.id].label}
+														help={
+															item.value
+																? "Hide Empty Enabled"
+																: "Hide Empty Disabled"
+														}
+														checked={item.value ? true : false}
+														onChange={() => {
+															const newValue = !itemQueryArgs[index].value;
+															updateTermQueryArgs(newValue, index);
+														}}
+													/>
 												</div>
 											)}
 										</div>
 									);
 								})}
-
 							</div>
 						)}
-
-
-
 
 						{globalOptions?.itemSource == "manual" && (
 							<div>
@@ -844,43 +1041,44 @@ function Html(props) {
 									return (
 										<>
 											<div className="">
-
-												<div className="bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400" onClick={(ev) => {
-													setitemActive(index == itemActive ? 999 : index)
-												}}>
-													<div>
-														{item?.headerLabel.options.text}
-													</div>
+												<div
+													className="bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400"
+													onClick={(ev) => {
+														setitemActive(index == itemActive ? 999 : index);
+													}}>
+													<div>{item?.headerLabel.options.text}</div>
 
 													<span
 														className="cursor-pointer hover:bg-red-500 hover:text-white "
 														onClick={(ev) => {
 															ev.stopPropagation();
-															var itemsX = [...items]
+															var itemsX = [...items];
 
 															itemsX.splice(index, 1);
-															setitems(itemsX)
+															setitems(itemsX);
 														}}>
 														<Icon icon={close} />
 													</span>
-
 												</div>
 
 												{itemActive == index && (
 													<div className="py-2 w-full">
-
 														<div className="mb-3">
 															<RichText
 																className="bg-slate-100 p-3 "
 																tagName={"div"}
 																value={item?.headerLabel.options.text}
-																allowedFormats={["core/bold", "core/italic", "core/link"]}
+																allowedFormats={[
+																	"core/bold",
+																	"core/italic",
+																	"core/link",
+																]}
 																onChange={(content) => {
-																	var itemsX = [...items]
+																	var itemsX = [...items];
 
-																	itemsX[index].headerLabel.options.text = content;
-																	setitems(itemsX)
-
+																	itemsX[index].headerLabel.options.text =
+																		content;
+																	setitems(itemsX);
 																}}
 																placeholder={""}
 															/>
@@ -890,12 +1088,16 @@ function Html(props) {
 																className={`bg-slate-100 p-3 min-h-24`}
 																tagName={"div"}
 																value={item?.content.options.text}
-																allowedFormats={["core/bold", "core/italic", "core/link"]}
+																allowedFormats={[
+																	"core/bold",
+																	"core/italic",
+																	"core/link",
+																]}
 																onChange={(content) => {
-																	var itemsX = [...items]
+																	var itemsX = [...items];
 
 																	itemsX[index].content.options.text = content;
-																	setitems(itemsX)
+																	setitems(itemsX);
 																	//setsearchPrams({ ...searchPrams, content: content });
 																}}
 																placeholder={"Write details"}
@@ -903,88 +1105,71 @@ function Html(props) {
 														</div>
 														<div className="mb-3">
 															<PanelRow>
-																<label for="">Active</label>
+																<label htmlFor="">Active</label>
 																<SelectControl
 																	label=""
 																	value={globalOptions?.active}
 																	options={[
-																		{ label: __("True", "post-grid"), value: 1 },
-																		{ label: __("False", "post-grid"), value: 0 },
+																		{
+																			label: __("True", "post-grid"),
+																			value: 1,
+																		},
+																		{
+																			label: __("False", "post-grid"),
+																			value: 0,
+																		},
 																	]}
 																	onChange={(newVal) => {
-																		var itemsX = [...items]
+																		var itemsX = [...items];
 
 																		itemsX[index].active = newVal;
-																		setitems(itemsX)
+																		setitems(itemsX);
 																	}}
 																/>
 															</PanelRow>
 														</div>
 														<div className="mb-3">
 															<PanelRow>
-																<label for="">Enable lazyLoad</label>
+																<label htmlFor="">Enable lazyLoad</label>
 																<SelectControl
 																	label=""
 																	value={globalOptions?.hideOnSchema}
 																	options={[
-																		{ label: __("True", "post-grid"), value: 1 },
-																		{ label: __("False", "post-grid"), value: 0 },
+																		{
+																			label: __("True", "post-grid"),
+																			value: 1,
+																		},
+																		{
+																			label: __("False", "post-grid"),
+																			value: 0,
+																		},
 																	]}
 																	onChange={(newVal) => {
-																		var itemsX = [...items]
+																		var itemsX = [...items];
 
 																		itemsX[index].hideOnSchema = newVal;
-																		setitems(itemsX)
+																		setitems(itemsX);
 																	}}
 																/>
 															</PanelRow>
 														</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 													</div>
 												)}
-
-
-
-
-
 											</div>
-
-
-
-
-
-
 										</>
 									);
 								})}
 							</div>
 						)}
-
-
-
 					</PanelBody>
-
 
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Accordion Settings"
 						initialOpen={false}>
 						<PGtab name="normal">
-
 							<PanelRow>
-								<label for="">Enable lazyLoad</label>
+								<label htmlFor="">Enable lazyLoad</label>
 								<SelectControl
 									label=""
 									value={globalOptions?.lazyLoad}
@@ -1000,7 +1185,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Enable Autoembed</label>
+								<label htmlFor="">Enable Autoembed</label>
 								<SelectControl
 									label=""
 									value={globalOptions?.autoembed}
@@ -1016,9 +1201,8 @@ function Html(props) {
 								/>
 							</PanelRow>
 
-
 							<PanelRow>
-								<label for="">Enable Shortcodes</label>
+								<label htmlFor="">Enable Shortcodes</label>
 
 								<SelectControl
 									label=""
@@ -1035,7 +1219,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Enable wpautop</label>
+								<label htmlFor="">Enable wpautop</label>
 
 								<SelectControl
 									label=""
@@ -1052,7 +1236,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Enable Schema</label>
+								<label htmlFor="">Enable Schema</label>
 
 								<SelectControl
 									label=""
@@ -1069,7 +1253,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Enable Toggle Text</label>
+								<label htmlFor="">Enable Toggle Text</label>
 
 								<SelectControl
 									label=""
@@ -1086,7 +1270,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Enable expand/collapse all</label>
+								<label htmlFor="">Enable expand/collapse all</label>
 
 								<SelectControl
 									label=""
@@ -1103,26 +1287,24 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Expand All Text</label>
+								<label htmlFor="">Expand All Text</label>
 
 								<PGinputText
 									label=""
 									value={globalOptions?.expandAllText}
-
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.expandAllText = newVal;
+										globalOptionsX.expandAllText = "";
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Collapse All Text</label>
+								<label htmlFor="">Collapse All Text</label>
 
 								<PGinputText
 									label=""
 									value={globalOptions?.collapseAllText}
-
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.collapseAllText = newVal;
@@ -1131,7 +1313,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Enable Stats</label>
+								<label htmlFor="">Enable Stats</label>
 
 								<SelectControl
 									label=""
@@ -1148,13 +1330,8 @@ function Html(props) {
 								/>
 							</PanelRow>
 
-
-
-
-
 							<PanelRow>
-
-								<label for="">Active Event</label>
+								<label htmlFor="">Active Event</label>
 
 								<SelectControl
 									label=""
@@ -1172,7 +1349,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Enable URL Hash</label>
+								<label htmlFor="">Enable URL Hash</label>
 								<SelectControl
 									label=""
 									value={globalOptions?.urlHash}
@@ -1189,7 +1366,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Click To Scroll Top</label>
+								<label htmlFor="">Click To Scroll Top</label>
 								<SelectControl
 									label=""
 									value={globalOptions?.clickToScrollTop}
@@ -1206,11 +1383,10 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Click To Scroll Top Offset</label>
+								<label htmlFor="">Click To Scroll Top Offset</label>
 								<PGinputText
 									label=""
 									value={globalOptions?.clickToScrollTopOffset}
-
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.clickToScrollTopOffset = newVal;
@@ -1219,7 +1395,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Animation Name</label>
+								<label htmlFor="">Animation Name</label>
 								<SelectControl
 									label=""
 									value={globalOptions?.animationName}
@@ -1236,11 +1412,10 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label for="">Animation delay</label>
+								<label htmlFor="">Animation delay</label>
 								<PGinputText
 									label=""
 									value={globalOptions?.animationDelay}
-
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.animationDelay = newVal;
@@ -1248,16 +1423,9 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-
-
-
-
-
-
 						</PGtab>
 						<div></div>
 					</PanelBody>
-
 
 					<PanelBody
 						className="font-medium text-slate-900 "
@@ -1337,9 +1505,6 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-
-
-
 
 					<PanelBody
 						className="font-medium text-slate-900 "
@@ -1438,9 +1603,7 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-
 								{JSON.stringify(header.options.class)}
-
 
 								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
@@ -1480,8 +1643,6 @@ function Html(props) {
 									onBulkAdd={(sudoSource, cssObj) =>
 										onBulkAddStyle(sudoSource, cssObj, header, setheader)
 									}
-
-
 								/>
 							</PGtab>
 						</PGtabs>
@@ -1558,7 +1719,12 @@ function Html(props) {
 										onResetStyle(sudoSources, headerActive, setheaderActive)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, headerActive, setheaderActive)
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											headerActive,
+											setheaderActive
+										)
 									}
 								/>
 							</PGtab>
@@ -1631,7 +1797,12 @@ function Html(props) {
 										onResetStyle(sudoSources, headerLabel, setheaderLabel)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, headerLabel, setheaderLabel)
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											headerLabel,
+											setheaderLabel
+										)
 									}
 								/>
 							</PGtab>
@@ -1745,7 +1916,12 @@ function Html(props) {
 										onResetStyle(sudoSources, labelCounter, setlabelCounter)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, labelCounter, setlabelCounter)
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											labelCounter,
+											setlabelCounter
+										)
 									}
 								/>
 							</PGtab>
@@ -2128,14 +2304,17 @@ function Html(props) {
 										onResetStyle(sudoSources, iconToggle, seticonToggle)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, iconToggle, seticonToggle)
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											iconToggle,
+											seticonToggle
+										)
 									}
 								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-
-
 				</>
 			)}
 		</div>
@@ -2166,8 +2345,6 @@ class AccordionsEdit extends Component {
 	render() {
 		var { onChange, postData, getNotifications } = this.props;
 
-
-
 		return (
 			<Html
 				onChange={onChange}
@@ -2181,3 +2358,38 @@ class AccordionsEdit extends Component {
 }
 
 export default AccordionsEdit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

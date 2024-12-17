@@ -40,6 +40,7 @@ function Html(props) {
 
 
 
+	var onChange = props.onChange;
 	var postDataX = props.postData;
 
 	var [postData, setpostData] = useState(props.postData); // Using the hook.
@@ -61,7 +62,6 @@ function Html(props) {
 
 
 	useEffect(() => {
-		console.log(props.postData);
 		setpostData(props.postData)
 
 	}, [props.postData]);
@@ -71,6 +71,12 @@ function Html(props) {
 		setaccordionData(postData.post_content)
 
 	}, [postData]);
+
+	useEffect(() => {
+
+
+
+	}, [accordionData]);
 
 
 
@@ -476,6 +482,17 @@ function Html(props) {
 		var reponsiveCss =
 			reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
 
+		return reponsiveCss;
+
+
+	}
+
+	useEffect(() => {
+		var reponsiveCss = generateBlockCss(styleObj);
+
+		onChange(reponsiveCss)
+
+
 		var wpfooter = document.getElementById("wpfooter");
 		var divWrap = document.getElementById("css-block");
 		if (divWrap != undefined) {
@@ -487,10 +504,7 @@ function Html(props) {
 		var csswrappg = document.getElementById("css-block");
 		var str = "" + reponsiveCss + "";
 		csswrappg.insertAdjacentHTML("beforeend", str);
-	}
 
-	useEffect(() => {
-		generateBlockCss(styleObj);
 	}, [styleObj]);
 
 
@@ -610,11 +624,12 @@ class AccordionsGenerateCss extends Component {
 
 
 	render() {
-		var { postData } = this.props;
+		var { postData, onChange } = this.props;
 
 		return (
 			<Html
 				postData={postData}
+				onChange={onChange}
 				warn={this.state.showWarning}
 			/>
 		);

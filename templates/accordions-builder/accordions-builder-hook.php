@@ -15,6 +15,10 @@ function accordions_builder_accordion($accordionData)
     $iconText = isset($iconOptions["text"]) ? $iconOptions["text"] : "";
 
 
+    $reponsiveCss = isset($accordionData["reponsiveCss"]) ? $accordionData["reponsiveCss"] : "";
+
+
+
     $wrapper = isset($accordionData["wrapper"]) ? $accordionData["wrapper"] : [];
     $wrapperOptions = isset($wrapper["options"]) ? $wrapper["options"] : [];
     $wrapperTag = !empty($wrapperOptions["tag"]) ? $wrapperOptions["tag"] : "div";
@@ -59,7 +63,6 @@ function accordions_builder_accordion($accordionData)
     $iconClass = isset($iconOptions["class"]) ? $iconOptions["class"] : "";
     $iconPosition = isset($iconOptions["position"]) ? $iconOptions["position"] : "left";
 
-    //var_dump($icon);
 
     $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : "fontAwesome";
     $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : "";
@@ -78,7 +81,6 @@ function accordions_builder_accordion($accordionData)
     $iconToggleSrc = !empty($iconToggleOptions['iconSrc']) ? $iconToggleOptions['iconSrc'] : "";
     $iconToggleHtml = !empty($iconSrc) ? '<span class="accordion-label-icon ' . $iconToggleClass . ' ' . $iconToggleSrc . '"></span>' : '';
 
-    //var_dump($iconLibrary);
 
     if ($iconLibrary == 'fontAwesome') {
         wp_enqueue_style('fontawesome-icons');
@@ -105,14 +107,16 @@ function accordions_builder_accordion($accordionData)
 
 
 
-    $blockId = "";
+    $blockId = "pg123";
 
+    $accordionDataAttr = [
+        "id" => $blockId,
+        "activeIndex" => 999,
+    ];
 
-
-    //var_dump($items);
 
 ?>
-    <div id="" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionData)) ?>" role="tablist">
+    <div id="pg123" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
 
         <?php
         $count = 0;
@@ -190,8 +194,15 @@ function accordions_builder_accordion($accordionData)
             $count++;
         }
 
+
         ?>
 
     </div>
+    <style>
+        <?php
+        echo $reponsiveCss;
+        ?>
+    </style>
+
 <?php
 }

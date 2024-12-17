@@ -64,7 +64,7 @@ function MyFunction(props) {
 		}>
 			<div
 
-				className="relative"
+				className="sticky top-0 z-[999]"
 			>
 				<div
 					className={

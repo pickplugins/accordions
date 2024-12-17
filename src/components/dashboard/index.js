@@ -64,6 +64,13 @@ function Html(props) {
 	function selectAccordion(args) {
 		setActiveAccordion(args);
 	}
+	function onChangeStyle(args) {
+		console.log(args);
+
+		var accordionDataX = { ...accordionData }
+		accordionDataX.reponsiveCss = args
+		setaccordionData(accordionDataX);
+	}
 
 	function onChangeAccordion(args) {
 
@@ -77,6 +84,13 @@ function Html(props) {
 		setpleaseUpdate(true)
 
 	}
+
+
+
+
+
+
+
 	function onUpdateAccordion() {
 
 
@@ -248,12 +262,15 @@ function Html(props) {
 							<AccordionsView pleaseUpdate={pleaseUpdate} onUpdate={onUpdateAccordion} isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} getNotifications={getNotifications} />
 						)}
 						{postData.ID != null && (
-							<AccordionsGenerateCss postData={postData} />
+							<AccordionsGenerateCss postData={postData} onChange={onChangeStyle} />
 
 						)}
 
 
 
+						{JSON.stringify(accordionData)}
+						<div>postData</div>
+						{JSON.stringify(postData)}
 
 
 

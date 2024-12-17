@@ -200,7 +200,7 @@ function Html(props) {
 		"focus-within": {
 			label: "Focus-within",
 			value: "focus-within",
-			isPro: true,
+			//isPro: true,
 		},
 		target: { label: "target", value: "target", isPro: true },
 		visited: { label: "Visited", value: "visited", isPro: true },
@@ -236,7 +236,7 @@ function Html(props) {
 		"first-letter": {
 			label: "First-letter",
 			value: "first-letter",
-			isPro: true,
+			//isPro: true,
 		},
 		"first-line": { label: "First-line", value: "first-line", isPro: true },
 		"hover::before": { label: "hover::before", value: "hover::before", isPro: true },
@@ -325,17 +325,17 @@ function Html(props) {
 		backgroundAttachment: {
 			id: "backgroundAttachment",
 			label: "Background Attachment",
-			isPro: true,
+			//isPro: true,
 		},
 		backgroundBlendMode: {
 			id: "backgroundBlendMode",
 			label: "Background Blend Mode",
-			isPro: true,
+			//isPro: true,
 		},
 		backgroundClip: {
 			id: "backgroundClip",
 			label: "Background Clip",
-			isPro: true,
+			//isPro: true,
 		},
 		backgroundColor: { id: "backgroundColor", label: "Background Color" },
 		backgroundImage: { id: "backgroundImage", label: "Background Image" },
@@ -355,14 +355,14 @@ function Html(props) {
 		borderCollapse: {
 			id: "borderCollapse",
 			label: "Border Collapse",
-			isPro: true,
+			//isPro: true,
 		},
 		borderImage: { id: "borderImage", label: "Border Image", isPro: true },
 		borderRadius: { id: "borderRadius", label: "Border Radius" },
 		borderSpacing: {
 			id: "borderSpacing",
 			label: "Border Spacing",
-			isPro: true,
+			//isPro: true,
 		},
 		backdropFilter: { id: "backdropFilter", label: "Backdrop Filter" },
 
@@ -380,7 +380,7 @@ function Html(props) {
 		counterIncrement: {
 			id: "counterIncrement",
 			label: "Counter Increment",
-			isPro: true,
+			//isPro: true,
 		},
 		counterReset: { id: "counterReset", label: "Counter Reset", isPro: true },
 		counterSet: { id: "counterSet", label: "Counter Set", isPro: true },
@@ -408,7 +408,7 @@ function Html(props) {
 		fontVariantCaps: {
 			id: "fontVariantCaps",
 			label: "Font VariantCaps",
-			isPro: true,
+			//isPro: true,
 		},
 		fontWeight: { id: "fontWeight", label: "Font Weight" },
 		gridAutoFlow: { id: "gridAutoFlow", label: "Grid Auto Flow" },
@@ -428,7 +428,7 @@ function Html(props) {
 		letterSpacing: {
 			id: "letterSpacing",
 			label: "Letter Spacing",
-			isPro: true,
+			//isPro: true,
 		},
 		lineHeight: { id: "lineHeight", label: "Line Height" },
 		listStyle: { id: "listStyle", label: "List Style" },
@@ -480,7 +480,7 @@ function Html(props) {
 		textDecoration: {
 			id: "textDecoration",
 			label: "Text Decoration",
-			isPro: true,
+			//isPro: true,
 		},
 		textIndent: { id: "textIndent", label: "Text Indent", isPro: true },
 		textJustify: { id: "textJustify", label: "Text Justify", isPro: true },
@@ -489,7 +489,7 @@ function Html(props) {
 		transformOrigin: {
 			id: "transformOrigin",
 			label: "Transform Origin",
-			isPro: true,
+			//isPro: true,
 		},
 		tableLayout: {
 			id: "tableLayout",
@@ -506,7 +506,7 @@ function Html(props) {
 		textTransform: {
 			id: "textTransform",
 			label: "Text Transform",
-			isPro: true,
+			//isPro: true,
 		},
 		wordBreak: { id: "wordBreak", label: "Word Break", isPro: true },
 		wordSpacing: { id: "wordSpacing", label: "Word Spacing", isPro: true },
@@ -515,7 +515,7 @@ function Html(props) {
 		"-webkit-text-fill-color": {
 			id: "-webkit-text-fill-color",
 			label: "Webkit Text Fill Color",
-			isPro: true,
+			//isPro: true,
 		},
 	};
 	let cssProps = applyFilters("cssProps", cssPropsBasic);

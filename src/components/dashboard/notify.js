@@ -1,17 +1,7 @@
 const { Component, useState, useEffect } = wp.element;
-import apiFetch from "@wordpress/api-fetch";
 
-import { Icon, bell, check, caution, error, published, brush, category, columns, close, cancelCircleFilled } from "@wordpress/icons";
+import { Icon, caution, check, error } from "@wordpress/icons";
 
-import AccordionsGenerateCss from "./generate-css";
-import accordionDefaultData from "./accordion-default-data";
-import tabsDefaultData from "./tabs-default-data";
-import accordionTemplates from "./accordion-templates";
-import AccordionsEdit from "../../components/accordions-edit";
-import AccordionsView from "../../components/accordions-view";
-import PGtab from "../../components/tab";
-import PGtabs from "../../components/tabs";
-import WCPSList from "../../components/wcps-list";
 
 function Html(props) {
 	if (!props.warn) {
@@ -42,7 +32,7 @@ function Html(props) {
 				var type = item.type
 
 				return (
-					<div className={`my-2 flex items-center gap-3 rounded-sm shadow-md bg-white p-3 ${type == 'success' ? "  border-l-4 border-indigo-500 border-solid" : ""} ${type == 'error' ? " border-b-2 border-red-700" : ""} ${type == 'warnning' ? " border-b-2 border-yellow-500" : ""}`}>
+					<div className={`my-2 flex items-center gap-3 rounded-sm shadow-md bg-white p-3 ${type == 'success' ? " border-0 border-l-4 border-l-indigo-500 border-solid" : ""} ${type == 'error' ? " border-b-2 border-b-red-700" : ""} ${type == 'warnning' ? " border-b-2 border-b-yellow-500" : ""}`}>
 						{type == "warnning" && (
 							<Icon icon={caution} />
 						)}

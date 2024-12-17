@@ -6,7 +6,8 @@ var accordionDefaultData = {
 		itemSource: "manual",
 	},
 	itemQueryArgs: [],
-
+	styleObj: {},
+	reponsiveCss: "",
 	wrapper: {
 		options: {
 

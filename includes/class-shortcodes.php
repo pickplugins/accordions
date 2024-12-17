@@ -66,7 +66,6 @@ class class_accordions_shortcodes
         $icon = isset($accordionData["icon"]) ? $accordionData["icon"] : [];
         $iconToggle = isset($accordionData["iconToggle"]) ? $accordionData["iconToggle"] : [];
 
-        var_dump($viewType);
 
 
         ob_start();
@@ -75,6 +74,7 @@ class class_accordions_shortcodes
         do_action("accordions_builder_" . $viewType, $accordionData);
 
 
+        wp_enqueue_script('accordions_front_scripts');
 
         return ob_get_clean();
     }
