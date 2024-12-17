@@ -1,23 +1,32 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
 import { __ } from "@wordpress/i18n";
+import { useSelect, select, useDispatch, dispatch } from "@wordpress/data";
+import { store as coreStore } from "@wordpress/core-data";
+import apiFetch from "@wordpress/api-fetch";
 
 import {
+	__experimentalInputControl as InputControl,
 	Icon,
 	PanelBody,
 	PanelRow,
 	SelectControl,
+	ToggleControl,
+	Popover,
 } from "@wordpress/components";
 import { brush, close, settings } from "@wordpress/icons";
 
 import breakPoints from "../../breakpoints";
 import PGDropdown from "../dropdown";
-import PGIconPicker from "../icon-picker";
-import PGinputText from "../input-text";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
+import PGIconPicker from "../icon-picker";
+import PGinputText from "../input-text";
+import PGinputSelect from "../input-select";
+import PGcssOpenaiPrompts from "../openai-prompts";
 
 var myStore = wp.data.select("postgrid-shop");
+import { RichText } from "@wordpress/block-editor";
 
 function Html(props) {
 	if (!props.warn) {
@@ -25,6 +34,8 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
+	var getNotifications = props.getNotifications;
+
 	var postData = props.postData;
 
 	if (postData.post_content == null) {
@@ -38,9 +49,13 @@ function Html(props) {
 	var breakPointX = "Desktop";
 
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
-	var [styleObj, setstyleObj] = useState({}); // Using the hook.
+
+	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
+
+	var [itemQueryArgs, setitemQueryArgs] = useState(accordionData.itemQueryArgs); // Using the hook.
 
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
+	var [items, setitems] = useState(accordionData.items); // Using the hook.
 	var [content, setcontent] = useState(accordionData.content);
 	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
 	var [header, setheader] = useState(accordionData.header);
@@ -51,9 +66,17 @@ function Html(props) {
 	var [icon, seticon] = useState(accordionData.icon);
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
 
+	var [styleObj, setstyleObj] = useState({}); // Using the hook.
+	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
+
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
 	const [unit, setUnit] = useState(gapValue.replace(number, ""));
+	const [itemActive, setitemActive] = useState(99999);
+	const [AIautoUpdate, setAIautoUpdate] = useState(false);
+	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
+	var formattedPrompt =
+		"Respond only with question answer as json array and no other text. Do not include any explanations, introductions, or concluding remarks.";
 
 	var breakPointList = [{ label: "Select..", icon: "", value: "" }];
 	for (var x in breakPoints) {
@@ -65,557 +88,97 @@ function Html(props) {
 		});
 	}
 
-	var blockClass = ".pg-accordion-nested";
-
-	var wrapperSelector = blockClass + "";
-	var contentSelector = blockClass + " .accordion-content";
-	var headerSelector = blockClass + " .accordion-header";
-	var headerActiveSelector = blockClass + " .accordion-header-active";
-	var headerLabelSelector = blockClass + " .accordion-header-label";
-	var labelCounterSelector = blockClass + " .accordion-label-counter";
-	var labelIconSelector = blockClass + " .accordion-label-icon";
-	var iconSelector = blockClass + " .accordion-icon";
-	var iconToggleSelector = blockClass + " .accordion-icon-toggle";
-
-	var blockId = postData.ID;
-
-	function getElementSelector(sudoScource, mainSelector) {
-		var elementSelector = mainSelector;
-		if (sudoScource == "styles") {
-			elementSelector = mainSelector;
-		} else if (sudoScource == "hover") {
-			elementSelector = mainSelector + ":hover";
-		} else if (sudoScource == "after") {
-			elementSelector = mainSelector + "::after";
-		} else if (sudoScource == "before") {
-			elementSelector = mainSelector + "::before";
-		} else if (sudoScource == "first-child") {
-			elementSelector = mainSelector + ":first-child";
-		} else if (sudoScource == "last-child") {
-			elementSelector = mainSelector + ":last-child";
-		} else if (sudoScource == "visited") {
-			elementSelector = mainSelector + ":visited";
-		} else if (sudoScource == "selection") {
-			elementSelector = mainSelector + "::selection";
-		} else if (sudoScource == "first-letter") {
-			elementSelector = mainSelector + "::first-letter";
-		} else if (sudoScource == "first-line") {
-			elementSelector = mainSelector + "::first-line";
-		} else {
-			elementSelector = mainSelector + ":" + sudoScource;
-		}
-		return elementSelector;
-	}
-	function cssAttrParse(key) {
-		var cssProp = "";
-		if (key == "alignContent") {
-			cssProp = "align-content";
-		} else if (key == "alignItems") {
-			cssProp = "align-items";
-		} else if (key == "animationName") {
-			cssProp = "animation-name";
-		} else if (key == "alignSelf") {
-			cssProp = "align-self";
-		} else if (key == "aspectRatio") {
-			cssProp = "aspect-ratio";
-		} else if (key == "backfaceVisibility") {
-			cssProp = "backface-visibility";
-		} else if (key == "backgroundAttachment") {
-			cssProp = "background-attachment";
-		} else if (key == "backgroundBlendMode") {
-			cssProp = "background-blend-mode";
-		} else if (key == "backgroundClip") {
-			cssProp = "background-clip";
-		} else if (key == "bgColor") {
-			cssProp = "background-color";
-		} else if (key == "backgroundColor") {
-			cssProp = "background-color";
-		} else if (key == "backgroundOrigin") {
-			cssProp = "background-origin";
-		} else if (key == "backgroundRepeat") {
-			cssProp = "background-repeat";
-		} else if (key == "backgroundSize") {
-			cssProp = "background-size";
-		} else if (key == "backgroundPosition") {
-			cssProp = "background-position";
-		} else if (key == "backgroundImage") {
-			cssProp = "background-image";
-		} else if (key == "border") {
-			cssProp = "border";
-		} else if (key == "borderTop") {
-			cssProp = "border-top";
-		} else if (key == "borderRight") {
-			cssProp = "border-right";
-		} else if (key == "borderBottom") {
-			cssProp = "border-bottom";
-		} else if (key == "borderLeft") {
-			cssProp = "border-left";
-		} else if (key == "borderRadius") {
-			cssProp = "border-radius";
-		} else if (key == "borderCollapse") {
-			cssProp = "border-collapse";
-		} else if (key == "borderSpacing") {
-			cssProp = "border-spacing";
-		} else if (key == "borderImage") {
-			cssProp = "border-image";
-		} else if (key == "boxShadow") {
-			cssProp = "box-shadow";
-		} else if (key == "backdropFilter") {
-			cssProp = "backdrop-filter";
-		} else if (
-			key == "bottom" ||
-			key == "top" ||
-			key == "left" ||
-			key == "right" ||
-			key == "clear" ||
-			key == "color" ||
-			key == "filter" ||
-			key == "float"
-		) {
-			cssProp = key;
-		} else if (key == "boxSizing") {
-			cssProp = "box-sizing";
-		} else if (key == "cursor") {
-			cssProp = "cursor";
-		} else if (key == "content") {
-			cssProp = "content";
-		} else if (key == "counterIncrement") {
-			cssProp = "counter-increment";
-		} else if (key == "counterReset") {
-			cssProp = "counter-reset";
-		} else if (key == "counterSet") {
-			cssProp = "counter-set";
-		} else if (key == "columnCount") {
-			cssProp = "column-count";
-		} else if (key == "columnRule") {
-			cssProp = "column-rule";
-		} else if (key == "direction") {
-			cssProp = "direction";
-		} else if (key == "fontFamily") {
-			cssProp = "font-family";
-		} else if (key == "fontSize") {
-			cssProp = "font-size";
-		} else if (key == "fontStyle") {
-			cssProp = "font-style";
-		} else if (key == "fontStretch") {
-			cssProp = "font-stretch";
-		} else if (key == "fontWeight") {
-			cssProp = "font-weight";
-		} else if (key == "fontVariantCaps") {
-			cssProp = "font-variant-caps";
-		} else if (key == "flexWrap") {
-			cssProp = "flex-wrap";
-		} else if (key == "flexDirection") {
-			cssProp = "flex-direction";
-		} else if (key == "flexGrow") {
-			cssProp = "flex-grow";
-		} else if (key == "flexShrink") {
-			cssProp = "flex-shrink";
-		} else if (key == "flexBasis") {
-			cssProp = "flex-basis";
-		} else if (key == "flexFlow") {
-			cssProp = "flex-flow";
-		} else if (key == "letterSpacing") {
-			cssProp = "letter-spacing";
-		} else if (key == "gridAutoFlow") {
-			cssProp = "grid-auto-flow";
-		} else if (key == "gridColumnEnd") {
-			cssProp = "grid-column-end";
-		} else if (key == "gridColumnStart") {
-			cssProp = "grid-column-start";
-		} else if (key == "gridRowEnd") {
-			cssProp = "grid-row-end";
-		} else if (key == "gridRowStart") {
-			cssProp = "grid-row-start";
-		} else if (key == "gridTemplateColumns") {
-			cssProp = "grid-template-columns";
-		} else if (key == "gridTemplateRows") {
-			cssProp = "grid-template-rows";
-		} else if (key == "listStyle") {
-			cssProp = "list-style";
-		} else if (key == "lineHeight") {
-			cssProp = "line-height";
-		} else if (key == "justifyContent") {
-			cssProp = "justify-content";
-		} else if (key == "maskImage") {
-			cssProp = "mask-image";
-		} else if (key == "objectFit") {
-			cssProp = "object-fit";
-		} else if (key == "opacity") {
-			cssProp = "opacity";
-		} else if (key == "outline") {
-			cssProp = "outline";
-		} else if (key == "order") {
-			cssProp = "order";
-		} else if (key == "outlineOffset") {
-			cssProp = "outline-offset";
-		} else if (key == "position") {
-			cssProp = "position";
-		} else if (key == "textIndent") {
-			cssProp = "text-indent";
-		} else if (key == "textJustify") {
-			cssProp = "text-justify";
-		} else if (key == "textTransform") {
-			cssProp = "text-transform";
-		} else if (key == "textDecoration") {
-			cssProp = "text-decoration";
-		} else if (key == "textOverflow") {
-			cssProp = "text-overflow";
-		} else if (key == "textShadow") {
-			cssProp = "text-shadow";
-		} else if (key == "textAlign") {
-			cssProp = "text-align";
-		} else if (key == "visibility") {
-			cssProp = "visibility";
-		} else if (key == "wordBreak") {
-			cssProp = "word-break";
-		} else if (key == "wordSpacing") {
-			cssProp = "word-spacing";
-		} else if (key == "zIndex") {
-			cssProp = "z-index";
-		} else if (key == "padding") {
-			cssProp = "padding";
-		} else if (key == "paddingTop") {
-			cssProp = "padding-top";
-		} else if (key == "paddingRight") {
-			cssProp = "padding-right";
-		} else if (key == "paddingBottom") {
-			cssProp = "padding-bottom";
-		} else if (key == "paddingLeft") {
-			cssProp = "padding-left";
-		} else if (key == "placeItems") {
-			cssProp = "place-items";
-		} else if (key == "margin") {
-			cssProp = "margin";
-		} else if (key == "marginTop") {
-			cssProp = "margin-top";
-		} else if (key == "marginRight") {
-			cssProp = "margin-right";
-		} else if (key == "marginBottom") {
-			cssProp = "margin-bottom";
-		} else if (key == "marginLeft") {
-			cssProp = "margin-left";
-		} else if (key == "display") {
-			cssProp = "display";
-		} else if (key == "width") {
-			cssProp = "width";
-		} else if (key == "height") {
-			cssProp = "height";
-		} else if (key == "verticalAlign") {
-			cssProp = "vertical-align";
-		} else if (key == "overflow") {
-			cssProp = "overflow";
-		} else if (key == "overflowX") {
-			cssProp = "overflow-x";
-		} else if (key == "overflowY") {
-			cssProp = "overflow-y";
-		} else if (key == "writingMode") {
-			cssProp = "writing-mode";
-		} else if (key == "wordWrap") {
-			cssProp = "word-wrap";
-		} else if (key == "perspective") {
-			cssProp = "perspective";
-		} else if (key == "minWidth") {
-			cssProp = "min-width";
-		} else if (key == "minHeight") {
-			cssProp = "min-height";
-		} else if (key == "maxHeight") {
-			cssProp = "max-height";
-		} else if (key == "maxWidth") {
-			cssProp = "max-width";
-		} else if (key == "transition") {
-			cssProp = "transition";
-		} else if (key == "transform") {
-			cssProp = "transform";
-		} else if (key == "transformOrigin") {
-			cssProp = "transform-origin";
-		} else if (key == "transformStyle") {
-			cssProp = "transform-style";
-		} else if (key == "tableLayout") {
-			cssProp = "table-layout";
-		} else if (key == "emptyCells") {
-			cssProp = "empty-cells";
-		} else if (key == "captionSide") {
-			cssProp = "caption-side";
-		} else if (key == "gap") {
-			cssProp = "gap";
-		} else if (key == "rowGap") {
-			cssProp = "row-gap";
-		} else if (key == "columnGap") {
-			cssProp = "column-gap";
-		} else if (key == "userSelect") {
-			cssProp = "user-select";
-		} else if (key == "-webkit-text-fill-color") {
-			cssProp = "-webkit-text-fill-color";
-		} else {
-			cssProp = key;
-		}
-		return cssProp;
-	}
-
-	function generateElementCss(obj, elementSelector) {
-		if (obj == null) {
-			return {};
-		}
-
-		var cssObj = {};
-
-		Object.entries(obj).map((args) => {
-			var sudoSrc = args[0];
-			var sudoArgs = args[1];
-			if (sudoSrc != "options" && sudoArgs != null) {
-				var selector = getElementSelector(sudoSrc, elementSelector);
-				Object.entries(args[1]).map((x) => {
-					var attr = x[0];
-					var propVal = x[1];
-					var cssPropty = cssAttrParse(attr);
-					var found = Object.entries(propVal).reduce(
-						(a, [k, v]) => (v ? ((a[k] = v), a) : a),
-						{}
-					);
-
-					if (Object.keys(found).length > 0) {
-						if (cssObj[selector] == undefined) {
-							cssObj[selector] = {};
-						}
-						if (cssObj[selector][cssPropty] == undefined) {
-							cssObj[selector][cssPropty] = {};
-						}
-
-						cssObj[selector][cssPropty] = x[1];
-					}
-				});
-			}
+	var postTypes = [];
+	const postTypesData = useSelect(
+		(select) => select(coreStore).getPostTypes({ per_page: -1 }),
+		[]
+	);
+	postTypesData !== null &&
+		postTypesData.map((x) => {
+			postTypes.push({ value: x.slug, label: x.name });
 		});
-
-		return cssObj;
-	}
-
-	function generateBlockCss(items) {
-		var reponsiveCssGroups = {};
-		for (var selector in items) {
-			var attrs = items[selector];
-			for (var attr in attrs) {
-				var breakpoints = attrs[attr];
-				for (var device in breakpoints) {
-					var attrValue = breakpoints[device];
-					if (reponsiveCssGroups[device] == undefined) {
-						reponsiveCssGroups[device] = [];
-					}
-					if (reponsiveCssGroups[device] == undefined) {
-						reponsiveCssGroups[device] = [];
-					}
-					if (reponsiveCssGroups[device][selector] == undefined) {
-						reponsiveCssGroups[device][selector] = [];
-					}
-					if (typeof attrValue == "string") {
-						attrValue = attrValue.replaceAll("u0022", '"');
-						reponsiveCssGroups[device][selector].push({
-							attr: attr,
-							val: attrValue,
-						});
-					}
-				}
-			}
-		}
-		var reponsiveCssDesktop = "";
-		if (reponsiveCssGroups["Desktop"] != undefined) {
-			for (var selector in reponsiveCssGroups["Desktop"]) {
-				var attrs = reponsiveCssGroups["Desktop"][selector];
-				reponsiveCssDesktop += selector + "{";
-				for (var index in attrs) {
-					var attr = attrs[index];
-					var attrName = attr.attr;
-					var attrValue = attr.val;
-					reponsiveCssDesktop += attrName + ":" + attrValue + ";";
-				}
-				reponsiveCssDesktop += "}";
-			}
-		}
-		var reponsiveCssTablet = "";
-		if (reponsiveCssGroups["Tablet"] != undefined) {
-			reponsiveCssTablet += "@media(max-width: 991px){";
-			for (var selector in reponsiveCssGroups["Tablet"]) {
-				var attrs = reponsiveCssGroups["Tablet"][selector];
-				reponsiveCssTablet += selector + "{";
-				for (var index in attrs) {
-					var attr = attrs[index];
-					var attrName = attr.attr;
-					var attrValue = attr.val;
-					reponsiveCssTablet += attrName + ":" + attrValue + ";";
-				}
-				reponsiveCssTablet += "}";
-			}
-			reponsiveCssTablet += "}";
-		}
-		var reponsiveCssMobile = "";
-		if (reponsiveCssGroups["Mobile"] != undefined) {
-			reponsiveCssMobile += "@media(max-width:767px){";
-			for (var selector in reponsiveCssGroups["Mobile"]) {
-				var attrs = reponsiveCssGroups["Mobile"][selector];
-				reponsiveCssMobile += selector + "{";
-				for (var index in attrs) {
-					var attr = attrs[index];
-					var attrName = attr.attr;
-					var attrValue = attr.val;
-					reponsiveCssMobile += attrName + ":" + attrValue + ";";
-				}
-				reponsiveCssMobile += "}";
-			}
-			reponsiveCssMobile += "}";
-		}
-		var reponsiveCss =
-			reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
-
-		var wpfooter = document.getElementById("wpfooter");
-		var divWrap = document.getElementById("css-block");
-		if (divWrap != undefined) {
-			document.getElementById("css-block").outerHTML = "";
-		}
-
-		var divWrap = '<style id="css-block"></style>';
-		wpfooter.insertAdjacentHTML("beforeend", divWrap);
-		var csswrappg = document.getElementById("css-block");
-		var str = "" + reponsiveCss + "";
-		csswrappg.insertAdjacentHTML("beforeend", str);
-	}
 
 	useEffect(() => {
-		generateBlockCss(styleObj);
-	}, [styleObj]);
+		apiFetch({
+			path: "/post-grid/v2/post_type_objects",
+			method: "POST",
+			data: { postTypes: [] },
+		}).then((res) => {
+			var taxonomies = [];
+			res.map((item) => {
+				taxonomies.push({ label: item.label, value: item.id });
+			});
+			setTaxonomiesObjects(taxonomies);
+		});
+	}, []);
 
 	useEffect(() => {
-		var styleObjX = { ...styleObj };
-
-		var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
-		Object.entries(wrapperCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var contentCss = generateElementCss(content, contentSelector);
-		Object.entries(contentCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var headerCss = generateElementCss(header, headerSelector);
-		Object.entries(headerCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var headerActiveCss = generateElementCss(
-			headerActive,
-			headerActiveSelector
-		);
-		Object.entries(headerActiveCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var headerLabelCss = generateElementCss(headerLabel, headerLabelSelector);
-		Object.entries(headerLabelCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var labelCounterCss = generateElementCss(
-			labelCounter,
-			labelCounterSelector
-		);
-		Object.entries(labelCounterCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var labelIconCss = generateElementCss(labelIcon, labelIconSelector);
-		Object.entries(labelIconCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var iconCss = generateElementCss(icon, iconSelector);
-		Object.entries(iconCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		var iconToggleCss = generateElementCss(iconToggle, iconToggleSelector);
-		Object.entries(iconToggleCss).map((selectors) => {
-			var selector = selectors[0];
-			var selectorData = selectors[1];
-			styleObjX[selector] = selectorData;
-		});
-
-		setstyleObj(styleObjX);
+		onChange(accordionData);
 	}, [accordionData]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.accOptions = accOptions;
+		accordionDataX.globalOptions = globalOptions;
+		setaccordionData(accordionDataX);
+	}, [globalOptions]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionDataX.accOptions = accOptions;
 		setaccordionData(accordionDataX);
 	}, [accOptions]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.wrapper = wrapper;
+		accordionDataX.wrapper = wrapper;
 		setaccordionData(accordionDataX);
 	}, [wrapper]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.content = content;
+		accordionDataX.content = content;
 		setaccordionData(accordionDataX);
 	}, [content]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.header = header;
+		accordionDataX.header = header;
 		setaccordionData(accordionDataX);
 	}, [header]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.headerActive = headerActive;
+		accordionDataX.headerActive = headerActive;
 		setaccordionData(accordionDataX);
 	}, [headerActive]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.headerLabel = headerLabel;
+		accordionDataX.headerLabel = headerLabel;
 		setaccordionData(accordionDataX);
 	}, [headerLabel]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.labelCounter = labelCounter;
+		accordionDataX.labelCounter = labelCounter;
 		setaccordionData(accordionDataX);
 	}, [labelCounter]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.labelIcon = labelIcon;
+		accordionDataX.labelIcon = labelIcon;
 		setaccordionData(accordionDataX);
 	}, [labelIcon]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.icon = icon;
+		accordionDataX.icon = icon;
 		setaccordionData(accordionDataX);
 	}, [icon]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionData.iconToggle = iconToggle;
+		accordionDataX.iconToggle = iconToggle;
 		setaccordionData(accordionDataX);
 	}, [iconToggle]);
 
@@ -646,6 +209,23 @@ function Html(props) {
 		const object = myStore.addPropertyDeep(obj, path, "");
 		setProperty(object);
 	}
+
+	function onResetStyle(sudoSources, propertyType, setProperty) {
+		let obj = Object.assign({}, propertyType);
+		Object.entries(sudoSources).map((args) => {
+			var sudoScource = args[0];
+			if (obj[sudoScource] == undefined) {
+			} else {
+				obj[sudoScource] = {};
+				// var elementSelector = myStore.getElementSelector(
+				// 	sudoScource,
+				// 	contentSelector // Replace this selector if needed
+				// );
+			}
+		});
+		setProperty(obj);
+	}
+
 	function onRemoveStyle(sudoScource, key, propertyType, setProperty) {
 		let obj = { ...propertyType };
 		var object = myStore.deletePropertyDeep(obj, [
@@ -667,110 +247,1186 @@ function Html(props) {
 		setProperty(obj);
 	}
 
-	function onResetStyle(sudoSources, propertyType, setProperty) {
-		let obj = Object.assign({}, propertyType);
-		Object.entries(sudoSources).map((args) => {
-			var sudoScource = args[0];
-			if (obj[sudoScource] == undefined) {
-			} else {
-				obj[sudoScource] = {};
-			}
-		});
-		setProperty(obj);
-	}
-
 	var accOptionsArgs = {
 		autoplay: { label: "Auto play", value: 1 },
 	};
+	var postQueryArgs = {
+		postType: {
+			value: ["post"],
+
+			id: "postType",
+			label: "Post types",
+			description: "Select Post Types to Query",
+		},
+		s: {
+			value: "",
+
+			id: "s",
+			label: "Keyword",
+			description: "Search keyword, ex: hello",
+		},
+		postStatus: {
+			value: [],
+
+			id: "postStatus",
+			label: "Post status",
+			description: "Query post by post status",
+		},
+		order: {
+			value: "",
+
+			id: "order",
+			label: "Order",
+			description: "Post query order",
+		},
+		orderby: {
+			value: [],
+
+			id: "orderby",
+			label: "Orderby",
+			description: "Post query orderby",
+		},
+		metaKey: {
+			value: "",
+
+			id: "metaKey",
+			label: "Meta fields key",
+			description: "Post query by meta fields key",
+		},
+		metaValue: {
+			value: "",
+
+			id: "metaValue",
+			label: "Meta Value",
+			description: "Post query by custom field value",
+		},
+		metaValueNum: {
+			value: "",
+
+			id: "metaValueNum",
+			label: "Meta Value Num",
+			description: "Post query by custom field value for number types",
+		},
+		metaCompare: {
+			value: "",
+
+			id: "metaCompare",
+			label: "Meta Compare",
+			description: "Meta query compare",
+		},
+	};
+	const updatePostQueryArgs = (newVal, index) => {
+		var itemQueryArgsX = [...itemQueryArgs];
+		itemQueryArgsX[index].value = newVal;
+		setitemQueryArgs(itemQueryArgsX);
+	};
+	var termQueryArgs = {
+		taxonomy: {
+			value: "category",
+
+			id: "taxonomy",
+			label: __("Taxonomy", "post-grid"),
+			description: "Select Taxonomy to Query",
+			longDescription:
+				"Taxonomy name, or array of taxonomy names, to which results should be limited.",
+		},
+		orderby: {
+			value: "name",
+
+			id: "orderby",
+			label: "Order By",
+			description: "Search keyword, ex: hello",
+		},
+		order: {
+			value: "ASC",
+
+			id: "order",
+			label: "Order",
+			description: "Whether to order terms in ascending or descending order.",
+		},
+		hide_empty: {
+			value: true,
+
+			id: "hide_empty",
+			label: "Hide Empty",
+			description: "Accepts true or false value.",
+			longDescription:
+				"Whether to hide terms not assigned to any posts. Accepts 1|true or 0|false.",
+		},
+		number: {
+			value: false,
+
+			id: "number",
+			label: "Number",
+			description: "Accepts 0 (all) or any positive number.",
+			longDescription:
+				"Maximum number of terms to return. Accepts ''|0 (all) or any positive number. Default ''|0 (all). Note that $number may not return accurate results when coupled with $object_ids.",
+		},
+		include: {
+			value: "category",
+
+			id: "include",
+			//isPro: true,
+			label: "Include",
+			description: "Comma-separated string of term IDs to include.",
+			longDescription:
+				"Array or comma/space-separated string of term IDs to include. Default empty array.",
+			placeholder: "Comma-separated string of term IDs to include.",
+		},
+		exclude: {
+			value: "",
+
+			id: "exclude",
+			//isPro: true,
+			label: "Exclude",
+			description: "Comma-separated string of term IDs to exclude.",
+			longDescription:
+				"Array or comma/space-separated string of term IDs to exclude. If $include is non-empty, $exclude is ignored. Default empty array.",
+			placeholder: "Comma-separated string of term IDs to exclude.",
+		},
+		child_of: {
+			value: "",
+
+			id: "child_of",
+			//isPro: true,
+			label: "Child of",
+			description: "Term ID to retrieve child terms of.",
+			longDescription:
+				"Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0.",
+		},
+		parent: {
+			value: "",
+
+			id: "parent",
+			//isPro: true,
+			label: "Parent",
+			description:
+				"Add {ID} to add Parent term ID to retrieve direct-child terms of.",
+			longDescription: "Parent term ID to retrieve direct-child terms of.",
+		},
+		meta_key: {
+			value: "",
+
+			id: "meta_key",
+			//isPro: true,
+			label: "Meta key",
+			description: "Comma-separated keys to return term(s) for.",
+			longDescription: "Meta key or keys to filter by.",
+		},
+		meta_value: {
+			value: "",
+
+			id: "meta_value",
+			//isPro: true,
+			label: "Meta value",
+			description: "Comma-separated keys to return term(s) for.",
+			longDescription: "Meta value or values to filter by.",
+		},
+	};
+
+  const updateTermQueryArgs = (newVal, index) => {
+		var itemQueryArgsX = [...itemQueryArgs];
+		itemQueryArgsX[index].value = newVal;
+		setitemQueryArgs(itemQueryArgsX);
+	};
 
 	var viewTypeArgs = {
-		accordion: { label: "accordion", value: "accordion" },
-		tabs: { label: "tabs", value: "tabs" },
-		tabsVertical: { label: "tabsVertical", value: "tabsVertical" },
+		accordion: { label: "Accordion", value: "accordion" },
+		// tabs: { label: "Tabs", value: "tabs" },
+		// tabsVertical: { label: "Tabs Vertical", value: "tabsVertical" },
+	};
+	var itemSources = {
+		manual: { label: "Manual", value: "manual" },
+		posts: { label: "Posts", value: "posts", isPro: 0 },
+		terms: { label: "Terms", value: "terms", isPro: 0 },
 	};
 
 	return (
 		<div className="">
-			{/* <div className="fixed top-[200px] right-[100px] z-[99999] w-[600px] bg-gray-200 p-4 "> */}
-				{JSON.stringify(wrapper)}
-				{/* {JSON.stringify(content)} */}
-				{/* {JSON.stringify(header)} */}
-				{/* {JSON.stringify(headerActive)} */}
-				{/* {JSON.stringify(headerLabel)} */}
-				{/* {JSON.stringify(labelCounter)} */}
-				{/* {JSON.stringify(labelIcon)} */}
-				{/* {JSON.stringify(icon)} */}
-				{/* {JSON.stringify(iconToggle)} */}
-			{/* </div> */}
+			{/* <div>{`{`}</div>
+			<div>{`"wrapper":${JSON.stringify(wrapper)}`},</div>
+			<div>{`"content":${JSON.stringify(content)}`},</div>
+			<div>{`"header":${JSON.stringify(header)}`},</div>
+			<div>{`"headerActive":${JSON.stringify(headerActive)}`},</div>
+			<div>{`"headerLabel":${JSON.stringify(headerLabel)}`},</div>
+			<div>{`"labelCounter":${JSON.stringify(labelCounter)}`},</div>
+			<div>{`"labelIcon":${JSON.stringify(labelIcon)}`},</div>
+			<div>{`"icon":${JSON.stringify(icon)}`},</div>
+			<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
+			<div>{`}`}</div> */}
 
 			{props.postData.post_content != null && (
 				<>
 					<div className="my-4 p-3">
-						<PGDropdown
-							position="bottom right"
-							variant="secondary"
-							buttonTitle={"Choose View Type"}
-							options={viewTypeArgs}
-							onChange={(option, index) => {
-								var sliderOptionsX = { ...accOptions };
-								sliderOptionsX.viewType = option.value;
-								setaccOptions(sliderOptionsX);
-							}}
-							values=""></PGDropdown>
+						<PanelRow>
+							<label htmlFor="">View Type?</label>
+							<PGDropdown
+								position="bottom right"
+								variant="secondary"
+								buttonTitle={viewTypeArgs[globalOptions.viewType]?.label}
+								options={viewTypeArgs}
+								onChange={(option, index) => {
+									var globalOptionsX = { ...globalOptions };
+									globalOptionsX.viewType = option.value;
+									setglobalOptions(globalOptionsX);
+								}}
+								values=""></PGDropdown>
+						</PanelRow>
 					</div>
+
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Items"
+						initialOpen={true}>
+						<div className="my-4 flex items-center justify-between ">
+							<div className=" flex items-center  gap-2">
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={
+										globalOptions.itemSource == undefined
+											? "Item Source"
+											: itemSources[globalOptions.itemSource]?.label
+									}
+									options={itemSources}
+									onChange={(option, index) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.itemSource = option.value;
+										setglobalOptions(globalOptionsX);
+									}}
+									values=""></PGDropdown>
+							</div>
+
+							<div className="flex items-center  gap-2">
+								{globalOptions?.itemSource == "posts" && (
+									<>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Add Query"}
+											options={postQueryArgs}
+											onChange={(option, index) => {
+												console.log(option);
+
+												var itemQueryArgsX = [...itemQueryArgs];
+												itemQueryArgsX.push({
+													id: option.id,
+													value: option.value,
+												});
+												setitemQueryArgs(itemQueryArgsX);
+											}}
+											values=""></PGDropdown>
+									</>
+								)}
+								{globalOptions?.itemSource == "terms" && (
+									<>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Add Query"}
+											options={termQueryArgs}
+											onChange={(option, index) => {
+												console.log(option);
+
+												var itemQueryArgsX = [...itemQueryArgs];
+												itemQueryArgsX.push({
+													id: option.id,
+													value: option.value,
+												});
+												setitemQueryArgs(itemQueryArgsX);
+											}}
+											values=""></PGDropdown>
+									</>
+								)}
+
+								{globalOptions?.itemSource == "manual" && (
+									<>
+										<div
+											className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+											onClick={(ev) => {
+												var itemsX = [...items];
+
+												itemsX.push({
+													active: 0,
+													hideOnSchema: 0,
+													headerLabel: {
+														options: {
+															text: "Accordion Header",
+															toggledText: "Accordion Header Toggled",
+															slug: "",
+															tag: "",
+															class: "accordion-header-label",
+														},
+													},
+													content: {
+														options: {
+															tag: "",
+															class: "accordion-content",
+															text: "Accordion content",
+														},
+													},
+													icon: {
+														options: {
+															library: "fontAwesome",
+															srcType: "class",
+															iconSrc: "fas fa-angle-down",
+															position: "left",
+															class: "accordion-icon",
+														},
+														styles: {},
+													},
+													iconToggle: {
+														options: {
+															library: "fontAwesome",
+															srcType: "class",
+															iconSrc: " fas fa-angle-up",
+															class: "accordion-icon-toggle",
+														},
+														styles: {},
+													},
+												});
+												setitems(itemsX);
+
+												getNotifications({
+													content: "Item Added",
+													type: "success",
+												});
+											}}>
+											Add New
+										</div>
+										<div
+											className="cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+											onClick={(ev) => {
+												ev.preventDefault();
+												ev.stopPropagation();
+												setAIWriter(!AIWriter);
+											}}>
+											AI
+											{AIWriter && (
+												<Popover position="bottom right">
+													<div className="w-[800px] p-3">
+														<PGcssOpenaiPrompts
+															value={""}
+															formattedPrompt={formattedPrompt}
+															promptsAgs={{
+																action: "write",
+																aiModel: "gpt-4-turbo",
+																objective: "generateFAQ",
+															}}
+															autoUpdate={AIautoUpdate}
+															onResponseLoaded={(value, autoUpdate) => {
+																// if (autoUpdate) {
+																// 	var options = { ...text.options, content: value };
+																// 	setAttributes({ text: { ...text, options: options } });
+																// }
+															}}
+															clickHandle={(value, action) => {
+																var valueObj = JSON.parse(value);
+
+																if (action == "prepend") {
+																}
+																if (action == "append") {
+																	valueObj.map((item) => {
+																		var answer = item.answer;
+																		var question = item.question;
+																	});
+																}
+																if (action == "replace") {
+																	var blocksX = [];
+
+																	valueObj.map((item) => {
+																		var answer = item.answer;
+																		var question = item.question;
+																	});
+																}
+
+																//setAttributes({ itemsX: { ...itemsX, items: itemx } });
+															}}
+														/>
+													</div>
+												</Popover>
+											)}
+										</div>
+									</>
+								)}
+							</div>
+						</div>
+						{globalOptions?.itemSource == "posts" && (
+							<div>
+								{JSON.stringify(itemQueryArgs)}
+
+								{itemQueryArgs?.map((item, index) => {
+									return (
+										<div key={index} className="my-4">
+											{item.id == "postType" && (
+												<div>
+													<label htmlFor="">Post Type</label>
+													<PGinputSelect
+														val={item.value}
+														options={postTypes}
+														multiple={true}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "postStatus" && (
+												<div
+													className={item.id == "postStatus" ? "" : "hidden"}>
+													<label htmlFor="">Post Status</label>
+													<PGinputSelect
+														val={item.value}
+														options={[
+															{ label: "Publish", value: "publish" },
+															{ label: "Pending", value: "pending" },
+															{ label: "Draft", value: "draft" },
+															{ label: "Auto draft", value: "auto-draft" },
+															{ label: "Future", value: "future" },
+															{ label: "Private", value: "private" },
+															{ label: "Inherit", value: "inherit" },
+															{ label: "Trash", value: "trash" },
+															{ label: "Any", value: "any" },
+														]}
+														multiple={true}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "order" && (
+												<div className={item.id == "order" ? "" : "hidden"}>
+													<label htmlFor="">Order</label>
+													<SelectControl
+														style={{ margin: 0 }}
+														label=""
+														value={item.value}
+														options={[
+															{ label: "Ascending", value: "ASC" },
+															{ label: "Descending", value: "DESC" },
+														]}
+														onChange={(newVal) =>
+															updatePostQueryArgs(newVal, index)
+														}
+													/>
+												</div>
+											)}
+											{item.id == "orderby" && (
+												<div className={item.id == "orderby" ? "" : "hidden"}>
+													<label htmlFor="">Order By</label>
+													<PGinputSelect
+														val={item.value}
+														options={[
+															{ label: __("None", "post-grid"), value: "none" },
+															{ label: "ID", value: "ID" },
+															{ label: "Author", value: "author" },
+															{ label: "Title", value: "title" },
+															{ label: "Name", value: "name" },
+															{ label: "Type", value: "type" },
+															{ label: "Date", value: "date" },
+															{ label: "Modified", value: "modified" },
+															{ label: "Parent", value: "parent" },
+															{ label: "Random", value: "rand" },
+															{
+																label: "Comment Count",
+																value: "comment_count",
+															},
+															{ label: "Relevance", value: "relevance" },
+															{ label: "Menu Order", value: "menu_order" },
+															{
+																label: "Meta Value(String)",
+																value: "meta_value",
+															},
+															{
+																label: "Meta Value(Number)",
+																value: "meta_value_num",
+															},
+															{ label: "post__in", value: "post__in" },
+															{
+																label: "post_name__in",
+																value: "post_name__in",
+															},
+															{
+																label: "post_parent__in",
+																value: "post_parent__in",
+															},
+														]}
+														multiple={true}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaKey" && (
+												<div>
+													<label htmlFor="">Meta Key</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaValue" && (
+												<div>
+													<label htmlFor="">Meta Value</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaValueNum" && (
+												<div>
+													<label htmlFor="">Meta Value Number</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "s" && (
+												<div>
+													<label htmlFor="">Keyword</label>
+													<InputControl
+														value={item.value}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "metaCompare" && (
+												<div>
+													<label htmlFor="">Meta Compare</label>
+													<SelectControl
+														style={{ margin: 0 }}
+														label=""
+														value={item.value}
+														options={[
+															{ label: "=", value: "=" },
+															{ label: "!=", value: "!=" },
+															{ label: ">", value: ">" },
+															{ label: ">=", value: ">=" },
+															{ label: "<", value: "<" },
+															{ label: "<=", value: "<=" },
+															{ label: "LIKE", value: "LIKE" },
+															{ label: "NOT LIKE", value: "NOT LIKE" },
+															{ label: "IN", value: "IN" },
+															{ label: "NOT IN", value: "NOT IN" },
+															{ label: "BETWEEN", value: "BETWEEN" },
+															{ label: "NOT BETWEEN", value: "NOT BETWEEN" },
+															{ label: "NOT EXISTS", value: "NOT EXISTS" },
+															{ label: "REGEXP", value: "REGEXP" },
+															{ label: "NOT REGEXP", value: "NOT REGEXP" },
+															{ label: "RLIKE", value: "RLIKE" },
+														]}
+														onChange={(newVal) => {
+															updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+										</div>
+									);
+								})}
+							</div>
+						)}
+						{globalOptions?.itemSource == "terms" && (
+							<div>
+								{JSON.stringify(itemQueryArgs)}
+
+								{itemQueryArgs?.map((item, index) => {
+									return (
+										<div key={index} className="my-4">
+											{item.id == "taxonomy" && (
+												<div>
+													<label htmlFor="">Taxonomy</label>
+													<PGinputSelect
+														val={item.value}
+														options={taxonomiesObjects}
+														multiple={true}
+														onChange={(newVal) => {
+															var itemQueryArgsX = [...itemQueryArgs];
+															itemQueryArgsX[index].value = newVal;
+															setitemQueryArgs(itemQueryArgsX);
+
+															//updatePostQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "orderby" && (
+												<div className={item.id == "orderby" ? "" : "hidden"}>
+													<label htmlFor="">Order By</label>
+													<SelectControl
+														value={item.value}
+														options={[
+															{ label: __("None", "post-grid"), value: "none" },
+															{ label: "ID", value: "ID" },
+															{ label: "Author", value: "author" },
+															{ label: "Title", value: "title" },
+															{ label: "Name", value: "name" },
+															{ label: "Type", value: "type" },
+															{ label: "Date", value: "date" },
+															{ label: "Modified", value: "modified" },
+															{ label: "Parent", value: "parent" },
+															{ label: "Random", value: "rand" },
+															{
+																label: "Comment Count",
+																value: "comment_count",
+															},
+															{ label: "Relevance", value: "relevance" },
+															{ label: "Menu Order", value: "menu_order" },
+															{
+																label: "Meta Value(String)",
+																value: "meta_value",
+															},
+															{
+																label: "Meta Value(Number)",
+																value: "meta_value_num",
+															},
+															{ label: "post__in", value: "post__in" },
+															{
+																label: "post_name__in",
+																value: "post_name__in",
+															},
+															{
+																label: "post_parent__in",
+																value: "post_parent__in",
+															},
+														]}
+														multiple={true}
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "order" && (
+												<div className={item.id == "order" ? "" : "hidden"}>
+													<label htmlFor="">Order</label>
+													<SelectControl
+														style={{ margin: 0 }}
+														label=""
+														value={item.value}
+														options={[
+															{ label: "Ascending", value: "ASC" },
+															{ label: "Descending", value: "DESC" },
+														]}
+														onChange={(newVal) =>
+															updateTermQueryArgs(newVal, index)
+														}
+													/>
+												</div>
+											)}
+											{item.id == "number" && (
+												<div className={item.id == "number" ? "" : "hidden"}>
+													<label htmlFor="">Number</label>
+													<InputControl
+														value={item.value}
+														type="number"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "include" && (
+												<div className={item.id == "include" ? "" : "hidden"}>
+													<label htmlFor="">Include</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "exclude" && (
+												<div className={item.id == "exclude" ? "" : "hidden"}>
+													<label htmlFor="">Exclude</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "child_of" && (
+												<div className={item.id == "child_of" ? "" : "hidden"}>
+													<label htmlFor="">Child Of</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "parent" && (
+												<div className={item.id == "parent" ? "" : "hidden"}>
+													<label htmlFor="">Parent</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "meta_key" && (
+												<div className={item.id == "meta_key" ? "" : "hidden"}>
+													<label htmlFor="">Meta Key</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "meta_value" && (
+												<div
+													className={item.id == "meta_value" ? "" : "hidden"}>
+													<label htmlFor="">Meta Value</label>
+													<InputControl
+														value={item.value}
+														type="text"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, index);
+														}}
+													/>
+												</div>
+											)}
+											{item.id == "hide_empty" && (
+												<div>
+													<ToggleControl
+														label={termQueryArgs[item.id].label}
+														help={
+															item.value
+																? "Hide Empty Enabled"
+																: "Hide Empty Disabled"
+														}
+														checked={item.value ? true : false}
+														onChange={() => {
+															const newValue = !itemQueryArgs[index].value;
+															updateTermQueryArgs(newValue, index);
+														}}
+													/>
+												</div>
+											)}
+										</div>
+									);
+								})}
+							</div>
+						)}
+
+						{globalOptions?.itemSource == "manual" && (
+							<div>
+								{items?.map((item, index) => {
+									return (
+										<>
+											<div className="">
+												<div
+													className="bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400"
+													onClick={(ev) => {
+														setitemActive(index == itemActive ? 999 : index);
+													}}>
+													<div>{item?.headerLabel.options.text}</div>
+
+													<span
+														className="cursor-pointer hover:bg-red-500 hover:text-white "
+														onClick={(ev) => {
+															ev.stopPropagation();
+															var itemsX = [...items];
+
+															itemsX.splice(index, 1);
+															setitems(itemsX);
+														}}>
+														<Icon icon={close} />
+													</span>
+												</div>
+
+												{itemActive == index && (
+													<div className="py-2 w-full">
+														<div className="mb-3">
+															<RichText
+																className="bg-slate-100 p-3 "
+																tagName={"div"}
+																value={item?.headerLabel.options.text}
+																allowedFormats={[
+																	"core/bold",
+																	"core/italic",
+																	"core/link",
+																]}
+																onChange={(content) => {
+																	var itemsX = [...items];
+
+																	itemsX[index].headerLabel.options.text =
+																		content;
+																	setitems(itemsX);
+																}}
+																placeholder={""}
+															/>
+														</div>
+														<div className="mb-3">
+															<RichText
+																className={`bg-slate-100 p-3 min-h-24`}
+																tagName={"div"}
+																value={item?.content.options.text}
+																allowedFormats={[
+																	"core/bold",
+																	"core/italic",
+																	"core/link",
+																]}
+																onChange={(content) => {
+																	var itemsX = [...items];
+
+																	itemsX[index].content.options.text = content;
+																	setitems(itemsX);
+																	//setsearchPrams({ ...searchPrams, content: content });
+																}}
+																placeholder={"Write details"}
+															/>
+														</div>
+														<div className="mb-3">
+															<PanelRow>
+																<label htmlFor="">Active</label>
+																<SelectControl
+																	label=""
+																	value={globalOptions?.active}
+																	options={[
+																		{
+																			label: __("True", "post-grid"),
+																			value: 1,
+																		},
+																		{
+																			label: __("False", "post-grid"),
+																			value: 0,
+																		},
+																	]}
+																	onChange={(newVal) => {
+																		var itemsX = [...items];
+
+																		itemsX[index].active = newVal;
+																		setitems(itemsX);
+																	}}
+																/>
+															</PanelRow>
+														</div>
+														<div className="mb-3">
+															<PanelRow>
+																<label htmlFor="">Enable lazyLoad</label>
+																<SelectControl
+																	label=""
+																	value={globalOptions?.hideOnSchema}
+																	options={[
+																		{
+																			label: __("True", "post-grid"),
+																			value: 1,
+																		},
+																		{
+																			label: __("False", "post-grid"),
+																			value: 0,
+																		},
+																	]}
+																	onChange={(newVal) => {
+																		var itemsX = [...items];
+
+																		itemsX[index].hideOnSchema = newVal;
+																		setitems(itemsX);
+																	}}
+																/>
+															</PanelRow>
+														</div>
+													</div>
+												)}
+											</div>
+										</>
+									);
+								})}
+							</div>
+						)}
+					</PanelBody>
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Accordion Settings"
 						initialOpen={false}>
 						<PGtab name="normal">
-							<PanelRow className="my-3">
-								<label>{__("Accordion Options", "post-grid")}</label>
-								<PGDropdown
-									position="bottom right"
-									variant="secondary"
-									buttonTitle={"Choose"}
-									options={accOptionsArgs}
-									onChange={(option, index) => {
-										var sliderOptionsX = { ...accOptions };
-										sliderOptionsX[index] = option.value;
-										setaccOptions(sliderOptionsX);
+							<PanelRow>
+								<label htmlFor="">Enable lazyLoad</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.lazyLoad}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.lazyLoad = newVal;
+										setglobalOptions(globalOptionsX);
 									}}
-									values=""></PGDropdown>
+								/>
 							</PanelRow>
-							<PanelRow className="justify-start gap-4 mb-3"></PanelRow>
-							{Object.entries(accOptions).map((item, index) => {
-								var id = item[0];
-								var value = item[1];
-								return (
-									<div key={index}>
-										{id == "collapsible" && (
-											<PanelRow>
-												<div className="flex items-center">
-													<RemoveSliderArg index={id} />
-													<span>{__("collapsible?", "post-grid")}</span>
-												</div>
-												<SelectControl
-													label=""
-													value={value}
-													options={[
-														{ label: __("True", "post-grid"), value: 1 },
-														{ label: __("False", "post-grid"), value: 0 },
-													]}
-													onChange={(newVal) => {
-														var sliderOptionsX = { ...accOptions };
-														sliderOptionsX[id] = newVal;
-														setaccOptions(sliderOptionsX);
-													}}
-												/>
-											</PanelRow>
-										)}
-									</div>
-								);
-							})}
+							<PanelRow>
+								<label htmlFor="">Enable Autoembed</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.autoembed}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.autoembed = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow>
+								<label htmlFor="">Enable Shortcodes</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.shortcodes}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.shortcodes = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Enable wpautop</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.wpautop}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.wpautop = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Enable Schema</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.schema}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.schema = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Enable Toggle Text</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.toggleText}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.toggleText = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Enable expand/collapse all</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.expandCollapseAll}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.expandCollapseAll = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Expand All Text</label>
+
+								<PGinputText
+									label=""
+									value={globalOptions?.expandAllText}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.expandAllText = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Collapse All Text</label>
+
+								<PGinputText
+									label=""
+									value={globalOptions?.collapseAllText}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.collapseAllText = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Enable Stats</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.stats}
+									options={[
+										{ label: __("True", "post-grid"), value: 1 },
+										{ label: __("False", "post-grid"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.stats = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+							<PanelRow>
+								<label htmlFor="">Active Event</label>
+
+								<SelectControl
+									label=""
+									value={globalOptions?.activeEvent}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.activeEvent = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Enable URL Hash</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.urlHash}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.urlHash = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Click To Scroll Top</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.clickToScrollTop}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.clickToScrollTop = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Click To Scroll Top Offset</label>
+								<PGinputText
+									label=""
+									value={globalOptions?.clickToScrollTopOffset}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.clickToScrollTopOffset = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Animation Name</label>
+								<SelectControl
+									label=""
+									value={globalOptions?.animationName}
+									options={[
+										{ label: __("Click", "post-grid"), value: "click" },
+										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
+										{ label: __("Focus", "post-grid"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.animationName = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Animation delay</label>
+								<PGinputText
+									label=""
+									value={globalOptions?.animationDelay}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.animationDelay = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
 						</PGtab>
 						<div></div>
 					</PanelBody>
-					{/* ////////////wrapper */}
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Wrapper"
@@ -849,7 +1505,7 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Content"
@@ -947,6 +1603,8 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
+								{JSON.stringify(header.options.class)}
+
 								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
 										{__("Class", "accordions")}
@@ -1685,13 +2343,12 @@ class AccordionsEdit extends Component {
 	}
 
 	render() {
-		var { onChange, postData } = this.props;
-
-		console.log(postData);
+		var { onChange, postData, getNotifications } = this.props;
 
 		return (
 			<Html
 				onChange={onChange}
+				getNotifications={getNotifications}
 				postData={postData}
 				warn={this.state.showWarning}
 				isLoaded={this.state.isLoaded}
@@ -1701,3 +2358,39 @@ class AccordionsEdit extends Component {
 }
 
 export default AccordionsEdit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

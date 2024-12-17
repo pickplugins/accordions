@@ -373,47 +373,25 @@ class AccordionsRest
 		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
 
 		$response = new stdClass();
-
+		if (empty($postId)) {
+			$response->post_id_missing = "";
+			die(wp_json_encode($response));
+		}
 
 		$post = get_post($postId);
 
 
+
+		$post_title = isset($post->post_title) ? $post->post_title : "";
+		$post_content = isset($post->post_content) ? $post->post_content : "";
+
+		$post_content = maybe_serialize($post_content) ? unserialize($post_content) : $post_content;
+
 		$response->ID = $post->ID;
-		$response->post_title = $post->post_title;
-		$response->post_content = $post->post_content;
-
-		$taxonomies = get_object_taxonomies(get_post_type($postId));
+		$response->post_title = $post_title;
+		$response->post_content = $post_content;
 
 
-
-		if (!empty($taxonomies))
-			foreach ($taxonomies as $taxonomy) {
-
-				$terms = get_the_terms($postId, $taxonomy);
-
-				$termsData = [];
-
-				if (!empty($terms))
-					foreach ($terms as $index => $term) {
-
-						$termsData[$index]['term_id'] = $term->term_id;
-						$termsData[$index]['name'] = $term->name;
-						$termsData[$index]['slug'] = $term->slug;
-						$termsData[$index]['count'] = $term->count;
-						$termsData[$index]['url'] = get_term_link($term->term_id);
-					}
-
-
-				if (!empty($termsData))
-					$response->$taxonomy = $termsData;
-			}
-
-
-		// $post_id = $post->ID;
-		// $post->post_id = $post->ID;
-		// $post->post_title = $post->post_title;
-
-		//$post->post_content = !empty($post->post_content) ? $post->post_content : null;
 
 
 		die(wp_json_encode($response));
@@ -430,20 +408,25 @@ class AccordionsRest
 
 		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
 		$content = isset($post_data['content']) ? $post_data['content'] : '';
-
 		$response = new stdClass();
+
+		if (empty($postId)) {
+			$response["id_missing"] = __("Post Id should not empty");
+		}
 
 
 
 
 		$my_post = array(
 			'ID'           => $postId,
-			'post_content' => $content,
+			'post_content' => serialize($content),
 		);
 
 		// Update the post into the database
-		wp_update_post($my_post);
+		$updatep_post_id = wp_update_post($my_post);
 
+		if ($updatep_post_id)
+			$response->id = $updatep_post_id;
 
 		die(wp_json_encode($response));
 	}
@@ -515,7 +498,6 @@ class AccordionsRest
 
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
-		error_log(serialize($queryArgs));
 		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
 		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
 

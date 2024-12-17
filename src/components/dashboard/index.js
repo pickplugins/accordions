@@ -3,6 +3,8 @@ import apiFetch from "@wordpress/api-fetch";
 
 import { brush, category, columns } from "@wordpress/icons";
 
+import PGNotify from "./notify";
+import AccordionsGenerateCss from "./generate-css";
 import accordionDefaultData from "./accordion-default-data";
 import tabsDefaultData from "./tabs-default-data";
 import accordionTemplates from "./accordion-templates";
@@ -20,15 +22,43 @@ function Html(props) {
 
 
 	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
-	var [postData, setpostData] = useState({ ID: 125777, post_content: accordionDefaultData, post_title: "" }); // Using the hook.
+	var [postData, setpostData] = useState({ ID: null, post_content: accordionDefaultData, post_title: "" }); // Using the hook.
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
+	var [pleaseUpdate, setpleaseUpdate] = useState(false); // Using the hook.
+
+	// var notificationsX = [
+	// 	{ content: "Hello notifications 1", type: "warnning" },
+	// 	{ content: "Hello notifications 2", type: "error" },
+	// 	{ content: "Hello notifications 3", type: "success" },
+	// ]
+
+	var [notifications, setnotifications] = useState([]); // Using the hook.
+
+
+
+	useEffect(() => {
+
+		setnotifications(notifications)
+
+		setTimeout(() => {
+			setnotifications([])
+		}, 5000)
+
+
+
+	}, [notifications]);
 
 
 
 
+	function getNotifications(notification) {
 
+		var notificationsX = [...notifications]
+		notificationsX.push(notification)
+		setnotifications(notificationsX);
+	}
 
 
 	function selectAccordion(args) {
@@ -41,10 +71,44 @@ function Html(props) {
 		var postDataX = { ...postData }
 		postDataX.post_content = args
 		setpostData(postDataX);
+
+		setaccordionData(args)
+
+		setpleaseUpdate(true)
+
 	}
+	function onUpdateAccordion() {
+
+
+		setisLoading(true);
+
+		apiFetch({
+			path: "/accordions/v2/update_post_data",
+			method: "POST",
+			data: {
+				postId: activeAccordion,
+				content: accordionData,
+				_wpnonce: post_grid_editor_js._wpnonce,
+			},
+		}).then((res) => {
+
+
+
+			setisLoading(false);
+			setpleaseUpdate(false)
+
+		});
+
+
+	}
+
+
+
 
 	useEffect(() => {
 		setisLoading(true);
+
+		if (activeAccordion == null) return;
 
 		apiFetch({
 			path: "/accordions/v2/accordions_data",
@@ -55,11 +119,9 @@ function Html(props) {
 			},
 		}).then((res) => {
 			setisLoading(false);
-
 			if (res?.post_content?.length == 0) {
 				res.post_content = accordionDefaultData;
 			}
-
 
 			setpostData(res);
 			setaccordionData(res.post_content)
@@ -67,22 +129,12 @@ function Html(props) {
 		});
 	}, [activeAccordion]);
 
-	useEffect(() => {
-
-	}, [accordionData]);
 
 
 
-
-
-
-
-
-
-	// ! hello
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
-			<div className="flex ">
+			<div className="flex h-[800px]">
 				<div className="w-[450px] overflow-y-scroll light-scrollbar">
 					<PGtabs
 						activeTab="accordions"
@@ -128,10 +180,15 @@ function Html(props) {
 						</PGtab>
 						<PGtab name="edit">
 							<div className=" ">
-								<AccordionsEdit
-									onChange={onChangeAccordion}
-									postData={postData}
-								/>
+								{postData.ID != null && (
+									<AccordionsEdit
+										onChange={onChangeAccordion}
+										getNotifications={getNotifications}
+										postData={postData}
+									/>
+								)}
+
+
 							</div>
 						</PGtab>
 						<PGtab name="templates">
@@ -141,7 +198,7 @@ function Html(props) {
 								{accordionTemplates.map((preset) => {
 
 									return (
-										<div onClick={ev => {
+										<div className="my-5 bg-slate-400 hover:bg-slate-500 p-3 rounded-sm cursor-pointer" onClick={ev => {
 											var data = preset.data
 											var presetClean = {};
 
@@ -161,10 +218,20 @@ function Html(props) {
 											})
 
 
-											var accordionDataX = { ...accordionData, presetClean }
+											var accordionDataX = { ...accordionData, ...presetClean }
+
+
+
 											onChangeAccordion(accordionDataX)
 
-										}}>{preset.label}</div>
+										}}>
+
+											<img className="w-full" src={preset.thumb} alt="" />
+											<div className="text-lg mt-3 text-white">
+												{preset.label}
+											</div>
+
+										</div>
 									)
 
 								})}
@@ -173,10 +240,20 @@ function Html(props) {
 						</PGtab>
 					</PGtabs>
 				</div>
-				<div className="w-full sticky top-0">
+				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
 
-						<AccordionsView isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} />
+
+						{postData.ID != null && (
+							<AccordionsView pleaseUpdate={pleaseUpdate} onUpdate={onUpdateAccordion} isLoading={isLoading} onChange={onChangeAccordion} postData={postData} id={activeAccordion} getNotifications={getNotifications} />
+						)}
+						{postData.ID != null && (
+							<AccordionsGenerateCss postData={postData} />
+
+						)}
+
+
+
 
 
 
@@ -185,6 +262,9 @@ function Html(props) {
 					</div>
 				</div>
 			</div>
+
+
+			<PGNotify notifications={notifications} />
 		</div>
 	);
 }
