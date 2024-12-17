@@ -9,7 +9,7 @@ var accordionDefaultData = {
 
 	wrapper: {
 		options: {
-			content: "",
+
 			tag: "div",
 			class: "pg-accordion-nested",
 		},
