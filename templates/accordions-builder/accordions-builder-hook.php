@@ -1,10 +1,21 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
 
-add_action('accordions_builder_accordion', 'accordions_builder_accordion', 5);
+add_action('accordions_builder_accordion', 'accordions_builder_accordion', 5, 2);
 
-function accordions_builder_accordion($accordionData)
+function accordions_builder_accordion($post_id, $accordionData)
 {
+
+    global $accordionsSchema;
+
+
+    $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
+    $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : true;
+
+
+    var_dump($globalOptions);
+
+
 
     $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
 
@@ -107,7 +118,7 @@ function accordions_builder_accordion($accordionData)
 
 
 
-    $blockId = "pg123";
+    $blockId = "accordions-" . $post_id;
 
     $accordionDataAttr = [
         "id" => $blockId,
@@ -116,7 +127,7 @@ function accordions_builder_accordion($accordionData)
 
 
 ?>
-    <div id="pg123" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
+    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
 
         <?php
         $count = 0;
@@ -193,6 +204,48 @@ function accordions_builder_accordion($accordionData)
         <?php
             $count++;
         }
+
+
+
+        if ($schema) {
+
+            $json = [];
+            $i = 0;
+            $json['@context'] = "https://schema.org";
+            $json['@type'] = "FAQPage";
+            foreach ($items as $item) {
+
+
+                $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
+                $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
+                $headerLabelText = isset($headerLabelOptions["text"]) ? $headerLabelOptions["text"] : "";
+
+
+                $content = isset($item["content"]) ? $item["content"] : [];
+                $contentOptions = isset($content["options"]) ? $content["options"] : [];
+                $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
+
+
+
+
+
+
+
+
+
+                $json['mainEntity'][$i]['@type'] = "Question";
+                $json['mainEntity'][$i]['@id'] = isset($item['attrs']['blockId']) ? "#" . $item['attrs']['blockId'] : '';
+                $json['mainEntity'][$i]['name'] = isset($item['attrs']['headerLabel']['options']['text']) ? _wp_specialchars($headerLabelText, ENT_QUOTES)  : '';
+                $json['mainEntity'][$i]['acceptedAnswer']['@type'] = "Answer";
+                $json['mainEntity'][$i]['acceptedAnswer']['text'] = _wp_specialchars($contentText, ENT_QUOTES);
+                $i++;
+            }
+            $accordionsSchema[$blockId] = $json;
+        }
+
+
+
+
 
 
         ?>

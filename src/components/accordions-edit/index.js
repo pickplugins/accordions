@@ -26,6 +26,7 @@ import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
+import PGinputTextarea from "../input-textarea";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -35,7 +36,7 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
-	var getNotifications = props.getNotifications;
+	var addNotifications = props.addNotifications;
 
 	var postData = props.postData;
 
@@ -113,9 +114,19 @@ function Html(props) {
 		});
 	}, []);
 
+
+
+	useEffect(() => {
+		console.log(props.postData);
+
+	}, [props.postData]);
+
+
 	useEffect(() => {
 		onChange(accordionData);
 	}, [accordionData]);
+
+
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -513,7 +524,6 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={postQueryArgs}
 											onChange={(option, index) => {
-												console.log(option);
 
 												var itemQueryArgsX = [...itemQueryArgs];
 												itemQueryArgsX.push({
@@ -533,7 +543,6 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-												console.log(option);
 
 												var itemQueryArgsX = [...itemQueryArgs];
 												itemQueryArgsX.push({
@@ -594,7 +603,7 @@ function Html(props) {
 												});
 												setitems(itemsX);
 
-												getNotifications({
+												addNotifications({
 													content: "Item Added",
 													type: "success",
 												});
@@ -602,16 +611,26 @@ function Html(props) {
 											Add New
 										</div>
 										<div
-											className="cursor-pointer py-2 px-4 capitalize tracking-wide bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-											onClick={(ev) => {
+											className=" tracking-wide "
+										>
+											<div className="py-2 px-4 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600" onClick={(ev) => {
 												ev.preventDefault();
 												ev.stopPropagation();
 												setAIWriter(!AIWriter);
-											}}>
-											AI
+											}}>AI</div>
 											{AIWriter && (
 												<Popover position="bottom right">
-													<div className="w-[800px] p-3">
+													<div className="w-[800px] p-3 relative">
+														<span
+															className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0"
+															onClick={(ev) => {
+																ev.preventDefault();
+																ev.stopPropagation();
+																setAIWriter(!AIWriter);
+															}}>
+															<Icon fill={"#fff"} icon={close} />
+														</span>
+
 														<PGcssOpenaiPrompts
 															value={""}
 															formattedPrompt={formattedPrompt}
@@ -660,7 +679,6 @@ function Html(props) {
 						</div>
 						{globalOptions?.itemSource == "posts" && (
 							<div>
-								{JSON.stringify(itemQueryArgs)}
 
 								{itemQueryArgs?.map((item, index) => {
 									return (
@@ -1062,7 +1080,7 @@ function Html(props) {
 														<div>{item?.headerLabel.options.text}</div>
 														<div className="flex items-center gap-2">
 															<span className="handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
-																<Icon icon={menu} />
+																<Icon fill={"#fff"} icon={menu} />
 															</span>
 															<span
 																className="cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
@@ -1071,20 +1089,21 @@ function Html(props) {
 																	var itemToDup = { ...itemsX[index] };
 																	itemsX.splice(index + 1, 0, itemToDup);
 																	setitems(itemsX);
-																	console.log("first: ", itemsX);
 																}}>
-																<Icon icon={copy} />
+																<Icon fill={"#fff"} icon={copy} />
 															</span>
 															<span
-																className="cursor-pointer hover:bg-red-500 hover:text-white "
+																className="cursor-pointer bg-red-700 hover:bg-red-600 hover:text-white px-1 py-1"
 																onClick={(ev) => {
 																	ev.stopPropagation();
 																	var itemsX = [...items];
 																	itemsX.splice(index, 1);
 																	setitems(itemsX);
 																}}>
-																<Icon icon={close} />
+																<Icon fill={"#fff"} icon={close} />
 															</span>
+
+
 														</div>
 													</div>
 
@@ -1126,6 +1145,35 @@ function Html(props) {
 																/>
 															</div>
 															<div className="mb-3">
+																<PGinputTextarea id={`content-${index}`} className={`bg-slate-100 p-3 min-h-24 w-full`} value={item?.content.options.text} onChange={(content) => {
+																	// var itemsX = [...items];
+
+																	// itemsX[index].content.options.text =
+																	// 	content;
+																	// setitems(itemsX);
+
+																	console.log(content);
+
+
+																	setitems((prevItems) => {
+																		const updatedItems = [...prevItems];
+																		updatedItems[index] = {
+																			...updatedItems[index],
+																			content: {
+																				...updatedItems[index].content,
+																				options: {
+																					...updatedItems[index].content
+																						.options,
+																					text: content,
+																				},
+																			},
+																		};
+																		return updatedItems;
+																	});
+																}} />
+
+
+
 																<RichText
 																	className={`bg-slate-100 p-3 min-h-24`}
 																	tagName={"div"}
@@ -1197,7 +1245,7 @@ function Html(props) {
 															</div>
 															<div className="mb-3">
 																<PanelRow>
-																	<label htmlFor="">Enable lazyLoad</label>
+																	<label htmlFor="">Hide On Schema</label>
 																	<SelectControl
 																		label=""
 																		value={item?.hideOnSchema ?? 0}
@@ -1244,9 +1292,9 @@ function Html(props) {
 						className="font-medium text-slate-900 "
 						title="Accordion Settings"
 						initialOpen={false}>
-						<PGtab name="normal">
+						<div className="py-3">
 							<PanelRow>
-								<label htmlFor="">Enable lazyLoad</label>
+								<label htmlFor="">Lazyload</label>
 								<SelectControl
 									className="w-[140px]"
 									label=""
@@ -1256,14 +1304,21 @@ function Html(props) {
 										{ label: __("False", "post-grid"), value: 0 },
 									]}
 									onChange={(newVal) => {
+										// var globalOptionsX = { ...globalOptions };
+										// globalOptionsX.lazyLoad = newVal;
+										// setglobalOptions(globalOptionsX);
+
+
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.lazyLoad = newVal;
 										setglobalOptions(globalOptionsX);
+
+
 									}}
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Enable Autoembed</label>
+								<label htmlFor="">Autoembed</label>
 								<SelectControl
 									className="w-[140px]"
 									label=""
@@ -1281,7 +1336,7 @@ function Html(props) {
 							</PanelRow>
 
 							<PanelRow>
-								<label htmlFor="">Enable Shortcodes</label>
+								<label htmlFor="">Shortcodes</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1299,7 +1354,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Enable wpautop</label>
+								<label htmlFor="">wpautop</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1317,7 +1372,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Enable Schema</label>
+								<label htmlFor="">Schema</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1335,10 +1390,9 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Enable Toggle Text</label>
+								<label htmlFor="">Toggle Text</label>
 
 								<SelectControl
-									className="w-[140px]"
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.toggleText}
@@ -1354,7 +1408,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Enable expand/collapse all</label>
+								<label htmlFor="">Expand/collapse all</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1400,7 +1454,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Enable Stats</label>
+								<label htmlFor="">Stats</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1438,7 +1492,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Enable URL Hash</label>
+								<label htmlFor="">URL Hash</label>
 								<SelectControl
 									className="w-[140px]"
 									label=""
@@ -1519,8 +1573,11 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-						</PGtab>
-						<div></div>
+
+
+						</div>
+
+
 					</PanelBody>
 
 					<PanelBody
@@ -1531,7 +1588,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1610,7 +1667,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1683,7 +1740,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1752,7 +1809,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1835,7 +1892,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1913,7 +1970,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2032,7 +2089,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2200,7 +2257,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2342,7 +2399,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2424,13 +2481,7 @@ class AccordionsEdit extends Component {
 		this.handleToggleClick = this.handleToggleClick.bind(this);
 	}
 
-	componentDidMount() {
-		setTimeout(() => {
-			this.setState((state) => ({
-				isLoaded: !state.isLoaded,
-			}));
-		}, 1000);
-	}
+
 
 	handleToggleClick() {
 		this.setState((state) => ({
@@ -2439,12 +2490,12 @@ class AccordionsEdit extends Component {
 	}
 
 	render() {
-		var { onChange, postData, getNotifications } = this.props;
+		var { onChange, postData, addNotifications } = this.props;
 
 		return (
 			<Html
 				onChange={onChange}
-				getNotifications={getNotifications}
+				addNotifications={addNotifications}
 				postData={postData}
 				warn={this.state.showWarning}
 				isLoaded={this.state.isLoaded}

@@ -35,6 +35,8 @@ class Accordions
     $accordionsAttrData = [];
 
 
+    global $accordionsSchema;
+    global $accordionsCss;
     global $accordionsCss;
     global $accordionsCustomCss;
     global $accordionsCustomScripts;
@@ -59,6 +61,7 @@ class Accordions
     require_once(accordions_plugin_dir . 'includes/class-settings-tabs.php');
     require_once(accordions_plugin_dir . 'includes/functions.php');
     require_once(accordions_plugin_dir . 'includes/functions-wc.php');
+    require_once(accordions_plugin_dir . 'includes/functions-builder.php');
     require_once(accordions_plugin_dir . 'includes/class-shortcodes.php');
     require_once(accordions_plugin_dir . 'includes/duplicate-post.php');
 

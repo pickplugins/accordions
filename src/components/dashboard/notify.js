@@ -1,6 +1,6 @@
 const { Component, useState, useEffect } = wp.element;
 
-import { Icon, caution, check, error } from "@wordpress/icons";
+import { Icon, caution, close, check, error } from "@wordpress/icons";
 
 
 function Html(props) {
@@ -16,7 +16,10 @@ function Html(props) {
 
 
 	useEffect(() => {
-		setnotifications(props.notifications)
+
+		props.notifications.reverse()
+		var slicedArray = props.notifications.slice(0, 3)
+		setnotifications(slicedArray)
 
 	}, [props.notifications]);
 
@@ -32,18 +35,36 @@ function Html(props) {
 				var type = item.type
 
 				return (
-					<div className={`my-2 flex items-center gap-3 rounded-sm shadow-md bg-white p-3 ${type == 'success' ? " border-0 border-l-4 border-l-indigo-500 border-solid" : ""} ${type == 'error' ? " border-b-2 border-b-red-700" : ""} ${type == 'warnning' ? " border-b-2 border-b-yellow-500" : ""}`}>
-						{type == "warnning" && (
-							<Icon icon={caution} />
-						)}
-						{type == "error" && (
-							<Icon icon={error} />
-						)}
-						{type == "success" && (
-							<Icon icon={check} />
-						)}
+					<div className={`max-w-72 mb-2 overflow-hidden relative rounded-sm shadow-md bg-white p-3 ${type == 'success' ? " border-0 border-l-4 border-l-green-700 border-solid" : ""} ${type == 'error' ? " border-b-2 border-b-red-700" : ""} ${type == 'warnning' ? " border-b-2 border-b-yellow-500" : ""}`}>
 
-						<span>{item.content}</span>
+						<span
+							className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0"
+							onClick={(ev) => {
+								var notificationsX = [...notifications];
+								notificationsX.splice(index, 1);
+
+								setnotifications(notificationsX);
+							}}>
+							<Icon fill={"#fff"} icon={close} />
+						</span>
+
+						<div className="flex items-center gap-3 ">
+							<div>
+								{type == "warnning" && (
+									<Icon icon={caution} />
+								)}
+								{type == "error" && (
+									<Icon icon={error} />
+								)}
+								{type == "success" && (
+									<Icon icon={check} />
+								)}
+							</div>
+							<div className="text-base mb-2">
+								{item?.title}
+							</div>
+						</div>
+						<div className="text-xs">{item?.content}</div>
 
 					</div>
 				)

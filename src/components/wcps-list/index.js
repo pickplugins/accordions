@@ -40,6 +40,7 @@ function Html(props) {
 	var isLoaded = props.isLoaded;
 	var selectAccordion = props.selectAccordion;
 	var activeAccordion = props.activeAccordion;
+	var addNotifications = props.addNotifications;
 
 
 
@@ -127,6 +128,9 @@ function Html(props) {
 			setisLoading(false);
 
 			setPosts(res.posts);
+			addNotifications({ title: "Accordions Loaded", content: "All Accordions loaded, Now click to pick one to edit.", type: "success" })
+
+
 		});
 
 
@@ -164,6 +168,10 @@ function Html(props) {
 								className="flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer"
 								onClick={(ev) => {
 									selectAccordion(item.ID);
+
+									addNotifications({ title: "Ready to Edit", content: "Now go to Edit panel to customize accordion.", type: "success" })
+
+
 								}}>
 								<span>
 									{item.post_title}{" "}
@@ -241,8 +249,8 @@ class wcpsList extends Component {
 
 		var {
 			selectAccordion,
-			activeAccordion
-
+			activeAccordion,
+			addNotifications
 		} = this.props;
 
 
@@ -254,7 +262,8 @@ class wcpsList extends Component {
 		return (
 
 
-			<Html selectAccordion={selectAccordion} activeAccordion={activeAccordion} warn={this.state.showWarning} isLoaded={this.state.isLoaded} />
+			<Html selectAccordion={selectAccordion} activeAccordion={activeAccordion} warn={this.state.showWarning} isLoaded={this.state.isLoaded} addNotifications={addNotifications}
+			/>
 
 
 		)

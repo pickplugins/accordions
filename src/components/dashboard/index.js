@@ -26,26 +26,29 @@ function Html(props) {
 	}); // Using the hook.
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
+	var [debounce, setdebounce] = useState(0); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 	var [pleaseUpdate, setpleaseUpdate] = useState(false); // Using the hook.
 
-	// var notificationsX = [
-	// 	{ content: "Hello notifications 1", type: "warnning" },
-	// 	{ content: "Hello notifications 2", type: "error" },
-	// 	{ content: "Hello notifications 3", type: "success" },
-	// ]
 
 	var [notifications, setnotifications] = useState([]); // Using the hook.
 
 	useEffect(() => {
 		setnotifications(notifications);
 
-		setTimeout(() => {
-			setnotifications([]);
-		}, 5000);
+		// setTimeout(() => {
+		// 	setnotifications([]);
+		// }, 5000);
+
+		const timer = setTimeout(() => {
+			setnotifications([]); // Update the debounced value after delay
+		}, 5000); // 300ms debounce delay
+
+		return () => clearTimeout(timer); // Cleanup timer on value change or unmount
+
 	}, [notifications]);
 
-	function getNotifications(notification) {
+	function addNotifications(notification) {
 		var notificationsX = [...notifications];
 		notificationsX.push(notification);
 		setnotifications(notificationsX);
@@ -55,7 +58,6 @@ function Html(props) {
 		setActiveAccordion(args);
 	}
 	function onChangeStyle(args) {
-		// console.log(args);
 
 		var accordionDataX = { ...accordionData };
 		accordionDataX.reponsiveCss = args;
@@ -86,6 +88,8 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 			setpleaseUpdate(false);
+			addNotifications({ title: "Accordion Saved!", content: "You change successfully saved!.", type: "success" })
+
 		});
 	}
 
@@ -115,7 +119,7 @@ function Html(props) {
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
 			<div className="flex h-[800px]">
-				<div className="w-[450px] overflow-y-scroll light-scrollbar">
+				<div className="w-[500px] overflow-y-scroll light-scrollbar">
 					<PGtabs
 						activeTab="accordions"
 						orientation=""
@@ -123,7 +127,7 @@ function Html(props) {
 						navItemClass="bg-gray-200 px-5 py-3 gap-2"
 						navItemSelectedClass="!bg-white"
 						activeClass="active-tab"
-						onSelect={(tabName) => {}}
+						onSelect={(tabName) => { }}
 						tabs={[
 							{
 								name: "accordions",
@@ -153,6 +157,7 @@ function Html(props) {
 								)}
 
 								<WCPSList
+									addNotifications={addNotifications}
 									selectAccordion={selectAccordion}
 									activeAccordion={activeAccordion}
 								/>
@@ -163,7 +168,7 @@ function Html(props) {
 								{postData.ID != null && (
 									<AccordionsEdit
 										onChange={onChangeAccordion}
-										getNotifications={getNotifications}
+										addNotifications={addNotifications}
 										postData={postData}
 									/>
 								)}
@@ -200,6 +205,9 @@ function Html(props) {
 												};
 
 												onChangeAccordion(accordionDataX);
+
+												addNotifications({ title: "Preset Applied", content: "WOW, Your accordion just got new look!", type: "success" })
+
 											}}>
 											<img className="w-full" src={preset.thumb} alt="" />
 											<div className="text-lg mt-3 text-white">
@@ -222,7 +230,7 @@ function Html(props) {
 								onChange={onChangeAccordion}
 								postData={postData}
 								id={activeAccordion}
-								getNotifications={getNotifications}
+								addNotifications={addNotifications}
 							/>
 						)}
 						{postData.ID != null && (
@@ -232,9 +240,7 @@ function Html(props) {
 							/>
 						)}
 
-						{JSON.stringify(accordionData)}
-						<div>postData</div>
-						{JSON.stringify(postData)}
+						{JSON.stringify(notifications)}
 					</div>
 				</div>
 			</div>
