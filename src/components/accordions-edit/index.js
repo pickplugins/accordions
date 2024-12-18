@@ -1,32 +1,33 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
-import { __ } from "@wordpress/i18n";
-import { useSelect, select, useDispatch, dispatch } from "@wordpress/data";
-import { store as coreStore } from "@wordpress/core-data";
 import apiFetch from "@wordpress/api-fetch";
+import { store as coreStore } from "@wordpress/core-data";
+import { useSelect } from "@wordpress/data";
+import { __ } from "@wordpress/i18n";
+import { ReactSortable } from "react-sortablejs";
 
 import {
-	__experimentalInputControl as InputControl,
 	Icon,
+	__experimentalInputControl as InputControl,
 	PanelBody,
 	PanelRow,
+	Popover,
 	SelectControl,
 	ToggleControl,
-	Popover,
 } from "@wordpress/components";
-import { brush, close, settings } from "@wordpress/icons";
+import { brush, close, copy, menu, settings } from "@wordpress/icons";
 
+import { RichText } from "@wordpress/block-editor";
 import breakPoints from "../../breakpoints";
 import PGDropdown from "../dropdown";
+import PGIconPicker from "../icon-picker";
+import PGinputSelect from "../input-select";
+import PGinputText from "../input-text";
+import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
-import PGIconPicker from "../icon-picker";
-import PGinputText from "../input-text";
-import PGinputSelect from "../input-select";
-import PGcssOpenaiPrompts from "../openai-prompts";
 
 var myStore = wp.data.select("postgrid-shop");
-import { RichText } from "@wordpress/block-editor";
 
 function Html(props) {
 	if (!props.warn) {
@@ -127,6 +128,12 @@ function Html(props) {
 		accordionDataX.accOptions = accOptions;
 		setaccordionData(accordionDataX);
 	}, [accOptions]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionDataX.items = items;
+		setaccordionData(accordionDataX);
+	}, [items]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -1037,128 +1044,198 @@ function Html(props) {
 
 						{globalOptions?.itemSource == "manual" && (
 							<div>
-								{items?.map((item, index) => {
-									return (
-										<>
-											<div className="">
-												<div
-													className="bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400"
-													onClick={(ev) => {
-														setitemActive(index == itemActive ? 999 : index);
-													}}>
-													<div>{item?.headerLabel.options.text}</div>
-
-													<span
-														className="cursor-pointer hover:bg-red-500 hover:text-white "
+								<ReactSortable
+									list={items}
+									handle={".handle"}
+									setList={(item) => {
+										setitems(item);
+									}}>
+									{items?.map((item, index) => {
+										return (
+											<>
+												<div className="" key={index}>
+													<div
+														className="bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400"
 														onClick={(ev) => {
-															ev.stopPropagation();
-															var itemsX = [...items];
-
-															itemsX.splice(index, 1);
-															setitems(itemsX);
+															setitemActive(index == itemActive ? 999 : index);
 														}}>
-														<Icon icon={close} />
-													</span>
-												</div>
-
-												{itemActive == index && (
-													<div className="py-2 w-full">
-														<div className="mb-3">
-															<RichText
-																className="bg-slate-100 p-3 "
-																tagName={"div"}
-																value={item?.headerLabel.options.text}
-																allowedFormats={[
-																	"core/bold",
-																	"core/italic",
-																	"core/link",
-																]}
-																onChange={(content) => {
+														<div>{item?.headerLabel.options.text}</div>
+														<div className="flex items-center gap-2">
+															<span className="handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
+																<Icon icon={menu} />
+															</span>
+															<span
+																className="cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
+																onClick={(ev) => {
 																	var itemsX = [...items];
-
-																	itemsX[index].headerLabel.options.text =
-																		content;
+																	var itemToDup = { ...itemsX[index] };
+																	itemsX.splice(index + 1, 0, itemToDup);
 																	setitems(itemsX);
-																}}
-																placeholder={""}
-															/>
-														</div>
-														<div className="mb-3">
-															<RichText
-																className={`bg-slate-100 p-3 min-h-24`}
-																tagName={"div"}
-																value={item?.content.options.text}
-																allowedFormats={[
-																	"core/bold",
-																	"core/italic",
-																	"core/link",
-																]}
-																onChange={(content) => {
+																	console.log("first: ", itemsX);
+																}}>
+																<Icon icon={copy} />
+															</span>
+															<span
+																className="cursor-pointer hover:bg-red-500 hover:text-white "
+																onClick={(ev) => {
+																	ev.stopPropagation();
 																	var itemsX = [...items];
-
-																	itemsX[index].content.options.text = content;
+																	itemsX.splice(index, 1);
 																	setitems(itemsX);
-																	//setsearchPrams({ ...searchPrams, content: content });
-																}}
-																placeholder={"Write details"}
-															/>
-														</div>
-														<div className="mb-3">
-															<PanelRow>
-																<label htmlFor="">Active</label>
-																<SelectControl
-																	label=""
-																	value={globalOptions?.active}
-																	options={[
-																		{
-																			label: __("True", "post-grid"),
-																			value: 1,
-																		},
-																		{
-																			label: __("False", "post-grid"),
-																			value: 0,
-																		},
-																	]}
-																	onChange={(newVal) => {
-																		var itemsX = [...items];
-
-																		itemsX[index].active = newVal;
-																		setitems(itemsX);
-																	}}
-																/>
-															</PanelRow>
-														</div>
-														<div className="mb-3">
-															<PanelRow>
-																<label htmlFor="">Enable lazyLoad</label>
-																<SelectControl
-																	label=""
-																	value={globalOptions?.hideOnSchema}
-																	options={[
-																		{
-																			label: __("True", "post-grid"),
-																			value: 1,
-																		},
-																		{
-																			label: __("False", "post-grid"),
-																			value: 0,
-																		},
-																	]}
-																	onChange={(newVal) => {
-																		var itemsX = [...items];
-
-																		itemsX[index].hideOnSchema = newVal;
-																		setitems(itemsX);
-																	}}
-																/>
-															</PanelRow>
+																}}>
+																<Icon icon={close} />
+															</span>
 														</div>
 													</div>
-												)}
-											</div>
-										</>
-									);
-								})}
+
+													{itemActive == index && (
+														<div className="py-2 w-full">
+															<div className="mb-3">
+																<RichText
+																	className="bg-slate-100 p-3 "
+																	tagName={"div"}
+																	value={item?.headerLabel.options.text}
+																	allowedFormats={[
+																		"core/bold",
+																		"core/italic",
+																		"core/link",
+																	]}
+																	onChange={(content) => {
+																		// var itemsX = [...items];
+
+																		// itemsX[index].headerLabel.options.text =
+																		// 	content;
+																		// setitems(itemsX);
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				headerLabel: {
+																					...updatedItems[index].headerLabel,
+																					options: {
+																						...updatedItems[index].headerLabel
+																							.options,
+																						text: content,
+																					},
+																				},
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																	placeholder={""}
+																/>
+															</div>
+															<div className="mb-3">
+																<RichText
+																	className={`bg-slate-100 p-3 min-h-24`}
+																	tagName={"div"}
+																	value={item?.content.options.text}
+																	allowedFormats={[
+																		"core/bold",
+																		"core/italic",
+																		"core/link",
+																	]}
+																	onChange={(content) => {
+																		// var itemsX = [...items];
+
+																		// itemsX[index].content.options.text =
+																		// 	content;
+																		// setitems(itemsX);
+
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				content: {
+																					...updatedItems[index].content,
+																					options: {
+																						...updatedItems[index].content
+																							.options,
+																						text: content,
+																					},
+																				},
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																	placeholder={"Write details"}
+																/>
+															</div>
+															<div className="mb-3">
+																<PanelRow>
+																	<label htmlFor="">Active</label>
+																	<SelectControl
+																		label=""
+																		value={item?.active ?? 0}
+																		options={[
+																			{
+																				label: __("True", "post-grid"),
+																				value: 1,
+																			},
+																			{
+																				label: __("False", "post-grid"),
+																				value: 0,
+																			},
+																		]}
+																		onChange={(newVal) => {
+																			// var itemsX = [...items];
+
+																			// itemsX[index].active = newVal;
+																			// setitems(itemsX);
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					active: newVal,
+																				};
+																				return updatedItems;
+																			});
+																		}}
+																	/>
+																</PanelRow>
+															</div>
+															<div className="mb-3">
+																<PanelRow>
+																	<label htmlFor="">Enable lazyLoad</label>
+																	<SelectControl
+																		label=""
+																		value={item?.hideOnSchema ?? 0}
+																		options={[
+																			{
+																				label: __("True", "post-grid"),
+																				value: 1,
+																			},
+																			{
+																				label: __("False", "post-grid"),
+																				value: 0,
+																			},
+																		]}
+																		onChange={(newVal) => {
+																			// var itemsX = [...items];
+
+																			// itemsX[index].hideOnSchema = newVal;
+																			// setitems(itemsX);
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					hideOnSchema: newVal,
+																				};
+																				return updatedItems;
+																			});
+																		}}
+																	/>
+																</PanelRow>
+															</div>
+														</div>
+													)}
+												</div>
+											</>
+										);
+									})}
+								</ReactSortable>
 							</div>
 						)}
 					</PanelBody>
@@ -1171,6 +1248,7 @@ function Html(props) {
 							<PanelRow>
 								<label htmlFor="">Enable lazyLoad</label>
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.lazyLoad}
 									options={[
@@ -1187,6 +1265,7 @@ function Html(props) {
 							<PanelRow>
 								<label htmlFor="">Enable Autoembed</label>
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.autoembed}
 									options={[
@@ -1205,6 +1284,7 @@ function Html(props) {
 								<label htmlFor="">Enable Shortcodes</label>
 
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.shortcodes}
 									options={[
@@ -1222,6 +1302,7 @@ function Html(props) {
 								<label htmlFor="">Enable wpautop</label>
 
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.wpautop}
 									options={[
@@ -1239,6 +1320,7 @@ function Html(props) {
 								<label htmlFor="">Enable Schema</label>
 
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.schema}
 									options={[
@@ -1256,6 +1338,8 @@ function Html(props) {
 								<label htmlFor="">Enable Toggle Text</label>
 
 								<SelectControl
+									className="w-[140px]"
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.toggleText}
 									options={[
@@ -1273,6 +1357,7 @@ function Html(props) {
 								<label htmlFor="">Enable expand/collapse all</label>
 
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.expandCollapseAll}
 									options={[
@@ -1290,11 +1375,12 @@ function Html(props) {
 								<label htmlFor="">Expand All Text</label>
 
 								<PGinputText
+									className="max-w-[140px]"
 									label=""
 									value={globalOptions?.expandAllText}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.expandAllText = "";
+										globalOptionsX.expandAllText = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
@@ -1303,6 +1389,7 @@ function Html(props) {
 								<label htmlFor="">Collapse All Text</label>
 
 								<PGinputText
+									className="max-w-[140px]"
 									label=""
 									value={globalOptions?.collapseAllText}
 									onChange={(newVal) => {
@@ -1316,6 +1403,7 @@ function Html(props) {
 								<label htmlFor="">Enable Stats</label>
 
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.stats}
 									options={[
@@ -1334,6 +1422,7 @@ function Html(props) {
 								<label htmlFor="">Active Event</label>
 
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.activeEvent}
 									options={[
@@ -1351,6 +1440,7 @@ function Html(props) {
 							<PanelRow>
 								<label htmlFor="">Enable URL Hash</label>
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.urlHash}
 									options={[
@@ -1368,6 +1458,7 @@ function Html(props) {
 							<PanelRow>
 								<label htmlFor="">Click To Scroll Top</label>
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.clickToScrollTop}
 									options={[
@@ -1382,9 +1473,12 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-							<PanelRow>
-								<label htmlFor="">Click To Scroll Top Offset</label>
+							<PanelRow className="w-full">
+								<label htmlFor="" className="break-all">
+									Click To Scroll Top Offset
+								</label>
 								<PGinputText
+									className="max-w-[140px]"
 									label=""
 									value={globalOptions?.clickToScrollTopOffset}
 									onChange={(newVal) => {
@@ -1397,6 +1491,7 @@ function Html(props) {
 							<PanelRow>
 								<label htmlFor="">Animation Name</label>
 								<SelectControl
+									className="w-[140px]"
 									label=""
 									value={globalOptions?.animationName}
 									options={[
@@ -1414,6 +1509,7 @@ function Html(props) {
 							<PanelRow>
 								<label htmlFor="">Animation delay</label>
 								<PGinputText
+									className="max-w-[140px]"
 									label=""
 									value={globalOptions?.animationDelay}
 									onChange={(newVal) => {
@@ -1435,7 +1531,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1469,7 +1565,7 @@ function Html(props) {
 												...wrapper,
 												options: {
 													...wrapper.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											setwrapper(optionsX);
@@ -1514,7 +1610,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1542,7 +1638,7 @@ function Html(props) {
 												...content,
 												options: {
 													...content.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											setcontent(optionsX);
@@ -1587,7 +1683,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1617,7 +1713,7 @@ function Html(props) {
 												...header,
 												options: {
 													...header.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											setheader(optionsX);
@@ -1656,7 +1752,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1684,7 +1780,7 @@ function Html(props) {
 												...headerActive,
 												options: {
 													...headerActive.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											setheaderActive(optionsX);
@@ -1739,7 +1835,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1767,7 +1863,7 @@ function Html(props) {
 												...headerLabel,
 												options: {
 													...headerLabel.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											setheaderLabel(optionsX);
@@ -1817,7 +1913,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1881,7 +1977,7 @@ function Html(props) {
 												...labelCounter,
 												options: {
 													...labelCounter.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											setlabelCounter(optionsX);
@@ -1936,7 +2032,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2030,7 +2126,7 @@ function Html(props) {
 												...labelIcon,
 												options: {
 													...labelIcon.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											setlabelIcon(optionsX);
@@ -2104,7 +2200,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2207,7 +2303,7 @@ function Html(props) {
 												...icon,
 												options: {
 													...icon.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											seticon(optionsX);
@@ -2246,7 +2342,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2274,7 +2370,7 @@ function Html(props) {
 												...iconToggle,
 												options: {
 													...iconToggle.options,
-													class: newVal.target.value,
+													class: newVal,
 												},
 											};
 											seticonToggle(optionsX);
@@ -2358,38 +2454,3 @@ class AccordionsEdit extends Component {
 }
 
 export default AccordionsEdit;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
