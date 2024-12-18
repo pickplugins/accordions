@@ -150,62 +150,57 @@ function Html(props) {
 
 	return (
 		<div className="">
-			{(isLoading) && (
-				<div className=' text-center '>
+			{isLoading && (
+				<div className=" text-center ">
 					<Spinner />
 				</div>
 			)}
 
-
 			{posts != null && (
 				<>
-					{posts.map(item => {
-
+					{posts.map((item) => {
 						return (
-							<div className='flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer' onClick={ev => {
-								selectAccordion(item.ID)
-							}}>
-
-								<span>{item.post_title} <span className="text-sm">{`(#${item.ID})`}</span></span>
+							<div
+								className="flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer"
+								onClick={(ev) => {
+									selectAccordion(item.ID);
+								}}>
+								<span>
+									{item.post_title}{" "}
+									<span className="text-sm">{`(#${item.ID})`}</span>
+								</span>
 								{activeAccordion == item.ID && (
-									<span><Icon icon={check} /></span>
+									<span>
+										<Icon icon={check} />
+									</span>
 								)}
-
 							</div>
-						)
-
+						);
 					})}
 				</>
 			)}
 
+			<div className="flex py-5 justify-between px-2">
+				<div
+					className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+					onClick={(ev) => {
+						if (pagination.currentPage > 1) {
+							var currentPage = pagination.currentPage - 1;
+							setPagination({ currentPage: currentPage });
+						}
+					}}>
+					Prev
+				</div>
+				<div
+					className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+					onClick={(ev) => {
+						var currentPage = pagination.currentPage + 1;
 
-
-			<div className='flex py-5 justify-between px-2'>
-
-				<div className='bg-slate-400 px-5 py-2 cursor-pointer hover:bg-slate-300' onClick={ev => {
-
-					if (pagination.currentPage > 1) {
-						var currentPage = pagination.currentPage - 1;
-						setPagination({ currentPage: currentPage })
-					}
-
-
-				}}>Prev</div>
-				<div className='bg-slate-400 px-5 py-2 cursor-pointer hover:bg-slate-300' onClick={ev => {
-
-					var currentPage = pagination.currentPage + 1;
-
-					setPagination({ currentPage: currentPage })
-				}}>Next</div>
-
-
-
-
+						setPagination({ currentPage: currentPage });
+					}}>
+					Next
+				</div>
 			</div>
-
-
-
-
 		</div>
 	);
 
