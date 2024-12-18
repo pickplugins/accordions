@@ -494,16 +494,29 @@ function Html(props) {
 
 
 		var wpfooter = document.getElementById("wpfooter");
-		var divWrap = document.getElementById("css-block");
-		if (divWrap != undefined) {
-			document.getElementById("css-block").outerHTML = "";
+		var csswrappg = document.getElementById("css-block");
+
+
+		// var divWrap = document.getElementById("css-block");
+
+
+		// if (divWrap != undefined) {
+		// 	divWrap.outerHTML = "";
+		// }
+
+		if (csswrappg == null) {
+			var divWrap = '<style id="css-block">' + reponsiveCss + '</style>';
+			wpfooter.insertAdjacentHTML("beforeend", divWrap);
+			var csswrappg = document.getElementById("css-block");
+			csswrappg.innerHtml = reponsiveCss;
+
+		} else {
+
+			//csswrappg.insertAdjacentHTML("beforeend", reponsiveCss);
+			csswrappg.innerHTML = reponsiveCss;
+
 		}
 
-		var divWrap = '<style id="css-block"></style>';
-		wpfooter.insertAdjacentHTML("beforeend", divWrap);
-		var csswrappg = document.getElementById("css-block");
-		var str = "" + reponsiveCss + "";
-		csswrappg.insertAdjacentHTML("beforeend", str);
 
 	}, [styleObj]);
 

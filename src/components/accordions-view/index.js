@@ -2,7 +2,7 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
 import { RichText } from '@wordpress/block-editor'
 
-import { Icon, close, settings, cloud, plus, post } from "@wordpress/icons";
+import { Icon, close, settings, cog, cloud, plus, post } from "@wordpress/icons";
 import { ReactSortable } from "react-sortablejs";
 import {
 	PanelBody,
@@ -28,6 +28,7 @@ import apiFetch from "@wordpress/api-fetch";
 import { Splide, SplideTrack } from "@splidejs/react-splide";
 
 import PGDropdown from '../../components/dropdown'
+import { Fragment } from 'react';
 
 
 var myStore = wp.data.select("postgrid-shop");
@@ -41,7 +42,7 @@ function Html(props) {
 
 	var id = props.id;
 	var onChange = props.onChange;
-	var getNotifications = props.getNotifications;
+	var addNotifications = props.addNotifications;
 
 	var isLoading = props.isLoading;
 	var onUpdate = props.onUpdate;
@@ -76,6 +77,7 @@ function Html(props) {
 	var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
 
 
+	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
 
 	const [toggled, setToggled] = useState(false);
 	const [labelIconHtml, setlabelIconHtml] = useState("");
@@ -86,7 +88,8 @@ function Html(props) {
 	const copyData = (data) => {
 
 		navigator.clipboard.writeText(data).then(() => {
-			getNotifications({ content: "Copied to clipboard!", type: "success" })
+			addNotifications({ title: "Copied to clipboard!", content: "Use the shortcode in page or post conent where you want to display.", type: "success" })
+
 		})
 			.catch((err) => { });
 	};
@@ -155,13 +158,8 @@ function Html(props) {
 
 	return (
 		<div className="ml-5">
-
-
-
-
 			<div className="flex items-center justify-between align-middle bg-white p-5  mb-5">
 				<div className="flex items-center gap-5">
-
 					<h2>
 						{postData?.post_title && (
 							<>You are editing: {postData.post_title}</>
@@ -169,19 +167,45 @@ function Html(props) {
 					</h2>
 				</div>
 
-				<div className='flex items-center align-middle gap-3'>
+				<div className="flex items-center align-middle gap-3">
+
+					<div
+						className=" tracking-wide "
+					>
+						<div className="py-1 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600" onClick={(ev) => {
+							ev.preventDefault();
+							ev.stopPropagation();
+							setAIWriter(!AIWriter);
+						}}> <Icon fill={"#fff"} icon={cog} /></div>
+						{AIWriter && (
+							<Popover position="bottom right">
+								<div className="w-[600px] p-3 relative">
+									<span
+										className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0"
+										onClick={(ev) => {
+											ev.preventDefault();
+											ev.stopPropagation();
+											setAIWriter(!AIWriter);
+										}}>
+										<Icon fill={"#fff"} icon={close} />
+									</span>
+
+									Hello
+								</div>
+							</Popover>
+						)}
+					</div>
 
 					<div>
-						<input type="text" className='w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4' value={`[accordions_builder id="${id}"]`}
+						<input
+							type="text"
+							className="w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 text-sm !py-1 !px-2 font-mono"
+							value={`[accordions_builder id="${id}"]`}
 							onClick={() => {
-
 								var str = `[accordions_builder id="${id}"]`;
 
 								copyData(str);
-
-
 							}}
-
 						/>
 					</div>
 
@@ -191,37 +215,31 @@ function Html(props) {
 						</div>
 					)}
 
-
-
 					{pleaseUpdateX && (
-						<div className='bg-slate-400 px-5 py-3 cursor-pointer hover:bg-slate-300' onClick={ev => {
-							onUpdate(true)
-						}}>Save</div>
+						<div
+							className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+							onClick={(ev) => {
+								onUpdate(true);
+							}}>
+							Save
+						</div>
 					)}
-
-
-
-
 				</div>
 			</div>
 
 			<div className={`my-5 ${wrapper?.options?.class} `}>
 				{items?.map((item, index) => {
-
 					return (
-						<>
+						<Fragment key={index}>
 							<div
-								className={`accordion-header ${header.options.class
-									} ${active == index ? "accordion-header-active" : ""}`}
+								className={`accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""
+									}`}
 								onClick={(ev) => {
 									setToggled(!toggled);
-									setactive(index == active ? 999 : index)
+									setactive(index == active ? 999 : index);
 								}}>
 								{labelCounter.options.position == "left" && (
-									<span
-										className={` accordion-label-counter`}>
-										{index}
-									</span>
+									<span className={` accordion-label-counter`}>{index}</span>
 								)}
 								{icon.options.position == "left" && (
 									<>
@@ -233,7 +251,9 @@ function Html(props) {
 										{active == index && (
 											<span
 												className={` accordion-icon accordion-icon-toggle}`}
-												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
 										)}
 									</>
 								)}
@@ -248,48 +268,37 @@ function Html(props) {
 										return;
 									}}>
 									{labelCounter.options.position == "beforeLabelText" && (
-										<span
-											className={` accordion-label-counter`}>
-											{index}
-										</span>
+										<span className={` accordion-label-counter`}>{index}</span>
 									)}
 									{labelIcon.options.position == "beforeLabelText" && (
 										<span
 											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											dangerouslySetInnerHTML={{
+												__html: labelIconHtml,
+											}}></span>
 									)}
 									{item.headerLabel?.options.text.length > 0 ? (
-
 										<>
-											<RichText
-												className=""
-												tagName={"span"}
-												value={item?.headerLabel.options.text}
-												allowedFormats={["core/bold", "core/italic", "core/link"]}
-												onChange={(content) => {
-													var itemsX = [...items]
+											<span
+												className={``}
+												dangerouslySetInnerHTML={{
+													__html: item?.headerLabel.options.text,
+												}}></span>
 
-													itemsX[index].headerLabel.options.text = content;
-													setitems(itemsX)
 
-												}}
-												placeholder={""}
-											/>
 										</>
-
 									) : (
 										"Start Writing..."
 									)}
 									{labelIcon.options.position == "afterLabelText" && (
 										<span
 											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											dangerouslySetInnerHTML={{
+												__html: labelIconHtml,
+											}}></span>
 									)}
 									{labelCounter.options.position == "afterLabelText" && (
-										<span
-											className={` accordion-label-counter`}>
-											{index}
-										</span>
+										<span className={` accordion-label-counter`}>{index}</span>
 									)}
 								</div>
 								{labelIcon.options.position == "afterLabel" && (
@@ -298,10 +307,7 @@ function Html(props) {
 										dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
 								)}
 								{labelCounter.options.position == "right" && (
-									<span
-										className={` accordion-label-counter`}>
-										{index}
-									</span>
+									<span className={` accordion-label-counter`}>{index}</span>
 								)}
 								{icon.options.position == "right" && (
 									<>
@@ -313,41 +319,27 @@ function Html(props) {
 										{active == index && (
 											<span
 												className={` accordion-icon-toggle`}
-												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
 										)}
 									</>
 								)}
-
-
-
 							</div>
 							{active == index && (
 								<>
-
-
-									<RichText
+									<div
 										className={`accordion-content`}
-										tagName={"div"}
-										value={item?.content.options.text}
-										allowedFormats={["core/bold", "core/italic", "core/link"]}
-										onChange={(content) => {
-											var itemsX = [...items]
+										dangerouslySetInnerHTML={{
+											__html: item?.content.options.text,
+										}}></div>
 
-											itemsX[index].content.options.text = content;
-											setitems(itemsX)
-											//setsearchPrams({ ...searchPrams, content: content });
-										}}
-										placeholder={"Write details about your design..."}
-									/>
 								</>
 							)}
-						</>
+						</Fragment>
 					);
 				})}
 			</div>
-
-
-
 		</div>
 	);
 }
@@ -367,7 +359,7 @@ class AccordionsView extends Component {
 
 
 	render() {
-		var { postData, id, isLoading, onChange, pleaseUpdate, onUpdate, getNotifications } = this.props;
+		var { postData, id, isLoading, onChange, pleaseUpdate, onUpdate, addNotifications } = this.props;
 
 		return (
 			<Html
@@ -377,7 +369,7 @@ class AccordionsView extends Component {
 				onUpdate={onUpdate}
 				pleaseUpdate={pleaseUpdate}
 				onChange={onChange}
-				getNotifications={getNotifications}
+				addNotifications={addNotifications}
 				warn={this.state.showWarning}
 			/>
 		);
