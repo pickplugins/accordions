@@ -441,19 +441,50 @@ function Html(props) {
 		terms: { label: "Terms", value: "terms", isPro: 0 },
 	};
 
+
+	const copyData = (data) => {
+
+		navigator.clipboard.writeText(data).then(() => {
+			getNotifications({ content: "Copied to clipboard!", type: "success" })
+		})
+			.catch((err) => { });
+	};
+
 	return (
-		<div className="">
-			{/* <div>{`{`}</div>
-			<div>{`"wrapper":${JSON.stringify(wrapper)}`},</div>
-			<div>{`"content":${JSON.stringify(content)}`},</div>
-			<div>{`"header":${JSON.stringify(header)}`},</div>
-			<div>{`"headerActive":${JSON.stringify(headerActive)}`},</div>
-			<div>{`"headerLabel":${JSON.stringify(headerLabel)}`},</div>
-			<div>{`"labelCounter":${JSON.stringify(labelCounter)}`},</div>
-			<div>{`"labelIcon":${JSON.stringify(labelIcon)}`},</div>
-			<div>{`"icon":${JSON.stringify(icon)}`},</div>
-			<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
-			<div>{`}`}</div> */}
+		<div className="" >
+
+			<div onClick={() => {
+
+				var str = `{
+			"wrapper":${JSON.stringify(wrapper)},
+			"content":${JSON.stringify(content)},
+			"header":${JSON.stringify(header)},
+			"headerActive":${JSON.stringify(headerActive)},
+			"headerLabel":${JSON.stringify(headerLabel)},
+			"labelCounter":${JSON.stringify(labelCounter)},
+			"labelIcon":${JSON.stringify(labelIcon)},
+			"icon":${JSON.stringify(icon)},
+			"iconToggle":${JSON.stringify(iconToggle)},
+			}`;
+
+				copyData(str);
+
+
+			}}>
+				{`{`}
+				{`"wrapper":${JSON.stringify(wrapper)}`},
+				{`"content":${JSON.stringify(content)}`},
+				{`"header":${JSON.stringify(header)}`},
+				{`"headerActive":${JSON.stringify(headerActive)}`},
+				{`"headerLabel":${JSON.stringify(headerLabel)}`},
+				{`"labelCounter":${JSON.stringify(labelCounter)}`},
+				{`"labelIcon":${JSON.stringify(labelIcon)}`},
+				{`"icon":${JSON.stringify(icon)}`},
+				{`"iconToggle":${JSON.stringify(iconToggle)}`},
+				{`}`}
+
+			</div>
+
 
 			{props.postData.post_content != null && (
 				<>

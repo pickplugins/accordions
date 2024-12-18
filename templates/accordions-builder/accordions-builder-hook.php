@@ -10,7 +10,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
-    $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : false;
+    $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : true;
 
 
     var_dump($globalOptions);
@@ -213,12 +213,31 @@ function accordions_builder_accordion($post_id, $accordionData)
             $i = 0;
             $json['@context'] = "https://schema.org";
             $json['@type'] = "FAQPage";
-            foreach ($items as $block) {
+            foreach ($items as $item) {
+
+
+                $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
+                $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
+                $headerLabelText = isset($headerLabelOptions["text"]) ? $headerLabelOptions["text"] : "";
+
+
+                $content = isset($item["content"]) ? $item["content"] : [];
+                $contentOptions = isset($content["options"]) ? $content["options"] : [];
+                $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
+
+
+
+
+
+
+
+
+
                 $json['mainEntity'][$i]['@type'] = "Question";
-                $json['mainEntity'][$i]['@id'] = isset($block['attrs']['blockId']) ? "#" . $block['attrs']['blockId'] : '';
-                $json['mainEntity'][$i]['name'] = isset($block['attrs']['headerLabel']['options']['text']) ? _wp_specialchars($block['attrs']['headerLabel']['options']['text'], ENT_QUOTES)  : '';
+                $json['mainEntity'][$i]['@id'] = isset($item['attrs']['blockId']) ? "#" . $item['attrs']['blockId'] : '';
+                $json['mainEntity'][$i]['name'] = isset($item['attrs']['headerLabel']['options']['text']) ? _wp_specialchars($headerLabelText, ENT_QUOTES)  : '';
                 $json['mainEntity'][$i]['acceptedAnswer']['@type'] = "Answer";
-                $json['mainEntity'][$i]['acceptedAnswer']['text'] = _wp_specialchars(render_block($block), ENT_QUOTES);
+                $json['mainEntity'][$i]['acceptedAnswer']['text'] = _wp_specialchars($contentText, ENT_QUOTES);
                 $i++;
             }
             $accordionsSchema[$blockId] = $json;
