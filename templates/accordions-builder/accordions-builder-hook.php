@@ -1,10 +1,21 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
 
-add_action('accordions_builder_accordion', 'accordions_builder_accordion', 5);
+add_action('accordions_builder_accordion', 'accordions_builder_accordion', 5, 2);
 
-function accordions_builder_accordion($accordionData)
+function accordions_builder_accordion($post_id, $accordionData)
 {
+
+    global $accordionsSchema;
+
+
+    $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
+    $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : false;
+
+
+    var_dump($globalOptions);
+
+
 
     $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
 
@@ -107,7 +118,7 @@ function accordions_builder_accordion($accordionData)
 
 
 
-    $blockId = "pg123";
+    $blockId = "accordions-" . $post_id;
 
     $accordionDataAttr = [
         "id" => $blockId,
@@ -193,6 +204,29 @@ function accordions_builder_accordion($accordionData)
         <?php
             $count++;
         }
+
+
+
+        if ($schema) {
+
+            $json = [];
+            $i = 0;
+            $json['@context'] = "https://schema.org";
+            $json['@type'] = "FAQPage";
+            foreach ($items as $block) {
+                $json['mainEntity'][$i]['@type'] = "Question";
+                $json['mainEntity'][$i]['@id'] = isset($block['attrs']['blockId']) ? "#" . $block['attrs']['blockId'] : '';
+                $json['mainEntity'][$i]['name'] = isset($block['attrs']['headerLabel']['options']['text']) ? _wp_specialchars($block['attrs']['headerLabel']['options']['text'], ENT_QUOTES)  : '';
+                $json['mainEntity'][$i]['acceptedAnswer']['@type'] = "Answer";
+                $json['mainEntity'][$i]['acceptedAnswer']['text'] = _wp_specialchars(render_block($block), ENT_QUOTES);
+                $i++;
+            }
+            $accordionsSchema[$blockId] = $json;
+        }
+
+
+
+
 
 
         ?>

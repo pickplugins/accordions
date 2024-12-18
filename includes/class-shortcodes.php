@@ -71,7 +71,7 @@ class class_accordions_shortcodes
         ob_start();
 
 
-        do_action("accordions_builder_" . $viewType, $accordionData);
+        do_action("accordions_builder_" . $viewType, $post_id, $accordionData);
 
 
         wp_enqueue_script('accordions_front_scripts');
