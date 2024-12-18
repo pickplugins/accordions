@@ -565,8 +565,16 @@
   width: 100%;
 }
 
+.w-\[140px\] {
+  width: 140px;
+}
+
 .max-w-12 {
   max-width: 3rem;
+}
+
+.max-w-\[160px\] {
+  max-width: 160px;
 }
 
 .max-w-\[400px\] {
@@ -575,6 +583,10 @@
 
 .max-w-\[calc\(100\%_-_50px\)\] {
   max-width: calc(100% - 50px);
+}
+
+.max-w-\[140px\] {
+  max-width: 140px;
 }
 
 .flex-1 {

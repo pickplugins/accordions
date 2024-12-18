@@ -33,8 +33,8 @@ function Html(props) {
         required={props.required}
         disabled={props.disabled}
 
-        onChange={(newVal) => {
-          props.onChange(newVal);
+        onChange={(e) => {
+          props.onChange(e.target.value);
 
         }}
       />

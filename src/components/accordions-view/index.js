@@ -28,6 +28,7 @@ import apiFetch from "@wordpress/api-fetch";
 import { Splide, SplideTrack } from "@splidejs/react-splide";
 
 import PGDropdown from '../../components/dropdown'
+import { Fragment } from 'react';
 
 
 var myStore = wp.data.select("postgrid-shop");
@@ -155,13 +156,8 @@ function Html(props) {
 
 	return (
 		<div className="ml-5">
-
-
-
-
 			<div className="flex items-center justify-between align-middle bg-white p-5  mb-5">
 				<div className="flex items-center gap-5">
-
 					<h2>
 						{postData?.post_title && (
 							<>You are editing: {postData.post_title}</>
@@ -169,19 +165,17 @@ function Html(props) {
 					</h2>
 				</div>
 
-				<div className='flex items-center align-middle gap-3'>
-
+				<div className="flex items-center align-middle gap-3">
 					<div>
-						<input type="text" className='w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4' value={`[accordions_builder id="${id}"]`}
+						<input
+							type="text"
+							className="w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 !py-1 !px-4"
+							value={`[accordions_builder id="${id}"]`}
 							onClick={() => {
-
 								var str = `[accordions_builder id="${id}"]`;
 
 								copyData(str);
-
-
 							}}
-
 						/>
 					</div>
 
@@ -191,37 +185,32 @@ function Html(props) {
 						</div>
 					)}
 
-
-
 					{pleaseUpdateX && (
-						<div className='bg-slate-400 px-5 py-3 cursor-pointer hover:bg-slate-300' onClick={ev => {
-							onUpdate(true)
-						}}>Save</div>
+						<div
+							className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+							onClick={(ev) => {
+								onUpdate(true);
+							}}>
+							Save
+						</div>
 					)}
-
-
-
-
 				</div>
 			</div>
 
 			<div className={`my-5 ${wrapper?.options?.class} `}>
 				{items?.map((item, index) => {
-
 					return (
-						<>
+						<Fragment key={index}>
 							<div
-								className={`accordion-header ${header.options.class
-									} ${active == index ? "accordion-header-active" : ""}`}
+								className={`accordion-header ${header.options.class} ${
+									active == index ? "accordion-header-active" : ""
+								}`}
 								onClick={(ev) => {
 									setToggled(!toggled);
-									setactive(index == active ? 999 : index)
+									setactive(index == active ? 999 : index);
 								}}>
 								{labelCounter.options.position == "left" && (
-									<span
-										className={` accordion-label-counter`}>
-										{index}
-									</span>
+									<span className={` accordion-label-counter`}>{index}</span>
 								)}
 								{icon.options.position == "left" && (
 									<>
@@ -233,7 +222,9 @@ function Html(props) {
 										{active == index && (
 											<span
 												className={` accordion-icon accordion-icon-toggle}`}
-												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
 										)}
 									</>
 								)}
@@ -248,48 +239,47 @@ function Html(props) {
 										return;
 									}}>
 									{labelCounter.options.position == "beforeLabelText" && (
-										<span
-											className={` accordion-label-counter`}>
-											{index}
-										</span>
+										<span className={` accordion-label-counter`}>{index}</span>
 									)}
 									{labelIcon.options.position == "beforeLabelText" && (
 										<span
 											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											dangerouslySetInnerHTML={{
+												__html: labelIconHtml,
+											}}></span>
 									)}
 									{item.headerLabel?.options.text.length > 0 ? (
-
 										<>
 											<RichText
 												className=""
 												tagName={"span"}
 												value={item?.headerLabel.options.text}
-												allowedFormats={["core/bold", "core/italic", "core/link"]}
+												allowedFormats={[
+													"core/bold",
+													"core/italic",
+													"core/link",
+												]}
 												onChange={(content) => {
-													var itemsX = [...items]
+													var itemsX = [...items];
 
 													itemsX[index].headerLabel.options.text = content;
-													setitems(itemsX)
-
+													setitems(itemsX);
 												}}
 												placeholder={""}
 											/>
 										</>
-
 									) : (
 										"Start Writing..."
 									)}
 									{labelIcon.options.position == "afterLabelText" && (
 										<span
 											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											dangerouslySetInnerHTML={{
+												__html: labelIconHtml,
+											}}></span>
 									)}
 									{labelCounter.options.position == "afterLabelText" && (
-										<span
-											className={` accordion-label-counter`}>
-											{index}
-										</span>
+										<span className={` accordion-label-counter`}>{index}</span>
 									)}
 								</div>
 								{labelIcon.options.position == "afterLabel" && (
@@ -298,10 +288,7 @@ function Html(props) {
 										dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
 								)}
 								{labelCounter.options.position == "right" && (
-									<span
-										className={` accordion-label-counter`}>
-										{index}
-									</span>
+									<span className={` accordion-label-counter`}>{index}</span>
 								)}
 								{icon.options.position == "right" && (
 									<>
@@ -313,41 +300,35 @@ function Html(props) {
 										{active == index && (
 											<span
 												className={` accordion-icon-toggle`}
-												dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
 										)}
 									</>
 								)}
-
-
-
 							</div>
 							{active == index && (
 								<>
-
-
 									<RichText
 										className={`accordion-content`}
 										tagName={"div"}
 										value={item?.content.options.text}
 										allowedFormats={["core/bold", "core/italic", "core/link"]}
 										onChange={(content) => {
-											var itemsX = [...items]
+											var itemsX = [...items];
 
 											itemsX[index].content.options.text = content;
-											setitems(itemsX)
+											setitems(itemsX);
 											//setsearchPrams({ ...searchPrams, content: content });
 										}}
 										placeholder={"Write details about your design..."}
 									/>
 								</>
 							)}
-						</>
+						</Fragment>
 					);
 				})}
 			</div>
-
-
-
 		</div>
 	);
 }
