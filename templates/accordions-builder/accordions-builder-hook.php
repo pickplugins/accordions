@@ -127,7 +127,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
 ?>
-    <div id="pg123" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
+    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
 
         <?php
         $count = 0;

@@ -768,6 +768,10 @@
   white-space: pre-line;
 }
 
+.text-wrap {
+  text-wrap: wrap;
+}
+
 .break-words {
   overflow-wrap: break-word;
 }

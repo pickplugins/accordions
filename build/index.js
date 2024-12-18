@@ -13204,32 +13204,9 @@ function Html(props) {
       isPro: 0
     }
   };
-  const copyData = data => {
-    navigator.clipboard.writeText(data).then(() => {
-      getNotifications({
-        content: "Copied to clipboard!",
-        type: "success"
-      });
-    }).catch(err => {});
-  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    onClick: () => {
-      var str = `{
-			"wrapper":${JSON.stringify(wrapper)},
-			"content":${JSON.stringify(content)},
-			"header":${JSON.stringify(header)},
-			"headerActive":${JSON.stringify(headerActive)},
-			"headerLabel":${JSON.stringify(headerLabel)},
-			"labelCounter":${JSON.stringify(labelCounter)},
-			"labelIcon":${JSON.stringify(labelIcon)},
-			"icon":${JSON.stringify(icon)},
-			"iconToggle":${JSON.stringify(iconToggle)},
-			}`;
-      copyData(str);
-    }
-  }, `{`, `"wrapper":${JSON.stringify(wrapper)}`, ",", `"content":${JSON.stringify(content)}`, ",", `"header":${JSON.stringify(header)}`, ",", `"headerActive":${JSON.stringify(headerActive)}`, ",", `"headerLabel":${JSON.stringify(headerLabel)}`, ",", `"labelCounter":${JSON.stringify(labelCounter)}`, ",", `"labelIcon":${JSON.stringify(labelIcon)}`, ",", `"icon":${JSON.stringify(icon)}`, ",", `"iconToggle":${JSON.stringify(iconToggle)}`, ",", `}`), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
@@ -14786,13 +14763,6 @@ class AccordionsEdit extends Component {
       isLoaded: false
     };
     this.handleToggleClick = this.handleToggleClick.bind(this);
-  }
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState(state => ({
-        isLoaded: !state.isLoaded
-      }));
-    }, 1000);
   }
   handleToggleClick() {
     this.setState(state => ({
@@ -37994,111 +37964,6 @@ __webpack_require__.r(__webpack_exports__);
 var accordionTemplates = [{
   label: "Template 1",
   thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
-  data: {
-    "wrapper": {
-      "options": {
-        "tag": "div",
-        "class": "pg-accordion-nested"
-      },
-      "styles": {}
-    },
-    "content": {
-      "options": {
-        "tag": "div",
-        "class": "accordion-content"
-      },
-      "styles": {
-        "padding": {
-          "Desktop": "15px 15px 15px 15px"
-        },
-        "backgroundColor": {
-          "Desktop": "#d5d4d9"
-        }
-      }
-    },
-    "header": {
-      "options": {
-        "tag": "div",
-        "class": "accordion-header"
-      },
-      "styles": {
-        "display": {
-          "Desktop": "flex"
-        },
-        "gap": {
-          "Desktop": "1em"
-        },
-        "padding": {
-          "Desktop": "12px 12px 12px 12px"
-        },
-        "backgroundColor": {
-          "Desktop": "#774360"
-        },
-        "margin": {
-          "Desktop": "0px 0px 1px 0px"
-        },
-        "fontSize": {
-          "Desktop": "16px"
-        }
-      }
-    },
-    "headerActive": {
-      "options": {
-        "tag": "div",
-        "class": "accordion-header-active"
-      },
-      "styles": {}
-    },
-    "headerLabel": {
-      "options": {
-        "text": "Accordion Header",
-        "tag": "div",
-        "class": "accordion-header-label"
-      },
-      "styles": {}
-    },
-    "labelCounter": {
-      "options": {
-        "enable": false,
-        "position": "",
-        "tag": "div",
-        "class": "accordion-label-counter"
-      },
-      "styles": {}
-    },
-    "labelIcon": {
-      "options": {
-        "library": "fontAwesome",
-        "srcType": "class",
-        "iconSrc": "",
-        "position": "",
-        "class": "accordion-label-icon"
-      },
-      "styles": {}
-    },
-    "icon": {
-      "options": {
-        "library": "fontAwesome",
-        "srcType": "class",
-        "iconSrc": "fas fa-angle-down",
-        "position": "left",
-        "class": "accordion-icon"
-      },
-      "styles": {}
-    },
-    "iconToggle": {
-      "options": {
-        "library": "fontAwesome",
-        "srcType": "class",
-        "iconSrc": " fas fa-angle-up",
-        "class": "accordion-icon-toggle"
-      },
-      "styles": {}
-    }
-  }
-}, {
-  label: "Template 1",
-  thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
   data: {}
 }, {
   label: "Template 1",
@@ -40434,6 +40299,7 @@ function Html(props) {
   if (!props.warn) {
     return null;
   }
+  console.log(props.warn);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     className: props.className,
     id: props.id,
@@ -40446,8 +40312,8 @@ function Html(props) {
     maxlength: props.maxlength,
     required: props.required,
     disabled: props.disabled,
-    onChange: newVal => {
-      props.onChange(newVal);
+    onChange: ev => {
+      props.onChange(ev.target.value);
     }
   }));
 }

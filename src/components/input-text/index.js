@@ -13,6 +13,7 @@ function Html(props) {
     return null;
   }
 
+  console.log(props.warn);
 
 
 
@@ -33,8 +34,9 @@ function Html(props) {
         required={props.required}
         disabled={props.disabled}
 
-        onChange={(newVal) => {
-          props.onChange(newVal);
+        onChange={(ev) => {
+
+          props.onChange(ev.target.value);
 
         }}
       />
