@@ -54,12 +54,12 @@ className,
                 onChange(selected);
               }}
             >
-              {options.map(x => {
+              {options.map((x,index) => {
 
                 var isSelected = val.includes(x.value)
 
                 return (
-                  <option value={x.value}
+                  <option value={x.value} key={index}
 
                     selected={isSelected}
 
@@ -78,11 +78,11 @@ className,
                 onChange(currentVal);
               }}
             >
-              {options.map(x => {
+              {options.map((x,index) => {
                 var selected = val.includes(x.value)
 
                 return (
-                  <option value={x.value} selected={selected}
+                  <option value={x.value} selected={selected} key={index}
                   >{x.label}</option>
                 )
               })}

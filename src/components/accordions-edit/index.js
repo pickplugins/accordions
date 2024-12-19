@@ -22,11 +22,11 @@ import PGDropdown from "../dropdown";
 import PGIconPicker from "../icon-picker";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
+import PGinputTextarea from "../input-textarea";
 import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
-import PGinputTextarea from "../input-textarea";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -67,6 +67,10 @@ function Html(props) {
 	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
 	var [icon, seticon] = useState(accordionData.icon);
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
+	var [expandCollapseAll, setexpandCollapseAll] = useState(
+		accordionData.expandCollapseAll
+	);
+	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
@@ -114,19 +118,13 @@ function Html(props) {
 		});
 	}, []);
 
-
-
 	useEffect(() => {
 		console.log(props.postData);
-
 	}, [props.postData]);
-
 
 	useEffect(() => {
 		onChange(accordionData);
 	}, [accordionData]);
-
-
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -199,6 +197,18 @@ function Html(props) {
 		accordionDataX.iconToggle = iconToggle;
 		setaccordionData(accordionDataX);
 	}, [iconToggle]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionDataX.expandCollapseAll = expandCollapseAll;
+		setaccordionData(accordionDataX);
+	}, [expandCollapseAll]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionDataX.searchInput = searchInput;
+		setaccordionData(accordionDataX);
+	}, [searchInput]);
 
 	var RemoveSliderArg = function ({ index }) {
 		return (
@@ -528,7 +538,6 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={postQueryArgs}
 											onChange={(option, index) => {
-
 												var itemQueryArgsX = [...itemQueryArgs];
 												itemQueryArgsX.push({
 													id: option.id,
@@ -547,7 +556,6 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-
 												var itemQueryArgsX = [...itemQueryArgs];
 												itemQueryArgsX.push({
 													id: option.id,
@@ -614,14 +622,16 @@ function Html(props) {
 											}}>
 											Add New
 										</div>
-										<div
-											className=" tracking-wide "
-										>
-											<div className="py-2 px-4 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600" onClick={(ev) => {
-												ev.preventDefault();
-												ev.stopPropagation();
-												setAIWriter(!AIWriter);
-											}}>AI</div>
+										<div className=" tracking-wide ">
+											<div
+												className="py-2 px-4 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+												onClick={(ev) => {
+													ev.preventDefault();
+													ev.stopPropagation();
+													setAIWriter(!AIWriter);
+												}}>
+												AI
+											</div>
 											{AIWriter && (
 												<Popover position="bottom right">
 													<div className="w-[800px] p-3 relative">
@@ -683,7 +693,6 @@ function Html(props) {
 						</div>
 						{globalOptions?.itemSource == "posts" && (
 							<div>
-
 								{itemQueryArgs?.map((item, index) => {
 									return (
 										<div key={index} className="my-4">
@@ -1312,12 +1321,9 @@ function Html(props) {
 										// globalOptionsX.lazyLoad = newVal;
 										// setglobalOptions(globalOptionsX);
 
-
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.lazyLoad = newVal;
 										setglobalOptions(globalOptionsX);
-
-
 									}}
 								/>
 							</PanelRow>
@@ -1417,7 +1423,7 @@ function Html(props) {
 								<SelectControl
 									className="w-[140px]"
 									label=""
-									value={globalOptions?.expandCollapseAll}
+									value={globalOptions?.expandCollapseAll ?? 0}
 									options={[
 										{ label: __("True", "post-grid"), value: 1 },
 										{ label: __("False", "post-grid"), value: 0 },
@@ -1429,34 +1435,79 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-							<PanelRow>
-								<label htmlFor="">Expand All Text</label>
+							{globalOptions?.expandCollapseAll == 1 && (
+								<>
+									<PanelRow>
+										<label htmlFor="">Expand All Text</label>
 
-								<PGinputText
-									className="max-w-[140px]"
-									label=""
-									value={globalOptions?.expandAllText}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.expandAllText = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-							<PanelRow>
-								<label htmlFor="">Collapse All Text</label>
+										<PGinputText
+											className="max-w-[140px]"
+											label=""
+											value={globalOptions?.expandAllText}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.expandAllText = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="">Collapse All Text</label>
 
-								<PGinputText
-									className="max-w-[140px]"
-									label=""
-									value={globalOptions?.collapseAllText}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.collapseAllText = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
+										<PGinputText
+											className="max-w-[140px]"
+											label=""
+											value={globalOptions?.collapseAllText}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.collapseAllText = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="" className="font-medium text-slate-900 ">
+											{__("Expand All Icon", "post-grid")}
+										</label>
+										<PGIconPicker
+											library={
+												globalOptions?.expandAllIcon?.library ?? "fontAwesome"
+											}
+											srcType={globalOptions?.expandAllIcon?.srcType ?? "class"}
+											iconSrc={
+												globalOptions?.expandAllIcon?.iconSrc ?? "fas fa-plus"
+											}
+											onChange={(arg) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.expandAllIcon = arg;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="" className="font-medium text-slate-900 ">
+											{__("Collapse All Icon", "post-grid")}
+										</label>
+										<PGIconPicker
+											library={
+												globalOptions?.collapseAllIcon?.library ?? "fontAwesome"
+											}
+											srcType={
+												globalOptions?.collapseAllIcon?.srcType ?? "class"
+											}
+											iconSrc={
+												globalOptions?.collapseAllIcon?.iconSrc ??
+												"fas fa-minus"
+											}
+											onChange={(arg) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.collapseAllIcon = arg;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+								</>
+							)}
 							<PanelRow>
 								<label htmlFor="">Stats</label>
 
@@ -1548,15 +1599,10 @@ function Html(props) {
 							</PanelRow>
 							<PanelRow>
 								<label htmlFor="">Animation Name</label>
-								<SelectControl
-									className="w-[140px]"
+								<PGinputText
+									className="max-w-[140px]"
 									label=""
-									value={globalOptions?.animationName}
-									options={[
-										{ label: __("Click", "post-grid"), value: "click" },
-										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
-										{ label: __("Focus", "post-grid"), value: "focus" },
-									]}
+									value={globalOptions?.animationName ?? ''}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.animationName = newVal;
@@ -1564,24 +1610,22 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-							<PanelRow>
-								<label htmlFor="">Animation delay</label>
-								<PGinputText
-									className="max-w-[140px]"
-									label=""
-									value={globalOptions?.animationDelay}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.animationDelay = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-
-
+							{globalOptions?.animationName && (
+								<PanelRow>
+									<label htmlFor="">Animation Duration</label>
+									<PGinputText
+										className="max-w-[140px]"
+										label=""
+										value={globalOptions?.animationDuration}
+										onChange={(newVal) => {
+											var globalOptionsX = { ...globalOptions };
+											globalOptionsX.animationDuration = newVal;
+											setglobalOptions(globalOptionsX);
+										}}
+									/>
+								</PanelRow>
+							)}
 						</div>
-
-
 					</PanelBody>
 
 					<PanelBody
@@ -1592,7 +1636,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1671,7 +1715,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1744,7 +1788,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1813,7 +1857,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1896,7 +1940,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1974,7 +2018,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2093,7 +2137,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2261,7 +2305,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2403,7 +2447,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2472,6 +2516,174 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Expand/Collapse All"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={expandCollapseAll.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...expandCollapseAll,
+												options: {
+													...expandCollapseAll.options,
+													class: newVal,
+												},
+											};
+											setexpandCollapseAll(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={expandCollapseAll}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											expandCollapseAll,
+											setexpandCollapseAll
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(
+											sudoScource,
+											key,
+											expandCollapseAll,
+											setexpandCollapseAll
+										)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(
+											sudoScource,
+											key,
+											expandCollapseAll,
+											setexpandCollapseAll
+										)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(
+											sudoSources,
+											expandCollapseAll,
+											setexpandCollapseAll
+										)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											expandCollapseAll,
+											setexpandCollapseAll
+										)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Search Input"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={searchInput.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...searchInput,
+												options: {
+													...searchInput.options,
+													class: newVal,
+												},
+											};
+											setsearchInput(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={searchInput}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											searchInput,
+											setsearchInput
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, searchInput, setsearchInput)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, searchInput, setsearchInput)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, searchInput, setsearchInput)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											searchInput,
+											setsearchInput
+										)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
 				</>
 			)}
 		</div>
@@ -2484,8 +2696,6 @@ class AccordionsEdit extends Component {
 		this.state = { showWarning: true, isLoaded: false };
 		this.handleToggleClick = this.handleToggleClick.bind(this);
 	}
-
-
 
 	handleToggleClick() {
 		this.setState((state) => ({

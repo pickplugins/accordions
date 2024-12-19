@@ -35,7 +35,7 @@ function Html(props) {
 				var type = item.type
 
 				return (
-					<div className={`max-w-72 mb-2 overflow-hidden relative rounded-sm shadow-md bg-white p-3 ${type == 'success' ? " border-0 border-l-4 border-l-green-700 border-solid" : ""} ${type == 'error' ? " border-b-2 border-b-red-700" : ""} ${type == 'warnning' ? " border-b-2 border-b-yellow-500" : ""}`}>
+					<div className={`max-w-72 mb-2 overflow-hidden relative rounded-sm shadow-md bg-white p-3 ${type == 'success' ? " border-0 border-l-4 border-l-green-700 border-solid" : ""} ${type == 'error' ? " border-b-2 border-b-red-700" : ""} ${type == 'warnning' ? " border-b-2 border-b-yellow-500" : ""}`} key={index}>
 
 						<span
 							className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0"
