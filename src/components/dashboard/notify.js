@@ -1,6 +1,6 @@
 const { Component, useState, useEffect } = wp.element;
 
-import { Icon, caution, close, check, error } from "@wordpress/icons";
+import { Icon, close, check } from "@wordpress/icons";
 
 
 function Html(props) {
@@ -51,10 +51,10 @@ function Html(props) {
 						<div className="flex items-center gap-3 ">
 							<div>
 								{type == "warnning" && (
-									<Icon icon={caution} />
+									<Icon icon={close} />
 								)}
 								{type == "error" && (
-									<Icon icon={error} />
+									<Icon icon={close} />
 								)}
 								{type == "success" && (
 									<Icon icon={check} />
