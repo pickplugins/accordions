@@ -10,10 +10,24 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
+    $lazyLoad = isset($globalOptions["lazyLoad"]) ? $globalOptions["lazyLoad"] : true;
+    $stats = isset($globalOptions["stats"]) ? $globalOptions["stats"] : true;
     $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : true;
+    $autoembed = isset($globalOptions["autoembed"]) ? $globalOptions["autoembed"] : true;
+    $shortcodes = isset($globalOptions["shortcodes"]) ? $globalOptions["shortcodes"] : true;
+    $wpautop = isset($globalOptions["wpautop"]) ? $globalOptions["wpautop"] : true;
+    $expandCollapseAll = isset($globalOptions["expandCollapseAll"]) ? $globalOptions["expandCollapseAll"] : "";
+    $expandAllText = isset($globalOptions["expandAllText"]) ? $globalOptions["expandAllText"] : "";
+    $collapseAllText = isset($globalOptions["collapseAllText"]) ? $globalOptions["collapseAllText"] : "";
+    $activeEvent = isset($globalOptions["activeEvent"]) ? $globalOptions["activeEvent"] : "";
+    $urlHash = isset($globalOptions["urlHash"]) ? $globalOptions["urlHash"] : "";
+    $clickToScrollTop = isset($globalOptions["clickToScrollTop"]) ? $globalOptions["clickToScrollTop"] : "";
+    $clickToScrollTopOffset = isset($globalOptions["clickToScrollTopOffset"]) ? $globalOptions["clickToScrollTopOffset"] : "";
+    $animationName = isset($globalOptions["animationName"]) ? $globalOptions["animationName"] : "";
+    $animationDelay = isset($globalOptions["animationDelay"]) ? $globalOptions["animationDelay"] : "";
 
 
-    var_dump($globalOptions);
+    //var_dump($globalOptions);
 
 
 
@@ -129,6 +143,25 @@ function accordions_builder_accordion($post_id, $accordionData)
 ?>
     <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
 
+        <div>
+
+            <?php if ($expandCollapseAll): ?>
+                <div class="expandCollapseAll" expandAllText="<?php esc_attr($expandAllText); ?>" collapseAllText="<?php esc_attr($collapseAllText); ?>">
+                    <?php echo $expandAllText; ?>
+                </div>
+            <?php endif; ?>
+
+        </div>
+
+        <div>
+
+        </div>
+
+
+
+
+
+
         <?php
         $count = 0;
         foreach ($items as $item) {
@@ -145,6 +178,18 @@ function accordions_builder_accordion($post_id, $accordionData)
             $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
 
 
+            if ($autoembed) {
+                $WP_Embed = new WP_Embed();
+                $contentText = $WP_Embed->autoembed($contentText);
+            }
+
+            if ($wpautop) {
+                $contentText = wpautop($contentText);
+            }
+
+            if ($shortcodes) {
+                $contentText = do_shortcode($contentText);
+            }
 
 
 
