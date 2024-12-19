@@ -18,7 +18,7 @@ class PGinputSelect extends Component {
       val,
       options,
       multiple,
-
+className,
       onChange,
 
 
@@ -33,7 +33,7 @@ class PGinputSelect extends Component {
 
       return (
 
-        <div className='w-full'>
+        <div className={`w-full ${className}`}>
 
           {multiple == true && (<>
             <select className='w-full'

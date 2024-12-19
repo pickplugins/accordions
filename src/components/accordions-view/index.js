@@ -1,44 +1,19 @@
-
 const { Component, RawHTML, useState, useEffect } = wp.element;
-import { RichText } from '@wordpress/block-editor'
-
-import { Icon, close, settings, cog, cloud, plus, post } from "@wordpress/icons";
-import { ReactSortable } from "react-sortablejs";
-import {
-	PanelBody,
-	RangeControl,
-	Button,
-	ButtonGroup,
-	Panel,
-	PanelRow,
-	Dropdown,
-	DropdownMenu,
-	SelectControl,
-	ColorPicker,
-	ColorPalette,
-	ToolsPanelItem,
-	ComboboxControl,
-	Spinner,
-	ToggleControl,
-	CustomSelectControl,
-	Popover,
-	__experimentalInputControl as InputControl,
-} from "@wordpress/components";
 import apiFetch from "@wordpress/api-fetch";
-import { Splide, SplideTrack } from "@splidejs/react-splide";
+import { Popover, Spinner } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
+import { Icon, close, cog } from "@wordpress/icons";
 
-import PGDropdown from '../../components/dropdown'
-import { Fragment } from 'react';
-
+import { Fragment } from "react";
+import PGinputSelect from "../input-select";
+import PGinputText from "../input-text";
 
 var myStore = wp.data.select("postgrid-shop");
 
 function Html(props) {
-
 	if (!props.warn) {
 		return null;
 	}
-
 
 	var id = props.id;
 	var onChange = props.onChange;
@@ -48,11 +23,8 @@ function Html(props) {
 	var onUpdate = props.onUpdate;
 	var pleaseUpdate = props.pleaseUpdate;
 
-
 	var postDataX = props.postData;
 	var accordionDataX = postDataX.post_content;
-
-
 
 	if (accordionDataX == null) {
 		return null;
@@ -76,7 +48,6 @@ function Html(props) {
 	var [icon, seticon] = useState(accordionDataX.icon);
 	var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
 
-
 	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
 
 	const [toggled, setToggled] = useState(false);
@@ -85,52 +56,79 @@ function Html(props) {
 	const [iconHtml, seticonHtml] = useState("");
 	const [iconToggleHtml, seticonToggleHtml] = useState("");
 
+	const [optionData, setoptionData] = useState({});
+	const [optionDataSaved, setoptionDataSaved] = useState({});
+	const [isLoadings, setisLoadings] = useState(false);
+
+	const [roles, setroles] = useState([]);
+
+	useEffect(() => {
+		setisLoadings(true);
+		apiFetch({
+			path: "/user-verification/v2/get_options",
+			method: "POST",
+			data: { option: "user_verification_settings" },
+		}).then((res) => {
+			if (res.length != 0) {
+				var resX = { ...res };
+
+				setoptionDataSaved(resX);
+				setoptionData(resX);
+			}
+			setisLoadings(false);
+		});
+	}, []);
+
+	useEffect(() => {
+		apiFetch({
+			path: "/user-verification/v2/user_roles_list",
+			method: "POST",
+			data: {},
+		}).then((res) => {
+			var rolesX = [];
+			Object.entries(res).map((role) => {
+				var index = role[0];
+				var val = role[1];
+				rolesX.push({ label: val, value: index });
+			});
+			setroles(rolesX);
+		});
+	}, []);
+
+	console.log(optionData);
+
 	const copyData = (data) => {
-
-		navigator.clipboard.writeText(data).then(() => {
-			addNotifications({ title: "Copied to clipboard!", content: "Use the shortcode in page or post conent where you want to display.", type: "success" })
-
-		})
-			.catch((err) => { });
+		navigator.clipboard
+			.writeText(data)
+			.then(() => {
+				addNotifications({
+					title: "Copied to clipboard!",
+					content:
+						"Use the shortcode in page or post conent where you want to display.",
+					type: "success",
+				});
+			})
+			.catch((err) => {});
 	};
 
 	useEffect(() => {
-		setpostData(props.postData)
-
+		setpostData(props.postData);
 	}, [props.postData]);
 
-
 	useEffect(() => {
-		setaccordionData(postData.post_content)
-		setitems(postData.post_content.items)
-
+		setaccordionData(postData.post_content);
+		setitems(postData.post_content.items);
 	}, [postData]);
 
-
-
-
-
-
-
-
 	useEffect(() => {
-
-		var accordionDataX = { ...accordionData }
-		accordionDataX.items = items
-		onChange(accordionDataX)
-
+		var accordionDataX = { ...accordionData };
+		accordionDataX.items = items;
+		onChange(accordionDataX);
 	}, [items]);
 
-
-
-
 	useEffect(() => {
-		setpleaseUpdateX(pleaseUpdate)
-
+		setpleaseUpdateX(pleaseUpdate);
 	}, [pleaseUpdate]);
-
-
-
 
 	useEffect(() => {
 		var iconSrc = iconToggle?.options?.iconSrc;
@@ -150,11 +148,7 @@ function Html(props) {
 		setlabelIconHtml(iconHtml);
 	}, [labelIcon?.options]);
 
-
 	var [active, setactive] = useState(9999);
-
-
-
 
 	return (
 		<div className="ml-5">
@@ -168,15 +162,17 @@ function Html(props) {
 				</div>
 
 				<div className="flex items-center align-middle gap-3">
-
-					<div
-						className=" tracking-wide "
-					>
-						<div className="py-1 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600" onClick={(ev) => {
-							ev.preventDefault();
-							ev.stopPropagation();
-							setAIWriter(!AIWriter);
-						}}> <Icon fill={"#fff"} icon={cog} /></div>
+					<div className=" tracking-wide ">
+						<div
+							className="py-1 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+							onClick={(ev) => {
+								ev.preventDefault();
+								ev.stopPropagation();
+								setAIWriter(!AIWriter);
+							}}>
+							{" "}
+							<Icon fill={"#fff"} icon={cog} />
+						</div>
 						{AIWriter && (
 							<Popover position="bottom right">
 								<div className="w-[600px] p-3 relative">
@@ -190,7 +186,126 @@ function Html(props) {
 										<Icon fill={"#fff"} icon={close} />
 									</span>
 
-									Hello
+									<div>
+										<div className="flex  my-5  justify-between items-center">
+											<label className="w-[400px]" htmlFor="">
+												{__("Allow access by roles", "accordions")}
+											</label>
+											<PGinputSelect
+												val={optionData?.user_roles ?? []}
+												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												options={roles}
+												onChange={(newVal) => {
+													var optionsX = {
+														...optionData,
+														user_roles: newVal,
+													};
+													setoptionData(optionsX);
+												}}
+												multiple={true}
+											/>
+										</div>
+										<div className="flex  my-5  justify-between items-center">
+											<label className="w-[400px]" htmlFor="">
+												{__("Font-awesome version", "accordions")}
+											</label>
+											<PGinputSelect
+												val={optionData?.font_aw_version ?? "none"}
+												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												options={[
+													{ label: "None", value: "none" },
+													{ label: "Version 4+", value: "v_4" },
+													{ label: "Version 5+", value: "v_5" },
+												]}
+												onChange={(newVal) => {
+													var optionsX = {
+														...optionData,
+														font_aw_version: newVal,
+													};
+													setoptionData(optionsX);
+												}}
+												multiple={false}
+											/>
+										</div>
+										<div className="flex  my-5  justify-between items-center">
+											<label className="w-[400px]" htmlFor="">
+												{__("Allow Iframe on accordion", "accordions")}
+											</label>
+											<PGinputSelect
+												val={optionData?.allow_iframe ?? "no"}
+												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												options={[
+													{ label: "No", value: "no" },
+													{ label: "Yes", value: "yes" },
+												]}
+												onChange={(newVal) => {
+													var optionsX = {
+														...optionData,
+														allow_iframe: newVal,
+													};
+													setoptionData(optionsX);
+												}}
+												multiple={false}
+											/>
+										</div>
+										<div className="flex  my-5  justify-between items-center">
+											<label className="w-[400px]" htmlFor="">
+												{__("Enable accordions preview", "accordions")}
+											</label>
+											<PGinputSelect
+												val={optionData?.accordions_preview ?? "no"}
+												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												options={[
+													{ label: "No", value: "no" },
+													{ label: "Yes", value: "yes" },
+												]}
+												onChange={(newVal) => {
+													var optionsX = {
+														...optionData,
+														accordions_preview: newVal,
+													};
+													setoptionData(optionsX);
+												}}
+												multiple={false}
+											/>
+										</div>
+										<div className="flex  my-5  justify-between items-center">
+											<label className="w-[400px]" htmlFor="">
+												{__("Open AI API Key", "accordions")}
+											</label>
+
+											<PGinputText
+												label=""
+												className="w-[180px]"
+												value={optionData?.openaiApiKey ?? ""}
+												onChange={(newVal) => {
+													var optionsX = {
+														...optionData,
+														openaiApiKey: newVal,
+													};
+													setoptionData(optionsX);
+												}}
+											/>
+										</div>
+										<div className="flex  my-5  justify-between items-center">
+											<label className="w-[400px]" htmlFor="">
+												{__("License Key", "accordions")}
+											</label>
+
+											<PGinputText
+												label=""
+												className="w-[180px]"
+												value={optionData?.licenseKey ?? ""}
+												onChange={(newVal) => {
+													var optionsX = {
+														...optionData,
+														licenseKey: newVal,
+													};
+													setoptionData(optionsX);
+												}}
+											/>
+										</div>
+									</div>
 								</div>
 							</Popover>
 						)}
@@ -232,8 +347,9 @@ function Html(props) {
 					return (
 						<Fragment key={index}>
 							<div
-								className={`accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""
-									}`}
+								className={`accordion-header ${header.options.class} ${
+									active == index ? "accordion-header-active" : ""
+								}`}
 								onClick={(ev) => {
 									setToggled(!toggled);
 									setactive(index == active ? 999 : index);
@@ -284,8 +400,6 @@ function Html(props) {
 												dangerouslySetInnerHTML={{
 													__html: item?.headerLabel.options.text,
 												}}></span>
-
-
 										</>
 									) : (
 										"Start Writing..."
@@ -333,7 +447,6 @@ function Html(props) {
 										dangerouslySetInnerHTML={{
 											__html: item?.content.options.text,
 										}}></div>
-
 								</>
 							)}
 						</Fragment>
@@ -357,9 +470,16 @@ class AccordionsView extends Component {
 		}));
 	}
 
-
 	render() {
-		var { postData, id, isLoading, onChange, pleaseUpdate, onUpdate, addNotifications } = this.props;
+		var {
+			postData,
+			id,
+			isLoading,
+			onChange,
+			pleaseUpdate,
+			onUpdate,
+			addNotifications,
+		} = this.props;
 
 		return (
 			<Html

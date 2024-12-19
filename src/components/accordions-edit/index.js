@@ -459,6 +459,10 @@ function Html(props) {
 		terms: { label: "Terms", value: "terms", isPro: 0 },
 	};
 
+	function generate3Digit() {
+		return Math.floor(100 + Math.random() * 900);
+	}
+
 	return (
 		<div className="">
 			{/* <div>{`{`}</div>
@@ -1102,8 +1106,6 @@ function Html(props) {
 																}}>
 																<Icon fill={"#fff"} icon={close} />
 															</span>
-
-
 														</div>
 													</div>
 
@@ -1145,34 +1147,36 @@ function Html(props) {
 																/>
 															</div>
 															<div className="mb-3">
-																<PGinputTextarea id={`content-${index}`} className={`bg-slate-100 p-3 min-h-24 w-full`} value={item?.content.options.text} onChange={(content) => {
-																	// var itemsX = [...items];
+																<PGinputTextarea
+																	id={`content-${index}-${generate3Digit()}`}
+																	className={`bg-slate-100 p-3 min-h-24 w-full`}
+																	value={item?.content.options.text}
+																	onChange={(content) => {
+																		// var itemsX = [...items];
 
-																	// itemsX[index].content.options.text =
-																	// 	content;
-																	// setitems(itemsX);
+																		// itemsX[index].content.options.text =
+																		// 	content;
+																		// setitems(itemsX);
 
-																	console.log(content);
+																		console.log(content);
 
-
-																	setitems((prevItems) => {
-																		const updatedItems = [...prevItems];
-																		updatedItems[index] = {
-																			...updatedItems[index],
-																			content: {
-																				...updatedItems[index].content,
-																				options: {
-																					...updatedItems[index].content
-																						.options,
-																					text: content,
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				content: {
+																					...updatedItems[index].content,
+																					options: {
+																						...updatedItems[index].content
+																							.options,
+																						text: content,
+																					},
 																				},
-																			},
-																		};
-																		return updatedItems;
-																	});
-																}} />
-
-
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																/>
 
 																<RichText
 																	className={`bg-slate-100 p-3 min-h-24`}
