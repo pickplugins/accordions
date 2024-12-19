@@ -127,9 +127,9 @@ function Html(props) {
 										<div
 											className={[
 												typeof value == "object" &&
-												value.includes(
-													isNumeric(index) ? parseInt(index) : index
-												)
+													value.includes(
+														isNumeric(index) ? parseInt(index) : index
+													)
 													? "border-b cursor-pointer bg-slate-200 p-2 block"
 													: "border-b cursor-pointer hover:bg-slate-200 p-2 block",
 											]}
@@ -154,7 +154,7 @@ function Html(props) {
 														<a
 															target="_blank"
 															href={
-																"https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
+																"https://pickplugins.com/accordions/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
 																x.label
 															}>
 															Pro
@@ -179,9 +179,9 @@ function Html(props) {
 										<div
 											className={[
 												typeof value == "object" &&
-												value.includes(
-													IsNumeric(index) ? parseInt(index) : index
-												)
+													value.includes(
+														IsNumeric(index) ? parseInt(index) : index
+													)
 													? "border-b cursor-pointer bg-slate-200 p-2 block"
 													: "border-b cursor-pointer hover:bg-slate-200 p-2 block",
 											]}

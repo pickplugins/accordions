@@ -102,7 +102,7 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: "/post-grid/v2/post_type_objects",
+			path: "/accordions/v2/post_type_objects",
 			method: "POST",
 			data: { postTypes: [] },
 		}).then((res) => {
@@ -117,7 +117,6 @@ function Html(props) {
 
 
 	useEffect(() => {
-		console.log(props.postData);
 
 	}, [props.postData]);
 
@@ -343,7 +342,7 @@ function Html(props) {
 			value: "category",
 
 			id: "taxonomy",
-			label: __("Taxonomy", "post-grid"),
+			label: __("Taxonomy", "accordions"),
 			description: "Select Taxonomy to Query",
 			longDescription:
 				"Taxonomy name, or array of taxonomy names, to which results should be limited.",
@@ -653,21 +652,224 @@ function Html(props) {
 															clickHandle={(value, action) => {
 																var valueObj = JSON.parse(value);
 
+																console.log(action);
+																console.log(valueObj);
+
+
 																if (action == "prepend") {
-																}
-																if (action == "append") {
-																	valueObj.map((item) => {
-																		var answer = item.answer;
-																		var question = item.question;
-																	});
-																}
-																if (action == "replace") {
-																	var blocksX = [];
+
+
+
+
+																	var itemsX = [...items];
+
+
+																	var faqX = [];
 
 																	valueObj.map((item) => {
 																		var answer = item.answer;
 																		var question = item.question;
+
+
+																		faqX.push({
+																			active: 0,
+																			hideOnSchema: 0,
+																			headerLabel: {
+																				options: {
+																					text: question,
+																					toggledText: "",
+																					slug: "",
+																					tag: "",
+																					class: "accordion-header-label",
+																				},
+																			},
+																			content: {
+																				options: {
+																					tag: "",
+																					class: "accordion-content",
+																					text: answer,
+																				},
+																			},
+																			icon: {
+																				options: {
+																					library: "fontAwesome",
+																					srcType: "class",
+																					iconSrc: "fas fa-angle-down",
+																					position: "left",
+																					class: "accordion-icon",
+																				},
+																				styles: {},
+																			},
+																			iconToggle: {
+																				options: {
+																					library: "fontAwesome",
+																					srcType: "class",
+																					iconSrc: " fas fa-angle-up",
+																					class: "accordion-icon-toggle",
+																				},
+																				styles: {},
+																			},
+																		});
+
 																	});
+
+
+																	setitems([...faqX, ...itemsX]);
+
+																	addNotifications({
+																		content: "Items append",
+																		type: "success",
+																	});
+
+
+
+
+
+
+
+
+
+
+																}
+																if (action == "append") {
+
+
+
+
+																	var itemsX = [...items];
+
+
+																	var faqX = [];
+
+																	valueObj.map((item) => {
+																		var answer = item.answer;
+																		var question = item.question;
+
+
+																		faqX.push({
+																			active: 0,
+																			hideOnSchema: 0,
+																			headerLabel: {
+																				options: {
+																					text: question,
+																					toggledText: "",
+																					slug: "",
+																					tag: "",
+																					class: "accordion-header-label",
+																				},
+																			},
+																			content: {
+																				options: {
+																					tag: "",
+																					class: "accordion-content",
+																					text: answer,
+																				},
+																			},
+																			icon: {
+																				options: {
+																					library: "fontAwesome",
+																					srcType: "class",
+																					iconSrc: "fas fa-angle-down",
+																					position: "left",
+																					class: "accordion-icon",
+																				},
+																				styles: {},
+																			},
+																			iconToggle: {
+																				options: {
+																					library: "fontAwesome",
+																					srcType: "class",
+																					iconSrc: " fas fa-angle-up",
+																					class: "accordion-icon-toggle",
+																				},
+																				styles: {},
+																			},
+																		});
+
+																	});
+
+
+																	setitems([...itemsX, ...faqX]);
+
+																	addNotifications({
+																		content: "Items append",
+																		type: "success",
+																	});
+
+
+
+
+
+
+
+
+																}
+																if (action == "replace") {
+																	var itemsX = [...items];
+
+
+																	var faqX = [];
+
+																	valueObj.map((item) => {
+																		var answer = item.answer;
+																		var question = item.question;
+
+
+																		faqX.push({
+																			active: 0,
+																			hideOnSchema: 0,
+																			headerLabel: {
+																				options: {
+																					text: question,
+																					toggledText: "",
+																					slug: "",
+																					tag: "",
+																					class: "accordion-header-label",
+																				},
+																			},
+																			content: {
+																				options: {
+																					tag: "",
+																					class: "accordion-content",
+																					text: answer,
+																				},
+																			},
+																			icon: {
+																				options: {
+																					library: "fontAwesome",
+																					srcType: "class",
+																					iconSrc: "fas fa-angle-down",
+																					position: "left",
+																					class: "accordion-icon",
+																				},
+																				styles: {},
+																			},
+																			iconToggle: {
+																				options: {
+																					library: "fontAwesome",
+																					srcType: "class",
+																					iconSrc: " fas fa-angle-up",
+																					class: "accordion-icon-toggle",
+																				},
+																				styles: {},
+																			},
+																		});
+
+																	});
+
+
+																	setitems(faqX);
+
+																	addNotifications({
+																		content: "Items Added",
+																		type: "success",
+																	});
+
+
+
+
+
+
 																}
 
 																//setAttributes({ itemsX: { ...itemsX, items: itemx } });
@@ -747,7 +949,7 @@ function Html(props) {
 													<PGinputSelect
 														val={item.value}
 														options={[
-															{ label: __("None", "post-grid"), value: "none" },
+															{ label: __("None", "accordions"), value: "none" },
 															{ label: "ID", value: "ID" },
 															{ label: "Author", value: "author" },
 															{ label: "Title", value: "title" },
@@ -898,7 +1100,7 @@ function Html(props) {
 													<SelectControl
 														value={item.value}
 														options={[
-															{ label: __("None", "post-grid"), value: "none" },
+															{ label: __("None", "accordions"), value: "none" },
 															{ label: "ID", value: "ID" },
 															{ label: "Author", value: "author" },
 															{ label: "Title", value: "title" },
@@ -1158,7 +1360,6 @@ function Html(props) {
 																		// 	content;
 																		// setitems(itemsX);
 
-																		console.log(content);
 
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
@@ -1221,11 +1422,11 @@ function Html(props) {
 																		value={item?.active ?? 0}
 																		options={[
 																			{
-																				label: __("True", "post-grid"),
+																				label: __("True", "accordions"),
 																				value: 1,
 																			},
 																			{
-																				label: __("False", "post-grid"),
+																				label: __("False", "accordions"),
 																				value: 0,
 																			},
 																		]}
@@ -1255,11 +1456,11 @@ function Html(props) {
 																		value={item?.hideOnSchema ?? 0}
 																		options={[
 																			{
-																				label: __("True", "post-grid"),
+																				label: __("True", "accordions"),
 																				value: 1,
 																			},
 																			{
-																				label: __("False", "post-grid"),
+																				label: __("False", "accordions"),
 																				value: 0,
 																			},
 																		]}
@@ -1304,8 +1505,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.lazyLoad}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										// var globalOptionsX = { ...globalOptions };
@@ -1328,8 +1529,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.autoembed}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1347,8 +1548,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.shortcodes}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1365,8 +1566,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.wpautop}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1383,8 +1584,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.schema}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1401,8 +1602,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.toggleText}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1419,8 +1620,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.expandCollapseAll}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1465,8 +1666,8 @@ function Html(props) {
 									label=""
 									value={globalOptions?.stats}
 									options={[
-										{ label: __("True", "post-grid"), value: 1 },
-										{ label: __("False", "post-grid"), value: 0 },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1484,9 +1685,9 @@ function Html(props) {
 									label=""
 									value={globalOptions?.activeEvent}
 									options={[
-										{ label: __("Click", "post-grid"), value: "click" },
-										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
-										{ label: __("Focus", "post-grid"), value: "focus" },
+										{ label: __("Click", "accordions"), value: "click" },
+										{ label: __("Mouseover", "accordions"), value: "mouseover" },
+										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1502,9 +1703,9 @@ function Html(props) {
 									label=""
 									value={globalOptions?.urlHash}
 									options={[
-										{ label: __("Click", "post-grid"), value: "click" },
-										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
-										{ label: __("Focus", "post-grid"), value: "focus" },
+										{ label: __("Click", "accordions"), value: "click" },
+										{ label: __("Mouseover", "accordions"), value: "mouseover" },
+										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1520,9 +1721,9 @@ function Html(props) {
 									label=""
 									value={globalOptions?.clickToScrollTop}
 									options={[
-										{ label: __("Click", "post-grid"), value: "click" },
-										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
-										{ label: __("Focus", "post-grid"), value: "focus" },
+										{ label: __("Click", "accordions"), value: "click" },
+										{ label: __("Mouseover", "accordions"), value: "mouseover" },
+										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1553,9 +1754,9 @@ function Html(props) {
 									label=""
 									value={globalOptions?.animationName}
 									options={[
-										{ label: __("Click", "post-grid"), value: "click" },
-										{ label: __("Mouseover", "post-grid"), value: "mouseover" },
-										{ label: __("Focus", "post-grid"), value: "focus" },
+										{ label: __("Click", "accordions"), value: "click" },
+										{ label: __("Mouseover", "accordions"), value: "mouseover" },
+										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1992,24 +2193,24 @@ function Html(props) {
 							<PGtab name="options">
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Counter position", "post-grid")}
+										{__("Counter position", "accordions")}
 									</label>
 									<SelectControl
 										label=""
 										value={labelCounter.options.position}
 										options={[
 											{
-												label: __("Choose Position", "post-grid"),
+												label: __("Choose Position", "accordions"),
 												value: "",
 											},
-											{ label: __("Left", "post-grid"), value: "left" },
-											{ label: __("Right", "post-grid"), value: "right" },
+											{ label: __("Left", "accordions"), value: "left" },
+											{ label: __("Right", "accordions"), value: "right" },
 											{
-												label: __("Before Label Text", "post-grid"),
+												label: __("Before Label Text", "accordions"),
 												value: "beforeLabelText",
 											},
 											{
-												label: __("After Label Text", "post-grid"),
+												label: __("After Label Text", "accordions"),
 												value: "afterLabelText",
 											},
 										]}
@@ -2111,7 +2312,7 @@ function Html(props) {
 							<PGtab name="options">
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Choose Label Icon", "post-grid")}
+										{__("Choose Label Icon", "accordions")}
 									</label>
 									<PGIconPicker
 										library={labelIcon.options.library}
@@ -2135,30 +2336,30 @@ function Html(props) {
 
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Icon position", "post-grid")}
+										{__("Icon position", "accordions")}
 									</label>
 									<SelectControl
 										label=""
 										value={labelIcon.options.position}
 										options={[
 											{
-												label: __("Choose Position", "post-grid"),
+												label: __("Choose Position", "accordions"),
 												value: "",
 											},
 											{
-												label: __("Before Label", "post-grid"),
+												label: __("Before Label", "accordions"),
 												value: "beforeLabel",
 											},
 											{
-												label: __("After Label", "post-grid"),
+												label: __("After Label", "accordions"),
 												value: "afterLabel",
 											},
 											{
-												label: __("Before Label Text", "post-grid"),
+												label: __("Before Label Text", "accordions"),
 												value: "beforeLabelText",
 											},
 											{
-												label: __("After Label Text", "post-grid"),
+												label: __("After Label Text", "accordions"),
 												value: "afterLabelText",
 											},
 										]}
@@ -2279,7 +2480,7 @@ function Html(props) {
 							<PGtab name="options">
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Choose Icon", "post-grid")}
+										{__("Choose Icon", "accordions")}
 									</label>
 									<PGIconPicker
 										library={icon.options.library}
@@ -2302,7 +2503,7 @@ function Html(props) {
 								</PanelRow>
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Choose Toggle Icon", "post-grid")}
+										{__("Choose Toggle Icon", "accordions")}
 									</label>
 									<PGIconPicker
 										library={iconToggle.options.library}
@@ -2326,18 +2527,18 @@ function Html(props) {
 
 								<PanelRow>
 									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Icon position", "post-grid")}
+										{__("Icon position", "accordions")}
 									</label>
 									<SelectControl
 										label=""
 										value={icon.options.position}
 										options={[
 											{
-												label: __("Choose Position", "post-grid"),
+												label: __("Choose Position", "accordions"),
 												value: "",
 											},
-											{ label: __("Left", "post-grid"), value: "left" },
-											{ label: __("Right", "post-grid"), value: "right" },
+											{ label: __("Left", "accordions"), value: "left" },
+											{ label: __("Right", "accordions"), value: "right" },
 										]}
 										onChange={(newVal) => {
 											var iconX = { ...icon };

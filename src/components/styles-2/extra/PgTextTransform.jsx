@@ -43,9 +43,8 @@ const PgCSSTextTransform = ({ val, onChange, breakPoint, sudoSrc }) => {
 						<Icon icon={formatCapitalize} size={24} />
 					</div>
 					<div
-						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-							align === "uppercase" ? "bg-blue-600 text-white " : ""
-						}`}
+						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "uppercase" ? "bg-blue-600 text-white " : ""
+							}`}
 						onClick={(ev) => {
 							if (!isImportant) {
 								onChange("uppercase", "textTransform");
@@ -58,9 +57,8 @@ const PgCSSTextTransform = ({ val, onChange, breakPoint, sudoSrc }) => {
 						<Icon icon={formatUppercase} size={24} />
 					</div>
 					<div
-						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-							align === "lowercase" ? "bg-blue-600 text-white " : ""
-						}`}
+						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "lowercase" ? "bg-blue-600 text-white " : ""
+							}`}
 						onClick={(ev) => {
 							if (!isImportant) {
 								onChange("lowercase", "textTransform");
@@ -73,9 +71,8 @@ const PgCSSTextTransform = ({ val, onChange, breakPoint, sudoSrc }) => {
 						<Icon icon={formatLowercase} size={24} />
 					</div>
 					<div
-						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-							align === "none" ? "bg-blue-600 text-white " : ""
-						}`}
+						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "none" ? "bg-blue-600 text-white " : ""
+							}`}
 						onClick={(ev) => {
 							if (!isImportant) {
 								onChange("none", "textTransform");
@@ -91,8 +88,8 @@ const PgCSSTextTransform = ({ val, onChange, breakPoint, sudoSrc }) => {
 				<ToggleControl
 					help={
 						isImportant
-							? __("(Enabled)", "post-grid")
-							: __("Important?", "post-grid")
+							? __("(Enabled)", "accordions")
+							: __("Important?", "accordions")
 					}
 					checked={isImportant}
 					onChange={(arg) => {

@@ -83,13 +83,13 @@ const PgCSSBackgroundColor = ({ val, onChange, breakPoint, sudoSrc }) => {
 				<div className="flex items-start justify-between gap-1 mt-3">
 					<div className="flex gap-1 items-center">
 						<label htmlFor="" className="!mr-0 !font-normal">
-							{__("Global Value", "post-grid")}
+							{__("Global Value", "accordions")}
 						</label>
 						<SelectControl
 							label=""
 							value={widthGlobal}
 							options={[
-								{ label: __("Choose", "post-grid"), value: "" },
+								{ label: __("Choose", "accordions"), value: "" },
 								{ label: "Inherit", value: "inherit" },
 								{ label: "Initial", value: "initial" },
 								{ label: "Revert", value: "revert" },
@@ -110,8 +110,8 @@ const PgCSSBackgroundColor = ({ val, onChange, breakPoint, sudoSrc }) => {
 					<ToggleControl
 						help={
 							isImportant
-								? __("(Enabled)", "post-grid")
-								: __("Important?", "post-grid")
+								? __("(Enabled)", "accordions")
+								: __("Important?", "accordions")
 						}
 						checked={isImportant}
 						onChange={(arg) => {

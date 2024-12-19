@@ -75,24 +75,24 @@ function Html(props) {
 					if (isImportant) {
 						props.onChange(
 							nextValues.top +
-								" " +
-								nextValues.right +
-								" " +
-								nextValues.bottom +
-								" " +
-								nextValues.left +
-								" !important",
+							" " +
+							nextValues.right +
+							" " +
+							nextValues.bottom +
+							" " +
+							nextValues.left +
+							" !important",
 							"borderRadius"
 						);
 					} else {
 						props.onChange(
 							nextValues.top +
-								" " +
-								nextValues.right +
-								" " +
-								nextValues.bottom +
-								" " +
-								nextValues.left,
+							" " +
+							nextValues.right +
+							" " +
+							nextValues.bottom +
+							" " +
+							nextValues.left,
 							"borderRadius"
 						);
 					}
@@ -101,8 +101,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {
@@ -115,13 +115,13 @@ function Html(props) {
 					} else {
 						props.onChange(
 							valX.top +
-								" " +
-								valX.right +
-								" " +
-								valX.bottom +
-								" " +
-								valX.left +
-								" !important",
+							" " +
+							valX.right +
+							" " +
+							valX.bottom +
+							" " +
+							valX.left +
+							" !important",
 							"borderRadius"
 						);
 					}

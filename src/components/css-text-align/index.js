@@ -43,12 +43,12 @@ function Html(props) {
 				position="bottom"
 				renderToggle={({ isOpen, onToggle }) => (
 					<Button
-						title={__("Clear", "post-grid")}
+						title={__("Clear", "accordions")}
 						onClick={onToggle}
 						aria-expanded={isOpen}>
 						<div className=" ">
 							{args[align] == undefined
-								? __("Select...", "post-grid")
+								? __("Select...", "accordions")
 								: args[align].label}
 						</div>
 					</Button>
@@ -71,7 +71,7 @@ function Html(props) {
 											props.onChange(x.value, "textAlign");
 										}
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "accordions")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);
@@ -104,9 +104,8 @@ function Html(props) {
 					</svg>
 				</div>
 				<div
-					className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-						align === "center" ? "bg-blue-600 text-white " : ""
-					}`}
+					className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "center" ? "bg-blue-600 text-white " : ""
+						}`}
 					onClick={(ev) => {
 						if (!isImportant) {
 							props.onChange("center", "textAlign");
@@ -127,9 +126,8 @@ function Html(props) {
 					</svg>
 				</div>
 				<div
-					className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-						align === "right" ? "bg-blue-600 text-white " : ""
-					}`}
+					className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "right" ? "bg-blue-600 text-white " : ""
+						}`}
 					onClick={(ev) => {
 						if (!isImportant) {
 							props.onChange("right", "textAlign");
@@ -151,9 +149,8 @@ function Html(props) {
 				</div>
 
 				<div
-					className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-						align === "justify" ? "bg-blue-600 text-white " : ""
-					}`}
+					className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "justify" ? "bg-blue-600 text-white " : ""
+						}`}
 					onClick={(ev) => {
 						if (!isImportant) {
 							props.onChange("justify", "textAlign");
@@ -178,8 +175,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {
@@ -308,8 +305,8 @@ class PGcssTextAlign extends Component {
 		//         </div>
 		//       </div>
 		//       {/* <ToggleControl
-		//         help={isImportant ? __('Important (Enabled)',"post-grid")
-		// : __('Important?',"post-grid")}
+		//         help={isImportant ? __('Important (Enabled)',"accordions")
+		// : __('Important?',"accordions")}
 		//         checked={isImportant}
 		//         onChange={(arg) => {
 		//           setImportant((isImportant) => !isImportant);

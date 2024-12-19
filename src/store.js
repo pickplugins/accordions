@@ -585,7 +585,6 @@ var selectors = {
 
 	generateBlockCss(state, items, blockId) {
 
-		console.log(items);
 
 
 		const { blockCss } = state;
@@ -684,7 +683,6 @@ var selectors = {
 		var reponsiveCss =
 			reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
 
-		console.log(reponsiveCss);
 
 
 		var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
@@ -730,14 +728,14 @@ var selectors = {
 
 var resolvers = {
 	*getLicense() {
-		const path = "/post-grid/v2/get_license";
+		const path = "/accordions/v2/get_license";
 		const res = yield actions.fetchLicense(path);
 
 		return actions.setLicense(res);
 	},
 
 	*getclientdata() {
-		const path = "/post-grid/v2/get_site_details";
+		const path = "/accordions/v2/get_site_details";
 		const res = yield actions.fetchclientdata(path);
 
 		return actions.setclientdata(res);

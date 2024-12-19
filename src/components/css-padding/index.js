@@ -60,8 +60,8 @@ function Html(props) {
 		valParts == undefined
 			? false
 			: valParts.includes("!important")
-			? true
-			: false
+				? true
+				: false
 	);
 	return (
 		<div>
@@ -80,24 +80,24 @@ function Html(props) {
 					if (isImportant) {
 						props.onChange(
 							nextValues.top +
-								" " +
-								nextValues.right +
-								" " +
-								nextValues.bottom +
-								" " +
-								nextValues.left +
-								" !important",
+							" " +
+							nextValues.right +
+							" " +
+							nextValues.bottom +
+							" " +
+							nextValues.left +
+							" !important",
 							"padding"
 						);
 					} else {
 						props.onChange(
 							nextValues.top +
-								" " +
-								nextValues.right +
-								" " +
-								nextValues.bottom +
-								" " +
-								nextValues.left,
+							" " +
+							nextValues.right +
+							" " +
+							nextValues.bottom +
+							" " +
+							nextValues.left,
 							"padding"
 						);
 					}
@@ -106,8 +106,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {
@@ -120,13 +120,13 @@ function Html(props) {
 					} else {
 						props.onChange(
 							valX.top +
-								" " +
-								valX.right +
-								" " +
-								valX.bottom +
-								" " +
-								valX.left +
-								" !important",
+							" " +
+							valX.right +
+							" " +
+							valX.bottom +
+							" " +
+							valX.left +
+							" !important",
 							"padding"
 						);
 					}

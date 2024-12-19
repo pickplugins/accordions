@@ -65,7 +65,7 @@ function Html(props) {
   return (
     <div className='mt-4'>
       <div className='flex'>
-        <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle={__("Add Filter","post-grid")} onChange={addFilter} values=""></PGDropdown>
+        <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle={__("Add Filter", "accordions")} onChange={addFilter} values=""></PGDropdown>
       </div>
       {
         valArgs != undefined && (

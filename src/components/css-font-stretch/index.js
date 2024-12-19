@@ -20,7 +20,7 @@ function Html(props) {
 	const [valArgs, setValArgs] = useState(props.val.split(" "));
 	const [align, setalign] = useState(valArgs[0]);
 	const [isImportant, setImportant] = useState(
-valArgs[1] == undefined ? false : true
+		valArgs[1] == undefined ? false : true
 	);
 	return (
 		<div className="flex justify-between items-center">
@@ -28,13 +28,13 @@ valArgs[1] == undefined ? false : true
 				position="bottom"
 				renderToggle={({ isOpen, onToggle }) => (
 					<Button
-						title={__("Clear", "post-grid")}
+						title={__("Clear", "accordions")}
 						onClick={onToggle}
 						aria-expanded={isOpen}>
 						{/* <div className=" ">{val ? args[val].label : 'Select...'}</div> */}
 						<div className=" ">
 							{args[align] == undefined
-								? __("Select...", "post-grid")
+								? __("Select...", "accordions")
 								: args[align].label}
 						</div>
 					</Button>
@@ -58,7 +58,7 @@ valArgs[1] == undefined ? false : true
 											props.onChange(x.value, "fontStretch");
 										}
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "accordions")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);
@@ -69,8 +69,8 @@ valArgs[1] == undefined ? false : true
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

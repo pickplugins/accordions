@@ -2,7 +2,7 @@ const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { Popover, Spinner } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Icon, close, cog } from "@wordpress/icons";
+import { Icon, close, cog, addCard } from "@wordpress/icons";
 
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
@@ -61,13 +61,40 @@ function Html(props) {
 	const [isLoadings, setisLoadings] = useState(false);
 
 	const [roles, setroles] = useState([]);
+	var [needSave, setneedSave] = useState(false); // Using the hook.
+	var [isLoading, setisLoading] = useState(false); // Using the hook.
+
+
+	function handleAlertConfirmation() {
+		if (confirm("Are you sure you want to reset the option data?")) {
+			resetOptionData();
+		}
+	}
+	function resetOptionData() {
+		setoptionData(optionDataDefault);
+	}
+
+	function updateOption() {
+		setisLoading(true);
+		apiFetch({
+			path: "/accordions/v2/update_options",
+			method: "POST",
+			data: { name: "accordions_settings", value: optionData },
+		}).then((res) => {
+			setisLoading(false);
+			if (res.status) {
+				setoptionDataSaved(optionData);
+				setneedSave(false);
+			}
+		});
+	}
 
 	useEffect(() => {
 		setisLoadings(true);
 		apiFetch({
-			path: "/user-verification/v2/get_options",
+			path: "/accordions/v2/get_options",
 			method: "POST",
-			data: { option: "user_verification_settings" },
+			data: { option: "accordions_settings" },
 		}).then((res) => {
 			if (res.length != 0) {
 				var resX = { ...res };
@@ -81,21 +108,21 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: "/user-verification/v2/user_roles_list",
+			path: "/accordions/v2/user_roles_list",
 			method: "POST",
 			data: {},
 		}).then((res) => {
 			var rolesX = [];
-			Object.entries(res).map((role) => {
+			Object.entries(res?.roles).map((role) => {
 				var index = role[0];
 				var val = role[1];
 				rolesX.push({ label: val, value: index });
 			});
+
 			setroles(rolesX);
 		});
 	}, []);
 
-	console.log(optionData);
 
 	const copyData = (data) => {
 		navigator.clipboard
@@ -108,7 +135,7 @@ function Html(props) {
 					type: "success",
 				});
 			})
-			.catch((err) => {});
+			.catch((err) => { });
 	};
 
 	useEffect(() => {
@@ -154,11 +181,13 @@ function Html(props) {
 		<div className="ml-5">
 			<div className="flex items-center justify-between align-middle bg-white p-5  mb-5">
 				<div className="flex items-center gap-5">
-					<h2>
+					<div className="text-xl">
 						{postData?.post_title && (
 							<>You are editing: {postData.post_title}</>
 						)}
-					</h2>
+					</div>
+
+
 				</div>
 
 				<div className="flex items-center align-middle gap-3">
@@ -175,8 +204,10 @@ function Html(props) {
 						</div>
 						{AIWriter && (
 							<Popover position="bottom right">
-								<div className="w-[600px] p-3 relative">
-									<span
+								<div className="w-[600px]  relative">
+
+
+									{/* <span
 										className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0"
 										onClick={(ev) => {
 											ev.preventDefault();
@@ -184,16 +215,46 @@ function Html(props) {
 											setAIWriter(!AIWriter);
 										}}>
 										<Icon fill={"#fff"} icon={close} />
-									</span>
+									</span> */}
 
-									<div>
+									<div className="px-4 py-2 bg-slate-400 text-white flex justify-between ">
+										<div className="text-xl text-white">Accordions Settings</div>
+
+										<div className="flex gap-2 items-center">
+											<div
+												className="bg-amber-500 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white "
+												onClick={(ev) => {
+													// resetOptionData();
+													handleAlertConfirmation();
+												}}>
+												{__("Reset", "accordions")}
+											</div>
+											<div
+												className="bg-green-700 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white flex items-center"
+												onClick={(ev) => {
+													updateOption();
+												}}>
+												<span>{__("Save", "accordions")}</span>
+												{needSave && (
+													<span className="w-5 inline-block h-5 ml-3 rounded-xl text-center bg-red-500">
+														!
+													</span>
+												)}
+											</div>
+										</div>
+
+
+									</div>
+
+
+									<div className="p-3">
 										<div className="flex  my-5  justify-between items-center">
-											<label className="w-[400px]" htmlFor="">
+											<label className=" text-base" htmlFor="">
 												{__("Allow access by roles", "accordions")}
 											</label>
 											<PGinputSelect
 												val={optionData?.user_roles ?? []}
-												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
 												options={roles}
 												onChange={(newVal) => {
 													var optionsX = {
@@ -206,12 +267,12 @@ function Html(props) {
 											/>
 										</div>
 										<div className="flex  my-5  justify-between items-center">
-											<label className="w-[400px]" htmlFor="">
+											<label className="text-base" htmlFor="">
 												{__("Font-awesome version", "accordions")}
 											</label>
 											<PGinputSelect
 												val={optionData?.font_aw_version ?? "none"}
-												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
 												options={[
 													{ label: "None", value: "none" },
 													{ label: "Version 4+", value: "v_4" },
@@ -228,12 +289,12 @@ function Html(props) {
 											/>
 										</div>
 										<div className="flex  my-5  justify-between items-center">
-											<label className="w-[400px]" htmlFor="">
+											<label className="text-base" htmlFor="">
 												{__("Allow Iframe on accordion", "accordions")}
 											</label>
 											<PGinputSelect
 												val={optionData?.allow_iframe ?? "no"}
-												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
 												options={[
 													{ label: "No", value: "no" },
 													{ label: "Yes", value: "yes" },
@@ -249,12 +310,12 @@ function Html(props) {
 											/>
 										</div>
 										<div className="flex  my-5  justify-between items-center">
-											<label className="w-[400px]" htmlFor="">
+											<label className="text-base" htmlFor="">
 												{__("Enable accordions preview", "accordions")}
 											</label>
 											<PGinputSelect
 												val={optionData?.accordions_preview ?? "no"}
-												className="!py-1 px-2 max-w-[200px] w-[180px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
 												options={[
 													{ label: "No", value: "no" },
 													{ label: "Yes", value: "yes" },
@@ -270,13 +331,13 @@ function Html(props) {
 											/>
 										</div>
 										<div className="flex  my-5  justify-between items-center">
-											<label className="w-[400px]" htmlFor="">
+											<label className="text-base" htmlFor="">
 												{__("Open AI API Key", "accordions")}
 											</label>
 
 											<PGinputText
 												label=""
-												className="w-[180px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
 												value={optionData?.openaiApiKey ?? ""}
 												onChange={(newVal) => {
 													var optionsX = {
@@ -288,13 +349,14 @@ function Html(props) {
 											/>
 										</div>
 										<div className="flex  my-5  justify-between items-center">
-											<label className="w-[400px]" htmlFor="">
+											<label className="text-base" htmlFor="">
 												{__("License Key", "accordions")}
 											</label>
 
 											<PGinputText
 												label=""
-												className="w-[180px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
+
 												value={optionData?.licenseKey ?? ""}
 												onChange={(newVal) => {
 													var optionsX = {
@@ -347,9 +409,8 @@ function Html(props) {
 					return (
 						<Fragment key={index}>
 							<div
-								className={`accordion-header ${header.options.class} ${
-									active == index ? "accordion-header-active" : ""
-								}`}
+								className={`accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""
+									}`}
 								onClick={(ev) => {
 									setToggled(!toggled);
 									setactive(index == active ? 999 : index);

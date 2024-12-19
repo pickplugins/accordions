@@ -45,13 +45,13 @@ function Html(props) {
   return (
     <div>
       <PanelRow>
-        <label htmlFor="">{__("Type", "post-grid")}</label>
+        <label htmlFor="">{__("Type", "accordions")}</label>
         <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={type} onChange={(option, index) => {
           props.onChange(option.value + ' ' + position + ' ' + image, 'listStyle');
         }} ></PGDropdown>
       </PanelRow>
       <PanelRow>
-        <label htmlFor="">{__("Position", "post-grid")}</label>
+        <label htmlFor="">{__("Position", "accordions")}</label>
         <PGDropdown position="bottom right" variant="secondary" options={[{ label: 'inside', value: 'inside' }, { label: 'outside', value: 'outside' }]} buttonTitle={position} onChange={(option, index) => {
           props.onChange(type + ' ' + option.value + ' ' + image, 'listStyle');
         }} ></PGDropdown>
@@ -72,7 +72,7 @@ function Html(props) {
           }
           allowedTypes={ALLOWED_MEDIA_TYPES}
           render={({ open }) => (
-            <Button className='my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>{__("Open Media Library", "post-grid")}</Button>
+            <Button className='my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>{__("Open Media Library", "accordions")}</Button>
           )}
         />
       </MediaUploadCheck>

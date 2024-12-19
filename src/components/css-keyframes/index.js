@@ -83,7 +83,7 @@ function Html(props) {
 					};
 					setkeyframesX(keyframes);
 				}}>
-				{__("Add", "post-grid")}
+				{__("Add", "accordions")}
 			</div>
 			{keyframesX != null &&
 				Object.entries(keyframesX).map((entry) => {
@@ -94,7 +94,7 @@ function Html(props) {
 							title={<EntryTitle name={args.name} entryIndex={entryIndex} />}
 							initialOpen={false}>
 							<PanelRow className="!justify-start gap-3 ">
-								<label htmlFor="">{__("Animation Name", "post-grid")}</label>
+								<label htmlFor="">{__("Animation Name", "accordions")}</label>
 								<InputControl
 									type="text"
 									className="mr-2"
@@ -116,7 +116,7 @@ function Html(props) {
 										//frames[40] = { 'background-color': 'red' }
 										//setkeyframesX(keyframes);
 									}}>
-									{__("Add", "post-grid")}
+									{__("Add", "accordions")}
 								</div>
 							</PanelRow>
 							<div className="my-5">
@@ -133,7 +133,7 @@ function Html(props) {
 											}
 											initialOpen={false}>
 											<PanelRow className="!justify-start gap-3 ">
-												<label htmlFor="">{__("Frame Step", "post-grid")}</label>
+												<label htmlFor="">{__("Frame Step", "accordions")}</label>
 												<InputControl
 													type="number"
 													className="mr-2"

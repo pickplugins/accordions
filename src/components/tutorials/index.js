@@ -35,7 +35,7 @@ class PGTutorials extends Component {
 
 			useEffect(() => {
 				fetch(
-					`https://comboblocks.com/server/wp-json/post-grid/v2/get_post_docs?category=${slug}`,
+					`https://comboblocks.com/server/wp-json/accordions/v2/get_post_docs?category=${slug}`,
 					{
 						method: "POST",
 						headers: {

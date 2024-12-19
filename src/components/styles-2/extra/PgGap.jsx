@@ -106,8 +106,8 @@ const PgCSSGap = ({ val, onChange, breakPoint, sudoSrc }) => {
 				<ToggleControl
 					help={
 						isImportant
-							? __("Important Enabled", "post-grid")
-							: __("Important?", "post-grid")
+							? __("Important Enabled", "accordions")
+							: __("Important?", "accordions")
 					}
 					checked={isImportant}
 					onChange={(arg) => {

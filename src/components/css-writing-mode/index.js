@@ -22,13 +22,13 @@ function Html(props) {
 				position="bottom"
 				renderToggle={({ isOpen, onToggle }) => (
 					<Button
-						title={__("Clear", "post-grid")}
+						title={__("Clear", "accordions")}
 						onClick={onToggle}
 						aria-expanded={isOpen}>
 						{/* <div className=" ">{val ? args[val].label : 'Select...'}</div> */}
 						<div className=" ">
 							{args[align] == undefined
-								? __("Select...", "post-grid")
+								? __("Select...", "accordions")
 								: args[align].label}
 						</div>
 					</Button>
@@ -52,7 +52,7 @@ function Html(props) {
 											props.onChange(x.value, "writingMode");
 										}
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "accordions")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);
@@ -63,8 +63,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

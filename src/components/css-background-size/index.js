@@ -58,13 +58,13 @@ function Html(props) {
 						setValArgs(valArgs);
 						props.onChange(valArgs.join(" "), "backgroundSize");
 					}}>
-					{__("Add", "post-grid")}
+					{__("Add", "accordions")}
 				</div>
 				<ToggleControl
 					label={
 						isMultiple
-							? __("Multiple (Enabled)", "post-grid")
-							: __("Multiple?", "post-grid")
+							? __("Multiple (Enabled)", "accordions")
+							: __("Multiple?", "accordions")
 					}
 					checked={isMultiple}
 					onChange={(arg) => {
@@ -125,13 +125,13 @@ function Html(props) {
 								position="bottom"
 								renderToggle={({ isOpen, onToggle }) => (
 									<Button
-										title={__("Background Repeat", "post-grid")}
+										title={__("Background Repeat", "accordions")}
 										onClick={onToggle}
 										aria-expanded={isOpen}>
 										{/* <div className=" ">{val ? args[val].label : 'Select...'}</div> */}
 										<div className=" ">
 											{args[item] == undefined
-												? __("Custom", "post-grid")
+												? __("Custom", "accordions")
 												: args[item].label}
 										</div>
 									</Button>
@@ -155,7 +155,7 @@ function Html(props) {
 														props.onChange(valArgs.join(" "), "backgroundSize");
 														setValArgs(valArgs);
 													}}>
-													{!x.value && <div>{__("Reset", "post-grid")}</div>}
+													{!x.value && <div>{__("Reset", "accordions")}</div>}
 													{x.value && <>{x.label}</>}
 												</div>
 											);
@@ -190,7 +190,7 @@ function Html(props) {
 												aria-expanded={isOpen}>
 												<div className=" ">
 													{item.match(/[a-zA-Z%]+/g) == null
-														? __("Select...", "post-grid")
+														? __("Select...", "accordions")
 														: unitArgs[item.match(/[a-zA-Z%]+/g)[0]] ==
 															undefined
 															? ""
@@ -237,8 +237,8 @@ function Html(props) {
 			<ToggleControl
 				label={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

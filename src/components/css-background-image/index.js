@@ -13,10 +13,10 @@ function Html(props) {
     return null;
   }
   var typeArgs = {
-    url: { label: __('Image URL', "post-grid"), id: 'url' },
+    url: { label: __('Image URL', "accordions"), id: 'url' },
     //conicGradient: { label: 'Conic Gradient', id: 'conicGradient' },
-    linearGradient: { label: __('Linear Gradient', "post-grid"), id: 'linearGradient' },
-    radialGradient: { label: __('Radial Gradient', "post-grid"), id: 'radialGradient' },
+    linearGradient: { label: __('Linear Gradient', "accordions"), id: 'linearGradient' },
+    radialGradient: { label: __('Radial Gradient', "accordions"), id: 'radialGradient' },
     // repeatingConicGradient: { label: 'Repeating Conic Gradient', id: 'repeatingConicGradient' },
     // repeatingLinearGradient: { label: 'Repeating Linear Gradient', id: 'repeatingLinearGradient' },
     // repeatingRadialGradient: { label: 'Repeating Radial Gradient', id: 'repeatingRadialGradient' },
@@ -63,7 +63,7 @@ function Html(props) {
   return (
     <div>
       <div className="my-4">
-        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={__("Add", "post-grid")} onChange={(option, index) => {
+        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={__("Add", "accordions")} onChange={(option, index) => {
           if (option.id == 'url') {
             var dsdsf = valArgs.concat('url()')
           }
@@ -120,7 +120,7 @@ function Html(props) {
                         <Button
                           className="my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full"
                           onClick={open}>
-                          {__("Open Media Library", "post-grid")}
+                          {__("Open Media Library", "accordions")}
                         </Button>
                       )}
                     />

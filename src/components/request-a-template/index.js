@@ -38,7 +38,7 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: '/post-grid/v2/get_site_details',
+			path: '/accordions/v2/get_site_details',
 			method: 'POST',
 			data: {},
 		}).then((res) => {
@@ -84,7 +84,7 @@ function Html(props) {
 
 
 		apiFetch({
-			path: '/post-grid/v2/send_mail',
+			path: '/accordions/v2/send_mail',
 			method: 'POST',
 			data: postData,
 

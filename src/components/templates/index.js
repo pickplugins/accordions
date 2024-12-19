@@ -106,7 +106,7 @@ function Html(props) {
 		postData = JSON.stringify(postData);
 
 		if (templateType == "section") {
-			fetch("https://comboblocks.com/server/wp-json/post-grid/v2/get_post_section", {
+			fetch("https://comboblocks.com/server/wp-json/accordions/v2/get_post_section", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json;charset=utf-8",
@@ -152,7 +152,7 @@ function Html(props) {
 		}
 
 		if (templateType == "fullpage") {
-			fetch("https://comboblocks.com/server/wp-json/post-grid/v2/get_post_fullpage", {
+			fetch("https://comboblocks.com/server/wp-json/accordions/v2/get_post_fullpage", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json;charset=utf-8",

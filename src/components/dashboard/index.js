@@ -47,7 +47,6 @@ function Html(props) {
 		return () => clearTimeout(timer); // Cleanup timer on value change or unmount
 
 	}, [notifications]);
-	console.log("first")
 
 	function addNotifications(notification) {
 		var notificationsX = [...notifications];
