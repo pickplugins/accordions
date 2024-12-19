@@ -37969,7 +37969,8 @@ __webpack_require__.r(__webpack_exports__);
 var accordionDefaultData = {
   globalOptions: {
     viewType: "accordion",
-    itemSource: "manual"
+    itemSource: "manual",
+    search: true
   },
   itemQueryArgs: [],
   styleObj: {},
@@ -38117,6 +38118,20 @@ var accordionDefaultData = {
       srcType: "class",
       iconSrc: " fas fa-angle-up",
       class: "accordion-icon-toggle"
+    },
+    styles: {}
+  },
+  searchInput: {
+    options: {
+      placeholder: "",
+      class: "search-input"
+    },
+    styles: {}
+  },
+  expandCollapseAll: {
+    options: {
+      placeholder: "",
+      class: "expand-collapse-all"
     },
     styles: {}
   },
@@ -43418,19 +43433,32 @@ function Html(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
     //tinymce.execCommand('mceAddEditor', true, props.id);
 
-    tinymce.init({
-      selector: "#" + props.id,
-      toolbar: "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat",
-      height: "700px",
-      setup: editor => {
-        editor.on("change", e => {
-          const newContent = editor.getContent(); // Get the updated content
-
-          console.log(newContent);
-          props.onChange(newContent);
-        });
-      }
+    wp.editor.initialize(props.id, {
+      tinymce: {
+        wpautop: true,
+        plugins: 'charmap colorpicker compat3x directionality fullscreen hr image lists media paste tabfocus textcolor wordpress wpautoresize wpdialogs wpeditimage wpemoji wpgallery wplink wptextpattern wpview',
+        toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv',
+        toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap | outdent indent | undo redo | wp_help'
+      },
+      quicktags: true,
+      mediaButtons: true
     });
+
+    // tinymce.init({
+    //   selector: "#" + props.id,
+    //   toolbar:
+    //     "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat",
+    //   height: "700px",
+    //   setup: (editor) => {
+    //     editor.on("change", (e) => {
+    //       const newContent = editor.getContent(); // Get the updated content
+
+    //       console.log(newContent);
+    //       props.onChange(newContent);
+
+    //     });
+    //   }
+    // });
   }, []);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     className: props.className,

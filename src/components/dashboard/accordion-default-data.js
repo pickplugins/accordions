@@ -4,6 +4,7 @@ var accordionDefaultData = {
 	globalOptions: {
 		viewType: "accordion",
 		itemSource: "manual",
+		search: true,
 	},
 	itemQueryArgs: [],
 	styleObj: {},
@@ -143,6 +144,23 @@ var accordionDefaultData = {
 		},
 		styles: {},
 	},
+	searchInput: {
+		options: {
+			placeholder: "",
+			class: "search-input",
+		},
+		styles: {},
+	},
+	expandCollapseAll: {
+		options: {
+			placeholder: "",
+			class: "expand-collapse-all",
+		},
+		styles: {},
+	},
+
+
+
 	accOptions: {
 		active: "9999",
 		collapsible: true,
