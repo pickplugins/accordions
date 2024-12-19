@@ -159,12 +159,12 @@ function Html(props) {
 			</PanelRow>
 
 			<div className="items">
-				{cssLibrary.items.map((x) => {
+				{cssLibrary.items.map((x, index) => {
 					var content = x.post_content;
 
 
 					return (
-						<div className=" border py-2 my-3">
+						<div className=" border py-2 my-3" key={index}>
 							<img src={x.thumb_url} alt="" className="" />
 							<div className="my-2  flex items-center justify-center flex-wrap gap-2 ">
 								<button

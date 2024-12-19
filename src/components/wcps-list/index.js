@@ -177,16 +177,15 @@ function Html(props) {
 
 			{posts != null && (
 				<>
-					{posts.map((item) => {
+					{posts.map((item,index) => {
 						return (
 							<div
 								className="flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer"
+								key={index}
 								onClick={(ev) => {
 									selectAccordion(item.ID);
 
 									addNotifications({ title: "Ready to Edit", content: "Now go to Edit panel to customize accordion.", type: "success" })
-
-
 								}}>
 								<span>
 									{item.post_title}{" "}

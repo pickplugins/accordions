@@ -76,7 +76,7 @@ function MyFunction(props) {
 
 
 					onWheel={onWheel}>
-					{props.tabs.map((tab) => {
+					{props.tabs.map((tab, index) => {
 						return (
 							<div
 								className={`${navItemClass} flex justify-between flex-none border-0   items-center grow  font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
@@ -84,7 +84,7 @@ function MyFunction(props) {
 								onClick={(ev) => {
 									props.onSelect(tab);
 									setSelected(tab.name);
-								}}>
+								}} key={index}>
 								<div
 									className={`flex ${orientation == "vertical" ? "" : "flex-col"
 										} justify-center items-center`}>
