@@ -2846,6 +2846,37 @@ function Icon({
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/add-card.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/add-card.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const addCard = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M18.5 5.5V8H20V5.5h2.5V4H20V1.5h-1.5V4H16v1.5h2.5zM12 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-6h-1.5v6a.5.5 0 01-.5.5H6a.5.5 0 01-.5-.5V6a.5.5 0 01.5-.5h6V4z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addCard);
+//# sourceMappingURL=add-card.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/icons/build-module/library/arrow-right.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/arrow-right.js ***!
@@ -3562,7 +3593,7 @@ function Html(props) {
   });
   useEffect(() => {
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: "/post-grid/v2/post_type_objects",
+      path: "/accordions/v2/post_type_objects",
       method: "POST",
       data: {
         postTypes: []
@@ -3815,7 +3846,7 @@ function Html(props) {
     taxonomy: {
       value: "category",
       id: "taxonomy",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Taxonomy", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Taxonomy", "accordions"),
       description: "Select Taxonomy to Query",
       longDescription: "Taxonomy name, or array of taxonomy names, to which results should be limited."
     },
@@ -4093,18 +4124,162 @@ function Html(props) {
     },
     clickHandle: (value, action) => {
       var valueObj = JSON.parse(value);
-      if (action == "prepend") {}
-      if (action == "append") {
+      console.log(action);
+      console.log(valueObj);
+      if (action == "prepend") {
+        var itemsX = [...items];
+        var faqX = [];
         valueObj.map(item => {
           var answer = item.answer;
           var question = item.question;
+          faqX.push({
+            active: 0,
+            hideOnSchema: 0,
+            headerLabel: {
+              options: {
+                text: question,
+                toggledText: "",
+                slug: "",
+                tag: "",
+                class: "accordion-header-label"
+              }
+            },
+            content: {
+              options: {
+                tag: "",
+                class: "accordion-content",
+                text: answer
+              }
+            },
+            icon: {
+              options: {
+                library: "fontAwesome",
+                srcType: "class",
+                iconSrc: "fas fa-angle-down",
+                position: "left",
+                class: "accordion-icon"
+              },
+              styles: {}
+            },
+            iconToggle: {
+              options: {
+                library: "fontAwesome",
+                srcType: "class",
+                iconSrc: " fas fa-angle-up",
+                class: "accordion-icon-toggle"
+              },
+              styles: {}
+            }
+          });
+        });
+        setitems([...faqX, ...itemsX]);
+        addNotifications({
+          content: "Items append",
+          type: "success"
+        });
+      }
+      if (action == "append") {
+        var itemsX = [...items];
+        var faqX = [];
+        valueObj.map(item => {
+          var answer = item.answer;
+          var question = item.question;
+          faqX.push({
+            active: 0,
+            hideOnSchema: 0,
+            headerLabel: {
+              options: {
+                text: question,
+                toggledText: "",
+                slug: "",
+                tag: "",
+                class: "accordion-header-label"
+              }
+            },
+            content: {
+              options: {
+                tag: "",
+                class: "accordion-content",
+                text: answer
+              }
+            },
+            icon: {
+              options: {
+                library: "fontAwesome",
+                srcType: "class",
+                iconSrc: "fas fa-angle-down",
+                position: "left",
+                class: "accordion-icon"
+              },
+              styles: {}
+            },
+            iconToggle: {
+              options: {
+                library: "fontAwesome",
+                srcType: "class",
+                iconSrc: " fas fa-angle-up",
+                class: "accordion-icon-toggle"
+              },
+              styles: {}
+            }
+          });
+        });
+        setitems([...itemsX, ...faqX]);
+        addNotifications({
+          content: "Items append",
+          type: "success"
         });
       }
       if (action == "replace") {
-        var blocksX = [];
+        var itemsX = [...items];
+        var faqX = [];
         valueObj.map(item => {
           var answer = item.answer;
           var question = item.question;
+          faqX.push({
+            active: 0,
+            hideOnSchema: 0,
+            headerLabel: {
+              options: {
+                text: question,
+                toggledText: "",
+                slug: "",
+                tag: "",
+                class: "accordion-header-label"
+              }
+            },
+            content: {
+              options: {
+                tag: "",
+                class: "accordion-content",
+                text: answer
+              }
+            },
+            icon: {
+              options: {
+                library: "fontAwesome",
+                srcType: "class",
+                iconSrc: "fas fa-angle-down",
+                position: "left",
+                class: "accordion-icon"
+              },
+              styles: {}
+            },
+            iconToggle: {
+              options: {
+                library: "fontAwesome",
+                srcType: "class",
+                iconSrc: " fas fa-angle-up",
+                class: "accordion-icon-toggle"
+              },
+              styles: {}
+            }
+          });
+        });
+        setitems(faqX);
+        addNotifications({
+          content: "Items Added",
+          type: "success"
         });
       }
 
@@ -4186,7 +4361,7 @@ function Html(props) {
     }, "Order By"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_11__["default"], {
       val: item.value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("None", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("None", "accordions"),
         value: "none"
       }, {
         label: "ID",
@@ -4357,7 +4532,7 @@ function Html(props) {
     }, "Order By"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       value: item.value,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("None", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("None", "accordions"),
         value: "none"
       }, {
         label: "ID",
@@ -4603,7 +4778,6 @@ function Html(props) {
         // 	content;
         // setitems(itemsX);
 
-        console.log(content);
         setitems(prevItems => {
           const updatedItems = [...prevItems];
           updatedItems[index] = {
@@ -4655,10 +4829,10 @@ function Html(props) {
       label: "",
       value: (_item$active = item?.active) !== null && _item$active !== void 0 ? _item$active : 0,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
         value: 0
       }],
       onChange: newVal => {
@@ -4684,10 +4858,10 @@ function Html(props) {
       label: "",
       value: (_item$hideOnSchema = item?.hideOnSchema) !== null && _item$hideOnSchema !== void 0 ? _item$hideOnSchema : 0,
       options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
         value: 1
       }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
         value: 0
       }],
       onChange: newVal => {
@@ -4719,10 +4893,10 @@ function Html(props) {
     label: "",
     value: globalOptions?.lazyLoad,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4743,10 +4917,10 @@ function Html(props) {
     label: "",
     value: globalOptions?.autoembed,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4763,10 +4937,10 @@ function Html(props) {
     label: "",
     value: globalOptions?.shortcodes,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4783,10 +4957,10 @@ function Html(props) {
     label: "",
     value: globalOptions?.wpautop,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4803,10 +4977,10 @@ function Html(props) {
     label: "",
     value: globalOptions?.schema,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4823,10 +4997,10 @@ function Html(props) {
     label: "",
     value: globalOptions?.toggleText,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4843,10 +5017,10 @@ function Html(props) {
     label: "",
     value: (_globalOptions$expand = globalOptions?.expandCollapseAll) !== null && _globalOptions$expand !== void 0 ? _globalOptions$expand : 0,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4917,10 +5091,10 @@ function Html(props) {
     label: "",
     value: globalOptions?.stats,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
       value: 0
     }],
     onChange: newVal => {
@@ -4937,13 +5111,13 @@ function Html(props) {
     label: "",
     value: globalOptions?.activeEvent,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Click", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Click", "accordions"),
       value: "click"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "accordions"),
       value: "mouseover"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "accordions"),
       value: "focus"
     }],
     onChange: newVal => {
@@ -4960,13 +5134,13 @@ function Html(props) {
     label: "",
     value: globalOptions?.urlHash,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Click", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Click", "accordions"),
       value: "click"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "accordions"),
       value: "mouseover"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "accordions"),
       value: "focus"
     }],
     onChange: newVal => {
@@ -4983,13 +5157,13 @@ function Html(props) {
     label: "",
     value: globalOptions?.clickToScrollTop,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Click", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Click", "accordions"),
       value: "click"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "accordions"),
       value: "mouseover"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "accordions"),
       value: "focus"
     }],
     onChange: newVal => {
@@ -5318,23 +5492,23 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Counter position", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Counter position", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
     label: "",
     value: labelCounter.options.position,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "accordions"),
       value: ""
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Left", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Left", "accordions"),
       value: "left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Right", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Right", "accordions"),
       value: "right"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Before Label Text", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Before Label Text", "accordions"),
       value: "beforeLabelText"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("After Label Text", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("After Label Text", "accordions"),
       value: "afterLabelText"
     }],
     onChange: newVal => {
@@ -5400,7 +5574,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Label Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Label Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
     library: labelIcon.options.library,
     srcType: labelIcon.options.srcType,
     iconSrc: labelIcon.options.iconSrc,
@@ -5420,23 +5594,23 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon position", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon position", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
     label: "",
     value: labelIcon.options.position,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "accordions"),
       value: ""
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Before Label", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Before Label", "accordions"),
       value: "beforeLabel"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("After Label", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("After Label", "accordions"),
       value: "afterLabel"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Before Label Text", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Before Label Text", "accordions"),
       value: "beforeLabelText"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("After Label Text", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("After Label Text", "accordions"),
       value: "afterLabelText"
     }],
     onChange: newVal => {
@@ -5502,7 +5676,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
     library: icon.options.library,
     srcType: icon.options.srcType,
     iconSrc: icon.options.iconSrc,
@@ -5522,7 +5696,7 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Toggle Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Toggle Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
     library: iconToggle.options.library,
     srcType: iconToggle.options.srcType,
     iconSrc: iconToggle.options.iconSrc,
@@ -5542,17 +5716,17 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon position", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon position", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
     label: "",
     value: icon.options.position,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "accordions"),
       value: ""
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Left", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Left", "accordions"),
       value: "left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Right", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Right", "accordions"),
       value: "right"
     }],
     onChange: newVal => {
@@ -5796,7 +5970,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/cog.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
 /* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
 /* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
 
@@ -5857,13 +6030,41 @@ function Html(props) {
   const [optionDataSaved, setoptionDataSaved] = useState({});
   const [isLoadings, setisLoadings] = useState(false);
   const [roles, setroles] = useState([]);
+  var [needSave, setneedSave] = useState(false); // Using the hook.
+  var [isLoading, setisLoading] = useState(false); // Using the hook.
+
+  function handleAlertConfirmation() {
+    if (confirm("Are you sure you want to reset the option data?")) {
+      resetOptionData();
+    }
+  }
+  function resetOptionData() {
+    setoptionData(optionDataDefault);
+  }
+  function updateOption() {
+    setisLoading(true);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: "/accordions/v2/update_options",
+      method: "POST",
+      data: {
+        name: "accordions_settings",
+        value: optionData
+      }
+    }).then(res => {
+      setisLoading(false);
+      if (res.status) {
+        setoptionDataSaved(optionData);
+        setneedSave(false);
+      }
+    });
+  }
   useEffect(() => {
     setisLoadings(true);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: "/user-verification/v2/get_options",
+      path: "/accordions/v2/get_options",
       method: "POST",
       data: {
-        option: "user_verification_settings"
+        option: "accordions_settings"
       }
     }).then(res => {
       if (res.length != 0) {
@@ -5878,12 +6079,12 @@ function Html(props) {
   }, []);
   useEffect(() => {
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: "/user-verification/v2/user_roles_list",
+      path: "/accordions/v2/user_roles_list",
       method: "POST",
       data: {}
     }).then(res => {
       var rolesX = [];
-      Object.entries(res).map(role => {
+      Object.entries(res?.roles).map(role => {
         var index = role[0];
         var val = role[1];
         rolesX.push({
@@ -5894,7 +6095,6 @@ function Html(props) {
       setroles(rolesX);
     });
   }, []);
-  console.log(optionData);
   const copyData = data => {
     navigator.clipboard.writeText(data).then(() => {
       addNotifications({
@@ -5943,7 +6143,9 @@ function Html(props) {
     className: "flex items-center justify-between align-middle bg-white p-5  mb-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-5"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, postData?.post_title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "You are editing: ", postData.post_title))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, postData?.post_title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "You are editing: ", postData.post_title))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center align-middle gap-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " tracking-wide "
@@ -5960,25 +6162,36 @@ function Html(props) {
   })), AIWriter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
     position: "bottom right"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-[600px] p-3 relative"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0",
+    className: "w-[600px]  relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "px-4 py-2 bg-slate-400 text-white flex justify-between "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl text-white"
+  }, "Accordions Settings"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-2 items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-amber-500 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white ",
     onClick: ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      setAIWriter(!AIWriter);
+      // resetOptionData();
+      handleAlertConfirmation();
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    fill: "#fff",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"]
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Reset", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-green-700 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white flex items-center",
+    onClick: ev => {
+      updateOption();
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Save", "accordions")), needSave && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "w-5 inline-block h-5 ml-3 rounded-xl text-center bg-red-500"
+  }, "!")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "w-[400px]",
+    className: " text-base",
     htmlFor: ""
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Allow access by roles", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
     val: (_optionData$user_role = optionData?.user_roles) !== null && _optionData$user_role !== void 0 ? _optionData$user_role : [],
-    className: "!py-1 px-2 max-w-[200px] w-[180px]",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]",
     options: roles,
     onChange: newVal => {
       var optionsX = {
@@ -5991,11 +6204,11 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "w-[400px]",
+    className: "text-base",
     htmlFor: ""
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Font-awesome version", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
     val: (_optionData$font_aw_v = optionData?.font_aw_version) !== null && _optionData$font_aw_v !== void 0 ? _optionData$font_aw_v : "none",
-    className: "!py-1 px-2 max-w-[200px] w-[180px]",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]",
     options: [{
       label: "None",
       value: "none"
@@ -6017,11 +6230,11 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "w-[400px]",
+    className: "text-base",
     htmlFor: ""
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Allow Iframe on accordion", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
     val: (_optionData$allow_ifr = optionData?.allow_iframe) !== null && _optionData$allow_ifr !== void 0 ? _optionData$allow_ifr : "no",
-    className: "!py-1 px-2 max-w-[200px] w-[180px]",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]",
     options: [{
       label: "No",
       value: "no"
@@ -6040,11 +6253,11 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "w-[400px]",
+    className: "text-base",
     htmlFor: ""
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Enable accordions preview", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
     val: (_optionData$accordion = optionData?.accordions_preview) !== null && _optionData$accordion !== void 0 ? _optionData$accordion : "no",
-    className: "!py-1 px-2 max-w-[200px] w-[180px]",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]",
     options: [{
       label: "No",
       value: "no"
@@ -6063,11 +6276,11 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "w-[400px]",
+    className: "text-base",
     htmlFor: ""
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Open AI API Key", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_5__["default"], {
     label: "",
-    className: "w-[180px]",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]",
     value: (_optionData$openaiApi = optionData?.openaiApiKey) !== null && _optionData$openaiApi !== void 0 ? _optionData$openaiApi : "",
     onChange: newVal => {
       var optionsX = {
@@ -6079,11 +6292,11 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "w-[400px]",
+    className: "text-base",
     htmlFor: ""
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("License Key", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_5__["default"], {
     label: "",
-    className: "w-[180px]",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]",
     value: (_optionData$licenseKe = optionData?.licenseKey) !== null && _optionData$licenseKe !== void 0 ? _optionData$licenseKe : "",
     onChange: newVal => {
       var optionsX = {
@@ -6331,7 +6544,7 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Align Content", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Align Content", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6353,10 +6566,10 @@ function Html(props) {
           }
           // props.onChange(x.value, 'alignContent');
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important (Enabled)', "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important?', "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important (Enabled)', "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important?', "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -6510,7 +6723,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -6527,10 +6740,10 @@ function Html(props) {
             props.onChange(x.value, "alignItems");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important (Enabled)', "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important?', "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important (Enabled)', "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Important?', "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -6679,12 +6892,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Align Self", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Align Self", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -6701,13 +6914,13 @@ function Html(props) {
             props.onChange(x.value, "alignSelf");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
-  }, isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+  }, isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
     className: "!mb-0",
     checked: isImportant,
     onChange: arg => {
@@ -6860,7 +7073,7 @@ function Html(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isAuto ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Auto', "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Auto?', "post-grid"),
+    help: isAuto ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Auto', "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Auto?', "accordions"),
     checked: isAuto,
     onChange: arg => {
       setisAuto(isAuto => !isAuto);
@@ -7047,7 +7260,7 @@ function Html(props) {
     position: "bottom right",
     variant: "secondary",
     options: filterArgs,
-    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Filter", "post-grid"),
+    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add Filter", "accordions"),
     onChange: addFilter,
     values: ""
   })), valArgs != undefined && valArgs.map((arg, i) => {
@@ -7196,7 +7409,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -7213,10 +7426,10 @@ function Html(props) {
             props.onChange(x.value, "backfaceVisibility");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -7329,12 +7542,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Attachment", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Attachment", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -7351,10 +7564,10 @@ function Html(props) {
             props.onChange(x.value, "backgroundAttachment");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -7519,12 +7732,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Blend Mode", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Blend Mode", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -7541,10 +7754,10 @@ function Html(props) {
             props.onChange(x.value, "backgroundBlendMode");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -7665,12 +7878,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Blend Mode", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Blend Mode", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -7687,10 +7900,10 @@ function Html(props) {
             props.onChange(x.value, "backgroundClip");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -7793,7 +8006,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "mb-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     className: "!mb-0",
     onChange: arg => {
@@ -7819,11 +8032,11 @@ function Html(props) {
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: "",
     value: val,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "accordions"),
       value: ""
     }, {
       label: "Inherit",
@@ -7949,16 +8162,16 @@ function Html(props) {
   }
   var typeArgs = {
     url: {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Image URL', "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Image URL', "accordions"),
       id: 'url'
     },
     //conicGradient: { label: 'Conic Gradient', id: 'conicGradient' },
     linearGradient: {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Linear Gradient', "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Linear Gradient', "accordions"),
       id: 'linearGradient'
     },
     radialGradient: {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Radial Gradient', "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Radial Gradient', "accordions"),
       id: 'radialGradient'
     }
     // repeatingConicGradient: { label: 'Repeating Conic Gradient', id: 'repeatingConicGradient' },
@@ -8009,7 +8222,7 @@ function Html(props) {
     position: "bottom right",
     variant: "secondary",
     options: typeArgs,
-    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "post-grid"),
+    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "accordions"),
     onChange: (option, index) => {
       if (option.id == 'url') {
         var dsdsf = valArgs.concat('url()');
@@ -8065,7 +8278,7 @@ function Html(props) {
       }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         className: "my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full",
         onClick: open
-      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Media Library", "post-grid"))
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Media Library", "accordions"))
     }))), !x.includes("url") && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
       value: x == null || x == undefined ? null : x,
       onChange: currentGradient => {
@@ -8198,12 +8411,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Blend Mode", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Blend Mode", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -8220,10 +8433,10 @@ function Html(props) {
             props.onChange(x.value, "backgroundOrigin");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -8350,7 +8563,7 @@ function Html(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isCustom ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value enabled?", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value?", "post-grid"),
+    label: isCustom ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value enabled?", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value?", "accordions"),
     checked: isCustom,
     onChange: arg => {
       setisCustom(isCustom => !isCustom);
@@ -8368,7 +8581,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, position.length == 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : position)),
+    }, position.length == 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : position)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, args.map(x => {
@@ -8383,7 +8596,7 @@ function Html(props) {
             props.onChange(x.value, "backgroundPosition");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), isCustom && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mt-4"
@@ -8412,7 +8625,7 @@ function Html(props) {
       }
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -8545,12 +8758,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Repeat", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Repeat", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -8567,10 +8780,10 @@ function Html(props) {
             props.onChange(x.value, "backgroundRepeat");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -8755,8 +8968,8 @@ function Html(props) {
       setValArgs(valArgs);
       props.onChange(valArgs.join(" "), "backgroundSize");
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isMultiple ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Multiple (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Multiple?", "post-grid"),
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: isMultiple ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Multiple (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Multiple?", "accordions"),
     checked: isMultiple,
     onChange: arg => {
       setisMultiple(isMultiple => !isMultiple);
@@ -8804,12 +9017,12 @@ function Html(props) {
         isOpen,
         onToggle
       }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Repeat", "post-grid"),
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Repeat", "accordions"),
         onClick: onToggle,
         "aria-expanded": isOpen
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, args[item] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom", "post-grid") : args[item].label)),
+      }, args[item] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom", "accordions") : args[item].label)),
       renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "w-32"
       }, Object.entries(args).map(args => {
@@ -8826,7 +9039,7 @@ function Html(props) {
             props.onChange(valArgs.join(" "), "backgroundSize");
             setValArgs(valArgs);
           }
-        }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
       }))
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), item.match(/-?\d+/g) != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex justify-between"
@@ -8851,7 +9064,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, item.match(/[a-zA-Z%]+/g) == null ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : unitArgs[item.match(/[a-zA-Z%]+/g)[0]] == undefined ? "" : unitArgs[item.match(/[a-zA-Z%]+/g)[0]].label)),
+      }, item.match(/[a-zA-Z%]+/g) == null ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : unitArgs[item.match(/[a-zA-Z%]+/g)[0]] == undefined ? "" : unitArgs[item.match(/[a-zA-Z%]+/g)[0]].label)),
       renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "w-32"
       }, Object.entries(unitArgs).map(y => {
@@ -8869,7 +9082,7 @@ function Html(props) {
       }))
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -9006,7 +9219,7 @@ class PGcssBgColor extends Component {
       className: "my-4"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
       className: "text-sm"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("This css property is depricated, please use", "post-grid"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "post-grid")), " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("instead", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("This css property is depricated, please use", "accordions"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "accordions")), " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("instead", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "relative h-10",
       style: placeholderStyle
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -9015,7 +9228,7 @@ class PGcssBgColor extends Component {
       onClick: this.handleToggleClick
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "w-full text-center left-0 top-1/2 -translate-y-1/2\t absolute"
-    }, val == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Set Color', "post-grid") : val)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+    }, val == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Set Color', "accordions") : val)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       enableAlpha: enableAlpha,
       value: val,
       onChange: onChange,
@@ -9186,7 +9399,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: widthValY,
@@ -9206,7 +9419,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -9224,18 +9437,18 @@ function Html(props) {
     className: "my-2 flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     position: "bottom right",
     renderToggle: ({
       isOpen,
       onToggle
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(outlineStyleArgs).map(arg => {
@@ -9247,11 +9460,11 @@ function Html(props) {
           props.onChange(widthVal + " " + x.value + " " + colorVal, "borderBottom");
           setoutlineStyleVal(x.value);
         }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_4__["default"],
     enableAlpha: true,
@@ -9260,7 +9473,7 @@ function Html(props) {
       setoutlineColorVal(newVal);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -9361,12 +9574,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Empty Cells", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Empty Cells", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -9383,10 +9596,10 @@ function Html(props) {
             props.onChange(x.value, "borderCollapse");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -9486,17 +9699,17 @@ function Html(props) {
   const [linearGradientValue, setLinearGradientValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)("linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)");
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source", "post-grid"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Source", "accordions"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "my-4"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 pg-font "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select Source", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select Source", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Linear Gradient", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Linear Gradient", "accordions"),
       value: "linear"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image", "accordions"),
       value: "image"
     }],
     values: "",
@@ -9550,10 +9763,10 @@ function Html(props) {
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
       className: "my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full",
       onClick: open
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Media Library", "post-grid"))
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Open Media Library", "accordions"))
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slice", "post-grid"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slice", "accordions"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
     label: "",
     values: {
       top: slice.split(" ")[0],
@@ -9571,7 +9784,7 @@ function Html(props) {
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "post-grid"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "accordions"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
     label: "",
     values: {
       top: width.split(" ")[0],
@@ -9590,7 +9803,7 @@ function Html(props) {
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "post-grid"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Outset", "accordions"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
     label: "",
     values: {
       top: outset.split(" ")[0],
@@ -9609,23 +9822,23 @@ function Html(props) {
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: "",
     value: repeat,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stretch", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Stretch", "accordions"),
       value: "stretch"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "accordions"),
       value: "repeat"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Round", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Round", "accordions"),
       value: "round"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Space", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Space", "accordions"),
       value: "space"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fill", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Fill", "accordions"),
       value: "fill"
     }],
     onChange: newVal => {
@@ -9822,7 +10035,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: widthValY,
@@ -9842,7 +10055,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -9860,18 +10073,18 @@ function Html(props) {
     className: "my-2 flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     position: "bottom right",
     renderToggle: ({
       isOpen,
       onToggle
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(outlineStyleArgs).map(arg => {
@@ -9883,11 +10096,11 @@ function Html(props) {
           props.onChange(widthVal + " " + x.value + " " + colorVal, "borderLeft");
           setoutlineStyleVal(x.value);
         }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_4__["default"],
     enableAlpha: true,
@@ -9896,7 +10109,7 @@ function Html(props) {
       setoutlineColorVal(newVal);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -10014,7 +10227,7 @@ function Html(props) {
       }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -10214,7 +10427,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: widthValY,
@@ -10234,7 +10447,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -10252,18 +10465,18 @@ function Html(props) {
     className: "my-2 flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     position: "bottom right",
     renderToggle: ({
       isOpen,
       onToggle
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(outlineStyleArgs).map(arg => {
@@ -10275,11 +10488,11 @@ function Html(props) {
           props.onChange(widthVal + " " + x.value + " " + colorVal, "borderRight");
           setoutlineStyleVal(x.value);
         }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_4__["default"],
     enableAlpha: true,
@@ -10288,7 +10501,7 @@ function Html(props) {
       setoutlineColorVal(newVal);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -10462,7 +10675,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Horizontal", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Horizontal", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: horizontalValY,
@@ -10482,7 +10695,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, horizontalUnitY != undefined ? unitArgs[horizontalUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, horizontalUnitY != undefined ? unitArgs[horizontalUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -10500,7 +10713,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Verical", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Verical", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: vericalValY,
@@ -10520,7 +10733,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, vericalUnitY != undefined ? unitArgs[vericalUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, vericalUnitY != undefined ? unitArgs[vericalUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -10535,7 +10748,7 @@ function Html(props) {
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -10757,7 +10970,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: widthValY,
@@ -10777,7 +10990,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -10795,18 +11008,18 @@ function Html(props) {
     className: "my-2 flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     position: "bottom right",
     renderToggle: ({
       isOpen,
       onToggle
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(outlineStyleArgs).map(arg => {
@@ -10818,11 +11031,11 @@ function Html(props) {
           props.onChange(widthVal + " " + x.value + " " + colorVal, "borderTop");
           setoutlineStyleVal(x.value);
         }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_4__["default"],
     enableAlpha: true,
@@ -10831,7 +11044,7 @@ function Html(props) {
       setoutlineColorVal(newVal);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -11031,7 +11244,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: widthValY,
@@ -11051,7 +11264,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, widthUnitY != undefined ? unitArgs[widthUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -11069,18 +11282,18 @@ function Html(props) {
     className: "my-2 flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Style", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     position: "bottom right",
     renderToggle: ({
       isOpen,
       onToggle
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32"
     }, Object.entries(outlineStyleArgs).map(arg => {
@@ -11092,11 +11305,11 @@ function Html(props) {
           props.onChange(widthVal + " " + x.value + " " + colorVal, "border");
           setoutlineStyleVal(x.value);
         }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Color", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_4__["default"],
     enableAlpha: true,
@@ -11105,7 +11318,7 @@ function Html(props) {
       setoutlineColorVal(newVal);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -11288,7 +11501,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -11315,7 +11528,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -11593,10 +11806,10 @@ function Html(props) {
       });
       setShadowObj(shadowObjX);
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "post-grid")), proText && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "accordions")), proText && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://comboblocks.com/pricing/",
     className: "pg-text-color block py-2 px-1"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Subscribe to add multiple shadows.", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, shadowObj.map((shadow, index) => {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Subscribe to add multiple shadows.", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, shadowObj.map((shadow, index) => {
     var h = shadow.h;
     var v = shadow.v;
     var blur = shadow.blur;
@@ -11640,7 +11853,7 @@ function Html(props) {
       initialOpen: false
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H-Offset", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H-Offset", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
       value: hVal,
       type: "number",
       onChange: newVal => {
@@ -11659,7 +11872,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("V-Offset", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("V-Offset", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
       value: vVal,
       type: "number",
       onChange: newVal => {
@@ -11678,7 +11891,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blur", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blur", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
       value: blurVal,
       type: "number",
       onChange: newVal => {
@@ -11697,7 +11910,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spread", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Spread", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
       value: spreadVal,
       type: "number",
       onChange: newVal => {
@@ -11716,7 +11929,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
       value: color,
       colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
       enableAlpha: true,
@@ -11726,7 +11939,7 @@ function Html(props) {
         setShadowObj(shadowObjX);
       }
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-      help: inset ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inset Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inset ?", "post-grid"),
+      help: inset ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inset Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inset ?", "accordions"),
       checked: inset,
       onChange: arg => {
         var shadowObjX = [...shadowObj];
@@ -11739,7 +11952,7 @@ function Html(props) {
       }
     }));
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -11832,12 +12045,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Sizing", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Box Sizing", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -11854,10 +12067,10 @@ function Html(props) {
             props.onChange(x.value, "boxSizing");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -11931,11 +12144,11 @@ function Html(props) {
   }
   var args = {
     top: {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top", "accordions"),
       value: "top"
     },
     bottom: {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom", "accordions"),
       value: "bottom"
     },
     inherit: {
@@ -11958,12 +12171,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Empty Cells", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Empty Cells", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -11980,10 +12193,10 @@ function Html(props) {
             props.onChange(x.value, "captionSide");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -12096,12 +12309,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -12118,10 +12331,10 @@ function Html(props) {
             props.onChange(x.value, "clear");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -12326,7 +12539,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "mb-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     className: "!mb-0",
     onChange: arg => {
@@ -12352,11 +12565,11 @@ function Html(props) {
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: "",
     value: val,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "accordions"),
       value: ""
     }, {
       label: "Inherit",
@@ -12486,7 +12699,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -12665,7 +12878,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -12692,7 +12905,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -12899,7 +13112,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: widthValY,
@@ -12945,13 +13158,13 @@ function Html(props) {
     className: "my-2 flex justify-between items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Style", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Style", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     position: "bottom right",
     renderToggle: ({
       isOpen,
       onToggle
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
@@ -12971,11 +13184,11 @@ function Html(props) {
             props.onChange(widthVal + " " + x.value + " " + colorVal, "columnRule");
           }
         }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     value: colorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_4__["default"],
     enableAlpha: true,
@@ -12987,7 +13200,7 @@ function Html(props) {
       }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: outlineimportantVal ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: outlineimportantVal ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: outlineimportantVal,
     onChange: arg => {
       setoutlineimportantVal(outlineimportantVal => !outlineimportantVal);
@@ -13508,7 +13721,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -13525,10 +13738,10 @@ function Html(props) {
             props.onChange(x.value, "cursor");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -13637,12 +13850,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Align Content", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Align Content", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -13659,10 +13872,10 @@ function Html(props) {
             props.onChange(x.value, "direction");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -13857,7 +14070,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -13874,10 +14087,10 @@ function Html(props) {
             props.onChange(x.value, "display");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -13978,12 +14191,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Empty Cells", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Empty Cells", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -14000,10 +14213,10 @@ function Html(props) {
             props.onChange(x.value, "emptyCells");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -14368,7 +14581,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -14383,7 +14596,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -14485,12 +14698,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[value] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[value].label)),
+    }, args[value] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[value].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -14509,7 +14722,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -14644,7 +14857,7 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -14662,7 +14875,7 @@ function Html(props) {
           setValArgs(valArgs);
           props.onChange(valArgs.join(" "), "flexFlow");
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), valArgs.map((x, i) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -14754,7 +14967,7 @@ function Html(props) {
       props.onChange(newVal, "flexGrow");
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -14840,7 +15053,7 @@ function Html(props) {
       props.onChange(newVal, "flexShrink");
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -14938,12 +15151,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Clear', "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Clear', "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[value] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[value].label)),
+    }, args[value] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[value].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -14962,7 +15175,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -15083,12 +15296,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -15105,10 +15318,10 @@ function Html(props) {
             props.onChange(x.value, "float");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -15205,7 +15418,7 @@ function Html(props) {
   }, [window.postGridBlockEditor]);
   // useEffect(() => {
   // 	apiFetch({
-  // 		path: "/post-grid/v2/get_options",
+  // 		path: "/accordions/v2/get_options",
   // 		method: "POST",
   // 		data: { option: "post_grid_block_editor" },
   // 	}).then((res) => {
@@ -15270,7 +15483,7 @@ function Html(props) {
       }
     }, font)), i == 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "bg-yellow-500 p-1"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Primary", "post-grid")));
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Primary", "accordions")));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex justify-between"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
@@ -15298,7 +15511,7 @@ function Html(props) {
       //setfonts(fonts);
       props.onChange(fontsY.toString(), "fontFamily");
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-3 h-60 overflow-y-scroll"
   }, keyword.length == 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, customFonts.length > 0 && customFonts.map(font => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15537,7 +15750,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -15564,7 +15777,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -15693,12 +15906,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -15715,10 +15928,10 @@ function Html(props) {
             props.onChange(x.value, "fontStretch");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -15815,12 +16028,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -15837,10 +16050,10 @@ function Html(props) {
             props.onChange(x.value, "fontStyle");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -15965,12 +16178,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -15987,10 +16200,10 @@ function Html(props) {
             props.onChange(x.value, "fontVariantCaps");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -16127,12 +16340,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -16149,10 +16362,10 @@ function Html(props) {
             props.onChange(x.value, "fontWeight");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -16331,7 +16544,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -16358,7 +16571,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -16549,7 +16762,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -16576,7 +16789,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -16705,12 +16918,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Place Items", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Place Items", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -16727,10 +16940,10 @@ function Html(props) {
             props.onChange(x.value, "gridAutoFlow");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -16821,7 +17034,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -16912,7 +17125,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -17003,7 +17216,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -17094,7 +17307,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -17256,7 +17469,7 @@ function Html(props) {
       setvalArgs(valArgsX);
       props.onChange(valArgsX.join(' '), 'gridTemplateColumns');
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "post-grid")), valArgs.map((part, index) => {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "accordions")), valArgs.map((part, index) => {
     var valNumber = part.match(/-?\d+/g) != null ? part.match(/-?\d+/g)[0] : 1;
     var valUnit = part.match(/[a-zA-Z%]+/g) != null ? part.match(/[a-zA-Z%]+/g)[0] : 'fr';
     // var valNumber = (valArgs[0] == undefined || valArgs[0].match(/-?\d+/g) == null) ? 0 : valArgs[0].match(/-?\d+/g)[0];
@@ -17465,7 +17678,7 @@ function Html(props) {
       setvalArgs(valArgsX);
       props.onChange(valArgsX.join(" "), "gridTemplateRows");
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "post-grid")), valArgs.map((part, index) => {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "accordions")), valArgs.map((part, index) => {
     var valNumber = part.match(/-?\d+/g) != null ? part.match(/-?\d+/g)[0] : 1;
     var valUnit = part.match(/[a-zA-Z%]+/g) != null ? part.match(/[a-zA-Z%]+/g)[0] : "fr";
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
@@ -17502,7 +17715,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
         className: " "
-      }, valUnit != undefined ? unitArgs[valUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+      }, valUnit != undefined ? unitArgs[valUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
       renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
         className: "w-32"
       }, Object.entries(unitArgs).map(y => {
@@ -17699,7 +17912,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -17726,7 +17939,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -17896,7 +18109,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -17913,10 +18126,10 @@ function Html(props) {
             props.onChange(x.value, "justifyContent");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -18099,7 +18312,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -18126,7 +18339,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -18304,7 +18517,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -18331,7 +18544,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -18550,7 +18763,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -18570,7 +18783,7 @@ function Html(props) {
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "post-grid"), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "accordions"), " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: "",
     value: widthUnit,
     options: [{
@@ -18757,7 +18970,7 @@ function Html(props) {
   const ALLOWED_MEDIA_TYPES = ['image'];
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Type", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Type", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
     variant: "secondary",
     options: typeArgs,
@@ -18767,7 +18980,7 @@ function Html(props) {
     }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Position", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Position", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
     variant: "secondary",
     options: [{
@@ -18799,7 +19012,7 @@ function Html(props) {
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       className: "my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full",
       onClick: open
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Open Media Library", "post-grid"))
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Open Media Library", "accordions"))
   })));
 }
 class PGcssListStyle extends Component {
@@ -18969,7 +19182,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -18996,7 +19209,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -19183,7 +19396,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -19210,7 +19423,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -19397,7 +19610,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -19424,7 +19637,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -19611,7 +19824,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -19638,7 +19851,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -19765,7 +19978,7 @@ function Html(props) {
       }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -19940,7 +20153,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -19967,7 +20180,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -20159,7 +20372,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -20186,7 +20399,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -20373,7 +20586,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -20400,7 +20613,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -20592,7 +20805,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -20619,7 +20832,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -20732,12 +20945,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -20754,10 +20967,10 @@ function Html(props) {
             props.onChange(x.value, "objectFit");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -20849,7 +21062,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -20938,7 +21151,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -21101,7 +21314,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select...', "post-grid"))),
+    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select...', "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -21232,7 +21445,7 @@ function Html(props) {
   const [isImportant, setImportant] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(valZ.includes(" !important") ? true : false);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Width", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     min: "0",
     max: "100",
     step: "1",
@@ -21246,14 +21459,14 @@ function Html(props) {
     position: "bottom right",
     variant: "secondary",
     options: styleArgs,
-    buttonTitle: styleArgs[style] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "post-grid") : styleArgs[style].label,
+    buttonTitle: styleArgs[style] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "accordions") : styleArgs[style].label,
     onChange: (option, index) => {
       props.onChange(blur + "px " + option.value + " " + color, "outline");
     },
     values: ""
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     for: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
     value: color,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
@@ -21261,7 +21474,7 @@ function Html(props) {
       props.onChange(blur + "px " + style + " " + newVal, "outline");
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -21367,7 +21580,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -21384,10 +21597,10 @@ function Html(props) {
             props.onChange(x.value, "overflowX");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -21493,7 +21706,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -21510,10 +21723,10 @@ function Html(props) {
             props.onChange(x.value, "overflowY");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -21623,7 +21836,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -21640,10 +21853,10 @@ function Html(props) {
             props.onChange(x.value, "overflow");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -21822,7 +22035,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -21849,7 +22062,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -22036,7 +22249,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -22063,7 +22276,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -22250,7 +22463,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -22277,7 +22490,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -22464,7 +22677,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -22491,7 +22704,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -22618,7 +22831,7 @@ function Html(props) {
       }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -22788,7 +23001,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -22815,7 +23028,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -22988,12 +23201,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Place Items", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Place Items", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -23010,10 +23223,10 @@ function Html(props) {
             props.onChange(x.value, "placeItems");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -23119,12 +23332,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[value] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[value].label)),
+    }, args[value] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[value].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -23143,7 +23356,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -23322,7 +23535,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -23349,7 +23562,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -23536,7 +23749,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -23563,7 +23776,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -23677,7 +23890,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -23694,10 +23907,10 @@ function Html(props) {
             props.onChange(x.value, "tableLayout");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -23814,7 +24027,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? args[props.val].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, props.val ? args[props.val].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -23825,7 +24038,7 @@ function Html(props) {
         onClick: ev => {
           onChange(x.value, "textAlignLast");
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }));
 }
@@ -24010,7 +24223,7 @@ function Html(props) {
     height: "2.35838",
     fill: "black"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -24141,8 +24354,8 @@ class PGcssTextAlign extends Component {
     //         </div>
     //       </div>
     //       {/* <ToggleControl
-    //         help={isImportant ? __('Important (Enabled)',"post-grid")
-    // : __('Important?',"post-grid")}
+    //         help={isImportant ? __('Important (Enabled)',"accordions")
+    // : __('Important?',"accordions")}
     //         checked={isImportant}
     //         onChange={(arg) => {
     //           setImportant((isImportant) => !isImportant);
@@ -24372,7 +24585,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Line", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Line", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "my-3"
   }, Object.entries(lineArgs).map(arg => {
     var i = arg[0];
@@ -24415,7 +24628,7 @@ function Html(props) {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_4__["default"],
     enableAlpha: true,
@@ -24435,18 +24648,18 @@ function Html(props) {
     className: "my-2 flex justify-between items-center pg-setting-css-components"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Style", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Style", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     position: "bottom right",
     renderToggle: ({
       isOpen,
       onToggle
     }) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, outlineStyleVal ? styleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, outlineStyleVal ? styleArgs[outlineStyleVal].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(styleArgs).map(arg => {
@@ -24466,13 +24679,13 @@ function Html(props) {
             props.onChange(textDecoration.line.join(" ") + " " + outlineColorVal + " " + x.value + " " + outlineThicknessVal, "textDecoration");
           }
         }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "my-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thickness", "post-grid")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Thickness", "accordions")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
     className: "flex justify-between items-center pg-setting-css-components"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
     value: thicknessValY,
@@ -24501,7 +24714,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: " "
-    }, thicknessUnitY != undefined ? unitArgs[thicknessUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, thicknessUnitY != undefined ? unitArgs[thicknessUnitY].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -24521,7 +24734,7 @@ function Html(props) {
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -24690,12 +24903,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Indent", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Indent", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -24722,7 +24935,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -24831,12 +25044,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -24853,10 +25066,10 @@ function Html(props) {
             props.onChange(x.value, "textJustify");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -24966,7 +25179,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -24983,10 +25196,10 @@ function Html(props) {
             props.onChange(x.value, "textOverflow");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -25255,10 +25468,10 @@ function Html(props) {
       });
       setShadowObj(shadowObjX);
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "post-grid")), proText && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add", "accordions")), proText && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://comboblocks.com/pricing/",
     className: "pg-text-color block py-2 px-1"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Subscribe to add multiple shadows.", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, shadowObj.map((shadow, index) => {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Subscribe to add multiple shadows.", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, shadowObj.map((shadow, index) => {
     var h = shadow.h;
     var v = shadow.v;
     var blur = shadow.blur;
@@ -25312,7 +25525,7 @@ function Html(props) {
       initialOpen: false
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H-Offset", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("H-Offset", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
       value: hVal,
       type: "number",
       onChange: newVal => {
@@ -25331,7 +25544,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("V-Offset", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("V-Offset", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
       value: vVal,
       type: "number",
       onChange: newVal => {
@@ -25350,7 +25563,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blur", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blur", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
       value: blurVal,
       type: "number",
       onChange: newVal => {
@@ -25369,7 +25582,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "accordions"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
       value: color,
       colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
       enableAlpha: true,
@@ -25380,7 +25593,7 @@ function Html(props) {
       }
     })));
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -25537,7 +25750,7 @@ function Html(props) {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
     size: 24
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -25726,7 +25939,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, valZ ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(unitArgs).map(y => {
@@ -25755,7 +25968,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -25890,7 +26103,7 @@ function Html(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isCustom ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value enabled?", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value?", "post-grid"),
+    label: isCustom ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value enabled?", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom Value?", "accordions"),
     checked: isCustom,
     onChange: arg => {
       setisCustom(isCustom => !isCustom);
@@ -25908,7 +26121,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, position.length == 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : position)),
+    }, position.length == 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : position)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, args.map(x => {
@@ -25923,7 +26136,7 @@ function Html(props) {
             props.onChange(x.value, "transformOrigin");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), isCustom && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mt-4"
@@ -25952,7 +26165,7 @@ function Html(props) {
       }
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -26191,7 +26404,7 @@ function Html(props) {
     position: "bottom right",
     variant: "secondary",
     options: propertyArgs,
-    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "post-grid"),
+    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "accordions"),
     onChange: (option, index) => {
       valArgs.push(option);
       var str = "";
@@ -26209,7 +26422,7 @@ function Html(props) {
       initialOpen: false
     }, (arg.id == "translateX" || arg.id == "translateY" || arg.id == "translateZ" || arg.id == "scaleX" || arg.id == "scaleY" || arg.id == "scaleZ" || arg.id == "rotate" || arg.id == "rotateX" || arg.id == "rotateY" || arg.id == "rotateZ" || arg.id == "skewX" || arg.id == "skewY" || arg.id == "perspective") && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.val.match(/-?\d+/g) == null ? 0 : arg.val.match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
@@ -26272,7 +26485,7 @@ function Html(props) {
       className: "mt-2"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("X Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("X Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.val.split(",")[0].match(/-?\d+/g) == undefined ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
@@ -26342,7 +26555,7 @@ function Html(props) {
       className: "mt-2"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Y Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Y Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
@@ -26409,7 +26622,7 @@ function Html(props) {
       }
     })), arg.id == "skew" && "deg")))), (arg.id == "translate3d" || arg.id == "scale3d" || arg.id == "rotate3d") && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("X Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("X Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
@@ -26492,7 +26705,7 @@ function Html(props) {
       }
     })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Y Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Y Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
@@ -26561,7 +26774,7 @@ function Html(props) {
       }
     })), arg.id == "skew" && "deg")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Z Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Z Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
@@ -26645,7 +26858,7 @@ function Html(props) {
       }
     })), arg.id == "skew" && "deg")), arg.id == "rotate3d" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Angle", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Angle", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.val.split(",")[3].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[3].match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
@@ -27136,7 +27349,7 @@ function Html(props) {
     position: "bottom right",
     variant: "secondary",
     options: transitionProperties,
-    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "post-grid"),
+    buttonTitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "accordions"),
     onChange: (option, index) => {
       valArgs.push({
         property: option.value,
@@ -27158,7 +27371,7 @@ function Html(props) {
       initialOpen: false
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Duration", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Duration", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.duration.slice(0, -1),
       type: "number",
       autocomplete: "off",
@@ -27179,7 +27392,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Timing Function", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Timing Function", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
       position: "bottom right",
       variant: "secondary",
       options: timingFunctionargs,
@@ -27201,7 +27414,7 @@ function Html(props) {
       }
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delay", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Delay", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
       value: arg.delay.slice(0, -1),
       type: "number",
       autocomplete: "off",
@@ -27329,12 +27542,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -27351,10 +27564,10 @@ function Html(props) {
             props.onChange(x.value, "userSelect");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -27484,7 +27697,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -27501,10 +27714,10 @@ function Html(props) {
             props.onChange(x.value, "verticalAlign");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -27601,12 +27814,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -27623,10 +27836,10 @@ function Html(props) {
             props.onChange(x.value, "visibility");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -27714,7 +27927,7 @@ function Html(props) {
   }, [window.postGridBlockEditor]);
   // useEffect(() => {
   // 	apiFetch({
-  // 		path: "/post-grid/v2/get_options",
+  // 		path: "/accordions/v2/get_options",
   // 		method: "POST",
   // 		data: { option: "post_grid_block_editor" },
   // 	}).then((res) => {
@@ -27748,7 +27961,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    label: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -27773,11 +27986,11 @@ function Html(props) {
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: "",
     value: val,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "accordions"),
       value: ""
     }, {
       label: "Inherit",
@@ -27939,7 +28152,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? args[props.val].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, props.val ? args[props.val].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
     }, Object.entries(args).map(args => {
@@ -27950,7 +28163,7 @@ function Html(props) {
         onClick: ev => {
           onChange(x.value, "whiteSpace");
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }));
 }
@@ -28164,7 +28377,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -28200,11 +28413,11 @@ function Html(props) {
     className: `${props.val.includes("calc") ? "hidden" : ""}`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Value", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
     label: "",
     value: widthUnit,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "post-grid"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Choose", "accordions"),
       value: "px"
     }, {
       label: "auto",
@@ -28338,12 +28551,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -28360,10 +28573,10 @@ function Html(props) {
             props.onChange(x.value, "wordBreak");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -28533,7 +28746,7 @@ function Html(props) {
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid"))),
+    }, props.val ? unitArgs[widthUnit].label : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions"))),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(unitArgs).map(y => {
@@ -28560,7 +28773,7 @@ function Html(props) {
       }, x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -28669,12 +28882,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -28691,10 +28904,10 @@ function Html(props) {
             props.onChange(x.value, "wordWrap");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -28791,12 +29004,12 @@ function Html(props) {
       isOpen,
       onToggle
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "post-grid"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Clear", "accordions"),
       onClick: onToggle,
       "aria-expanded": isOpen
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " "
-    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "post-grid") : args[align].label)),
+    }, args[align] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select...", "accordions") : args[align].label)),
     renderContent: () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32 pg-font"
     }, Object.entries(args).map(args => {
@@ -28813,10 +29026,10 @@ function Html(props) {
             props.onChange(x.value, "writingMode");
           }
         }
-      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "post-grid")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+      }, !x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset", "accordions")), x.value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important (Enabled)", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -28904,7 +29117,7 @@ function Html(props) {
       }
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "post-grid") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "post-grid"),
+    help: isImportant ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important Enabled", "accordions") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Important?", "accordions"),
     checked: isImportant,
     onChange: arg => {
       setImportant(isImportant => !isImportant);
@@ -29120,7 +29333,6 @@ var accordionDefaultData = {
   },
   expandCollapseAll: {
     options: {
-      placeholder: "",
       class: "expand-collapse-all"
     },
     styles: {}
@@ -32850,7 +33062,6 @@ function Html(props) {
 
     return () => clearTimeout(timer); // Cleanup timer on value change or unmount
   }, [notifications]);
-  console.log("first");
   function addNotifications(notification) {
     var notificationsX = [...notifications];
     notificationsX.push(notification);
@@ -33296,7 +33507,7 @@ function Html(props) {
     // <span className="bg-amber-400 rounded-sm px-3  text-white hover:text-white">
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
       target: "_blank",
-      href: "https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" + x.label,
+      href: "https://pickplugins.com/accordions/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" + x.label,
       className: "pg-bg-color rounded-sm px-3 inline-block cursor-pointer py-1 no-underline text-white hover:text-white"
     }, "Pro")
     // </span>
@@ -34261,10 +34472,8 @@ class PGinputSelect extends Component {
       onChange
     } = this.props;
     function Html() {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: `w-full ${className}`
-      }, multiple == true && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-        className: "w-full",
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, multiple == true && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        className: ` ${className}`,
         multiple: true,
         onChange: event => {
           var options = event.target.options;
@@ -34284,6 +34493,7 @@ class PGinputSelect extends Component {
           selected: isSelected
         }, x.label);
       }))), multiple == false && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        className: ` ${className}`,
         onChange: event => {
           var currentVal = options[event.target.options.selectedIndex].value;
           onChange(currentVal);
@@ -34536,13 +34746,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var openai__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! openai */ "./node_modules/openai/index.mjs");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var openai__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! openai */ "./node_modules/openai/index.mjs");
 
 const {
   Component
 } = wp.element;
+
 
 
 
@@ -34562,6 +34775,7 @@ function Html(props) {
   var aiModel = (_promptsAgs$aiModel = promptsAgs?.aiModel) !== null && _promptsAgs$aiModel !== void 0 ? _promptsAgs$aiModel : "gpt-4-turbo";
   var objective = (_promptsAgs$objective = promptsAgs?.objective) !== null && _promptsAgs$objective !== void 0 ? _promptsAgs$objective : "";
   let isProFeature = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__.applyFilters)("isProFeature", true);
+  const [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)({});
   const [isLoading, setisLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
   const [promptPrams, setpromptPrams] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)({
     aiModel: aiModel,
@@ -34586,7 +34800,23 @@ function Html(props) {
     role: "",
     reponse: null
   });
-  var apikey = window?.postGridBlockEditor?.apiKeys?.openAI?.args?.apikey;
+  var apikey = optionData?.openaiApiKey;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
+      path: "/accordions/v2/get_options",
+      method: "POST",
+      data: {
+        option: "accordions_settings"
+      }
+    }).then(res => {
+      if (res.length != 0) {
+        var resX = {
+          ...res
+        };
+        setoptionData(resX);
+      }
+    });
+  }, []);
   async function getGTP() {
     if (openAiPrams.promt.length == 0) {
       alert("Please write some instructions.");
@@ -34597,7 +34827,7 @@ function Html(props) {
       return;
     }
     if (openAiPrams.promt.length > 0) {
-      const openai = new openai__WEBPACK_IMPORTED_MODULE_6__["default"]({
+      const openai = new openai__WEBPACK_IMPORTED_MODULE_7__["default"]({
         apiKey: apikey,
         dangerouslyAllowBrowser: true
       });
@@ -35835,7 +36065,7 @@ function Html(props) {
     }
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
     className: ""
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.RichText, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.RichText, {
     tagName: "div",
     className: "h-[150px] bg-slate-400 p-2 overflow-y-scroll",
     value: openAiPrams.promt,
@@ -35852,16 +36082,16 @@ function Html(props) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", {
     className: "cursor-pointer text-center my-3 bg-gray-700 hover:bg-gray-600 rounded-sm text-white px-3 py-2",
     onClick: ev => {
-      if (isProFeature) {
-        alert("This feature is only available in Pro Version.");
-        return;
-      }
+      // if (isProFeature) {
+      //   alert("This feature is only available in Pro Version.");
+      //   return;
+      // }
       getGTP();
     }
   }, isProFeature && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", {
     className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white"
-  }, "Pro"), isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", null, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Please wait...", "post-grid")), !isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", null, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Get Response", "post-grid")), isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)), (promptPrams.action == 'write' || promptPrams.action == 'rewrite' || promptPrams.action == 'extend') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Update?", "post-grid"),
+  }, "Pro"), isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", null, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Please wait...", "accordions")), !isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("span", null, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Get Response", "accordions")), isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)), (promptPrams.action == 'write' || promptPrams.action == 'rewrite' || promptPrams.action == 'extend') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto Update?", "accordions"),
     className: "mt-3",
     checked: openAiPrams.autoUpdate ? true : false,
     onChange: e => {
@@ -37985,7 +38215,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/check.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/add-card.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/check.js");
 
 const {
   Component,
@@ -38062,7 +38293,15 @@ function Html(props) {
     className: ""
   }, isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " text-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null)), posts != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((item, index) => {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-4 flex"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center  gap-2 py-2 px-3 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600",
+    onClick: ev => {}
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Create New"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    fill: "#fff",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }))), posts != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((item, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer",
       key: index,
@@ -38077,7 +38316,7 @@ function Html(props) {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, item.post_title, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "text-sm"
     }, `(#${item.ID})`)), activeAccordion == item.ID && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"]
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"]
     })));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex py-5 justify-between px-2"
@@ -38738,7 +38977,6 @@ var selectors = {
     var reponsiveCssGroups = {};
   },
   generateBlockCss(state, items, blockId) {
-    console.log(items);
     const {
       blockCss
     } = state;
@@ -38815,7 +39053,6 @@ var selectors = {
       reponsiveCssMobile += "}";
     }
     var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
-    console.log(reponsiveCss);
     var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
     if (iframe) {
       setTimeout(() => {
@@ -38848,12 +39085,12 @@ var selectors = {
 };
 var resolvers = {
   *getLicense() {
-    const path = "/post-grid/v2/get_license";
+    const path = "/accordions/v2/get_license";
     const res = yield actions.fetchLicense(path);
     return actions.setLicense(res);
   },
   *getclientdata() {
-    const path = "/post-grid/v2/get_site_details";
+    const path = "/accordions/v2/get_site_details";
     const res = yield actions.fetchclientdata(path);
     return actions.setclientdata(res);
   }
@@ -43892,11 +44129,15 @@ class APIClient {
         if (signal)
             signal.addEventListener('abort', () => controller.abort());
         const timeout = setTimeout(() => controller.abort(), ms);
-        return (
-        // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
-        this.fetch.call(undefined, url, { signal: controller.signal, ...options }).finally(() => {
+        return (this.getRequestClient()
+            // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
+            .fetch.call(undefined, url, { signal: controller.signal, ...options })
+            .finally(() => {
             clearTimeout(timeout);
         }));
+    }
+    getRequestClient() {
+        return { fetch: this.fetch };
     }
     shouldRetry(response) {
         // Note this is not a standard header.
@@ -49976,7 +50217,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.76.1'; // x-release-please-version
+const VERSION = '4.74.0'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })

@@ -71,7 +71,7 @@ function Html(props) {
 	return (
 		<div>
 			<div className="my-2">
-				<label htmlFor="">{__("Width", "post-grid")}</label>
+				<label htmlFor="">{__("Width", "accordions")}</label>
 				<div className="flex justify-between items-center">
 					<InputControl
 						value={widthValY}
@@ -81,13 +81,13 @@ function Html(props) {
 							if (outlineimportantVal) {
 								props.onChange(
 									newVal +
-										widthUnitY +
-										" " +
-										styleVal +
-										" " +
-										colorVal +
-										" " +
-										"!important",
+									widthUnitY +
+									" " +
+									styleVal +
+									" " +
+									colorVal +
+									" " +
+									"!important",
 									"columnRule"
 								);
 							} else {
@@ -125,23 +125,23 @@ function Html(props) {
 													if (outlineimportantVal) {
 														props.onChange(
 															widthValY +
-																x.value +
-																" " +
-																styleVal +
-																" " +
-																colorVal +
-																" " +
-																"!important",
+															x.value +
+															" " +
+															styleVal +
+															" " +
+															colorVal +
+															" " +
+															"!important",
 															"columnRule"
 														);
 													} else {
 														props.onChange(
 															widthValY +
-																x.value +
-																" " +
-																styleVal +
-																" " +
-																colorVal,
+															x.value +
+															" " +
+															styleVal +
+															" " +
+															colorVal,
 															"columnRule"
 														);
 													}
@@ -157,12 +157,12 @@ function Html(props) {
 				</div>
 			</div>
 			<div className="my-2 flex justify-between items-center">
-				<label htmlFor="">{__("Style", "post-grid")}</label>
+				<label htmlFor="">{__("Style", "accordions")}</label>
 				<Dropdown
 					position="bottom right"
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
-							title={__("Clear", "post-grid")}
+							title={__("Clear", "accordions")}
 							onClick={onToggle}
 							aria-expanded={isOpen}>
 							<div className=" ">
@@ -186,12 +186,12 @@ function Html(props) {
 											if (outlineimportantVal) {
 												props.onChange(
 													widthVal +
-														" " +
-														x.value +
-														" " +
-														colorVal +
-														" " +
-														"!important",
+													" " +
+													x.value +
+													" " +
+													colorVal +
+													" " +
+													"!important",
 													"columnRule"
 												);
 											} else {
@@ -201,7 +201,7 @@ function Html(props) {
 												);
 											}
 										}}>
-										{!x.value && <div>{__("Reset", "post-grid")}</div>}
+										{!x.value && <div>{__("Reset", "accordions")}</div>}
 										{x.value && <>{x.label}</>}
 									</div>
 								);
@@ -210,7 +210,7 @@ function Html(props) {
 					)}
 				/>
 			</div>
-			<label htmlFor="">{__("Color", "post-grid")}</label>
+			<label htmlFor="">{__("Color", "accordions")}</label>
 			<PGColorPicker
 				value={colorVal}
 				colors={colorsPresets}
@@ -232,8 +232,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					outlineimportantVal
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={outlineimportantVal}
 				onChange={(arg) => {

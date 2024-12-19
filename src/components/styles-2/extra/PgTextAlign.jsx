@@ -44,9 +44,8 @@ const PgCSSTextAlign = ({ val, onChange, breakPoint, sudoSrc }) => {
 						</svg>
 					</div>
 					<div
-						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-							align === "center" ? "bg-blue-600 text-white " : ""
-						}`}
+						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "center" ? "bg-blue-600 text-white " : ""
+							}`}
 						onClick={(ev) => {
 							if (!isImportant) {
 								onChange("center", "textAlign");
@@ -67,9 +66,8 @@ const PgCSSTextAlign = ({ val, onChange, breakPoint, sudoSrc }) => {
 						</svg>
 					</div>
 					<div
-						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-							align === "right" ? "bg-blue-600 text-white " : ""
-						}`}
+						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "right" ? "bg-blue-600 text-white " : ""
+							}`}
 						onClick={(ev) => {
 							if (!isImportant) {
 								onChange("right", "textAlign");
@@ -90,9 +88,8 @@ const PgCSSTextAlign = ({ val, onChange, breakPoint, sudoSrc }) => {
 						</svg>
 					</div>
 					<div
-						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${
-							align === "justify" ? "bg-blue-600 text-white " : ""
-						}`}
+						className={`flex items-center justify-center w-[30px] h-[30px] border cursor-pointer ${align === "justify" ? "bg-blue-600 text-white " : ""
+							}`}
 						onClick={(ev) => {
 							if (!isImportant) {
 								onChange("justify", "textAlign");
@@ -117,8 +114,8 @@ const PgCSSTextAlign = ({ val, onChange, breakPoint, sudoSrc }) => {
 				<ToggleControl
 					help={
 						isImportant
-							? __("(Enabled)", "post-grid")
-							: __("Important?", "post-grid")
+							? __("(Enabled)", "accordions")
+							: __("Important?", "accordions")
 					}
 					checked={isImportant}
 					onChange={(arg) => {

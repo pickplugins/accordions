@@ -39,7 +39,7 @@ function Html(props) {
 	}, [window.postGridBlockEditor]);
 	// useEffect(() => {
 	// 	apiFetch({
-	// 		path: "/post-grid/v2/get_options",
+	// 		path: "/accordions/v2/get_options",
 	// 		method: "POST",
 	// 		data: { option: "post_grid_block_editor" },
 	// 	}).then((res) => {
@@ -77,8 +77,8 @@ function Html(props) {
 					<ToggleControl
 						label={
 							isImportant
-								? __("Important (Enabled)", "post-grid")
-								: __("Important?", "post-grid")
+								? __("Important (Enabled)", "accordions")
+								: __("Important?", "accordions")
 						}
 						checked={isImportant}
 						onChange={(arg) => {
@@ -108,12 +108,12 @@ function Html(props) {
 						}}
 					/>
 					<PanelRow>
-						<label htmlFor="">{__("Global Value", "post-grid")}</label>
+						<label htmlFor="">{__("Global Value", "accordions")}</label>
 						<SelectControl
 							label=""
 							value={val}
 							options={[
-								{ label: __("Choose", "post-grid"), value: "" },
+								{ label: __("Choose", "accordions"), value: "" },
 								{ label: "Inherit", value: "inherit" },
 								{ label: "Initial", value: "initial" },
 								{ label: "Revert", value: "revert" },

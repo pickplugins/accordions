@@ -75,24 +75,24 @@ const PgCSSPadding = ({ val, onChange, breakPoint, sudoSrc }) => {
 					if (isImportant) {
 						onChange(
 							nextValues.top +
-								" " +
-								nextValues.right +
-								" " +
-								nextValues.bottom +
-								" " +
-								nextValues.left +
-								" !important",
+							" " +
+							nextValues.right +
+							" " +
+							nextValues.bottom +
+							" " +
+							nextValues.left +
+							" !important",
 							"padding"
 						);
 					} else {
 						onChange(
 							nextValues.top +
-								" " +
-								nextValues.right +
-								" " +
-								nextValues.bottom +
-								" " +
-								nextValues.left,
+							" " +
+							nextValues.right +
+							" " +
+							nextValues.bottom +
+							" " +
+							nextValues.left,
 							"padding"
 						);
 					}
@@ -101,8 +101,8 @@ const PgCSSPadding = ({ val, onChange, breakPoint, sudoSrc }) => {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				className="absolute !top-[20px] !right-[80px]"
@@ -116,13 +116,13 @@ const PgCSSPadding = ({ val, onChange, breakPoint, sudoSrc }) => {
 					} else {
 						onChange(
 							valX.top +
-								" " +
-								valX.right +
-								" " +
-								valX.bottom +
-								" " +
-								valX.left +
-								" !important",
+							" " +
+							valX.right +
+							" " +
+							valX.bottom +
+							" " +
+							valX.left +
+							" !important",
 							"padding"
 						);
 					}

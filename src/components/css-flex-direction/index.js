@@ -32,12 +32,12 @@ function Html(props) {
 				position="bottom"
 				renderToggle={({ isOpen, onToggle }) => (
 					<Button
-						title={__("Clear", "post-grid")}
+						title={__("Clear", "accordions")}
 						onClick={onToggle}
 						aria-expanded={isOpen}>
 						<div className=" ">
 							{args[value] == undefined
-								? __("Select...", "post-grid")
+								? __("Select...", "accordions")
 								: args[value].label}
 						</div>
 					</Button>
@@ -70,8 +70,8 @@ function Html(props) {
 			<ToggleControl
 				label={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

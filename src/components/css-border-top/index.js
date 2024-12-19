@@ -79,7 +79,7 @@ function Html(props) {
 	return (
 		<div>
 			<div className="my-2">
-				<label htmlFor="">{__("Border Width", "post-grid")}</label>
+				<label htmlFor="">{__("Border Width", "accordions")}</label>
 				<div className="flex justify-between items-center">
 					<InputControl
 						value={widthValY}
@@ -100,7 +100,7 @@ function Html(props) {
 									<div className=" ">
 										{widthUnitY != undefined
 											? unitArgs[widthUnitY].label
-											: __("Select...", "post-grid")}
+											: __("Select...", "accordions")}
 									</div>
 								</Button>
 							)}
@@ -118,11 +118,11 @@ function Html(props) {
 													setwidthUnit(x.value);
 													props.onChange(
 														widthValY +
-															x.value +
-															" " +
-															styleVal +
-															" " +
-															colorVal,
+														x.value +
+														" " +
+														styleVal +
+														" " +
+														colorVal,
 														"borderTop"
 													);
 												}}>
@@ -137,18 +137,18 @@ function Html(props) {
 				</div>
 			</div>
 			<div className="my-2 flex justify-between items-center">
-				<label htmlFor="">{__("Border Style", "post-grid")}</label>
+				<label htmlFor="">{__("Border Style", "accordions")}</label>
 				<Dropdown
 					position="bottom right"
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
-							title={__("Clear", "post-grid")}
+							title={__("Clear", "accordions")}
 							onClick={onToggle}
 							aria-expanded={isOpen}>
 							<div className=" ">
 								{outlineStyleVal
 									? outlineStyleArgs[outlineStyleVal].label
-									: __("Select...", "post-grid")}
+									: __("Select...", "accordions")}
 							</div>
 						</Button>
 					)}
@@ -169,7 +169,7 @@ function Html(props) {
 											);
 											setoutlineStyleVal(x.value);
 										}}>
-										{!x.value && <div>{__("Reset", "post-grid")}</div>}
+										{!x.value && <div>{__("Reset", "accordions")}</div>}
 										{x.value && <>{x.label}</>}
 									</div>
 								);
@@ -178,7 +178,7 @@ function Html(props) {
 					)}
 				/>
 			</div>
-			<label htmlFor="">{__("Border Color", "post-grid")}</label>
+			<label htmlFor="">{__("Border Color", "accordions")}</label>
 			<PGColorPicker
 				value={outlineColorVal}
 				colors={colorsPresets}
@@ -191,8 +191,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

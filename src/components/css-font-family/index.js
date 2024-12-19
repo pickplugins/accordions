@@ -1601,7 +1601,7 @@ function Html(props) {
 	}, [window.postGridBlockEditor]);
 	// useEffect(() => {
 	// 	apiFetch({
-	// 		path: "/post-grid/v2/get_options",
+	// 		path: "/accordions/v2/get_options",
 	// 		method: "POST",
 	// 		data: { option: "post_grid_block_editor" },
 	// 	}).then((res) => {
@@ -1669,7 +1669,7 @@ function Html(props) {
 										</span>
 										<span style={{ fontFamily: font }}>{font}</span>
 									</div>
-									{i == 0 && <div className="bg-yellow-500 p-1">{__("Primary","post-grid")}</div>}
+									{i == 0 && <div className="bg-yellow-500 p-1">{__("Primary", "accordions")}</div>}
 								</div>
 							);
 						})}
@@ -1704,7 +1704,7 @@ function Html(props) {
 								//setfonts(fonts);
 								props.onChange(fontsY.toString(), "fontFamily");
 							}}>
-							{__("Add","post-grid")}
+							{__("Add", "accordions")}
 						</div>
 					</div>
 					<div className="my-3 h-60 overflow-y-scroll">

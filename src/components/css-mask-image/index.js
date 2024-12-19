@@ -63,7 +63,7 @@ function Html(props) {
   return (
     <div>
       <div className="my-4">
-        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={__("Add", "post-grid")} onChange={(option, index) => {
+        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={__("Add", "accordions")} onChange={(option, index) => {
           if (option.id == 'url') {
             var dsdsf = valArgs.concat('url()')
           }
@@ -118,7 +118,7 @@ function Html(props) {
                         <Button
                           className="my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full"
                           onClick={open}>
-                          {__("Open Media Library", "post-grid")}
+                          {__("Open Media Library", "accordions")}
                         </Button>
                       )}
                     />

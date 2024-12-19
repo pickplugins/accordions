@@ -44,7 +44,7 @@ function Html(props) {
         var valArgsX = valArgs.concat('1fr');
         setvalArgs(valArgsX);
         props.onChange(valArgsX.join(' '), 'gridTemplateColumns');
-      }}>{__("Add","post-grid")}</div>
+      }}>{__("Add", "accordions")}</div>
       {valArgs.map((part, index) => {
         var valNumber = (part.match(/-?\d+/g) != null) ? part.match(/-?\d+/g)[0] : 1;
         var valUnit = (part.match(/[a-zA-Z%]+/g) != null) ? part.match(/[a-zA-Z%]+/g)[0] : 'fr';

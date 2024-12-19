@@ -61,7 +61,7 @@ function Html(props) {
 	return (
 		<div className="">
 			<ToggleControl
-				label={isCustom ? __("Custom Value enabled?","post-grid") : __("Custom Value?","post-grid")}
+				label={isCustom ? __("Custom Value enabled?", "accordions") : __("Custom Value?", "accordions")}
 				checked={isCustom}
 				onChange={(arg) => {
 					setisCustom((isCustom) => !isCustom);
@@ -75,7 +75,7 @@ function Html(props) {
 							<Button title="" onClick={onToggle} aria-expanded={isOpen}>
 								{/* <div className=" ">{val ? val : 'Select...'}</div> */}
 								<div className=" ">
-									{position.length == 0 ? __("Select...","post-grid") : position}
+									{position.length == 0 ? __("Select...", "accordions") : position}
 								</div>
 							</Button>
 						)}
@@ -99,7 +99,7 @@ function Html(props) {
 													props.onChange(x.value, "backgroundPosition");
 												}
 											}}>
-											{!x.value && <div>{__("Reset", "post-grid")}</div>}
+											{!x.value && <div>{__("Reset", "accordions")}</div>}
 											{x.value && <>{x.label}</>}
 										</div>
 									);
@@ -120,12 +120,12 @@ function Html(props) {
 								if (isImportant) {
 									props.onChange(
 										newVal +
-											valUnitX +
-											" " +
-											ValY +
-											valUnitY +
-											" " +
-											"!important",
+										valUnitX +
+										" " +
+										ValY +
+										valUnitY +
+										" " +
+										"!important",
 										"backgroundPosition"
 									);
 								} else {
@@ -147,12 +147,12 @@ function Html(props) {
 								if (isImportant) {
 									props.onChange(
 										ValX +
-											valUnitX +
-											" " +
-											newVal +
-											valUnitY +
-											" " +
-											"!important",
+										valUnitX +
+										" " +
+										newVal +
+										valUnitY +
+										" " +
+										"!important",
 										"backgroundPosition"
 									);
 								} else {
@@ -169,8 +169,8 @@ function Html(props) {
 			<ToggleControl
 				label={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

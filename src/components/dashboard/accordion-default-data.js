@@ -153,7 +153,6 @@ var accordionDefaultData = {
 	},
 	expandCollapseAll: {
 		options: {
-			placeholder: "",
 			class: "expand-collapse-all",
 		},
 		styles: {},

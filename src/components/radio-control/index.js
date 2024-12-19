@@ -17,27 +17,26 @@ function Html(props) {
 	if (!props.warn) {
 		return null;
 	}
-  var selected = props.selected;
+	var selected = props.selected;
 	var label = props.label;
 	var name = props.name;
-  
+
 	var options = props.options;
 	var onChange = props.onChange;
-  
-  return (
+
+	return (
 		<div>
-      <span className="mb-3 font-bold ">{label}</span>
+			<span className="mb-3 font-bold ">{label}</span>
 			{Object.entries(options).map((args) => {
-        var index = args[0];
+				var index = args[0];
 				var x = args[1];
 				return (
 					<div className="flex items-center w-full my-1 post-grid ">
 						<input
 							type="radio"
 							id={index}
-							className={`!h-4 !w-4 ${
-								x.isPro ? "!border-gray-300 " : "!border-gray-500"
-							}  focus:ring-2 focus:ring-blue-300`}
+							className={`!h-4 !w-4 ${x.isPro ? "!border-gray-300 " : "!border-gray-500"
+								}  focus:ring-2 focus:ring-blue-300`}
 							name={props.name}
 							value={x.value}
 							disabled={x.isPro ? true : false}
@@ -107,12 +106,12 @@ class PGRadioControl extends Component {
 					label={label}
 					name={name}
 					options={options}
-          onChange={onChange}
+					onChange={onChange}
 					// buttonTitle={buttonTitle}
 					// searchPlaceholder={searchPlaceholder}
 					// btnClass={btnClass}
 					// variant={variant}
-					
+
 					warn={this.state.showWarning}
 				/>
 			</div>

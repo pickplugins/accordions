@@ -38,7 +38,7 @@ class PGContactSupport extends Component {
       var docUrl = 'https://comboblocks.com/documentations/?' + utmPrams + '&utm_medium=Docsbutton';
       var tutsUrl = 'https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6';
       var supportCreate = 'https://pickplugins.com/create-support-ticket/?' + utmPrams + '&utm_medium=createSupportButton';
-      var reviewUrl = 'https://wordpress.org/support/plugin/post-grid/reviews/#new-post';
+      var reviewUrl = 'https://wordpress.org/support/plugin/accordions/reviews/#new-post';
 
 
 

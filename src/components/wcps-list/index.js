@@ -25,6 +25,7 @@ import {
 	arrowRight,
 	brush,
 	code,
+	addCard,
 } from "@wordpress/icons";
 
 var myStore = wp.data.select('postgrid-shop');
@@ -159,6 +160,20 @@ function Html(props) {
 					<Spinner />
 				</div>
 			)}
+
+
+			<div className="my-4 flex">
+
+				<div
+					className="flex items-center  gap-2 py-2 px-3 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+					onClick={(ev) => {
+
+					}}>
+					<span>Create New</span>
+					<Icon fill={"#fff"} icon={addCard} />
+				</div>
+			</div>
+
 
 			{posts != null && (
 				<>

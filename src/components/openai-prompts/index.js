@@ -5,6 +5,7 @@ import { Icon, styles, settings, link, linkOff, close, language } from "@wordpre
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { __experimentalInputControl as InputControl, Spinner, PanelBody, PanelRow, ColorPalette, RangeControl, TextareaControl, SelectControl, ToggleControl } from '@wordpress/components';
 import { applyFilters } from "@wordpress/hooks";
+import apiFetch from "@wordpress/api-fetch";
 
 import {
   InspectorControls,
@@ -27,14 +28,27 @@ function Html(props) {
   var objective = promptsAgs?.objective ?? "";
 
   let isProFeature = applyFilters("isProFeature", true);
+  const [optionData, setoptionData] = useState({});
 
   const [isLoading, setisLoading] = useState(false);
   const [promptPrams, setpromptPrams] = useState({ aiModel: aiModel, promt: "", action: action, language: "", objectFoundedYear: "", objective: objective, objectName: "", keywords: "", services: "", lengthType: "", length: 20, imageCount: 1, imageSize: '512x512' });
   const [openAiPrams, setopenAiPrams] = useState({ promt: "", apikey: '', autoUpdate: props.autoUpdate, model: '', role: "", reponse: null });
 
-  var apikey = window?.postGridBlockEditor?.apiKeys?.openAI?.args?.apikey
+  var apikey = optionData?.openaiApiKey
 
+  useEffect(() => {
+    apiFetch({
+      path: "/accordions/v2/get_options",
+      method: "POST",
+      data: { option: "accordions_settings" },
+    }).then((res) => {
+      if (res.length != 0) {
+        var resX = { ...res };
 
+        setoptionData(resX);
+      }
+    });
+  }, []);
 
 
   async function getGTP() {
@@ -1211,10 +1225,10 @@ function Html(props) {
 
         <div className="flex items-center gap-3 my-3">
           <div className='cursor-pointer text-center my-3 bg-gray-700 hover:bg-gray-600 rounded-sm text-white px-3 py-2' onClick={ev => {
-            if (isProFeature) {
-              alert("This feature is only available in Pro Version.");
-              return;
-            }
+            // if (isProFeature) {
+            //   alert("This feature is only available in Pro Version.");
+            //   return;
+            // }
             getGTP();
           }}>
 
@@ -1227,10 +1241,10 @@ function Html(props) {
             )}
 
             {isLoading && (
-              <span> {__("Please wait...", "post-grid")}</span>
+              <span> {__("Please wait...", "accordions")}</span>
             )}
             {!isLoading && (
-              <span> {__("Get Response", "post-grid")}</span>
+              <span> {__("Get Response", "accordions")}</span>
             )}
             {isLoading && (
               <Spinner />
@@ -1247,7 +1261,7 @@ function Html(props) {
               <div>
 
                 <ToggleControl
-                  label={__("Auto Update?", "post-grid")}
+                  label={__("Auto Update?", "accordions")}
                   className="mt-3"
 
                   checked={openAiPrams.autoUpdate ? true : false}

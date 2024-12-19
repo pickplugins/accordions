@@ -35,7 +35,7 @@ function Html(props) {
 			<Dropdown
 				position="bottom"
 				renderToggle={({ isOpen, onToggle }) => (
-					<Button title={__("Clear","post-grid")} onClick={onToggle} aria-expanded={isOpen}>
+					<Button title={__("Clear", "accordions")} onClick={onToggle} aria-expanded={isOpen}>
 						<div className=" ">{"Select..."}</div>
 					</Button>
 				)}
@@ -54,7 +54,7 @@ function Html(props) {
 										setValArgs(valArgs);
 										props.onChange(valArgs.join(" "), "flexFlow");
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "accordions")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);

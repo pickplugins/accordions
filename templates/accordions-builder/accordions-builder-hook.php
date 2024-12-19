@@ -10,6 +10,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
+    $search = isset($globalOptions["search"]) ? $globalOptions["search"] : true;
     $lazyLoad = isset($globalOptions["lazyLoad"]) ? $globalOptions["lazyLoad"] : true;
     $stats = isset($globalOptions["stats"]) ? $globalOptions["stats"] : true;
     $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : true;
@@ -145,6 +146,11 @@ function accordions_builder_accordion($post_id, $accordionData)
 
         <div>
 
+            <?php if ($search): ?>
+
+                <input type="text" placeholder="" placeholder="<?php esc_attr($expandAllText); ?>" />
+
+            <?php endif; ?>
             <?php if ($expandCollapseAll): ?>
                 <div class="expandCollapseAll" expandAllText="<?php esc_attr($expandAllText); ?>" collapseAllText="<?php esc_attr($collapseAllText); ?>">
                     <?php echo $expandAllText; ?>
@@ -194,7 +200,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
         ?>
-            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1">
+            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1" toggledText="<?php echo esc_attr($headerLabelToggledText); ?>">
                 <?php if ($iconPosition == 'left') : ?>
                     <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
                         <?php echo wp_kses_post($iconHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
