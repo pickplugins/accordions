@@ -395,10 +395,8 @@ function Html(props) {
 					<PGtabs
 						activeTab="accordions"
 						orientation=""
-						stickyNavs={true}
 						contentClass=" bg-white w-full"
-						navItemClass="bg-gray-200 px-5 py-3 gap-2 grow "
-						navItemLabelClass="flex-col "
+						navItemClass="bg-gray-200 px-5 py-3 gap-2"
 						navItemSelectedClass="!bg-white"
 						activeClass="active-tab"
 						onSelect={(tabName) => { }}
@@ -424,22 +422,11 @@ function Html(props) {
 						]}>
 						<PGtab name="accordions">
 							<div className="relative p-3">
-
-
-
-
-
-
-
-
-
 								{postData.post_content == null && (
 									<div className="p-3 my-5 bg-orange-400">
 										Please choose an accordion first.
 									</div>
 								)}
-
-
 
 								<WCPSList
 									addNotifications={addNotifications}
@@ -474,25 +461,14 @@ function Html(props) {
 													var itemIndex = item[0];
 													var itemArg = item[1];
 
-
-
 													if (itemArg.options) {
 														delete itemArg.options;
 													}
-													console.log(itemIndex);
-													console.log(itemArg);
-
-													console.log(accordionData[itemIndex]);
-
 
 													presetClean[itemIndex] = {
 														...accordionData[itemIndex],
 														...itemArg,
 													};
-
-													console.log(presetClean);
-
-
 												});
 
 												var accordionDataX = {
@@ -522,7 +498,9 @@ function Html(props) {
 
 
 						{postData.ID == null && (
-							<AccordionsGuide />
+							<AccordionsGuide
+
+							/>
 						)}
 						{postData.ID != null && (
 							<AccordionsView
@@ -542,6 +520,7 @@ function Html(props) {
 							/>
 						)}
 
+						{JSON.stringify(notifications)}
 					</div>
 				</div>
 			</div>

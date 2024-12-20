@@ -1225,10 +1225,10 @@ function Html(props) {
 
         <div className="flex items-center gap-3 my-3">
           <div className='cursor-pointer text-center my-3 bg-gray-700 hover:bg-gray-600 rounded-sm text-white px-3 py-2' onClick={ev => {
-            // if (isProFeature) {
-            //   alert("This feature is only available in Pro Version.");
-            //   return;
-            // }
+            if (isProFeature) {
+              alert("This feature is only available in Pro Version.");
+              return;
+            }
             getGTP();
           }}>
 
