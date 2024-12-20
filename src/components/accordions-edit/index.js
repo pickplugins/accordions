@@ -465,8 +465,8 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		posts: { label: "Posts", value: "posts", isPro: 0 },
-		terms: { label: "Terms", value: "terms", isPro: 0 },
+		posts: { label: "Posts", value: "posts", isPro: true },
+		terms: { label: "Terms", value: "terms", isPro: true },
 	};
 
 	function generate3Digit() {

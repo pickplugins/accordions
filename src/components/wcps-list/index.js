@@ -29,6 +29,7 @@ import {
 } from "@wordpress/icons";
 
 var myStore = wp.data.select('postgrid-shop');
+import PGinputText from "../input-text";
 
 
 
@@ -48,6 +49,7 @@ function Html(props) {
 
 
 
+	var [searchPrams, setsearchPrams] = useState({ search: "" }); // Using the hook.
 	var [posts, setPosts] = useState(null); // Using the hook.
 	var [pagination, setPagination] = useState({ currentPage: 1 }); // Using the hook.
 	var [dataLoaded, setdataLoaded] = useState(false); // Using the hook.
@@ -72,6 +74,10 @@ function Html(props) {
 			"val": [
 				"any"
 			]
+		},
+		{
+			"id": "s",
+			"val": ""
 		},
 		{
 			"id": "order",
@@ -109,6 +115,11 @@ function Html(props) {
 			if (id == "paged") {
 				item.val = pagination.currentPage;
 			}
+			if (id == "s") {
+				item.val = searchPrams.search;
+			}
+
+
 
 		})
 
@@ -139,12 +150,45 @@ function Html(props) {
 
 
 
-	}, [isLoaded, pagination.currentPage]);
+	}, [isLoaded, pagination.currentPage, searchPrams.search]);
 
 
 
 
+	function create_post() {
 
+
+		setisLoading(true);
+		apiFetch({
+			path: "/accordions/v2/create_post",
+			method: "POST",
+			data: { postTitle: searchPrams.search, },
+		}).then((res) => {
+			console.log(res);
+
+			if (res.error) {
+				addNotifications({
+					title: "There is an Error!",
+					content: res.errorMessage,
+					type: "error",
+				});
+			}
+			if (res.success) {
+				posts.unshift({ ID: res.id, post_content: "", post_author: 0, post_title: searchPrams.search });
+				addNotifications({
+					title: "Accordion Create!",
+					content: res.successMessage,
+					type: "success",
+				});
+			}
+
+
+
+			setisLoading(false);
+			if (res.status) {
+			}
+		});
+	}
 
 
 
@@ -161,23 +205,45 @@ function Html(props) {
 				</div>
 			)}
 
+			<div className="my-4 flex items-center gap-3">
 
-			<div className="my-4 flex">
+				<PGinputText
+					value={searchPrams.search}
+					placeholder={"Search.../Add New..."}
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[220px]"
+					onChange={(newVal) => {
+						var searchPramsX = { ...searchPrams };
+						searchPramsX.search = newVal
+						setsearchPrams(searchPramsX)
+
+						const timer = setTimeout(() => {
+							// Update the debounced value after delay
+
+						}, 3000); // 300ms debounce delay
+
+						return () => clearTimeout(timer); // Cleanup timer on value change or unmount
+
+
+
+
+					}}
+				/>
 
 				<div
 					className="flex items-center  gap-2 py-2 px-3 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
 					onClick={(ev) => {
-
+						create_post();
 					}}>
-					<span>Create New</span>
 					<Icon fill={"#fff"} icon={addCard} />
+					<span>Create</span>
 				</div>
 			</div>
 
 
+
 			{posts != null && (
 				<>
-					{posts.map((item,index) => {
+					{posts.map((item, index) => {
 						return (
 							<div
 								className="flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer"
@@ -187,10 +253,10 @@ function Html(props) {
 
 									addNotifications({ title: "Ready to Edit", content: "Now go to Edit panel to customize accordion.", type: "success" })
 								}}>
-								<span>
-									{item.post_title}{" "}
-									<span className="text-sm">{`(#${item.ID})`}</span>
-								</span>
+								<div>
+									<div className="text-base mb-2">{item.post_title}</div>
+									<div className="text-sm flex items-center gap-2"><span className="text-xs">{`(#${item.ID})`}</span></div>
+								</div>
 								{activeAccordion == item.ID && (
 									<span>
 										<Icon icon={check} />
