@@ -2,7 +2,7 @@ const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { Popover, Spinner } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Icon, close, cog, addCard, brush, category, columns, starFilled } from "@wordpress/icons";
+import { Icon, close, cog, addCard, brush, category, columns, starFilled, postAuthor, styles } from "@wordpress/icons";
 
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
@@ -93,20 +93,16 @@ function Html(props) {
 
 	return (
 		<div className="ml-5">
-			<div className="flex justify-between items-center p-5 bg-white">
+			<div className="flex justify-between items-center p-5 pb-20 bg-white ">
 				<div>
-					<div className="text-4xl">Accordions By PickPlugins</div>
+					<div className="flex justify-between items-center gap-3"><span className="text-4xl font-extrabold">Accordions</span> <span className="text-base">By PickPlugins</span></div>
+					<div className="font-mono text-sm">Version: 2.3.1</div>
 				</div>
-				<div>
-					<div>Version: 2.3.1</div>
-					<div>Create Support Ticket</div>
-					<div>Videos</div>
-					<div>
-						<Icon icon={starFilled} />
-						<Icon icon={starFilled} />
-						<Icon icon={starFilled} />
-						<Icon icon={starFilled} />
-						<Icon icon={starFilled} />
+				<div className="">
+
+					<div className="flex items-center  gap-2 py-3 px-5 cursor-pointer  capitalize bg-amber-500 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Upgrade</div>
+					<div className="my-4 max-w-52">Help us by providing your feedbacks and five star reviews on wordpress.org
+						🌟🌟🌟🌟🌟
 					</div>
 				</div>
 			</div>
@@ -114,11 +110,13 @@ function Html(props) {
 			<PGtabs
 				activeTab="overview"
 				orientation=""
+				tabsWrapperClass="mt-[-50px] "
 				contentClass=" w-full"
-				navItemClass="bg-gray-200 px-5 py-3 gap-2"
-				navItemSelectedClass="!bg-white"
+				navItemsWrapClass="gap-3 px-10"
+				navItemClass=" px-5 py-3 gap-2 rounded-t-md"
+				navItemSelectedClass="!bg-white border-2  border-b-0 border-solid  border-blue-700"
 				activeClass="active-tab"
-				onSelect={(tabName) => {}}
+				onSelect={(tabName) => { }}
 				tabs={[
 					{
 						name: "overview",
@@ -128,26 +126,32 @@ function Html(props) {
 					},
 					{
 						name: "edit",
-						title: "Edit",
-						icon: brush,
+						title: "Free Vs Pro",
+						icon: styles,
 						className: "tab-disable-blocks",
 					},
 					{
 						name: "templates",
-						title: "Templates",
-						icon: category,
+						title: "About Us",
+						icon: postAuthor,
 						className: "tab-disable-blocks",
 					},
 				]}>
 				<PGtab name="overview">
-					<div className="flex gap-4 items-start flex-wrap">
+					<div className="flex gap-4 items-start flex-wrap mt-10 px-10">
 						<div className="flex-1 flex flex-col gap-3 p-[40px] max-w-[70%] bg-white rounded-md shadow-md">
 							<h2 className="text-[32px] font-semibold text-gray-800">
-								Welcome to Easy Accordion!
+								Super Excited to See you!
 							</h2>
 							<p className="text-gray-500 text-[14px]">
-								Thank you for installing Easy Accordion! This video will help
-								you get started with the plugin. Enjoy!
+								Thanks for installing Accordions plugin! Watch this video to get started.
+
+
+
+
+
+
+
 							</p>
 							<iframe
 								width="100%"
@@ -159,89 +163,63 @@ function Html(props) {
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 								referrerpolicy="strict-origin-when-cross-origin"
 								allowfullscreen></iframe>
-							<div className="flex gap-4 items-center">
-								<a
-									href="#"
-									className="inline-block font-medium px-[24px] py-[16px] bg-gray-700 text-white rounded-md">
-									Item - 1
-								</a>
-								<a
-									href="#"
-									className="inline-block font-medium px-[24px] py-[16px] bg-gray-700 text-white rounded-md">
-									Item - 2
-								</a>
-								<a
-									href="#"
-									className="inline-block font-medium px-[24px] py-[16px] bg-gray-700 text-white rounded-md">
-									Item - 3
-								</a>
-							</div>
+
 						</div>
 						<div className="grid md:grid-cols-1 grid-cols-3 content-between md:max-w-[30%] max-w-full gap-3 text-gray-800">
 							<div className="flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md">
-								<h4 className="text-[18px] font-semibold flex items-center gap-2">
-									<span>🌟</span>Documentation
-								</h4>
+								<div className="text-[18px] font-semibold flex items-center gap-2">
+									<span>🌟</span>Videos
+								</div>
 								<p>
-									Explore Easy Accordion plugin capabilities in our enriched
-									documentation.
+									Join the PickPlugins Facebook group to share your experiences, ideas, and feedback!
+
 								</p>
 								<a
 									href="#"
-									className="inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
-									Browse Now
+									className="inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
+									Watch on YouTube
 								</a>
 							</div>
 							<div className="flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md">
-								<h4 className="text-[18px] font-semibold flex items-center gap-2">
+								<div className="text-[18px] font-semibold flex items-center gap-2">
 									<span>🌟</span>Documentation
-								</h4>
+								</div>
 								<p>
-									Explore Easy Accordion plugin capabilities in our enriched
-									documentation.
+									Check out our detailed documentation to learn what the Accordions plugin can do!
+
+
+
+
+
+
+
 								</p>
 								<a
 									href="#"
 									className="inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
-									Browse Now
+									Check Documentation
 								</a>
 							</div>
 							<div className="flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md">
-								<h4 className="text-[18px] font-semibold flex items-center gap-2">
-									<span>🌟</span>Documentation
-								</h4>
+								<div className="text-[18px] font-semibold flex items-center gap-2">
+									<span>🌟</span>Need Help?
+								</div>
 								<p>
-									Explore Easy Accordion plugin capabilities in our enriched
-									documentation.
+									Contact our friendly support team for quick and personalized help!
 								</p>
 								<a
 									href="#"
 									className="inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
-									Browse Now
+									Create Support Ticket
 								</a>
 							</div>
 						</div>
 					</div>
 
-					{/* <div class="grid grid-rows-4 grid-flow-col gap-4">
-						<div class="row-span-3 ...">01</div>
-						<div class="col-span-2 ...">02</div>
-						<div class="row-span-2 col-span-2 ...">03</div>
-					</div>
-					<div className="grid my-5 grid-cols-12 gap-4">
-						<div className="col-span-8">
-							<div className="bg-white rounded-md p-6">
-								<iframe width="100%" height="700" src="https://www.youtube.com/embed/ArANm9K1bes?si=uIGfrIJGD_cC2TGI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-							</div>
-						</div>
-						<div className="col-span-4">
-							<div >
-							</div>
-						</div>
-					</div> */}
+
 				</PGtab>
 				<PGtab name="edit">
-					<div className="overflow-x-auto rounded-md border border-solid border-gray-800 max-w-[800px] mx-auto">
+					<div className=" rounded-md   mt-10">
 						<table className="table-auto w-full text-left">
 							<thead className="bg-gray-700 text-white">
 								<tr className="">
@@ -268,23 +246,23 @@ function Html(props) {
 												</span>
 											)}
 										</td>
-										<td className="py-3 px-8 border-x-[1px] border-solid border-x-gray-800 text-center">
+										<td className="py-3 px-8  text-center">
 											{typeof item.lite === "number"
 												? item.lite
 												: item.lite === "true"
-												? "✔️"
-												: item.lite === "false"
-												? "❌"
-												: item.lite}
+													? "✔️"
+													: item.lite === "false"
+														? "❌"
+														: item.lite}
 										</td>
 										<td className="py-3 px-8 text-center">
 											{typeof item.pro === "number"
 												? item.pro
 												: item.pro === "true"
-												? "✔️"
-												: item.pro === "false"
-												? "❌"
-												: item.pro}
+													? "✔️"
+													: item.pro === "false"
+														? "❌"
+														: item.pro}
 										</td>
 									</tr>
 								))}
@@ -293,7 +271,7 @@ function Html(props) {
 					</div>
 				</PGtab>
 				<PGtab name="templates">
-					<div className="grid grid-cols-2 gap-4 w-full p-7 bg-white">
+					<div className="grid grid-cols-2 gap-4 w-full p-7 bg-white mt-10">
 						<div>
 							<h1 className="text-2xl font-medium mb-4">
 								The Most Powerful Accordion and FAQs Builder plugin for
@@ -340,16 +318,12 @@ function Html(props) {
 					</div>
 					<div>
 						<h3 className="text-2xl font-medium my-8">
-							Upgrade your Website with our High-quality Plugins!
+							Improve your website with our top-notch plugins!
 						</h3>
 						<div className="grid grid-cols-3 gap-4">
 							{ourPlugins.map((plugin) => (
 								<div className="bg-gray-200 hover:bg-gray-300 shadow-sm p-8 rounded-lg relative">
-									<img
-										src={plugin.logo}
-										alt={plugin.name}
-										className="w-[70px] mb-4"
-									/>
+
 									<h4 className="font-medium text-lg mb-4">{plugin.name}</h4>
 									<p className="text-[14px]">{plugin.description}</p>
 									<a href={plugin.link} className="absolute inset-0"></a>

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	window.pgAccordion = {
 		id: "",
 		activeIndex: [999],
+		expandCollapseAllHndle: ".expand-collapse-all",
 		headerList: [],
 		listenUrlHash: () => {
 			var hash = window.location.hash;
@@ -42,6 +43,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var max = window.pgAccordion.headerList.length - 1;
 			var nextIndex = (activeIndex - 1 < 0) ? max : (activeIndex - 1);
 			window.pgAccordion.switch(nextIndex);
+		},
+		expandCollapseAll: () => {
+			var expandCollapseAllHndle = document.querySelector("#" + window.pgAccordion.id + " " + window.pgAccordion.expandCollapseAllHndle);
+
+			var toggled = expandCollapseAllHndle.getAttribute("data-toggled");
+
+
+
+			var expandalltext = expandCollapseAllHndle.getAttribute("data-expandalltext");
+			var collapsealltext = expandCollapseAllHndle.getAttribute("data-collapsealltext");
+			var expandalliconhtml = expandCollapseAllHndle.getAttribute("data-expandalliconhtml");
+			var collapsealliconhtml = expandCollapseAllHndle.getAttribute("data-collapsealliconhtml");
+
+			if (!toggled) {
+				expandCollapseAllHndle.setAttribute("data-toggled", true);
+				var innerHtml = `${collapsealliconhtml}<span>${collapsealltext}</span>`;
+			} else {
+				expandCollapseAllHndle.removeAttribute("data-toggled");
+				var innerHtml = `${expandalliconhtml}<span>${expandalltext}</span>`;
+			}
+
+			expandCollapseAllHndle.innerHTML = innerHtml
+
+
+
+
 		},
 		init: ({ selector = "[data-pgaccordion]" }) => {
 			if (selector.length == 0) return;
@@ -117,6 +144,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					});
 				}
 			})
+
+
+
+			var expandCollapseAllHndle = document.querySelector("#" + window.pgAccordion.id + " " + window.pgAccordion.expandCollapseAllHndle);
+
+			expandCollapseAllHndle.addEventListener("click", function (event) {
+
+				window.pgAccordion.expandCollapseAll()
+			})
+
+
 			// var nextWrap = document.querySelector("#" + window.pgAccordion.id + " .next ");
 			// var prevWrap = document.querySelector("#" + window.pgAccordion.id + " .prev ");
 			// var pageNumbers = document.querySelectorAll("#" + window.pgAccordion.id + " .page-numbers ");

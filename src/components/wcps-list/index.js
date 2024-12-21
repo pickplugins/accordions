@@ -44,7 +44,7 @@ function Html(props) {
 	var selectAccordion = props.selectAccordion;
 	var activeAccordion = props.activeAccordion;
 	var addNotifications = props.addNotifications;
-var setHelp = props.setHelp;
+	var setHelp = props.setHelp;
 
 
 
@@ -210,7 +210,7 @@ var setHelp = props.setHelp;
 				<PGinputText
 					value={searchPrams.search}
 					placeholder={"Search.../Add New..."}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[180px]"
 					onChange={(newVal) => {
 						var searchPramsX = { ...searchPrams };
 						searchPramsX.search = newVal;

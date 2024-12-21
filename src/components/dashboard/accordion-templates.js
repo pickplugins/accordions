@@ -4,7 +4,7 @@ var accordionTemplates = [
 
 	{
 		label: "Template 1",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-1.png",
 		data: {
 			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "2px solid #f58117" }, "borderBottom": { "Desktop": "2px solid #f58117" }, "borderLeft": { "Desktop": "2px solid #f58117" } } },
@@ -22,7 +22,7 @@ var accordionTemplates = [
 
 	{
 		label: "Template 2",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+		thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004349.png",
 		data: {
 			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "1px solid #ededed" }, "borderBottom": { "Desktop": "1px solid #ededed" }, "borderLeft": { "Desktop": "1px solid #ededed" }, "boxShadow": [] } },
@@ -38,7 +38,7 @@ var accordionTemplates = [
 
 	{
 		label: "Template 3",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+		thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004348.png",
 		data: {
 			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "1px solid #ededed" }, "borderBottom": { "Desktop": "1px solid #ededed" }, "borderLeft": { "Desktop": "1px solid #ededed" }, "boxShadow": [], "margin": { "Desktop": "0px 0px 0px 76px" } } },
@@ -54,7 +54,7 @@ var accordionTemplates = [
 
 	{
 		label: "Template 4",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+		thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004347.png",
 		data: {
 			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "1px solid #ededed" }, "borderBottom": { "Desktop": "1px solid #ededed" }, "borderLeft": { "Desktop": "1px solid #ededed" }, "boxShadow": [] } },
