@@ -14,7 +14,7 @@ import {
 	SelectControl,
 	ToggleControl,
 } from "@wordpress/components";
-import { brush, close, copy, menu, settings } from "@wordpress/icons";
+import { brush, close, copy, help, menu, settings } from "@wordpress/icons";
 
 import { RichText } from "@wordpress/block-editor";
 import breakPoints from "../../breakpoints";
@@ -37,6 +37,7 @@ function Html(props) {
 
 	var onChange = props.onChange;
 	var addNotifications = props.addNotifications;
+	var setHelp = props.setHelp;
 
 	var postData = props.postData;
 
@@ -532,6 +533,16 @@ function Html(props) {
 							<div className="flex items-center  gap-2">
 								{globalOptions?.itemSource == "posts" && (
 									<>
+										<span
+											className="cursor-pointer"
+											onClick={() => {
+												setHelp({
+													id: "addPostQuery",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
 										<PGDropdown
 											position="bottom right"
 											variant="secondary"
@@ -550,6 +561,16 @@ function Html(props) {
 								)}
 								{globalOptions?.itemSource == "terms" && (
 									<>
+										<span
+											className="cursor-pointer"
+											onClick={() => {
+												setHelp({
+													id: "addTermQuery",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
 										<PGDropdown
 											position="bottom right"
 											variant="secondary"
@@ -666,21 +687,14 @@ function Html(props) {
 																console.log(action);
 																console.log(valueObj);
 
-
 																if (action == "prepend") {
-
-
-
-
 																	var itemsX = [...items];
-
 
 																	var faqX = [];
 
 																	valueObj.map((item) => {
 																		var answer = item.answer;
 																		var question = item.question;
-
 
 																		faqX.push({
 																			active: 0,
@@ -721,9 +735,7 @@ function Html(props) {
 																				styles: {},
 																			},
 																		});
-
 																	});
-
 
 																	setitems([...faqX, ...itemsX]);
 
@@ -731,31 +743,15 @@ function Html(props) {
 																		content: "Items append",
 																		type: "success",
 																	});
-
-
-
-
-
-
-
-
-
-
 																}
 																if (action == "append") {
-
-
-
-
 																	var itemsX = [...items];
-
 
 																	var faqX = [];
 
 																	valueObj.map((item) => {
 																		var answer = item.answer;
 																		var question = item.question;
-
 
 																		faqX.push({
 																			active: 0,
@@ -796,9 +792,7 @@ function Html(props) {
 																				styles: {},
 																			},
 																		});
-
 																	});
-
 
 																	setitems([...itemsX, ...faqX]);
 
@@ -806,25 +800,15 @@ function Html(props) {
 																		content: "Items append",
 																		type: "success",
 																	});
-
-
-
-
-
-
-
-
 																}
 																if (action == "replace") {
 																	var itemsX = [...items];
-
 
 																	var faqX = [];
 
 																	valueObj.map((item) => {
 																		var answer = item.answer;
 																		var question = item.question;
-
 
 																		faqX.push({
 																			active: 0,
@@ -865,9 +849,7 @@ function Html(props) {
 																				styles: {},
 																			},
 																		});
-
 																	});
-
 
 																	setitems(faqX);
 
@@ -875,12 +857,6 @@ function Html(props) {
 																		content: "Items Added",
 																		type: "success",
 																	});
-
-
-
-
-
-
 																}
 
 																//setAttributes({ itemsX: { ...itemsX, items: itemx } });
@@ -959,7 +935,10 @@ function Html(props) {
 													<PGinputSelect
 														val={item.value}
 														options={[
-															{ label: __("None", "accordions"), value: "none" },
+															{
+																label: __("None", "accordions"),
+																value: "none",
+															},
 															{ label: "ID", value: "ID" },
 															{ label: "Author", value: "author" },
 															{ label: "Title", value: "title" },
@@ -1110,7 +1089,10 @@ function Html(props) {
 													<SelectControl
 														value={item.value}
 														options={[
-															{ label: __("None", "accordions"), value: "none" },
+															{
+																label: __("None", "accordions"),
+																value: "none",
+															},
 															{ label: "ID", value: "ID" },
 															{ label: "Author", value: "author" },
 															{ label: "Title", value: "title" },
@@ -1370,7 +1352,6 @@ function Html(props) {
 																		// 	content;
 																		// setitems(itemsX);
 
-
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
@@ -1509,7 +1490,19 @@ function Html(props) {
 						initialOpen={false}>
 						<div className="py-3">
 							<PanelRow>
-								<label htmlFor="">Lazyload</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Lazyload{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "lazyloadSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 								<SelectControl
 									className="w-[140px]"
 									label=""
@@ -1530,7 +1523,19 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Autoembed</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Autoembed{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "autoembedSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 								<SelectControl
 									className="w-[140px]"
 									label=""
@@ -1548,7 +1553,19 @@ function Html(props) {
 							</PanelRow>
 
 							<PanelRow>
-								<label htmlFor="">Shortcodes</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Shortcodes{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "shortcodesSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1566,7 +1583,19 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">wpautop</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									wpautop{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "wpautopSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1584,7 +1613,19 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Schema</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Schema{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "schemaSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1602,7 +1643,19 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Toggle Text</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Toggle Text{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "toggleTextSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1620,7 +1673,19 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Expand/collapse all</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Expand/collapse all{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "expandCollapseSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1711,7 +1776,19 @@ function Html(props) {
 								</>
 							)}
 							<PanelRow>
-								<label htmlFor="">Stats</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Stats{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "statsSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 
 								<SelectControl
 									className="w-[140px]"
@@ -1738,7 +1815,10 @@ function Html(props) {
 									value={globalOptions?.activeEvent}
 									options={[
 										{ label: __("Click", "accordions"), value: "click" },
-										{ label: __("Mouseover", "accordions"), value: "mouseover" },
+										{
+											label: __("Mouseover", "accordions"),
+											value: "mouseover",
+										},
 										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
@@ -1756,7 +1836,10 @@ function Html(props) {
 									value={globalOptions?.urlHash}
 									options={[
 										{ label: __("Click", "accordions"), value: "click" },
-										{ label: __("Mouseover", "accordions"), value: "mouseover" },
+										{
+											label: __("Mouseover", "accordions"),
+											value: "mouseover",
+										},
 										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
@@ -1767,15 +1850,26 @@ function Html(props) {
 								/>
 							</PanelRow>
 							<PanelRow>
-								<label htmlFor="">Click To Scroll Top</label>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Click To Scroll Top{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "scrollToTopSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
 								<SelectControl
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.clickToScrollTop}
 									options={[
-										{ label: __("Click", "accordions"), value: "click" },
-										{ label: __("Mouseover", "accordions"), value: "mouseover" },
-										{ label: __("Focus", "accordions"), value: "focus" },
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1784,27 +1878,45 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-							<PanelRow className="w-full">
-								<label htmlFor="" className="break-all">
-									Click To Scroll Top Offset
-								</label>
-								<PGinputText
-									className="max-w-[140px]"
-									label=""
-									value={globalOptions?.clickToScrollTopOffset}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.clickToScrollTopOffset = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
+							{globalOptions?.clickToScrollTop && (
+								<PanelRow className="w-full">
+									<label htmlFor="" className="break-all">
+										Click To Scroll Top Offset
+									</label>
+									<PGinputText
+										className="max-w-[140px]"
+										label=""
+										value={globalOptions?.clickToScrollTopOffset}
+										onChange={(newVal) => {
+											var globalOptionsX = { ...globalOptions };
+											globalOptionsX.clickToScrollTopOffset = newVal;
+											setglobalOptions(globalOptionsX);
+										}}
+									/>
+								</PanelRow>
+							)}
 							<PanelRow>
-								<label htmlFor="">Animation Name</label>
-								<PGinputText
-									className="max-w-[140px]"
+								<label htmlFor="" className="flex gap-2 items-center">
+									Animation Name{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "animationSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
+								<SelectControl
+									className="w-[140px]"
 									label=""
-									value={globalOptions?.animationName ?? ''}
+									value={globalOptions?.animationName}
+									options={[
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
+									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.animationName = newVal;
@@ -1838,7 +1950,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1917,7 +2029,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1990,7 +2102,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2059,7 +2171,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2142,7 +2254,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2220,7 +2332,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2339,7 +2451,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2507,7 +2619,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2649,7 +2761,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2726,7 +2838,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2817,7 +2929,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2906,13 +3018,14 @@ class AccordionsEdit extends Component {
 	}
 
 	render() {
-		var { onChange, postData, addNotifications } = this.props;
+		var { onChange, postData, addNotifications, setHelp } = this.props;
 
 		return (
 			<Html
 				onChange={onChange}
 				addNotifications={addNotifications}
 				postData={postData}
+				setHelp={setHelp}
 				warn={this.state.showWarning}
 				isLoaded={this.state.isLoaded}
 			/>

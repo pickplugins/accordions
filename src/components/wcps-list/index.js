@@ -26,6 +26,7 @@ import {
 	brush,
 	code,
 	addCard,
+	help,
 } from "@wordpress/icons";
 
 var myStore = wp.data.select('postgrid-shop');
@@ -43,7 +44,7 @@ function Html(props) {
 	var selectAccordion = props.selectAccordion;
 	var activeAccordion = props.activeAccordion;
 	var addNotifications = props.addNotifications;
-
+var setHelp = props.setHelp;
 
 
 
@@ -206,26 +207,18 @@ function Html(props) {
 			)}
 
 			<div className="my-4 flex items-center gap-3">
-
 				<PGinputText
 					value={searchPrams.search}
 					placeholder={"Search.../Add New..."}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[220px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 					onChange={(newVal) => {
 						var searchPramsX = { ...searchPrams };
-						searchPramsX.search = newVal
-						setsearchPrams(searchPramsX)
-
+						searchPramsX.search = newVal;
+						setsearchPrams(searchPramsX);
 						const timer = setTimeout(() => {
 							// Update the debounced value after delay
-
 						}, 3000); // 300ms debounce delay
-
 						return () => clearTimeout(timer); // Cleanup timer on value change or unmount
-
-
-
-
 					}}
 				/>
 
@@ -237,9 +230,17 @@ function Html(props) {
 					<Icon fill={"#fff"} icon={addCard} />
 					<span>Create</span>
 				</div>
+				<span
+					className="cursor-pointer"
+					onClick={() => {
+						setHelp({
+							id: "createAccordion",
+							enable: true,
+						});
+					}}>
+					<Icon icon={help} />
+				</span>
 			</div>
-
-
 
 			{posts != null && (
 				<>
@@ -251,11 +252,17 @@ function Html(props) {
 								onClick={(ev) => {
 									selectAccordion(item.ID);
 
-									addNotifications({ title: "Ready to Edit", content: "Now go to Edit panel to customize accordion.", type: "success" })
+									addNotifications({
+										title: "Ready to Edit",
+										content: "Now go to Edit panel to customize accordion.",
+										type: "success",
+									});
 								}}>
 								<div>
 									<div className="text-base mb-2">{item.post_title}</div>
-									<div className="text-sm flex items-center gap-2"><span className="text-xs">{`(#${item.ID})`}</span></div>
+									<div className="text-sm flex items-center gap-2">
+										<span className="text-xs">{`(#${item.ID})`}</span>
+									</div>
 								</div>
 								{activeAccordion == item.ID && (
 									<span>
@@ -330,6 +337,7 @@ class wcpsList extends Component {
 		var {
 			selectAccordion,
 			activeAccordion,
+			setHelp,
 			addNotifications
 		} = this.props;
 
@@ -342,7 +350,7 @@ class wcpsList extends Component {
 		return (
 
 
-			<Html selectAccordion={selectAccordion} activeAccordion={activeAccordion} warn={this.state.showWarning} isLoaded={this.state.isLoaded} addNotifications={addNotifications}
+			<Html selectAccordion={selectAccordion} activeAccordion={activeAccordion} warn={this.state.showWarning} isLoaded={this.state.isLoaded} setHelp={setHelp} addNotifications={addNotifications}
 			/>
 
 
