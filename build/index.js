@@ -3972,7 +3972,7 @@ function Html(props) {
     include: {
       value: "category",
       id: "include",
-      isPro: true,
+      //isPro: true,
       label: "Include",
       description: "Comma-separated string of term IDs to include.",
       longDescription: "Array or comma/space-separated string of term IDs to include. Default empty array.",
@@ -3981,7 +3981,7 @@ function Html(props) {
     exclude: {
       value: "",
       id: "exclude",
-      isPro: true,
+      //isPro: true,
       label: "Exclude",
       description: "Comma-separated string of term IDs to exclude.",
       longDescription: "Array or comma/space-separated string of term IDs to exclude. If $include is non-empty, $exclude is ignored. Default empty array.",
@@ -3990,7 +3990,7 @@ function Html(props) {
     child_of: {
       value: "",
       id: "child_of",
-      isPro: true,
+      //isPro: true,
       label: "Child of",
       description: "Term ID to retrieve child terms of.",
       longDescription: "Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0."
@@ -3998,7 +3998,7 @@ function Html(props) {
     parent: {
       value: "",
       id: "parent",
-      isPro: true,
+      //isPro: true,
       label: "Parent",
       description: "Add {ID} to add Parent term ID to retrieve direct-child terms of.",
       longDescription: "Parent term ID to retrieve direct-child terms of."
@@ -4006,7 +4006,7 @@ function Html(props) {
     meta_key: {
       value: "",
       id: "meta_key",
-      isPro: true,
+      //isPro: true,
       label: "Meta key",
       description: "Comma-separated keys to return term(s) for.",
       longDescription: "Meta key or keys to filter by."
@@ -4014,7 +4014,7 @@ function Html(props) {
     meta_value: {
       value: "",
       id: "meta_value",
-      isPro: true,
+      //isPro: true,
       label: "Meta value",
       description: "Comma-separated keys to return term(s) for.",
       longDescription: "Meta value or values to filter by."
@@ -4047,12 +4047,12 @@ function Html(props) {
     posts: {
       label: "Posts",
       value: "posts",
-      isPro: false
+      isPro: true
     },
     terms: {
       label: "Terms",
       value: "terms",
-      isPro: false
+      isPro: true
     }
   };
   function generate3Digit() {
