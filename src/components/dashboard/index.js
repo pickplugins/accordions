@@ -43,7 +43,7 @@ function Html(props) {
 	var [isLoadings, setisLoadings] = useState(false); // Using the hook.
 
 	var [notifications, setnotifications] = useState([]); // Using the hook.
-	var [help, sethelp] = useState({ id: "createAccordion", enable: true }); // Using the hook.
+	var [help, sethelp] = useState({ id: "createAccordion", enable: false }); // Using the hook.
 
 	useEffect(() => {
 		setnotifications(notifications);

@@ -29389,7 +29389,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var accordionTemplates = [{
   label: "Template 1",
-  thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+  thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-1.png",
   data: {
     "wrapper": {
       "options": {
@@ -29563,7 +29563,7 @@ var accordionTemplates = [{
   }
 }, {
   label: "Template 2",
-  thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+  thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004349.png",
   data: {
     "wrapper": {
       "options": {
@@ -29748,7 +29748,7 @@ var accordionTemplates = [{
   }
 }, {
   label: "Template 3",
-  thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+  thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004348.png",
   data: {
     "wrapper": {
       "options": {
@@ -29936,7 +29936,7 @@ var accordionTemplates = [{
   }
 }, {
   label: "Template 4",
-  thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
+  thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004347.png",
   data: {
     "wrapper": {
       "options": {
@@ -32532,6 +32532,8 @@ function Html(props) {
   var labelIconSelector = blockClass + " .accordion-label-icon";
   var iconSelector = blockClass + " .accordion-icon";
   var iconToggleSelector = blockClass + " .accordion-icon-toggle";
+  var expandCollapseAllSelector = blockClass + " .expand-collapse-all";
+  var searchInputSelector = blockClass + " .search-input";
   function getElementSelector(sudoScource, mainSelector) {
     var elementSelector = mainSelector;
     if (sudoScource == "styles") {
@@ -32981,6 +32983,18 @@ function Html(props) {
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
     });
+    var expandCollapseAllCss = generateElementCss(accordionData.expandCollapseAll, expandCollapseAllSelector);
+    Object.entries(expandCollapseAllCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var searchInputCss = generateElementCss(accordionData.searchInput, searchInputSelector);
+    Object.entries(searchInputCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
     setstyleObj(styleObjX);
   }, [accordionData]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -33063,6 +33077,12 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, 
 `,
       video: "ArANm9K1bes",
+      docsUrl: "#"
+    },
+    sdfsd: {
+      title: "",
+      content: ``,
+      video: "",
       docsUrl: "#"
     }
   };
@@ -33219,7 +33239,7 @@ function Html(props) {
   var [notifications, setnotifications] = useState([]); // Using the hook.
   var [help, sethelp] = useState({
     id: "createAccordion",
-    enable: true
+    enable: false
   }); // Using the hook.
 
   useEffect(() => {

@@ -20,6 +20,22 @@ function accordions_builder_accordion($post_id, $accordionData)
     $expandCollapseAll = isset($globalOptions["expandCollapseAll"]) ? $globalOptions["expandCollapseAll"] : "";
     $expandAllText = isset($globalOptions["expandAllText"]) ? $globalOptions["expandAllText"] : "";
     $collapseAllText = isset($globalOptions["collapseAllText"]) ? $globalOptions["collapseAllText"] : "";
+    $expandAllIcon = isset($globalOptions["expandAllIcon"]) ? $globalOptions["expandAllIcon"] : [];
+    $expandAllIconLibrary = isset($expandAllIcon["library"]) ? $expandAllIcon["library"] : "";
+    $expandAllIconSrcType = isset($expandAllIcon["srcType"]) ? $expandAllIcon["srcType"] : "";
+    $expandAllIconSrc = isset($expandAllIcon["iconSrc"]) ? $expandAllIcon["iconSrc"] : "";
+
+    $expandAllIconHtml = !empty($expandAllIconSrc) ? '<span class="' . $expandAllIconSrc . '"></span>' : '';
+
+
+    $collapseAllIcon = isset($globalOptions["collapseAllIcon"]) ? $globalOptions["collapseAllIcon"] : [];
+    $collapseAllIconLibrary = isset($collapseAllIcon["library"]) ? $collapseAllIcon["library"] : "";
+    $collapseAllIconSrcType = isset($collapseAllIcon["srcType"]) ? $collapseAllIcon["srcType"] : "";
+    $collapseAllIconSrc = isset($collapseAllIcon["iconSrc"]) ? $collapseAllIcon["iconSrc"] : "";
+
+    $collapseAllIconHtml = !empty($collapseAllIconSrc) ? '<span class="' . $collapseAllIconSrc . '"></span>' : '';
+
+
     $activeEvent = isset($globalOptions["activeEvent"]) ? $globalOptions["activeEvent"] : "";
     $urlHash = isset($globalOptions["urlHash"]) ? $globalOptions["urlHash"] : "";
     $clickToScrollTop = isset($globalOptions["clickToScrollTop"]) ? $globalOptions["clickToScrollTop"] : "";
@@ -27,8 +43,6 @@ function accordions_builder_accordion($post_id, $accordionData)
     $animationName = isset($globalOptions["animationName"]) ? $globalOptions["animationName"] : "";
     $animationDelay = isset($globalOptions["animationDelay"]) ? $globalOptions["animationDelay"] : "";
 
-
-    //var_dump($globalOptions);
 
 
 
@@ -42,6 +56,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $reponsiveCss = isset($accordionData["reponsiveCss"]) ? $accordionData["reponsiveCss"] : "";
+
 
 
 
@@ -122,11 +137,27 @@ function accordions_builder_accordion($post_id, $accordionData)
     } else if ($iconToggleLibrary == 'bootstrap') {
         wp_enqueue_style('bootstrap-icons');
     }
+
     if ($labelIconLibrary == 'fontAwesome') {
         wp_enqueue_style('fontawesome-icons');
     } else if ($labelIconLibrary == 'iconFont') {
         wp_enqueue_style('icofont-icons');
     } else if ($labelIconLibrary == 'bootstrap') {
+        wp_enqueue_style('bootstrap-icons');
+    }
+
+    if ($expandAllIconLibrary == 'fontAwesome') {
+        wp_enqueue_style('fontawesome-icons');
+    } else if ($expandAllIconLibrary == 'iconFont') {
+        wp_enqueue_style('icofont-icons');
+    } else if ($expandAllIconLibrary == 'bootstrap') {
+        wp_enqueue_style('bootstrap-icons');
+    }
+    if ($collapseAllIconLibrary == 'fontAwesome') {
+        wp_enqueue_style('fontawesome-icons');
+    } else if ($collapseAllIconLibrary == 'iconFont') {
+        wp_enqueue_style('icofont-icons');
+    } else if ($collapseAllIconLibrary == 'bootstrap') {
         wp_enqueue_style('bootstrap-icons');
     }
 
@@ -141,19 +172,25 @@ function accordions_builder_accordion($post_id, $accordionData)
     ];
 
 
+
+
 ?>
     <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
 
-        <div>
+        <div style="display: flex;align-items: center;justify-content: space-between; ">
 
             <?php if ($search): ?>
 
-                <input type="text" placeholder="" placeholder="<?php esc_attr($expandAllText); ?>" />
+                <div class="search-wrap">
+                    <input type="text" class="search-input" placeholder="" placeholder="<?php esc_attr($expandAllText); ?>" />
+                </div>
 
             <?php endif; ?>
             <?php if ($expandCollapseAll): ?>
-                <div class="expandCollapseAll" expandAllText="<?php esc_attr($expandAllText); ?>" collapseAllText="<?php esc_attr($collapseAllText); ?>">
-                    <?php echo $expandAllText; ?>
+                <div class="expand-collapse-all" data-expandAllText="<?php echo esc_attr($expandAllText); ?>" data-collapseAllText="<?php echo esc_attr($collapseAllText); ?>" data-expandAllIconHtml="<?php echo esc_attr($expandAllIconHtml); ?>" data-collapseAllIconHtml="<?php echo esc_attr($collapseAllIconHtml); ?>">
+                    <?php echo $expandAllIconHtml; ?>
+                    <span><?php echo $expandAllText; ?></span>
+
                 </div>
             <?php endif; ?>
 
