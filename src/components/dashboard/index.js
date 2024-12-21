@@ -2,7 +2,7 @@ const { Component, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { __ } from "@wordpress/i18n";
 
-import { Icon, close, cog, addCard, brush, category, columns } from "@wordpress/icons";
+import { Icon, close, cog, addCard, brush, category, help as helpIcon, columns } from "@wordpress/icons";
 import { Popover, Spinner } from "@wordpress/components";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
@@ -17,6 +17,7 @@ import accordionDefaultData from "./accordion-default-data";
 import accordionTemplates from "./accordion-templates";
 import AccordionsGenerateCss from "./generate-css";
 import PGNotify from "./notify";
+import PGHelp from "./help";
 
 function Html(props) {
 	if (!props.warn) {
@@ -42,6 +43,7 @@ function Html(props) {
 	var [isLoadings, setisLoadings] = useState(false); // Using the hook.
 
 	var [notifications, setnotifications] = useState([]); // Using the hook.
+	var [help, sethelp] = useState({ id: "createAccordion", enable: false }); // Using the hook.
 
 	useEffect(() => {
 		setnotifications(notifications);
@@ -89,6 +91,12 @@ function Html(props) {
 		notificationsX.push(notification);
 		setnotifications(notificationsX);
 	}
+	function setHelp(helpX) {
+
+		sethelp(helpX);
+	}
+
+
 
 	function selectAccordion(args) {
 		setActiveAccordion(args);
@@ -195,11 +203,9 @@ function Html(props) {
 		<div className="pg-setting-input-text pg-dashboard">
 			<div className="flex h-[800px]">
 				<div className="w-[500px] overflow-y-scroll light-scrollbar">
-
 					<div className="flex items-center justify-between bg-blue-700 py-3 px-3">
 						<div>
 							<div className="flex items-center align-middle gap-3">
-
 								<div className="text-xl text-white">Accordions</div>
 								<div className="text-xs text-white">2.3.1</div>
 							</div>
@@ -221,8 +227,6 @@ function Html(props) {
 								{AIWriter && (
 									<Popover position="bottom right">
 										<div className="w-[600px]  relative">
-
-
 											{/* <span
 										className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0"
 										onClick={(ev) => {
@@ -234,7 +238,9 @@ function Html(props) {
 									</span> */}
 
 											<div className="px-4 py-2 bg-slate-400 text-white flex justify-between ">
-												<div className="text-xl text-white">Accordions Settings</div>
+												<div className="text-xl text-white">
+													Accordions Settings
+												</div>
 
 												<div className="flex gap-2 items-center">
 													<div
@@ -258,10 +264,7 @@ function Html(props) {
 														)}
 													</div>
 												</div>
-
-
 											</div>
-
 
 											<div className="p-3">
 												<div className="flex  my-5  justify-between items-center">
@@ -372,7 +375,6 @@ function Html(props) {
 													<PGinputText
 														label=""
 														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
-
 														value={optionData?.licenseKey ?? ""}
 														onChange={(newVal) => {
 															var optionsX = {
@@ -388,7 +390,6 @@ function Html(props) {
 									</Popover>
 								)}
 							</div>
-
 						</div>
 					</div>
 
@@ -401,7 +402,7 @@ function Html(props) {
 						navItemLabelClass="flex-col "
 						navItemSelectedClass="!bg-white"
 						activeClass="active-tab"
-						onSelect={(tabName) => { }}
+						onSelect={(tabName) => {}}
 						tabs={[
 							{
 								name: "accordions",
@@ -424,27 +425,17 @@ function Html(props) {
 						]}>
 						<PGtab name="accordions">
 							<div className="relative p-3">
-
-
-
-
-
-
-
-
-
 								{postData.post_content == null && (
 									<div className="p-3 my-5 bg-orange-400">
 										Please choose an accordion first.
 									</div>
 								)}
 
-
-
 								<WCPSList
 									addNotifications={addNotifications}
 									selectAccordion={selectAccordion}
 									activeAccordion={activeAccordion}
+									setHelp={setHelp}
 								/>
 							</div>
 						</PGtab>
@@ -455,12 +446,26 @@ function Html(props) {
 										onChange={onChangeAccordion}
 										addNotifications={addNotifications}
 										postData={postData}
+										setHelp={setHelp}
 									/>
 								)}
 							</div>
 						</PGtab>
 						<PGtab name="templates">
 							<div className="p-3">
+								<p className="flex items-center gap-2">
+									How templates work.{" "}
+									<span
+										className="cursor-pointer"
+										onClick={() => {
+											setHelp({
+												id: "accordionTemplatesHelp",
+												enable: true,
+											});
+										}}>
+										<Icon icon={helpIcon} />
+									</span>
+								</p>
 								{accordionTemplates.map((preset, index) => {
 									return (
 										<div
@@ -474,8 +479,6 @@ function Html(props) {
 													var itemIndex = item[0];
 													var itemArg = item[1];
 
-
-
 													if (itemArg.options) {
 														delete itemArg.options;
 													}
@@ -484,15 +487,12 @@ function Html(props) {
 
 													console.log(accordionData[itemIndex]);
 
-
 													presetClean[itemIndex] = {
 														...accordionData[itemIndex],
 														...itemArg,
 													};
 
 													console.log(presetClean);
-
-
 												});
 
 												var accordionDataX = {
@@ -502,8 +502,11 @@ function Html(props) {
 
 												onChangeAccordion(accordionDataX);
 
-												addNotifications({ title: "Preset Applied", content: "WOW, Your accordion just got new look!", type: "success" })
-
+												addNotifications({
+													title: "Preset Applied",
+													content: "WOW, Your accordion just got new look!",
+													type: "success",
+												});
 											}}>
 											<img className="w-full" src={preset.thumb} alt="" />
 											<div className="text-lg mt-3 text-white">
@@ -518,12 +521,8 @@ function Html(props) {
 				</div>
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
+						{postData.ID == null && <AccordionsGuide />}
 
-
-
-						{postData.ID == null && (
-							<AccordionsGuide />
-						)}
 						{postData.ID != null && (
 							<AccordionsView
 								pleaseUpdate={pleaseUpdate}
@@ -533,6 +532,7 @@ function Html(props) {
 								postData={postData}
 								id={activeAccordion}
 								addNotifications={addNotifications}
+								setHelp={setHelp}
 							/>
 						)}
 						{postData.ID != null && (
@@ -541,12 +541,12 @@ function Html(props) {
 								onChange={onChangeStyle}
 							/>
 						)}
-
 					</div>
 				</div>
 			</div>
 
 			<PGNotify notifications={notifications} />
+			<PGHelp help={help} />
 		</div>
 	);
 }

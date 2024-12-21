@@ -154,6 +154,10 @@
   z-index: 30;
 }
 
+.z-\[99999\] {
+  z-index: 99999;
+}
+
 .z-\[999\] {
   z-index: 999;
 }
@@ -264,6 +268,11 @@
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.my-\[100px\] {
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .\!mb-0 {
@@ -468,6 +477,10 @@
 
 .h-\[30px\] {
   height: 30px;
+}
+
+.h-\[600px\] {
+  height: 600px;
 }
 
 .h-\[800px\] {
@@ -1303,6 +1316,10 @@
 
 .bg-opacity-80 {
   --tw-bg-opacity: 0.8;
+}
+
+.bg-opacity-90 {
+  --tw-bg-opacity: 0.9;
 }
 
 .fill-white {
