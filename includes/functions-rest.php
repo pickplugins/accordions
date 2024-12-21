@@ -492,6 +492,7 @@ class AccordionsRest
 		if (empty($postTitle)) {
 			$response->error = true;
 			$response->errorMessage = __("Post title should not empty");
+			die(wp_json_encode($response));
 		}
 
 

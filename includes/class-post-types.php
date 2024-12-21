@@ -10,8 +10,8 @@ class accordions_post_types
 
 	public function __construct()
 	{
-		add_action('init', array($this, '_posttype_accordions'), 0);
-		add_action('admin_init', array($this, 'add_capability'));
+		add_action('init', [$this, '_posttype_accordions'], 0);
+		add_action('admin_init', [$this, 'add_capability']);
 	}
 	public function add_capability()
 	{
@@ -60,7 +60,7 @@ class accordions_post_types
 	public function _posttype_accordions()
 	{
 
-		if (post_type_exists("accordions"))
+		if (post_type_exists("class_accordions_shortcodes"))
 			return;
 
 		$singular  = __('Accordions', 'accordions');

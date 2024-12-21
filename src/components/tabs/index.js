@@ -7,9 +7,11 @@ function MyFunction(props) {
 		return null;
 	}
 
-	var navItemLabelClass = props.navItemLabelClass; // vertical, horizontal
-	var stickyNavs = props.stickyNavs; // vertical, horizontal
+	var navItemLabelClass = props.navItemLabelClass;
+	var stickyNavs = props.stickyNavs;
 	var orientation = props.orientation; // vertical, horizontal
+	var tabsWrapperClass = props.tabsWrapperClass;
+	var navItemsWrapClass = props.navItemsWrapClass;
 	var contentClass = (props.contentClass == undefined) ? "py-3" : props.contentClass;
 	var navItemClass = (props.navItemClass == undefined) ? "bg-gray-200" : props.navItemClass;
 	var navItemSelectedClass = (props.navItemSelectedClass == undefined) ? "!bg-gray-400" : props.navItemSelectedClass;
@@ -61,8 +63,8 @@ function MyFunction(props) {
 	return (
 		<div className={
 			orientation == "vertical"
-				? "flex tabsWrapper"
-				: "relative tabsWrapper "
+				? `flex tabsWrapper ${tabsWrapperClass}`
+				: ` relative tabsWrapper ${tabsWrapperClass}`
 		}>
 
 			{stickyNavs && (
@@ -71,7 +73,7 @@ function MyFunction(props) {
 						className={
 							orientation == "vertical"
 								? "block w-[200px] "
-								: "flex overflow-hidden  tabsNavs cursor-move "
+								: `flex overflow-hidden  tabsNavs cursor-move ${navItemsWrapClass}`
 						}
 
 
@@ -80,7 +82,7 @@ function MyFunction(props) {
 						{props.tabs.map((tab, index) => {
 							return (
 								<div
-									className={`${navItemClass} flex justify-between flex-none border-0   items-center grow  font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
+									className={`${navItemClass} flex justify-between flex-none   items-center grow  font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
 										} ${orientation == "vertical" ? "       " : ""}`}
 									onClick={(ev) => {
 										props.onSelect(tab);
@@ -119,14 +121,14 @@ function MyFunction(props) {
 					className={
 						orientation == "vertical"
 							? "block w-[200px] "
-							: "flex overflow-hidden  tabsNavs cursor-move "
+							: `flex overflow-hidden  tabsNavs cursor-move ${navItemsWrapClass}`
 					}
 
 					onWheel={onWheel}>
 					{props.tabs.map((tab, index) => {
 						return (
 							<div
-								className={`${navItemClass} flex justify-between flex-none border-0   items-center   font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
+								className={`${navItemClass} flex justify-between flex-none    items-center   font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
 									} ${orientation == "vertical" ? "       " : ""}`}
 								onClick={(ev) => {
 									props.onSelect(tab);
@@ -160,12 +162,6 @@ function MyFunction(props) {
 				</div>
 			)}
 
-
-
-
-
-
-
 			<div className={`tabContent  ${contentClass}`}>{content}</div>
 		</div>
 	);
@@ -191,6 +187,8 @@ class PGtabs extends Component {
 			activeClass,
 			contentClass,
 			stickyNavs,
+			tabsWrapperClass,
+			navItemsWrapClass,
 			navItemClass,
 
 			navItemLabelClass,
@@ -208,6 +206,8 @@ class PGtabs extends Component {
 					orientation={orientation}
 					contentClass={contentClass}
 					stickyNavs={stickyNavs}
+					tabsWrapperClass={tabsWrapperClass}
+					navItemsWrapClass={navItemsWrapClass}
 					navItemClass={navItemClass}
 					navItemLabelClass={navItemLabelClass}
 					navItemSelectedClass={navItemSelectedClass}
