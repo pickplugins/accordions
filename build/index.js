@@ -6031,6 +6031,56 @@ function Html(props) {
   }
   var [postData, setpostData] = useState(props.postData); // Using the hook.
 
+  const tableData = [{
+    feature: "Feature 1",
+    lite: "true",
+    pro: "true",
+    new: "true"
+  }, {
+    feature: "Feature 2",
+    lite: "false",
+    pro: "true",
+    hot: "true"
+  }, {
+    feature: "Feature 3",
+    lite: "1+",
+    pro: "3+"
+  }, {
+    feature: "Feature 4",
+    lite: "12",
+    pro: "4"
+  }];
+  const ourPlugins = [{
+    name: "Plugin Name 1",
+    description: "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/512px-WordPress_blue_logo.svg.png",
+    link: "https://example.com"
+  }, {
+    name: "Plugin Name 2",
+    description: "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/512px-WordPress_blue_logo.svg.png",
+    link: "https://example.com"
+  }, {
+    name: "Plugin Name 3",
+    description: "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/512px-WordPress_blue_logo.svg.png",
+    link: "https://example.com"
+  }, {
+    name: "Plugin Name 4",
+    description: "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/512px-WordPress_blue_logo.svg.png",
+    link: "https://example.com"
+  }, {
+    name: "Plugin Name 5",
+    description: "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/512px-WordPress_blue_logo.svg.png",
+    link: "https://example.com"
+  }, {
+    name: "Plugin Name 6",
+    description: "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites.",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/512px-WordPress_blue_logo.svg.png",
+    link: "https://example.com"
+  }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "ml-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6074,35 +6124,132 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "overview"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "grid grid-rows-4 grid-flow-col gap-4"
+    className: "flex gap-4 items-start flex-wrap"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "row-span-3 ..."
-  }, "01"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "col-span-2 ..."
-  }, "02"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "row-span-2 col-span-2 ..."
-  }, "03")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid my-5 grid-cols-12 gap-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "col-span-8"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "bg-white rounded-md p-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+    className: "flex-1 flex flex-col gap-3 p-[40px] max-w-[70%] bg-white rounded-md shadow-md"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
+    className: "text-[32px] font-semibold text-gray-800"
+  }, "Welcome to Easy Accordion!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "text-gray-500 text-[14px]"
+  }, "Thank you for installing Easy Accordion! This video will help you get started with the plugin. Enjoy!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
     width: "100%",
-    height: "700",
-    src: "https://www.youtube.com/embed/ArANm9K1bes?si=uIGfrIJGD_cC2TGI",
+    height: "400",
+    src: "https://www.youtube.com/embed/9PS63kqe20M?si=8osl4q7yCx7c8BGY",
     title: "YouTube video player",
+    className: "rounded-md overflow-hidden",
     frameborder: "0",
     allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
     referrerpolicy: "strict-origin-when-cross-origin",
     allowfullscreen: true
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "col-span-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-4 items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "inline-block font-medium px-[24px] py-[16px] bg-gray-700 text-white rounded-md"
+  }, "Item - 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "inline-block font-medium px-[24px] py-[16px] bg-gray-700 text-white rounded-md"
+  }, "Item - 2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "inline-block font-medium px-[24px] py-[16px] bg-gray-700 text-white rounded-md"
+  }, "Item - 3"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid md:grid-cols-1 grid-cols-3 content-between md:max-w-[30%] max-w-full gap-3 text-gray-800"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+    className: "text-[18px] font-semibold flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Documentation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Explore Easy Accordion plugin capabilities in our enriched documentation."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
+  }, "Browse Now")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+    className: "text-[18px] font-semibold flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Documentation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Explore Easy Accordion plugin capabilities in our enriched documentation."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
+  }, "Browse Now")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+    className: "text-[18px] font-semibold flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Documentation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Explore Easy Accordion plugin capabilities in our enriched documentation."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
+  }, "Browse Now"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "edit"
-  }, "edit"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "overflow-x-auto rounded-md border border-solid border-gray-800 max-w-[800px] mx-auto"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
+    className: "table-auto w-full text-left"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", {
+    className: "bg-gray-700 text-white"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+    className: ""
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
+    className: "min-w-[550px] py-4 px-8"
+  }, "FEATURES"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
+    className: "min-w-[100px] py-4 px-8 text-center"
+  }, "Lite"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
+    className: "min-w-[100px] py-4 px-8 text-center"
+  }, "\uD83D\uDC51PRO"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", {
+    className: "bg-gray-100 text-gray-800"
+  }, tableData.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+    key: index,
+    className: "even:bg-gray-200 last:rounded-b-md last:overflow-hidden"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+    className: "py-3 px-8"
+  }, item.feature, " ", item.new && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full"
+  }, "NEW"), " ", item.hot && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-red-500 rounded-full"
+  }, "HOT")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+    className: "py-3 px-8 border-x-[1px] border-solid border-x-gray-800 text-center"
+  }, typeof item.lite === "number" ? item.lite : item.lite === "true" ? "✔️" : item.lite === "false" ? "❌" : item.lite), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+    className: "py-3 px-8 text-center"
+  }, typeof item.pro === "number" ? item.pro : item.pro === "true" ? "✔️" : item.pro === "false" ? "❌" : item.pro))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "templates"
-  }, "templates")));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid grid-cols-2 gap-4 w-full p-7 bg-white"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "text-2xl font-medium mb-4"
+  }, "The Most Powerful Accordion and FAQs Builder plugin for WordPress from the Easy Accordion Team, ShapedPlugin, LLC"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "mb-4 text-pretty"
+  }, "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites. Unfortunately, we couldn't find any suitable plugin that met our needs. Hence, we set a simple goal: to develop a highly customizable and full-featured Accordion and FAQs builder plugin to minimize customer support costs."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "mb-4 text-pretty"
+  }, "The Easy Accordion plugin provides a convenient way to create visually appealing FAQ pages to reduce customer costs. Check it out now and experience the difference!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "bg-gray-700 border-transparent border border-solid font-medium text-white inline-block py-[14px] px-[24px] rounded-md"
+  }, "Explore Easy Accordion"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "hover:bg-gray-700 border-gray-700 text-gray-700 hover:text-white border border-solid font-medium transition-colors duration-300 inline-block py-[14px] px-[24px] rounded-md"
+  }, "More About Us"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "self-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("figure", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: "https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    alt: "",
+    className: "w-full rounded-lg shadow-sm object-contain"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("figcaption", {
+    className: "text-sm text-center mt-2"
+  }, "ShapedPlugin Team")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
+    className: "text-2xl font-medium my-8"
+  }, "Upgrade your Website with our High-quality Plugins!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid grid-cols-3 gap-4"
+  }, ourPlugins.map(plugin => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-gray-200 hover:bg-gray-300 shadow-sm p-8 rounded-lg relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: plugin.logo,
+    alt: plugin.name,
+    className: "w-[70px] mb-4"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+    className: "font-medium text-lg mb-4"
+  }, plugin.name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "text-[14px]"
+  }, plugin.description), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: plugin.link,
+    className: "absolute inset-0"
+  }))))))));
 }
 class AccordionsGuide extends Component {
   constructor(props) {
@@ -44424,15 +44571,11 @@ class APIClient {
         if (signal)
             signal.addEventListener('abort', () => controller.abort());
         const timeout = setTimeout(() => controller.abort(), ms);
-        return (this.getRequestClient()
-            // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
-            .fetch.call(undefined, url, { signal: controller.signal, ...options })
-            .finally(() => {
+        return (
+        // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
+        this.fetch.call(undefined, url, { signal: controller.signal, ...options }).finally(() => {
             clearTimeout(timeout);
         }));
-    }
-    getRequestClient() {
-        return { fetch: this.fetch };
     }
     shouldRetry(response) {
         // Note this is not a standard header.
@@ -50512,7 +50655,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.74.0'; // x-release-please-version
+const VERSION = '4.76.1'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })
