@@ -394,7 +394,7 @@ function Html(props) {
 			value: "category",
 
 			id: "include",
-			//isPro: true,
+			isPro: true,
 			label: "Include",
 			description: "Comma-separated string of term IDs to include.",
 			longDescription:
@@ -405,7 +405,7 @@ function Html(props) {
 			value: "",
 
 			id: "exclude",
-			//isPro: true,
+			isPro: true,
 			label: "Exclude",
 			description: "Comma-separated string of term IDs to exclude.",
 			longDescription:
@@ -416,7 +416,7 @@ function Html(props) {
 			value: "",
 
 			id: "child_of",
-			//isPro: true,
+			isPro: true,
 			label: "Child of",
 			description: "Term ID to retrieve child terms of.",
 			longDescription:
@@ -426,7 +426,7 @@ function Html(props) {
 			value: "",
 
 			id: "parent",
-			//isPro: true,
+			isPro: true,
 			label: "Parent",
 			description:
 				"Add {ID} to add Parent term ID to retrieve direct-child terms of.",
@@ -436,7 +436,7 @@ function Html(props) {
 			value: "",
 
 			id: "meta_key",
-			//isPro: true,
+			isPro: true,
 			label: "Meta key",
 			description: "Comma-separated keys to return term(s) for.",
 			longDescription: "Meta key or keys to filter by.",
@@ -445,7 +445,7 @@ function Html(props) {
 			value: "",
 
 			id: "meta_value",
-			//isPro: true,
+			isPro: true,
 			label: "Meta value",
 			description: "Comma-separated keys to return term(s) for.",
 			longDescription: "Meta value or values to filter by.",
@@ -465,8 +465,8 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		posts: { label: "Posts", value: "posts", isPro: true },
-		terms: { label: "Terms", value: "terms", isPro: true },
+		posts: { label: "Posts", value: "posts", isPro: false },
+		terms: { label: "Terms", value: "terms", isPro: false },
 	};
 
 	function generate3Digit() {

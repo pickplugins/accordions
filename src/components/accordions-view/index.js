@@ -2,7 +2,7 @@ const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { Popover, Spinner } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Icon, close, cog, addCard } from "@wordpress/icons";
+import { Icon, close, cog, addCard, helpFilled, help } from "@wordpress/icons";
 
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
@@ -18,6 +18,7 @@ function Html(props) {
 	var id = props.id;
 	var onChange = props.onChange;
 	var addNotifications = props.addNotifications;
+	var setHelp = props.setHelp;
 
 	var isLoading = props.isLoading;
 	var onUpdate = props.onUpdate;
@@ -126,7 +127,18 @@ function Html(props) {
 				<div className="flex items-center align-middle gap-3">
 
 
-					<div>
+					<div className="flex items-center align-middle gap-2">
+						<span className="cursor-pointer"
+							onClick={() => {
+								setHelp({
+									id: "useShortcodes",
+									enable: true,
+
+								});
+							}}
+						>
+							<Icon icon={help} />
+						</span>
 						<input
 							type="text"
 							className="w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 text-sm !py-1 !px-2 font-mono"
@@ -293,6 +305,7 @@ class AccordionsView extends Component {
 			pleaseUpdate,
 			onUpdate,
 			addNotifications,
+			setHelp,
 		} = this.props;
 
 		return (
@@ -304,6 +317,7 @@ class AccordionsView extends Component {
 				pleaseUpdate={pleaseUpdate}
 				onChange={onChange}
 				addNotifications={addNotifications}
+				setHelp={setHelp}
 				warn={this.state.showWarning}
 			/>
 		);
