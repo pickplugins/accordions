@@ -17,6 +17,7 @@ import accordionDefaultData from "./accordion-default-data";
 import accordionTemplates from "./accordion-templates";
 import AccordionsGenerateCss from "./generate-css";
 import PGNotify from "./notify";
+import PGHelp from "./help";
 
 function Html(props) {
 	if (!props.warn) {
@@ -42,6 +43,7 @@ function Html(props) {
 	var [isLoadings, setisLoadings] = useState(false); // Using the hook.
 
 	var [notifications, setnotifications] = useState([]); // Using the hook.
+	var [help, sethelp] = useState({ id: "createAccordion", enable: true }); // Using the hook.
 
 	useEffect(() => {
 		setnotifications(notifications);
@@ -89,6 +91,12 @@ function Html(props) {
 		notificationsX.push(notification);
 		setnotifications(notificationsX);
 	}
+	function setHelp(helpX) {
+
+		sethelp(helpX);
+	}
+
+
 
 	function selectAccordion(args) {
 		setActiveAccordion(args);
@@ -524,6 +532,9 @@ function Html(props) {
 						{postData.ID == null && (
 							<AccordionsGuide />
 						)}
+
+
+
 						{postData.ID != null && (
 							<AccordionsView
 								pleaseUpdate={pleaseUpdate}
@@ -533,6 +544,7 @@ function Html(props) {
 								postData={postData}
 								id={activeAccordion}
 								addNotifications={addNotifications}
+								setHelp={setHelp}
 							/>
 						)}
 						{postData.ID != null && (
@@ -547,6 +559,7 @@ function Html(props) {
 			</div>
 
 			<PGNotify notifications={notifications} />
+			<PGHelp help={help} />
 		</div>
 	);
 }
