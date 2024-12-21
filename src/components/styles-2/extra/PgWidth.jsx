@@ -96,58 +96,58 @@ const PgCSSWidth = ({ val, onChange, breakPoint, sudoSrc }) => {
 				widthUnit != "revert" ||
 				widthUnit != "revert-layer" ||
 				widthUnit != "unset") && (
-				<div className="flex justify-between items-center pg-font">
-					{widthUnit != "auto" && (
-						<InputControl
-							value={widthVal}
-							type={
-								widthVal.length == 0 || isNaN(widthVal) || val.includes("calc")
-									? "text"
-									: "number"
-							}
-							disabled={
-								widthGlobal === "auto" ||
-								widthGlobal === "max-content" ||
-								widthGlobal === "min-content" ||
-								widthGlobal === "inherit" ||
-								widthGlobal === "initial" ||
-								widthGlobal === "revert" ||
-								widthGlobal === "revert-layer" ||
-								widthGlobal === "unset"
-									? true
-									: false
-							}
-							onChange={(newVal) => {
-								if (newVal.includes("calc")) {
-									// onChange(newVal, "width", );
-									if (isImportant) {
-										onChange(newVal + " !important", "width");
-									} else {
-										onChange(newVal, "width");
-									}
-									return;
+					<div className="flex justify-between items-center pg-font">
+						{widthUnit != "auto" && (
+							<InputControl
+								value={widthVal}
+								type={
+									widthVal.length == 0 || isNaN(widthVal) || val.includes("calc")
+										? "text"
+										: "number"
 								}
-								setwidthVal(newVal);
-								if (widthUnit == "auto") {
-									// onChange(widthUnit, 'width');
-									if (isImportant) {
-										onChange(widthUnit + " !important", "width");
-									} else {
-										onChange(widthUnit, "width");
-									}
-								} else {
-									//onChange(newVal + widthUnit, 'width');
-									if (isImportant) {
-										onChange(newVal + widthUnit + " !important", "width");
-									} else {
-										onChange(newVal + widthUnit, "width");
-									}
+								disabled={
+									widthGlobal === "auto" ||
+										widthGlobal === "max-content" ||
+										widthGlobal === "min-content" ||
+										widthGlobal === "inherit" ||
+										widthGlobal === "initial" ||
+										widthGlobal === "revert" ||
+										widthGlobal === "revert-layer" ||
+										widthGlobal === "unset"
+										? true
+										: false
 								}
-							}}
-						/>
-					)}
-					<div className={`${val.includes("calc") ? "hidden" : ""}`}>
-						{/* <select
+								onChange={(newVal) => {
+									if (newVal.includes("calc")) {
+										// onChange(newVal, "width", );
+										if (isImportant) {
+											onChange(newVal + " !important", "width");
+										} else {
+											onChange(newVal, "width");
+										}
+										return;
+									}
+									setwidthVal(newVal);
+									if (widthUnit == "auto") {
+										// onChange(widthUnit, 'width');
+										if (isImportant) {
+											onChange(widthUnit + " !important", "width");
+										} else {
+											onChange(widthUnit, "width");
+										}
+									} else {
+										//onChange(newVal + widthUnit, 'width');
+										if (isImportant) {
+											onChange(newVal + widthUnit + " !important", "width");
+										} else {
+											onChange(newVal + widthUnit, "width");
+										}
+									}
+								}}
+							/>
+						)}
+						<div className={`${val.includes("calc") ? "hidden" : ""}`}>
+							{/* <select
 							value={unit}
 							onChange={(ev) => {
 								// const selectedValue = ev.target.value;
@@ -202,104 +202,104 @@ const PgCSSWidth = ({ val, onChange, breakPoint, sudoSrc }) => {
 								);
 							})}
 						</select> */}
-						<Dropdown
-							position="bottom left"
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button title="" onClick={onToggle} aria-expanded={isOpen}>
-									<div className=" ">
-										{unitArgs[widthUnit] == undefined
-											? "Select..."
-											: unitArgs[widthUnit].label}
-									</div>
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="w-32 pg-font">
-									{Object.entries(unitArgs).map((y) => {
-										var index = y[0];
-										var x = y[1];
-										return (
-											<div
-												className={
-													"px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer"
-												}
-												onClick={(ev) => {
-													setwidthUnit(x.value);
-													if (x.value == "auto") {
-														if (isImportant) {
-															onChange(x.value + " !important", "width");
-														} else {
-															onChange(x.value, "width");
-														}
-													} else {
-														if (isImportant) {
-															onChange(
-																widthVal + x.value + " !important",
-																"width"
-															);
-														} else {
-															onChange(widthVal + x.value, "width");
-														}
+							<Dropdown
+								position="bottom left"
+								renderToggle={({ isOpen, onToggle }) => (
+									<Button title="" onClick={onToggle} aria-expanded={isOpen}>
+										<div className=" ">
+											{unitArgs[widthUnit] == undefined
+												? "Select..."
+												: unitArgs[widthUnit].label}
+										</div>
+									</Button>
+								)}
+								renderContent={() => (
+									<div className="w-32 pg-font">
+										{Object.entries(unitArgs).map((y) => {
+											var index = y[0];
+											var x = y[1];
+											return (
+												<div
+													className={
+														"px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer"
 													}
-												}}>
-												{x.value && <>{x.label}</>}
-											</div>
-										);
-									})}
-								</div>
-							)}
+													onClick={(ev) => {
+														setwidthUnit(x.value);
+														if (x.value == "auto") {
+															if (isImportant) {
+																onChange(x.value + " !important", "width");
+															} else {
+																onChange(x.value, "width");
+															}
+														} else {
+															if (isImportant) {
+																onChange(
+																	widthVal + x.value + " !important",
+																	"width"
+																);
+															} else {
+																onChange(widthVal + x.value, "width");
+															}
+														}
+													}}>
+													{x.value && <>{x.label}</>}
+												</div>
+											);
+										})}
+									</div>
+								)}
+							/>
+						</div>
+						<ToggleControl
+							help={
+								isImportant
+									? __("Important Enabled", "accordions")
+									: __("Important?", "accordions")
+							}
+							checked={isImportant}
+							onChange={(arg) => {
+								setImportant((isImportant) => !isImportant);
+								if (val.includes("calc")) {
+									// var valX  = val.replaceAll(" !important", "")
+									// onChange(newVal, "width", );
+									if (isImportant) {
+										var valX = val.replaceAll(" !important", "");
+										onChange(valX, "width");
+										// onChange(val + " !important", "width", );
+									} else {
+										// var valX = val.replaceAll(" !important", "");
+										// onChange(valX, "width", );
+										onChange(val + " !important", "width");
+									}
+									return;
+								}
+								if (isImportant) {
+									if (widthUnit == "auto") {
+										onChange(widthUnit, "width");
+									} else {
+										onChange(widthVal + widthUnit, "width");
+									}
+								} else {
+									if (widthUnit == "auto") {
+										onChange(widthUnit + " !important", "width");
+									} else {
+										onChange(widthVal + widthUnit + " !important", "width");
+									}
+								}
+							}}
 						/>
 					</div>
-					<ToggleControl
-						help={
-							isImportant
-								? __("Important Enabled", "post-grid")
-								: __("Important?", "post-grid")
-						}
-						checked={isImportant}
-						onChange={(arg) => {
-							setImportant((isImportant) => !isImportant);
-							if (val.includes("calc")) {
-								// var valX  = val.replaceAll(" !important", "")
-								// onChange(newVal, "width", );
-								if (isImportant) {
-									var valX = val.replaceAll(" !important", "");
-									onChange(valX, "width");
-									// onChange(val + " !important", "width", );
-								} else {
-									// var valX = val.replaceAll(" !important", "");
-									// onChange(valX, "width", );
-									onChange(val + " !important", "width");
-								}
-								return;
-							}
-							if (isImportant) {
-								if (widthUnit == "auto") {
-									onChange(widthUnit, "width");
-								} else {
-									onChange(widthVal + widthUnit, "width");
-								}
-							} else {
-								if (widthUnit == "auto") {
-									onChange(widthUnit + " !important", "width");
-								} else {
-									onChange(widthVal + widthUnit + " !important", "width");
-								}
-							}
-						}}
-					/>
-				</div>
-			)}
+				)}
 			<div className={`${val.includes("calc") ? "hidden" : ""}`}>
 				<PanelRow>
 					<label htmlFor="" className="!font-normal">
-						{__("Global Value", "post-grid")}
+						{__("Global Value", "accordions")}
 					</label>
 					<SelectControl
 						label=""
 						value={widthGlobal}
 						options={[
-							{ label: __("Choose", "post-grid"), value: "px" },
+							{ label: __("Choose", "accordions"), value: "px" },
 							{ label: "auto", value: "auto" },
 							{ label: "max-content", value: "max-content" },
 							{ label: "min-content", value: "min-content" },

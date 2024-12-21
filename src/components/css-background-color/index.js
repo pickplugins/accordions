@@ -62,8 +62,8 @@ function Html(props) {
 					<ToggleControl
 						label={
 							isImportant
-								? __("Important (Enabled)", "post-grid")
-								: __("Important?", "post-grid")
+								? __("Important (Enabled)", "accordions")
+								: __("Important?", "accordions")
 						}
 						checked={isImportant}
 						className="!mb-0"
@@ -97,12 +97,12 @@ function Html(props) {
 					}}
 				/>
 				<PanelRow>
-					<label htmlFor="">{__("Global Value", "post-grid")}</label>
+					<label htmlFor="">{__("Global Value", "accordions")}</label>
 					<SelectControl
 						label=""
 						value={val}
 						options={[
-							{ label: __("Choose", "post-grid"), value: "" },
+							{ label: __("Choose", "accordions"), value: "" },
 							{ label: "Inherit", value: "inherit" },
 							{ label: "Initial", value: "initial" },
 							{ label: "Revert", value: "revert" },

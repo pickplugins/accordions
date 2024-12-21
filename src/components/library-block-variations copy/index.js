@@ -84,7 +84,7 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: "/post-grid/v2/get_site_details",
+			path: "/accordions/v2/get_site_details",
 			method: "POST",
 			data: {},
 		}).then((res) => {
@@ -105,7 +105,7 @@ function Html(props) {
 		};
 		postData = JSON.stringify(postData);
 
-		fetch("https://comboblocks.com/server/wp-json/post-grid/v2/get_block_patterns", {
+		fetch("https://comboblocks.com/server/wp-json/accordions/v2/get_block_patterns", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json;charset=utf-8",
@@ -259,8 +259,8 @@ function Html(props) {
 									</div>
 									<div
 										className={` ${isHovered && hoverValue == index
-												? "my-2 mb-0 w-full bg-slate-400 bg-opacity-30 flex items-center justify-center flex-wrap gap-2 opacity-100 visible h-[max-content] absolute bottom-0 left-0 right-0 "
-												: "opacity-0 invisible h-0 "
+											? "my-2 mb-0 w-full bg-slate-400 bg-opacity-30 flex items-center justify-center flex-wrap gap-2 opacity-100 visible h-[max-content] absolute bottom-0 left-0 right-0 "
+											: "opacity-0 invisible h-0 "
 											} `}>
 										{x.is_pro && isProFeature && (
 											<div className="">
@@ -545,7 +545,7 @@ function Html(props) {
 							postData = JSON.stringify(postData);
 
 							fetch(
-								"https://comboblocks.com/server/wp-json/post-grid/v2/submit_block_variation",
+								"https://comboblocks.com/server/wp-json/accordions/v2/submit_block_variation",
 								{
 									method: "POST",
 									headers: {

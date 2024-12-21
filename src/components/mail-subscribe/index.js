@@ -32,7 +32,7 @@ class PGMailSubsctibe extends Component {
 
       useEffect(() => {
         apiFetch({
-          path: '/post-grid/v2/get_site_details',
+          path: '/accordions/v2/get_site_details',
           method: 'POST',
           data: {},
         }).then((res) => {
@@ -52,7 +52,7 @@ class PGMailSubsctibe extends Component {
 
         <div className='grid grid-cols-2 gap-2 mb-5'>
 
-   
+
 
           {hasSubscribed && (
             <div className='col-span-2 bg-green-700 text-white py-2 px-2 my-2'>Thanks for subscribe!</div>
@@ -92,7 +92,7 @@ class PGMailSubsctibe extends Component {
 
 
                   apiFetch({
-                    path: '/post-grid/v2/email_subscribe',
+                    path: '/accordions/v2/email_subscribe',
                     method: 'POST',
                     data: { email: emailSubscribe.email },
                   }).then((res) => {
@@ -126,7 +126,7 @@ class PGMailSubsctibe extends Component {
                   setEmailSubscribe({ ...emailSubscribe, loading: true });
 
                   apiFetch({
-                    path: '/post-grid/v2/email_subscribe',
+                    path: '/accordions/v2/email_subscribe',
                     method: 'POST',
                     data: { interested: false },
                   }).then((res) => {

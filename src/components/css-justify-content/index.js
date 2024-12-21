@@ -43,7 +43,7 @@ function Html(props) {
 						{/* <div className=" ">{props.val ? args[props.val].label : 'Select...'}</div> */}
 						<div className=" ">
 							{args[align] == undefined
-								? __("Select...", "post-grid")
+								? __("Select...", "accordions")
 								: args[align].label}
 						</div>
 					</Button>
@@ -67,7 +67,7 @@ function Html(props) {
 											props.onChange(x.value, "justifyContent");
 										}
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "accordions")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);
@@ -78,8 +78,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

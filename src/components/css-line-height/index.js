@@ -61,130 +61,130 @@ function Html(props) {
 				widthUnit != "revert" ||
 				widthUnit != "revert-layer" ||
 				widthUnit != "unset") && (
-				<div className="flex justify-between items-center">
-					{widthUnit != "normal" && (
-						<InputControl
-							value={widthVal}
-							type="number"
-							disabled={
-								widthUnit == "normal" ||
-								widthUnit == "max-content" ||
-								widthUnit == "min-content" ||
-								widthUnit == "inherit" ||
-								widthUnit == "initial" ||
-								widthUnit == "revert" ||
-								widthUnit == "revert-layer" ||
-								widthUnit == "unset"
-									? true
-									: false
-							}
-							onChange={(newVal) => {
-								setwidthVal(newVal);
-								if (widthUnit == "normal") {
-									// props.onChange(widthUnit, 'lineHeight');
-									if (isImportant) {
-										props.onChange(widthUnit + " !important", "lineHeight");
+					<div className="flex justify-between items-center">
+						{widthUnit != "normal" && (
+							<InputControl
+								value={widthVal}
+								type="number"
+								disabled={
+									widthUnit == "normal" ||
+										widthUnit == "max-content" ||
+										widthUnit == "min-content" ||
+										widthUnit == "inherit" ||
+										widthUnit == "initial" ||
+										widthUnit == "revert" ||
+										widthUnit == "revert-layer" ||
+										widthUnit == "unset"
+										? true
+										: false
+								}
+								onChange={(newVal) => {
+									setwidthVal(newVal);
+									if (widthUnit == "normal") {
+										// props.onChange(widthUnit, 'lineHeight');
+										if (isImportant) {
+											props.onChange(widthUnit + " !important", "lineHeight");
+										} else {
+											props.onChange(widthUnit, "lineHeight");
+										}
 									} else {
+										//props.onChange(newVal + widthUnit, 'lineHeight');
+										if (isImportant) {
+											props.onChange(
+												newVal + widthUnit + " !important",
+												"lineHeight"
+											);
+										} else {
+											props.onChange(newVal + widthUnit, "lineHeight");
+										}
+									}
+								}}
+							/>
+						)}
+						<div>
+							<Dropdown
+								position="bottom left"
+								renderToggle={({ isOpen, onToggle }) => (
+									<Button title="" onClick={onToggle} aria-expanded={isOpen}>
+										<div className=" ">
+											{unitArgs[widthUnit] == undefined
+												? "Select..."
+												: unitArgs[widthUnit].label}
+										</div>
+									</Button>
+								)}
+								renderContent={() => (
+									<div className="w-32">
+										{Object.entries(unitArgs).map((y) => {
+											var index = y[0];
+											var x = y[1];
+											return (
+												<div
+													className={
+														"px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer"
+													}
+													onClick={(ev) => {
+														setwidthUnit(x.value);
+														if (x.value == "normal") {
+															if (isImportant) {
+																props.onChange(
+																	x.value + " !important",
+																	"lineHeight"
+																);
+															} else {
+																props.onChange(x.value, "lineHeight");
+															}
+														} else {
+															if (isImportant) {
+																props.onChange(
+																	widthVal + x.value + " !important",
+																	"lineHeight"
+																);
+															} else {
+																props.onChange(widthVal + x.value, "lineHeight");
+															}
+														}
+													}}>
+													{x.value && <>{x.label}</>}
+												</div>
+											);
+										})}
+									</div>
+								)}
+							/>
+						</div>
+						<ToggleControl
+							help={
+								isImportant
+									? __("Important Enabled", "accordions")
+									: __("Important?", "accordions")
+							}
+							checked={isImportant}
+							onChange={(arg) => {
+								setImportant((isImportant) => !isImportant);
+								if (isImportant) {
+									if (widthUnit == "normal") {
 										props.onChange(widthUnit, "lineHeight");
+									} else {
+										props.onChange(widthVal + widthUnit, "lineHeight");
 									}
 								} else {
-									//props.onChange(newVal + widthUnit, 'lineHeight');
-									if (isImportant) {
+									if (widthUnit == "normal") {
+										props.onChange(widthUnit + " !important", "lineHeight");
+									} else {
 										props.onChange(
-											newVal + widthUnit + " !important",
+											widthVal + widthUnit + " !important",
 											"lineHeight"
 										);
-									} else {
-										props.onChange(newVal + widthUnit, "lineHeight");
 									}
 								}
 							}}
 						/>
-					)}
-					<div>
-						<Dropdown
-							position="bottom left"
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button title="" onClick={onToggle} aria-expanded={isOpen}>
-									<div className=" ">
-										{unitArgs[widthUnit] == undefined
-											? "Select..."
-											: unitArgs[widthUnit].label}
-									</div>
-								</Button>
-							)}
-							renderContent={() => (
-								<div className="w-32">
-									{Object.entries(unitArgs).map((y) => {
-										var index = y[0];
-										var x = y[1];
-										return (
-											<div
-												className={
-													"px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer"
-												}
-												onClick={(ev) => {
-													setwidthUnit(x.value);
-													if (x.value == "normal") {
-														if (isImportant) {
-															props.onChange(
-																x.value + " !important",
-																"lineHeight"
-															);
-														} else {
-															props.onChange(x.value, "lineHeight");
-														}
-													} else {
-														if (isImportant) {
-															props.onChange(
-																widthVal + x.value + " !important",
-																"lineHeight"
-															);
-														} else {
-															props.onChange(widthVal + x.value, "lineHeight");
-														}
-													}
-												}}>
-												{x.value && <>{x.label}</>}
-											</div>
-										);
-									})}
-								</div>
-							)}
-						/>
 					</div>
-					<ToggleControl
-						help={
-							isImportant
-								? __("Important Enabled", "post-grid")
-								: __("Important?", "post-grid")
-						}
-						checked={isImportant}
-						onChange={(arg) => {
-							setImportant((isImportant) => !isImportant);
-							if (isImportant) {
-								if (widthUnit == "normal") {
-									props.onChange(widthUnit, "lineHeight");
-								} else {
-									props.onChange(widthVal + widthUnit, "lineHeight");
-								}
-							} else {
-								if (widthUnit == "normal") {
-									props.onChange(widthUnit + " !important", "lineHeight");
-								} else {
-									props.onChange(
-										widthVal + widthUnit + " !important",
-										"lineHeight"
-									);
-								}
-							}
-						}}
-					/>
-				</div>
-			)}
+				)}
 			<div>
 				<PanelRow>
-					<label htmlFor="">{__("Global Value","post-grid")} </label>
+					<label htmlFor="">{__("Global Value", "accordions")} </label>
 					<SelectControl
 						label=""
 						value={widthUnit}

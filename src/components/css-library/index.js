@@ -67,7 +67,7 @@ function Html(props) {
 	}, [queryCss]);
 	useEffect(() => {
 		apiFetch({
-			path: "/post-grid/v2/get_site_details",
+			path: "/accordions/v2/get_site_details",
 			method: "POST",
 			data: {},
 		}).then((res) => {
@@ -84,7 +84,7 @@ function Html(props) {
 			category: queryCss.category,
 		};
 		postData = JSON.stringify(postData);
-		fetch("https://comboblocks.com/server/wp-json/post-grid/v2/get_post_css", {
+		fetch("https://comboblocks.com/server/wp-json/accordions/v2/get_post_css", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json;charset=utf-8",
@@ -220,12 +220,12 @@ function Html(props) {
 											<div className="absolute top-0 right-2">
 												{!x.is_pro && (
 													<span className=" bg-lime-600 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
-														{__("Free", "post-grid")}
+														{__("Free", "accordions")}
 													</span>
 												)}
 												{x.is_pro && (
 													<span className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
-														{__("Pro", "post-grid")}
+														{__("Pro", "accordions")}
 													</span>
 												)}
 											</div>
@@ -241,7 +241,7 @@ function Html(props) {
 													}
 													className="px-3 py-2 bg-amber-500 rounded-sm text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform  flex items-center gap-2 justify-center ">
 													<Icon fill="#fff" icon={link} />
-													<span>{__("Subscribe to Import", "post-grid")}</span>
+													<span>{__("Subscribe to Import", "accordions")}</span>
 												</a>
 											</div>
 										)}
@@ -270,7 +270,7 @@ function Html(props) {
 																height="186px"
 																viewBox="0 -6 16 16"
 																version="1.1">
-																<title>{__("Apply Style", "post-grid")}</title>
+																<title>{__("Apply Style", "accordions")}</title>
 																<defs>
 																	<linearGradient
 																		id="gradient1"
@@ -335,7 +335,7 @@ function Html(props) {
 																onClick={(ev) => {
 																	props.onChange(objCss);
 																}}>
-																{__("Apply All", "post-grid")}
+																{__("Apply All", "accordions")}
 															</div>
 															{Object.entries(objCss).map((item) => {
 																var sudoIndex = item[0];
@@ -379,12 +379,12 @@ function Html(props) {
 								<Spinner />
 							</span>
 						)}
-						{__("Load More", "post-grid")}
+						{__("Load More", "accordions")}
 					</div>
 				</PGtab>
 				<PGtab name="submit">
 					<div>
-						<label htmlFor="">{__("Item Title", "post-grid")}</label>
+						<label htmlFor="">{__("Item Title", "accordions")}</label>
 						<InputControl
 							className="w-full"
 							value={cssSubmission.title}
@@ -396,7 +396,7 @@ function Html(props) {
 						/>
 					</div>
 					<PanelRow>
-						<label htmlFor="">{__("Choose category", "post-grid")}</label>
+						<label htmlFor="">{__("Choose category", "accordions")}</label>
 						<SelectControl
 							className="w-full"
 							style={{ margin: 0 }}
@@ -409,7 +409,7 @@ function Html(props) {
 						/>
 					</PanelRow>
 					<div>
-						<label htmlFor="">{__("Add Some Tags", "post-grid")}</label>
+						<label htmlFor="">{__("Add Some Tags", "accordions")}</label>
 						<InputControl
 							className="w-full"
 							value={cssSubmission.tags}
@@ -424,13 +424,13 @@ function Html(props) {
 						<div
 							onClick={htmlToImageCapt}
 							className="bg-green-700 text-white p-3 px-5 cursor-pointer">
-							{__("Take Screenshot", "post-grid")}
+							{__("Take Screenshot", "accordions")}
 						</div>
-						<label htmlFor="">{__("Preview Thumbnail", "post-grid")}</label>
+						<label htmlFor="">{__("Preview Thumbnail", "accordions")}</label>
 						<img src={cssSubmission.thumb} />
 					</div>
 					<div>
-						<label htmlFor="">{__("Your Email", "post-grid")}</label>
+						<label htmlFor="">{__("Your Email", "accordions")}</label>
 						<InputControl
 							className="w-full"
 							value={cssSubmission.email}
@@ -458,7 +458,7 @@ function Html(props) {
 							};
 							postData = JSON.stringify(postData);
 							fetch(
-								"https://comboblocks.com/server/wp-json/post-grid/v2/submit_css",
+								"https://comboblocks.com/server/wp-json/accordions/v2/submit_css",
 								{
 									method: "POST",
 									headers: {
@@ -505,7 +505,7 @@ function Html(props) {
 									// handle the error
 								});
 						}}>
-						{__("Submit to CSS Library", "post-grid")}
+						{__("Submit to CSS Library", "accordions")}
 						{cssSubmission.status == "busy" && (
 							<span className="text-center">
 								<Spinner />

@@ -7,6 +7,8 @@ function MyFunction(props) {
 		return null;
 	}
 
+	var navItemLabelClass = props.navItemLabelClass; // vertical, horizontal
+	var stickyNavs = props.stickyNavs; // vertical, horizontal
 	var orientation = props.orientation; // vertical, horizontal
 	var contentClass = (props.contentClass == undefined) ? "py-3" : props.contentClass;
 	var navItemClass = (props.navItemClass == undefined) ? "bg-gray-200" : props.navItemClass;
@@ -60,12 +62,59 @@ function MyFunction(props) {
 		<div className={
 			orientation == "vertical"
 				? "flex tabsWrapper"
-				: "relative tabsWrapper"
+				: "relative tabsWrapper "
 		}>
-			<div
 
-				className="sticky top-0 z-[999]"
-			>
+			{stickyNavs && (
+				<div className="sticky top-0 z-[999]">
+					<div
+						className={
+							orientation == "vertical"
+								? "block w-[200px] "
+								: "flex overflow-hidden  tabsNavs cursor-move "
+						}
+
+
+
+						onWheel={onWheel}>
+						{props.tabs.map((tab, index) => {
+							return (
+								<div
+									className={`${navItemClass} flex justify-between flex-none border-0   items-center grow  font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
+										} ${orientation == "vertical" ? "       " : ""}`}
+									onClick={(ev) => {
+										props.onSelect(tab);
+										setSelected(tab.name);
+									}} key={index}>
+									<div
+										className={`flex ${navItemLabelClass} ${orientation == "vertical" ? "" : "flex-col"
+											} justify-center items-center`}>
+										<Icon
+											fill="#404040"
+											icon={tab.icon}
+											size={24}
+											// className="mr-2 w-[20px] text-green-500"
+											className=" text-green-500"
+										/>
+										<span className="text-sm">{tab.title}</span>
+									</div>
+
+									{tab.isPro != null && tab.isPro && (
+										<span
+											className="pg-bg-color text-white px-2  text-sm rounded-sm"
+											onClick={(ev) => {
+												window.open("https://comboblocks.com/pricing/", "_blank");
+											}}>
+											Pro
+										</span>
+									)}
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			)}
+			{!stickyNavs && (
 				<div
 					className={
 						orientation == "vertical"
@@ -73,20 +122,18 @@ function MyFunction(props) {
 							: "flex overflow-hidden  tabsNavs cursor-move "
 					}
 
-
-
 					onWheel={onWheel}>
 					{props.tabs.map((tab, index) => {
 						return (
 							<div
-								className={`${navItemClass} flex justify-between flex-none border-0   items-center grow  font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
-									} ${orientation == "vertical" ? "       " : "flex-col"}`}
+								className={`${navItemClass} flex justify-between flex-none border-0   items-center   font-medium  text-slate-900 p-2 cursor-pointer hover:bg-gray-300 ${tab.name == selected ? navItemSelectedClass : navItemClass
+									} ${orientation == "vertical" ? "       " : ""}`}
 								onClick={(ev) => {
 									props.onSelect(tab);
 									setSelected(tab.name);
 								}} key={index}>
 								<div
-									className={`flex ${orientation == "vertical" ? "" : "flex-col"
+									className={`flex ${navItemLabelClass} ${orientation == "vertical" ? "" : ""
 										} justify-center items-center`}>
 									<Icon
 										fill="#404040"
@@ -111,24 +158,13 @@ function MyFunction(props) {
 						);
 					})}
 				</div>
+			)}
 
-				{orientation != "vertical" && (
-					<></>
-					// <div className="navs absolute w-full top-1/2 -translate-y-1/2 ">
-					// 	<div
-					// 		className="navPrev cursor-pointer absolute top-[50%] left-0 -translate-y-2/4  bg-[#ffffff6b]"
-					// 		onClick={scrollPrev}>
-					// 		<Icon fill="#333" icon={chevronLeft} />
-					// 	</div>
-					// 	<div
-					// 		className="navNext cursor-pointer absolute top-[50%] -translate-y-2/4 right-[-4px]  bg-[#ffffff6b]"
-					// 		onClick={scrollNext}>
-					// 		<Icon fill="#333" icon={chevronRight} />
-					// 	</div>
-					// </div>
-				)}
 
-			</div>
+
+
+
+
 
 			<div className={`tabContent  ${contentClass}`}>{content}</div>
 		</div>
@@ -154,7 +190,10 @@ class PGtabs extends Component {
 			orientation,
 			activeClass,
 			contentClass,
+			stickyNavs,
 			navItemClass,
+
+			navItemLabelClass,
 			navItemSelectedClass,
 			onSelect,
 			tabs,
@@ -168,7 +207,9 @@ class PGtabs extends Component {
 					tabs={tabs}
 					orientation={orientation}
 					contentClass={contentClass}
+					stickyNavs={stickyNavs}
 					navItemClass={navItemClass}
+					navItemLabelClass={navItemLabelClass}
 					navItemSelectedClass={navItemSelectedClass}
 					onSelect={onSelect}
 					activeTab={activeTab}

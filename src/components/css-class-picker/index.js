@@ -54,7 +54,7 @@ function Html(props) {
 							setsearch({ ...search, enable: !search.enable });
 						}}>
 						<Icon fill="#fff" size="20" icon={plusCircle} />
-						<span className="text-[13px] ">{__("Add", "post-grid")}</span>
+						<span className="text-[13px] ">{__("Add", "accordions")}</span>
 					</div>
 				</div>
 				<div className="pg-setting-input-textarea">
@@ -159,11 +159,11 @@ function Html(props) {
 													<a
 														target="_blank"
 														href={
-															"https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
+															"https://pickplugins.com/accordions/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
 															x.label
 														}
 														className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
-														{__("Pro", "post-grid")}
+														{__("Pro", "accordions")}
 													</a>
 													// </span>
 												)}
@@ -216,7 +216,7 @@ function Html(props) {
 															x.label
 														}
 														className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
-														{__("Pro", "post-grid")}
+														{__("Pro", "accordions")}
 													</a>
 												)}
 											</div>
@@ -264,7 +264,7 @@ function Html(props) {
 																x.label
 															}
 															className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
-															{__("Pro", "post-grid")}
+															{__("Pro", "accordions")}
 														</a>
 													)}
 												</div>
@@ -311,7 +311,7 @@ function Html(props) {
 																x.label
 															}
 															className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
-															{__("Pro", "post-grid")}
+															{__("Pro", "accordions")}
 														</a>
 													)}
 												</div>
@@ -329,12 +329,12 @@ function Html(props) {
 								typeof filteredOptions == "object" &&
 								Object.entries(filteredOptions).length == 0 && (
 									<div className="text-center p-2 text-red-500 ">
-										{__("No tags found.", "post-grid")}
+										{__("No tags found.", "accordions")}
 									</div>
 								)}
 							{keyword.length > 0 && filteredOptions.length == 0 && (
 								<div className="text-center p-2 text-red-500 ">
-									{__("No tags found.", "post-grid")}
+									{__("No tags found.", "accordions")}
 								</div>
 							)}
 						</div>

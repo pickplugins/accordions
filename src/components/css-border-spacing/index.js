@@ -71,7 +71,7 @@ function Html(props) {
 		<div>
 			<div className="grid grid-cols-2 gap-2">
 				<div className="my-2">
-					<label htmlFor="">{__("Horizontal","post-grid")}</label>
+					<label htmlFor="">{__("Horizontal", "accordions")}</label>
 					<div className="flex justify-between items-center">
 						<InputControl
 							value={horizontalValY}
@@ -92,7 +92,7 @@ function Html(props) {
 										<div className=" ">
 											{horizontalUnitY != undefined
 												? unitArgs[horizontalUnitY].label
-												 : __("Select...","post-grid")}
+												: __("Select...", "accordions")}
 										</div>
 									</Button>
 								)}
@@ -110,9 +110,9 @@ function Html(props) {
 														sethorizontalUnit(x.value);
 														props.onChange(
 															horizontalValY +
-																x.value +
-																" " +
-																outlinevericalVal,
+															x.value +
+															" " +
+															outlinevericalVal,
 															"borderSpacing"
 														);
 													}}>
@@ -127,7 +127,7 @@ function Html(props) {
 					</div>
 				</div>
 				<div className="my-2">
-					<label htmlFor="">{__("Verical","post-grid")}</label>
+					<label htmlFor="">{__("Verical", "accordions")}</label>
 					<div className="flex justify-between items-center">
 						<InputControl
 							value={vericalValY}
@@ -148,7 +148,7 @@ function Html(props) {
 										<div className=" ">
 											{vericalUnitY != undefined
 												? unitArgs[vericalUnitY].label
-												 : __("Select...","post-grid")}
+												: __("Select...", "accordions")}
 										</div>
 									</Button>
 								)}
@@ -166,9 +166,9 @@ function Html(props) {
 														setvericalUnit(x.value);
 														props.onChange(
 															outlinehorizontalVal +
-																" " +
-																vericalValY +
-																x.value,
+															" " +
+															vericalValY +
+															x.value,
 															"borderSpacing"
 														);
 													}}>
@@ -186,8 +186,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

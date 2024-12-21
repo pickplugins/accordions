@@ -103,7 +103,7 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: "/post-grid/v2/get_site_details",
+			path: "/accordions/v2/get_site_details",
 			method: "POST",
 			data: {},
 		}).then((res) => {
@@ -125,7 +125,7 @@ function Html(props) {
 		postData = JSON.stringify(postData);
 
 		fetch(
-			"https://comboblocks.com/server/wp-json/post-grid/v2/get_block_patterns",
+			"https://comboblocks.com/server/wp-json/accordions/v2/get_block_patterns",
 			{
 				method: "POST",
 				headers: {
@@ -207,7 +207,7 @@ function Html(props) {
 	}
 
 	const htmlToImageCapt = () => {
-		
+
 		setloading(true);
 		var stylesheet = document.getElementById("pg-google-fonts-css");
 		if (stylesheet && !stylesheet.hasAttribute("disabled")) {
@@ -240,7 +240,7 @@ function Html(props) {
 				activeTab="cssItems"
 				orientation="horizontal"
 				activeClass="active-tab"
-				onSelect={(tabName) => {}}
+				onSelect={(tabName) => { }}
 				tabs={[
 					{
 						name: "cssItems",
@@ -347,14 +347,14 @@ function Html(props) {
 							return (
 								<div
 									className={`item-${index} relative  group pb-[20px] py-2 hover:border-black  border border-solid  border-slate-400 rounded-md shadow-md  my-3 transition-all duration-300 ease-in-out `}
-									// onMouseEnter={() => {
-									// 	setIsHovered(true);
-									// 	setHoverValue(index);
-									// }}
-									// onMouseLeave={() => {
-									// 	setIsHovered(false);
-									// 	setHoverValue("");
-									// }}
+								// onMouseEnter={() => {
+								// 	setIsHovered(true);
+								// 	setHoverValue(index);
+								// }}
+								// onMouseLeave={() => {
+								// 	setIsHovered(false);
+								// 	setHoverValue("");
+								// }}
 								>
 									{isProFeature && (
 										<div className="absolute z-30 top-2 right-2">
@@ -457,15 +457,15 @@ function Html(props) {
 												</button>
 												{props.isApplyStyle && (
 
-												<button
-													type="button"
-													title="Apply Style"
-													// className="  rounded-sm bg-slate-400 bg-opacity-30 text-white text-xs outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform  flex gap-2 items-center justify-center "
-													className="pg-bg-color  text-white no-underline hover:text-white text-xs px-2 rounded-sm py-1"
-													onClick={(ev) => {
-														props.onChange(content, "applyStyle");
-													}}>
-													{/* <Icon
+													<button
+														type="button"
+														title="Apply Style"
+														// className="  rounded-sm bg-slate-400 bg-opacity-30 text-white text-xs outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform  flex gap-2 items-center justify-center "
+														className="pg-bg-color  text-white no-underline hover:text-white text-xs px-2 rounded-sm py-1"
+														onClick={(ev) => {
+															props.onChange(content, "applyStyle");
+														}}>
+														{/* <Icon
 														icon={
 															<svg
 																width="186"
@@ -510,10 +510,10 @@ function Html(props) {
 															</svg>
 														}
 													/> */}
-													{/* <span className="pg-bg-color  text-white no-underline hover:text-white text-xs px-2 rounded-sm py-1"> */}
-													Apply Style
-													{/* </span> */}
-												</button>
+														{/* <span className="pg-bg-color  text-white no-underline hover:text-white text-xs px-2 rounded-sm py-1"> */}
+														Apply Style
+														{/* </span> */}
+													</button>
 												)}
 												<button
 													type="button"
@@ -684,7 +684,7 @@ function Html(props) {
 							console.log(postData);
 
 							fetch(
-								"https://comboblocks.com/server/wp-json/post-grid/v2/submit_block_variation",
+								"https://comboblocks.com/server/wp-json/accordions/v2/submit_block_variation",
 								{
 									method: "POST",
 									headers: {
@@ -740,7 +740,7 @@ function Html(props) {
 							</span>
 						)}
 					</div>
-					
+
 
 					{cssSubmission.status == "success" && (
 						<div className=" font-bold text-green-700">
@@ -777,7 +777,7 @@ class PGLibraryBlockVariations extends Component {
 	}
 
 	render() {
-		var { blockName, blockId, clientId, onChange, isApplyStyle=true } = this.props;
+		var { blockName, blockId, clientId, onChange, isApplyStyle = true } = this.props;
 
 		return (
 			<Html

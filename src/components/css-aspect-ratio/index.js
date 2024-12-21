@@ -16,8 +16,8 @@ function Html(props) {
       <ToggleControl
         help={
           isAuto
-            ? __('Auto',"post-grid")
-            : __('Auto?',"post-grid")
+            ? __('Auto', "accordions")
+            : __('Auto?', "accordions")
         }
         checked={isAuto}
         onChange={(arg) => {

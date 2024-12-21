@@ -114,8 +114,8 @@ const PgCSSFontSize = ({ val, onChange, breakPoint, sudoSrc }) => {
 				<ToggleControl
 					help={
 						isImportant
-							? __("(Enabled)", "post-grid")
-							: __("Important?", "post-grid")
+							? __("(Enabled)", "accordions")
+							: __("Important?", "accordions")
 					}
 					checked={isImportant}
 					onChange={(arg) => {

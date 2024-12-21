@@ -64,10 +64,10 @@ class PGcssBgColor extends Component {
     return (
       <div>
         <div className='my-4'>
-          <p className='text-sm'>{__("This css property is depricated, please use","post-grid")} <strong>{__("Background Color","post-grid")}</strong> {__("instead","post-grid")}</p>
+          <p className='text-sm'>{__("This css property is depricated, please use", "accordions")} <strong>{__("Background Color", "accordions")}</strong> {__("instead", "accordions")}</p>
           <div className='relative h-10' style={placeholderStyle}>
             <div className='absolute w-full  h-full top-0 left-0 text-center' style={btnStyle} onClick={this.handleToggleClick}>
-              <span className='w-full text-center left-0 top-1/2 -translate-y-1/2	 absolute'>{(val == undefined) ? __('Set Color',"post-grid") : val}</span>
+              <span className='w-full text-center left-0 top-1/2 -translate-y-1/2	 absolute'>{(val == undefined) ? __('Set Color', "accordions") : val}</span>
             </div>
           </div>
         </div>

@@ -49,16 +49,16 @@ function Html(props) {
 	return (
 		<div>
 			<PanelRow>
-				<label htmlFor="">{__("Source", "post-grid")}</label>
+				<label htmlFor="">{__("Source", "accordions")}</label>
 			</PanelRow>
 			<div className="my-4">
 				<label htmlFor="" className="font-medium text-slate-900 pg-font ">
-					{__("Select Source", "post-grid")}
+					{__("Select Source", "accordions")}
 				</label>
 				<SelectControl
 					options={[
-						{ label: __("Linear Gradient", "post-grid"), value: "linear" },
-						{ label: __("Image", "post-grid"), value: "image" },
+						{ label: __("Linear Gradient", "accordions"), value: "linear" },
+						{ label: __("Image", "accordions"), value: "image" },
 					]}
 					values=""
 					onChange={(newVal) => {
@@ -159,7 +159,7 @@ function Html(props) {
 								<Button
 									className="my-3 bg-gray-700 hover:bg-gray-600 text-white border border-solid border-gray-300 text-center w-full"
 									onClick={open}>
-									{__("Open Media Library", "post-grid")}
+									{__("Open Media Library", "accordions")}
 								</Button>
 							)}
 						/>
@@ -203,7 +203,7 @@ function Html(props) {
 				]}
 			/> */}
 			<PanelRow>
-				<label htmlFor="">{__("Slice", "post-grid")}</label>
+				<label htmlFor="">{__("Slice", "accordions")}</label>
 			</PanelRow>
 			<BoxControl
 				label=""
@@ -234,7 +234,7 @@ function Html(props) {
 				}}
 			/>
 			<PanelRow>
-				<label htmlFor="">{__("Width", "post-grid")}</label>
+				<label htmlFor="">{__("Width", "accordions")}</label>
 			</PanelRow>
 			<BoxControl
 				label=""
@@ -266,7 +266,7 @@ function Html(props) {
 				}}
 			/>
 			<PanelRow>
-				<label htmlFor="">{__("Outset", "post-grid")}</label>
+				<label htmlFor="">{__("Outset", "accordions")}</label>
 			</PanelRow>
 			<BoxControl
 				label=""
@@ -298,16 +298,16 @@ function Html(props) {
 				}}
 			/>
 			<PanelRow>
-				<label htmlFor="">{__("Repeat", "post-grid")}</label>
+				<label htmlFor="">{__("Repeat", "accordions")}</label>
 				<SelectControl
 					label=""
 					value={repeat}
 					options={[
-						{ label: __("Stretch", "post-grid"), value: "stretch" },
-						{ label: __("Repeat", "post-grid"), value: "repeat" },
-						{ label: __("Round", "post-grid"), value: "round" },
-						{ label: __("Space", "post-grid"), value: "space" },
-						{ label: __("Fill", "post-grid"), value: "fill" },
+						{ label: __("Stretch", "accordions"), value: "stretch" },
+						{ label: __("Repeat", "accordions"), value: "repeat" },
+						{ label: __("Round", "accordions"), value: "round" },
+						{ label: __("Space", "accordions"), value: "space" },
+						{ label: __("Fill", "accordions"), value: "fill" },
 					]}
 					onChange={(newVal) => {
 						var sliceX = slice.replaceAll("px", "");

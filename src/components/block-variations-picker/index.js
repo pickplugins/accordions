@@ -88,7 +88,7 @@ function Html(props) {
 
 	useEffect(() => {
 		apiFetch({
-			path: "/post-grid/v2/get_site_details",
+			path: "/accordions/v2/get_site_details",
 			method: "POST",
 			data: {},
 		}).then((res) => {
@@ -109,7 +109,7 @@ function Html(props) {
 		};
 		postData = JSON.stringify(postData);
 
-		fetch("https://comboblocks.com/server/wp-json/post-grid/v2/get_block_patterns", {
+		fetch("https://comboblocks.com/server/wp-json/accordions/v2/get_block_patterns", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json;charset=utf-8",

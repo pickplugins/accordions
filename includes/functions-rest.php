@@ -21,7 +21,7 @@ class AccordionsRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'accordions/v2',
 			'/update_options',
 			array(
 				'methods' => 'POST',
@@ -37,7 +37,7 @@ class AccordionsRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'accordions/v2',
 			'/get_options',
 			array(
 				'methods' => 'POST',
@@ -52,7 +52,7 @@ class AccordionsRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'accordions/v2',
 			'/get_posts',
 			array(
 				'methods' => 'POST',
@@ -61,6 +61,9 @@ class AccordionsRest
 
 			)
 		);
+
+
+
 		register_rest_route(
 			'accordions/v2',
 			'/accordions_list',
@@ -97,14 +100,34 @@ class AccordionsRest
 
 			)
 		);
+		register_rest_route(
+			'accordions/v2',
+			'/create_post',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'create_post'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
-
-
+		register_rest_route(
+			'accordions/v2',
+			'/user_roles_list',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'user_roles_list'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'accordions/v2',
 			'/get_post_data',
 			array(
 				'methods' => 'POST',
@@ -118,6 +141,27 @@ class AccordionsRest
 
 
 
+	/**
+	 * Return user_roles_list
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function user_roles_list($request)
+	{
+		$response = [];
+		$formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
+		global $wp_roles;
+		$roles = [];
+		if ($wp_roles && property_exists($wp_roles, 'roles')) {
+			$rolesAll = isset($wp_roles->roles) ? $wp_roles->roles : [];
+			foreach ($rolesAll as $roleIndex => $role) {
+				$roles[$roleIndex] = $role['name'];
+			}
+		}
+		$response['roles'] = $roles;
+		die(wp_json_encode($response));
+	}
 
 
 	/**
@@ -136,10 +180,10 @@ class AccordionsRest
 		$message = "";
 		if (!empty($value)) {
 			$status = update_option($name, $value);
-			$message = __("Options updated", "post-grid");
+			$message = __("Options updated", "accordions");
 		} else {
 			$status = false;
-			$message = __("Value should not empty", "post-grid");
+			$message = __("Value should not empty", "accordions");
 		}
 
 
@@ -427,6 +471,44 @@ class AccordionsRest
 
 		if ($updatep_post_id)
 			$response->id = $updatep_post_id;
+
+		die(wp_json_encode($response));
+	}
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function create_post($post_data)
+	{
+
+		$postTitle = isset($post_data['postTitle']) ? sanitize_text_field($post_data['postTitle']) : '';
+		$content = isset($post_data['content']) ? sanitize_text_field($post_data['content']) : '';
+		$response = new stdClass();
+
+		if (empty($postTitle)) {
+			$response->error = true;
+			$response->errorMessage = __("Post title should not empty");
+		}
+
+
+		$my_post = array(
+			'post_title' => ($postTitle),
+			'post_content' => ($content),
+			'post_type' => "accordions",
+		);
+
+		// Update the post into the database
+		$updatep_post_id = wp_insert_post($my_post);
+
+		if ($updatep_post_id) {
+			$response->success = true;
+			$response->successMessage = __("Post created");
+		}
+		$response->id = $updatep_post_id;
 
 		die(wp_json_encode($response));
 	}
@@ -885,6 +967,8 @@ class AccordionsRest
 						$query_args['orderby'] = implode(' ', $val);
 					} elseif ($id == 'metaKey') {
 						$query_args['meta_key'] = $val;
+					} elseif ($id == 's') {
+						$query_args['s'] = $val;
 					} elseif ($id == 'dateQuery') {
 
 

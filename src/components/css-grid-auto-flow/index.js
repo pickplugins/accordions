@@ -28,13 +28,13 @@ function Html(props) {
 				position="bottom"
 				renderToggle={({ isOpen, onToggle }) => (
 					<Button
-						title={__("Place Items", "post-grid")}
+						title={__("Place Items", "accordions")}
 						onClick={onToggle}
 						aria-expanded={isOpen}>
 						{/* <div className=" ">{props.val ? args[props.val].label : 'Select...'}</div> */}
 						<div className=" ">
 							{args[align] == undefined
-								? __("Select...", "post-grid")
+								? __("Select...", "accordions")
 								: args[align].label}
 						</div>
 						{/* <div className=" ">{val ? val : 'Select...'}</div> */}
@@ -59,7 +59,7 @@ function Html(props) {
 											props.onChange(x.value, "gridAutoFlow");
 										}
 									}}>
-									{!x.value && <div>{__("Reset", "post-grid")}</div>}
+									{!x.value && <div>{__("Reset", "accordions")}</div>}
 									{x.value && <>{x.label}</>}
 								</div>
 							);
@@ -70,8 +70,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important (Enabled)", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important (Enabled)", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {

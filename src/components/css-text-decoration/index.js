@@ -114,7 +114,7 @@ function Html(props) {
 	return (
 		<div>
 			<div className="my-2">
-				<label htmlFor="">{__("Line","post-grid")}</label>
+				<label htmlFor="">{__("Line", "accordions")}</label>
 				<div className="my-3">
 					{Object.entries(lineArgs).map((arg) => {
 						var i = arg[0];
@@ -202,7 +202,7 @@ function Html(props) {
 				</div>
 			</div>
 			<div className="my-2">
-				<label htmlFor="">{__("Color","post-grid")}</label>
+				<label htmlFor="">{__("Color", "accordions")}</label>
 				<ColorPalette
 					value={outlineColorVal}
 					colors={colorsPresets}
@@ -239,18 +239,18 @@ function Html(props) {
 				/>
 			</div>
 			<div className="my-2 flex justify-between items-center pg-setting-css-components">
-				<label htmlFor="">{__("Style","post-grid")}</label>
+				<label htmlFor="">{__("Style", "accordions")}</label>
 				<Dropdown
 					position="bottom right"
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
-							title={__("Clear", "post-grid")}
+							title={__("Clear", "accordions")}
 							onClick={onToggle}
 							aria-expanded={isOpen}>
 							<div className=" ">
 								{outlineStyleVal
 									? styleArgs[outlineStyleVal].label
-									: __("Select...", "post-grid")}
+									: __("Select...", "accordions")}
 							</div>
 						</Button>
 					)}
@@ -293,7 +293,7 @@ function Html(props) {
 												);
 											}
 										}}>
-										{!x.value && <div>{__("Reset", "post-grid")}</div>}
+										{!x.value && <div>{__("Reset", "accordions")}</div>}
 										{x.value && <>{x.label}</>}
 									</div>
 								);
@@ -303,7 +303,7 @@ function Html(props) {
 				/>
 			</div>
 			<div className="my-2">
-				<label htmlFor="">{__("Thickness","post-grid")}</label>
+				<label htmlFor="">{__("Thickness", "accordions")}</label>
 				<div className="flex justify-between items-center pg-setting-css-components">
 					<InputControl
 						value={thicknessValY}
@@ -349,7 +349,7 @@ function Html(props) {
 									<div className=" ">
 										{thicknessUnitY != undefined
 											? unitArgs[thicknessUnitY].label
-											: __("Select...", "post-grid")}
+											: __("Select...", "accordions")}
 									</div>
 								</Button>
 							)}
@@ -407,8 +407,8 @@ function Html(props) {
 			<ToggleControl
 				help={
 					isImportant
-						? __("Important Enabled", "post-grid")
-						: __("Important?", "post-grid")
+						? __("Important Enabled", "accordions")
+						: __("Important?", "accordions")
 				}
 				checked={isImportant}
 				onChange={(arg) => {
