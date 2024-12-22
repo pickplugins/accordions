@@ -182,7 +182,7 @@ function accordions_builder_accordion($post_id, $accordionData)
             <?php if ($search): ?>
 
                 <div class="search-wrap">
-                    <input type="text" class="search-input" placeholder="" placeholder="<?php esc_attr($expandAllText); ?>" />
+                    <input type="text" class="search-input" placeholder="<?php esc_attr($expandAllText); ?>" />
                 </div>
 
             <?php endif; ?>

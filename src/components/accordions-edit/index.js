@@ -535,6 +535,7 @@ function Html(props) {
 									<>
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "addPostQuery",
@@ -563,6 +564,7 @@ function Html(props) {
 									<>
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "addTermQuery",
@@ -1494,6 +1496,7 @@ function Html(props) {
 									Lazyload{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "lazyloadSetting",
@@ -1522,101 +1525,13 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Autoembed{" "}
-									<span
-										className="cursor-pointer"
-										onClick={() => {
-											setHelp({
-												id: "autoembedSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.autoembed}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.autoembed = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
 
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Shortcodes{" "}
-									<span
-										className="cursor-pointer"
-										onClick={() => {
-											setHelp({
-												id: "shortcodesSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.shortcodes}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.shortcodes = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									wpautop{" "}
-									<span
-										className="cursor-pointer"
-										onClick={() => {
-											setHelp({
-												id: "wpautopSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.wpautop}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.wpautop = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
 									Schema{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "schemaSetting",
@@ -1642,144 +1557,13 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Toggle Text{" "}
-									<span
-										className="cursor-pointer"
-										onClick={() => {
-											setHelp({
-												id: "toggleTextSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
 
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.toggleText}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.toggleText = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Expand/collapse all{" "}
-									<span
-										className="cursor-pointer"
-										onClick={() => {
-											setHelp({
-												id: "expandCollapseSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.expandCollapseAll ?? 0}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.expandCollapseAll = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-							{globalOptions?.expandCollapseAll == 1 && (
-								<>
-									<PanelRow>
-										<label htmlFor="">Expand All Text</label>
-
-										<PGinputText
-											className="max-w-[140px]"
-											label=""
-											value={globalOptions?.expandAllText}
-											onChange={(newVal) => {
-												var globalOptionsX = { ...globalOptions };
-												globalOptionsX.expandAllText = newVal;
-												setglobalOptions(globalOptionsX);
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="">Collapse All Text</label>
-
-										<PGinputText
-											className="max-w-[140px]"
-											label=""
-											value={globalOptions?.collapseAllText}
-											onChange={(newVal) => {
-												var globalOptionsX = { ...globalOptions };
-												globalOptionsX.collapseAllText = newVal;
-												setglobalOptions(globalOptionsX);
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Expand All Icon", "post-grid")}
-										</label>
-										<PGIconPicker
-											library={
-												globalOptions?.expandAllIcon?.library ?? "fontAwesome"
-											}
-											srcType={globalOptions?.expandAllIcon?.srcType ?? "class"}
-											iconSrc={
-												globalOptions?.expandAllIcon?.iconSrc ?? "fas fa-plus"
-											}
-											onChange={(arg) => {
-												var globalOptionsX = { ...globalOptions };
-												globalOptionsX.expandAllIcon = arg;
-												setglobalOptions(globalOptionsX);
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Collapse All Icon", "post-grid")}
-										</label>
-										<PGIconPicker
-											library={
-												globalOptions?.collapseAllIcon?.library ?? "fontAwesome"
-											}
-											srcType={
-												globalOptions?.collapseAllIcon?.srcType ?? "class"
-											}
-											iconSrc={
-												globalOptions?.collapseAllIcon?.iconSrc ??
-												"fas fa-minus"
-											}
-											onChange={(arg) => {
-												var globalOptionsX = { ...globalOptions };
-												globalOptionsX.collapseAllIcon = arg;
-												setglobalOptions(globalOptionsX);
-											}}
-										/>
-									</PanelRow>
-								</>
-							)}
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
 									Stats{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "statsSetting",
@@ -1854,6 +1638,7 @@ function Html(props) {
 									Click To Scroll Top{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "scrollToTopSetting",
@@ -1900,6 +1685,7 @@ function Html(props) {
 									Animation Name{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "animationSetting",
@@ -2064,6 +1850,115 @@ function Html(props) {
 										}}
 									/>
 								</div>
+
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										Autoembed{" "}
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "autoembedSetting",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
+									</label>
+									<SelectControl
+										className="w-[140px]"
+										label=""
+										value={globalOptions?.autoembed}
+										options={[
+											{ label: __("True", "accordions"), value: 1 },
+											{ label: __("False", "accordions"), value: 0 },
+										]}
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													autoembed: newVal,
+												},
+											};
+											setcontent(optionsX);
+										}}
+									/>
+								</PanelRow>
+
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										Shortcodes{" "}
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "shortcodesSetting",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
+									</label>
+
+									<SelectControl
+										className="w-[140px]"
+										label=""
+										value={globalOptions?.shortcodes}
+										options={[
+											{ label: __("True", "accordions"), value: 1 },
+											{ label: __("False", "accordions"), value: 0 },
+										]}
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													shortcodes: newVal,
+												},
+											};
+											setcontent(optionsX);
+										}}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										wpautop{" "}
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "wpautopSetting",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
+									</label>
+
+									<SelectControl
+										className="w-[140px]"
+										label=""
+										value={content?.options?.wpautop}
+										options={[
+											{ label: __("True", "accordions"), value: 1 },
+											{ label: __("False", "accordions"), value: 0 },
+										]}
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													wpautop: newVal,
+												},
+											};
+											setcontent(optionsX);
+										}}
+									/>
+								</PanelRow>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -2118,8 +2013,6 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-								{JSON.stringify(header.options.class)}
-
 								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
 										{__("Class", "accordions")}
@@ -2139,6 +2032,43 @@ function Html(props) {
 										}}
 									/>
 								</div>
+
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										Toggle Text{" "}
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "toggleTextSetting",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
+									</label>
+
+									<SelectControl
+										className="w-[140px]"
+										label=""
+										value={header?.options?.toggleText}
+										options={[
+											{ label: __("True", "accordions"), value: 1 },
+											{ label: __("False", "accordions"), value: 0 },
+										]}
+										onChange={(newVal) => {
+											var optionsX = {
+												...header,
+												options: {
+													...header.options,
+													toggleText: newVal,
+												},
+											};
+											setheader(optionsX);
+										}}
+									/>
+								</PanelRow>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -2873,6 +2803,119 @@ function Html(props) {
 										}}
 									/>
 								</div>
+
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										Expand/collapse all{" "}
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "expandCollapseSetting",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
+									</label>
+
+									<SelectControl
+										className="w-[140px]"
+										label=""
+										value={expandCollapseAll.options.expandCollapseAll ?? 0}
+										options={[
+											{ label: __("True", "accordions"), value: 1 },
+											{ label: __("False", "accordions"), value: 0 },
+										]}
+										onChange={(newVal) => {
+											var optionsX = {
+												...expandCollapseAll,
+												options: {
+													...expandCollapseAll.options,
+													expandCollapseAll: newVal,
+												},
+											};
+											setexpandCollapseAll(optionsX);
+										}}
+									/>
+								</PanelRow>
+								{globalOptions?.expandCollapseAll == 1 && (
+									<>
+										<PanelRow>
+											<label htmlFor="">Expand All Text</label>
+
+											<PGinputText
+												className="max-w-[140px]"
+												label=""
+												value={globalOptions?.expandAllText}
+												onChange={(newVal) => {
+													var globalOptionsX = { ...globalOptions };
+													globalOptionsX.expandAllText = newVal;
+													setglobalOptions(globalOptionsX);
+												}}
+											/>
+										</PanelRow>
+										<PanelRow>
+											<label htmlFor="">Collapse All Text</label>
+
+											<PGinputText
+												className="max-w-[140px]"
+												label=""
+												value={globalOptions?.collapseAllText}
+												onChange={(newVal) => {
+													var globalOptionsX = { ...globalOptions };
+													globalOptionsX.collapseAllText = newVal;
+													setglobalOptions(globalOptionsX);
+												}}
+											/>
+										</PanelRow>
+										<PanelRow>
+											<label htmlFor="" className="font-medium text-slate-900 ">
+												{__("Expand All Icon", "post-grid")}
+											</label>
+											<PGIconPicker
+												library={
+													globalOptions?.expandAllIcon?.library ?? "fontAwesome"
+												}
+												srcType={
+													globalOptions?.expandAllIcon?.srcType ?? "class"
+												}
+												iconSrc={
+													globalOptions?.expandAllIcon?.iconSrc ?? "fas fa-plus"
+												}
+												onChange={(arg) => {
+													var globalOptionsX = { ...globalOptions };
+													globalOptionsX.expandAllIcon = arg;
+													setglobalOptions(globalOptionsX);
+												}}
+											/>
+										</PanelRow>
+										<PanelRow>
+											<label htmlFor="" className="font-medium text-slate-900 ">
+												{__("Collapse All Icon", "post-grid")}
+											</label>
+											<PGIconPicker
+												library={
+													globalOptions?.collapseAllIcon?.library ??
+													"fontAwesome"
+												}
+												srcType={
+													globalOptions?.collapseAllIcon?.srcType ?? "class"
+												}
+												iconSrc={
+													globalOptions?.collapseAllIcon?.iconSrc ??
+													"fas fa-minus"
+												}
+												onChange={(arg) => {
+													var globalOptionsX = { ...globalOptions };
+													globalOptionsX.collapseAllIcon = arg;
+													setglobalOptions(globalOptionsX);
+												}}
+											/>
+										</PanelRow>
+									</>
+								)}
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -2958,6 +3001,25 @@ function Html(props) {
 												options: {
 													...searchInput.options,
 													class: newVal,
+												},
+											};
+											setsearchInput(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Placeholder", "accordions")}
+									</label>
+									<PGinputText
+										value={searchInput.options.placeholder}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...searchInput,
+												options: {
+													...searchInput.options,
+													placeholder: newVal,
 												},
 											};
 											setsearchInput(optionsX);

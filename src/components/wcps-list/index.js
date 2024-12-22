@@ -231,7 +231,7 @@ function Html(props) {
 					<span>Create</span>
 				</div>
 				<span
-					className="cursor-pointer"
+					className="cursor-pointer" title="Click to know more"
 					onClick={() => {
 						setHelp({
 							id: "createAccordion",

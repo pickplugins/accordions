@@ -3688,7 +3688,7 @@ const {
 
 var myStore = wp.data.select("postgrid-shop");
 function Html(props) {
-  var _globalOptions$expand, _globalOptions$expand2, _globalOptions$expand3, _globalOptions$expand4, _globalOptions$collap, _globalOptions$collap2, _globalOptions$collap3;
+  var _expandCollapseAll$op, _globalOptions$expand, _globalOptions$expand2, _globalOptions$expand3, _globalOptions$collap, _globalOptions$collap2, _globalOptions$collap3;
   if (!props.warn) {
     return null;
   }
@@ -4171,6 +4171,7 @@ function Html(props) {
     className: "flex items-center  gap-2"
   }, globalOptions?.itemSource == "posts" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "addPostQuery",
@@ -4195,6 +4196,7 @@ function Html(props) {
     values: ""
   })), globalOptions?.itemSource == "terms" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "addTermQuery",
@@ -5073,6 +5075,7 @@ function Html(props) {
     className: "flex gap-2 items-center"
   }, "Lazyload", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "lazyloadSetting",
@@ -5106,101 +5109,9 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "flex gap-2 items-center"
-  }, "Autoembed", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer",
-    onClick: () => {
-      setHelp({
-        id: "autoembedSetting",
-        enable: true
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    className: "w-[140px]",
-    label: "",
-    value: globalOptions?.autoembed,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
-      value: 1
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
-      value: 0
-    }],
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.autoembed = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "flex gap-2 items-center"
-  }, "Shortcodes", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer",
-    onClick: () => {
-      setHelp({
-        id: "shortcodesSetting",
-        enable: true
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    className: "w-[140px]",
-    label: "",
-    value: globalOptions?.shortcodes,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
-      value: 1
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
-      value: 0
-    }],
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.shortcodes = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "flex gap-2 items-center"
-  }, "wpautop", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer",
-    onClick: () => {
-      setHelp({
-        id: "wpautopSetting",
-        enable: true
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    className: "w-[140px]",
-    label: "",
-    value: globalOptions?.wpautop,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
-      value: 1
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
-      value: 0
-    }],
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.wpautop = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "flex gap-2 items-center"
   }, "Schema", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "schemaSetting",
@@ -5230,124 +5141,9 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "flex gap-2 items-center"
-  }, "Toggle Text", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer",
-    onClick: () => {
-      setHelp({
-        id: "toggleTextSetting",
-        enable: true
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    className: "w-[140px]",
-    label: "",
-    value: globalOptions?.toggleText,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
-      value: 1
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
-      value: 0
-    }],
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.toggleText = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "flex gap-2 items-center"
-  }, "Expand/collapse all", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer",
-    onClick: () => {
-      setHelp({
-        id: "expandCollapseSetting",
-        enable: true
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    className: "w-[140px]",
-    label: "",
-    value: (_globalOptions$expand = globalOptions?.expandCollapseAll) !== null && _globalOptions$expand !== void 0 ? _globalOptions$expand : 0,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
-      value: 1
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
-      value: 0
-    }],
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.expandCollapseAll = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), globalOptions?.expandCollapseAll == 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, "Expand All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    className: "max-w-[140px]",
-    label: "",
-    value: globalOptions?.expandAllText,
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.expandAllText = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, "Collapse All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    className: "max-w-[140px]",
-    label: "",
-    value: globalOptions?.collapseAllText,
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.collapseAllText = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Expand All Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: (_globalOptions$expand2 = globalOptions?.expandAllIcon?.library) !== null && _globalOptions$expand2 !== void 0 ? _globalOptions$expand2 : "fontAwesome",
-    srcType: (_globalOptions$expand3 = globalOptions?.expandAllIcon?.srcType) !== null && _globalOptions$expand3 !== void 0 ? _globalOptions$expand3 : "class",
-    iconSrc: (_globalOptions$expand4 = globalOptions?.expandAllIcon?.iconSrc) !== null && _globalOptions$expand4 !== void 0 ? _globalOptions$expand4 : "fas fa-plus",
-    onChange: arg => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.expandAllIcon = arg;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "font-medium text-slate-900 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Collapse All Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: (_globalOptions$collap = globalOptions?.collapseAllIcon?.library) !== null && _globalOptions$collap !== void 0 ? _globalOptions$collap : "fontAwesome",
-    srcType: (_globalOptions$collap2 = globalOptions?.collapseAllIcon?.srcType) !== null && _globalOptions$collap2 !== void 0 ? _globalOptions$collap2 : "class",
-    iconSrc: (_globalOptions$collap3 = globalOptions?.collapseAllIcon?.iconSrc) !== null && _globalOptions$collap3 !== void 0 ? _globalOptions$collap3 : "fas fa-minus",
-    onChange: arg => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.collapseAllIcon = arg;
-      setglobalOptions(globalOptionsX);
-    }
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "flex gap-2 items-center"
   }, "Stats", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "statsSetting",
@@ -5425,6 +5221,7 @@ function Html(props) {
     className: "flex gap-2 items-center"
   }, "Click To Scroll Top", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "scrollToTopSetting",
@@ -5472,6 +5269,7 @@ function Html(props) {
     className: "flex gap-2 items-center"
   }, "Animation Name", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "animationSetting",
@@ -5607,6 +5405,111 @@ function Html(props) {
       };
       setcontent(optionsX);
     }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "flex gap-2 items-center"
+  }, "Autoembed", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "autoembedSetting",
+        enable: true
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    className: "w-[140px]",
+    label: "",
+    value: globalOptions?.autoembed,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...content,
+        options: {
+          ...content.options,
+          autoembed: newVal
+        }
+      };
+      setcontent(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "flex gap-2 items-center"
+  }, "Shortcodes", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "shortcodesSetting",
+        enable: true
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    className: "w-[140px]",
+    label: "",
+    value: globalOptions?.shortcodes,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...content,
+        options: {
+          ...content.options,
+          shortcodes: newVal
+        }
+      };
+      setcontent(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "flex gap-2 items-center"
+  }, "wpautop", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "wpautopSetting",
+        enable: true
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    className: "w-[140px]",
+    label: "",
+    value: content?.options?.wpautop,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...content,
+        options: {
+          ...content.options,
+          wpautop: newVal
+        }
+      };
+      setcontent(optionsX);
+    }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -5638,7 +5541,7 @@ function Html(props) {
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
     name: "options"
-  }, JSON.stringify(header.options.class), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "",
@@ -5652,6 +5555,41 @@ function Html(props) {
         options: {
           ...header.options,
           class: newVal
+        }
+      };
+      setheader(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "flex gap-2 items-center"
+  }, "Toggle Text", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "toggleTextSetting",
+        enable: true
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    className: "w-[140px]",
+    label: "",
+    value: header?.options?.toggleText,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...header,
+        options: {
+          ...header.options,
+          toggleText: newVal
         }
       };
       setheader(optionsX);
@@ -6152,7 +6090,96 @@ function Html(props) {
       };
       setexpandCollapseAll(optionsX);
     }
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "flex gap-2 items-center"
+  }, "Expand/collapse all", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "expandCollapseSetting",
+        enable: true
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    className: "w-[140px]",
+    label: "",
+    value: (_expandCollapseAll$op = expandCollapseAll.options.expandCollapseAll) !== null && _expandCollapseAll$op !== void 0 ? _expandCollapseAll$op : 0,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...expandCollapseAll,
+        options: {
+          ...expandCollapseAll.options,
+          expandCollapseAll: newVal
+        }
+      };
+      setexpandCollapseAll(optionsX);
+    }
+  })), globalOptions?.expandCollapseAll == 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: ""
+  }, "Expand All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    className: "max-w-[140px]",
+    label: "",
+    value: globalOptions?.expandAllText,
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.expandAllText = newVal;
+      setglobalOptions(globalOptionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: ""
+  }, "Collapse All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    className: "max-w-[140px]",
+    label: "",
+    value: globalOptions?.collapseAllText,
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.collapseAllText = newVal;
+      setglobalOptions(globalOptionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "font-medium text-slate-900 "
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Expand All Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    library: (_globalOptions$expand = globalOptions?.expandAllIcon?.library) !== null && _globalOptions$expand !== void 0 ? _globalOptions$expand : "fontAwesome",
+    srcType: (_globalOptions$expand2 = globalOptions?.expandAllIcon?.srcType) !== null && _globalOptions$expand2 !== void 0 ? _globalOptions$expand2 : "class",
+    iconSrc: (_globalOptions$expand3 = globalOptions?.expandAllIcon?.iconSrc) !== null && _globalOptions$expand3 !== void 0 ? _globalOptions$expand3 : "fas fa-plus",
+    onChange: arg => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.expandAllIcon = arg;
+      setglobalOptions(globalOptionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "font-medium text-slate-900 "
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Collapse All Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    library: (_globalOptions$collap = globalOptions?.collapseAllIcon?.library) !== null && _globalOptions$collap !== void 0 ? _globalOptions$collap : "fontAwesome",
+    srcType: (_globalOptions$collap2 = globalOptions?.collapseAllIcon?.srcType) !== null && _globalOptions$collap2 !== void 0 ? _globalOptions$collap2 : "class",
+    iconSrc: (_globalOptions$collap3 = globalOptions?.collapseAllIcon?.iconSrc) !== null && _globalOptions$collap3 !== void 0 ? _globalOptions$collap3 : "fas fa-minus",
+    onChange: arg => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.collapseAllIcon = arg;
+      setglobalOptions(globalOptionsX);
+    }
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
     name: "styles"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_15__["default"], {
     obj: expandCollapseAll,
@@ -6197,6 +6224,24 @@ function Html(props) {
         options: {
           ...searchInput.options,
           class: newVal
+        }
+      };
+      setsearchInput(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Placeholder", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    value: searchInput.options.placeholder,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...searchInput,
+        options: {
+          ...searchInput.options,
+          placeholder: newVal
         }
       };
       setsearchInput(optionsX);
@@ -6247,6 +6292,49 @@ class AccordionsEdit extends Component {
 
 /***/ }),
 
+/***/ "./src/components/accordions-guide/PricingTable.js":
+/*!*********************************************************!*\
+  !*** ./src/components/accordions-guide/PricingTable.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const PricingTable = ({
+  data
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-white rounded-md"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center justify-center gap-2 py-5"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-gray-700 line-through text-xl font-medium"
+  }, data.price), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-gray-700 text-3xl font-bold"
+  }, data.salePrice)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-[#450077] py-4 text-center text-white text-xl font-bold"
+  }, data.title), data.features.map((item, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "py-[8px] text-center font-medium border-b border-solid border-b-gray-200"
+  }, item)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  items-center justify-center p-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: data.link,
+    className: "px-8 py-3 no-underline bg-[#450077] text-white cursor-pointer rounded-md"
+  }, "Buy Now ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    className: "fas fa-cart-plus"
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PricingTable);
+
+/***/ }),
+
 /***/ "./src/components/accordions-guide/index.js":
 /*!**************************************************!*\
   !*** ./src/components/accordions-guide/index.js ***!
@@ -6260,20 +6348,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/post-author.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/store.js");
-/* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
-/* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
-/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
-/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/post-author.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/store.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _pricingData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pricingData */ "./src/components/accordions-guide/pricingData.js");
+/* harmony import */ var _PricingTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PricingTable */ "./src/components/accordions-guide/PricingTable.js");
 
 const {
   Component,
@@ -6281,10 +6363,6 @@ const {
   useState,
   useEffect
 } = wp.element;
-
-
-
-
 
 
 
@@ -6430,7 +6508,7 @@ function Html(props) {
     className: " inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300",
     href: "https://wordpress.org/support/plugin/accordions/reviews/#new-post",
     target: "_blank"
-  }, "Submit Reviews"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, "Submit Reviews"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_2__["default"], {
     activeTab: "overview",
     orientation: "",
     tabsWrapperClass: "mt-[-50px] ",
@@ -6443,22 +6521,22 @@ function Html(props) {
     tabs: [{
       name: "overview",
       title: "Overview",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "edit",
       title: "Free Vs Pro",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "templates",
       title: "About Us",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
       className: "tab-disable-blocks"
     }, {
       name: "buyNow",
       title: "Buy Now",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
       className: "tab-disable-blocks"
     }
 
@@ -6469,7 +6547,7 @@ function Html(props) {
     // 	className: "tab-disable-blocks",
     // },
     ]
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "overview"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-4 items-start flex-wrap mt-10 px-10"
@@ -6512,7 +6590,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Need Help?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Contact our friendly support team for quick and personalized help!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "#",
     className: "inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
-  }, "Create Support Ticket"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, "Create Support Ticket"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " rounded-md   mt-10 px-10"
@@ -6545,7 +6623,7 @@ function Html(props) {
     className: "py-3 px-8  text-center"
   }, item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8 text-center"
-  }, item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-2 gap-4 w-full p-7 bg-white mt-10"
@@ -6584,11 +6662,46 @@ function Html(props) {
   }, plugin.description), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: plugin.link,
     className: "absolute inset-0"
-  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "supportTicket"
-  }, "supportTicket"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, "supportTicket"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "buyNow"
-  }, "buyNow")));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    activeTab: "yearly",
+    orientation: "",
+    tabsWrapperClass: "mt-[50px] ",
+    contentClass: " w-full",
+    navItemsWrapClass: "gap-3 px-10",
+    navItemClass: " px-5 py-3 gap-2 rounded-t-md",
+    navItemSelectedClass: "!bg-white border-2  border-b-0 border-solid  border-blue-700",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "yearly",
+      title: "Yearly",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
+      className: "tab-yearly"
+    }, {
+      name: "lifetime",
+      title: "Lifetime",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
+      className: "tab-lifetime"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    name: "yearly"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid grid-cols-4 gap-6"
+  }, _pricingData__WEBPACK_IMPORTED_MODULE_3__.pricingData.yearly.map((item, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PricingTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: i,
+    data: item
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    name: "lifetime"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid grid-cols-4 gap-6"
+  }, _pricingData__WEBPACK_IMPORTED_MODULE_3__.pricingData.lifetime.map((item, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PricingTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: i,
+    data: item
+  }))))))));
 }
 class AccordionsGuide extends Component {
   constructor(props) {
@@ -6614,6 +6727,72 @@ class AccordionsGuide extends Component {
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccordionsGuide);
+
+/***/ }),
+
+/***/ "./src/components/accordions-guide/pricingData.js":
+/*!********************************************************!*\
+  !*** ./src/components/accordions-guide/pricingData.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   pricingData: () => (/* binding */ pricingData)
+/* harmony export */ });
+const pricingData = {
+  yearly: [{
+    title: "Personal",
+    features: ["Up to 3 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
+    price: "$19",
+    salePrice: "$9",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }, {
+    title: "Plus",
+    features: ["Up to 10 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
+    price: "$69",
+    salePrice: "$49",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }, {
+    title: "Freelance",
+    features: ["Up to 30 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
+    price: "$120",
+    salePrice: "$89",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }, {
+    title: "Agency",
+    features: ["Up to 500 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
+    price: "$180",
+    salePrice: "$129",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }],
+  lifetime: [{
+    title: "Personal",
+    features: ["Up to 3 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
+    price: "$69",
+    salePrice: "$49",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }, {
+    title: "Plus",
+    features: ["Up to 10 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
+    price: "$99",
+    salePrice: "$89",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }, {
+    title: "Freelance",
+    features: ["Up to 30 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
+    price: "$149",
+    salePrice: "$129",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }, {
+    title: "Agency",
+    features: ["Up to 500 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
+    price: "$199",
+    salePrice: "$169",
+    link: "https://pickplugins.com/accordions/?ref=dashboard"
+  }]
+};
 
 /***/ }),
 
@@ -6676,6 +6855,7 @@ function Html(props) {
   var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
+  var [globalOptions, setglobalOptions] = useState(accordionDataX.globalOptions); // Using the hook.
 
   var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
   var [items, setitems] = useState(accordionDataX.items); // Using the hook.
@@ -6688,6 +6868,8 @@ function Html(props) {
   var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
   var [icon, seticon] = useState(accordionDataX.icon);
   var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
+  var [searchInput, setsearchInput] = useState(accordionDataX.searchInput);
+  var [expandCollapseAll, setexpandCollapseAll] = useState(accordionDataX.expandCollapseAll);
   const [toggled, setToggled] = useState(false);
   const [labelIconHtml, setlabelIconHtml] = useState("");
   const [iconHtml, seticonHtml] = useState("");
@@ -6748,6 +6930,7 @@ function Html(props) {
     className: "flex items-center align-middle gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "useShortcodes",
@@ -6772,8 +6955,24 @@ function Html(props) {
       onUpdate(true);
     }
   }, "Save"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `my-5 ${wrapper?.options?.class} `
-  }, items?.map((item, index) => {
+    className: "px-10 py-10"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${wrapper?.options?.class} `
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "top-meta"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "search-wrap"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    class: "search-input",
+    placeholder: searchInput.options.placeholder
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "expand-collapse-all",
+    "data-expandAllText": "",
+    "data-collapseAllText": "",
+    "data-expandAllIconHtml": "",
+    "data-collapseAllIconHtml": ""
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, globalOptions?.expandAllText))), items?.map((item, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: index
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6846,7 +7045,7 @@ function Html(props) {
         __html: item?.content.options.text
       }
     })));
-  })));
+  }))));
 }
 class AccordionsView extends Component {
   constructor(props) {
@@ -33666,18 +33865,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/cog.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/brush.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/category.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/help.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
 /* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
-/* harmony import */ var _components_accordions_guide__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accordions-guide */ "./src/components/accordions-guide/index.js");
-/* harmony import */ var _components_accordions_edit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/accordions-edit */ "./src/components/accordions-edit/index.js");
+/* harmony import */ var _components_accordions_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/accordions-edit */ "./src/components/accordions-edit/index.js");
+/* harmony import */ var _components_accordions_guide__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/accordions-guide */ "./src/components/accordions-guide/index.js");
 /* harmony import */ var _components_accordions_view__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/accordions-view */ "./src/components/accordions-view/index.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
 /* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
@@ -33685,8 +33884,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _accordion_default_data__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./accordion-default-data */ "./src/components/dashboard/accordion-default-data.js");
 /* harmony import */ var _accordion_templates__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./accordion-templates */ "./src/components/dashboard/accordion-templates.js");
 /* harmony import */ var _generate_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./generate-css */ "./src/components/dashboard/generate-css.js");
-/* harmony import */ var _notify__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./notify */ "./src/components/dashboard/notify.js");
-/* harmony import */ var _help__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./help */ "./src/components/dashboard/help.js");
+/* harmony import */ var _help__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./help */ "./src/components/dashboard/help.js");
+/* harmony import */ var _notify__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./notify */ "./src/components/dashboard/notify.js");
 
 const {
   Component,
@@ -34097,7 +34296,7 @@ function Html(props) {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " "
-  }, postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onChange: onChangeAccordion,
     addNotifications: addNotifications,
     postData: postData,
@@ -34110,6 +34309,7 @@ function Html(props) {
     className: "flex items-center gap-2"
   }, "How templates work.", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "accordionTemplatesHelp",
@@ -34162,7 +34362,7 @@ function Html(props) {
     className: "w-full sticky top-0 overflow-y-scroll"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "  relative"
-  }, postData.ID == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_guide__WEBPACK_IMPORTED_MODULE_6__["default"], null), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, postData.ID == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_guide__WEBPACK_IMPORTED_MODULE_7__["default"], null), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_8__["default"], {
     pleaseUpdate: pleaseUpdate,
     onUpdate: onUpdateAccordion,
     isLoading: isLoading,
@@ -34174,9 +34374,9 @@ function Html(props) {
   }), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_generate_css__WEBPACK_IMPORTED_MODULE_14__["default"], {
     postData: postData,
     onChange: onChangeStyle
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_notify__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_notify__WEBPACK_IMPORTED_MODULE_16__["default"], {
     notifications: notifications
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_help__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_help__WEBPACK_IMPORTED_MODULE_15__["default"], {
     help: help
   }));
 }
@@ -39342,6 +39542,7 @@ function Html(props) {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Create")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
+    title: "Click to know more",
     onClick: () => {
       setHelp({
         id: "createAccordion",
