@@ -535,6 +535,7 @@ function Html(props) {
 									<>
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "addPostQuery",
@@ -563,6 +564,7 @@ function Html(props) {
 									<>
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "addTermQuery",
@@ -1494,6 +1496,7 @@ function Html(props) {
 									Lazyload{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "lazyloadSetting",
@@ -1528,6 +1531,7 @@ function Html(props) {
 									Schema{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "schemaSetting",
@@ -1559,6 +1563,7 @@ function Html(props) {
 									Stats{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "statsSetting",
@@ -1633,6 +1638,7 @@ function Html(props) {
 									Click To Scroll Top{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "scrollToTopSetting",
@@ -1679,6 +1685,7 @@ function Html(props) {
 									Animation Name{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "animationSetting",
@@ -1729,7 +1736,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1808,7 +1815,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1849,6 +1856,7 @@ function Html(props) {
 										Autoembed{" "}
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "autoembedSetting",
@@ -1867,9 +1875,14 @@ function Html(props) {
 											{ label: __("False", "accordions"), value: 0 },
 										]}
 										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.autoembed = newVal;
-											setglobalOptions(globalOptionsX);
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													autoembed: newVal,
+												},
+											};
+											setcontent(optionsX);
 										}}
 									/>
 								</PanelRow>
@@ -1879,6 +1892,7 @@ function Html(props) {
 										Shortcodes{" "}
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "shortcodesSetting",
@@ -1898,9 +1912,14 @@ function Html(props) {
 											{ label: __("False", "accordions"), value: 0 },
 										]}
 										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.shortcodes = newVal;
-											setglobalOptions(globalOptionsX);
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													shortcodes: newVal,
+												},
+											};
+											setcontent(optionsX);
 										}}
 									/>
 								</PanelRow>
@@ -1909,6 +1928,7 @@ function Html(props) {
 										wpautop{" "}
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "wpautopSetting",
@@ -1922,15 +1942,20 @@ function Html(props) {
 									<SelectControl
 										className="w-[140px]"
 										label=""
-										value={globalOptions?.wpautop}
+										value={content?.options?.wpautop}
 										options={[
 											{ label: __("True", "accordions"), value: 1 },
 											{ label: __("False", "accordions"), value: 0 },
 										]}
 										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.wpautop = newVal;
-											setglobalOptions(globalOptionsX);
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													wpautop: newVal,
+												},
+											};
+											setcontent(optionsX);
 										}}
 									/>
 								</PanelRow>
@@ -1972,7 +1997,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1988,7 +2013,6 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-
 								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
 										{__("Class", "accordions")}
@@ -2014,6 +2038,7 @@ function Html(props) {
 										Toggle Text{" "}
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "toggleTextSetting",
@@ -2027,19 +2052,23 @@ function Html(props) {
 									<SelectControl
 										className="w-[140px]"
 										label=""
-										value={globalOptions?.toggleText}
+										value={header?.options?.toggleText}
 										options={[
 											{ label: __("True", "accordions"), value: 1 },
 											{ label: __("False", "accordions"), value: 0 },
 										]}
 										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.toggleText = newVal;
-											setglobalOptions(globalOptionsX);
+											var optionsX = {
+												...header,
+												options: {
+													...header.options,
+													toggleText: newVal,
+												},
+											};
+											setheader(optionsX);
 										}}
 									/>
 								</PanelRow>
-
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -2072,7 +2101,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2155,7 +2184,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2233,7 +2262,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2352,7 +2381,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2520,7 +2549,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2662,7 +2691,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2739,7 +2768,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2775,13 +2804,12 @@ function Html(props) {
 									/>
 								</div>
 
-
-
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
 										Expand/collapse all{" "}
 										<span
 											className="cursor-pointer"
+											title="Click to know more"
 											onClick={() => {
 												setHelp({
 													id: "expandCollapseSetting",
@@ -2795,15 +2823,20 @@ function Html(props) {
 									<SelectControl
 										className="w-[140px]"
 										label=""
-										value={globalOptions?.expandCollapseAll ?? 0}
+										value={expandCollapseAll.options.expandCollapseAll ?? 0}
 										options={[
 											{ label: __("True", "accordions"), value: 1 },
 											{ label: __("False", "accordions"), value: 0 },
 										]}
 										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.expandCollapseAll = newVal;
-											setglobalOptions(globalOptionsX);
+											var optionsX = {
+												...expandCollapseAll,
+												options: {
+													...expandCollapseAll.options,
+													expandCollapseAll: newVal,
+												},
+											};
+											setexpandCollapseAll(optionsX);
 										}}
 									/>
 								</PanelRow>
@@ -2845,7 +2878,9 @@ function Html(props) {
 												library={
 													globalOptions?.expandAllIcon?.library ?? "fontAwesome"
 												}
-												srcType={globalOptions?.expandAllIcon?.srcType ?? "class"}
+												srcType={
+													globalOptions?.expandAllIcon?.srcType ?? "class"
+												}
 												iconSrc={
 													globalOptions?.expandAllIcon?.iconSrc ?? "fas fa-plus"
 												}
@@ -2862,7 +2897,8 @@ function Html(props) {
 											</label>
 											<PGIconPicker
 												library={
-													globalOptions?.collapseAllIcon?.library ?? "fontAwesome"
+													globalOptions?.collapseAllIcon?.library ??
+													"fontAwesome"
 												}
 												srcType={
 													globalOptions?.collapseAllIcon?.srcType ?? "class"
@@ -2880,15 +2916,6 @@ function Html(props) {
 										</PanelRow>
 									</>
 								)}
-
-
-
-
-
-
-
-
-
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -2945,7 +2972,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2999,10 +3026,6 @@ function Html(props) {
 										}}
 									/>
 								</div>
-
-
-
-
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles

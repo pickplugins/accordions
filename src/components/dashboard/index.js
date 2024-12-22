@@ -2,13 +2,20 @@ const { Component, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { __ } from "@wordpress/i18n";
 
-import { Icon, close, cog, addCard, brush, category, help as helpIcon, columns } from "@wordpress/icons";
-import { Popover, Spinner } from "@wordpress/components";
+import { Popover } from "@wordpress/components";
+import {
+	Icon,
+	brush,
+	category,
+	cog,
+	columns,
+	help as helpIcon,
+} from "@wordpress/icons";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 
-import AccordionsGuide from "../../components/accordions-guide";
 import AccordionsEdit from "../../components/accordions-edit";
+import AccordionsGuide from "../../components/accordions-guide";
 import AccordionsView from "../../components/accordions-view";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
@@ -16,8 +23,8 @@ import WCPSList from "../../components/wcps-list";
 import accordionDefaultData from "./accordion-default-data";
 import accordionTemplates from "./accordion-templates";
 import AccordionsGenerateCss from "./generate-css";
-import PGNotify from "./notify";
 import PGHelp from "./help";
+import PGNotify from "./notify";
 
 function Html(props) {
 	if (!props.warn) {
@@ -57,9 +64,7 @@ function Html(props) {
 		}, 5000); // 300ms debounce delay
 
 		return () => clearTimeout(timer); // Cleanup timer on value change or unmount
-
 	}, [notifications]);
-
 
 	function handleAlertConfirmation() {
 		if (confirm("Are you sure you want to reset the option data?")) {
@@ -92,17 +97,13 @@ function Html(props) {
 		setnotifications(notificationsX);
 	}
 	function setHelp(helpX) {
-
 		sethelp(helpX);
 	}
-
-
 
 	function selectAccordion(args) {
 		setActiveAccordion(args);
 	}
 	function onChangeStyle(args) {
-
 		var accordionDataX = { ...accordionData };
 		accordionDataX.reponsiveCss = args;
 		setaccordionData(accordionDataX);
@@ -132,8 +133,11 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 			setpleaseUpdate(false);
-			addNotifications({ title: "Accordion Saved!", content: "You change successfully saved!.", type: "success" })
-
+			addNotifications({
+				title: "Accordion Saved!",
+				content: "You change successfully saved!.",
+				type: "success",
+			});
 		});
 	}
 
@@ -160,8 +164,6 @@ function Html(props) {
 		});
 	}, [activeAccordion]);
 
-
-
 	useEffect(() => {
 		apiFetch({
 			path: "/accordions/v2/user_roles_list",
@@ -178,9 +180,6 @@ function Html(props) {
 			setroles(rolesX);
 		});
 	}, []);
-
-
-
 
 	useEffect(() => {
 		setisLoadings(true);
@@ -207,7 +206,10 @@ function Html(props) {
 						<div>
 							<div className="flex items-center align-middle gap-3">
 								<div className="text-xl text-white">Accordions</div>
-								<div className="text-xs text-white flex items-center gap-2"><span>2.3.1</span> <span className="bg-lime-600 px-3 py-1 rounded-md">Beta</span></div>
+								<div className="text-xs text-white flex items-center gap-2">
+									<span>2.3.1</span>{" "}
+									<span className="bg-lime-600 px-3 py-1 rounded-md">Beta</span>
+								</div>
 							</div>
 							<div className="text-sm text-white">By PickPlugins</div>
 						</div>
@@ -402,7 +404,7 @@ function Html(props) {
 						navItemLabelClass="flex-col "
 						navItemSelectedClass="!bg-white"
 						activeClass="active-tab"
-						onSelect={(tabName) => { }}
+						onSelect={(tabName) => {}}
 						tabs={[
 							{
 								name: "accordions",
@@ -457,6 +459,7 @@ function Html(props) {
 									How templates work.{" "}
 									<span
 										className="cursor-pointer"
+										title="Click to know more"
 										onClick={() => {
 											setHelp({
 												id: "accordionTemplatesHelp",
