@@ -575,6 +575,8 @@ function Html(props) {
 								setHelp={setHelp}
 							/>
 						)}
+						{JSON.stringify(accordionData)}
+
 						{postData.ID != null && (
 							<AccordionsGenerateCss
 								postData={postData}
@@ -584,6 +586,8 @@ function Html(props) {
 					</div>
 				</div>
 			</div>
+
+
 
 			<PGNotify notifications={notifications} />
 			<PGHelp help={help} />

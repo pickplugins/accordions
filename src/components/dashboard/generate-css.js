@@ -89,6 +89,7 @@ function Html(props) {
 	var iconSelector = blockClass + " .accordion-icon";
 	var iconToggleSelector = blockClass + " .accordion-icon-toggle";
 	var expandCollapseAllSelector = blockClass + " .expand-collapse-all";
+	var topWrapSelector = blockClass + " .top-wrap";
 	var searchInputSelector = blockClass + " .search-input";
 
 
@@ -597,12 +598,23 @@ function Html(props) {
 			styleObjX[selector] = selectorData;
 		});
 
+		var topWrapCss = generateElementCss(accordionData.topWrap, topWrapSelector);
+		Object.entries(topWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+
 		var expandCollapseAllCss = generateElementCss(accordionData.expandCollapseAll, expandCollapseAllSelector);
 		Object.entries(expandCollapseAllCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
+
+
+
 
 		var searchInputCss = generateElementCss(accordionData.searchInput, searchInputSelector);
 		Object.entries(searchInputCss).map((selectors) => {

@@ -153,7 +153,26 @@ var accordionDefaultData = {
 	},
 	expandCollapseAll: {
 		options: {
+			enable: false,
 			class: "expand-collapse-all",
+			expandAllText: "Expand All",
+			collapseAllText: "Collapse All",
+			expandAllIcon: {
+				library: "fontAwesome",
+				srcType: "class",
+				iconSrc: " fas fa-angle-up",
+			},
+			collapseAllIcon: {
+				library: "fontAwesome",
+				srcType: "class",
+				iconSrc: " fas fa-angle-up",
+			},
+		},
+		styles: {},
+	},
+	topWrap: {
+		options: {
+			class: "top-wrap",
 		},
 		styles: {},
 	},
