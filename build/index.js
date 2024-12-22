@@ -3412,39 +3412,6 @@ const plus = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_pri
 
 /***/ }),
 
-/***/ "./node_modules/@wordpress/icons/build-module/library/post-author.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@wordpress/icons/build-module/library/post-author.js ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
-/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
-
-/**
- * WordPress dependencies
- */
-
-const postAuthor = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
-  viewBox: "0 0 24 24",
-  xmlns: "http://www.w3.org/2000/svg"
-}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
-  d: "M10 4.5a1 1 0 11-2 0 1 1 0 012 0zm1.5 0a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm2.25 7.5v-1A2.75 2.75 0 0011 8.25H7A2.75 2.75 0 004.25 11v1h1.5v-1c0-.69.56-1.25 1.25-1.25h4c.69 0 1.25.56 1.25 1.25v1h1.5zM4 20h9v-1.5H4V20zm16-4H4v-1.5h16V16z",
-  fillRule: "evenodd",
-  clipRule: "evenodd"
-}));
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (postAuthor);
-//# sourceMappingURL=post-author.js.map
-
-/***/ }),
-
 /***/ "./node_modules/@wordpress/icons/build-module/library/settings.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/settings.js ***!
@@ -4977,34 +4944,6 @@ function Html(props) {
           return updatedItems;
         });
       }
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.RichText, {
-      className: `bg-slate-100 p-3 min-h-24`,
-      tagName: "div",
-      value: item?.content.options.text,
-      allowedFormats: ["core/bold", "core/italic", "core/link"],
-      onChange: content => {
-        // var itemsX = [...items];
-
-        // itemsX[index].content.options.text =
-        // 	content;
-        // setitems(itemsX);
-
-        setitems(prevItems => {
-          const updatedItems = [...prevItems];
-          updatedItems[index] = {
-            ...updatedItems[index],
-            content: {
-              ...updatedItems[index].content,
-              options: {
-                ...updatedItems[index].content.options,
-                text: content
-              }
-            }
-          };
-          return updatedItems;
-        });
-      },
-      placeholder: "Write details"
     })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "mb-3"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
@@ -6319,14 +6258,14 @@ const PricingTable = ({
   }, data.price), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-gray-700 text-3xl font-bold"
   }, data.salePrice)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "bg-[#450077] py-4 text-center text-white text-xl font-bold"
+    className: "bg-blue-700 py-4 text-center text-white text-xl font-bold"
   }, data.title), data.features.map((item, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "py-[8px] text-center font-medium border-b border-solid border-b-gray-200"
+    className: "py-4 text-center font-medium "
   }, item)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  items-center justify-center p-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: data.link,
-    className: "px-8 py-3 no-underline bg-[#450077] text-white cursor-pointer rounded-md"
+    className: "px-8 py-3 no-underline bg-blue-700 text-white cursor-pointer rounded-md"
   }, "Buy Now ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     className: "fas fa-cart-plus"
   }))));
@@ -6350,8 +6289,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/post-author.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/store.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/store.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
 /* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
 /* harmony import */ var _pricingData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pricingData */ "./src/components/accordions-guide/pricingData.js");
@@ -6501,11 +6439,9 @@ function Html(props) {
   }, "Version: 2.3.1")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
-  }, "Upgrade"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 max-w-52"
   }, "Help us by providing your feedbacks and five star reviews on wordpress.org \uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    className: " inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300",
+    className: " bg-amber-500 text-white no-underline font-medium px-[16px] py-[8px]  hover:bg-amber-700 hover:text-white rounded-md w-max transition-colors duration-300",
     href: "https://wordpress.org/support/plugin/accordions/reviews/#new-post",
     target: "_blank"
   }, "Submit Reviews"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -6528,15 +6464,17 @@ function Html(props) {
       title: "Free Vs Pro",
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
       className: "tab-disable-blocks"
-    }, {
-      name: "templates",
-      title: "About Us",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
-      className: "tab-disable-blocks"
-    }, {
+    },
+    // {
+    // 	name: "templates",
+    // 	title: "About Us",
+    // 	icon: postAuthor,
+    // 	className: "tab-disable-blocks",
+    // },
+    {
       name: "buyNow",
       title: "Buy Now",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
       className: "tab-disable-blocks"
     }
 
@@ -6575,21 +6513,21 @@ function Html(props) {
     className: "text-[18px] font-semibold flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Videos"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Watch our videos to see how the accordion works in real-world projects!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "#",
-    className: "inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
+    className: "inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Watch on YouTube")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-[18px] font-semibold flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Documentation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Check out our detailed documentation to learn what the Accordions plugin can do!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "#",
-    className: "inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
+    className: "inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Check Documentation")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-[18px] font-semibold flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Need Help?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Contact our friendly support team for quick and personalized help!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "#",
-    className: "inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
+    className: "inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Create Support Ticket"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6661,7 +6599,7 @@ function Html(props) {
     className: "text-[14px]"
   }, plugin.description), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: plugin.link,
-    className: "absolute inset-0"
+    className: "absolute inset-0 "
   })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "supportTicket"
   }, "supportTicket"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -6671,9 +6609,9 @@ function Html(props) {
     orientation: "",
     tabsWrapperClass: "mt-[50px] ",
     contentClass: " w-full",
-    navItemsWrapClass: "gap-3 px-10",
-    navItemClass: " px-5 py-3 gap-2 rounded-t-md",
-    navItemSelectedClass: "!bg-white border-2  border-b-0 border-solid  border-blue-700",
+    navItemsWrapClass: "gap-3 px-10 justify-center",
+    navItemClass: " px-5 py-3 gap-2 rounded-md",
+    navItemSelectedClass: "!bg-white border-2  border-solid  border-blue-700",
     activeClass: "active-tab",
     onSelect: tabName => {},
     tabs: [{
@@ -6690,14 +6628,14 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "yearly"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-4 gap-6"
+    className: "grid grid-cols-3 gap-6 mt-10 px-10"
   }, _pricingData__WEBPACK_IMPORTED_MODULE_3__.pricingData.yearly.map((item, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PricingTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: i,
     data: item
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "lifetime"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-4 gap-6"
+    className: "grid grid-cols-3 gap-6 mt-10 px-10"
   }, _pricingData__WEBPACK_IMPORTED_MODULE_3__.pricingData.lifetime.map((item, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PricingTable__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: i,
     data: item
@@ -6745,8 +6683,8 @@ const pricingData = {
   yearly: [{
     title: "Personal",
     features: ["Up to 3 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
-    price: "$19",
-    salePrice: "$9",
+    price: "$29",
+    salePrice: "$19",
     link: "https://pickplugins.com/accordions/?ref=dashboard"
   }, {
     title: "Plus",
@@ -6754,42 +6692,56 @@ const pricingData = {
     price: "$69",
     salePrice: "$49",
     link: "https://pickplugins.com/accordions/?ref=dashboard"
-  }, {
-    title: "Freelance",
-    features: ["Up to 30 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
-    price: "$120",
-    salePrice: "$89",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
-  }, {
+  },
+  // {
+  // 	title: "Freelance",
+  // 	features: [
+  // 		"Up to 30 Sites",
+  // 		"1 Year of Updates",
+  // 		"1 Year Free Support",
+  // 		"Access to All PRO Features",
+  // 	],
+  // 	price: "$120",
+  // 	salePrice: "$89",
+  // 	link: "https://pickplugins.com/accordions/?ref=dashboard",
+  // },
+  {
     title: "Agency",
     features: ["Up to 500 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
-    price: "$180",
-    salePrice: "$129",
+    price: "$149",
+    salePrice: "$99",
     link: "https://pickplugins.com/accordions/?ref=dashboard"
   }],
   lifetime: [{
     title: "Personal",
     features: ["Up to 3 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
-    price: "$69",
-    salePrice: "$49",
+    price: "$149",
+    salePrice: "$99",
     link: "https://pickplugins.com/accordions/?ref=dashboard"
   }, {
     title: "Plus",
     features: ["Up to 10 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
-    price: "$99",
-    salePrice: "$89",
+    price: "$249",
+    salePrice: "$149",
     link: "https://pickplugins.com/accordions/?ref=dashboard"
-  }, {
-    title: "Freelance",
-    features: ["Up to 30 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
-    price: "$149",
-    salePrice: "$129",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
-  }, {
+  },
+  // {
+  // 	title: "Freelance",
+  // 	features: [
+  // 		"Up to 30 Sites",
+  // 		"Lifetime Free Updates",
+  // 		"Lifetime Support",
+  // 		"Access to All PRO Features",
+  // 	],
+  // 	price: "$149",
+  // 	salePrice: "$129",
+  // 	link: "https://pickplugins.com/accordions/?ref=dashboard",
+  // },
+  {
     title: "Agency",
     features: ["Up to 500 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
-    price: "$199",
-    salePrice: "$169",
+    price: "$299",
+    salePrice: "$199",
     link: "https://pickplugins.com/accordions/?ref=dashboard"
   }]
 };
@@ -33144,7 +33096,6 @@ function Html(props) {
   useEffect(() => {
     setaccordionData(postData.post_content);
   }, [postData]);
-  useEffect(() => {}, [accordionData]);
   var blockClass = ".pg-accordion-nested";
   var wrapperSelector = blockClass + "";
   var contentSelector = blockClass + " .accordion-content";
@@ -33931,6 +33882,7 @@ function Html(props) {
   const [roles, setroles] = useState([]);
   var [needSave, setneedSave] = useState(false); // Using the hook.
   var [isLoadings, setisLoadings] = useState(false); // Using the hook.
+  var [toggleSettings, settoggleSettings] = useState(false); // Using the hook.
 
   var [notifications, setnotifications] = useState([]); // Using the hook.
   var [help, sethelp] = useState({
@@ -34098,25 +34050,19 @@ function Html(props) {
   }, "Beta"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-sm text-white"
   }, "By PickPlugins")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: " tracking-wide "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "py-1 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600",
     onClick: ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      setAIWriter(!AIWriter);
+      settoggleSettings(!toggleSettings);
     }
-  }, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"], {
     fill: "#fff",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"]
-  })), AIWriter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Popover, {
-    position: "bottom right"
+  })))), toggleSettings && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "relative bg-white"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-[600px]  relative"
+    className: "px-4 py-2 bg-slate-400 text-white  "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "px-4 py-2 bg-slate-400 text-white flex justify-between "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-xl text-white"
+    className: "text-xl text-white mb-4"
   }, "Accordions Settings"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-2 items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -34135,7 +34081,7 @@ function Html(props) {
   }, "!")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex  my-5  justify-between items-center"
+    className: "my-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: " text-base",
     htmlFor: ""
@@ -34152,7 +34098,7 @@ function Html(props) {
     },
     multiple: true
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex  my-5  justify-between items-center"
+    className: "my-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "text-base",
     htmlFor: ""
@@ -34178,7 +34124,7 @@ function Html(props) {
     },
     multiple: false
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex  my-5  justify-between items-center"
+    className: "my-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "text-base",
     htmlFor: ""
@@ -34201,7 +34147,7 @@ function Html(props) {
     },
     multiple: false
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex  my-5  justify-between items-center"
+    className: "my-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "text-base",
     htmlFor: ""
@@ -34224,7 +34170,7 @@ function Html(props) {
     },
     multiple: false
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex  my-5  justify-between items-center"
+    className: "my-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "text-base",
     htmlFor: ""
@@ -34240,7 +34186,7 @@ function Html(props) {
       setoptionData(optionsX);
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex  my-5  justify-between items-center"
+    className: "my-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "text-base",
     htmlFor: ""
@@ -34255,7 +34201,7 @@ function Html(props) {
       };
       setoptionData(optionsX);
     }
-  })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }))))), !toggleSettings && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_10__["default"], {
     activeTab: "accordions",
     orientation: "",
     stickyNavs: true,
@@ -34329,13 +34275,13 @@ function Html(props) {
           var itemIndex = item[0];
           var itemArg = item[1];
           if (itemArg.options) {
-            delete itemArg.options;
+            //delete itemArg.options;
           }
           console.log(itemIndex);
           console.log(itemArg);
           console.log(accordionData[itemIndex]);
           presetClean[itemIndex] = {
-            ...accordionData[itemIndex],
+            //...accordionData[itemIndex],
             ...itemArg
           };
           console.log(presetClean);
@@ -34358,11 +34304,11 @@ function Html(props) {
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "text-lg mt-3 text-white"
     }, preset.label));
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full sticky top-0 overflow-y-scroll"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "  relative"
-  }, postData.ID == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_guide__WEBPACK_IMPORTED_MODULE_7__["default"], null), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, (postData.ID == null || toggleSettings) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_guide__WEBPACK_IMPORTED_MODULE_7__["default"], null), !toggleSettings && postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_8__["default"], {
     pleaseUpdate: pleaseUpdate,
     onUpdate: onUpdateAccordion,
     isLoading: isLoading,
