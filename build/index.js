@@ -3478,6 +3478,39 @@ const settings = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/store.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/store.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const store = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  fillRule: "evenodd",
+  d: "M19.75 11H21V8.667L19.875 4H4.125L3 8.667V11h1.25v8.75h15.5V11zm-1.5 0H5.75v7.25H10V13h4v5.25h4.25V11zm-5.5-5.5h2.067l.486 3.24.028.76H12.75v-4zm-3.567 0h2.067v4H8.669l.028-.76.486-3.24zm7.615 3.1l-.464-3.1h2.36l.806 3.345V9.5h-2.668l-.034-.9zM7.666 5.5h-2.36L4.5 8.845V9.5h2.668l.034-.9.464-3.1z",
+  clipRule: "evenodd"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+//# sourceMappingURL=store.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/icons/build-module/library/styles.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/styles.js ***!
@@ -6236,6 +6269,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/columns.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/post-author.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/store.js");
 /* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
 /* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
@@ -6263,24 +6297,85 @@ function Html(props) {
   }
   var [postData, setpostData] = useState(props.postData); // Using the hook.
 
-  const tableData = [{
-    feature: "Feature 1",
-    lite: "true",
-    pro: "true",
-    new: "true"
+  const freeVsProArgs = [{
+    feature: "View Type - Accordion",
+    free: true,
+    pro: true
   }, {
-    feature: "Feature 2",
-    lite: "false",
-    pro: "true",
-    hot: "true"
+    feature: "View Type - Tabs",
+    free: true,
+    pro: true
   }, {
-    feature: "Feature 3",
-    lite: "1+",
-    pro: "3+"
+    feature: "View Type - Vertical Tabs",
+    free: false,
+    pro: true
   }, {
-    feature: "Feature 4",
-    lite: "12",
-    pro: "4"
+    feature: "Multi-level/Nested Accordion",
+    free: false,
+    pro: true
+  }, {
+    feature: "Item Source - AI",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Item Source - Posts",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Item Source - Terms",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Preloader - Hide accordions until page load",
+    free: false,
+    pro: true
+  }, {
+    feature: "Autoembed - Enable/Disable emebed content",
+    free: false,
+    pro: true
+  }, {
+    feature: "Shortcodes - Enable/Disable third party shortcodes",
+    free: false,
+    pro: true
+  }, {
+    feature: "wpautop - Enable/Disable wpautop function",
+    free: false,
+    pro: true
+  }, {
+    feature: "Schema - Enable/Disable Schema to boost SEO",
+    free: false,
+    pro: true
+  }, {
+    feature: "Toggle Text - Enable/Disable Toggle Text on accordion header",
+    free: false,
+    pro: true
+  }, {
+    feature: "Expand/collapse All",
+    free: false,
+    pro: true
+  }, {
+    feature: "Stats",
+    free: false,
+    pro: true
+  }, {
+    feature: "Active Event",
+    free: false,
+    pro: true
+  }, {
+    feature: "Click To Scroll Top",
+    free: false,
+    pro: true
+  }, {
+    feature: "Animation Name",
+    free: false,
+    pro: true
+  }, {
+    feature: "Search - Accordion",
+    free: false,
+    pro: true
   }];
   const ourPlugins = [{
     name: "Plugin Name 1",
@@ -6328,10 +6423,14 @@ function Html(props) {
   }, "Version: 2.3.1")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center  gap-2 py-3 px-5 cursor-pointer  capitalize bg-amber-500 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+    className: "inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Upgrade"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 max-w-52"
-  }, "Help us by providing your feedbacks and five star reviews on wordpress.org \uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, "Help us by providing your feedbacks and five star reviews on wordpress.org \uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F\uD83C\uDF1F"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    className: " inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300",
+    href: "https://wordpress.org/support/plugin/accordions/reviews/#new-post",
+    target: "_blank"
+  }, "Submit Reviews"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: "overview",
     orientation: "",
     tabsWrapperClass: "mt-[-50px] ",
@@ -6356,7 +6455,20 @@ function Html(props) {
       title: "About Us",
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
       className: "tab-disable-blocks"
-    }]
+    }, {
+      name: "buyNow",
+      title: "Buy Now",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+      className: "tab-disable-blocks"
+    }
+
+    // {
+    // 	name: "supportTicket",
+    // 	title: "Support Ticket",
+    // 	icon: postComments,
+    // 	className: "tab-disable-blocks",
+    // },
+    ]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "overview"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6383,7 +6495,7 @@ function Html(props) {
     className: "flex flex-col gap-3 bg-white p-[20px] rounded-md shadow-md"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-[18px] font-semibold flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Videos"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Join the PickPlugins Facebook group to share your experiences, ideas, and feedback!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Videos"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Watch our videos to see how the accordion works in real-world projects!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "#",
     className: "inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Watch on YouTube")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6403,7 +6515,7 @@ function Html(props) {
   }, "Create Support Ticket"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: " rounded-md   mt-10"
+    className: " rounded-md   mt-10 px-10"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
     className: "table-auto w-full text-left"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", {
@@ -6414,24 +6526,26 @@ function Html(props) {
     className: "min-w-[550px] py-4 px-8"
   }, "FEATURES"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
     className: "min-w-[100px] py-4 px-8 text-center"
-  }, "Lite"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
+  }, "Free"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", {
     className: "min-w-[100px] py-4 px-8 text-center"
   }, "\uD83D\uDC51PRO"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", {
     className: "bg-gray-100 text-gray-800"
-  }, tableData.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+  }, freeVsProArgs.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
     key: index,
     className: "even:bg-gray-200 last:rounded-b-md last:overflow-hidden"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8"
-  }, item.feature, " ", item.new && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-2 items-center"
+  }, item.feature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, item.feature), item.new && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full"
-  }, "NEW"), " ", item.hot && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, "NEW"), item.hot && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-red-500 rounded-full"
-  }, "HOT")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+  }, "HOT"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8  text-center"
-  }, typeof item.lite === "number" ? item.lite : item.lite === "true" ? "✔️" : item.lite === "false" ? "❌" : item.lite), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+  }, item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8 text-center"
-  }, typeof item.pro === "number" ? item.pro : item.pro === "true" ? "✔️" : item.pro === "false" ? "❌" : item.pro))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-2 gap-4 w-full p-7 bg-white mt-10"
@@ -6470,7 +6584,11 @@ function Html(props) {
   }, plugin.description), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: plugin.link,
     className: "absolute inset-0"
-  }))))))));
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "supportTicket"
+  }, "supportTicket"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    name: "buyNow"
+  }, "buyNow")));
 }
 class AccordionsGuide extends Component {
   constructor(props) {
@@ -33775,8 +33893,10 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-xl text-white"
   }, "Accordions"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-xs text-white"
-  }, "2.3.1")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xs text-white flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "2.3.1"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "bg-lime-600 px-3 py-1 rounded-md"
+  }, "Beta"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-sm text-white"
   }, "By PickPlugins")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " tracking-wide "

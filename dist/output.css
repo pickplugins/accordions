@@ -641,8 +641,8 @@
   max-width: 3rem;
 }
 
-.max-w-20 {
-  max-width: 5rem;
+.max-w-52 {
+  max-width: 13rem;
 }
 
 .max-w-72 {
@@ -667,10 +667,6 @@
 
 .max-w-full {
   max-width: 100%;
-}
-
-.max-w-52 {
-  max-width: 13rem;
 }
 
 .flex-1 {

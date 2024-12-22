@@ -2,7 +2,7 @@ const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { Popover, Spinner } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Icon, close, cog, addCard, brush, category, columns, starFilled, postAuthor, styles } from "@wordpress/icons";
+import { Icon, close, cog, addCard, brush, category, columns, starFilled, postAuthor, styles, postComments, store } from "@wordpress/icons";
 
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
@@ -21,29 +21,127 @@ function Html(props) {
 
 	var [postData, setpostData] = useState(props.postData); // Using the hook.
 
-	const tableData = [
+	const freeVsProArgs = [
+
+
+
+
 		{
-			feature: "Feature 1",
-			lite: "true",
-			pro: "true",
-			new: "true",
+			feature: "View Type - Accordion",
+			free: true,
+			pro: true,
+
 		},
 		{
-			feature: "Feature 2",
-			lite: "false",
-			pro: "true",
-			hot: "true",
+			feature: "View Type - Tabs",
+			free: true,
+			pro: true,
+
 		},
 		{
-			feature: "Feature 3",
-			lite: "1+",
-			pro: "3+",
+			feature: "View Type - Vertical Tabs",
+			free: false,
+			pro: true,
 		},
 		{
-			feature: "Feature 4",
-			lite: "12",
-			pro: "4",
+			feature: "Multi-level/Nested Accordion",
+			free: false,
+			pro: true,
 		},
+
+
+		{
+			feature: "Item Source - AI",
+			free: false,
+			pro: true,
+			new: true,
+		},
+		{
+			feature: "Item Source - Posts",
+			free: false,
+			pro: true,
+			new: true,
+		},
+		{
+			feature: "Item Source - Terms",
+			free: false,
+			pro: true,
+			new: true,
+		},
+		{
+			feature: "Preloader - Hide accordions until page load",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Autoembed - Enable/Disable emebed content",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Shortcodes - Enable/Disable third party shortcodes",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "wpautop - Enable/Disable wpautop function",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Schema - Enable/Disable Schema to boost SEO",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Toggle Text - Enable/Disable Toggle Text on accordion header",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Expand/collapse All",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Stats",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Active Event",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Click To Scroll Top",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Animation Name",
+			free: false,
+			pro: true,
+
+		},
+		{
+			feature: "Search - Accordion",
+			free: false,
+			pro: true,
+
+		},
+
+
 	];
 
 	const ourPlugins = [
@@ -100,10 +198,12 @@ function Html(props) {
 				</div>
 				<div className="">
 
-					<div className="flex items-center  gap-2 py-3 px-5 cursor-pointer  capitalize bg-amber-500 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Upgrade</div>
+					<div className="inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">Upgrade</div>
 					<div className="my-4 max-w-52">Help us by providing your feedbacks and five star reviews on wordpress.org
 						🌟🌟🌟🌟🌟
 					</div>
+					<a className=" inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300" href="https://wordpress.org/support/plugin/accordions/reviews/#new-post" target="_blank">Submit Reviews</a>
+
 				</div>
 			</div>
 
@@ -136,6 +236,22 @@ function Html(props) {
 						icon: postAuthor,
 						className: "tab-disable-blocks",
 					},
+					{
+						name: "buyNow",
+						title: "Buy Now",
+						icon: store,
+						className: "tab-disable-blocks",
+					},
+
+
+					// {
+					// 	name: "supportTicket",
+					// 	title: "Support Ticket",
+					// 	icon: postComments,
+					// 	className: "tab-disable-blocks",
+					// },
+
+
 				]}>
 				<PGtab name="overview">
 					<div className="flex gap-4 items-start flex-wrap mt-10 px-10">
@@ -171,7 +287,13 @@ function Html(props) {
 									<span>🌟</span>Videos
 								</div>
 								<p>
-									Join the PickPlugins Facebook group to share your experiences, ideas, and feedback!
+									Watch our videos to see how the accordion works in real-world projects!
+
+
+
+
+
+
 
 								</p>
 								<a
@@ -219,50 +341,62 @@ function Html(props) {
 
 				</PGtab>
 				<PGtab name="edit">
-					<div className=" rounded-md   mt-10">
+					<div className=" rounded-md   mt-10 px-10">
 						<table className="table-auto w-full text-left">
 							<thead className="bg-gray-700 text-white">
 								<tr className="">
 									<th className="min-w-[550px] py-4 px-8">FEATURES</th>
-									<th className="min-w-[100px] py-4 px-8 text-center">Lite</th>
+									<th className="min-w-[100px] py-4 px-8 text-center">Free</th>
 									<th className="min-w-[100px] py-4 px-8 text-center">👑PRO</th>
 								</tr>
 							</thead>
 							<tbody className="bg-gray-100 text-gray-800">
-								{tableData.map((item, index) => (
+								{freeVsProArgs.map((item, index) => (
 									<tr
 										key={index}
 										className="even:bg-gray-200 last:rounded-b-md last:overflow-hidden">
 										<td className="py-3 px-8">
-											{item.feature}{" "}
-											{item.new && (
-												<span className="text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full">
-													NEW
-												</span>
-											)}{" "}
-											{item.hot && (
-												<span className="text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-red-500 rounded-full">
-													HOT
-												</span>
-											)}
+
+											<div className="flex gap-2 items-center">
+												{item.feature && (
+													<span>{item.feature}</span>
+												)}
+
+												{item.new && (
+													<span className="text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full">
+														NEW
+													</span>
+												)}
+												{item.hot && (
+													<span className="text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-red-500 rounded-full">
+														HOT
+													</span>
+												)}
+											</div>
 										</td>
 										<td className="py-3 px-8  text-center">
-											{typeof item.lite === "number"
-												? item.lite
-												: item.lite === "true"
-													? "✔️"
-													: item.lite === "false"
-														? "❌"
-														: item.lite}
+
+											{item.free && (
+												<span>✔️</span>
+											)}
+											{!item.free && (
+												<span>❌</span>
+											)}
+
+
+
 										</td>
 										<td className="py-3 px-8 text-center">
-											{typeof item.pro === "number"
-												? item.pro
-												: item.pro === "true"
-													? "✔️"
-													: item.pro === "false"
-														? "❌"
-														: item.pro}
+
+											{item.pro && (
+												<span>✔️</span>
+											)}
+											{!item.pro && (
+												<span>❌</span>
+											)}
+
+
+
 										</td>
 									</tr>
 								))}
@@ -332,6 +466,14 @@ function Html(props) {
 						</div>
 					</div>
 				</PGtab>
+				<PGtab name="supportTicket">
+					supportTicket
+				</PGtab>
+				<PGtab name="buyNow">
+					buyNow
+				</PGtab>
+
+
 			</PGtabs>
 		</div>
 	);

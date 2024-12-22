@@ -207,7 +207,7 @@ function Html(props) {
 						<div>
 							<div className="flex items-center align-middle gap-3">
 								<div className="text-xl text-white">Accordions</div>
-								<div className="text-xs text-white">2.3.1</div>
+								<div className="text-xs text-white flex items-center gap-2"><span>2.3.1</span> <span className="bg-lime-600 px-3 py-1 rounded-md">Beta</span></div>
 							</div>
 							<div className="text-sm text-white">By PickPlugins</div>
 						</div>
@@ -402,7 +402,7 @@ function Html(props) {
 						navItemLabelClass="flex-col "
 						navItemSelectedClass="!bg-white"
 						activeClass="active-tab"
-						onSelect={(tabName) => {}}
+						onSelect={(tabName) => { }}
 						tabs={[
 							{
 								name: "accordions",
