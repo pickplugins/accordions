@@ -36,6 +36,7 @@ function Html(props) {
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
+	var [globalOptions, setglobalOptions] = useState(accordionDataX.globalOptions); // Using the hook.
 
 	var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
 	var [items, setitems] = useState(accordionDataX.items); // Using the hook.
@@ -48,6 +49,8 @@ function Html(props) {
 	var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
 	var [icon, seticon] = useState(accordionDataX.icon);
 	var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
+	var [searchInput, setsearchInput] = useState(accordionDataX.searchInput);
+	var [expandCollapseAll, setexpandCollapseAll] = useState(accordionDataX.expandCollapseAll);
 
 
 	const [toggled, setToggled] = useState(false);
@@ -169,116 +172,138 @@ function Html(props) {
 				</div>
 			</div>
 
-			<div className={`my-5 ${wrapper?.options?.class} `}>
-				{items?.map((item, index) => {
-					return (
-						<Fragment key={index}>
-							<div
-								className={`accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""
-									}`}
-								onClick={(ev) => {
-									setToggled(!toggled);
-									setactive(index == active ? 999 : index);
-								}}>
-								{labelCounter.options.position == "left" && (
-									<span className={` accordion-label-counter`}>{index}</span>
-								)}
-								{icon.options.position == "left" && (
-									<>
-										{active != index && (
-											<span
-												className={` accordion-icon`}
-												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
-										)}
-										{active == index && (
-											<span
-												className={` accordion-icon accordion-icon-toggle}`}
-												dangerouslySetInnerHTML={{
-													__html: iconToggleHtml,
-												}}></span>
-										)}
-									</>
-								)}
-								{labelIcon.options.position == "beforeLabel" && (
-									<span
-										className={` accordion-label-icon`}
-										dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
-								)}
+
+			<div className="px-10 py-10">
+
+				<div className={`${wrapper?.options?.class} `}>
+
+					<div className="top-meta">
+
+						<div class="search-wrap">
+							<input type="text" class="search-input" placeholder={searchInput.options.placeholder} />
+						</div>
+						<div class="expand-collapse-all" data-expandAllText="" data-collapseAllText="" data-expandAllIconHtml="" data-collapseAllIconHtml="">
+
+							<span>{globalOptions?.expandAllText}</span>
+
+						</div>
+
+
+					</div>
+
+
+					{items?.map((item, index) => {
+						return (
+							<Fragment key={index}>
 								<div
-									className={` accordion-header-label`}
-									onClick={(e) => {
-										return;
+									className={`accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""
+										}`}
+									onClick={(ev) => {
+										setToggled(!toggled);
+										setactive(index == active ? 999 : index);
 									}}>
-									{labelCounter.options.position == "beforeLabelText" && (
+									{labelCounter.options.position == "left" && (
 										<span className={` accordion-label-counter`}>{index}</span>
 									)}
-									{labelIcon.options.position == "beforeLabelText" && (
-										<span
-											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{
-												__html: labelIconHtml,
-											}}></span>
-									)}
-									{item.headerLabel?.options.text.length > 0 ? (
+									{icon.options.position == "left" && (
 										<>
-											<span
-												className={``}
-												dangerouslySetInnerHTML={{
-													__html: item?.headerLabel.options.text,
-												}}></span>
+											{active != index && (
+												<span
+													className={` accordion-icon`}
+													dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+											)}
+											{active == index && (
+												<span
+													className={` accordion-icon accordion-icon-toggle}`}
+													dangerouslySetInnerHTML={{
+														__html: iconToggleHtml,
+													}}></span>
+											)}
 										</>
-									) : (
-										"Start Writing..."
 									)}
-									{labelIcon.options.position == "afterLabelText" && (
+									{labelIcon.options.position == "beforeLabel" && (
 										<span
 											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{
-												__html: labelIconHtml,
-											}}></span>
+											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
 									)}
-									{labelCounter.options.position == "afterLabelText" && (
+									<div
+										className={` accordion-header-label`}
+										onClick={(e) => {
+											return;
+										}}>
+										{labelCounter.options.position == "beforeLabelText" && (
+											<span className={` accordion-label-counter`}>{index}</span>
+										)}
+										{labelIcon.options.position == "beforeLabelText" && (
+											<span
+												className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{
+													__html: labelIconHtml,
+												}}></span>
+										)}
+										{item.headerLabel?.options.text.length > 0 ? (
+											<>
+												<span
+													className={``}
+													dangerouslySetInnerHTML={{
+														__html: item?.headerLabel.options.text,
+													}}></span>
+											</>
+										) : (
+											"Start Writing..."
+										)}
+										{labelIcon.options.position == "afterLabelText" && (
+											<span
+												className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{
+													__html: labelIconHtml,
+												}}></span>
+										)}
+										{labelCounter.options.position == "afterLabelText" && (
+											<span className={` accordion-label-counter`}>{index}</span>
+										)}
+									</div>
+									{labelIcon.options.position == "afterLabel" && (
+										<span
+											className={` accordion-label-icon`}
+											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+									)}
+									{labelCounter.options.position == "right" && (
 										<span className={` accordion-label-counter`}>{index}</span>
+									)}
+									{icon.options.position == "right" && (
+										<>
+											{active != index && (
+												<span
+													className={` accordion-icon`}
+													dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+											)}
+											{active == index && (
+												<span
+													className={` accordion-icon-toggle`}
+													dangerouslySetInnerHTML={{
+														__html: iconToggleHtml,
+													}}></span>
+											)}
+										</>
 									)}
 								</div>
-								{labelIcon.options.position == "afterLabel" && (
-									<span
-										className={` accordion-label-icon`}
-										dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
-								)}
-								{labelCounter.options.position == "right" && (
-									<span className={` accordion-label-counter`}>{index}</span>
-								)}
-								{icon.options.position == "right" && (
+								{active == index && (
 									<>
-										{active != index && (
-											<span
-												className={` accordion-icon`}
-												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
-										)}
-										{active == index && (
-											<span
-												className={` accordion-icon-toggle`}
-												dangerouslySetInnerHTML={{
-													__html: iconToggleHtml,
-												}}></span>
-										)}
+										<div
+											className={`accordion-content`}
+											dangerouslySetInnerHTML={{
+												__html: item?.content.options.text,
+											}}></div>
 									</>
 								)}
-							</div>
-							{active == index && (
-								<>
-									<div
-										className={`accordion-content`}
-										dangerouslySetInnerHTML={{
-											__html: item?.content.options.text,
-										}}></div>
-								</>
-							)}
-						</Fragment>
-					);
-				})}
+							</Fragment>
+						);
+					})}
+				</div>
 			</div>
+
+
 		</div>
 	);
 }
