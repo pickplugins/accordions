@@ -131,7 +131,7 @@ function Html(props) {
 
 
 					<div className="flex items-center align-middle gap-2">
-						<span className="cursor-pointer" title="Click to know more" 
+						<span className="cursor-pointer" title="Click to know more"
 							onClick={() => {
 								setHelp({
 									id: "useShortcodes",
@@ -154,11 +154,7 @@ function Html(props) {
 						/>
 					</div>
 
-					{isLoading && (
-						<div className="">
-							<Spinner />
-						</div>
-					)}
+
 
 					{pleaseUpdateX && (
 						<div
