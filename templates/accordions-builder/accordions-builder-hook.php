@@ -18,22 +18,9 @@ function accordions_builder_accordion($post_id, $accordionData)
     $shortcodes = isset($globalOptions["shortcodes"]) ? $globalOptions["shortcodes"] : true;
     $wpautop = isset($globalOptions["wpautop"]) ? $globalOptions["wpautop"] : true;
     $expandCollapseAll = isset($globalOptions["expandCollapseAll"]) ? $globalOptions["expandCollapseAll"] : "";
-    $expandAllText = isset($globalOptions["expandAllText"]) ? $globalOptions["expandAllText"] : "";
-    $collapseAllText = isset($globalOptions["collapseAllText"]) ? $globalOptions["collapseAllText"] : "";
-    $expandAllIcon = isset($globalOptions["expandAllIcon"]) ? $globalOptions["expandAllIcon"] : [];
-    $expandAllIconLibrary = isset($expandAllIcon["library"]) ? $expandAllIcon["library"] : "";
-    $expandAllIconSrcType = isset($expandAllIcon["srcType"]) ? $expandAllIcon["srcType"] : "";
-    $expandAllIconSrc = isset($expandAllIcon["iconSrc"]) ? $expandAllIcon["iconSrc"] : "";
-
-    $expandAllIconHtml = !empty($expandAllIconSrc) ? '<span class="' . $expandAllIconSrc . '"></span>' : '';
 
 
-    $collapseAllIcon = isset($globalOptions["collapseAllIcon"]) ? $globalOptions["collapseAllIcon"] : [];
-    $collapseAllIconLibrary = isset($collapseAllIcon["library"]) ? $collapseAllIcon["library"] : "";
-    $collapseAllIconSrcType = isset($collapseAllIcon["srcType"]) ? $collapseAllIcon["srcType"] : "";
-    $collapseAllIconSrc = isset($collapseAllIcon["iconSrc"]) ? $collapseAllIcon["iconSrc"] : "";
 
-    $collapseAllIconHtml = !empty($collapseAllIconSrc) ? '<span class="' . $collapseAllIconSrc . '"></span>' : '';
 
 
     $activeEvent = isset($globalOptions["activeEvent"]) ? $globalOptions["activeEvent"] : "";
@@ -47,6 +34,35 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
+
+    $expandCollapseAll = isset($accordionData["expandCollapseAll"]) ? $accordionData["expandCollapseAll"] : [];
+    $expandCollapseAllOptions = isset($expandCollapseAll["options"]) ? $expandCollapseAll["options"] : [];
+
+    var_dump($expandCollapseAllOptions);
+
+
+    $expandCollapseAllEnable = isset($expandCollapseAllOptions["enable"]) ? $expandCollapseAllOptions["enable"] : false;
+
+    $expandAllText = isset($expandCollapseAllOptions["expandAllText"]) ? $expandCollapseAllOptions["expandAllText"] : "";
+    $collapseAllText = isset($expandCollapseAllOptions["collapseAllText"]) ? $expandCollapseAllOptions["collapseAllText"] : "";
+
+    $expandAllIcon = isset($expandCollapseAllOptions["expandAllIcon"]) ? $expandCollapseAllOptions["expandAllIcon"] : [];
+    $expandAllIconLibrary = isset($expandAllIcon["library"]) ? $expandAllIcon["library"] : "";
+    $expandAllIconSrcType = isset($expandAllIcon["srcType"]) ? $expandAllIcon["srcType"] : "";
+    $expandAllIconSrc = isset($expandAllIcon["iconSrc"]) ? $expandAllIcon["iconSrc"] : "";
+
+    $expandAllIconHtml = !empty($expandAllIconSrc) ? '<span class="' . $expandAllIconSrc . '"></span>' : '';
+
+
+
+    $collapseAllIcon = isset($expandCollapseAllOptions["collapseAllIcon"]) ? $expandCollapseAllOptions["collapseAllIcon"] : [];
+    $collapseAllIconLibrary = isset($collapseAllIcon["library"]) ? $collapseAllIcon["library"] : "";
+    $collapseAllIconSrcType = isset($collapseAllIcon["srcType"]) ? $collapseAllIcon["srcType"] : "";
+    $collapseAllIconSrc = isset($collapseAllIcon["iconSrc"]) ? $collapseAllIcon["iconSrc"] : "";
+
+    $collapseAllIconHtml = !empty($collapseAllIconSrc) ? '<span class="' . $collapseAllIconSrc . '"></span>' : '';
+
+
 
 
 
@@ -177,7 +193,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 ?>
     <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
 
-        <div style="display: flex;align-items: center;justify-content: space-between; ">
+        <div class="top-wrap">
 
             <?php if ($search): ?>
 
@@ -186,7 +202,7 @@ function accordions_builder_accordion($post_id, $accordionData)
                 </div>
 
             <?php endif; ?>
-            <?php if ($expandCollapseAll): ?>
+            <?php if ($expandCollapseAllEnable): ?>
                 <div class="expand-collapse-all" data-expandAllText="<?php echo esc_attr($expandAllText); ?>" data-collapseAllText="<?php echo esc_attr($collapseAllText); ?>" data-expandAllIconHtml="<?php echo esc_attr($expandAllIconHtml); ?>" data-collapseAllIconHtml="<?php echo esc_attr($collapseAllIconHtml); ?>">
                     <?php echo $expandAllIconHtml; ?>
                     <span><?php echo $expandAllText; ?></span>
@@ -208,6 +224,9 @@ function accordions_builder_accordion($post_id, $accordionData)
         <?php
         $count = 0;
         foreach ($items as $item) {
+
+            $itemActive = isset($item["active"]) ? (bool) $item["active"] : false;
+
 
             $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
             $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
@@ -237,7 +256,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
         ?>
-            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1" toggledText="<?php echo esc_attr($headerLabelToggledText); ?>">
+            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo ($itemActive) ? "accordion-header-active" : ""; ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1" toggledText="<?php echo esc_attr($headerLabelToggledText); ?>">
                 <?php if ($iconPosition == 'left') : ?>
                     <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
                         <?php echo wp_kses_post($iconHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
@@ -285,7 +304,7 @@ function accordions_builder_accordion($post_id, $accordionData)
                     </span>
                 <?php endif; ?>
             </<?php echo tag_escape($headerTag); ?>>
-            <<?php echo tag_escape($contentTag); ?> class="<?php echo esc_attr($contentClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false">
+            <<?php echo tag_escape($contentTag); ?> class="<?php echo esc_attr($contentClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false" <?php echo ($itemActive) ? 'style="height: auto; overflow: hidden; display: block;"' : ""; ?>>
                 <?php echo wp_kses_post($contentText); ?>
             </<?php echo tag_escape($contentTag); ?>>
 

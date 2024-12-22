@@ -3655,7 +3655,7 @@ const {
 
 var myStore = wp.data.select("postgrid-shop");
 function Html(props) {
-  var _expandCollapseAll$op, _globalOptions$expand, _globalOptions$expand2, _globalOptions$expand3, _globalOptions$collap, _globalOptions$collap2, _globalOptions$collap3;
+  var _expandCollapseAll$op, _expandCollapseAll$op2, _expandCollapseAll$op3, _expandCollapseAll$op4, _expandCollapseAll$op5, _expandCollapseAll$op6, _expandCollapseAll$op7, _searchInput$options$;
   if (!props.warn) {
     return null;
   }
@@ -3687,6 +3687,7 @@ function Html(props) {
   var [icon, seticon] = useState(accordionData.icon);
   var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
   var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
+  var [topWrap, settopWrap] = useState(accordionData.topWrap);
   var [searchInput, setsearchInput] = useState(accordionData.searchInput);
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
   const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
@@ -3738,9 +3739,7 @@ function Html(props) {
       setTaxonomiesObjects(taxonomies);
     });
   }, []);
-  useEffect(() => {
-    console.log(props.postData);
-  }, [props.postData]);
+  useEffect(() => {}, [props.postData]);
   useEffect(() => {
     onChange(accordionData);
   }, [accordionData]);
@@ -3835,6 +3834,13 @@ function Html(props) {
     accordionDataX.expandCollapseAll = expandCollapseAll;
     setaccordionData(accordionDataX);
   }, [expandCollapseAll]);
+  useEffect(() => {
+    var accordionDataX = {
+      ...accordionData
+    };
+    accordionDataX.topWrap = topWrap;
+    setaccordionData(accordionDataX);
+  }, [topWrap]);
   useEffect(() => {
     var accordionDataX = {
       ...accordionData
@@ -4275,8 +4281,6 @@ function Html(props) {
     },
     clickHandle: (value, action) => {
       var valueObj = JSON.parse(value);
-      console.log(action);
-      console.log(valueObj);
       if (action == "prepend") {
         var itemsX = [...items];
         var faqX = [];
@@ -6046,7 +6050,7 @@ function Html(props) {
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
     className: "w-[140px]",
     label: "",
-    value: (_expandCollapseAll$op = expandCollapseAll.options.expandCollapseAll) !== null && _expandCollapseAll$op !== void 0 ? _expandCollapseAll$op : 0,
+    value: (_expandCollapseAll$op = expandCollapseAll.options.enable) !== null && _expandCollapseAll$op !== void 0 ? _expandCollapseAll$op : 0,
     options: [{
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
       value: 1
@@ -6055,68 +6059,96 @@ function Html(props) {
       value: 0
     }],
     onChange: newVal => {
-      var optionsX = {
+      var expandCollapseAllX = {
         ...expandCollapseAll,
         options: {
           ...expandCollapseAll.options,
-          expandCollapseAll: newVal
+          enable: newVal
         }
       };
-      setexpandCollapseAll(optionsX);
+      setexpandCollapseAll(expandCollapseAllX);
     }
-  })), globalOptions?.expandCollapseAll == 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  })), expandCollapseAll.options?.enable == 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
   }, "Expand All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "max-w-[140px]",
     label: "",
-    value: globalOptions?.expandAllText,
+    value: expandCollapseAll.options?.expandAllText,
     onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
+      var expandCollapseAllX = {
+        ...expandCollapseAll,
+        options: {
+          ...expandCollapseAll.options,
+          expandAllText: newVal
+        }
       };
-      globalOptionsX.expandAllText = newVal;
-      setglobalOptions(globalOptionsX);
+      setexpandCollapseAll(expandCollapseAllX);
+
+      // var globalOptionsX = { ...globalOptions };
+      // globalOptionsX.expandAllText = newVal;
+      // setglobalOptions(globalOptionsX);
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
   }, "Collapse All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "max-w-[140px]",
     label: "",
-    value: globalOptions?.collapseAllText,
+    value: expandCollapseAll.options?.collapseAllText,
     onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
+      var expandCollapseAllX = {
+        ...expandCollapseAll,
+        options: {
+          ...expandCollapseAll.options,
+          collapseAllText: newVal
+        }
       };
-      globalOptionsX.collapseAllText = newVal;
-      setglobalOptions(globalOptionsX);
+      setexpandCollapseAll(expandCollapseAllX);
+
+      // var globalOptionsX = { ...globalOptions };
+      // globalOptionsX.collapseAllText = newVal;
+      // setglobalOptions(globalOptionsX);
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Expand All Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: (_globalOptions$expand = globalOptions?.expandAllIcon?.library) !== null && _globalOptions$expand !== void 0 ? _globalOptions$expand : "fontAwesome",
-    srcType: (_globalOptions$expand2 = globalOptions?.expandAllIcon?.srcType) !== null && _globalOptions$expand2 !== void 0 ? _globalOptions$expand2 : "class",
-    iconSrc: (_globalOptions$expand3 = globalOptions?.expandAllIcon?.iconSrc) !== null && _globalOptions$expand3 !== void 0 ? _globalOptions$expand3 : "fas fa-plus",
+    library: (_expandCollapseAll$op2 = expandCollapseAll.options?.expandAllIcon?.library) !== null && _expandCollapseAll$op2 !== void 0 ? _expandCollapseAll$op2 : "fontAwesome",
+    srcType: (_expandCollapseAll$op3 = expandCollapseAll.options?.expandAllIcon?.srcType) !== null && _expandCollapseAll$op3 !== void 0 ? _expandCollapseAll$op3 : "class",
+    iconSrc: (_expandCollapseAll$op4 = expandCollapseAll.options?.expandAllIcon?.iconSrc) !== null && _expandCollapseAll$op4 !== void 0 ? _expandCollapseAll$op4 : "fas fa-plus",
     onChange: arg => {
-      var globalOptionsX = {
-        ...globalOptions
+      var expandCollapseAllX = {
+        ...expandCollapseAll,
+        options: {
+          ...expandCollapseAll.options,
+          expandAllIcon: arg
+        }
       };
-      globalOptionsX.expandAllIcon = arg;
-      setglobalOptions(globalOptionsX);
+      setexpandCollapseAll(expandCollapseAllX);
+
+      // var globalOptionsX = { ...globalOptions };
+      // globalOptionsX.expandAllIcon = arg;
+      // setglobalOptions(globalOptionsX);
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Collapse All Icon", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: (_globalOptions$collap = globalOptions?.collapseAllIcon?.library) !== null && _globalOptions$collap !== void 0 ? _globalOptions$collap : "fontAwesome",
-    srcType: (_globalOptions$collap2 = globalOptions?.collapseAllIcon?.srcType) !== null && _globalOptions$collap2 !== void 0 ? _globalOptions$collap2 : "class",
-    iconSrc: (_globalOptions$collap3 = globalOptions?.collapseAllIcon?.iconSrc) !== null && _globalOptions$collap3 !== void 0 ? _globalOptions$collap3 : "fas fa-minus",
+    library: (_expandCollapseAll$op5 = expandCollapseAll.options?.collapseAllIcon?.library) !== null && _expandCollapseAll$op5 !== void 0 ? _expandCollapseAll$op5 : "fontAwesome",
+    srcType: (_expandCollapseAll$op6 = expandCollapseAll.options?.collapseAllIcon?.srcType) !== null && _expandCollapseAll$op6 !== void 0 ? _expandCollapseAll$op6 : "class",
+    iconSrc: (_expandCollapseAll$op7 = expandCollapseAll.options?.collapseAllIcon?.iconSrc) !== null && _expandCollapseAll$op7 !== void 0 ? _expandCollapseAll$op7 : "fas fa-minus",
     onChange: arg => {
-      var globalOptionsX = {
-        ...globalOptions
+      var expandCollapseAllX = {
+        ...expandCollapseAll,
+        options: {
+          ...expandCollapseAll.options,
+          collapseAllIcon: arg
+        }
       };
-      globalOptionsX.collapseAllIcon = arg;
-      setglobalOptions(globalOptionsX);
+      setexpandCollapseAll(expandCollapseAllX);
+
+      // var globalOptionsX = { ...globalOptions };
+      // globalOptionsX.collapseAllIcon = arg;
+      // setglobalOptions(globalOptionsX);
     }
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
     name: "styles"
@@ -6127,6 +6159,55 @@ function Html(props) {
     onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, expandCollapseAll, setexpandCollapseAll),
     onReset: sudoSources => onResetStyle(sudoSources, expandCollapseAll, setexpandCollapseAll),
     onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, expandCollapseAll, setexpandCollapseAll)
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    className: "font-medium text-slate-900 ",
+    title: "Top Wrap",
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    activeTab: "options",
+    orientation: "horizontal",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "options",
+      title: "Options",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+      className: "tab-settings"
+    }, {
+      name: "styles",
+      title: "Styles",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+      className: "tab-style"
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    name: "options"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    value: topWrap.options.class,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...topWrap,
+        options: {
+          ...topWrap.options,
+          class: newVal
+        }
+      };
+      settopWrap(optionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    name: "styles"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_styles__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    obj: topWrap,
+    onChange: (sudoScource, newVal, attr) => onChangeStyle(sudoScource, newVal, attr, topWrap, settopWrap),
+    onAdd: (sudoScource, key) => onAddStyle(sudoScource, key, topWrap, settopWrap),
+    onRemove: (sudoScource, key) => onRemoveStyle(sudoScource, key, topWrap, settopWrap),
+    onReset: sudoSources => onResetStyle(sudoSources, topWrap, settopWrap),
+    onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, topWrap, settopWrap)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Search Input",
@@ -6149,7 +6230,42 @@ function Html(props) {
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
     name: "options"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "",
+    className: "flex gap-2 items-center"
+  }, "Expand/collapse all", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "expandCollapseSetting",
+        enable: true
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    className: "w-[140px]",
+    label: "",
+    value: (_searchInput$options$ = searchInput.options.enable) !== null && _searchInput$options$ !== void 0 ? _searchInput$options$ : 0,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
+      value: 1
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
+      value: 0
+    }],
+    onChange: newVal => {
+      var searchInputX = {
+        ...searchInput,
+        options: {
+          ...searchInput.options,
+          enable: newVal
+        }
+      };
+      setsearchInput(searchInputX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "",
@@ -6797,31 +6913,26 @@ function Html(props) {
   var isLoading = props.isLoading;
   var onUpdate = props.onUpdate;
   var pleaseUpdate = props.pleaseUpdate;
-  var postDataX = props.postData;
-  var accordionDataX = postDataX.post_content;
-  if (accordionDataX == null) {
+  if (props.postData.post_content == null) {
     return null;
   }
-  var [pleaseUpdateX, setpleaseUpdateX] = useState(props.pleaseUpdate); // Using the hook.
-  var [postData, setpostData] = useState(props.postData); // Using the hook.
-  var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
-
-  var [styleObj, setstyleObj] = useState({}); // Using the hook.
-  var [globalOptions, setglobalOptions] = useState(accordionDataX.globalOptions); // Using the hook.
-
-  var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-  var [items, setitems] = useState(accordionDataX.items); // Using the hook.
-  var [content, setcontent] = useState(accordionDataX.content);
-  var [accOptions, setaccOptions] = useState(accordionDataX.accOptions);
-  var [header, setheader] = useState(accordionDataX.header);
-  var [headerActive, setheaderActive] = useState(accordionDataX.headerActive);
-  var [headerLabel, setheaderLabel] = useState(accordionDataX.headerLabel);
-  var [labelCounter, setlabelCounter] = useState(accordionDataX.labelCounter);
-  var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
-  var [icon, seticon] = useState(accordionDataX.icon);
-  var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
-  var [searchInput, setsearchInput] = useState(accordionDataX.searchInput);
-  var [expandCollapseAll, setexpandCollapseAll] = useState(accordionDataX.expandCollapseAll);
+  var [pleaseUpdateX, setpleaseUpdateX] = useState(props.pleaseUpdate);
+  var [postData, setpostData] = useState(props.postData);
+  var [accordionData, setaccordionData] = useState(postData.post_content);
+  var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions);
+  var [wrapper, setwrapper] = useState(accordionData.wrapper);
+  var [items, setitems] = useState(accordionData.items);
+  var [content, setcontent] = useState(accordionData.content);
+  var [accOptions, setaccOptions] = useState(accordionData.accOptions);
+  var [header, setheader] = useState(accordionData.header);
+  var [headerActive, setheaderActive] = useState(accordionData.headerActive);
+  var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+  var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
+  var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
+  var [icon, seticon] = useState(accordionData.icon);
+  var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
+  var [searchInput, setsearchInput] = useState(accordionData.searchInput);
+  var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
   const [toggled, setToggled] = useState(false);
   const [labelIconHtml, setlabelIconHtml] = useState("");
   const [iconHtml, seticonHtml] = useState("");
@@ -6842,6 +6953,23 @@ function Html(props) {
     setaccordionData(postData.post_content);
     setitems(postData.post_content.items);
   }, [postData]);
+  useEffect(() => {
+    console.log(accordionData);
+    setglobalOptions(accordionData.globalOptions);
+    setwrapper(accordionData.wrapper);
+    setitems(accordionData.items);
+    setcontent(accordionData.content);
+    setaccOptions(accordionData.accOptions);
+    setheader(accordionData.header);
+    setheaderActive(accordionData.headerActive);
+    setheaderLabel(accordionData.headerLabel);
+    setlabelCounter(accordionData.labelCounter);
+    setlabelIcon(accordionData.labelIcon);
+    seticon(accordionData.icon);
+    seticonToggle(accordionData.iconToggle);
+    setsearchInput(accordionData.searchInput);
+    setexpandCollapseAll(accordionData.expandCollapseAll);
+  }, [accordionData]);
   useEffect(() => {
     var accordionDataX = {
       ...accordionData
@@ -6906,23 +7034,23 @@ function Html(props) {
     }
   }, "Save"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "px-10 py-10"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, JSON.stringify(globalOptions), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `${wrapper?.options?.class} `
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "top-meta"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "top-wrap"
+  }, searchInput.options.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "search-wrap"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     class: "search-input",
     placeholder: searchInput.options.placeholder
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), expandCollapseAll.options.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "expand-collapse-all",
     "data-expandAllText": "",
     "data-collapseAllText": "",
     "data-expandAllIconHtml": "",
     "data-collapseAllIconHtml": ""
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, globalOptions?.expandAllText))), items?.map((item, index) => {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, expandCollapseAll.options?.expandAllText))), items?.map((item, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: index
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -29935,7 +30063,26 @@ var accordionDefaultData = {
   },
   expandCollapseAll: {
     options: {
-      class: "expand-collapse-all"
+      enable: false,
+      class: "expand-collapse-all",
+      expandAllText: "Expand All",
+      collapseAllText: "Collapse All",
+      expandAllIcon: {
+        library: "fontAwesome",
+        srcType: "class",
+        iconSrc: " fas fa-angle-up"
+      },
+      collapseAllIcon: {
+        library: "fontAwesome",
+        srcType: "class",
+        iconSrc: " fas fa-angle-up"
+      }
+    },
+    styles: {}
+  },
+  topWrap: {
+    options: {
+      class: "top-wrap"
     },
     styles: {}
   },
@@ -33105,6 +33252,7 @@ function Html(props) {
   var iconSelector = blockClass + " .accordion-icon";
   var iconToggleSelector = blockClass + " .accordion-icon-toggle";
   var expandCollapseAllSelector = blockClass + " .expand-collapse-all";
+  var topWrapSelector = blockClass + " .top-wrap";
   var searchInputSelector = blockClass + " .search-input";
   function getElementSelector(sudoScource, mainSelector) {
     var elementSelector = mainSelector;
@@ -33551,6 +33699,12 @@ function Html(props) {
     });
     var iconToggleCss = generateElementCss(accordionData.iconToggle, iconToggleSelector);
     Object.entries(iconToggleCss).map(selectors => {
+      var selector = selectors[0];
+      var selectorData = selectors[1];
+      styleObjX[selector] = selectorData;
+    });
+    var topWrapCss = generateElementCss(accordionData.topWrap, topWrapSelector);
+    Object.entries(topWrapCss).map(selectors => {
       var selector = selectors[0];
       var selectorData = selectors[1];
       styleObjX[selector] = selectorData;
@@ -34319,7 +34473,7 @@ function Html(props) {
     id: activeAccordion,
     addNotifications: addNotifications,
     setHelp: setHelp
-  }), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_generate_css__WEBPACK_IMPORTED_MODULE_14__["default"], {
+  }), JSON.stringify(accordionData), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_generate_css__WEBPACK_IMPORTED_MODULE_14__["default"], {
     postData: postData,
     onChange: onChangeStyle
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_notify__WEBPACK_IMPORTED_MODULE_16__["default"], {

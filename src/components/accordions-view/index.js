@@ -24,33 +24,29 @@ function Html(props) {
 	var onUpdate = props.onUpdate;
 	var pleaseUpdate = props.pleaseUpdate;
 
-	var postDataX = props.postData;
-	var accordionDataX = postDataX.post_content;
-
-	if (accordionDataX == null) {
+	if (props.postData.post_content == null) {
 		return null;
 	}
 
-	var [pleaseUpdateX, setpleaseUpdateX] = useState(props.pleaseUpdate); // Using the hook.
-	var [postData, setpostData] = useState(props.postData); // Using the hook.
-	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
+	var [pleaseUpdateX, setpleaseUpdateX] = useState(props.pleaseUpdate);
+	var [postData, setpostData] = useState(props.postData);
+	var [accordionData, setaccordionData] = useState(postData.post_content);
 
-	var [styleObj, setstyleObj] = useState({}); // Using the hook.
-	var [globalOptions, setglobalOptions] = useState(accordionDataX.globalOptions); // Using the hook.
+	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions);
 
-	var [wrapper, setwrapper] = useState(accordionDataX.wrapper); // Using the hook.
-	var [items, setitems] = useState(accordionDataX.items); // Using the hook.
-	var [content, setcontent] = useState(accordionDataX.content);
-	var [accOptions, setaccOptions] = useState(accordionDataX.accOptions);
-	var [header, setheader] = useState(accordionDataX.header);
-	var [headerActive, setheaderActive] = useState(accordionDataX.headerActive);
-	var [headerLabel, setheaderLabel] = useState(accordionDataX.headerLabel);
-	var [labelCounter, setlabelCounter] = useState(accordionDataX.labelCounter);
-	var [labelIcon, setlabelIcon] = useState(accordionDataX.labelIcon);
-	var [icon, seticon] = useState(accordionDataX.icon);
-	var [iconToggle, seticonToggle] = useState(accordionDataX.iconToggle);
-	var [searchInput, setsearchInput] = useState(accordionDataX.searchInput);
-	var [expandCollapseAll, setexpandCollapseAll] = useState(accordionDataX.expandCollapseAll);
+	var [wrapper, setwrapper] = useState(accordionData.wrapper);
+	var [items, setitems] = useState(accordionData.items);
+	var [content, setcontent] = useState(accordionData.content);
+	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
+	var [header, setheader] = useState(accordionData.header);
+	var [headerActive, setheaderActive] = useState(accordionData.headerActive);
+	var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+	var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
+	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
+	var [icon, seticon] = useState(accordionData.icon);
+	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
+	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
+	var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
 
 
 	const [toggled, setToggled] = useState(false);
@@ -83,6 +79,31 @@ function Html(props) {
 		setaccordionData(postData.post_content);
 		setitems(postData.post_content.items);
 	}, [postData]);
+
+
+	useEffect(() => {
+
+		console.log(accordionData);
+
+		setglobalOptions(accordionData.globalOptions);
+
+		setwrapper(accordionData.wrapper);
+		setitems(accordionData.items);
+		setcontent(accordionData.content);
+		setaccOptions(accordionData.accOptions);
+		setheader(accordionData.header);
+		setheaderActive(accordionData.headerActive);
+		setheaderLabel(accordionData.headerLabel);
+		setlabelCounter(accordionData.labelCounter);
+		setlabelIcon(accordionData.labelIcon);
+		seticon(accordionData.icon);
+		seticonToggle(accordionData.iconToggle);
+		setsearchInput(accordionData.searchInput);
+		setexpandCollapseAll(accordionData.expandCollapseAll);
+
+	}, [accordionData]);
+
+
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -171,18 +192,29 @@ function Html(props) {
 
 			<div className="px-10 py-10">
 
+				{JSON.stringify(globalOptions)}
+
+
 				<div className={`${wrapper?.options?.class} `}>
 
-					<div className="top-meta">
+					<div className="top-wrap">
+						{searchInput.options.enable && (
+							<div class="search-wrap">
+								<input type="text" class="search-input" placeholder={searchInput.options.placeholder} />
+							</div>
+						)}
 
-						<div class="search-wrap">
-							<input type="text" class="search-input" placeholder={searchInput.options.placeholder} />
-						</div>
-						<div class="expand-collapse-all" data-expandAllText="" data-collapseAllText="" data-expandAllIconHtml="" data-collapseAllIconHtml="">
 
-							<span>{globalOptions?.expandAllText}</span>
+						{expandCollapseAll.options.enable && (
+							<div class="expand-collapse-all" data-expandAllText="" data-collapseAllText="" data-expandAllIconHtml="" data-collapseAllIconHtml="">
 
-						</div>
+								<span>{expandCollapseAll.options?.expandAllText}</span>
+
+							</div>
+						)}
+
+
+
 
 
 					</div>

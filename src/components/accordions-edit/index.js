@@ -68,9 +68,9 @@ function Html(props) {
 	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
 	var [icon, seticon] = useState(accordionData.icon);
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
-	var [expandCollapseAll, setexpandCollapseAll] = useState(
-		accordionData.expandCollapseAll
-	);
+	var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
+	var [topWrap, settopWrap] = useState(accordionData.topWrap);
+
 	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
@@ -120,7 +120,6 @@ function Html(props) {
 	}, []);
 
 	useEffect(() => {
-		console.log(props.postData);
 	}, [props.postData]);
 
 	useEffect(() => {
@@ -204,6 +203,14 @@ function Html(props) {
 		accordionDataX.expandCollapseAll = expandCollapseAll;
 		setaccordionData(accordionDataX);
 	}, [expandCollapseAll]);
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionDataX.topWrap = topWrap;
+		setaccordionData(accordionDataX);
+	}, [topWrap]);
+
+
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -686,8 +693,6 @@ function Html(props) {
 															clickHandle={(value, action) => {
 																var valueObj = JSON.parse(value);
 
-																console.log(action);
-																console.log(valueObj);
 
 																if (action == "prepend") {
 																	var itemsX = [...items];
@@ -2817,24 +2822,21 @@ function Html(props) {
 									<SelectControl
 										className="w-[140px]"
 										label=""
-										value={expandCollapseAll.options.expandCollapseAll ?? 0}
+										value={expandCollapseAll.options.enable ?? 0}
 										options={[
 											{ label: __("True", "accordions"), value: 1 },
 											{ label: __("False", "accordions"), value: 0 },
 										]}
 										onChange={(newVal) => {
-											var optionsX = {
+											var expandCollapseAllX = {
 												...expandCollapseAll,
-												options: {
-													...expandCollapseAll.options,
-													expandCollapseAll: newVal,
-												},
+												options: { ...expandCollapseAll.options, enable: newVal, },
 											};
-											setexpandCollapseAll(optionsX);
+											setexpandCollapseAll(expandCollapseAllX);
 										}}
 									/>
 								</PanelRow>
-								{globalOptions?.expandCollapseAll == 1 && (
+								{expandCollapseAll.options?.enable == 1 && (
 									<>
 										<PanelRow>
 											<label htmlFor="">Expand All Text</label>
@@ -2842,11 +2844,19 @@ function Html(props) {
 											<PGinputText
 												className="max-w-[140px]"
 												label=""
-												value={globalOptions?.expandAllText}
+												value={expandCollapseAll.options?.expandAllText}
 												onChange={(newVal) => {
-													var globalOptionsX = { ...globalOptions };
-													globalOptionsX.expandAllText = newVal;
-													setglobalOptions(globalOptionsX);
+													var expandCollapseAllX = {
+														...expandCollapseAll,
+														options: { ...expandCollapseAll.options, expandAllText: newVal, },
+													};
+													setexpandCollapseAll(expandCollapseAllX);
+
+
+
+													// var globalOptionsX = { ...globalOptions };
+													// globalOptionsX.expandAllText = newVal;
+													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -2856,11 +2866,20 @@ function Html(props) {
 											<PGinputText
 												className="max-w-[140px]"
 												label=""
-												value={globalOptions?.collapseAllText}
+												value={expandCollapseAll.options?.collapseAllText}
 												onChange={(newVal) => {
-													var globalOptionsX = { ...globalOptions };
-													globalOptionsX.collapseAllText = newVal;
-													setglobalOptions(globalOptionsX);
+
+													var expandCollapseAllX = {
+														...expandCollapseAll,
+														options: { ...expandCollapseAll.options, collapseAllText: newVal, },
+													};
+													setexpandCollapseAll(expandCollapseAllX);
+
+
+
+													// var globalOptionsX = { ...globalOptions };
+													// globalOptionsX.collapseAllText = newVal;
+													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -2870,18 +2889,31 @@ function Html(props) {
 											</label>
 											<PGIconPicker
 												library={
-													globalOptions?.expandAllIcon?.library ?? "fontAwesome"
+													expandCollapseAll.options?.expandAllIcon?.library ?? "fontAwesome"
 												}
 												srcType={
-													globalOptions?.expandAllIcon?.srcType ?? "class"
+													expandCollapseAll.options?.expandAllIcon?.srcType ?? "class"
 												}
 												iconSrc={
-													globalOptions?.expandAllIcon?.iconSrc ?? "fas fa-plus"
+													expandCollapseAll.options?.expandAllIcon?.iconSrc ?? "fas fa-plus"
 												}
 												onChange={(arg) => {
-													var globalOptionsX = { ...globalOptions };
-													globalOptionsX.expandAllIcon = arg;
-													setglobalOptions(globalOptionsX);
+
+
+													var expandCollapseAllX = {
+														...expandCollapseAll,
+														options: { ...expandCollapseAll.options, expandAllIcon: arg, },
+													};
+													setexpandCollapseAll(expandCollapseAllX);
+
+
+
+
+
+
+													// var globalOptionsX = { ...globalOptions };
+													// globalOptionsX.expandAllIcon = arg;
+													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -2891,20 +2923,32 @@ function Html(props) {
 											</label>
 											<PGIconPicker
 												library={
-													globalOptions?.collapseAllIcon?.library ??
+													expandCollapseAll.options?.collapseAllIcon?.library ??
 													"fontAwesome"
 												}
 												srcType={
-													globalOptions?.collapseAllIcon?.srcType ?? "class"
+													expandCollapseAll.options?.collapseAllIcon?.srcType ?? "class"
 												}
 												iconSrc={
-													globalOptions?.collapseAllIcon?.iconSrc ??
+													expandCollapseAll.options?.collapseAllIcon?.iconSrc ??
 													"fas fa-minus"
 												}
 												onChange={(arg) => {
-													var globalOptionsX = { ...globalOptions };
-													globalOptionsX.collapseAllIcon = arg;
-													setglobalOptions(globalOptionsX);
+
+													var expandCollapseAllX = {
+														...expandCollapseAll,
+														options: { ...expandCollapseAll.options, collapseAllIcon: arg, },
+													};
+													setexpandCollapseAll(expandCollapseAllX);
+
+
+
+
+
+
+													// var globalOptionsX = { ...globalOptions };
+													// globalOptionsX.collapseAllIcon = arg;
+													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -2960,6 +3004,99 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
+						title="Top Wrap"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => { }}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={topWrap.options.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...topWrap,
+												options: {
+													...topWrap.options,
+													class: newVal,
+												},
+											};
+											settopWrap(optionsX);
+										}}
+									/>
+								</div>
+
+
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={topWrap}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											topWrap,
+											settopWrap
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(
+											sudoScource,
+											key,
+											topWrap,
+											settopWrap
+										)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(
+											sudoScource,
+											key,
+											topWrap,
+											settopWrap
+										)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(
+											sudoSources,
+											topWrap,
+											settopWrap
+										)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											topWrap,
+											settopWrap
+										)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
 						title="Search Input"
 						initialOpen={false}>
 						<PGtabs
@@ -2982,6 +3119,54 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
+
+
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										Expand/collapse all{" "}
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "expandCollapseSetting",
+													enable: true,
+												});
+											}}>
+											<Icon icon={help} />
+										</span>
+									</label>
+
+									<SelectControl
+										className="w-[140px]"
+										label=""
+										value={searchInput.options.enable ?? 0}
+										options={[
+											{ label: __("True", "accordions"), value: 1 },
+											{ label: __("False", "accordions"), value: 0 },
+										]}
+										onChange={(newVal) => {
+											var searchInputX = {
+												...searchInput,
+												options: { ...searchInput.options, enable: newVal, },
+											};
+											setsearchInput(searchInputX);
+										}}
+									/>
+								</PanelRow>
+
+
+
+
+
+
+
+
+
+
+
+
+
 								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
 										{__("Class", "accordions")}
