@@ -200,11 +200,6 @@ function Html(props) {
 
 	return (
 		<div className="">
-			{isLoading && (
-				<div className=" text-center ">
-					<Spinner />
-				</div>
-			)}
 
 			<div className="my-4 flex items-center gap-3">
 				<PGinputText

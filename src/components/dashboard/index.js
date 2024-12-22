@@ -2,13 +2,14 @@ const { Component, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { __ } from "@wordpress/i18n";
 
-import { Popover } from "@wordpress/components";
+import { Popover, Spinner } from "@wordpress/components";
 import {
 	Icon,
 	brush,
 	category,
 	cog,
 	columns,
+	close,
 	help as helpIcon,
 } from "@wordpress/icons";
 import PGinputSelect from "../input-select";
@@ -219,12 +220,24 @@ function Html(props) {
 
 
 							<div
-								className="py-1 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+								className={`py-1 px-2 cursor-pointer  capitalize  text-white font-medium rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700 ${toggleSettings ? "bg-gray-800" : "bg-gray-500"}`}
 								onClick={(ev) => {
 									settoggleSettings(!toggleSettings)
 								}}>
 
-								<Icon fill={"#fff"} icon={cog} />
+								{isLoading && (
+									<Spinner />
+								)}
+								{!isLoading && (
+									<>
+										{toggleSettings && (<Icon fill={"#fff"} icon={close} />)}
+										{!toggleSettings && (<Icon fill={"#fff"} icon={cog} />)}
+									</>
+								)}
+
+
+
+
 							</div>
 
 
