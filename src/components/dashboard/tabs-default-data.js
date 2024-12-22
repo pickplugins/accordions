@@ -13,53 +13,16 @@ var tabsDefaultData = {
 	},
 	items: [
 		{
-			headerLabel: {
-				options: {
-					text: "Accordion Header 1",
-					tag: "",
-					class: "accordion-header-label",
-				},
-			},
-			content: {
-				options: {
-					tag: "",
-					class: "accordion-content",
-					text: "Accordion content 1",
-				},
-			},
+			"isActive": false,
+			"headerText": "What is Lorem Ipsum?",
+			"content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+			"icon": "fas fa-angle-right",
+			"iconToggle": "fas fa-angle-down",
+			"styles": {}
 		},
-		{
-			headerLabel: {
-				options: {
-					text: "Accordion Header 2",
-					tag: "",
-					class: "accordion-header-label",
-				},
-			},
-			content: {
-				options: {
-					tag: "",
-					class: "accordion-content",
-					text: "Accordion content 2",
-				},
-			},
-		},
-		{
-			headerLabel: {
-				options: {
-					text: "Accordion Header 3",
-					tag: "",
-					class: "accordion-header-label",
-				},
-			},
-			content: {
-				options: {
-					tag: "",
-					class: "accordion-content",
-					text: "Accordion content 3",
-				},
-			},
-		},
+
+
+
 	],
 	content: {
 		options: {
@@ -71,35 +34,42 @@ var tabsDefaultData = {
 			backgroundColor: { Desktop: "#d5d4d9" },
 		},
 	},
-	header: {
+
+	navsWrap: {
 		options: {
-			tag: "div",
-			class: "accordion-header",
+			class: ""
 		},
-		styles: {
-			display: { Desktop: "flex" },
-			gap: { Desktop: "1em" },
-			padding: { Desktop: "12px 12px 12px 12px" },
-			backgroundColor: { Desktop: "#9DD6DF" },
-			margin: { Desktop: "0px 0px 1px 0px" },
-			fontSize: { Desktop: "16px" },
-		},
+		styles: {}
 	},
-	headerActive: {
+	navItem: {
 		options: {
-			tag: "div",
-			class: "accordion-header-active",
+			class: ""
 		},
-		styles: {},
+		styles: {}
 	},
-	headerLabel: {
+	activeNavItem: {
 		options: {
-			text: "Accordion Header",
-			tag: "div",
-			class: "accordion-header-label",
+			class: "",
+			id: ""
 		},
-		styles: {},
+		styles: {}
 	},
+	navLabel: {
+		options: {
+			class: ""
+		},
+		styles: {}
+	},
+	panelWrap: {
+		options: {
+			position: "left",
+			class: ""
+		},
+		styles: {}
+	},
+
+
+
 	labelCounter: {
 		options: {
 			enable: false,
@@ -109,16 +79,7 @@ var tabsDefaultData = {
 		},
 		styles: {},
 	},
-	labelIcon: {
-		options: {
-			library: "fontAwesome",
-			srcType: "class",
-			iconSrc: "",
-			position: "",
-			class: "accordion-label-icon",
-		},
-		styles: {},
-	},
+
 	icon: {
 		options: {
 			library: "fontAwesome",

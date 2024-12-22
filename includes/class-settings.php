@@ -22,7 +22,7 @@ class accordions_class_settings
 
         add_submenu_page('edit.php?post_type=accordions', __('Settings', 'accordions'), __('Settings', 'accordions'), 'manage_options', 'accordions-settings', array($this, 'settings'));
 
-        add_submenu_page('edit.php?post_type=accordions', __('Dashboard', 'accordions'), __('Dashboard', 'accordions'), 'manage_options', 'accordions-dashboard', array($this, 'dashboard'));
+        add_submenu_page('edit.php?post_type=accordions', __('Builder', 'accordions'), __('Builder', 'accordions'), 'manage_options', 'accordions-builder', array($this, 'builder'));
 
         if ($accordions_upgrade != 'done') {
             //add_submenu_page( 'edit.php?post_type=accordions', __( 'Upgrade status', 'accordions' ), __( 'Upgrade status', 'accordions' ), 'manage_options', 'upgrade_status', array( $this, 'upgrade_status' ) );
@@ -39,7 +39,7 @@ class accordions_class_settings
         include('menu/upgrade-status.php');
     }
 
-    public function dashboard()
+    public function builder()
     {
         include('menu/dashboard.php');
     }

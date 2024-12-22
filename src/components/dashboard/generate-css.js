@@ -72,11 +72,7 @@ function Html(props) {
 
 	}, [postData]);
 
-	useEffect(() => {
 
-
-
-	}, [accordionData]);
 
 
 

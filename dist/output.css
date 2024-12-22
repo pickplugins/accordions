@@ -347,12 +347,12 @@
   margin-top: 28px;
 }
 
-.mt-\[70px\] {
-  margin-top: 70px;
-}
-
 .mt-\[50px\] {
   margin-top: 50px;
+}
+
+.mt-\[70px\] {
+  margin-top: 70px;
 }
 
 .block {
@@ -1061,6 +1061,11 @@
   border-bottom-color: rgb(31 41 55 / 0.2) !important;
 }
 
+.border-b-gray-200 {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
+}
+
 .border-b-gray-800\/20 {
   border-bottom-color: rgb(31 41 55 / 0.2);
 }
@@ -1078,11 +1083,6 @@
 .border-l-green-700 {
   --tw-border-opacity: 1;
   border-left-color: rgb(21 128 61 / var(--tw-border-opacity, 1));
-}
-
-.border-b-gray-200 {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
 }
 
 .\!bg-blue-500 {
@@ -1113,6 +1113,11 @@
 .\!bg-white {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.bg-\[\#450077\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(69 0 119 / var(--tw-bg-opacity, 1));
 }
 
 .bg-amber-100 {
@@ -1293,15 +1298,6 @@
   background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[gray-700\] {
-  background-color: gray-700;
-}
-
-.bg-\[\#450077\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(69 0 119 / var(--tw-bg-opacity, 1));
-}
-
 .bg-opacity-30 {
   --tw-bg-opacity: 0.3;
 }
@@ -1357,10 +1353,6 @@
 
 .p-\[40px\] {
   padding: 40px;
-}
-
-.p-6 {
-  padding: 1.5rem;
 }
 
 .\!px-2 {
@@ -1473,11 +1465,6 @@
   padding-bottom: 8px;
 }
 
-.py-\[6px\] {
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -1568,6 +1555,11 @@
   line-height: 2rem;
 }
 
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -1626,11 +1618,6 @@
   line-height: 1rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -1645,10 +1632,6 @@
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-normal {
-  font-weight: 400;
 }
 
 .uppercase {
@@ -2696,6 +2679,11 @@
 .hover\:bg-slate-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(71 85 105 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-amber-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(180 83 9 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-gray-800:hover {

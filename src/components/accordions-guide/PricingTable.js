@@ -11,18 +11,18 @@ const PricingTable = ({ data }) => {
 					{data.salePrice}
 				</span>
 			</div>
-			<div className="bg-[#450077] py-4 text-center text-white text-xl font-bold">
+			<div className="bg-blue-700 py-4 text-center text-white text-xl font-bold">
 				{data.title}
 			</div>
 			{data.features.map((item, i) => (
-				<div className="py-[8px] text-center font-medium border-b border-solid border-b-gray-200">
+				<div className="py-4 text-center font-medium ">
 					{item}
 				</div>
 			))}
 			<div className="flex  items-center justify-center p-4">
 				<a
 					href={data.link}
-					className="px-8 py-3 no-underline bg-[#450077] text-white cursor-pointer rounded-md"
+					className="px-8 py-3 no-underline bg-blue-700 text-white cursor-pointer rounded-md"
 				>
 					Buy Now <i className="fas fa-cart-plus"></i>
 				</a>

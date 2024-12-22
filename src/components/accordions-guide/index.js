@@ -172,15 +172,13 @@ function Html(props) {
 					<div className="font-mono text-sm">Version: 2.3.1</div>
 				</div>
 				<div className="">
-					<div className="inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
-						Upgrade
-					</div>
+
 					<div className="my-4 max-w-52">
 						Help us by providing your feedbacks and five star reviews on
 						wordpress.org 🌟🌟🌟🌟🌟
 					</div>
 					<a
-						className=" inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
+						className=" bg-amber-500 text-white no-underline font-medium px-[16px] py-[8px]  hover:bg-amber-700 hover:text-white rounded-md w-max transition-colors duration-300"
 						href="https://wordpress.org/support/plugin/accordions/reviews/#new-post"
 						target="_blank">
 						Submit Reviews
@@ -197,7 +195,7 @@ function Html(props) {
 				navItemClass=" px-5 py-3 gap-2 rounded-t-md"
 				navItemSelectedClass="!bg-white border-2  border-b-0 border-solid  border-blue-700"
 				activeClass="active-tab"
-				onSelect={(tabName) => {}}
+				onSelect={(tabName) => { }}
 				tabs={[
 					{
 						name: "overview",
@@ -211,12 +209,12 @@ function Html(props) {
 						icon: styles,
 						className: "tab-disable-blocks",
 					},
-					{
-						name: "templates",
-						title: "About Us",
-						icon: postAuthor,
-						className: "tab-disable-blocks",
-					},
+					// {
+					// 	name: "templates",
+					// 	title: "About Us",
+					// 	icon: postAuthor,
+					// 	className: "tab-disable-blocks",
+					// },
 					{
 						name: "buyNow",
 						title: "Buy Now",
@@ -263,7 +261,7 @@ function Html(props) {
 								</p>
 								<a
 									href="#"
-									className="inline-block  font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
+									className="inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
 									Watch on YouTube
 								</a>
 							</div>
@@ -277,7 +275,7 @@ function Html(props) {
 								</p>
 								<a
 									href="#"
-									className="inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
+									className="inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
 									Check Documentation
 								</a>
 							</div>
@@ -291,7 +289,7 @@ function Html(props) {
 								</p>
 								<a
 									href="#"
-									className="inline-block font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
+									className="inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
 									Create Support Ticket
 								</a>
 							</div>
@@ -398,7 +396,7 @@ function Html(props) {
 								<div className="bg-gray-200 hover:bg-gray-300 shadow-sm p-8 rounded-lg relative">
 									<h4 className="font-medium text-lg mb-4">{plugin.name}</h4>
 									<p className="text-[14px]">{plugin.description}</p>
-									<a href={plugin.link} className="absolute inset-0"></a>
+									<a href={plugin.link} className="absolute inset-0 "></a>
 								</div>
 							))}
 						</div>
@@ -411,11 +409,11 @@ function Html(props) {
 						orientation=""
 						tabsWrapperClass="mt-[50px] "
 						contentClass=" w-full"
-						navItemsWrapClass="gap-3 px-10"
-						navItemClass=" px-5 py-3 gap-2 rounded-t-md"
-						navItemSelectedClass="!bg-white border-2  border-b-0 border-solid  border-blue-700"
+						navItemsWrapClass="gap-3 px-10 justify-center"
+						navItemClass=" px-5 py-3 gap-2 rounded-md"
+						navItemSelectedClass="!bg-white border-2  border-solid  border-blue-700"
 						activeClass="active-tab"
-						onSelect={(tabName) => {}}
+						onSelect={(tabName) => { }}
 						tabs={[
 							{
 								name: "yearly",
@@ -431,14 +429,14 @@ function Html(props) {
 							},
 						]}>
 						<PGtab name="yearly">
-							<div className="grid grid-cols-4 gap-6">
+							<div className="grid grid-cols-3 gap-6 mt-10 px-10">
 								{pricingData.yearly.map((item, i) => (
 									<PricingTable key={i} data={item} />
 								))}
 							</div>
 						</PGtab>
 						<PGtab name="lifetime">
-							<div className="grid grid-cols-4 gap-6">
+							<div className="grid grid-cols-3 gap-6 mt-10 px-10">
 								{pricingData.lifetime.map((item, i) => (
 									<PricingTable key={i} data={item} />
 								))}
