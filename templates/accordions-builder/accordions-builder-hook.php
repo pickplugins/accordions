@@ -38,7 +38,6 @@ function accordions_builder_accordion($post_id, $accordionData)
     $expandCollapseAll = isset($accordionData["expandCollapseAll"]) ? $accordionData["expandCollapseAll"] : [];
     $expandCollapseAllOptions = isset($expandCollapseAll["options"]) ? $expandCollapseAll["options"] : [];
 
-    var_dump($expandCollapseAllOptions);
 
 
     $expandCollapseAllEnable = isset($expandCollapseAllOptions["enable"]) ? $expandCollapseAllOptions["enable"] : false;
@@ -124,7 +123,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : "fontAwesome";
     $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : "";
     $iconSrc = !empty($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : "";
-    $iconHtml = !empty($iconSrc) ? '<span class="accordion-label-icon ' . $iconClass . ' ' . $iconSrc . '"></span>' : '';
+    $iconIdleHtml = !empty($iconSrc) ? '<span class="accordion-icon-idle ' . $iconSrc . '"></span>' : '';
 
 
 
@@ -136,7 +135,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     $iconToggleLibrary = isset($iconToggleOptions['library']) ? $iconToggleOptions['library'] : "fontAwesome";
     $iconToggleSrcType = isset($iconToggleOptions['srcType']) ? $iconToggleOptions['srcType'] : "";
     $iconToggleSrc = !empty($iconToggleOptions['iconSrc']) ? $iconToggleOptions['iconSrc'] : "";
-    $iconToggleHtml = !empty($iconSrc) ? '<span class="accordion-label-icon ' . $iconToggleClass . ' ' . $iconToggleSrc . '"></span>' : '';
+    $iconToggleHtml = !empty($iconToggleSrc) ? '<span class="accordion-icon-toggle ' . $iconToggleSrc . '"></span>' : '';
 
 
     if ($iconLibrary == 'fontAwesome') {
@@ -177,14 +176,23 @@ function accordions_builder_accordion($post_id, $accordionData)
         wp_enqueue_style('bootstrap-icons');
     }
 
+    $activeIndex = [];
+    foreach ($items as $index => $item) {
+        $itemActive = isset($item["active"]) ? (bool) $item["active"] : false;
 
+        if ($itemActive) {
+            $activeIndex[] = $index;
+        }
+    }
 
+    $activeIndex[] = 9999;
 
     $blockId = "accordions-" . $post_id;
+    //var_dump($activeIndex);
 
     $accordionDataAttr = [
         "id" => $blockId,
-        "activeIndex" => 999,
+        "activeIndex" => $activeIndex,
     ];
 
 
@@ -197,9 +205,11 @@ function accordions_builder_accordion($post_id, $accordionData)
 
             <?php if ($search): ?>
 
-                <div class="search-wrap">
+
+                <form class="search-form" action="">
                     <input type="text" class="search-input" placeholder="<?php esc_attr($expandAllText); ?>" />
-                </div>
+                </form>
+
 
             <?php endif; ?>
             <?php if ($expandCollapseAllEnable): ?>
@@ -211,14 +221,6 @@ function accordions_builder_accordion($post_id, $accordionData)
             <?php endif; ?>
 
         </div>
-
-        <div>
-
-        </div>
-
-
-
-
 
 
         <?php
@@ -256,10 +258,10 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
         ?>
-            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header <?php echo ($itemActive) ? "accordion-header-active" : ""; ?> <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1" toggledText="<?php echo esc_attr($headerLabelToggledText); ?>">
+            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header  <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1" toggledText="<?php echo esc_attr($headerLabelToggledText); ?>">
                 <?php if ($iconPosition == 'left') : ?>
                     <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
-                        <?php echo wp_kses_post($iconHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
+                        <?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
                     </span>
                 <?php endif; ?>
                 <?php if ($labelCounterPosition == 'left') : ?>
@@ -299,7 +301,7 @@ function accordions_builder_accordion($post_id, $accordionData)
                 <?php endif; ?>
                 <?php if ($iconPosition == 'right') : ?>
                     <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
-                        <?php echo wp_kses_post($iconHtml); ?>
+                        <?php echo wp_kses_post($iconIdleHtml); ?>
                         <?php echo wp_kses_post($iconToggleHtml); ?>
                     </span>
                 <?php endif; ?>

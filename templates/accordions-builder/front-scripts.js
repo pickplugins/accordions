@@ -14,6 +14,43 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var index = header.getAttribute("index")
 			window.pgAccordion.switch(index)
 		},
+		activeByIndex: (index) => {
+			if (window.pgAccordion.id.length == 0) return;
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
+				window.pgAccordion.activeIndex = index
+				var content = header.nextElementSibling;
+				if (loopIndex == index) {
+					header.classList.toggle("accordion-header-active");
+					content.style.display = "block";
+					content.style.height = "auto";
+				} else {
+					header.classList.remove("accordion-header-active");
+					content.style.display = "none";
+					content.style.height = 0;
+				}
+			});
+		},
+		inactiveByIndex: (index) => {
+			if (window.pgAccordion.id.length == 0) return;
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
+				window.pgAccordion.activeIndex = index
+				var content = header.nextElementSibling;
+				if (loopIndex == index) {
+					header.classList.toggle("accordion-header-active");
+					content.style.display = "block";
+					content.style.height = "auto";
+				} else {
+					header.classList.remove("accordion-header-active");
+					content.style.display = "none";
+					content.style.height = 0;
+				}
+			});
+		},
+
 		switch: (index) => {
 			if (window.pgAccordion.id.length == 0) return;
 			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
@@ -50,6 +87,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var toggled = expandCollapseAllHndle.getAttribute("data-toggled");
 
 
+			var headerCount = window.pgAccordion.headerList.length
+			//console.log(headerCount);
+
 
 			var expandalltext = expandCollapseAllHndle.getAttribute("data-expandalltext");
 			var collapsealltext = expandCollapseAllHndle.getAttribute("data-collapsealltext");
@@ -59,9 +99,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			if (!toggled) {
 				expandCollapseAllHndle.setAttribute("data-toggled", true);
 				var innerHtml = `${collapsealliconhtml}<span>${collapsealltext}</span>`;
+
+				window.pgAccordion.activeByIndex(1)
+				for (var i = 0; i < headerCount; i++) {
+
+					//console.log(i);
+
+
+
+				}
+
+
+				//console.log(window.pgAccordion.activeIndex);
+				console.log("Opend");
+
+
 			} else {
+
+				console.log("Closed");
+				window.pgAccordion.inactiveByIndex(1)
+
 				expandCollapseAllHndle.removeAttribute("data-toggled");
 				var innerHtml = `${expandalliconhtml}<span>${expandalltext}</span>`;
+
 			}
 
 			expandCollapseAllHndle.innerHTML = innerHtml
@@ -79,6 +139,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var activeIndex = accordionDataObj.activeIndex;
 				var accordionWrapId = accordionDataObj.id;
 				window.pgAccordion.id = accordionWrapId;
+
+				console.log(activeIndex);
+
+
 				window.pgAccordion.activeIndex = activeIndex;
 				var accordionHeaders = document.querySelectorAll("#" + accordionWrapId + " .accordion-header");
 				var headerList = [];
