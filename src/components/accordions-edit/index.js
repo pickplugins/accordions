@@ -68,13 +68,24 @@ function Html(props) {
 	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
 	var [icon, seticon] = useState(accordionData.icon);
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
-	var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
+	var [expandCollapseAll, setexpandCollapseAll] = useState(
+		accordionData.expandCollapseAll
+	);
 	var [topWrap, settopWrap] = useState(accordionData.topWrap);
+	var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
+	var [navItem, setnavItem] = useState(accordionData?.navItem);
+	var [activeNavItem, setactiveNavItem] = useState(
+		accordionData?.activeNavItem
+	);
+	var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
+	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
 
 	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
+
+	var isProFeature = true
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -119,8 +130,7 @@ function Html(props) {
 		});
 	}, []);
 
-	useEffect(() => {
-	}, [props.postData]);
+	useEffect(() => {}, [props.postData]);
 
 	useEffect(() => {
 		onChange(accordionData);
@@ -209,8 +219,6 @@ function Html(props) {
 		accordionDataX.topWrap = topWrap;
 		setaccordionData(accordionDataX);
 	}, [topWrap]);
-
-
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -513,7 +521,6 @@ function Html(props) {
 								values=""></PGDropdown>
 						</PanelRow>
 					</div>
-
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Items"
@@ -692,7 +699,6 @@ function Html(props) {
 															}}
 															clickHandle={(value, action) => {
 																var valueObj = JSON.parse(value);
-
 
 																if (action == "prepend") {
 																	var itemsX = [...items];
@@ -1484,7 +1490,6 @@ function Html(props) {
 							</div>
 						)}
 					</PanelBody>
-
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Accordion Settings"
@@ -1726,7 +1731,6 @@ function Html(props) {
 							)}
 						</div>
 					</PanelBody>
-
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Wrapper"
@@ -1735,7 +1739,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1805,7 +1809,6 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Content"
@@ -1814,7 +1817,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1996,7 +1999,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2100,7 +2103,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2183,7 +2186,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2255,13 +2258,30 @@ function Html(props) {
 					{/* ///////////labelCounter */}
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Label Counter"
+						// title="Label Counter"
+						opened={isProFeature ? false : null}
+						title={
+							<span className="flex justify-between w-full gap-2">
+								<span>{__("Label Counter", "post-grid")}</span>
+								{isProFeature ? (
+									<span
+										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+										onClick={(ev) => {
+											window.open("https://comboblocks.com/pricing/", "_blank");
+										}}>
+										{__("Pro", "post-grid")}
+									</span>
+								) : (
+									""
+								)}{" "}
+							</span>
+						}
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2374,13 +2394,30 @@ function Html(props) {
 					{/* ////////LabelIcon */}
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Label Icon"
+						// title="Label Icon"
+						opened={isProFeature ? false : null}
+						title={
+							<span className="flex justify-between w-full gap-2">
+								<span>{__("Label Icon", "post-grid")}</span>
+								{isProFeature ? (
+									<span
+										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+										onClick={(ev) => {
+											window.open("https://comboblocks.com/pricing/", "_blank");
+										}}>
+										{__("Pro", "post-grid")}
+									</span>
+								) : (
+									""
+								)}{" "}
+							</span>
+						}
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2548,7 +2585,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2690,7 +2727,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2761,13 +2798,30 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Expand/Collapse All"
+						// title="Expand/Collapse All"
+						opened={isProFeature ? false : null}
+						title={
+							<span className="flex justify-between w-full gap-2">
+								<span>{__("Expand/Collapse All", "post-grid")}</span>
+								{isProFeature ? (
+									<span
+										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+										onClick={(ev) => {
+											window.open("https://comboblocks.com/pricing/", "_blank");
+										}}>
+										{__("Pro", "post-grid")}
+									</span>
+								) : (
+									""
+								)}{" "}
+							</span>
+						}
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2830,7 +2884,10 @@ function Html(props) {
 										onChange={(newVal) => {
 											var expandCollapseAllX = {
 												...expandCollapseAll,
-												options: { ...expandCollapseAll.options, enable: newVal, },
+												options: {
+													...expandCollapseAll.options,
+													enable: newVal,
+												},
 											};
 											setexpandCollapseAll(expandCollapseAllX);
 										}}
@@ -2848,15 +2905,12 @@ function Html(props) {
 												onChange={(newVal) => {
 													var expandCollapseAllX = {
 														...expandCollapseAll,
-														options: { ...expandCollapseAll.options, expandAllText: newVal, },
+														options: {
+															...expandCollapseAll.options,
+															expandAllText: newVal,
+														},
 													};
 													setexpandCollapseAll(expandCollapseAllX);
-
-
-
-													// var globalOptionsX = { ...globalOptions };
-													// globalOptionsX.expandAllText = newVal;
-													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -2868,18 +2922,14 @@ function Html(props) {
 												label=""
 												value={expandCollapseAll.options?.collapseAllText}
 												onChange={(newVal) => {
-
 													var expandCollapseAllX = {
 														...expandCollapseAll,
-														options: { ...expandCollapseAll.options, collapseAllText: newVal, },
+														options: {
+															...expandCollapseAll.options,
+															collapseAllText: newVal,
+														},
 													};
 													setexpandCollapseAll(expandCollapseAllX);
-
-
-
-													// var globalOptionsX = { ...globalOptions };
-													// globalOptionsX.collapseAllText = newVal;
-													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -2889,31 +2939,26 @@ function Html(props) {
 											</label>
 											<PGIconPicker
 												library={
-													expandCollapseAll.options?.expandAllIcon?.library ?? "fontAwesome"
+													expandCollapseAll.options?.expandAllIcon?.library ??
+													"fontAwesome"
 												}
 												srcType={
-													expandCollapseAll.options?.expandAllIcon?.srcType ?? "class"
+													expandCollapseAll.options?.expandAllIcon?.srcType ??
+													"class"
 												}
 												iconSrc={
-													expandCollapseAll.options?.expandAllIcon?.iconSrc ?? "fas fa-plus"
+													expandCollapseAll.options?.expandAllIcon?.iconSrc ??
+													"fas fa-plus"
 												}
 												onChange={(arg) => {
-
-
 													var expandCollapseAllX = {
 														...expandCollapseAll,
-														options: { ...expandCollapseAll.options, expandAllIcon: arg, },
+														options: {
+															...expandCollapseAll.options,
+															expandAllIcon: arg,
+														},
 													};
 													setexpandCollapseAll(expandCollapseAllX);
-
-
-
-
-
-
-													// var globalOptionsX = { ...globalOptions };
-													// globalOptionsX.expandAllIcon = arg;
-													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -2927,28 +2972,22 @@ function Html(props) {
 													"fontAwesome"
 												}
 												srcType={
-													expandCollapseAll.options?.collapseAllIcon?.srcType ?? "class"
+													expandCollapseAll.options?.collapseAllIcon?.srcType ??
+													"class"
 												}
 												iconSrc={
 													expandCollapseAll.options?.collapseAllIcon?.iconSrc ??
 													"fas fa-minus"
 												}
 												onChange={(arg) => {
-
 													var expandCollapseAllX = {
 														...expandCollapseAll,
-														options: { ...expandCollapseAll.options, collapseAllIcon: arg, },
+														options: {
+															...expandCollapseAll.options,
+															collapseAllIcon: arg,
+														},
 													};
 													setexpandCollapseAll(expandCollapseAllX);
-
-
-
-
-
-
-													// var globalOptionsX = { ...globalOptions };
-													// globalOptionsX.collapseAllIcon = arg;
-													// setglobalOptions(globalOptionsX);
 												}}
 											/>
 										</PanelRow>
@@ -3010,7 +3049,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -3031,7 +3070,7 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={topWrap.options.class}
+										value={topWrap?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
@@ -3045,8 +3084,6 @@ function Html(props) {
 										}}
 									/>
 								</div>
-
-
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -3061,35 +3098,16 @@ function Html(props) {
 										)
 									}
 									onAdd={(sudoScource, key) =>
-										onAddStyle(
-											sudoScource,
-											key,
-											topWrap,
-											settopWrap
-										)
+										onAddStyle(sudoScource, key, topWrap, settopWrap)
 									}
 									onRemove={(sudoScource, key) =>
-										onRemoveStyle(
-											sudoScource,
-											key,
-											topWrap,
-											settopWrap
-										)
+										onRemoveStyle(sudoScource, key, topWrap, settopWrap)
 									}
 									onReset={(sudoSources) =>
-										onResetStyle(
-											sudoSources,
-											topWrap,
-											settopWrap
-										)
+										onResetStyle(sudoSources, topWrap, settopWrap)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(
-											sudoSource,
-											cssObj,
-											topWrap,
-											settopWrap
-										)
+										onBulkAddStyle(sudoSource, cssObj, topWrap, settopWrap)
 									}
 								/>
 							</PGtab>
@@ -3097,13 +3115,30 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Search Input"
+						// title="Search Input"
+						opened={isProFeature ? false : null}
+						title={
+							<span className="flex justify-between w-full gap-2">
+								<span>{__("Search Input", "post-grid")}</span>
+								{isProFeature ? (
+									<span
+										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+										onClick={(ev) => {
+											window.open("https://comboblocks.com/pricing/", "_blank");
+										}}>
+										{__("Pro", "post-grid")}
+									</span>
+								) : (
+									""
+								)}{" "}
+							</span>
+						}
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -3119,8 +3154,6 @@ function Html(props) {
 								},
 							]}>
 							<PGtab name="options">
-
-
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
 										Expand/collapse all{" "}
@@ -3148,25 +3181,12 @@ function Html(props) {
 										onChange={(newVal) => {
 											var searchInputX = {
 												...searchInput,
-												options: { ...searchInput.options, enable: newVal, },
+												options: { ...searchInput.options, enable: newVal },
 											};
 											setsearchInput(searchInputX);
 										}}
 									/>
 								</PanelRow>
-
-
-
-
-
-
-
-
-
-
-
-
-
 								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
 										{__("Class", "accordions")}
@@ -3234,6 +3254,453 @@ function Html(props) {
 											searchInput,
 											setsearchInput
 										)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Navs Wrap"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={navsWrap?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...navsWrap,
+												options: {
+													...navsWrap.options,
+													class: newVal,
+												},
+											};
+											setnavsWrap(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={navsWrap}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											navsWrap,
+											setnavsWrap
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, navsWrap, setnavsWrap)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, navsWrap, setnavsWrap)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Nav Item"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={navItem?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...navItem,
+												options: {
+													...navItem?.options,
+													class: newVal,
+												},
+											};
+											setnavsWrap(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={navItem}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											navItem,
+											setnavItem
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, navItem, setnavItem)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, navItem, setnavItem)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, navItem, setnavItem)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, navItem, setnavItem)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Active Nav Item"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={activeNavItem?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...activeNavItem,
+												options: {
+													...activeNavItem?.options,
+													class: newVal,
+												},
+											};
+											setnavsWrap(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={activeNavItem}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											activeNavItem,
+											setactiveNavItem
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(
+											sudoScource,
+											key,
+											activeNavItem,
+											setactiveNavItem
+										)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(
+											sudoScource,
+											key,
+											activeNavItem,
+											setactiveNavItem
+										)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, activeNavItem, setactiveNavItem)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											activeNavItem,
+											setactiveNavItem
+										)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Nav Label"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={navLabel?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...navLabel,
+												options: {
+													...navLabel?.options,
+													class: newVal,
+												},
+											};
+											setnavsWrap(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={navLabel}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											navLabel,
+											setnavLabel
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, navLabel, setnavLabel)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, navLabel, setnavLabel)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, navLabel, setnavLabel)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, navLabel, setnavLabel)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Nav Label"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={navLabel?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...navLabel,
+												options: {
+													...navLabel?.options,
+													class: newVal,
+												},
+											};
+											setnavsWrap(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={navLabel}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											navLabel,
+											setnavLabel
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, navLabel, setnavLabel)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, navLabel, setnavLabel)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, navLabel, setnavLabel)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, navLabel, setnavLabel)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Panel Wrap"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={panelWrap?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...panelWrap,
+												options: {
+													...panelWrap?.options,
+													class: newVal,
+												},
+											};
+											setnavsWrap(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={panelWrap}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											panelWrap,
+											setpanelWrap
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, panelWrap, setpanelWrap)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, panelWrap, setpanelWrap)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, panelWrap, setpanelWrap)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, panelWrap, setpanelWrap)
 									}
 								/>
 							</PGtab>
