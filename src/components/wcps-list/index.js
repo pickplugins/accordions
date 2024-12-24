@@ -133,15 +133,24 @@ function Html(props) {
 			method: "POST",
 			data: {
 				queryArgs: queryArgs,
-				_wpnonce: post_grid_editor_js._wpnonce,
+				_wpnonce: accordions_builder_js._wpnonce,
 
 			},
 		}).then((res) => {
 
 			setisLoading(false);
 
-			setPosts(res.posts);
-			addNotifications({ title: "Accordions Loaded", content: "All Accordions loaded, Now click to pick one to edit.", type: "success" })
+			console.log(res.posts);
+
+			if (res.posts == undefined) {
+				setPosts([]);
+				addNotifications({ title: "No Items Found", content: "It seems there is no items in the list.", type: "success" })
+			} else {
+				setPosts(res.posts);
+				addNotifications({ title: "Accordions Loaded", content: "All Accordions loaded, Now click to pick one to edit.", type: "success" })
+			}
+
+
 
 
 		});
@@ -237,6 +246,10 @@ function Html(props) {
 				</span>
 			</div>
 
+			{posts == null && (
+				<div className="p-3 my-5 bg-orange-400 ">No Items, Please Create First One!</div>
+			)}
+
 			{posts != null && (
 				<>
 					{posts.map((item, index) => {
@@ -301,7 +314,7 @@ function Html(props) {
 
 }
 
-class wcpsList extends Component {
+class WCPSList extends Component {
 
 	constructor(props) {
 		super(props);
@@ -365,4 +378,4 @@ class wcpsList extends Component {
 
 
 
-export default wcpsList;
+export default WCPSList;

@@ -25,10 +25,38 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					header.classList.toggle("accordion-header-active");
 					content.style.display = "block";
 					content.style.height = "auto";
-				} else {
-					header.classList.remove("accordion-header-active");
-					content.style.display = "none";
-					content.style.height = 0;
+
+					var iconToggle = header.querySelector(".accordion-icon-toggle");
+					var iconIdle = header.querySelector(".accordion-icon-idle");
+
+
+					if (header.classList.contains("accordion-header-active")) {
+						if (iconToggle != null) {
+							iconToggle.style.display = "inline-block";
+						}
+						if (iconIdle != null) {
+							iconIdle.style.display = "none";
+						}
+						content.style.display = "block";
+						content.style.height = "auto";
+					} else {
+						if (iconIdle != null) {
+							iconIdle.style.display = "inline-block";
+						}
+						if (iconToggle != null) {
+							iconToggle.style.display = "none";
+						}
+						content.style.display = "none";
+						content.style.height = 0;
+					}
+
+
+
+
+
+
+
+
 				}
 			});
 		},
@@ -37,17 +65,42 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
-				window.pgAccordion.activeIndex = index
+
+
 				var content = header.nextElementSibling;
 				if (loopIndex == index) {
 					header.classList.toggle("accordion-header-active");
-					content.style.display = "block";
-					content.style.height = "auto";
-				} else {
-					header.classList.remove("accordion-header-active");
 					content.style.display = "none";
 					content.style.height = 0;
 				}
+
+				var iconToggle = header.querySelector(".accordion-icon-toggle");
+				var iconIdle = header.querySelector(".accordion-icon-idle");
+
+
+				if (header.classList.contains("accordion-header-active")) {
+					if (iconToggle != null) {
+						iconToggle.style.display = "inline-block";
+					}
+					if (iconIdle != null) {
+						iconIdle.style.display = "none";
+					}
+					content.style.display = "block";
+					content.style.height = "auto";
+				} else {
+					if (iconIdle != null) {
+						iconIdle.style.display = "inline-block";
+					}
+					if (iconToggle != null) {
+						iconToggle.style.display = "none";
+					}
+					content.style.display = "none";
+					content.style.height = 0;
+				}
+
+
+
+
 			});
 		},
 
@@ -88,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 			var headerCount = window.pgAccordion.headerList.length
-			//console.log(headerCount);
 
 
 			var expandalltext = expandCollapseAllHndle.getAttribute("data-expandalltext");
@@ -100,25 +152,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				expandCollapseAllHndle.setAttribute("data-toggled", true);
 				var innerHtml = `${collapsealliconhtml}<span>${collapsealltext}</span>`;
 
-				window.pgAccordion.activeByIndex(1)
 				for (var i = 0; i < headerCount; i++) {
-
-					//console.log(i);
-
-
-
+					window.pgAccordion.activeByIndex(i)
 				}
 
 
-				//console.log(window.pgAccordion.activeIndex);
 				console.log("Opend");
 
 
 			} else {
 
 				console.log("Closed");
-				window.pgAccordion.inactiveByIndex(1)
-
+				for (var i = 0; i < headerCount; i++) {
+					window.pgAccordion.inactiveByIndex(i)
+				}
 				expandCollapseAllHndle.removeAttribute("data-toggled");
 				var innerHtml = `${expandalliconhtml}<span>${expandalltext}</span>`;
 
@@ -140,7 +187,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var accordionWrapId = accordionDataObj.id;
 				window.pgAccordion.id = accordionWrapId;
 
-				console.log(activeIndex);
 
 
 				window.pgAccordion.activeIndex = activeIndex;

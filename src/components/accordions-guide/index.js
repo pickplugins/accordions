@@ -427,6 +427,12 @@ function Html(props) {
 								icon: styles,
 								className: "tab-lifetime",
 							},
+							// {
+							// 	name: "freeTrail",
+							// 	title: "Free Trail",
+							// 	icon: columns,
+							// 	className: "tab-yearly",
+							// },
 						]}>
 						<PGtab name="yearly">
 							<div className="grid grid-cols-3 gap-6 mt-10 px-10">
@@ -442,6 +448,12 @@ function Html(props) {
 								))}
 							</div>
 						</PGtab>
+						<PGtab name="freeTrail">
+							freeTrail
+						</PGtab>
+
+
+
 					</PGtabs>
 				</PGtab>
 			</PGtabs>

@@ -75,6 +75,12 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
 
+    $searchInput = isset($accordionData["searchInput"]) ? $accordionData["searchInput"] : [];
+    $searchInputOptions = isset($searchInput["options"]) ? $searchInput["options"] : [];
+    $searchInputEnable = !empty($searchInputOptions["enable"]) ? $searchInputOptions["enable"] : false;
+    $searchInputPlaceholder = !empty($searchInputOptions["placeholder"]) ? $searchInputOptions["placeholder"] : "";
+
+
     $wrapper = isset($accordionData["wrapper"]) ? $accordionData["wrapper"] : [];
     $wrapperOptions = isset($wrapper["options"]) ? $wrapper["options"] : [];
     $wrapperTag = !empty($wrapperOptions["tag"]) ? $wrapperOptions["tag"] : "div";
@@ -207,7 +213,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
                 <form class="search-form" action="">
-                    <input type="text" class="search-input" placeholder="<?php esc_attr($expandAllText); ?>" />
+                    <input type="text" class="search-input" placeholder="<?php echo esc_attr($searchInputPlaceholder); ?>" />
                 </form>
 
 
@@ -324,6 +330,9 @@ function accordions_builder_accordion($post_id, $accordionData)
             $json['@type'] = "FAQPage";
             foreach ($items as $item) {
 
+                $hideOnSchema = isset($item["hideOnSchema"]) ? (bool) $item["hideOnSchema"] : false;
+
+                if ($hideOnSchema) continue;
 
                 $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
                 $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
@@ -333,14 +342,6 @@ function accordions_builder_accordion($post_id, $accordionData)
                 $content = isset($item["content"]) ? $item["content"] : [];
                 $contentOptions = isset($content["options"]) ? $content["options"] : [];
                 $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
-
-
-
-
-
-
-
-
 
                 $json['mainEntity'][$i]['@type'] = "Question";
                 $json['mainEntity'][$i]['@id'] = isset($item['attrs']['blockId']) ? "#" . $item['attrs']['blockId'] : '';
