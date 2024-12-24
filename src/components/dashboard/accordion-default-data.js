@@ -101,7 +101,7 @@ var accordionDefaultData = {
 	headerLabel: {
 		options: {
 			text: "Accordion Header",
-			tag: "div",
+			tag: "a",
 			class: "accordion-header-label",
 		},
 		styles: {},

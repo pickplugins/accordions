@@ -6515,10 +6515,89 @@ function Html(props) {
     free: false,
     pro: true
   }, {
-    feature: "Item Source - AI",
+    feature: "Preloader - Hide accordions until page load",
+    free: false,
+    pro: true
+  }, {
+    feature: "Stats",
+    free: false,
+    pro: true
+  }, {
+    feature: "Click To Scroll Top",
+    free: false,
+    pro: true
+  }, {
+    feature: "Search - Accordion",
+    free: false,
+    pro: true
+  }, {
+    feature: "Schema",
+    isHeading: true
+  }, {
+    feature: "Enable/Disable Schema ",
+    free: false,
+    pro: true
+  }, {
+    feature: "Hide any item in Schema ",
+    free: false,
+    pro: true
+  }, {
+    feature: "Expand/Collapse All Features",
+    isHeading: true
+  }, {
+    feature: "Expand All Custom Text",
+    free: false,
+    pro: true
+  }, {
+    feature: "Collapse All Custom Text",
+    free: false,
+    pro: true
+  }, {
+    feature: "Expand All Custom Icon",
+    free: false,
+    pro: true
+  }, {
+    feature: "Collapse All Custom Icon",
+    free: false,
+    pro: true
+  }, {
+    feature: "Accordion Content Features",
+    isHeading: true
+  }, {
+    feature: "Enable/Disable Embeds",
+    free: false,
+    pro: true
+  }, {
+    feature: "Enable/Disable Shortcodes",
+    free: false,
+    pro: true
+  }, {
+    feature: "Enable/Disable wpautop function",
+    free: false,
+    pro: true
+  }, {
+    feature: "Content In-Out animation",
     free: false,
     pro: true,
-    new: true
+    new: true,
+    hot: true
+  }, {
+    feature: "Edit content with WYSIWYG editor",
+    free: false,
+    pro: true
+  }, {
+    feature: "Item Source",
+    isHeading: true
+  }, {
+    feature: "Item Source - Manual",
+    free: false,
+    pro: true
+  }, {
+    feature: "Generate items by AI",
+    free: false,
+    pro: true,
+    new: true,
+    hot: true
   }, {
     feature: "Item Source - Posts",
     free: false,
@@ -6530,51 +6609,80 @@ function Html(props) {
     pro: true,
     new: true
   }, {
-    feature: "Preloader - Hide accordions until page load",
+    feature: "Accordion Header & Labels Features",
+    isHeading: true
+  }, {
+    feature: "Edit header label with Richtext editor",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Edit header label toggled text",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header active custom style",
     free: false,
     pro: true
   }, {
-    feature: "Autoembed - Enable/Disable emebed content",
+    feature: "Header label custom style",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label counter",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label counter position",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label icons",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label icons position",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Accordion Icons Features",
+    isHeading: true
+  }, {
+    feature: "Icon In-Out animation",
+    free: false,
+    pro: true,
+    new: true,
+    hot: true
+  }, {
+    feature: "Font-awesome Icons",
     free: false,
     pro: true
   }, {
-    feature: "Shortcodes - Enable/Disable third party shortcodes",
+    feature: "Iconfont Icons",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Bootstrap Icons",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Custom Idle Icon",
     free: false,
     pro: true
   }, {
-    feature: "wpautop - Enable/Disable wpautop function",
+    feature: "Custom Toggled Icon",
     free: false,
     pro: true
   }, {
-    feature: "Schema - Enable/Disable Schema to boost SEO",
-    free: false,
-    pro: true
-  }, {
-    feature: "Toggle Text - Enable/Disable Toggle Text on accordion header",
-    free: false,
-    pro: true
-  }, {
-    feature: "Expand/collapse All",
-    free: false,
-    pro: true
-  }, {
-    feature: "Stats",
-    free: false,
-    pro: true
-  }, {
-    feature: "Active Event",
-    free: false,
-    pro: true
-  }, {
-    feature: "Click To Scroll Top",
-    free: false,
-    pro: true
-  }, {
-    feature: "Animation Name",
-    free: false,
-    pro: true
-  }, {
-    feature: "Search - Accordion",
+    feature: "Icon Position Left/Right",
     free: false,
     pro: true
   }];
@@ -6731,7 +6839,21 @@ function Html(props) {
     className: "min-w-[100px] py-4 px-8 text-center"
   }, "\uD83D\uDC51PRO"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", {
     className: "bg-gray-100 text-gray-800"
-  }, freeVsProArgs.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+  }, freeVsProArgs.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item.isHeading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+    key: index,
+    className: "bg-gray-400 last:rounded-b-md last:overflow-hidden"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+    className: "py-3 px-8",
+    colSpan: "3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-2 items-center "
+  }, item.feature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-base"
+  }, item.feature), item.new && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full"
+  }, "NEW"), item.hot && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-orange-400 rounded-full"
+  }, "HOT")))), !item?.isHeading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
     key: index,
     className: "even:bg-gray-200 last:rounded-b-md last:overflow-hidden"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
@@ -6741,12 +6863,12 @@ function Html(props) {
   }, item.feature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, item.feature), item.new && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full"
   }, "NEW"), item.hot && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-red-500 rounded-full"
+    className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-orange-400 rounded-full"
   }, "HOT"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8  text-center"
   }, item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8 text-center"
-  }, item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C"))))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-2 gap-4 w-full p-7 bg-white mt-10"
@@ -30089,7 +30211,7 @@ var accordionDefaultData = {
   headerLabel: {
     options: {
       text: "Accordion Header",
-      tag: "div",
+      tag: "a",
       class: "accordion-header-label"
     },
     styles: {}

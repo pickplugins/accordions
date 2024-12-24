@@ -36,11 +36,125 @@ function Html(props) {
 			pro: true,
 		},
 
+
 		{
-			feature: "Item Source - AI",
+			feature: "Preloader - Hide accordions until page load",
+			free: false,
+			pro: true,
+		},
+
+
+		{
+			feature: "Stats",
+			free: false,
+			pro: true,
+		},
+
+		{
+			feature: "Click To Scroll Top",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Search - Accordion",
+			free: false,
+			pro: true,
+		},
+
+		{
+			feature: "Schema",
+			isHeading: true,
+		},
+		{
+			feature: "Enable/Disable Schema ",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Hide any item in Schema ",
+			free: false,
+			pro: true,
+		},
+
+
+		{
+			feature: "Expand/Collapse All Features",
+			isHeading: true,
+		},
+
+		{
+			feature: "Expand All Custom Text",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Collapse All Custom Text",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Expand All Custom Icon",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Collapse All Custom Icon",
+			free: false,
+			pro: true,
+		},
+
+
+
+
+		{
+			feature: "Accordion Content Features",
+			isHeading: true,
+		},
+		{
+			feature: "Enable/Disable Embeds",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Enable/Disable Shortcodes",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Enable/Disable wpautop function",
+			free: false,
+			pro: true,
+		},
+
+		{
+			feature: "Content In-Out animation",
 			free: false,
 			pro: true,
 			new: true,
+			hot: true,
+
+		},
+		{
+			feature: "Edit content with WYSIWYG editor",
+			free: false,
+			pro: true,
+		},
+		{
+			feature: "Item Source",
+			isHeading: true,
+		},
+		{
+			feature: "Item Source - Manual",
+			free: false,
+			pro: true,
+		},
+
+		{
+			feature: "Generate items by AI",
+			free: false,
+			pro: true,
+			new: true,
+			hot: true,
 		},
 		{
 			feature: "Item Source - Posts",
@@ -55,65 +169,120 @@ function Html(props) {
 			new: true,
 		},
 		{
-			feature: "Preloader - Hide accordions until page load",
+			feature: "Accordion Header & Labels Features",
+			isHeading: true,
+		},
+		{
+			feature: "Edit header label with Richtext editor",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+		{
+			feature: "Edit header label toggled text",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+		{
+			feature: "Header active custom style",
 			free: false,
 			pro: true,
 		},
 		{
-			feature: "Autoembed - Enable/Disable emebed content",
+			feature: "Header label custom style",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+		{
+			feature: "Header label counter",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+		{
+			feature: "Header label counter position",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+
+		{
+			feature: "Header label icons",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+		{
+			feature: "Header label icons position",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+
+
+
+		{
+			feature: "Accordion Icons Features",
+			isHeading: true,
+		},
+
+
+		{
+			feature: "Icon In-Out animation",
+			free: false,
+			pro: true,
+			new: true,
+			hot: true,
+		},
+
+		{
+			feature: "Font-awesome Icons",
 			free: false,
 			pro: true,
 		},
 		{
-			feature: "Shortcodes - Enable/Disable third party shortcodes",
+			feature: "Iconfont Icons",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+		{
+			feature: "Bootstrap Icons",
+			free: false,
+			pro: true,
+			new: true,
+
+		},
+
+
+		{
+			feature: "Custom Idle Icon",
 			free: false,
 			pro: true,
 		},
 		{
-			feature: "wpautop - Enable/Disable wpautop function",
+			feature: "Custom Toggled Icon",
 			free: false,
 			pro: true,
 		},
 		{
-			feature: "Schema - Enable/Disable Schema to boost SEO",
+			feature: "Icon Position Left/Right",
 			free: false,
 			pro: true,
 		},
-		{
-			feature: "Toggle Text - Enable/Disable Toggle Text on accordion header",
-			free: false,
-			pro: true,
-		},
-		{
-			feature: "Expand/collapse All",
-			free: false,
-			pro: true,
-		},
-		{
-			feature: "Stats",
-			free: false,
-			pro: true,
-		},
-		{
-			feature: "Active Event",
-			free: false,
-			pro: true,
-		},
-		{
-			feature: "Click To Scroll Top",
-			free: false,
-			pro: true,
-		},
-		{
-			feature: "Animation Name",
-			free: false,
-			pro: true,
-		},
-		{
-			feature: "Search - Accordion",
-			free: false,
-			pro: true,
-		},
+
+
+
 	];
 
 	const ourPlugins = [
@@ -308,34 +477,67 @@ function Html(props) {
 							</thead>
 							<tbody className="bg-gray-100 text-gray-800">
 								{freeVsProArgs.map((item, index) => (
-									<tr
-										key={index}
-										className="even:bg-gray-200 last:rounded-b-md last:overflow-hidden">
-										<td className="py-3 px-8">
-											<div className="flex gap-2 items-center">
-												{item.feature && <span>{item.feature}</span>}
 
-												{item.new && (
-													<span className="text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full">
-														NEW
-													</span>
-												)}
-												{item.hot && (
-													<span className="text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-red-500 rounded-full">
-														HOT
-													</span>
-												)}
-											</div>
-										</td>
-										<td className="py-3 px-8  text-center">
-											{item.free && <span>✔️</span>}
-											{!item.free && <span>❌</span>}
-										</td>
-										<td className="py-3 px-8 text-center">
-											{item.pro && <span>✔️</span>}
-											{!item.pro && <span>❌</span>}
-										</td>
-									</tr>
+
+									<>
+										{item.isHeading && (
+											<tr
+												key={index}
+												className="bg-gray-400 last:rounded-b-md last:overflow-hidden">
+												<td className="py-3 px-8" colSpan={"3"}>
+													<div className="flex gap-2 items-center ">
+														{item.feature && <span className="text-base">{item.feature}</span>}
+
+														{item.new && (
+															<span className="text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full">
+																NEW
+															</span>
+														)}
+														{item.hot && (
+															<span className="text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-orange-400 rounded-full">
+																HOT
+															</span>
+														)}
+													</div>
+												</td>
+
+											</tr>
+
+										)}
+										{!item?.isHeading && (
+											<tr
+												key={index}
+												className="even:bg-gray-200 last:rounded-b-md last:overflow-hidden">
+												<td className="py-3 px-8">
+													<div className="flex gap-2 items-center">
+														{item.feature && <span>{item.feature}</span>}
+
+														{item.new && (
+															<span className="text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full">
+																NEW
+															</span>
+														)}
+														{item.hot && (
+															<span className="text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-orange-400 rounded-full">
+																HOT
+															</span>
+														)}
+													</div>
+												</td>
+												<td className="py-3 px-8  text-center">
+													{item.free && <span>✔️</span>}
+													{!item.free && <span>❌</span>}
+												</td>
+												<td className="py-3 px-8 text-center">
+													{item.pro && <span>✔️</span>}
+													{!item.pro && <span>❌</span>}
+												</td>
+											</tr>
+
+										)}
+
+
+									</>
 								))}
 							</tbody>
 						</table>

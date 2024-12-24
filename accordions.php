@@ -157,6 +157,9 @@ class Accordions
 
   public function _front_scripts()
   {
+    wp_register_style('accordions_animate', accordions_plugin_url . 'assets/css/animate.min.css');
+
+
     wp_enqueue_script('accordions_front_scripts', accordions_plugin_url . 'templates/accordions-builder/front-scripts.js', array('jquery'), '20181018');
 
     wp_register_script('accordions_js', accordions_plugin_url . 'assets/frontend/js/scripts.js', array('jquery'), time(), true);

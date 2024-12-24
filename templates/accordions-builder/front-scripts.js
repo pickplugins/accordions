@@ -234,12 +234,72 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							if (accordionHeader.classList.contains("accordion-header-active")) {
 								if (iconToggle != null) {
 									iconToggle.style.display = "inline-block";
+
+									//var entranceAnimation =										popupWrap.getAttribute("data-entrance-animation");
+									var entranceAnimation = "backInDown";
+
+									iconToggle.classList.add("animate__animated");
+									iconToggle.classList.add("animate__" + entranceAnimation);
+									setTimeout(() => {
+										iconToggle.classList.remove("animate__animated");
+										iconToggle.classList.remove("animate__" + entranceAnimation);
+										// popup.style.display = "none";
+									}, 2000);
+
+
+
+
+
+
 								}
 								if (iconIdle != null) {
 									iconIdle.style.display = "none";
+
+
+
+
+									var entranceAnimation = "backOutDown";
+
+									iconIdle.classList.add("animate__animated");
+									iconIdle.classList.add("animate__" + entranceAnimation);
+									setTimeout(() => {
+										iconIdle.classList.remove("animate__animated");
+										iconIdle.classList.remove("animate__" + entranceAnimation);
+										// popup.style.display = "none";
+									}, 2000);
+
+
+
+
+
+
+
 								}
 								content.style.display = "block";
 								content.style.height = "auto";
+
+
+
+
+								var entranceAnimation = "backInDown";
+
+								content.classList.add("animate__animated");
+								content.classList.add("animate__fast");
+								content.classList.add("animate__" + entranceAnimation);
+								setTimeout(() => {
+									content.classList.remove("animate__animated");
+									content.classList.remove("animate__" + entranceAnimation);
+									// popup.style.display = "none";
+								}, 800);
+
+
+
+
+
+
+
+
+
 							} else {
 								if (iconIdle != null) {
 									iconIdle.style.display = "inline-block";
@@ -247,8 +307,28 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								if (iconToggle != null) {
 									iconToggle.style.display = "none";
 								}
-								content.style.display = "none";
-								content.style.height = 0;
+								//content.style.display = "none";
+								//content.style.height = 0;
+
+
+
+
+								var entranceAnimation = "backOutDown";
+
+								content.classList.add("animate__animated");
+								content.classList.add("animate__fast");
+								content.classList.add("animate__" + entranceAnimation);
+								setTimeout(() => {
+									content.classList.remove("animate__animated");
+									content.classList.remove("animate__animated");
+									content.classList.remove("animate__" + entranceAnimation);
+									content.style.display = "none";
+								}, 800);
+
+
+
+
+
 							}
 						});
 					});
@@ -258,11 +338,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 			var expandCollapseAllHndle = document.querySelector("#" + window.pgAccordion.id + " " + window.pgAccordion.expandCollapseAllHndle);
+			if (expandCollapseAllHndle != null) {
+				expandCollapseAllHndle.addEventListener("click", function (event) {
 
-			expandCollapseAllHndle.addEventListener("click", function (event) {
+					window.pgAccordion.expandCollapseAll()
+				})
+			}
 
-				window.pgAccordion.expandCollapseAll()
-			})
 
 
 			// var nextWrap = document.querySelector("#" + window.pgAccordion.id + " .next ");
