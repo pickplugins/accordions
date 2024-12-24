@@ -39,7 +39,7 @@ function Html(props) {
 
 		{
 			feature: "Preloader - Hide accordions until page load",
-			free: false,
+			free: true,
 			pro: true,
 		},
 
@@ -67,7 +67,7 @@ function Html(props) {
 		},
 		{
 			feature: "Enable/Disable Schema ",
-			free: false,
+			free: true,
 			pro: true,
 		},
 		{
@@ -112,17 +112,17 @@ function Html(props) {
 		},
 		{
 			feature: "Enable/Disable Embeds",
-			free: false,
+			free: true,
 			pro: true,
 		},
 		{
 			feature: "Enable/Disable Shortcodes",
-			free: false,
+			free: true,
 			pro: true,
 		},
 		{
 			feature: "Enable/Disable wpautop function",
-			free: false,
+			free: true,
 			pro: true,
 		},
 
@@ -136,7 +136,7 @@ function Html(props) {
 		},
 		{
 			feature: "Edit content with WYSIWYG editor",
-			free: false,
+			free: true,
 			pro: true,
 		},
 		{
@@ -145,7 +145,7 @@ function Html(props) {
 		},
 		{
 			feature: "Item Source - Manual",
-			free: false,
+			free: true,
 			pro: true,
 		},
 
@@ -174,7 +174,7 @@ function Html(props) {
 		},
 		{
 			feature: "Edit header label with Richtext editor",
-			free: false,
+			free: true,
 			pro: true,
 			new: true,
 
@@ -246,7 +246,7 @@ function Html(props) {
 
 		{
 			feature: "Font-awesome Icons",
-			free: false,
+			free: true,
 			pro: true,
 		},
 		{
@@ -277,7 +277,7 @@ function Html(props) {
 		},
 		{
 			feature: "Icon Position Left/Right",
-			free: false,
+			free: true,
 			pro: true,
 		},
 
@@ -338,7 +338,7 @@ function Html(props) {
 						<span className="text-4xl font-extrabold">Accordions</span>{" "}
 						<span className="text-base">By PickPlugins</span>
 					</div>
-					<div className="font-mono text-sm">Version: 2.3.1</div>
+					<div className="font-mono text-sm">Version: 2.3.2</div>
 				</div>
 				<div className="">
 

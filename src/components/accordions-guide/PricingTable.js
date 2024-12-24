@@ -22,6 +22,7 @@ const PricingTable = ({ data }) => {
 			<div className="flex  items-center justify-center p-4">
 				<a
 					href={data.link}
+					target="_blank"
 					className="px-8 py-3 no-underline bg-blue-700 text-white cursor-pointer rounded-md"
 				>
 					Buy Now <i className="fas fa-cart-plus"></i>

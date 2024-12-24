@@ -33,34 +33,27 @@ function Html(props) {
 		return null;
 	}
 
-	var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
+	var [activeAccordion, setActiveAccordion] = useState(null);
 	var [postData, setpostData] = useState({
 		ID: null,
 		post_content: accordionDefaultData,
 		post_title: "",
-	}); // Using the hook.
-	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
+	});
+	var [accordionData, setaccordionData] = useState(postData.post_content);
 
-	var [debounce, setdebounce] = useState(0); // Using the hook.
-	var [isLoading, setisLoading] = useState(false); // Using the hook.
-	var [pleaseUpdate, setpleaseUpdate] = useState(false); // Using the hook.
-	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
+	var [isLoading, setisLoading] = useState(false);
+	var [pleaseUpdate, setpleaseUpdate] = useState(false);
 	const [optionData, setoptionData] = useState({});
-	const [optionDataSaved, setoptionDataSaved] = useState({});
 	const [roles, setroles] = useState([]);
-	var [needSave, setneedSave] = useState(false); // Using the hook.
-	var [isLoadings, setisLoadings] = useState(false); // Using the hook.
-	var [toggleSettings, settoggleSettings] = useState(false); // Using the hook.
+	var [needSave, setneedSave] = useState(false);
+	var [toggleSettings, settoggleSettings] = useState(false);
 
-	var [notifications, setnotifications] = useState([]); // Using the hook.
-	var [help, sethelp] = useState({ id: "createAccordion", enable: false }); // Using the hook.
+	var [notifications, setnotifications] = useState([]);
+	var [help, sethelp] = useState({ id: "", enable: false });
 
 	useEffect(() => {
 		setnotifications(notifications);
 
-		// setTimeout(() => {
-		// 	setnotifications([]);
-		// }, 5000);
 
 		const timer = setTimeout(() => {
 			setnotifications([]); // Update the debounced value after delay
@@ -88,7 +81,6 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 			if (res.status) {
-				setoptionDataSaved(optionData);
 				setneedSave(false);
 			}
 		});
@@ -185,7 +177,7 @@ function Html(props) {
 	}, []);
 
 	useEffect(() => {
-		setisLoadings(true);
+		setisLoading(true);
 		apiFetch({
 			path: "/accordions/v2/get_options",
 			method: "POST",
@@ -194,10 +186,9 @@ function Html(props) {
 			if (res.length != 0) {
 				var resX = { ...res };
 
-				setoptionDataSaved(resX);
 				setoptionData(resX);
 			}
-			setisLoadings(false);
+			setisLoading(false);
 		});
 	}, []);
 
@@ -210,7 +201,7 @@ function Html(props) {
 							<div className="flex items-center align-middle gap-3">
 								<div className="text-xl text-white">Accordions</div>
 								<div className="text-xs text-white flex items-center gap-2">
-									<span>2.3.1</span>{" "}
+									<span>2.3.2</span>{" "}
 									<span className="bg-lime-600 px-3 py-1 rounded-md">Beta</span>
 								</div>
 							</div>
@@ -247,24 +238,7 @@ function Html(props) {
 
 
 
-							{/* 
-							<div className=" tracking-wide ">
-								<div
-									className="py-1 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-									onClick={(ev) => {
-										ev.preventDefault();
-										ev.stopPropagation();
-										setAIWriter(!AIWriter);
-									}}>
-									{" "}
-									<Icon fill={"#fff"} icon={cog} />
-								</div>
-								{AIWriter && (
-									<Popover position="bottom right">
 
-									</Popover>
-								)}
-							</div> */}
 						</div>
 					</div>
 
@@ -282,7 +256,6 @@ function Html(props) {
 										<div
 											className="bg-amber-500 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white "
 											onClick={(ev) => {
-												// resetOptionData();
 												handleAlertConfirmation();
 											}}>
 											{__("Reset", "accordions")}

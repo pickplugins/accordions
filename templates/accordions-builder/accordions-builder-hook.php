@@ -91,6 +91,11 @@ function accordions_builder_accordion($post_id, $accordionData)
     $contentTag = !empty($contentOptions["tag"]) ? $contentOptions["tag"] : "div";
     $contentClass = isset($contentOptions["class"]) ? $contentOptions["class"] : "";
 
+    $contentInAnimation = isset($contentOptions["inAnimation"]) ? $contentOptions["inAnimation"] : "";
+    $contentOutAnimation = isset($contentOptions["outAnimation"]) ? $contentOptions["outAnimation"] : "";
+
+
+
     $header = isset($accordionData["header"]) ? $accordionData["header"] : [];
     $headerOptions = isset($header["options"]) ? $header["options"] : [];
     $headerTag = isset($headerOptions["tag"]) ? $headerOptions["tag"] : "div";
@@ -124,6 +129,8 @@ function accordions_builder_accordion($post_id, $accordionData)
     $iconTag = !empty($iconOptions["tag"]) ? $iconOptions["tag"] : "span";
     $iconClass = isset($iconOptions["class"]) ? $iconOptions["class"] : "";
     $iconPosition = isset($iconOptions["position"]) ? $iconOptions["position"] : "left";
+    $iconInAnimation = isset($iconOptions["inAnimation"]) ? $iconOptions["inAnimation"] : "";
+    $iconOutAnimation = isset($iconOptions["outAnimation"]) ? $iconOptions["outAnimation"] : "";
 
 
     $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : "fontAwesome";
@@ -199,13 +206,18 @@ function accordions_builder_accordion($post_id, $accordionData)
     $accordionDataAttr = [
         "id" => $blockId,
         "activeIndex" => $activeIndex,
+        "iconInAnimation" => $iconInAnimation,
+        "iconOutAnimation" => $iconOutAnimation,
+        "contentInAnimation" => $contentInAnimation,
+        "contentOutAnimation" => $contentOutAnimation,
+        "lazyLoad" => $lazyLoad,
     ];
 
 
 
 
 ?>
-    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
+    <div style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>" id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
 
         <div class="top-wrap">
 

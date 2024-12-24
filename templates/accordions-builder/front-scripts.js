@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	window.pgAccordion = {
 		id: "",
 		activeIndex: [999],
+		iconInAnimation: "",
+		iconOutAnimation: "",
+		contentInAnimation: "",
+		contentOutAnimation: "",
+		lazyLoad: false,
+
+
+
 		expandCollapseAllHndle: ".expand-collapse-all",
 		headerList: [],
 		listenUrlHash: () => {
@@ -184,12 +192,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var accordionData = accordion.getAttribute("data-pgaccordion");
 				var accordionDataObj = JSON.parse(accordionData);
 				var activeIndex = accordionDataObj.activeIndex;
+				var iconInAnimation = accordionDataObj.iconInAnimation;
+				var iconOutAnimation = accordionDataObj.iconOutAnimation;
+				var contentInAnimation = accordionDataObj.contentInAnimation;
+				var contentOutAnimation = accordionDataObj.contentOutAnimation;
+				var lazyLoad = accordionDataObj.lazyLoad;
+
+				if (lazyLoad) {
+					accordion.style.display = "block";
+				}
+
+
 				var accordionWrapId = accordionDataObj.id;
 				window.pgAccordion.id = accordionWrapId;
 
 
 
 				window.pgAccordion.activeIndex = activeIndex;
+				window.pgAccordion.iconInAnimation = iconInAnimation;
+				window.pgAccordion.iconOutAnimation = iconOutAnimation;
+				window.pgAccordion.contentInAnimation = contentInAnimation;
+				window.pgAccordion.contentOutAnimation = contentOutAnimation;
+				window.pgAccordion.lazyLoad = lazyLoad;
+
+
+
+
 				var accordionHeaders = document.querySelectorAll("#" + accordionWrapId + " .accordion-header");
 				var headerList = [];
 				accordionHeaders.forEach((header, index) => {
@@ -236,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									iconToggle.style.display = "inline-block";
 
 									//var entranceAnimation =										popupWrap.getAttribute("data-entrance-animation");
-									var entranceAnimation = "backInDown";
+									var entranceAnimation = window.pgAccordion.iconInAnimation;
 
 									iconToggle.classList.add("animate__animated");
 									iconToggle.classList.add("animate__" + entranceAnimation);
@@ -258,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-									var entranceAnimation = "backOutDown";
+									var entranceAnimation = window.pgAccordion.iconOutAnimation;
 
 									iconIdle.classList.add("animate__animated");
 									iconIdle.classList.add("animate__" + entranceAnimation);
@@ -281,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-								var entranceAnimation = "backInDown";
+								var entranceAnimation = window.pgAccordion.contentInAnimation;
 
 								content.classList.add("animate__animated");
 								content.classList.add("animate__fast");
@@ -311,9 +339,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								//content.style.height = 0;
 
 
-
-
-								var entranceAnimation = "backOutDown";
+								var entranceAnimation = window.pgAccordion.contentOutAnimation;
 
 								content.classList.add("animate__animated");
 								content.classList.add("animate__fast");

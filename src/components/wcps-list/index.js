@@ -214,7 +214,7 @@ function Html(props) {
 				<PGinputText
 					value={searchPrams.search}
 					placeholder={"Search.../Add New..."}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[180px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 					onChange={(newVal) => {
 						var searchPramsX = { ...searchPrams };
 						searchPramsX.search = newVal;
