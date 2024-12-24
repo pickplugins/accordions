@@ -439,7 +439,7 @@ function accordions_preview_content($content)
 {
     if (is_singular('accordions')) {
         $post_id = get_the_id();
-        $content .= do_shortcode('[accordions id="' . $post_id . '"]');
+        $content = do_shortcode('[accordions id="' . $post_id . '"]');
     }
 
     return $content;
@@ -809,7 +809,6 @@ function accordions_global_vars()
                 $i++;
             }
 
-            //echo "<pre>".var_export($mainEntity, true)."</pre>";
 
     ?>
             <script type="application/ld+json">

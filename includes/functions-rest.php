@@ -31,6 +31,17 @@ class AccordionsRest
 				},
 			)
 		);
+		register_rest_route(
+			'accordions/v2',
+			'/check_license',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'check_license'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 
@@ -188,6 +199,28 @@ class AccordionsRest
 
 
 		$response['status'] = $status;
+		$response['message'] = $message;
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return check_license
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function check_license($request)
+	{
+		$response = [];
+
+
+		$license_key = isset($request['license_key']) ? sanitize_text_field($request['license_key']) : '';
+		$message = "";
+
+
+
+		//$response['status'] = $status;
 		$response['message'] = $message;
 
 		die(wp_json_encode($response));
