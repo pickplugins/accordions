@@ -568,7 +568,7 @@ if (!class_exists('settings_tabs_field')) {
                 </div>
                 <input type="text" placeholder="<?php echo esc_attr($placeholder); ?>" name="<?php echo esc_attr($field_name); ?>" id="media_input_<?php echo esc_attr($css_id); ?>" value="<?php echo esc_attr($value); ?>" />
                 <div class="media-upload button" id="media_upload_<?php echo esc_attr($css_id); ?>"><?php echo __('Upload', $this->textdomain); ?></div>
-                <div class="clear button" id="media_clear_<?php echo esc_attr($css_id); ?>"><?php echo __('Clear', 'post-grid'); ?></div>
+                <div class="clear button" id="media_clear_<?php echo esc_attr($css_id); ?>"><?php echo __('Clear', 'accordions'); ?></div>
                 <div class="error-mgs"></div>
             </div>
 
@@ -671,7 +671,7 @@ if (!class_exists('settings_tabs_field')) {
 
             <div id="input-wrapper-<?php echo esc_attr($css_id); ?>" class=" input-wrapper field-repeatable-wrapper
             field-repeatable-wrapper-<?php echo esc_attr($css_id); ?>">
-                <div add_html="<?php echo esc_attr($fieldHtml); ?>" class="add-repeat-field"><i class="far fa-plus-square"></i> <?php _e('Add', 'post-grid'); ?></div>
+                <div add_html="<?php echo esc_attr($fieldHtml); ?>" class="add-repeat-field"><i class="far fa-plus-square"></i> <?php _e('Add', 'accordions'); ?></div>
                 <div class="repeatable-field-list sortable" id="<?php echo esc_attr($css_id); ?>">
                     <?php
                     if (!empty($values)) :

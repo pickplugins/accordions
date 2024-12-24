@@ -20,7 +20,7 @@
     "src",
     "templates",
     "dist",
-    "post-grid.php"
+    "accordions.php"
   ],
   "keywords": [],
   "author": "",

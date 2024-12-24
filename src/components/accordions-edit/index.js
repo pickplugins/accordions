@@ -87,8 +87,9 @@ function Html(props) {
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
+	var [customerData, setcustomerData] = useState(props.customerData);
+	var [isProFeature, setisProFeature] = useState(true);
 
-	var isProFeature = true;
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -132,6 +133,20 @@ function Html(props) {
 			setTaxonomiesObjects(taxonomies);
 		});
 	}, []);
+
+
+
+	useEffect(() => {
+		console.log(props.customerData);
+
+		if (customerData.isPro) {
+			setisProFeature(false)
+
+		}
+
+	}, [props.customerData]);
+
+
 
 	useEffect(() => { }, [props.postData]);
 
@@ -655,7 +670,8 @@ function Html(props) {
 												setitems(itemsX);
 
 												addNotifications({
-													content: "Item Added",
+													title: "Item Added",
+													content: "You just added an item, Now go to edit.",
 													type: "success",
 												});
 											}}>
@@ -770,7 +786,8 @@ function Html(props) {
 																	setitems([...faqX, ...itemsX]);
 
 																	addNotifications({
-																		content: "Items append",
+																		title: "Items append",
+																		content: "Items append, You can customize now.",
 																		type: "success",
 																	});
 																}
@@ -827,7 +844,8 @@ function Html(props) {
 																	setitems([...itemsX, ...faqX]);
 
 																	addNotifications({
-																		content: "Items append",
+																		title: "Items Append",
+																		content: "Items append, You can customize now.",
 																		type: "success",
 																	});
 																}
@@ -884,7 +902,8 @@ function Html(props) {
 																	setitems(faqX);
 
 																	addNotifications({
-																		content: "Items Added",
+																		title: "Items Added",
+																		content: "You just added an item, Now go to edit.",
 																		type: "success",
 																	});
 																}
@@ -1295,6 +1314,17 @@ function Html(props) {
 									handle={".handle"}
 									setList={(item) => {
 										setitems(item);
+
+
+										addNotifications({
+											title: "Items Sorted",
+											content: "You just sorted items",
+											type: "success",
+										});
+
+
+
+
 									}}>
 									{items?.map((item, index) => {
 										return (
@@ -1313,10 +1343,24 @@ function Html(props) {
 															<span
 																className="cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
 																onClick={(ev) => {
+																	ev.stopPropagation();
+
 																	var itemsX = [...items];
 																	var itemToDup = { ...itemsX[index] };
 																	itemsX.splice(index + 1, 0, itemToDup);
 																	setitems(itemsX);
+
+
+																	addNotifications({
+																		title: "Item Duplicated",
+																		content: "You just duplicate an item",
+																		type: "success",
+																	});
+
+
+
+
+
 																}}>
 																<Icon fill={"#fff"} icon={copy} />
 															</span>
@@ -1327,6 +1371,17 @@ function Html(props) {
 																	var itemsX = [...items];
 																	itemsX.splice(index, 1);
 																	setitems(itemsX);
+
+
+																	addNotifications({
+																		title: "Item Removed",
+																		content: "You just removed an item",
+																		type: "success",
+																	});
+
+
+
+
 																}}>
 																<Icon fill={"#fff"} icon={close} />
 															</span>
@@ -2438,12 +2493,12 @@ function Html(props) {
 							opened={isProFeature ? false : null}
 							title={
 								<span className="flex justify-between w-full gap-2">
-									<span>{__("Label Counter", "post-grid")}</span>
+									<span>{__("Label Counter", "accordions")}</span>
 									{isProFeature && (
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 										>
-											{__("Pro", "post-grid")}
+											{__("Pro", "accordions")}
 										</span>
 									)}
 								</span>
@@ -2574,7 +2629,7 @@ function Html(props) {
 							opened={isProFeature ? false : null}
 							title={
 								<span className="flex justify-between w-full gap-2">
-									<span>{__("Label Icon", "post-grid")}</span>
+									<span>{__("Label Icon", "accordions")}</span>
 									{isProFeature ? (
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
@@ -2584,7 +2639,7 @@ function Html(props) {
 													"_blank"
 												);
 											}}>
-											{__("Pro", "post-grid")}
+											{__("Pro", "accordions")}
 										</span>
 									) : (
 										""
@@ -2739,12 +2794,12 @@ function Html(props) {
 
 							title={
 								<span className="flex justify-between w-full gap-2">
-									<span>{__("Icon Idle", "post-grid")}</span>
+									<span>{__("Icon Idle", "accordions")}</span>
 									{isProFeature && (
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 										>
-											{__("Pro", "post-grid")}
+											{__("Pro", "accordions")}
 										</span>
 									)}
 								</span>
@@ -3006,12 +3061,12 @@ function Html(props) {
 
 							title={
 								<span className="flex justify-between w-full gap-2">
-									<span>{__("Icon Idle", "post-grid")}</span>
+									<span>{__("Icon Idle", "accordions")}</span>
 									{isProFeature && (
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 										>
-											{__("Pro", "post-grid")}
+											{__("Pro", "accordions")}
 										</span>
 									)}
 								</span>
@@ -3107,12 +3162,12 @@ function Html(props) {
 
 						title={
 							<span className="flex justify-between w-full gap-2">
-								<span>{__("Icon Idle", "post-grid")}</span>
+								<span>{__("Icon Idle", "accordions")}</span>
 								{isProFeature && (
 									<span
 										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 									>
-										{__("Pro", "post-grid")}
+										{__("Pro", "accordions")}
 									</span>
 								)}
 							</span>
@@ -3236,7 +3291,7 @@ function Html(props) {
 										</PanelRow>
 										<PanelRow>
 											<label htmlFor="" className="font-medium text-slate-900 ">
-												{__("Expand All Icon", "post-grid")}
+												{__("Expand All Icon", "accordions")}
 											</label>
 											<PGIconPicker
 												library={
@@ -3265,7 +3320,7 @@ function Html(props) {
 										</PanelRow>
 										<PanelRow>
 											<label htmlFor="" className="font-medium text-slate-900 ">
-												{__("Collapse All Icon", "post-grid")}
+												{__("Collapse All Icon", "accordions")}
 											</label>
 											<PGIconPicker
 												library={
@@ -3349,12 +3404,12 @@ function Html(props) {
 
 						title={
 							<span className="flex justify-between w-full gap-2">
-								<span>{__("Top Wrap", "post-grid")}</span>
+								<span>{__("Top Wrap", "accordions")}</span>
 								{isProFeature && (
 									<span
 										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 									>
-										{__("Pro", "post-grid")}
+										{__("Pro", "accordions")}
 									</span>
 								)}
 							</span>
@@ -3434,12 +3489,12 @@ function Html(props) {
 					<PanelBody title="Search" initialOpen={false}
 						title={
 							<span className="flex justify-between w-full gap-2">
-								<span>{__("Search", "post-grid")}</span>
+								<span>{__("Search", "accordions")}</span>
 								{isProFeature && (
 									<span
 										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 									>
-										{__("Pro", "post-grid")}
+										{__("Pro", "accordions")}
 									</span>
 								)}
 							</span>
@@ -3483,7 +3538,7 @@ function Html(props) {
 								opened={isProFeature ? false : null}
 								title={
 									<span className="flex justify-between w-full gap-2">
-										<span>{__("Search Input", "post-grid")}</span>
+										<span>{__("Search Input", "accordions")}</span>
 										{isProFeature ? (
 											<span
 												className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
@@ -3493,7 +3548,7 @@ function Html(props) {
 														"_blank"
 													);
 												}}>
-												{__("Pro", "post-grid")}
+												{__("Pro", "accordions")}
 											</span>
 										) : (
 											""
@@ -3626,13 +3681,14 @@ class AccordionsEdit extends Component {
 	}
 
 	render() {
-		var { onChange, postData, addNotifications, setHelp } = this.props;
+		var { onChange, postData, customerData, addNotifications, setHelp } = this.props;
 
 		return (
 			<Html
 				onChange={onChange}
 				addNotifications={addNotifications}
 				postData={postData}
+				customerData={customerData}
 				setHelp={setHelp}
 				warn={this.state.showWarning}
 				isLoaded={this.state.isLoaded}

@@ -187,7 +187,7 @@ class AccordionsRest
 
 
 		$name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
-		$value = isset($request['value']) ? post_grid_recursive_sanitize_arr($request['value']) : '';
+		$value = isset($request['value']) ? accordions_recursive_sanitize_arr($request['value']) : '';
 		$message = "";
 		if (!empty($value)) {
 			$status = update_option($name, $value);

@@ -1745,14 +1745,14 @@ function Html(props) {
 						opened={isProFeature ? false : null}
 						title={
 							<span className="flex justify-between w-full gap-2">
-								<span>{__("Label Counter", "post-grid")}</span>
+								<span>{__("Label Counter", "accordions")}</span>
 								{isProFeature ? (
 									<span
 										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 										onClick={(ev) => {
 											window.open("https://comboblocks.com/pricing/", "_blank");
 										}}>
-										{__("Pro", "post-grid")}
+										{__("Pro", "accordions")}
 									</span>
 								) : (
 									""
@@ -2569,13 +2569,14 @@ class TabsEdit extends Component {
 	}
 
 	render() {
-		var { onChange, postData, addNotifications, setHelp } = this.props;
+		var { onChange, postData, customerData, addNotifications, setHelp } = this.props;
 
 		return (
 			<Html
 				onChange={onChange}
 				addNotifications={addNotifications}
 				postData={postData}
+				customerData={customerData}
 				setHelp={setHelp}
 				warn={this.state.showWarning}
 				isLoaded={this.state.isLoaded}
