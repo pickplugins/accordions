@@ -8,6 +8,7 @@ import {
 	SelectControl,
 	Popover,
 } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 import {
 	createElement,
 	useCallback,
@@ -23,6 +24,7 @@ import { link, linkOff } from "@wordpress/icons";
 import fontawesomeClasses from "./fontawesome-classes";
 import iconfontClasses from "./iconfont-classes";
 import bootstrapIcons from "./bootstrap-icons";
+import PGDropdown from "../dropdown";
 
 function Html(props) {
 	if (!props.warn) {
@@ -110,7 +112,27 @@ function Html(props) {
 					<div className="w-72 p-2 pg-setting-input-text  custom-scrollbar relative ">
 						<div className="w-[calc(100%_-_8px)] fixed top-0 left-0  p-1 bg-white ">
 							<PanelRow>
-								<SelectControl
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={__("Choose", "accordions")}
+									options={[
+										{ label: "Choose Library", value: "" },
+										{ label: "Font Awesome", value: "fontAwesome" },
+										{ label: "IconFont", value: "iconFont" },
+										{ label: "Bootstrap Icons", value: "bootstrap" },
+										// { label: 'Material', value: 'material' },
+									]}
+									onChange={(newVal) => {
+										setIconData({ ...iconData, library: newVal.value });
+										props.onChange({
+											iconSrc: iconSrc,
+											library: newVal,
+											srcType: srcType,
+										});
+									}}
+									values=""></PGDropdown>
+								{/* <SelectControl
 									label=""
 									value={iconData.library}
 									options={[
@@ -128,7 +150,7 @@ function Html(props) {
 											srcType: srcType,
 										});
 									}}
-								/>
+								/> */}
 
 								<InputControl
 									placeholder="Search for icons"

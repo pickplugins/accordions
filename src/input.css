@@ -82,6 +82,9 @@
   @apply bg-gray-800 dark:bg-gray-200 rounded;
 }
 
+.pg-setting-input-text .components-toggle-control{
+  margin-bottom: 0 !important;
+}
 
 
 .block-editor-block-inspector .components-base-control {
