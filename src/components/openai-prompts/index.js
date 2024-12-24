@@ -27,7 +27,6 @@ function Html(props) {
   var aiModel = promptsAgs?.aiModel ?? "gpt-4-turbo";
   var objective = promptsAgs?.objective ?? "";
 
-  let isProFeature = applyFilters("isProFeature", true);
   const [optionData, setoptionData] = useState({});
 
   const [isLoading, setisLoading] = useState(false);
@@ -1225,20 +1224,13 @@ function Html(props) {
 
         <div className="flex items-center gap-3 my-3">
           <div className='cursor-pointer text-center my-3 bg-gray-700 hover:bg-gray-600 rounded-sm text-white px-3 py-2' onClick={ev => {
-            if (isProFeature) {
-              alert("This feature is only available in Pro Version.");
-              return;
-            }
+
             getGTP();
           }}>
 
 
 
-            {isProFeature && (
-              <span className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white">
-                Pro
-              </span>
-            )}
+
 
             {isLoading && (
               <span> {__("Please wait...", "accordions")}</span>

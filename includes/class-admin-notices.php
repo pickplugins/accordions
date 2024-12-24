@@ -14,7 +14,7 @@ class class_accordions_notices
 
     public function beta_test()
     {
-        //delete_option("accordions_notices");
+        delete_option("accordions_notices");
 
 
         $screen = get_current_screen();
@@ -32,8 +32,11 @@ class class_accordions_notices
         ob_start();
         if ($is_hidden == 'no') :
 ?>
-            <div class="notice notice-error">
-                <p>Try new modern react based <strong><a target="_blank" href="<?php echo admin_url(); ?>edit.php?post_type=accordions&page=accordions-builder">accordion builder</a></strong> <a style="margin: 0 20px;" class="" href="<?php echo esc_url_raw($actionurl) ?>">❌ Hide</a></p>
+            <div class="notice">
+
+                <h3>⚡ Intorducing React Based Modern Builder for Accordions, <strong><a target="_blank" href="<?php echo admin_url(); ?>edit.php?post_type=accordions&page=accordions-builder">Try Now</a></strong></h3>
+
+                <p> <a style="margin: 0 20px;" class="" href="<?php echo esc_url_raw($actionurl) ?>">❌ Hide Notice</a></p>
             </div>
         <?php
         endif;

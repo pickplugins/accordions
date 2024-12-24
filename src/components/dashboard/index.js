@@ -53,6 +53,8 @@ function Html(props) {
 
 	var [notifications, setnotifications] = useState([]);
 	var [help, sethelp] = useState({ id: "", enable: false });
+	var [customerData, setcustomerData] = useState({ id: "", isPro: false });
+	var [isProFeature, setisProFeature] = useState(true);
 
 	useEffect(() => {
 		setnotifications(notifications);
@@ -64,6 +66,18 @@ function Html(props) {
 
 		return () => clearTimeout(timer); // Cleanup timer on value change or unmount
 	}, [notifications]);
+	useEffect(() => {
+
+		if (customerData.isPro) {
+			setisProFeature(false)
+
+		}
+
+	}, [customerData]);
+
+
+
+
 
 	function handleAlertConfirmation() {
 		if (confirm("Are you sure you want to reset the option data?")) {
@@ -188,6 +202,9 @@ function Html(props) {
 		}).then((res) => {
 			if (res.length != 0) {
 				var resX = { ...res };
+				if (resX?.license_key.length > 0) {
+					setcustomerData({ ...customerData, isPro: true })
+				}
 
 				setoptionData(resX);
 			}
@@ -379,7 +396,7 @@ function Html(props) {
 											}}
 										/>
 									</div>
-									{/* <div className="my-5">
+									<div className="my-5">
 										<label className="text-base" htmlFor="">
 											{__("License Key", "accordions")}
 										</label>
@@ -387,16 +404,16 @@ function Html(props) {
 										<PGinputText
 											label=""
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[250px]"
-											value={optionData?.licenseKey ?? ""}
+											value={optionData?.license_key ?? ""}
 											onChange={(newVal) => {
 												var optionsX = {
 													...optionData,
-													licenseKey: newVal,
+													license_key: newVal,
 												};
 												setoptionData(optionsX);
 											}}
 										/>
-									</div> */}
+									</div>
 								</div>
 							</div>
 
@@ -463,6 +480,7 @@ function Html(props) {
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}
+														customerData={customerData}
 														setHelp={setHelp}
 													/>
 												)}
@@ -471,6 +489,7 @@ function Html(props) {
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}
+														customerData={customerData}
 														setHelp={setHelp}
 													/>
 												)}
@@ -581,7 +600,7 @@ function Html(props) {
 																	<span
 																		className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 																	>
-																		{__("Pro", "post-grid")}
+																		{__("Pro", "accordions")}
 																	</span>
 																)}
 															</>

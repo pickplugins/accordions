@@ -129,7 +129,10 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 					}}>
 					<Icon fill={"#fff"} icon={close} />
 				</span>
-				<div className="mb-4 text-2xl font-bold">{helpPrams[help?.id]?.title}</div>
+
+				<h3>Coming Soon...</h3>
+
+				{/* <div className="mb-4 text-2xl font-bold">{helpPrams[help?.id]?.title}</div>
 				<div className="flex items-center  gap-2 align-middle"></div>
 				<a className=" flex items-center gap-2 py-2 px-3 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
 					<Icon fill={"#fff"} icon={external} />
@@ -138,7 +141,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 				<div className="my-4 text-base">{helpPrams[help?.id]?.content}</div>
 				<div className="my-4 text-base">
 					<iframe width="100%" height="450" src={`https://www.youtube.com/embed/${helpPrams[help?.id]?.video}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
