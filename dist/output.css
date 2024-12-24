@@ -1973,6 +1973,10 @@
   }
 }
 
+.pg-setting-input-text .components-toggle-control{
+  margin-bottom: 0 !important;
+}
+
 .block-editor-block-inspector .components-base-control {
   margin-bottom: 0;
 }

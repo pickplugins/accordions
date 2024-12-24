@@ -27,6 +27,9 @@ import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
+import { popupEntranceAnimateBasic } from "./inAnimation";
+import { popupCloseAnimateBasic } from "./outAnimation";
+import Toggle from "./toggle";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -85,7 +88,7 @@ function Html(props) {
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
 
-	var isProFeature = false
+	var isProFeature = false;
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -130,7 +133,7 @@ function Html(props) {
 		});
 	}, []);
 
-	useEffect(() => { }, [props.postData]);
+	useEffect(() => {}, [props.postData]);
 
 	useEffect(() => {
 		onChange(accordionData);
@@ -477,7 +480,6 @@ function Html(props) {
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
 		// tabs: { label: "Tabs", value: "tabs" },
-
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
@@ -1510,19 +1512,9 @@ function Html(props) {
 										<Icon icon={help} />
 									</span>
 								</label>
-								<SelectControl
-									className="w-[140px]"
-									label=""
+								<Toggle
 									value={globalOptions?.lazyLoad}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
 									onChange={(newVal) => {
-										// var globalOptionsX = { ...globalOptions };
-										// globalOptionsX.lazyLoad = newVal;
-										// setglobalOptions(globalOptionsX);
-
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.lazyLoad = newVal;
 										setglobalOptions(globalOptionsX);
@@ -1546,14 +1538,8 @@ function Html(props) {
 									</span>
 								</label>
 
-								<SelectControl
-									className="w-[140px]"
-									label=""
+								<Toggle
 									value={globalOptions?.schema}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.schema = newVal;
@@ -1577,8 +1563,15 @@ function Html(props) {
 										<Icon icon={help} />
 									</span>
 								</label>
-
-								<SelectControl
+								<Toggle
+									value={globalOptions?.stats}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.stats = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+								{/* <SelectControl
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.stats}
@@ -1591,13 +1584,32 @@ function Html(props) {
 										globalOptionsX.stats = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
-								/>
+								/> */}
 							</PanelRow>
 
 							<PanelRow>
 								<label htmlFor="">Active Event</label>
 
-								<SelectControl
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									buttonTitle={__("Choose", "accordions")}
+									options={[
+										{ label: __("Click", "accordions"), value: "click" },
+										{
+											label: __("Mouseover", "accordions"),
+											value: "mouseover",
+										},
+										{ label: __("Focus", "accordions"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.activeEvent = newVal.value;
+										setglobalOptions(globalOptionsX);
+									}}
+									values=""></PGDropdown>
+
+								{/* <SelectControl
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.activeEvent}
@@ -1614,7 +1626,7 @@ function Html(props) {
 										globalOptionsX.activeEvent = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
-								/>
+								/> */}
 							</PanelRow>
 							<PanelRow>
 								<label htmlFor="">URL Hash</label>
@@ -1652,7 +1664,15 @@ function Html(props) {
 										<Icon icon={help} />
 									</span>
 								</label>
-								<SelectControl
+								<Toggle
+									value={globalOptions?.clickToScrollTop}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.clickToScrollTop = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+								{/* <SelectControl
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.clickToScrollTop}
@@ -1665,7 +1685,7 @@ function Html(props) {
 										globalOptionsX.clickToScrollTop = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
-								/>
+								/> */}
 							</PanelRow>
 							{globalOptions?.clickToScrollTop && (
 								<PanelRow className="w-full">
@@ -1699,7 +1719,15 @@ function Html(props) {
 										<Icon icon={help} />
 									</span>
 								</label>
-								<SelectControl
+								<Toggle
+									value={globalOptions?.animationName}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.animationName = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+								{/* <SelectControl
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.animationName}
@@ -1712,7 +1740,7 @@ function Html(props) {
 										globalOptionsX.animationName = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
-								/>
+								/> */}
 							</PanelRow>
 							{globalOptions?.animationName && (
 								<PanelRow>
@@ -1739,7 +1767,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1817,7 +1845,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1852,7 +1880,6 @@ function Html(props) {
 										}}
 									/>
 								</div>
-
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
 										Autoembed{" "}
@@ -1868,7 +1895,20 @@ function Html(props) {
 											<Icon icon={help} />
 										</span>
 									</label>
-									<SelectControl
+									<Toggle
+										value={content?.options?.autoembed}
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													autoembed: newVal,
+												},
+											};
+											setcontent(optionsX);
+										}}
+									/>
+									{/* <SelectControl
 										className="w-[140px]"
 										label=""
 										value={globalOptions?.autoembed}
@@ -1886,7 +1926,7 @@ function Html(props) {
 											};
 											setcontent(optionsX);
 										}}
-									/>
+									/> */}
 								</PanelRow>
 
 								<PanelRow>
@@ -1905,14 +1945,8 @@ function Html(props) {
 										</span>
 									</label>
 
-									<SelectControl
-										className="w-[140px]"
-										label=""
+									<Toggle
 										value={globalOptions?.shortcodes}
-										options={[
-											{ label: __("True", "accordions"), value: 1 },
-											{ label: __("False", "accordions"), value: 0 },
-										]}
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
@@ -1941,14 +1975,8 @@ function Html(props) {
 										</span>
 									</label>
 
-									<SelectControl
-										className="w-[140px]"
-										label=""
+									<Toggle
 										value={content?.options?.wpautop}
-										options={[
-											{ label: __("True", "accordions"), value: 1 },
-											{ label: __("False", "accordions"), value: 0 },
-										]}
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
@@ -1960,6 +1988,62 @@ function Html(props) {
 											setcontent(optionsX);
 										}}
 									/>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										IN Animation
+									</label>
+
+									<PGDropdown
+										position="bottom right"
+										variant="secondary"
+										buttonTitle={
+											popupEntranceAnimateBasic[content.options.inAnimation] ==
+											undefined
+												? __("Choose", "accordions")
+												: popupEntranceAnimateBasic[content.options.inAnimation]
+														.label
+										}
+										options={popupEntranceAnimateBasic}
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													inAnimation: newVal.value,
+												},
+											};
+											setcontent(optionsX);
+										}}
+										values=""></PGDropdown>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										OUT Animation
+									</label>
+
+									<PGDropdown
+										position="bottom right"
+										variant="secondary"
+										buttonTitle={
+											popupCloseAnimateBasic[content.options.outAnimation] ==
+											undefined
+												? __("Choose", "accordions")
+												: popupCloseAnimateBasic[content.options.outAnimation]
+														.label
+										}
+										options={popupCloseAnimateBasic}
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													outAnimation: newVal.value,
+												},
+											};
+											setcontent(optionsX);
+										}}
+										values=""></PGDropdown>
 								</PanelRow>
 							</PGtab>
 							<PGtab name="styles">
@@ -1999,7 +2083,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -2051,14 +2135,8 @@ function Html(props) {
 											</span>
 										</label>
 
-										<SelectControl
-											className="w-[140px]"
-											label=""
+										<Toggle
 											value={header?.options?.toggleText}
-											options={[
-												{ label: __("True", "accordions"), value: 1 },
-												{ label: __("False", "accordions"), value: 0 },
-											]}
 											onChange={(newVal) => {
 												var optionsX = {
 													...header,
@@ -2076,7 +2154,13 @@ function Html(props) {
 									<PGStyles
 										obj={header}
 										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(sudoScource, newVal, attr, header, setheader)
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												header,
+												setheader
+											)
 										}
 										onAdd={(sudoScource, key) =>
 											onAddStyle(sudoScource, key, header, setheader)
@@ -2102,7 +2186,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -2151,7 +2235,12 @@ function Html(props) {
 											)
 										}
 										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, headerActive, setheaderActive)
+											onAddStyle(
+												sudoScource,
+												key,
+												headerActive,
+												setheaderActive
+											)
 										}
 										onRemove={(sudoScource, key) =>
 											onRemoveStyle(
@@ -2184,7 +2273,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -2236,7 +2325,12 @@ function Html(props) {
 											onAddStyle(sudoScource, key, headerLabel, setheaderLabel)
 										}
 										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, headerLabel, setheaderLabel)
+											onRemoveStyle(
+												sudoScource,
+												key,
+												headerLabel,
+												setheaderLabel
+											)
 										}
 										onReset={(sudoSources) =>
 											onResetStyle(sudoSources, headerLabel, setheaderLabel)
@@ -2264,7 +2358,10 @@ function Html(props) {
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 											onClick={(ev) => {
-												window.open("https://comboblocks.com/pricing/", "_blank");
+												window.open(
+													"https://comboblocks.com/pricing/",
+													"_blank"
+												);
 											}}>
 											{__("Pro", "post-grid")}
 										</span>
@@ -2278,7 +2375,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -2363,7 +2460,12 @@ function Html(props) {
 											)
 										}
 										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, labelCounter, setlabelCounter)
+											onAddStyle(
+												sudoScource,
+												key,
+												labelCounter,
+												setlabelCounter
+											)
 										}
 										onRemove={(sudoScource, key) =>
 											onRemoveStyle(
@@ -2399,7 +2501,10 @@ function Html(props) {
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 											onClick={(ev) => {
-												window.open("https://comboblocks.com/pricing/", "_blank");
+												window.open(
+													"https://comboblocks.com/pricing/",
+													"_blank"
+												);
 											}}>
 											{__("Pro", "post-grid")}
 										</span>
@@ -2413,7 +2518,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -2537,7 +2642,12 @@ function Html(props) {
 											onResetStyle(sudoSources, labelIcon, setlabelIcon)
 										}
 										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(sudoSource, cssObj, labelIcon, setlabelIcon)
+											onBulkAddStyle(
+												sudoSource,
+												cssObj,
+												labelIcon,
+												setlabelIcon
+											)
 										}
 									/>
 								</PGtab>
@@ -2545,8 +2655,7 @@ function Html(props) {
 						</PanelBody>
 					</PanelBody>
 
-					<PanelBody title="Icons" initialOpen={false}
-					>
+					<PanelBody title="Icons" initialOpen={false}>
 						<PanelBody
 							className="font-medium text-slate-900 "
 							title="Icon Idle"
@@ -2555,7 +2664,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -2622,7 +2731,31 @@ function Html(props) {
 										<label htmlFor="" className="font-medium text-slate-900 ">
 											{__("Icon position", "accordions")}
 										</label>
-										<SelectControl
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={__("Choose", "accordions")}
+											options={[
+												{
+													label: __("Choose Position", "accordions"),
+													value: "",
+												},
+												{ label: __("Left", "accordions"), value: "left" },
+												{ label: __("Right", "accordions"), value: "right" },
+											]}
+											onChange={(newVal) => {
+												var iconX = { ...icon };
+
+												var optionsX = {
+													...iconX.options,
+													position: newVal.value,
+												};
+
+												iconX.options = optionsX;
+												seticon(iconX);
+											}}
+											values=""></PGDropdown>
+										{/* <SelectControl
 											label=""
 											value={icon.options.position}
 											options={[
@@ -2644,10 +2777,10 @@ function Html(props) {
 												iconX.options = optionsX;
 												seticon(iconX);
 											}}
-										/>
+										/> */}
 									</PanelRow>
 									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
+										<label className="" htmlFor="">
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
@@ -2665,6 +2798,62 @@ function Html(props) {
 											}}
 										/>
 									</div>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											IN Animation
+										</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												popupEntranceAnimateBasic[icon.options.inAnimation] ==
+												undefined
+													? __("Choose", "accordions")
+													: popupEntranceAnimateBasic[icon.options.inAnimation]
+															.label
+											}
+											options={popupEntranceAnimateBasic}
+											onChange={(newVal) => {
+												var optionsX = {
+													...icon,
+													options: {
+														...icon.options,
+														inAnimation: newVal.value,
+													},
+												};
+												seticon(optionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											OUT Animation
+										</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												popupCloseAnimateBasic[icon.options.outAnimation] ==
+												undefined
+													? __("Choose", "accordions")
+													: popupCloseAnimateBasic[icon.options.outAnimation]
+															.label
+											}
+											options={popupCloseAnimateBasic}
+											onChange={(newVal) => {
+												var optionsX = {
+													...icon,
+													options: {
+														...icon.options,
+														outAnimation: newVal.value,
+													},
+												};
+												seticon(optionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -2696,7 +2885,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => { }}
+								onSelect={(tabName) => {}}
 								tabs={[
 									{
 										name: "options",
@@ -2767,7 +2956,6 @@ function Html(props) {
 						</PanelBody>
 					</PanelBody>
 
-
 					<PanelBody
 						className="font-medium text-slate-900 "
 						// title="Expand/Collapse All"
@@ -2793,7 +2981,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2845,14 +3033,8 @@ function Html(props) {
 										</span>
 									</label>
 
-									<SelectControl
-										className="w-[140px]"
-										label=""
-										value={expandCollapseAll.options.enable ?? 0}
-										options={[
-											{ label: __("True", "accordions"), value: 1 },
-											{ label: __("False", "accordions"), value: 0 },
-										]}
+									<Toggle
+										value={expandCollapseAll?.options?.enable}
 										onChange={(newVal) => {
 											var expandCollapseAllX = {
 												...expandCollapseAll,
@@ -3021,7 +3203,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -3087,7 +3269,6 @@ function Html(props) {
 					</PanelBody>
 
 					<PanelBody title="Search" initialOpen={false}>
-
 						<PanelRow className="my-5">
 							<label htmlFor="" className="flex gap-2 items-center">
 								Enable Search?
@@ -3104,14 +3285,10 @@ function Html(props) {
 								</span>
 							</label>
 
-							<SelectControl
+							<Toggle
 								className="w-[140px]"
 								label=""
-								value={searchInput.options.enable ?? 0}
-								options={[
-									{ label: __("True", "accordions"), value: 1 },
-									{ label: __("False", "accordions"), value: 0 },
-								]}
+								value={searchInput?.options?.enable}
 								onChange={(newVal) => {
 									var searchInputX = {
 										...searchInput,
@@ -3134,7 +3311,10 @@ function Html(props) {
 											<span
 												className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
 												onClick={(ev) => {
-													window.open("https://comboblocks.com/pricing/", "_blank");
+													window.open(
+														"https://comboblocks.com/pricing/",
+														"_blank"
+													);
 												}}>
 												{__("Pro", "post-grid")}
 											</span>
@@ -3148,7 +3328,7 @@ function Html(props) {
 									activeTab="options"
 									orientation="horizontal"
 									activeClass="active-tab"
-									onSelect={(tabName) => { }}
+									onSelect={(tabName) => {}}
 									tabs={[
 										{
 											name: "options",
@@ -3180,14 +3360,8 @@ function Html(props) {
 												</span>
 											</label>
 
-											<SelectControl
-												className="w-[140px]"
-												label=""
-												value={searchInput.options.enable ?? 0}
-												options={[
-													{ label: __("True", "accordions"), value: 1 },
-													{ label: __("False", "accordions"), value: 0 },
-												]}
+											<Toggle
+												value={searchInput?.options?.enable}
 												onChange={(newVal) => {
 													var searchInputX = {
 														...searchInput,
@@ -3249,10 +3423,20 @@ function Html(props) {
 												)
 											}
 											onAdd={(sudoScource, key) =>
-												onAddStyle(sudoScource, key, searchInput, setsearchInput)
+												onAddStyle(
+													sudoScource,
+													key,
+													searchInput,
+													setsearchInput
+												)
 											}
 											onRemove={(sudoScource, key) =>
-												onRemoveStyle(sudoScource, key, searchInput, setsearchInput)
+												onRemoveStyle(
+													sudoScource,
+													key,
+													searchInput,
+													setsearchInput
+												)
 											}
 											onReset={(sudoSources) =>
 												onResetStyle(sudoSources, searchInput, setsearchInput)
@@ -3269,16 +3453,8 @@ function Html(props) {
 									</PGtab>
 								</PGtabs>
 							</PanelBody>
-
-
 						)}
-
-
 					</PanelBody>
-
-
-
-
 				</>
 			)}
 		</div>
