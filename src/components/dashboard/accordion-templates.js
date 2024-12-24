@@ -4,6 +4,7 @@ var accordionTemplates = [
 
 	{
 		label: "Template 1",
+		isPro: false,
 		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-1.png",
 		data: {
 			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
@@ -22,6 +23,8 @@ var accordionTemplates = [
 
 	{
 		label: "Template 2",
+		isPro: false,
+
 		thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004349.png",
 		data: {
 			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
@@ -39,6 +42,8 @@ var accordionTemplates = [
 	{
 		label: "Template 3",
 		thumb: "http://localhost/wordpress/wp-content/uploads/2024/12/Group-1000004348.png",
+		isPro: false,
+
 		data: {
 			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
 			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "1px solid #ededed" }, "borderBottom": { "Desktop": "1px solid #ededed" }, "borderLeft": { "Desktop": "1px solid #ededed" }, "boxShadow": [], "margin": { "Desktop": "0px 0px 0px 76px" } } },
@@ -259,44 +264,6 @@ var accordionTemplates = [
 			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": {} },
 		}
 	},
-
-	{
-		label: "Template 1",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
-		data: {}
-	},
-
-	{
-		label: "Template 1",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
-		data: {}
-	},
-
-	{
-		label: "Template 1",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
-		data: {}
-	},
-
-	{
-		label: "Template 1",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
-		data: {}
-	},
-
-	{
-		label: "Template 1",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
-		data: {}
-	},
-
-	{
-		label: "Template 1",
-		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/image-optimization-by-optimole-alternatives.png",
-		data: {}
-	},
-
-
 
 
 

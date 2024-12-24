@@ -1144,6 +1144,7 @@ class AccordionsRest
 		$responses = [];
 
 
+
 		$post_grid_wp_query = new WP_Query($query_args);
 
 
@@ -1175,31 +1176,13 @@ class AccordionsRest
 			endwhile;
 
 
-			$big = 999999999; // need an unlikely integer
-
-			$maxPageNum = (!empty($maxPageNum)) ? $maxPageNum : $post_grid_wp_query->max_num_pages;
 
 
-
-			$pages = paginate_links(
-				array(
-					'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-					'format' => '?paged=%#%',
-					'current' => max(1, $paged),
-					'total' => $maxPageNum,
-					'prev_text' => $prevText,
-					'next_text' => $nextText,
-					'type' => 'array',
-
-				)
-			);
-
-
+			error_log(serialize($posts));
 
 
 
 			$responses['posts'] = $posts;
-			$responses['pagination'] = $pages;
 
 			wp_reset_query();
 			wp_reset_postdata();

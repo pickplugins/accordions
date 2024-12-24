@@ -15,6 +15,7 @@ import {
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 
+import TabsEdit from "../../components/edit-tabs";
 import AccordionsEdit from "../../components/accordions-edit";
 import AccordionsGuide from "../../components/accordions-guide";
 import AccordionsView from "../../components/accordions-view";
@@ -130,7 +131,7 @@ function Html(props) {
 			data: {
 				postId: activeAccordion,
 				content: accordionData,
-				_wpnonce: post_grid_editor_js._wpnonce,
+				_wpnonce: accordions_builder_js._wpnonce,
 			},
 		}).then((res) => {
 			setisLoading(false);
@@ -153,7 +154,7 @@ function Html(props) {
 			method: "POST",
 			data: {
 				postId: activeAccordion,
-				_wpnonce: post_grid_editor_js._wpnonce,
+				_wpnonce: accordions_builder_js._wpnonce,
 			},
 		}).then((res) => {
 			setisLoading(false);
@@ -402,7 +403,7 @@ function Html(props) {
 											}}
 										/>
 									</div>
-									<div className="my-5">
+									{/* <div className="my-5">
 										<label className="text-base" htmlFor="">
 											{__("License Key", "accordions")}
 										</label>
@@ -419,7 +420,7 @@ function Html(props) {
 												setoptionData(optionsX);
 											}}
 										/>
-									</div>
+									</div> */}
 								</div>
 							</div>
 
@@ -475,15 +476,40 @@ function Html(props) {
 									</div>
 								</PGtab>
 								<PGtab name="edit">
+
+
+
 									<div className=" ">
 										{postData.ID != null && (
-											<AccordionsEdit
-												onChange={onChangeAccordion}
-												addNotifications={addNotifications}
-												postData={postData}
-												setHelp={setHelp}
-											/>
+											<>
+												{accordionData.globalOptions.viewType == "accordion" && (
+													<AccordionsEdit
+														onChange={onChangeAccordion}
+														addNotifications={addNotifications}
+														postData={postData}
+														setHelp={setHelp}
+													/>
+												)}
+												{accordionData.globalOptions.viewType == "tabs" && (
+													<TabsEdit
+														onChange={onChangeAccordion}
+														addNotifications={addNotifications}
+														postData={postData}
+														setHelp={setHelp}
+													/>
+												)}
+
+
+
+
+
+
+											</>
 										)}
+
+
+
+
 									</div>
 								</PGtab>
 								<PGtab name="templates">
@@ -575,7 +601,6 @@ function Html(props) {
 								setHelp={setHelp}
 							/>
 						)}
-						{JSON.stringify(accordionData)}
 
 						{postData.ID != null && (
 							<AccordionsGenerateCss

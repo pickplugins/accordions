@@ -14,6 +14,96 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var index = header.getAttribute("index")
 			window.pgAccordion.switch(index)
 		},
+		activeByIndex: (index) => {
+			if (window.pgAccordion.id.length == 0) return;
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
+				window.pgAccordion.activeIndex = index
+				var content = header.nextElementSibling;
+				if (loopIndex == index) {
+					header.classList.toggle("accordion-header-active");
+					content.style.display = "block";
+					content.style.height = "auto";
+
+					var iconToggle = header.querySelector(".accordion-icon-toggle");
+					var iconIdle = header.querySelector(".accordion-icon-idle");
+
+
+					if (header.classList.contains("accordion-header-active")) {
+						if (iconToggle != null) {
+							iconToggle.style.display = "inline-block";
+						}
+						if (iconIdle != null) {
+							iconIdle.style.display = "none";
+						}
+						content.style.display = "block";
+						content.style.height = "auto";
+					} else {
+						if (iconIdle != null) {
+							iconIdle.style.display = "inline-block";
+						}
+						if (iconToggle != null) {
+							iconToggle.style.display = "none";
+						}
+						content.style.display = "none";
+						content.style.height = 0;
+					}
+
+
+
+
+
+
+
+
+				}
+			});
+		},
+		inactiveByIndex: (index) => {
+			if (window.pgAccordion.id.length == 0) return;
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
+
+
+				var content = header.nextElementSibling;
+				if (loopIndex == index) {
+					header.classList.toggle("accordion-header-active");
+					content.style.display = "none";
+					content.style.height = 0;
+				}
+
+				var iconToggle = header.querySelector(".accordion-icon-toggle");
+				var iconIdle = header.querySelector(".accordion-icon-idle");
+
+
+				if (header.classList.contains("accordion-header-active")) {
+					if (iconToggle != null) {
+						iconToggle.style.display = "inline-block";
+					}
+					if (iconIdle != null) {
+						iconIdle.style.display = "none";
+					}
+					content.style.display = "block";
+					content.style.height = "auto";
+				} else {
+					if (iconIdle != null) {
+						iconIdle.style.display = "inline-block";
+					}
+					if (iconToggle != null) {
+						iconToggle.style.display = "none";
+					}
+					content.style.display = "none";
+					content.style.height = 0;
+				}
+
+
+
+
+			});
+		},
+
 		switch: (index) => {
 			if (window.pgAccordion.id.length == 0) return;
 			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
@@ -50,6 +140,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var toggled = expandCollapseAllHndle.getAttribute("data-toggled");
 
 
+			var headerCount = window.pgAccordion.headerList.length
+
 
 			var expandalltext = expandCollapseAllHndle.getAttribute("data-expandalltext");
 			var collapsealltext = expandCollapseAllHndle.getAttribute("data-collapsealltext");
@@ -59,9 +151,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			if (!toggled) {
 				expandCollapseAllHndle.setAttribute("data-toggled", true);
 				var innerHtml = `${collapsealliconhtml}<span>${collapsealltext}</span>`;
+
+				for (var i = 0; i < headerCount; i++) {
+					window.pgAccordion.activeByIndex(i)
+				}
+
+
+				console.log("Opend");
+
+
 			} else {
+
+				console.log("Closed");
+				for (var i = 0; i < headerCount; i++) {
+					window.pgAccordion.inactiveByIndex(i)
+				}
 				expandCollapseAllHndle.removeAttribute("data-toggled");
 				var innerHtml = `${expandalliconhtml}<span>${expandalltext}</span>`;
+
 			}
 
 			expandCollapseAllHndle.innerHTML = innerHtml
@@ -79,6 +186,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var activeIndex = accordionDataObj.activeIndex;
 				var accordionWrapId = accordionDataObj.id;
 				window.pgAccordion.id = accordionWrapId;
+
+
+
 				window.pgAccordion.activeIndex = activeIndex;
 				var accordionHeaders = document.querySelectorAll("#" + accordionWrapId + " .accordion-header");
 				var headerList = [];

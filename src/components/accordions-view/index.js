@@ -192,8 +192,6 @@ function Html(props) {
 
 			<div className="px-10 py-10">
 
-				{JSON.stringify(globalOptions)}
-
 
 				<div className={`${wrapper?.options?.class} `}>
 
