@@ -3607,13 +3607,11 @@ var popupEntranceAnimateBasic = {
   },
   backInRight: {
     label: "backInRight",
-    value: "backInRight",
-    isPro: true
+    value: "backInRight"
   },
   backInUp: {
     label: "backInUp",
-    value: "backInUp",
-    isPro: true
+    value: "backInUp"
   },
   bounceIn: {
     label: "bounceIn",
@@ -3621,23 +3619,19 @@ var popupEntranceAnimateBasic = {
   },
   bounceInDown: {
     label: "bounceInDown",
-    value: "bounceInDown",
-    isPro: true
+    value: "bounceInDown"
   },
   bounceInLeft: {
     label: "bounceInLeft",
-    value: "bounceInLeft",
-    isPro: true
+    value: "bounceInLeft"
   },
   bounceInRight: {
     label: "bounceInRight",
-    value: "bounceInRight",
-    isPro: true
+    value: "bounceInRight"
   },
   bounceInUp: {
     label: "bounceInUp",
-    value: "bounceInUp",
-    isPro: true
+    value: "bounceInUp"
   },
   fadeIn: {
     label: "fadeIn",
@@ -3645,63 +3639,51 @@ var popupEntranceAnimateBasic = {
   },
   fadeInDown: {
     label: "fadeInDown",
-    value: "fadeInDown",
-    isPro: true
+    value: "fadeInDown"
   },
   fadeInDownBig: {
     label: "fadeInDownBig",
-    value: "fadeInDownBig",
-    isPro: true
+    value: "fadeInDownBig"
   },
   fadeInLeft: {
     label: "fadeInLeft",
-    value: "fadeInLeft",
-    isPro: true
+    value: "fadeInLeft"
   },
   fadeInLeftBig: {
     label: "fadeInLeftBig",
-    value: "fadeInLeftBig",
-    isPro: true
+    value: "fadeInLeftBig"
   },
   fadeInRight: {
     label: "fadeInRight",
-    value: "fadeInRight",
-    isPro: true
+    value: "fadeInRight"
   },
   fadeInRightBig: {
     label: "fadeInRightBig",
-    value: "fadeInRightBig",
-    isPro: true
+    value: "fadeInRightBig"
   },
   fadeInUp: {
     label: "fadeInUp",
-    value: "fadeInUp",
-    isPro: true
+    value: "fadeInUp"
   },
   fadeInUpBig: {
     label: "fadeInUpBig",
-    value: "fadeInUpBig",
-    isPro: true
+    value: "fadeInUpBig"
   },
   fadeInTopLeft: {
     label: "fadeInTopLeft",
-    value: "fadeInTopLeft",
-    isPro: true
+    value: "fadeInTopLeft"
   },
   fadeInTopRight: {
     label: "fadeInTopRight",
-    value: "fadeInTopRight",
-    isPro: true
+    value: "fadeInTopRight"
   },
   fadeInBottomRight: {
     label: "fadeInBottomRight",
-    value: "fadeInBottomRight",
-    isPro: true
+    value: "fadeInBottomRight"
   },
   fadeInBottomLeft: {
     label: "fadeInBottomLeft",
-    value: "fadeInBottomLeft",
-    isPro: true
+    value: "fadeInBottomLeft"
   },
   rotateIn: {
     label: "rotateIn",
@@ -3709,68 +3691,55 @@ var popupEntranceAnimateBasic = {
   },
   rotateInDownLeft: {
     label: "rotateInDownLeft",
-    value: "rotateInDownLeft",
-    isPro: true
+    value: "rotateInDownLeft"
   },
   rotateInDownRight: {
     label: "rotateInDownRight",
-    value: "rotateInDownRight",
-    isPro: true
+    value: "rotateInDownRight"
   },
   rotateInUpLeft: {
     label: "rotateInUpLeft",
-    value: "rotateInUpLeft",
-    isPro: true
+    value: "rotateInUpLeft"
   },
   rotateInUpRight: {
     label: "rotateInUpRight",
-    value: "rotateInUpRight",
-    isPro: true
+    value: "rotateInUpRight"
   },
   zoomIn: {
     label: "zoomIn",
-    value: "zoomIn",
-    isPro: true
+    value: "zoomIn"
   },
   zoomInDown: {
     label: "zoomInDown",
-    value: "zoomInDown",
-    isPro: true
+    value: "zoomInDown"
   },
   zoomInLeft: {
     label: "zoomInLeft",
-    value: "zoomInLeft",
-    isPro: true
+    value: "zoomInLeft"
   },
   zoomInRight: {
     label: "zoomInRight",
-    value: "zoomInRight",
-    isPro: true
+    value: "zoomInRight"
   },
   zoomInUp: {
     label: "zoomInUp",
-    value: "zoomInUp",
-    isPro: true
+    value: "zoomInUp"
   },
   slideInDown: {
     label: "slideInDown",
-    value: "slideInDown",
-    isPro: true
+    value: "slideInDown"
   },
   slideInLeft: {
     label: "slideInLeft",
-    value: "slideInLeft",
-    isPro: true
+    value: "slideInLeft"
   },
   slideInRight: {
     label: "slideInRight",
-    value: "slideInRight",
-    isPro: true
+    value: "slideInRight"
   },
   slideInUp: {
     label: "slideInUp",
-    value: "slideInUp",
-    isPro: true
+    value: "slideInUp"
   }
 };
 
@@ -3893,7 +3862,7 @@ function Html(props) {
   var [searchInput, setsearchInput] = useState(accordionData.searchInput);
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
   const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
-  var isProFeature = false;
+  var isProFeature = true;
   const gapValue = accOptions?.gap || "0px";
   const [number, setNumber] = useState(parseInt(gapValue));
   const [unit, setUnit] = useState(gapValue.replace(number, ""));
@@ -4444,6 +4413,14 @@ function Html(props) {
     onClick: ev => {
       ev.preventDefault();
       ev.stopPropagation();
+      if (isProFeature) {
+        addNotifications({
+          title: "Opps its pro!",
+          content: "This feature only avilable in premium version",
+          type: "error"
+        });
+        return;
+      }
       setAIWriter(!AIWriter);
     }
   }, "AI"), AIWriter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Popover, {
@@ -5148,22 +5125,17 @@ function Html(props) {
       className: "mb-3"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, "Active"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
+    }, "Active"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
       value: (_item$active = item?.active) !== null && _item$active !== void 0 ? _item$active : 0,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
-        value: 1
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
-        value: 0
-      }],
       onChange: newVal => {
-        // var itemsX = [...items];
-
-        // itemsX[index].active = newVal;
-        // setitems(itemsX);
-
+        if (isProFeature) {
+          addNotifications({
+            title: "Opps its pro!",
+            content: "This feature only avilable in premium version",
+            type: "error"
+          });
+          return;
+        }
         setitems(prevItems => {
           const updatedItems = [...prevItems];
           updatedItems[index] = {
@@ -5177,22 +5149,17 @@ function Html(props) {
       className: "mb-3"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       htmlFor: ""
-    }, "Hide On Schema"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
+    }, "Hide On Schema"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
       value: (_item$hideOnSchema = item?.hideOnSchema) !== null && _item$hideOnSchema !== void 0 ? _item$hideOnSchema : 0,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("True", "accordions"),
-        value: 1
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("False", "accordions"),
-        value: 0
-      }],
       onChange: newVal => {
-        // var itemsX = [...items];
-
-        // itemsX[index].hideOnSchema = newVal;
-        // setitems(itemsX);
-
+        if (isProFeature) {
+          addNotifications({
+            title: "Opps its pro!",
+            content: "This feature only avilable in premium version",
+            type: "error"
+          });
+          return;
+        }
         setitems(prevItems => {
           const updatedItems = [...prevItems];
           updatedItems[index] = {
@@ -5272,6 +5239,14 @@ function Html(props) {
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
     value: globalOptions?.stats,
     onChange: newVal => {
+      if (isProFeature) {
+        addNotifications({
+          title: "Opps its pro!",
+          content: "This feature only avilable in premium version",
+          type: "error"
+        });
+        return;
+      }
       var globalOptionsX = {
         ...globalOptions
       };
@@ -5289,10 +5264,12 @@ function Html(props) {
       value: "click"
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "accordions"),
-      value: "mouseover"
+      value: "mouseover",
+      isPro: true
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "accordions"),
-      value: "focus"
+      value: "focus",
+      isPro: true
     }],
     onChange: newVal => {
       var globalOptionsX = {
@@ -5303,22 +5280,30 @@ function Html(props) {
     },
     values: ""
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, "URL Hash"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    className: "w-[140px]",
-    label: "",
+    htmlFor: "",
+    className: "flex gap-2 items-center"
+  }, "URL Hash", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "urlHash",
+        enable: true
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
     value: globalOptions?.urlHash,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Click", "accordions"),
-      value: "click"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Mouseover", "accordions"),
-      value: "mouseover"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Focus", "accordions"),
-      value: "focus"
-    }],
     onChange: newVal => {
+      if (isProFeature) {
+        addNotifications({
+          title: "Opps its pro!",
+          content: "This feature only avilable in premium version",
+          type: "error"
+        });
+        return;
+      }
       var globalOptionsX = {
         ...globalOptions
       };
@@ -5342,6 +5327,12 @@ function Html(props) {
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
     value: globalOptions?.clickToScrollTop,
     onChange: newVal => {
+      addNotifications({
+        title: "Opps its pro!",
+        content: "This feature only avilable in premium version",
+        type: "error"
+      });
+      return;
       var globalOptionsX = {
         ...globalOptions
       };
@@ -5362,42 +5353,6 @@ function Html(props) {
         ...globalOptions
       };
       globalOptionsX.clickToScrollTopOffset = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "flex gap-2 items-center"
-  }, "Animation Name", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer",
-    title: "Click to know more",
-    onClick: () => {
-      setHelp({
-        id: "animationSetting",
-        enable: true
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"]
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    value: globalOptions?.animationName,
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.animationName = newVal;
-      setglobalOptions(globalOptionsX);
-    }
-  })), globalOptions?.animationName && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, "Animation Duration"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    className: "max-w-[140px]",
-    label: "",
-    value: globalOptions?.animationDuration,
-    onChange: newVal => {
-      var globalOptionsX = {
-        ...globalOptions
-      };
-      globalOptionsX.animationDuration = newVal;
       setglobalOptions(globalOptionsX);
     }
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
@@ -5537,7 +5492,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"]
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    value: globalOptions?.shortcodes,
+    value: content.options?.shortcodes,
     onChange: newVal => {
       var optionsX = {
         ...content,
@@ -5577,12 +5532,20 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "flex gap-2 items-center"
-  }, "IN Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, "In Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
     buttonTitle: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[content.options.inAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[content.options.inAnimation].label,
     options: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic,
     onChange: newVal => {
+      if (isProFeature) {
+        addNotifications({
+          title: "Opps its pro!",
+          content: "This feature only avilable in premium version",
+          type: "error"
+        });
+        return;
+      }
       var optionsX = {
         ...content,
         options: {
@@ -5596,12 +5559,20 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "flex gap-2 items-center"
-  }, "OUT Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, "Out Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
     buttonTitle: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[content.options.outAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[content.options.outAnimation].label,
     options: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic,
     onChange: newVal => {
+      if (isProFeature) {
+        addNotifications({
+          title: "Opps its pro!",
+          content: "This feature only avilable in premium version",
+          type: "error"
+        });
+        return;
+      }
       var optionsX = {
         ...content,
         options: {
@@ -5667,7 +5638,7 @@ function Html(props) {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "",
     className: "flex gap-2 items-center"
-  }, "Toggle Text", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, "Toggle Text", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "cursor-pointer",
     title: "Click to know more",
     onClick: () => {
@@ -5681,6 +5652,14 @@ function Html(props) {
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
     value: header?.options?.toggleText,
     onChange: newVal => {
+      if (isProFeature) {
+        addNotifications({
+          title: "Opps its pro!",
+          content: "This feature only avilable in premium version",
+          type: "error"
+        });
+        return;
+      }
       var optionsX = {
         ...header,
         options: {
@@ -5766,6 +5745,7 @@ function Html(props) {
       name: "styles",
       title: "Styles",
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
+      isPro: true,
       className: "tab-style"
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -5804,12 +5784,9 @@ function Html(props) {
     opened: isProFeature ? false : null,
     title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "flex justify-between w-full gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Label Counter", "post-grid")), isProFeature ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white ",
-      onClick: ev => {
-        window.open("https://comboblocks.com/pricing/", "_blank");
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid")) : "", " "),
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Label Counter", "post-grid")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid"))),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
     activeTab: "options",
@@ -6006,7 +5983,12 @@ function Html(props) {
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Icon Idle",
+    title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "flex justify-between w-full gap-2"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon Idle", "post-grid")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid"))),
+    opened: isProFeature ? false : null,
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
     activeTab: "options",
@@ -6162,7 +6144,12 @@ function Html(props) {
     onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, icon, seticon)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Icon Toggle",
+    title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "flex justify-between w-full gap-2"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon Idle", "post-grid")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid"))),
+    opened: isProFeature ? false : null,
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
     activeTab: "options",
@@ -6210,18 +6197,13 @@ function Html(props) {
     onReset: sudoSources => onResetStyle(sudoSources, iconToggle, seticonToggle),
     onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, iconToggle, seticonToggle)
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
-    className: "font-medium text-slate-900 "
-    // title="Expand/Collapse All"
-    ,
+    className: "font-medium text-slate-900 ",
     opened: isProFeature ? false : null,
     title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "flex justify-between w-full gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Expand/Collapse All", "post-grid")), isProFeature ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white ",
-      onClick: ev => {
-        window.open("https://comboblocks.com/pricing/", "_blank");
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid")) : "", " "),
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon Idle", "post-grid")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid"))),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
     activeTab: "options",
@@ -6362,7 +6344,12 @@ function Html(props) {
     onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, expandCollapseAll, setexpandCollapseAll)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     className: "font-medium text-slate-900 ",
-    title: "Top Wrap",
+    title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "flex justify-between w-full gap-2"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Top Wrap", "post-grid")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid"))),
+    opened: isProFeature ? false : null,
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
     activeTab: "options",
@@ -6411,7 +6398,13 @@ function Html(props) {
     onBulkAdd: (sudoSource, cssObj) => onBulkAddStyle(sudoSource, cssObj, topWrap, settopWrap)
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     title: "Search",
-    initialOpen: false
+    initialOpen: false,
+    title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "flex justify-between w-full gap-2"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Search", "post-grid")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "post-grid"))),
+    opened: isProFeature ? false : null
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
     className: "my-5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
@@ -6474,33 +6467,7 @@ function Html(props) {
     }]
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
     name: "options"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "flex gap-2 items-center"
-  }, "Enable Search?", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "cursor-pointer",
-    title: "Click to know more",
-    onClick: () => {
-      setHelp({
-        id: "expandCollapseSetting",
-        enable: true
-      });
-    }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"]
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    value: searchInput?.options?.enable,
-    onChange: newVal => {
-      var searchInputX = {
-        ...searchInput,
-        options: {
-          ...searchInput.options,
-          enable: newVal
-        }
-      };
-      setsearchInput(searchInputX);
-    }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "",
@@ -6604,13 +6571,11 @@ var popupCloseAnimateBasic = {
   },
   backOutRight: {
     label: "backOutRight",
-    value: "backOutRight",
-    isPro: true
+    value: "backOutRight"
   },
   backOutUp: {
     label: "backOutUp",
-    value: "backOutUp",
-    isPro: true
+    value: "backOutUp"
   },
   bounceOut: {
     label: "bounceOut",
@@ -6618,23 +6583,19 @@ var popupCloseAnimateBasic = {
   },
   bounceOutDown: {
     label: "bounceOutDown",
-    value: "bounceOutDown",
-    isPro: true
+    value: "bounceOutDown"
   },
   bounceOutLeft: {
     label: "bounceOutLeft",
-    value: "bounceOutLeft",
-    isPro: true
+    value: "bounceOutLeft"
   },
   bounceOutRight: {
     label: "bounceOutRight",
-    value: "bounceOutRight",
-    isPro: true
+    value: "bounceOutRight"
   },
   bounceOutUp: {
     label: "bounceOutUp",
-    value: "bounceOutUp",
-    isPro: true
+    value: "bounceOutUp"
   },
   fadeOut: {
     label: "fadeOut",
@@ -6642,63 +6603,51 @@ var popupCloseAnimateBasic = {
   },
   fadeOutDown: {
     label: "fadeOutDown",
-    value: "fadeOutDown",
-    isPro: true
+    value: "fadeOutDown"
   },
   fadeOutDownBig: {
     label: "fadeOutDownBig",
-    value: "fadeOutDownBig",
-    isPro: true
+    value: "fadeOutDownBig"
   },
   fadeOutLeft: {
     label: "fadeOutLeft",
-    value: "fadeOutLeft",
-    isPro: true
+    value: "fadeOutLeft"
   },
   fadeOutLeftBig: {
     label: "fadeOutLeftBig",
-    value: "fadeOutLeftBig",
-    isPro: true
+    value: "fadeOutLeftBig"
   },
   fadeOutRight: {
     label: "fadeOutRight",
-    value: "fadeOutRight",
-    isPro: true
+    value: "fadeOutRight"
   },
   fadeOutRightBig: {
     label: "fadeOutRightBig",
-    value: "fadeOutRightBig",
-    isPro: true
+    value: "fadeOutRightBig"
   },
   fadeOutUp: {
     label: "fadeOutUp",
-    value: "fadeOutUp",
-    isPro: true
+    value: "fadeOutUp"
   },
   fadeOutUpBig: {
     label: "fadeOutUpBig",
-    value: "fadeOutUpBig",
-    isPro: true
+    value: "fadeOutUpBig"
   },
   fadeOutTopLeft: {
     label: "fadeOutTopLeft",
-    value: "fadeOutTopLeft",
-    isPro: true
+    value: "fadeOutTopLeft"
   },
   fadeOutTopRight: {
     label: "fadeOutTopRight",
-    value: "fadeOutTopRight",
-    isPro: true
+    value: "fadeOutTopRight"
   },
   fadeOutBottomRight: {
     label: "fadeOutBottomRight",
-    value: "fadeOutBottomRight",
-    isPro: true
+    value: "fadeOutBottomRight"
   },
   fadeOutBottomLeft: {
     label: "fadeOutBottomLeft",
-    value: "fadeOutBottomLeft",
-    isPro: true
+    value: "fadeOutBottomLeft"
   },
   rotateOut: {
     label: "rotateOut",
@@ -6706,68 +6655,55 @@ var popupCloseAnimateBasic = {
   },
   rotateOutDownLeft: {
     label: "rotateOutDownLeft",
-    value: "rotateOutDownLeft",
-    isPro: true
+    value: "rotateOutDownLeft"
   },
   rotateOutDownRight: {
     label: "rotateOutDownRight",
-    value: "rotateOutDownRight",
-    isPro: true
+    value: "rotateOutDownRight"
   },
   rotateOutUpLeft: {
     label: "rotateOutUpLeft",
-    value: "rotateOutUpLeft",
-    isPro: true
+    value: "rotateOutUpLeft"
   },
   rotateOutUpRight: {
     label: "rotateOutUpRight",
-    value: "rotateOutUpRight",
-    isPro: true
+    value: "rotateOutUpRight"
   },
   zoomOut: {
     label: "zoomOut",
-    value: "zoomOut",
-    isPro: true
+    value: "zoomOut"
   },
   zoomOutDown: {
     label: "zoomOutDown",
-    value: "zoomOutDown",
-    isPro: true
+    value: "zoomOutDown"
   },
   zoomOutLeft: {
     label: "zoomOutLeft",
-    value: "zoomOutLeft",
-    isPro: true
+    value: "zoomOutLeft"
   },
   zoomOutRight: {
     label: "zoomOutRight",
-    value: "zoomOutRight",
-    isPro: true
+    value: "zoomOutRight"
   },
   zoomOutUp: {
     label: "zoomOutUp",
-    value: "zoomOutUp",
-    isPro: true
+    value: "zoomOutUp"
   },
   slideOutDown: {
     label: "slideOutDown",
-    value: "slideOutDown",
-    isPro: true
+    value: "slideOutDown"
   },
   slideOutLeft: {
     label: "slideOutLeft",
-    value: "slideOutLeft",
-    isPro: true
+    value: "slideOutLeft"
   },
   slideOutRight: {
     label: "slideOutRight",
-    value: "slideOutRight",
-    isPro: true
+    value: "slideOutRight"
   },
   slideOutUp: {
     label: "slideOutUp",
-    value: "slideOutUp",
-    isPro: true
+    value: "slideOutUp"
   }
 };
 
@@ -6849,6 +6785,7 @@ const PricingTable = ({
     className: "flex  items-center justify-center p-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: data.link,
+    target: "_blank",
     className: "px-8 py-3 no-underline bg-blue-700 text-white cursor-pointer rounded-md"
   }, "Buy Now ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     className: "fas fa-cart-plus"
@@ -6914,10 +6851,89 @@ function Html(props) {
     free: false,
     pro: true
   }, {
-    feature: "Item Source - AI",
+    feature: "Preloader - Hide accordions until page load",
+    free: true,
+    pro: true
+  }, {
+    feature: "Stats",
+    free: false,
+    pro: true
+  }, {
+    feature: "Click To Scroll Top",
+    free: false,
+    pro: true
+  }, {
+    feature: "Search - Accordion",
+    free: false,
+    pro: true
+  }, {
+    feature: "Schema",
+    isHeading: true
+  }, {
+    feature: "Enable/Disable Schema ",
+    free: true,
+    pro: true
+  }, {
+    feature: "Hide any item in Schema ",
+    free: false,
+    pro: true
+  }, {
+    feature: "Expand/Collapse All Features",
+    isHeading: true
+  }, {
+    feature: "Expand All Custom Text",
+    free: false,
+    pro: true
+  }, {
+    feature: "Collapse All Custom Text",
+    free: false,
+    pro: true
+  }, {
+    feature: "Expand All Custom Icon",
+    free: false,
+    pro: true
+  }, {
+    feature: "Collapse All Custom Icon",
+    free: false,
+    pro: true
+  }, {
+    feature: "Accordion Content Features",
+    isHeading: true
+  }, {
+    feature: "Enable/Disable Embeds",
+    free: true,
+    pro: true
+  }, {
+    feature: "Enable/Disable Shortcodes",
+    free: true,
+    pro: true
+  }, {
+    feature: "Enable/Disable wpautop function",
+    free: true,
+    pro: true
+  }, {
+    feature: "Content In-Out animation",
     free: false,
     pro: true,
-    new: true
+    new: true,
+    hot: true
+  }, {
+    feature: "Edit content with WYSIWYG editor",
+    free: true,
+    pro: true
+  }, {
+    feature: "Item Source",
+    isHeading: true
+  }, {
+    feature: "Item Source - Manual",
+    free: true,
+    pro: true
+  }, {
+    feature: "Generate items by AI",
+    free: false,
+    pro: true,
+    new: true,
+    hot: true
   }, {
     feature: "Item Source - Posts",
     free: false,
@@ -6929,52 +6945,81 @@ function Html(props) {
     pro: true,
     new: true
   }, {
-    feature: "Preloader - Hide accordions until page load",
+    feature: "Accordion Header & Labels Features",
+    isHeading: true
+  }, {
+    feature: "Edit header label with Richtext editor",
+    free: true,
+    pro: true,
+    new: true
+  }, {
+    feature: "Edit header label toggled text",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header active custom style",
     free: false,
     pro: true
   }, {
-    feature: "Autoembed - Enable/Disable emebed content",
+    feature: "Header label custom style",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label counter",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label counter position",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label icons",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Header label icons position",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Accordion Icons Features",
+    isHeading: true
+  }, {
+    feature: "Icon In-Out animation",
+    free: false,
+    pro: true,
+    new: true,
+    hot: true
+  }, {
+    feature: "Font-awesome Icons",
+    free: true,
+    pro: true
+  }, {
+    feature: "Iconfont Icons",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Bootstrap Icons",
+    free: false,
+    pro: true,
+    new: true
+  }, {
+    feature: "Custom Idle Icon",
     free: false,
     pro: true
   }, {
-    feature: "Shortcodes - Enable/Disable third party shortcodes",
+    feature: "Custom Toggled Icon",
     free: false,
     pro: true
   }, {
-    feature: "wpautop - Enable/Disable wpautop function",
-    free: false,
-    pro: true
-  }, {
-    feature: "Schema - Enable/Disable Schema to boost SEO",
-    free: false,
-    pro: true
-  }, {
-    feature: "Toggle Text - Enable/Disable Toggle Text on accordion header",
-    free: false,
-    pro: true
-  }, {
-    feature: "Expand/collapse All",
-    free: false,
-    pro: true
-  }, {
-    feature: "Stats",
-    free: false,
-    pro: true
-  }, {
-    feature: "Active Event",
-    free: false,
-    pro: true
-  }, {
-    feature: "Click To Scroll Top",
-    free: false,
-    pro: true
-  }, {
-    feature: "Animation Name",
-    free: false,
-    pro: true
-  }, {
-    feature: "Search - Accordion",
-    free: false,
+    feature: "Icon Position Left/Right",
+    free: true,
     pro: true
   }];
   const ourPlugins = [{
@@ -7020,7 +7065,7 @@ function Html(props) {
     className: "text-base"
   }, "By PickPlugins")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "font-mono text-sm"
-  }, "Version: 2.3.1")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Version: 2.3.2")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 max-w-52"
@@ -7130,7 +7175,21 @@ function Html(props) {
     className: "min-w-[100px] py-4 px-8 text-center"
   }, "\uD83D\uDC51PRO"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", {
     className: "bg-gray-100 text-gray-800"
-  }, freeVsProArgs.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+  }, freeVsProArgs.map((item, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item.isHeading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+    key: index,
+    className: "bg-gray-400 last:rounded-b-md last:overflow-hidden"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+    className: "py-3 px-8",
+    colSpan: "3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-2 items-center "
+  }, item.feature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-base"
+  }, item.feature), item.new && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full"
+  }, "NEW"), item.hot && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-orange-400 rounded-full"
+  }, "HOT")))), !item?.isHeading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
     key: index,
     className: "even:bg-gray-200 last:rounded-b-md last:overflow-hidden"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
@@ -7140,12 +7199,12 @@ function Html(props) {
   }, item.feature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, item.feature), item.new && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-emerald-100 inline-block text-[12px] leading-none px-2 py-1 bg-emerald-500 rounded-full"
   }, "NEW"), item.hot && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-red-500 rounded-full"
+    className: "text-red-100 inline-block text-[12px] leading-none px-2 py-1 bg-orange-400 rounded-full"
   }, "HOT"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8  text-center"
   }, item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.free && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
     className: "py-3 px-8 text-center"
-  }, item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C")))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2714\uFE0F"), !item.pro && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u274C"))))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-2 gap-4 w-full p-7 bg-white mt-10"
@@ -7276,66 +7335,40 @@ const pricingData = {
   yearly: [{
     title: "Personal",
     features: ["Up to 3 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
-    price: "$29",
-    salePrice: "$19",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
+    price: "$40",
+    salePrice: "$25",
+    link: "https://pickplugins.lemonsqueezy.com/checkout/buy/e8d33f98-b84e-480a-a422-bc175af6ada9?enabled=270427&checkout%5Bcustom%5D%5Bproduct_id%5D=3935"
   }, {
     title: "Plus",
     features: ["Up to 10 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
-    price: "$69",
-    salePrice: "$49",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
-  },
-  // {
-  // 	title: "Freelance",
-  // 	features: [
-  // 		"Up to 30 Sites",
-  // 		"1 Year of Updates",
-  // 		"1 Year Free Support",
-  // 		"Access to All PRO Features",
-  // 	],
-  // 	price: "$120",
-  // 	salePrice: "$89",
-  // 	link: "https://pickplugins.com/accordions/?ref=dashboard",
-  // },
-  {
+    price: "$99",
+    salePrice: "$75",
+    link: "https://pickplugins.lemonsqueezy.com/checkout/buy/98b2b146-9ed0-4d97-b0ad-ee54b762f799?enabled=270430&checkout%5Bcustom%5D%5Bproduct_id%5D=3934"
+  }, {
     title: "Agency",
     features: ["Up to 500 Sites", "1 Year of Updates", "1 Year Free Support", "Access to All PRO Features"],
-    price: "$149",
-    salePrice: "$99",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
+    price: "$199",
+    salePrice: "$150",
+    link: "https://pickplugins.lemonsqueezy.com/checkout/buy/365ae069-9604-4a4c-b83c-12a315df8b38?enabled=270434&checkout%5Bcustom%5D%5Bproduct_id%5D=3933"
   }],
   lifetime: [{
     title: "Personal",
     features: ["Up to 3 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
-    price: "$149",
-    salePrice: "$99",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
+    price: "$99",
+    salePrice: "$80",
+    link: "https://pickplugins.lemonsqueezy.com/checkout/buy/6d25c9ad-d2af-4732-b8cd-2716a961e6d0?enabled=270429&checkout%5Bcustom%5D%5Bproduct_id%5D=37934"
   }, {
     title: "Plus",
     features: ["Up to 10 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
-    price: "$249",
-    salePrice: "$149",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
-  },
-  // {
-  // 	title: "Freelance",
-  // 	features: [
-  // 		"Up to 30 Sites",
-  // 		"Lifetime Free Updates",
-  // 		"Lifetime Support",
-  // 		"Access to All PRO Features",
-  // 	],
-  // 	price: "$149",
-  // 	salePrice: "$129",
-  // 	link: "https://pickplugins.com/accordions/?ref=dashboard",
-  // },
-  {
+    price: "$199",
+    salePrice: "$160",
+    link: "https://pickplugins.lemonsqueezy.com/checkout/buy/47471695-88ef-40ad-80b8-da6853929627?enabled=270431&checkout%5Bcustom%5D%5Bproduct_id%5D=37933"
+  }, {
     title: "Agency",
     features: ["Up to 500 Sites", "Lifetime Free Updates", "Lifetime Support", "Access to All PRO Features"],
     price: "$299",
-    salePrice: "$199",
-    link: "https://pickplugins.com/accordions/?ref=dashboard"
+    salePrice: "$240",
+    link: "https://pickplugins.lemonsqueezy.com/checkout/buy/76616a32-9e29-481a-8344-ece4686b3718?enabled=270435&checkout%5Bcustom%5D%5Bproduct_id%5D=37935"
   }]
 };
 
@@ -30488,7 +30521,7 @@ var accordionDefaultData = {
   headerLabel: {
     options: {
       text: "Accordion Header",
-      tag: "div",
+      tag: "a",
       class: "accordion-header-label"
     },
     styles: {}
@@ -34476,38 +34509,26 @@ function Html(props) {
   if (!props.warn) {
     return null;
   }
-  var [activeAccordion, setActiveAccordion] = useState(null); // Using the hook.
+  var [activeAccordion, setActiveAccordion] = useState(null);
   var [postData, setpostData] = useState({
     ID: null,
     post_content: _accordion_default_data__WEBPACK_IMPORTED_MODULE_13__["default"],
     post_title: ""
-  }); // Using the hook.
-  var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
-
-  var [debounce, setdebounce] = useState(0); // Using the hook.
-  var [isLoading, setisLoading] = useState(false); // Using the hook.
-  var [pleaseUpdate, setpleaseUpdate] = useState(false); // Using the hook.
-  var [AIWriter, setAIWriter] = useState(false); // Using the hook.
+  });
+  var [accordionData, setaccordionData] = useState(postData.post_content);
+  var [isLoading, setisLoading] = useState(false);
+  var [pleaseUpdate, setpleaseUpdate] = useState(false);
   const [optionData, setoptionData] = useState({});
-  const [optionDataSaved, setoptionDataSaved] = useState({});
   const [roles, setroles] = useState([]);
-  var [needSave, setneedSave] = useState(false); // Using the hook.
-  var [isLoadings, setisLoadings] = useState(false); // Using the hook.
-  var [toggleSettings, settoggleSettings] = useState(false); // Using the hook.
-
-  var [notifications, setnotifications] = useState([]); // Using the hook.
+  var [needSave, setneedSave] = useState(false);
+  var [toggleSettings, settoggleSettings] = useState(false);
+  var [notifications, setnotifications] = useState([]);
   var [help, sethelp] = useState({
-    id: "createAccordion",
+    id: "",
     enable: false
-  }); // Using the hook.
-
+  });
   useEffect(() => {
     setnotifications(notifications);
-
-    // setTimeout(() => {
-    // 	setnotifications([]);
-    // }, 5000);
-
     const timer = setTimeout(() => {
       setnotifications([]); // Update the debounced value after delay
     }, 5000); // 300ms debounce delay
@@ -34534,7 +34555,6 @@ function Html(props) {
     }).then(res => {
       setisLoading(false);
       if (res.status) {
-        setoptionDataSaved(optionData);
         setneedSave(false);
       }
     });
@@ -34624,7 +34644,7 @@ function Html(props) {
     });
   }, []);
   useEffect(() => {
-    setisLoadings(true);
+    setisLoading(true);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: "/accordions/v2/get_options",
       method: "POST",
@@ -34636,10 +34656,9 @@ function Html(props) {
         var resX = {
           ...res
         };
-        setoptionDataSaved(resX);
         setoptionData(resX);
       }
-      setisLoadings(false);
+      setisLoading(false);
     });
   }, []);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -34656,7 +34675,7 @@ function Html(props) {
     className: "text-xl text-white"
   }, "Accordions"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-xs text-white flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "2.3.1"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "2.3.2"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "bg-lime-600 px-3 py-1 rounded-md"
   }, "Beta"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-sm text-white"
@@ -34682,7 +34701,6 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-amber-500 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white ",
     onClick: ev => {
-      // resetOptionData();
       handleAlertConfirmation();
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Reset", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -42319,7 +42337,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_4__["default"], {
     value: searchPrams.search,
     placeholder: "Search.../Add New...",
-    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[180px]",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]",
     onChange: newVal => {
       var searchPramsX = {
         ...searchPrams
@@ -42479,6 +42497,775 @@ function DOMContentLoadedImport() {
     }
   }, 2000);
 }
+
+/***/ }),
+
+/***/ "./src/store.js":
+/*!**********************!*\
+  !*** ./src/store.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   store: () => (/* binding */ store)
+/* harmony export */ });
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const {
+  __experimentalSetPreviewDeviceType: setPreviewDeviceType
+} = wp.data.dispatch("core/edit-post");
+
+// if (wp.data.dispatch('core/edit-post') != null) {
+//   const {
+//     __experimentalSetPreviewDeviceType: setPreviewDeviceType,
+
+//   } = wp.data.dispatch('core/edit-post')
+
+// } else {
+//   const {
+//     __experimentalSetPreviewDeviceType: setPreviewDeviceType,
+
+//   } = wp.data.dispatch('core/edit-widgets')
+// }
+
+const DEFAULT_STATE = {
+  breakPoint: "Desktop",
+  clientdata: {},
+  license: {
+    license_status: "",
+    license_key: ""
+  },
+  blockCss: "",
+  stylesClipboard: null
+};
+var selectors = {
+  getBreakPoint(state) {
+    const {
+      breakPoint
+    } = state;
+    return breakPoint;
+  },
+  getclientdata(state) {
+    const {
+      clientdata
+    } = state;
+    return clientdata;
+  },
+  getLicense(state) {
+    const {
+      license
+    } = state;
+    return license;
+  },
+  getStylesClipboard(state) {
+    const {
+      stylesClipboard
+    } = state;
+    return stylesClipboard;
+  },
+  parseCustomTags(state, str, tags) {
+    if (str !== undefined) {
+      var strArr = str?.split(" ");
+      if (str?.length == 0) return;
+      var newStr = strArr.map(item => {
+        if (item.indexOf("currentYear") >= 0) {
+          return tags.currentYear.value;
+        } else if (item.indexOf("currentMonth") >= 0) {
+          return tags.currentMonth.value;
+        } else if (item.indexOf("currentDay") >= 0) {
+          return tags.currentDay.value;
+        } else if (item.indexOf("currentDate") >= 0) {
+          return tags.currentDate.value;
+        } else if (item.indexOf("currentTime") >= 0) {
+          return tags.currentTime.value;
+        } else if (item.indexOf("postPublishDate") >= 0) {
+          return tags.postPublishDate.value;
+        } else if (item.indexOf("postModifiedDate") >= 0) {
+          return tags.postModifiedDate.value;
+        } else if (item.indexOf("termId") >= 0) {
+          return tags.termId.value;
+        } else if (item.indexOf("termTitle") >= 0) {
+          return tags.termTitle.value;
+        } else if (item.indexOf("termDescription") >= 0) {
+          return tags.termDescription.value;
+        } else if (item.indexOf("termPostCount") >= 0) {
+          return tags.termPostCount.value;
+        } else if (item.indexOf("postTagTitle") >= 0) {
+          return tags.postTagTitle.value;
+        } else if (item.indexOf("postTagsTitle") >= 0) {
+          return tags.postTagsTitle.value;
+        } else if (item.indexOf("postCategoryTitle") >= 0) {
+          return tags.postCategoryTitle.value;
+        } else if (item.indexOf("postCategoriesTitle") >= 0) {
+          return tags.postCategoriesTitle.value;
+        } else if (item.indexOf("postTermTitle") >= 0) {
+          return tags.postTermTitle.value;
+        } else if (item.indexOf("postTermsTitle") >= 0) {
+          return tags.postTermsTitle.value;
+        } else if (item.indexOf("postSlug") >= 0) {
+          return tags.postSlug.value;
+        } else if (item.indexOf("postId") >= 0) {
+          return tags.postId.value;
+        } else if (item.indexOf("postStatus") >= 0) {
+          return tags.postStatus.value;
+        } else if (item.indexOf("authorId") >= 0) {
+          return tags.authorId.value;
+        } else if (item.indexOf("authorName") >= 0) {
+          return tags.authorName.value;
+        } else if (item.indexOf("authorFirstName") >= 0) {
+          return tags.authorFirstName.value;
+        } else if (item.indexOf("authorLastName") >= 0) {
+          return tags.authorLastName.value;
+        } else if (item.indexOf("authorDescription") >= 0) {
+          return tags.authorDescription.value;
+        } else if (item.indexOf("excerpt") >= 0) {
+          return tags.excerpt.value;
+        } else if (item.indexOf("rankmathTitle") >= 0) {
+          return tags.rankmathTitle.value;
+        } else if (item.indexOf("rankmathDescription") >= 0) {
+          return tags.rankmathDescription.value;
+        } else if (item.indexOf("rankmathFocusKeyword") >= 0) {
+          return tags.rankmathFocusKeyword.value;
+        } else if (item.indexOf("rankmathOrgname") >= 0) {
+          return tags.rankmathOrgname.value;
+        } else if (item.indexOf("rankmathOrgurl") >= 0) {
+          return tags.rankmathOrgurl.value;
+        } else if (item.indexOf("rankmathOrglogo") >= 0) {
+          return tags.rankmathOrglogo.value;
+        } else if (item.indexOf("siteTitle") >= 0) {
+          return tags.siteTitle.value;
+        } else if (item.indexOf("siteDescription") >= 0) {
+          return tags.siteDescription.value;
+        } else if (item.indexOf("postMeta") >= 0) {
+          return tags.currentDay.value;
+        } else if (item.indexOf("separator") >= 0) {
+          return tags.separator.value;
+        } else if (item.indexOf("searchTerms") >= 0) {
+          return tags.searchTerms.value;
+        }
+        // else if (item.indexOf("counter") >= 0) {
+        // 	return tags.counter.value;
+        // }
+        else {
+          return item;
+        }
+      });
+      return newStr.join(" ");
+    }
+  },
+  cssAttrParse(state, key) {
+    var cssProp = "";
+    if (key == "alignContent") {
+      cssProp = "align-content";
+    } else if (key == "alignItems") {
+      cssProp = "align-items";
+    } else if (key == "animationName") {
+      cssProp = "animation-name";
+    } else if (key == "alignSelf") {
+      cssProp = "align-self";
+    } else if (key == "aspectRatio") {
+      cssProp = "aspect-ratio";
+    } else if (key == "backfaceVisibility") {
+      cssProp = "backface-visibility";
+    } else if (key == "backgroundAttachment") {
+      cssProp = "background-attachment";
+    } else if (key == "backgroundBlendMode") {
+      cssProp = "background-blend-mode";
+    } else if (key == "backgroundClip") {
+      cssProp = "background-clip";
+    } else if (key == "bgColor") {
+      cssProp = "background-color";
+    } else if (key == "backgroundColor") {
+      cssProp = "background-color";
+    } else if (key == "backgroundOrigin") {
+      cssProp = "background-origin";
+    } else if (key == "backgroundRepeat") {
+      cssProp = "background-repeat";
+    } else if (key == "backgroundSize") {
+      cssProp = "background-size";
+    } else if (key == "backgroundPosition") {
+      cssProp = "background-position";
+    } else if (key == "backgroundImage") {
+      cssProp = "background-image";
+    } else if (key == "border") {
+      cssProp = "border";
+    } else if (key == "borderTop") {
+      cssProp = "border-top";
+    } else if (key == "borderRight") {
+      cssProp = "border-right";
+    } else if (key == "borderBottom") {
+      cssProp = "border-bottom";
+    } else if (key == "borderLeft") {
+      cssProp = "border-left";
+    } else if (key == "borderRadius") {
+      cssProp = "border-radius";
+    } else if (key == "borderCollapse") {
+      cssProp = "border-collapse";
+    } else if (key == "borderSpacing") {
+      cssProp = "border-spacing";
+    } else if (key == "borderImage") {
+      cssProp = "border-image";
+    } else if (key == "boxShadow") {
+      cssProp = "box-shadow";
+    } else if (key == "backdropFilter") {
+      cssProp = "backdrop-filter";
+    } else if (key == "bottom" || key == "top" || key == "left" || key == "right" || key == "clear" || key == "color" || key == "filter" || key == "float") {
+      cssProp = key;
+    } else if (key == "boxSizing") {
+      cssProp = "box-sizing";
+    } else if (key == "cursor") {
+      cssProp = "cursor";
+    } else if (key == "content") {
+      cssProp = "content";
+    } else if (key == "counterIncrement") {
+      cssProp = "counter-increment";
+    } else if (key == "counterReset") {
+      cssProp = "counter-reset";
+    } else if (key == "counterSet") {
+      cssProp = "counter-set";
+    } else if (key == "columnCount") {
+      cssProp = "column-count";
+    } else if (key == "columnRule") {
+      cssProp = "column-rule";
+    } else if (key == "direction") {
+      cssProp = "direction";
+    } else if (key == "fontFamily") {
+      cssProp = "font-family";
+    } else if (key == "fontSize") {
+      cssProp = "font-size";
+    } else if (key == "fontStyle") {
+      cssProp = "font-style";
+    } else if (key == "fontStretch") {
+      cssProp = "font-stretch";
+    } else if (key == "fontWeight") {
+      cssProp = "font-weight";
+    } else if (key == "fontVariantCaps") {
+      cssProp = "font-variant-caps";
+    } else if (key == "flexWrap") {
+      cssProp = "flex-wrap";
+    } else if (key == "flexDirection") {
+      cssProp = "flex-direction";
+    } else if (key == "flexGrow") {
+      cssProp = "flex-grow";
+    } else if (key == "flexShrink") {
+      cssProp = "flex-shrink";
+    } else if (key == "flexBasis") {
+      cssProp = "flex-basis";
+    } else if (key == "flexFlow") {
+      cssProp = "flex-flow";
+    } else if (key == "letterSpacing") {
+      cssProp = "letter-spacing";
+    } else if (key == "gridAutoFlow") {
+      cssProp = "grid-auto-flow";
+    } else if (key == "gridColumnEnd") {
+      cssProp = "grid-column-end";
+    } else if (key == "gridColumnStart") {
+      cssProp = "grid-column-start";
+    } else if (key == "gridRowEnd") {
+      cssProp = "grid-row-end";
+    } else if (key == "gridRowStart") {
+      cssProp = "grid-row-start";
+    } else if (key == "gridTemplateColumns") {
+      cssProp = "grid-template-columns";
+    } else if (key == "gridTemplateRows") {
+      cssProp = "grid-template-rows";
+    } else if (key == "listStyle") {
+      cssProp = "list-style";
+    } else if (key == "lineHeight") {
+      cssProp = "line-height";
+    } else if (key == "justifyContent") {
+      cssProp = "justify-content";
+    } else if (key == "objectFit") {
+      cssProp = "object-fit";
+    } else if (key == "opacity") {
+      cssProp = "opacity";
+    } else if (key == "outline") {
+      cssProp = "outline";
+    } else if (key == "order") {
+      cssProp = "order";
+    } else if (key == "outlineOffset") {
+      cssProp = "outline-offset";
+    } else if (key == "position") {
+      cssProp = "position";
+    } else if (key == "textIndent") {
+      cssProp = "text-indent";
+    } else if (key == "textJustify") {
+      cssProp = "text-justify";
+    } else if (key == "textTransform") {
+      cssProp = "text-transform";
+    } else if (key == "textDecoration") {
+      cssProp = "text-decoration";
+    } else if (key == "textOverflow") {
+      cssProp = "text-overflow";
+    } else if (key == "textShadow") {
+      cssProp = "text-shadow";
+    } else if (key == "textAlign") {
+      cssProp = "text-align";
+    } else if (key == "visibility") {
+      cssProp = "visibility";
+    } else if (key == "wordBreak") {
+      cssProp = "word-break";
+    } else if (key == "wordSpacing") {
+      cssProp = "word-spacing";
+    } else if (key == "zIndex") {
+      cssProp = "z-index";
+    } else if (key == "padding") {
+      cssProp = "padding";
+    } else if (key == "paddingTop") {
+      cssProp = "padding-top";
+    } else if (key == "paddingRight") {
+      cssProp = "padding-right";
+    } else if (key == "paddingBottom") {
+      cssProp = "padding-bottom";
+    } else if (key == "paddingLeft") {
+      cssProp = "padding-left";
+    } else if (key == "placeItems") {
+      cssProp = "place-items";
+    } else if (key == "margin") {
+      cssProp = "margin";
+    } else if (key == "marginTop") {
+      cssProp = "margin-top";
+    } else if (key == "marginRight") {
+      cssProp = "margin-right";
+    } else if (key == "marginBottom") {
+      cssProp = "margin-bottom";
+    } else if (key == "marginLeft") {
+      cssProp = "margin-left";
+    } else if (key == "display") {
+      cssProp = "display";
+    } else if (key == "width") {
+      cssProp = "width";
+    } else if (key == "height") {
+      cssProp = "height";
+    } else if (key == "verticalAlign") {
+      cssProp = "vertical-align";
+    } else if (key == "overflow") {
+      cssProp = "overflow";
+    } else if (key == "overflowX") {
+      cssProp = "overflow-x";
+    } else if (key == "overflowY") {
+      cssProp = "overflow-y";
+    } else if (key == "writingMode") {
+      cssProp = "writing-mode";
+    } else if (key == "wordWrap") {
+      cssProp = "word-wrap";
+    } else if (key == "perspective") {
+      cssProp = "perspective";
+    } else if (key == "minWidth") {
+      cssProp = "min-width";
+    } else if (key == "minHeight") {
+      cssProp = "min-height";
+    } else if (key == "maxHeight") {
+      cssProp = "max-height";
+    } else if (key == "maxWidth") {
+      cssProp = "max-width";
+    } else if (key == "transition") {
+      cssProp = "transition";
+    } else if (key == "transform") {
+      cssProp = "transform";
+    } else if (key == "transformOrigin") {
+      cssProp = "transform-origin";
+    } else if (key == "tableLayout") {
+      cssProp = "table-layout";
+    } else if (key == "emptyCells") {
+      cssProp = "empty-cells";
+    } else if (key == "captionSide") {
+      cssProp = "caption-side";
+    } else if (key == "gap") {
+      cssProp = "gap";
+    } else if (key == "rowGap") {
+      cssProp = "row-gap";
+    } else if (key == "columnGap") {
+      cssProp = "column-gap";
+    } else if (key == "userSelect") {
+      cssProp = "user-select";
+    } else if (key == "-webkit-text-fill-color") {
+      cssProp = "-webkit-text-fill-color";
+    } else {
+      cssProp = key;
+    }
+    return cssProp;
+  },
+  onAddStyleItem(state, sudoScource, key, obj) {
+    const {
+      breakPoint
+    } = state;
+    var path = [sudoScource, key, breakPoint];
+    let objX = Object.assign({}, obj);
+    const object = selectors.addPropertyDeep(state, objX, path, "");
+    return object;
+  },
+  addPropertyDeep(state, obj, path, value) {
+    const [head, ...rest] = path;
+    return {
+      ...obj,
+      [head]: rest.length ? selectors.addPropertyDeep(state, obj[head], rest, value) : value
+    };
+  },
+  updatePropertyDeep(state, obj, path, value) {
+    const [head, ...rest] = path;
+    return {
+      ...obj,
+      [head]: rest.length ? selectors.updatePropertyDeep(state, obj[head], rest, value) : value
+    };
+  },
+  setPropertyDeep(state, obj, path, value) {
+    const [head, ...rest] = path.split(".");
+    return {
+      ...obj,
+      [head]: rest.length ? selectors.setPropertyDeep(state, obj[head], rest.join("."), value) : value
+    };
+  },
+  deletePropertyDeep(state, object, path) {
+    var last = path.pop();
+    delete path.reduce((o, k) => o[k] || {}, object)[last];
+    return object;
+  },
+  getElementSelector(state, sudoScource, mainSelector) {
+    var elementSelector = mainSelector;
+    if (sudoScource == "styles") {
+      elementSelector = mainSelector;
+    } else if (sudoScource == "hover") {
+      elementSelector = mainSelector + ":hover";
+    } else if (sudoScource == "after") {
+      elementSelector = mainSelector + "::after";
+    } else if (sudoScource == "before") {
+      elementSelector = mainSelector + "::before";
+    } else if (sudoScource == "first-child") {
+      elementSelector = mainSelector + ":first-child";
+    } else if (sudoScource == "last-child") {
+      elementSelector = mainSelector + ":last-child";
+    } else if (sudoScource == "visited") {
+      elementSelector = mainSelector + ":visited";
+    } else if (sudoScource == "selection") {
+      elementSelector = mainSelector + "::selection";
+    } else if (sudoScource == "first-letter") {
+      elementSelector = mainSelector + "::first-letter";
+    } else if (sudoScource == "first-line") {
+      elementSelector = mainSelector + "::first-line";
+    } else {
+      elementSelector = mainSelector + ":" + sudoScource;
+    }
+    return elementSelector;
+  },
+  // generateElementCss(state, obj, elementSelector) {
+  // 	var cssObj = {};
+
+  // 	Object.entries(obj).map((args) => {
+  // 		var sudoSrc = args[0];
+  // 		var sudoArgs = args[1];
+  // 		if (sudoSrc != "options" && sudoArgs != null) {
+  // 			var selector = selectors.getElementSelector(
+  // 				state,
+  // 				sudoSrc,
+  // 				elementSelector
+  // 			);
+  // 			Object.entries(args[1]).map((x) => {
+  // 				var attr = x[0];
+  // 				var cssPropty = selectors.cssAttrParse(state, attr);
+
+  // 				if (cssObj[selector] == undefined) {
+  // 					cssObj[selector] = {};
+  // 				}
+
+  // 				if (cssObj[selector][cssPropty] == undefined) {
+  // 					cssObj[selector][cssPropty] = {};
+  // 				}
+
+  // 				cssObj[selector][cssPropty] = x[1];
+  // 			});
+  // 		}
+  // 	});
+
+  // 	return cssObj;
+  // },
+  generateElementCss(state, obj, elementSelector) {
+    var cssObj = {};
+    Object.entries(obj).map(args => {
+      var sudoSrc = args[0];
+      var sudoArgs = args[1];
+      if (sudoSrc != "options" && sudoArgs != null) {
+        var selector = selectors.getElementSelector(state, sudoSrc, elementSelector);
+        Object.entries(args[1]).map(x => {
+          var attr = x[0];
+          var propVal = x[1];
+          var cssPropty = selectors.cssAttrParse(state, attr);
+          var found = Object.entries(propVal).reduce((a, [k, v]) => v ? (a[k] = v, a) : a, {});
+          if (Object.keys(found).length > 0) {
+            if (cssObj[selector] == undefined) {
+              cssObj[selector] = {};
+            }
+            if (cssObj[selector][cssPropty] == undefined) {
+              cssObj[selector][cssPropty] = {};
+            }
+            cssObj[selector][cssPropty] = x[1];
+          }
+        });
+      }
+    });
+    return cssObj;
+  },
+  // getBlockCssRules(state, blockCssObj) {
+  // 	var blockCssRules = {};
+
+  // 	Object.entries(blockCssObj).map((args) => {
+  // 		var elementSelector = args[0];
+  // 		var elementObj = args[1];
+
+  // 		var elementCss = selectors.generateElementCss(
+  // 			state,
+  // 			elementObj,
+  // 			elementSelector
+  // 		);
+
+  // 		if (elementCss[elementSelector] == undefined) {
+  // 		} else {
+  // 			blockCssRules[elementSelector] = elementCss[elementSelector];
+  // 		}
+  // 	});
+
+  // 	return blockCssRules;
+  // },
+
+  getBlockCssRules(state, blockCssObj) {
+    var blockCssRules = {};
+    Object.entries(blockCssObj).map(args => {
+      var elementSelector = args[0];
+      var elementObj = args[1];
+      var elementCss = selectors.generateElementCss(state, elementObj, elementSelector);
+      Object.entries(elementCss).map(sudoCss => {
+        var sudoSelector = sudoCss[0];
+        var sudoVal = sudoCss[1];
+        blockCssRules[sudoSelector] = sudoVal;
+      });
+    });
+    return blockCssRules;
+  },
+  generateCssFromElementObject(state, obj, selector) {
+    var reponsiveCssGroups = {};
+  },
+  generateBlockCss(state, items, blockId) {
+    const {
+      blockCss
+    } = state;
+    var reponsiveCssGroups = {};
+    for (var selector in items) {
+      var attrs = items[selector];
+      for (var attr in attrs) {
+        var breakpoints = attrs[attr];
+        for (var device in breakpoints) {
+          var attrValue = breakpoints[device];
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = [];
+          }
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = [];
+          }
+          if (reponsiveCssGroups[device][selector] == undefined) {
+            reponsiveCssGroups[device][selector] = [];
+          }
+          if (typeof attrValue == "string") {
+            attrValue = attrValue.replaceAll("u0022", '"');
+            reponsiveCssGroups[device][selector].push({
+              attr: attr,
+              val: attrValue
+            });
+          }
+        }
+      }
+    }
+    var reponsiveCssDesktop = "";
+    if (reponsiveCssGroups["Desktop"] != undefined) {
+      for (var selector in reponsiveCssGroups["Desktop"]) {
+        var attrs = reponsiveCssGroups["Desktop"][selector];
+        reponsiveCssDesktop += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssDesktop += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssDesktop += "}";
+      }
+    }
+    var reponsiveCssTablet = "";
+    if (reponsiveCssGroups["Tablet"] != undefined) {
+      reponsiveCssTablet += "@media(max-width: 991px){";
+      for (var selector in reponsiveCssGroups["Tablet"]) {
+        var attrs = reponsiveCssGroups["Tablet"][selector];
+        reponsiveCssTablet += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssTablet += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssTablet += "}";
+      }
+      reponsiveCssTablet += "}";
+    }
+    var reponsiveCssMobile = "";
+    if (reponsiveCssGroups["Mobile"] != undefined) {
+      reponsiveCssMobile += "@media(max-width:767px){";
+      for (var selector in reponsiveCssGroups["Mobile"]) {
+        var attrs = reponsiveCssGroups["Mobile"][selector];
+        reponsiveCssMobile += selector + "{";
+        for (var index in attrs) {
+          var attr = attrs[index];
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssMobile += attrName + ":" + attrValue + ";";
+        }
+        reponsiveCssMobile += "}";
+      }
+      reponsiveCssMobile += "}";
+    }
+    var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+    var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+    if (iframe) {
+      setTimeout(() => {
+        var iframeDocument = iframe.contentDocument;
+        var body = iframeDocument.body;
+        var divWrap = iframeDocument.getElementById("css-block-" + blockId);
+        if (divWrap != undefined) {
+          iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
+        }
+        var divWrap = '<div id="css-block-' + blockId + '"></div>';
+        body.insertAdjacentHTML("beforeend", divWrap);
+        var csswrappg = iframeDocument.getElementById("css-block-" + blockId);
+        var str = "<style>" + reponsiveCss + "</style>";
+        csswrappg.insertAdjacentHTML("beforeend", str);
+      }, 200);
+    } else {
+      var wpfooter = document.getElementById("wpfooter");
+      var divWrap = document.getElementById("css-block-" + blockId);
+      if (divWrap != undefined) {
+        document.getElementById("css-block-" + blockId).outerHTML = "";
+      }
+      var divWrap = '<div id="css-block-' + blockId + '"></div>';
+      wpfooter.insertAdjacentHTML("beforeend", divWrap);
+      var csswrappg = document.getElementById("css-block-" + blockId);
+      var str = "<style>" + reponsiveCss + "</style>";
+      csswrappg.insertAdjacentHTML("beforeend", str);
+    }
+    return blockCss;
+  }
+};
+var resolvers = {
+  *getLicense() {
+    const path = "/accordions/v2/get_license";
+    const res = yield actions.fetchLicense(path);
+    return actions.setLicense(res);
+  },
+  *getclientdata() {
+    const path = "/accordions/v2/get_site_details";
+    const res = yield actions.fetchclientdata(path);
+    return actions.setclientdata(res);
+  }
+};
+const actions = {
+  setBreakPoint(breakpoint) {
+    setPreviewDeviceType(breakpoint);
+    return {
+      type: "SET_BREAKPOINT",
+      breakpoint
+    };
+  },
+  setclientdata(clientdata) {
+    return {
+      type: "SET_CLIENTDATA",
+      clientdata
+    };
+  },
+  setLicense(license) {
+    return {
+      type: "SET_LICENSE",
+      license
+    };
+  },
+  setStylesClipboard(stylesClipboard) {
+    return {
+      type: "SET_CLIPBOARD",
+      stylesClipboard
+    };
+  },
+  fetchLicense(path) {
+    return {
+      type: "FETCH_LICENSE_FROM_API",
+      path
+    };
+  },
+  fetchclientdata(path) {
+    return {
+      type: "FETCH_CLIENTDATA_FROM_API",
+      path
+    };
+  }
+};
+var controls = {
+  FETCH_LICENSE_FROM_API(action) {
+    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+      path: action.path,
+      method: "POST",
+      data: {}
+    });
+  },
+  FETCH_CLIENTDATA_FROM_API(action) {
+    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+      path: action.path,
+      method: "POST",
+      data: {}
+    });
+  },
+  FETCH_PRO_INFO_FROM_API(action) {
+    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+      path: action.path,
+      method: "POST",
+      data: {}
+    });
+  }
+};
+const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)("postgrid-shop", {
+  reducer(state = DEFAULT_STATE, action) {
+    switch (action.type) {
+      case "SET_BREAKPOINT":
+        return {
+          ...state,
+          breakPoint: action.breakpoint
+        };
+      case "SET_CLIENTDATA":
+        return {
+          ...state,
+          clientdata: action.clientdata
+        };
+      case "SET_LICENSE":
+        return {
+          ...state,
+          license: action.license
+        };
+      case "SET_CLIPBOARD":
+        return {
+          ...state,
+          stylesClipboard: action.stylesClipboard
+        };
+    }
+    return state;
+  },
+  actions,
+  selectors,
+  controls,
+  resolvers
+});
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.register)(store);
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.subscribe)(() => {});
+
 
 /***/ }),
 
@@ -47417,11 +48204,15 @@ class APIClient {
         if (signal)
             signal.addEventListener('abort', () => controller.abort());
         const timeout = setTimeout(() => controller.abort(), ms);
-        return (
-        // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
-        this.fetch.call(undefined, url, { signal: controller.signal, ...options }).finally(() => {
+        return (this.getRequestClient()
+            // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
+            .fetch.call(undefined, url, { signal: controller.signal, ...options })
+            .finally(() => {
             clearTimeout(timeout);
         }));
+    }
+    getRequestClient() {
+        return { fetch: this.fetch };
     }
     shouldRetry(response) {
         // Note this is not a standard header.
@@ -53501,7 +54292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.76.1'; // x-release-please-version
+const VERSION = '4.74.0'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })
@@ -53582,13 +54373,13 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dashboard */ "./src/dashboard.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./src/store.js");
+/* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dashboard */ "./src/dashboard.js");
 // import apiFetch from "@wordpress/api-fetch";
 // import { addFilter } from "@wordpress/hooks";
 // import { createHigherOrderComponent } from "@wordpress/compose";
 // import { subscribe, select } from "@wordpress/data";
 
-//import "./store";
 
 
 })();

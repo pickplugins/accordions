@@ -75,6 +75,7 @@ class class_accordions_shortcodes
 
 
         wp_enqueue_script('accordions_front_scripts');
+        wp_enqueue_style('accordions_animate');
 
         return ob_get_clean();
     }

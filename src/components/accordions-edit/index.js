@@ -88,7 +88,7 @@ function Html(props) {
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
 
-	var isProFeature = false;
+	var isProFeature = true;
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -133,7 +133,7 @@ function Html(props) {
 		});
 	}, []);
 
-	useEffect(() => {}, [props.postData]);
+	useEffect(() => { }, [props.postData]);
 
 	useEffect(() => {
 		onChange(accordionData);
@@ -667,6 +667,21 @@ function Html(props) {
 												onClick={(ev) => {
 													ev.preventDefault();
 													ev.stopPropagation();
+
+													if (isProFeature) {
+
+														addNotifications({
+															title: "Opps its pro!",
+															content: "This feature only avilable in premium version",
+															type: "error",
+														});
+														return;
+													}
+
+
+
+
+
 													setAIWriter(!AIWriter);
 												}}>
 												AI
@@ -1417,7 +1432,7 @@ function Html(props) {
 															<div className="mb-3">
 																<PanelRow>
 																	<label htmlFor="">Active</label>
-																	<SelectControl
+																	{/* <SelectControl
 																		label=""
 																		value={item?.active ?? 0}
 																		options={[
@@ -1445,13 +1460,44 @@ function Html(props) {
 																				return updatedItems;
 																			});
 																		}}
+																	/> */}
+
+
+
+																	<Toggle
+																		value={item?.active ?? 0}
+																		onChange={(newVal) => {
+
+																			if (isProFeature) {
+
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content: "This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					active: newVal,
+																				};
+																				return updatedItems;
+																			});
+																		}}
 																	/>
+
+
+
+
 																</PanelRow>
 															</div>
 															<div className="mb-3">
 																<PanelRow>
 																	<label htmlFor="">Hide On Schema</label>
-																	<SelectControl
+																	{/* <SelectControl
 																		label=""
 																		value={item?.hideOnSchema ?? 0}
 																		options={[
@@ -1479,7 +1525,42 @@ function Html(props) {
 																				return updatedItems;
 																			});
 																		}}
+																	/> */}
+
+
+
+
+																	<Toggle
+																		value={item?.hideOnSchema ?? 0}
+																		onChange={(newVal) => {
+
+																			if (isProFeature) {
+
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content: "This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					hideOnSchema: newVal,
+																				};
+																				return updatedItems;
+																			});
+																		}}
 																	/>
+
+
+
+
+
+
+
 																</PanelRow>
 															</div>
 														</div>
@@ -1566,25 +1647,27 @@ function Html(props) {
 								<Toggle
 									value={globalOptions?.stats}
 									onChange={(newVal) => {
+
+										if (isProFeature) {
+
+											addNotifications({
+												title: "Opps its pro!",
+												content: "This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+
+
+
+
+
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.stats = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
-								{/* <SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.stats}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.stats = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/> */}
+
 							</PanelRow>
 
 							<PanelRow>
@@ -1599,8 +1682,9 @@ function Html(props) {
 										{
 											label: __("Mouseover", "accordions"),
 											value: "mouseover",
+											isPro: true,
 										},
-										{ label: __("Focus", "accordions"), value: "focus" },
+										{ label: __("Focus", "accordions"), value: "focus", isPro: true, },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1609,45 +1693,50 @@ function Html(props) {
 									}}
 									values=""></PGDropdown>
 
-								{/* <SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.activeEvent}
-									options={[
-										{ label: __("Click", "accordions"), value: "click" },
-										{
-											label: __("Mouseover", "accordions"),
-											value: "mouseover",
-										},
-										{ label: __("Focus", "accordions"), value: "focus" },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.activeEvent = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/> */}
+
 							</PanelRow>
+
+
+
+
 							<PanelRow>
-								<label htmlFor="">URL Hash</label>
-								<SelectControl
-									className="w-[140px]"
-									label=""
+								<label htmlFor="" className="flex gap-2 items-center">
+									URL Hash
+									<span
+										className="cursor-pointer"
+										title="Click to know more"
+										onClick={() => {
+											setHelp({
+												id: "urlHash",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
+								<Toggle
 									value={globalOptions?.urlHash}
-									options={[
-										{ label: __("Click", "accordions"), value: "click" },
-										{
-											label: __("Mouseover", "accordions"),
-											value: "mouseover",
-										},
-										{ label: __("Focus", "accordions"), value: "focus" },
-									]}
 									onChange={(newVal) => {
+
+										if (isProFeature) {
+
+											addNotifications({
+												title: "Opps its pro!",
+												content: "This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+
+
+
+
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.urlHash = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
+
 							</PanelRow>
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
@@ -1667,25 +1756,24 @@ function Html(props) {
 								<Toggle
 									value={globalOptions?.clickToScrollTop}
 									onChange={(newVal) => {
+
+
+										addNotifications({
+											title: "Opps its pro!",
+											content: "This feature only avilable in premium version",
+											type: "error",
+										});
+										return;
+
+
+
+
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.clickToScrollTop = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
-								{/* <SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.clickToScrollTop}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.clickToScrollTop = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/> */}
+
 							</PanelRow>
 							{globalOptions?.clickToScrollTop && (
 								<PanelRow className="w-full">
@@ -1704,59 +1792,8 @@ function Html(props) {
 									/>
 								</PanelRow>
 							)}
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Animation Name{" "}
-									<span
-										className="cursor-pointer"
-										title="Click to know more"
-										onClick={() => {
-											setHelp({
-												id: "animationSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-								<Toggle
-									value={globalOptions?.animationName}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.animationName = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-								{/* <SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.animationName}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.animationName = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/> */}
-							</PanelRow>
-							{globalOptions?.animationName && (
-								<PanelRow>
-									<label htmlFor="">Animation Duration</label>
-									<PGinputText
-										className="max-w-[140px]"
-										label=""
-										value={globalOptions?.animationDuration}
-										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.animationDuration = newVal;
-											setglobalOptions(globalOptionsX);
-										}}
-									/>
-								</PanelRow>
-							)}
+
+
 						</div>
 					</PanelBody>
 					<PanelBody
@@ -1767,7 +1804,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1845,7 +1882,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1908,25 +1945,7 @@ function Html(props) {
 											setcontent(optionsX);
 										}}
 									/>
-									{/* <SelectControl
-										className="w-[140px]"
-										label=""
-										value={globalOptions?.autoembed}
-										options={[
-											{ label: __("True", "accordions"), value: 1 },
-											{ label: __("False", "accordions"), value: 0 },
-										]}
-										onChange={(newVal) => {
-											var optionsX = {
-												...content,
-												options: {
-													...content.options,
-													autoembed: newVal,
-												},
-											};
-											setcontent(optionsX);
-										}}
-									/> */}
+
 								</PanelRow>
 
 								<PanelRow>
@@ -1946,7 +1965,7 @@ function Html(props) {
 									</label>
 
 									<Toggle
-										value={globalOptions?.shortcodes}
+										value={content.options?.shortcodes}
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
@@ -1991,7 +2010,7 @@ function Html(props) {
 								</PanelRow>
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
-										IN Animation
+										In Animation
 									</label>
 
 									<PGDropdown
@@ -1999,13 +2018,25 @@ function Html(props) {
 										variant="secondary"
 										buttonTitle={
 											popupEntranceAnimateBasic[content.options.inAnimation] ==
-											undefined
+												undefined
 												? __("Choose", "accordions")
 												: popupEntranceAnimateBasic[content.options.inAnimation]
-														.label
+													.label
 										}
 										options={popupEntranceAnimateBasic}
 										onChange={(newVal) => {
+
+											if (isProFeature) {
+
+												addNotifications({
+													title: "Opps its pro!",
+													content: "This feature only avilable in premium version",
+													type: "error",
+												});
+												return;
+											}
+
+
 											var optionsX = {
 												...content,
 												options: {
@@ -2019,7 +2050,7 @@ function Html(props) {
 								</PanelRow>
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
-										OUT Animation
+										Out Animation
 									</label>
 
 									<PGDropdown
@@ -2027,13 +2058,30 @@ function Html(props) {
 										variant="secondary"
 										buttonTitle={
 											popupCloseAnimateBasic[content.options.outAnimation] ==
-											undefined
+												undefined
 												? __("Choose", "accordions")
 												: popupCloseAnimateBasic[content.options.outAnimation]
-														.label
+													.label
 										}
 										options={popupCloseAnimateBasic}
 										onChange={(newVal) => {
+
+
+											if (isProFeature) {
+
+												addNotifications({
+													title: "Opps its pro!",
+													content: "This feature only avilable in premium version",
+													type: "error",
+												});
+												return;
+											}
+
+
+
+
+
+
 											var optionsX = {
 												...content,
 												options: {
@@ -2045,6 +2093,28 @@ function Html(props) {
 										}}
 										values=""></PGDropdown>
 								</PanelRow>
+
+
+								{/* <div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Animation duration", "accordions")}
+									</label>
+									<PGinputText
+										value={content.options.animationDuration}
+										placeholder={"1000"}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content.options,
+													animationDuration: newVal,
+												},
+											};
+											setcontent(optionsX);
+										}}
+									/>
+								</div> */}
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -2083,7 +2153,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2121,7 +2191,7 @@ function Html(props) {
 
 									<PanelRow>
 										<label htmlFor="" className="flex gap-2 items-center">
-											Toggle Text{" "}
+											Toggle Text
 											<span
 												className="cursor-pointer"
 												title="Click to know more"
@@ -2138,6 +2208,20 @@ function Html(props) {
 										<Toggle
 											value={header?.options?.toggleText}
 											onChange={(newVal) => {
+
+
+												if (isProFeature) {
+
+													addNotifications({
+														title: "Opps its pro!",
+														content: "This feature only avilable in premium version",
+														type: "error",
+													});
+													return;
+												}
+
+
+
 												var optionsX = {
 													...header,
 													options: {
@@ -2186,7 +2270,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2273,7 +2357,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2285,6 +2369,7 @@ function Html(props) {
 										name: "styles",
 										title: "Styles",
 										icon: brush,
+										isPro: true,
 										className: "tab-style",
 									},
 								]}>
@@ -2354,20 +2439,13 @@ function Html(props) {
 							title={
 								<span className="flex justify-between w-full gap-2">
 									<span>{__("Label Counter", "post-grid")}</span>
-									{isProFeature ? (
+									{isProFeature && (
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
-											onClick={(ev) => {
-												window.open(
-													"https://comboblocks.com/pricing/",
-													"_blank"
-												);
-											}}>
+										>
 											{__("Pro", "post-grid")}
 										</span>
-									) : (
-										""
-									)}{" "}
+									)}
 								</span>
 							}
 							initialOpen={false}>
@@ -2375,7 +2453,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2518,7 +2596,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2658,13 +2736,31 @@ function Html(props) {
 					<PanelBody title="Icons" initialOpen={false}>
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Icon Idle"
+
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Icon Idle", "post-grid")}</span>
+									{isProFeature && (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+										>
+											{__("Pro", "post-grid")}
+										</span>
+									)}
+								</span>
+							}
+
+
+
+
+
+							opened={isProFeature ? false : null}
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2808,10 +2904,10 @@ function Html(props) {
 											variant="secondary"
 											buttonTitle={
 												popupEntranceAnimateBasic[icon.options.inAnimation] ==
-												undefined
+													undefined
 													? __("Choose", "accordions")
 													: popupEntranceAnimateBasic[icon.options.inAnimation]
-															.label
+														.label
 											}
 											options={popupEntranceAnimateBasic}
 											onChange={(newVal) => {
@@ -2836,10 +2932,10 @@ function Html(props) {
 											variant="secondary"
 											buttonTitle={
 												popupCloseAnimateBasic[icon.options.outAnimation] ==
-												undefined
+													undefined
 													? __("Choose", "accordions")
 													: popupCloseAnimateBasic[icon.options.outAnimation]
-															.label
+														.label
 											}
 											options={popupCloseAnimateBasic}
 											onChange={(newVal) => {
@@ -2854,6 +2950,34 @@ function Html(props) {
 											}}
 											values=""></PGDropdown>
 									</PanelRow>
+
+									{/* <div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Animation duration", "accordions")}
+										</label>
+										<PGinputText
+											value={icon.options.animationDuration}
+											placeholder={"1000"}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[200px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...icon,
+													options: {
+														...icon.options,
+														animationDuration: newVal,
+													},
+												};
+												setcontent(optionsX);
+											}}
+										/>
+									</div> */}
+
+
+
+
+
+
+
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -2879,13 +3003,32 @@ function Html(props) {
 						</PanelBody>
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Icon Toggle"
+
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Icon Idle", "post-grid")}</span>
+									{isProFeature && (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+										>
+											{__("Pro", "post-grid")}
+										</span>
+									)}
+								</span>
+							}
+
+
+
+
+
+
+							opened={isProFeature ? false : null}
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2958,30 +3101,34 @@ function Html(props) {
 
 					<PanelBody
 						className="font-medium text-slate-900 "
-						// title="Expand/Collapse All"
+
 						opened={isProFeature ? false : null}
+
+
 						title={
 							<span className="flex justify-between w-full gap-2">
-								<span>{__("Expand/Collapse All", "post-grid")}</span>
-								{isProFeature ? (
+								<span>{__("Icon Idle", "post-grid")}</span>
+								{isProFeature && (
 									<span
 										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
-										onClick={(ev) => {
-											window.open("https://comboblocks.com/pricing/", "_blank");
-										}}>
+									>
 										{__("Pro", "post-grid")}
 									</span>
-								) : (
-									""
-								)}{" "}
+								)}
 							</span>
 						}
+
+
+
+
+
+
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -3197,13 +3344,29 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Top Wrap"
+
+
+
+						title={
+							<span className="flex justify-between w-full gap-2">
+								<span>{__("Top Wrap", "post-grid")}</span>
+								{isProFeature && (
+									<span
+										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+									>
+										{__("Pro", "post-grid")}
+									</span>
+								)}
+							</span>
+						}
+
+						opened={isProFeature ? false : null}
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -3268,7 +3431,21 @@ function Html(props) {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Search" initialOpen={false}>
+					<PanelBody title="Search" initialOpen={false}
+						title={
+							<span className="flex justify-between w-full gap-2">
+								<span>{__("Search", "post-grid")}</span>
+								{isProFeature && (
+									<span
+										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+									>
+										{__("Pro", "post-grid")}
+									</span>
+								)}
+							</span>
+						}
+
+						opened={isProFeature ? false : null}>
 						<PanelRow className="my-5">
 							<label htmlFor="" className="flex gap-2 items-center">
 								Enable Search?
@@ -3328,7 +3505,7 @@ function Html(props) {
 									activeTab="options"
 									orientation="horizontal"
 									activeClass="active-tab"
-									onSelect={(tabName) => {}}
+									onSelect={(tabName) => { }}
 									tabs={[
 										{
 											name: "options",
@@ -3344,33 +3521,7 @@ function Html(props) {
 										},
 									]}>
 									<PGtab name="options">
-										<PanelRow>
-											<label htmlFor="" className="flex gap-2 items-center">
-												Enable Search?
-												<span
-													className="cursor-pointer"
-													title="Click to know more"
-													onClick={() => {
-														setHelp({
-															id: "expandCollapseSetting",
-															enable: true,
-														});
-													}}>
-													<Icon icon={help} />
-												</span>
-											</label>
 
-											<Toggle
-												value={searchInput?.options?.enable}
-												onChange={(newVal) => {
-													var searchInputX = {
-														...searchInput,
-														options: { ...searchInput.options, enable: newVal },
-													};
-													setsearchInput(searchInputX);
-												}}
-											/>
-										</PanelRow>
 										<div className="flex  my-5  justify-between items-center">
 											<label className="" htmlFor="emailVerification">
 												{__("Class", "accordions")}

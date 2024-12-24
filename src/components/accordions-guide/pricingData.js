@@ -8,9 +8,9 @@ export const pricingData = {
 				"1 Year Free Support",
 				"Access to All PRO Features",
 			],
-			price: "$29",
-			salePrice: "$19",
-			link: "https://pickplugins.com/accordions/?ref=dashboard",
+			price: "$40",
+			salePrice: "$25",
+			link: "https://pickplugins.lemonsqueezy.com/checkout/buy/e8d33f98-b84e-480a-a422-bc175af6ada9?enabled=270427&checkout%5Bcustom%5D%5Bproduct_id%5D=3935",
 		},
 		{
 			title: "Plus",
@@ -20,22 +20,11 @@ export const pricingData = {
 				"1 Year Free Support",
 				"Access to All PRO Features",
 			],
-			price: "$69",
-			salePrice: "$49",
-			link: "https://pickplugins.com/accordions/?ref=dashboard",
+			price: "$99",
+			salePrice: "$75",
+			link: "https://pickplugins.lemonsqueezy.com/checkout/buy/98b2b146-9ed0-4d97-b0ad-ee54b762f799?enabled=270430&checkout%5Bcustom%5D%5Bproduct_id%5D=3934",
 		},
-		// {
-		// 	title: "Freelance",
-		// 	features: [
-		// 		"Up to 30 Sites",
-		// 		"1 Year of Updates",
-		// 		"1 Year Free Support",
-		// 		"Access to All PRO Features",
-		// 	],
-		// 	price: "$120",
-		// 	salePrice: "$89",
-		// 	link: "https://pickplugins.com/accordions/?ref=dashboard",
-		// },
+
 		{
 			title: "Agency",
 			features: [
@@ -44,9 +33,9 @@ export const pricingData = {
 				"1 Year Free Support",
 				"Access to All PRO Features",
 			],
-			price: "$149",
-			salePrice: "$99",
-			link: "https://pickplugins.com/accordions/?ref=dashboard",
+			price: "$199",
+			salePrice: "$150",
+			link: "https://pickplugins.lemonsqueezy.com/checkout/buy/365ae069-9604-4a4c-b83c-12a315df8b38?enabled=270434&checkout%5Bcustom%5D%5Bproduct_id%5D=3933",
 		},
 	],
 	lifetime: [
@@ -58,9 +47,9 @@ export const pricingData = {
 				"Lifetime Support",
 				"Access to All PRO Features",
 			],
-			price: "$149",
-			salePrice: "$99",
-			link: "https://pickplugins.com/accordions/?ref=dashboard",
+			price: "$99",
+			salePrice: "$80",
+			link: "https://pickplugins.lemonsqueezy.com/checkout/buy/6d25c9ad-d2af-4732-b8cd-2716a961e6d0?enabled=270429&checkout%5Bcustom%5D%5Bproduct_id%5D=37934",
 		},
 		{
 			title: "Plus",
@@ -70,22 +59,11 @@ export const pricingData = {
 				"Lifetime Support",
 				"Access to All PRO Features",
 			],
-			price: "$249",
-			salePrice: "$149",
-			link: "https://pickplugins.com/accordions/?ref=dashboard",
+			price: "$199",
+			salePrice: "$160",
+			link: "https://pickplugins.lemonsqueezy.com/checkout/buy/47471695-88ef-40ad-80b8-da6853929627?enabled=270431&checkout%5Bcustom%5D%5Bproduct_id%5D=37933",
 		},
-		// {
-		// 	title: "Freelance",
-		// 	features: [
-		// 		"Up to 30 Sites",
-		// 		"Lifetime Free Updates",
-		// 		"Lifetime Support",
-		// 		"Access to All PRO Features",
-		// 	],
-		// 	price: "$149",
-		// 	salePrice: "$129",
-		// 	link: "https://pickplugins.com/accordions/?ref=dashboard",
-		// },
+
 		{
 			title: "Agency",
 			features: [
@@ -95,8 +73,8 @@ export const pricingData = {
 				"Access to All PRO Features",
 			],
 			price: "$299",
-			salePrice: "$199",
-			link: "https://pickplugins.com/accordions/?ref=dashboard",
+			salePrice: "$240",
+			link: "https://pickplugins.lemonsqueezy.com/checkout/buy/76616a32-9e29-481a-8344-ece4686b3718?enabled=270435&checkout%5Bcustom%5D%5Bproduct_id%5D=37935",
 		},
 	],
 };

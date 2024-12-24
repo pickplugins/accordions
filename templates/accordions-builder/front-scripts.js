@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	window.pgAccordion = {
 		id: "",
 		activeIndex: [999],
+		iconInAnimation: "",
+		iconOutAnimation: "",
+		contentInAnimation: "",
+		contentOutAnimation: "",
+		lazyLoad: false,
+
+
+
 		expandCollapseAllHndle: ".expand-collapse-all",
 		headerList: [],
 		listenUrlHash: () => {
@@ -184,12 +192,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var accordionData = accordion.getAttribute("data-pgaccordion");
 				var accordionDataObj = JSON.parse(accordionData);
 				var activeIndex = accordionDataObj.activeIndex;
+				var iconInAnimation = accordionDataObj.iconInAnimation;
+				var iconOutAnimation = accordionDataObj.iconOutAnimation;
+				var contentInAnimation = accordionDataObj.contentInAnimation;
+				var contentOutAnimation = accordionDataObj.contentOutAnimation;
+				var lazyLoad = accordionDataObj.lazyLoad;
+
+				if (lazyLoad) {
+					accordion.style.display = "block";
+				}
+
+
 				var accordionWrapId = accordionDataObj.id;
 				window.pgAccordion.id = accordionWrapId;
 
 
 
 				window.pgAccordion.activeIndex = activeIndex;
+				window.pgAccordion.iconInAnimation = iconInAnimation;
+				window.pgAccordion.iconOutAnimation = iconOutAnimation;
+				window.pgAccordion.contentInAnimation = contentInAnimation;
+				window.pgAccordion.contentOutAnimation = contentOutAnimation;
+				window.pgAccordion.lazyLoad = lazyLoad;
+
+
+
+
 				var accordionHeaders = document.querySelectorAll("#" + accordionWrapId + " .accordion-header");
 				var headerList = [];
 				accordionHeaders.forEach((header, index) => {
@@ -234,12 +262,72 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							if (accordionHeader.classList.contains("accordion-header-active")) {
 								if (iconToggle != null) {
 									iconToggle.style.display = "inline-block";
+
+									//var entranceAnimation =										popupWrap.getAttribute("data-entrance-animation");
+									var entranceAnimation = window.pgAccordion.iconInAnimation;
+
+									iconToggle.classList.add("animate__animated");
+									iconToggle.classList.add("animate__" + entranceAnimation);
+									setTimeout(() => {
+										iconToggle.classList.remove("animate__animated");
+										iconToggle.classList.remove("animate__" + entranceAnimation);
+										// popup.style.display = "none";
+									}, 2000);
+
+
+
+
+
+
 								}
 								if (iconIdle != null) {
 									iconIdle.style.display = "none";
+
+
+
+
+									var entranceAnimation = window.pgAccordion.iconOutAnimation;
+
+									iconIdle.classList.add("animate__animated");
+									iconIdle.classList.add("animate__" + entranceAnimation);
+									setTimeout(() => {
+										iconIdle.classList.remove("animate__animated");
+										iconIdle.classList.remove("animate__" + entranceAnimation);
+										// popup.style.display = "none";
+									}, 2000);
+
+
+
+
+
+
+
 								}
 								content.style.display = "block";
 								content.style.height = "auto";
+
+
+
+
+								var entranceAnimation = window.pgAccordion.contentInAnimation;
+
+								content.classList.add("animate__animated");
+								content.classList.add("animate__fast");
+								content.classList.add("animate__" + entranceAnimation);
+								setTimeout(() => {
+									content.classList.remove("animate__animated");
+									content.classList.remove("animate__" + entranceAnimation);
+									// popup.style.display = "none";
+								}, 800);
+
+
+
+
+
+
+
+
+
 							} else {
 								if (iconIdle != null) {
 									iconIdle.style.display = "inline-block";
@@ -247,8 +335,26 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								if (iconToggle != null) {
 									iconToggle.style.display = "none";
 								}
-								content.style.display = "none";
-								content.style.height = 0;
+								//content.style.display = "none";
+								//content.style.height = 0;
+
+
+								var entranceAnimation = window.pgAccordion.contentOutAnimation;
+
+								content.classList.add("animate__animated");
+								content.classList.add("animate__fast");
+								content.classList.add("animate__" + entranceAnimation);
+								setTimeout(() => {
+									content.classList.remove("animate__animated");
+									content.classList.remove("animate__animated");
+									content.classList.remove("animate__" + entranceAnimation);
+									content.style.display = "none";
+								}, 800);
+
+
+
+
+
 							}
 						});
 					});
@@ -258,11 +364,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 			var expandCollapseAllHndle = document.querySelector("#" + window.pgAccordion.id + " " + window.pgAccordion.expandCollapseAllHndle);
+			if (expandCollapseAllHndle != null) {
+				expandCollapseAllHndle.addEventListener("click", function (event) {
 
-			expandCollapseAllHndle.addEventListener("click", function (event) {
+					window.pgAccordion.expandCollapseAll()
+				})
+			}
 
-				window.pgAccordion.expandCollapseAll()
-			})
 
 
 			// var nextWrap = document.querySelector("#" + window.pgAccordion.id + " .next ");
