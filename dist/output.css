@@ -960,6 +960,10 @@
   border-left-width: 4px;
 }
 
+.border-l-2 {
+  border-left-width: 2px;
+}
+
 .\!border-solid {
   border-style: solid !important;
 }
@@ -1074,6 +1078,16 @@
 .border-l-green-700 {
   --tw-border-opacity: 1;
   border-left-color: rgb(21 128 61 / var(--tw-border-opacity, 1));
+}
+
+.border-l-red-700 {
+  --tw-border-opacity: 1;
+  border-left-color: rgb(185 28 28 / var(--tw-border-opacity, 1));
+}
+
+.border-l-yellow-500 {
+  --tw-border-opacity: 1;
+  border-left-color: rgb(234 179 8 / var(--tw-border-opacity, 1));
 }
 
 .\!bg-blue-500 {

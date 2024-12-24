@@ -33,6 +33,9 @@ function Html(props) {
 		return null;
 	}
 
+	var isProFeature = true;
+
+
 	var [activeAccordion, setActiveAccordion] = useState(null);
 	var [postData, setpostData] = useState({
 		ID: null,
@@ -505,8 +508,34 @@ function Html(props) {
 											return (
 												<div
 													className="my-5 bg-slate-400 hover:bg-slate-500 p-3 rounded-sm cursor-pointer"
+													title="Click To Apply"
 													key={index}
 													onClick={(ev) => {
+
+														if (preset.isPro) {
+
+															if (isProFeature) {
+																addNotifications({
+																	title: "Opps its pro!",
+																	content: "This feature only avilable in premium version",
+																	type: "error",
+																});
+																return;
+
+															}
+
+														}
+
+														addNotifications({
+															title: "Preset Applied",
+															content: "WOW, Your accordion just got new look!",
+															type: "success",
+														});
+
+
+
+
+
 														var data = preset.data;
 														var presetClean = {};
 
@@ -517,17 +546,14 @@ function Html(props) {
 															if (itemArg.options) {
 																//delete itemArg.options;
 															}
-															console.log(itemIndex);
-															console.log(itemArg);
 
-															console.log(accordionData[itemIndex]);
+
 
 															presetClean[itemIndex] = {
 																//...accordionData[itemIndex],
 																...itemArg,
 															};
 
-															console.log(presetClean);
 														});
 
 														var accordionDataX = {
@@ -544,8 +570,28 @@ function Html(props) {
 														});
 													}}>
 													<img className="w-full" src={preset.thumb} alt="" />
-													<div className="text-lg mt-3 text-white">
-														{preset.label}
+													<div className="mt-3 flex justify-between  items-center">
+														<span className="text-lg  text-white ">{preset.label}</span>
+
+														{preset.isPro && (
+
+															<>
+
+																{isProFeature && (
+																	<span
+																		className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+																	>
+																		{__("Pro", "post-grid")}
+																	</span>
+																)}
+															</>
+
+														)}
+
+
+
+
+
 													</div>
 												</div>
 											);

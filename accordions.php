@@ -183,6 +183,7 @@ class Accordions
 
     //var_dump($screen);
 
+    wp_register_style('accordions_animate', accordions_plugin_url . 'assets/css/animate.min.css');
 
 
     wp_enqueue_script('accordions_admin_js', accordions_plugin_url . 'assets/admin/js/scripts.js', array('jquery'), '20181018');

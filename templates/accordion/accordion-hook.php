@@ -261,7 +261,6 @@ function accordions_main_items($atts)
     $post_id = str_replace("'", "", $post_id);
     $post_id = str_replace("&#039;", "", $post_id);
     $post_id = str_replace("&quot;", "", $post_id);
-    //var_dump($post_id);
 
     $accordions_options = get_post_meta($post_id, 'accordions_options', true);
 
@@ -367,7 +366,6 @@ function accordions_main_items($atts)
             }
 
 
-            //var_dump($active_index);
 
             if (!in_array('accordions-pro/accordions-pro.php', (array) $active_plugins)) {
                 if (has_shortcode($accordion_body, 'accordions') || has_shortcode($accordion_body, 'accordions_pickplguins') || has_shortcode($accordion_body, 'accordions_pplugins')) {
