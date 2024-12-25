@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		contentInAnimation: "",
 		contentOutAnimation: "",
 		lazyLoad: false,
+		autoPlay: false,
 
 
 
@@ -182,6 +183,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var nextIndex = (activeIndex - 1 < 0) ? max : (activeIndex - 1);
 			window.pgAccordion.switch(nextIndex);
 		},
+		autoPlayRun: () => {
+
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+
+			var items = [];
+
+
+
+			accordionHeaders.forEach((header, i) => {
+
+				items.push(i)
+			});
+
+
+			let currentIndex = 0;
+
+			function loopThroughItems() {
+				console.log(items[currentIndex]); // Print the current item
+				currentIndex = (currentIndex + 1) % items.length; // Move to the next index
+				setTimeout(loopThroughItems, 1000); // Recursively call after 1 second
+
+
+				window.pgAccordion.switch(currentIndex)
+			}
+
+			// Start the loop
+			loopThroughItems();
+
+
+
+		},
+
+
 		search: (keyword) => {
 			console.log(keyword);
 
@@ -281,9 +315,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var contentInAnimation = accordionDataObj.contentInAnimation;
 				var contentOutAnimation = accordionDataObj.contentOutAnimation;
 				var lazyLoad = accordionDataObj.lazyLoad;
+				var autoPlay = accordionDataObj.autoPlay;
 
 				if (lazyLoad) {
 					accordion.style.display = "block";
+				}
+				if (autoPlay) {
+
+					setTimeout(() => {
+
+						window.pgAccordion.autoPlayRun();
+
+					}, 2000)
+
 				}
 
 
@@ -298,11 +342,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				window.pgAccordion.contentInAnimation = contentInAnimation;
 				window.pgAccordion.contentOutAnimation = contentOutAnimation;
 				window.pgAccordion.lazyLoad = lazyLoad;
+				window.pgAccordion.autoPlay = autoPlay;
 
 
 
 
 				var accordionHeaders = document.querySelectorAll("#" + accordionWrapId + " .accordion-header");
+
+				console.log(accordionHeaders);
+
+
 				var headerList = [];
 				accordionHeaders.forEach((header, index) => {
 					var headerId = header.getAttribute("id");

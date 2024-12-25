@@ -14,7 +14,7 @@ import {
 	SelectControl,
 	ToggleControl,
 } from "@wordpress/components";
-import { brush, close, copy, help, menu, settings } from "@wordpress/icons";
+import { brush, close, copy, help, menu, settings, update } from "@wordpress/icons";
 
 import { RichText } from "@wordpress/block-editor";
 import breakPoints from "../../breakpoints";
@@ -1623,13 +1623,84 @@ function Html(props) {
 																</PanelRow>
 
 
+																<div className="w-full">
+																	<div className="break-all">
+																		Slug
+																	</div>
+																	<div className="flex items-center gap-2">
 
+																		<PGinputText
+																			className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+																			label=""
+																			value={item?.headerLabel.options.slug}
+																			onChange={(newVal) => {
+
+																				if (isProFeature) {
+
+																					addNotifications({
+																						title: "Opps its pro!",
+																						content: "This feature only avilable in premium version",
+																						type: "error",
+																					});
+																					return;
+																				}
+
+
+
+																				setitems((prevItems) => {
+																					const updatedItems = [...prevItems];
+																					updatedItems[index] = {
+																						...updatedItems[index],
+																						headerLabel: {
+																							...updatedItems[index].headerLabel,
+																							options: {
+																								...updatedItems[index].headerLabel
+																									.options,
+																								slug: newVal,
+																							},
+																						},
+																					};
+																					return updatedItems;
+																				});
+
+
+																			}}
+																		/>
+
+																		<div title="Generate from Label" className="cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
+																			onClick={ev => {
+																				var slug = item?.headerLabel.options.text.toLowerCase().replaceAll(" ", "-");
+
+																				setitems((prevItems) => {
+																					const updatedItems = [...prevItems];
+																					updatedItems[index] = {
+																						...updatedItems[index],
+																						headerLabel: {
+																							...updatedItems[index].headerLabel,
+																							options: {
+																								...updatedItems[index].headerLabel
+																									.options,
+																								slug: slug,
+																							},
+																						},
+																					};
+																					return updatedItems;
+																				});
+
+
+																			}}><Icon fill={"#fff"} icon={update} /></div>
+																	</div>
+																</div>
 
 
 
 
 
 															</div>
+
+
+
+
 														</div>
 													)}
 												</div>
@@ -1737,6 +1808,7 @@ function Html(props) {
 
 							</PanelRow>
 
+
 							<PanelRow>
 								<label htmlFor="">Active Event</label>
 
@@ -1825,13 +1897,17 @@ function Html(props) {
 									onChange={(newVal) => {
 
 
-										addNotifications({
-											title: "Opps its pro!",
-											content: "This feature only avilable in premium version",
-											type: "error",
-										});
-										return;
 
+
+										if (isProFeature) {
+
+											addNotifications({
+												title: "Opps its pro!",
+												content: "This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
 
 
 
@@ -1859,6 +1935,120 @@ function Html(props) {
 									/>
 								</PanelRow>
 							)}
+
+							<PanelRow>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Auto Play
+									<span
+										className="cursor-pointer"
+										title="Click to know more"
+										onClick={() => {
+											setHelp({
+												id: "statsSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
+								<Toggle
+									value={globalOptions?.autoPlay}
+									onChange={(newVal) => {
+
+										if (isProFeature) {
+
+											addNotifications({
+												title: "Opps its pro!",
+												content: "This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.autoPlay = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+
+							</PanelRow>
+
+
+							{globalOptions?.autoPlay && (
+								<>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											Auto Play Control
+											<span
+												className="cursor-pointer"
+												title="Click to know more"
+												onClick={() => {
+													setHelp({
+														id: "statsSetting",
+														enable: true,
+													});
+												}}>
+												<Icon icon={help} />
+											</span>
+										</label>
+										<Toggle
+											value={globalOptions?.autoPlayControl}
+											onChange={(newVal) => {
+
+												if (isProFeature) {
+
+													addNotifications({
+														title: "Opps its pro!",
+														content: "This feature only avilable in premium version",
+														type: "error",
+													});
+													return;
+												}
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayControl = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+
+									</PanelRow>
+
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Timeout
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayTimeout}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayTimeout = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Delay
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayDelay}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayDelay = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+
+								</>
+
+
+
+
+							)}
+
 
 
 						</div>
@@ -1899,7 +2089,7 @@ function Html(props) {
 									</label>
 									<PGinputText
 										value={wrapper.options.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...wrapper,
@@ -1971,7 +2161,7 @@ function Html(props) {
 									</label>
 									<PGinputText
 										value={content.options.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
@@ -2169,7 +2359,7 @@ function Html(props) {
 									<PGinputText
 										value={content.options.animationDuration}
 										placeholder={"1000"}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
@@ -2242,7 +2432,7 @@ function Html(props) {
 										</label>
 										<PGinputText
 											value={header.options.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...header,
@@ -2359,7 +2549,7 @@ function Html(props) {
 										</label>
 										<PGinputText
 											value={headerActive.options.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...headerActive,
@@ -2462,7 +2652,7 @@ function Html(props) {
 										</label>
 										<PGinputText
 											value={headerLabel.options.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...headerLabel,
@@ -2593,7 +2783,7 @@ function Html(props) {
 										</label>
 										<PGinputText
 											value={labelCounter.options.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...labelCounter,
@@ -2766,7 +2956,7 @@ function Html(props) {
 										</label>
 										<PGinputText
 											value={labelIcon.options.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...labelIcon,
@@ -2963,7 +3153,7 @@ function Html(props) {
 										</label>
 										<PGinputText
 											value={icon.options.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...icon,
@@ -3132,7 +3322,7 @@ function Html(props) {
 										</label>
 										<PGinputText
 											value={iconToggle.options.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...iconToggle,
@@ -3232,7 +3422,7 @@ function Html(props) {
 									</label>
 									<PGinputText
 										value={expandCollapseAll.options.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...expandCollapseAll,
@@ -3470,7 +3660,7 @@ function Html(props) {
 									</label>
 									<PGinputText
 										value={topWrap?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...topWrap,
@@ -3610,7 +3800,7 @@ function Html(props) {
 											</label>
 											<PGinputText
 												value={searchInput.options.class}
-												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 												onChange={(newVal) => {
 													var optionsX = {
 														...searchInput,
@@ -3629,7 +3819,7 @@ function Html(props) {
 											</label>
 											<PGinputText
 												value={searchInput.options.placeholder}
-												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 												onChange={(newVal) => {
 													var optionsX = {
 														...searchInput,

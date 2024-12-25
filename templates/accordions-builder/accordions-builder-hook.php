@@ -10,16 +10,12 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
-    $search = isset($globalOptions["search"]) ? $globalOptions["search"] : true;
     $lazyLoad = isset($globalOptions["lazyLoad"]) ? $globalOptions["lazyLoad"] : true;
     $stats = isset($globalOptions["stats"]) ? $globalOptions["stats"] : true;
     $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : true;
-    $autoembed = isset($globalOptions["autoembed"]) ? $globalOptions["autoembed"] : true;
-    $shortcodes = isset($globalOptions["shortcodes"]) ? $globalOptions["shortcodes"] : true;
-    $wpautop = isset($globalOptions["wpautop"]) ? $globalOptions["wpautop"] : true;
-    $expandCollapseAll = isset($globalOptions["expandCollapseAll"]) ? $globalOptions["expandCollapseAll"] : "";
-
-
+    $autoPlay = isset($globalOptions["autoPlay"]) ? $globalOptions["autoPlay"] : true;
+    $autoPlayTimeout = isset($globalOptions["autoPlayTimeout"]) ? $globalOptions["autoPlayTimeout"] : 2000;
+    $autoPlayDelay = isset($globalOptions["autoPlayDelay"]) ? $globalOptions["autoPlayDelay"] : 2000;
 
 
 
@@ -27,9 +23,6 @@ function accordions_builder_accordion($post_id, $accordionData)
     $urlHash = isset($globalOptions["urlHash"]) ? $globalOptions["urlHash"] : "";
     $clickToScrollTop = isset($globalOptions["clickToScrollTop"]) ? $globalOptions["clickToScrollTop"] : "";
     $clickToScrollTopOffset = isset($globalOptions["clickToScrollTopOffset"]) ? $globalOptions["clickToScrollTopOffset"] : "";
-    $animationName = isset($globalOptions["animationName"]) ? $globalOptions["animationName"] : "";
-    $animationDelay = isset($globalOptions["animationDelay"]) ? $globalOptions["animationDelay"] : "";
-
 
 
 
@@ -93,6 +86,10 @@ function accordions_builder_accordion($post_id, $accordionData)
 
     $contentInAnimation = isset($contentOptions["inAnimation"]) ? $contentOptions["inAnimation"] : "";
     $contentOutAnimation = isset($contentOptions["outAnimation"]) ? $contentOptions["outAnimation"] : "";
+
+    $contentAutoembed = isset($contentOptions["autoembed"]) ? $contentOptions["autoembed"] : true;
+    $contentShortcodes = isset($contentOptions["shortcodes"]) ? $contentOptions["shortcodes"] : true;
+    $contentWpautop = isset($contentOptions["wpautop"]) ? $contentOptions["wpautop"] : true;
 
 
 
@@ -203,9 +200,20 @@ function accordions_builder_accordion($post_id, $accordionData)
     $blockId = "accordions-" . $post_id;
     //var_dump($activeIndex);
 
+
+
+
     $accordionDataAttr = [
         "id" => $blockId,
         "activeIndex" => $activeIndex,
+        "activeEvent" => $activeEvent,
+        "autoPlay" => $autoPlay,
+        "autoPlayTimeout" => $autoPlayTimeout,
+        "autoPlayDelay" => $autoPlayDelay,
+        "stats" => $stats,
+        "urlHash" => $urlHash,
+        "clickToScrollTop" => $clickToScrollTop,
+        "clickToScrollTopOffset" => $clickToScrollTopOffset,
         "iconInAnimation" => $iconInAnimation,
         "iconOutAnimation" => $iconOutAnimation,
         "contentInAnimation" => $contentInAnimation,
@@ -262,16 +270,16 @@ function accordions_builder_accordion($post_id, $accordionData)
             $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
 
 
-            if ($autoembed) {
+            if ($contentAutoembed) {
                 $WP_Embed = new WP_Embed();
                 $contentText = $WP_Embed->autoembed($contentText);
             }
 
-            if ($wpautop) {
+            if ($contentWpautop) {
                 $contentText = wpautop($contentText);
             }
 
-            if ($shortcodes) {
+            if ($contentShortcodes) {
                 $contentText = do_shortcode($contentText);
             }
 
@@ -306,8 +314,18 @@ function accordions_builder_accordion($post_id, $accordionData)
                 <?php endif; ?>
                 <<?php echo tag_escape($headerLabelTag); ?> index=""
                     <?php if ($headerLabelTag == 'a') :
-                        $link = strtolower($headerLabelText);
-                        $link = str_replace(" ", "-", $link);
+
+                        if (empty($headerLabelSlug)) {
+                            $link = strtolower($headerLabelText);
+                            $link = str_replace(" ", "-", $link);
+                        } else {
+                            $link = $headerLabelSlug;
+                        }
+
+
+
+
+
                     ?> href="#<?php echo esc_attr($link); ?>" <?php endif; ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
                     <?php if ($labelCounterPosition == 'beforeLabelText') : ?>
                         <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
