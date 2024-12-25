@@ -221,7 +221,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
         <div class="top-wrap">
 
-            <?php if ($search): ?>
+            <?php if ($searchInputEnable): ?>
 
 
                 <form class="search-form" action="">
