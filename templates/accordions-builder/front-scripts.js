@@ -105,12 +105,49 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					content.style.display = "none";
 					content.style.height = 0;
 				}
+			});
+		},
+		hideByIndex: (index) => {
+			if (window.pgAccordion.id.length == 0) return;
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
+
+				if (index == loopIndex) {
+					var content = header.nextElementSibling;
+					//content.style.display = "none";
+					header.style.display = "none";
+				}
+			});
+		},
+		unhideByIndex: (index) => {
+			if (window.pgAccordion.id.length == 0) return;
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
+
+				if (index == loopIndex) {
+					var content = header.nextElementSibling;
+					//content.style.display = "block";
+					header.style.display = "flex";
+				}
+			});
+		},
+		unhideAll: (index) => {
+			if (window.pgAccordion.id.length == 0) return;
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
 
 
-
+				var content = header.nextElementSibling;
+				content.style.display = "none";
+				header.style.display = "flex";
 
 			});
 		},
+
+
 
 		switch: (index) => {
 			if (window.pgAccordion.id.length == 0) return;
@@ -130,6 +167,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				}
 			});
 		},
+
+
+
 		switchNext: () => {
 			var activeIndex = window.pgAccordion.activeIndex;
 			var max = window.pgAccordion.headerList.length - 1;
@@ -142,6 +182,50 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var nextIndex = (activeIndex - 1 < 0) ? max : (activeIndex - 1);
 			window.pgAccordion.switch(nextIndex);
 		},
+		search: (keyword) => {
+			console.log(keyword);
+
+			if (keyword.length == 0) {
+				window.pgAccordion.unhideAll()
+
+				return;
+
+			}
+
+			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
+			accordionHeaders.forEach((header, i) => {
+				var loopIndex = header.getAttribute("index");
+
+				//window.pgAccordion.activeIndex = index
+				var content = header.nextElementSibling;
+
+				var headerLabel = header.querySelector(".accordion-header-label");
+
+				var labelText = headerLabel.innerText.toLowerCase();;
+				var contentText = content.innerText.toLowerCase();;
+
+				var searchContent = labelText + " " + contentText
+				var position = searchContent.indexOf(keyword);
+
+
+
+				if (position < 0) {
+					//window.pgAccordion.inactiveByIndex(loopIndex)
+					window.pgAccordion.hideByIndex(loopIndex)
+
+				} else {
+					window.pgAccordion.unhideByIndex(loopIndex)
+					//window.pgAccordion.activeByIndex(loopIndex)
+
+				}
+
+			});
+
+
+		},
+
+
+
 		expandCollapseAll: () => {
 			var expandCollapseAllHndle = document.querySelector("#" + window.pgAccordion.id + " " + window.pgAccordion.expandCollapseAllHndle);
 
@@ -165,12 +249,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				}
 
 
-				console.log("Opend");
+
 
 
 			} else {
 
-				console.log("Closed");
+
 				for (var i = 0; i < headerCount; i++) {
 					window.pgAccordion.inactiveByIndex(i)
 				}
@@ -363,6 +447,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+
 			var expandCollapseAllHndle = document.querySelector("#" + window.pgAccordion.id + " " + window.pgAccordion.expandCollapseAllHndle);
 			if (expandCollapseAllHndle != null) {
 				expandCollapseAllHndle.addEventListener("click", function (event) {
@@ -372,6 +457,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}
 
 
+			var searchHndle = document.querySelector("#" + window.pgAccordion.id + " .search-input");
+
+			if (searchHndle != null) {
+
+				function debounce(func, delay) {
+					let timeout;
+					return function (...args) {
+						clearTimeout(timeout);
+						timeout = setTimeout(() => func.apply(this, args), delay);
+					};
+				}
+
+
+				function handleKeyup(event) {
+					event.preventDefault();
+
+					console.log(event);
+					var value = event.target.value;
+					window.pgAccordion.search(value)
+				}
+
+				searchHndle.addEventListener('keyup', debounce(handleKeyup, 500));
+
+			}
 
 			// var nextWrap = document.querySelector("#" + window.pgAccordion.id + " .next ");
 			// var prevWrap = document.querySelector("#" + window.pgAccordion.id + " .prev ");
