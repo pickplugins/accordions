@@ -14,7 +14,7 @@ class class_accordions_notices
 
     public function beta_test()
     {
-        // delete_option("accordions_notices");
+        //delete_option("accordions_notices");
 
 
         $screen = get_current_screen();

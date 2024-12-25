@@ -654,6 +654,14 @@ function Html(props) {
 														},
 														styles: {},
 													},
+													labelIcon: {
+														options: {
+															library: "fontAwesome",
+															srcType: "class",
+															iconSrc: "",
+														},
+														styles: {},
+													},
 												});
 												setitems(itemsX);
 
@@ -1475,35 +1483,7 @@ function Html(props) {
 															<div className="mb-3">
 																<PanelRow>
 																	<label htmlFor="">Active</label>
-																	{/* <SelectControl
-																		label=""
-																		value={item?.active ?? 0}
-																		options={[
-																			{
-																				label: __("True", "accordions"),
-																				value: 1,
-																			},
-																			{
-																				label: __("False", "accordions"),
-																				value: 0,
-																			},
-																		]}
-																		onChange={(newVal) => {
-																			// var itemsX = [...items];
 
-																			// itemsX[index].active = newVal;
-																			// setitems(itemsX);
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					active: newVal,
-																				};
-																				return updatedItems;
-																			});
-																		}}
-																	/> */}
 
 
 
@@ -1540,35 +1520,6 @@ function Html(props) {
 															<div className="mb-3">
 																<PanelRow>
 																	<label htmlFor="">Hide On Schema</label>
-																	{/* <SelectControl
-																		label=""
-																		value={item?.hideOnSchema ?? 0}
-																		options={[
-																			{
-																				label: __("True", "accordions"),
-																				value: 1,
-																			},
-																			{
-																				label: __("False", "accordions"),
-																				value: 0,
-																			},
-																		]}
-																		onChange={(newVal) => {
-																			// var itemsX = [...items];
-
-																			// itemsX[index].hideOnSchema = newVal;
-																			// setitems(itemsX);
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					hideOnSchema: newVal,
-																				};
-																				return updatedItems;
-																			});
-																		}}
-																	/> */}
 
 
 
@@ -1605,6 +1556,79 @@ function Html(props) {
 
 
 																</PanelRow>
+
+
+																<PanelRow>
+																	<label htmlFor="" className="font-medium text-slate-900 ">
+																		{__("Label Icon", "accordions")}
+																	</label>
+																	<PGIconPicker
+																		library={item?.labelIcon?.options.library}
+																		srcType={item?.labelIcon?.options.srcType}
+																		iconSrc={item?.labelIcon?.options.iconSrc}
+																		onChange={(arg) => {
+
+
+																			if (isProFeature) {
+
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content: "This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					labelIcon: {
+																						...updatedItems[index].labelIcon,
+																						options: {
+																							...updatedItems[index]?.labelIcon?.options,
+																							srcType: arg.srcType,
+																							library: arg.library,
+																							iconSrc: arg.iconSrc,
+																						}
+
+																					},
+																				};
+																				return updatedItems;
+																			});
+
+
+
+
+
+
+
+
+
+
+
+																			// var iconToggleX = { ...iconToggle };
+
+																			// var optionsX = {
+																			// 	...iconToggleX.options,
+																			// 	srcType: arg.srcType,
+																			// 	library: arg.library,
+																			// 	iconSrc: arg.iconSrc,
+																			// };
+
+																			// iconToggleX.options = optionsX;
+																			// seticonToggle(iconToggleX);
+																		}}
+																	/>
+																</PanelRow>
+
+
+
+
+
+
+
+
 															</div>
 														</div>
 													)}
@@ -3064,7 +3088,7 @@ function Html(props) {
 
 							title={
 								<span className="flex justify-between w-full gap-2">
-									<span>{__("Icon Idle", "accordions")}</span>
+									<span>{__("Icon Toggle", "accordions")}</span>
 									{isProFeature && (
 										<span
 											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
@@ -3165,7 +3189,7 @@ function Html(props) {
 
 						title={
 							<span className="flex justify-between w-full gap-2">
-								<span>{__("Icon Idle", "accordions")}</span>
+								<span>{__("Expand/Collapse All", "accordions")}</span>
 								{isProFeature && (
 									<span
 										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
