@@ -248,6 +248,8 @@ function accordions_builder_accordion($post_id, $accordionData)
             $itemActive = isset($item["active"]) ? (bool) $item["active"] : false;
 
 
+
+
             $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
             $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
             $headerLabelText = isset($headerLabelOptions["text"]) ? $headerLabelOptions["text"] : "";
@@ -273,6 +275,10 @@ function accordions_builder_accordion($post_id, $accordionData)
                 $contentText = do_shortcode($contentText);
             }
 
+            $itemLabelIcon = isset($item["labelIcon"]) ? $item["labelIcon"] : [];
+            $itemLabelIconOptions = isset($itemLabelIcon["options"]) ? $itemLabelIcon["options"] : [];
+            $itemLabelIconSrc = isset($itemLabelIconOptions["iconSrc"]) ? $itemLabelIconOptions["iconSrc"] : "";
+
 
 
         ?>
@@ -288,7 +294,15 @@ function accordions_builder_accordion($post_id, $accordionData)
                     </span>
                 <?php endif; ?>
                 <?php if ($labelIconPosition == 'beforeLabel') : ?>
-                    <?php echo wp_kses_post($labelIconHtml); ?>
+
+
+                    <?php if (empty($itemLabelIconSrc)): ?>
+                        <?php echo wp_kses_post($labelIconHtml); ?>
+                    <?php else: ?>
+                        <span class="accordion-label-icon <?php echo "$labelIconClass $itemLabelIconSrc"; ?>"></span>
+                    <?php endif; ?>
+
+
                 <?php endif; ?>
                 <<?php echo tag_escape($headerLabelTag); ?> index=""
                     <?php if ($headerLabelTag == 'a') :
@@ -301,11 +315,19 @@ function accordions_builder_accordion($post_id, $accordionData)
                         </span>
                     <?php endif; ?>
                     <?php if ($labelIconPosition == 'beforeLabelText') : ?>
-                        <?php echo wp_kses_post($labelIconHtml); ?>
+                        <?php if (empty($itemLabelIconSrc)): ?>
+                            <?php echo wp_kses_post($labelIconHtml); ?>
+                        <?php else: ?>
+                            <span class="accordion-label-icon <?php echo "$labelIconClass $itemLabelIconSrc"; ?>"></span>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php echo wp_kses_post($headerLabelText); ?>
                     <?php if ($labelIconPosition == 'afterLabelText') : ?>
-                        <?php echo wp_kses_post($labelIconHtml); ?>
+                        <?php if (empty($itemLabelIconSrc)): ?>
+                            <?php echo wp_kses_post($labelIconHtml); ?>
+                        <?php else: ?>
+                            <span class="accordion-label-icon <?php echo "$labelIconClass $itemLabelIconSrc"; ?>"></span>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if ($labelCounterPosition == 'afterLabelText') : ?>
                         <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
@@ -315,7 +337,11 @@ function accordions_builder_accordion($post_id, $accordionData)
                     <?php endif; ?>
                 </<?php echo tag_escape($headerLabelTag); ?>>
                 <?php if ($labelIconPosition == 'afterLabel') : ?>
-                    <?php echo wp_kses_post($labelIconHtml); ?>
+                    <?php if (empty($itemLabelIconSrc)): ?>
+                        <?php echo wp_kses_post($labelIconHtml); ?>
+                    <?php else: ?>
+                        <span class="accordion-label-icon <?php echo "$labelIconClass $itemLabelIconSrc"; ?>"></span>
+                    <?php endif; ?>
                 <?php endif; ?>
                 <?php if ($iconPosition == 'right') : ?>
                     <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">

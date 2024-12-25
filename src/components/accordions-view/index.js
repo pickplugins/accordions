@@ -239,7 +239,7 @@ function Html(props) {
 											)}
 											{active == index && (
 												<span
-													className={` accordion-icon accordion-icon-toggle}`}
+													className={` accordion-icon accordion-icon-toggle`}
 													dangerouslySetInnerHTML={{
 														__html: iconToggleHtml,
 													}}></span>
@@ -247,9 +247,16 @@ function Html(props) {
 										</>
 									)}
 									{labelIcon.options.position == "beforeLabel" && (
-										<span
-											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+										<>
+											{item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+											)}
+											{!item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											)}
+										</>
 									)}
 									<div
 										className={` accordion-header-label`}
@@ -260,11 +267,16 @@ function Html(props) {
 											<span className={` accordion-label-counter`}>{index}</span>
 										)}
 										{labelIcon.options.position == "beforeLabelText" && (
-											<span
-												className={` accordion-label-icon`}
-												dangerouslySetInnerHTML={{
-													__html: labelIconHtml,
-												}}></span>
+											<>
+												{item?.labelIcon?.options.iconSrc && (
+													<span className={` accordion-label-icon`}
+														dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+												)}
+												{!item?.labelIcon?.options.iconSrc && (
+													<span className={` accordion-label-icon`}
+														dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+												)}
+											</>
 										)}
 										{item.headerLabel?.options.text.length > 0 ? (
 											<>
@@ -278,20 +290,32 @@ function Html(props) {
 											"Start Writing..."
 										)}
 										{labelIcon.options.position == "afterLabelText" && (
-											<span
-												className={` accordion-label-icon`}
-												dangerouslySetInnerHTML={{
-													__html: labelIconHtml,
-												}}></span>
+											<>
+												{item?.labelIcon?.options.iconSrc && (
+													<span className={` accordion-label-icon`}
+														dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+												)}
+												{!item?.labelIcon?.options.iconSrc && (
+													<span className={` accordion-label-icon`}
+														dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+												)}
+											</>
 										)}
 										{labelCounter.options.position == "afterLabelText" && (
 											<span className={` accordion-label-counter`}>{index}</span>
 										)}
 									</div>
 									{labelIcon.options.position == "afterLabel" && (
-										<span
-											className={` accordion-label-icon`}
-											dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+										<>
+											{item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+											)}
+											{!item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											)}
+										</>
 									)}
 									{labelCounter.options.position == "right" && (
 										<span className={` accordion-label-counter`}>{index}</span>

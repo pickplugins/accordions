@@ -4352,6 +4352,14 @@ function Html(props) {
             class: "accordion-icon-toggle"
           },
           styles: {}
+        },
+        labelIcon: {
+          options: {
+            library: "fontAwesome",
+            srcType: "class",
+            iconSrc: ""
+          },
+          styles: {}
         }
       });
       setitems(itemsX);
@@ -5142,6 +5150,51 @@ function Html(props) {
           };
           return updatedItems;
         });
+      }
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      htmlFor: "",
+      className: "font-medium text-slate-900 "
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Label Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      library: item?.labelIcon?.options.library,
+      srcType: item?.labelIcon?.options.srcType,
+      iconSrc: item?.labelIcon?.options.iconSrc,
+      onChange: arg => {
+        if (isProFeature) {
+          addNotifications({
+            title: "Opps its pro!",
+            content: "This feature only avilable in premium version",
+            type: "error"
+          });
+          return;
+        }
+        setitems(prevItems => {
+          const updatedItems = [...prevItems];
+          updatedItems[index] = {
+            ...updatedItems[index],
+            labelIcon: {
+              ...updatedItems[index].labelIcon,
+              options: {
+                ...updatedItems[index]?.labelIcon?.options,
+                srcType: arg.srcType,
+                library: arg.library,
+                iconSrc: arg.iconSrc
+              }
+            }
+          };
+          return updatedItems;
+        });
+
+        // var iconToggleX = { ...iconToggle };
+
+        // var optionsX = {
+        // 	...iconToggleX.options,
+        // 	srcType: arg.srcType,
+        // 	library: arg.library,
+        // 	iconSrc: arg.iconSrc,
+        // };
+
+        // iconToggleX.options = optionsX;
+        // seticonToggle(iconToggleX);
       }
     }))))));
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
@@ -6125,7 +6178,7 @@ function Html(props) {
     className: "font-medium text-slate-900 ",
     title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "flex justify-between w-full gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon Idle", "accordions")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon Toggle", "accordions")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "accordions"))),
     opened: isProFeature ? false : null,
@@ -6180,7 +6233,7 @@ function Html(props) {
     opened: isProFeature ? false : null,
     title: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "flex justify-between w-full gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon Idle", "accordions")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Expand/Collapse All", "accordions")), isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Pro", "accordions"))),
     initialOpen: false
@@ -7556,45 +7609,65 @@ function Html(props) {
         __html: iconHtml
       }
     }), active == index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: ` accordion-icon accordion-icon-toggle}`,
+      className: ` accordion-icon accordion-icon-toggle`,
       dangerouslySetInnerHTML: {
         __html: iconToggleHtml
       }
-    })), labelIcon.options.position == "beforeLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })), labelIcon.options.position == "beforeLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: ` accordion-label-icon`,
+      dangerouslySetInnerHTML: {
+        __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
+      }
+    }), !item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: ` accordion-header-label`,
       onClick: e => {
         return;
       }
     }, labelCounter.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-counter`
-    }, index), labelIcon.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, index), labelIcon.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: ` accordion-label-icon`,
+      dangerouslySetInnerHTML: {
+        __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
+      }
+    }), !item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
-    }), item.headerLabel?.options.text.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })), item.headerLabel?.options.text.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ``,
       dangerouslySetInnerHTML: {
         __html: item?.headerLabel.options.text
       }
-    })) : "Start Writing...", labelIcon.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })) : "Start Writing...", labelIcon.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: ` accordion-label-icon`,
+      dangerouslySetInnerHTML: {
+        __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
+      }
+    }), !item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
-    }), labelCounter.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })), labelCounter.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-counter`
-    }, index)), labelIcon.options.position == "afterLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, index)), labelIcon.options.position == "afterLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: ` accordion-label-icon`,
+      dangerouslySetInnerHTML: {
+        __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
+      }
+    }), !item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
-    }), labelCounter.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })), labelCounter.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-counter`
     }, index), icon.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, active != index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-icon`,
