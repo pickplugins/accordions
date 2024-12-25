@@ -200,35 +200,41 @@ function Html(props) {
 		"focus-within": {
 			label: "Focus-within",
 			value: "focus-within",
-			//isPro: true,
+			isPro: true,
 		},
 		target: { label: "target", value: "target", isPro: true },
 		visited: { label: "Visited", value: "visited", isPro: true },
 		selection: { label: "Selection", value: "selection", isPro: true },
-		":marker": { label: "Marker", value: ":marker" },
+		":marker": { label: "Marker", value: ":marker", isPro: true },
 		"nth-child(even)": {
 			label: "nth-child(even)",
 			value: "nth-child(even)",
+			isPro: true
 		},
 		"nth-child(odd)": {
 			label: "nth-child(odd)",
 			value: "nth-child(odd)",
+			isPro: true
 		},
 		"nth-child(2)": {
 			label: "nth-child(2)",
 			value: "nth-child(2)",
+			isPro: true
 		},
 		"nth-child(3)": {
 			label: "nth-child(3)",
 			value: "nth-child(3)",
+			isPro: true
 		},
 		"nth-child(4)": {
 			label: "nth-child(4)",
 			value: "nth-child(4)",
+			isPro: true
 		},
 		"nth-child(5)": {
 			label: "nth-child(5)",
 			value: "nth-child(5)",
+			isPro: true
 		},
 
 		"first-child": { label: "First-child", value: "first-child", isPro: true },
@@ -236,7 +242,7 @@ function Html(props) {
 		"first-letter": {
 			label: "First-letter",
 			value: "first-letter",
-			//isPro: true,
+			isPro: true,
 		},
 		"first-line": { label: "First-line", value: "first-line", isPro: true },
 		"hover::before": { label: "hover::before", value: "hover::before", isPro: true },
@@ -249,11 +255,11 @@ function Html(props) {
 		"hover:first-line": { label: "hover:first-line", value: "hover:first-line", isPro: true },
 		"hover:nth-child(odd)": { label: "hover:nth-child(odd)", value: "hover:nth-child(odd)", isPro: true },
 		"hover:nth-child(even)": { label: "hover:nth-child(even)", value: "hover:nth-child(even)", isPro: true },
-		"-webkit-slider-thumb": { label: "-webkit-slider-thumb", value: "-webkit-slider-thumb", },
-		"-moz-range-thumb": { label: "-moz-range-thumb", value: "-moz-range-thumb", },
-		"checked": { label: "checked", value: "checked", },
-		"checked:after": { label: "checked:after", value: "checked:after", },
-		"checked:before": { label: "checked:before", value: "checked:before", },
+		"-webkit-slider-thumb": { label: "-webkit-slider-thumb", value: "-webkit-slider-thumb", isPro: true },
+		"-moz-range-thumb": { label: "-moz-range-thumb", value: "-moz-range-thumb", isPro: true },
+		"checked": { label: "checked", value: "checked", isPro: true },
+		"checked:after": { label: "checked:after", value: "checked:after", isPro: true },
+		"checked:before": { label: "checked:before", value: "checked:before", isPro: true },
 		//custom: { label: 'Custom', value: '', isPro: true },
 	};
 

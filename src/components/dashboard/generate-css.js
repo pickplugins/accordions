@@ -521,7 +521,7 @@ function Html(props) {
 
 
 	useEffect(() => {
-		var styleObjX = { ...styleObj };
+		var styleObjX = {};
 
 		var wrapperCss = generateElementCss(accordionData.wrapper, wrapperSelector);
 		Object.entries(wrapperCss).map((selectors) => {
@@ -627,6 +627,7 @@ function Html(props) {
 		setstyleObj(styleObjX)
 
 
+
 	}, [accordionData]);
 
 
@@ -639,7 +640,6 @@ function Html(props) {
 
 	return (
 		<div className="ml-5">
-
 
 
 		</div>

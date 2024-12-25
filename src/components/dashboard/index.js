@@ -510,7 +510,7 @@ function Html(props) {
 								<PGtab name="templates">
 									<div className="p-3">
 										<p className="flex items-center gap-2">
-											How templates work.{" "}
+											How templates work.
 											<span
 												className="cursor-pointer"
 												title="Click to know more"
@@ -552,9 +552,6 @@ function Html(props) {
 														});
 
 
-
-
-
 														var data = preset.data;
 														var presetClean = {};
 
@@ -563,22 +560,37 @@ function Html(props) {
 															var itemArg = item[1];
 
 															if (itemArg.options) {
-																//delete itemArg.options;
+																delete itemArg.options;
+																delete accordionData[itemIndex]?.styles;
+																delete accordionData[itemIndex]?.hover;
+																delete accordionData[itemIndex]?.after;
+																delete accordionData[itemIndex]?.before;
+																delete accordionData[itemIndex]?.active;
+																delete accordionData[itemIndex]?.focus;
+																delete accordionData[itemIndex]?.target;
+																delete accordionData[itemIndex]?.visited;
+
+
 															}
 
 
 
 															presetClean[itemIndex] = {
-																//...accordionData[itemIndex],
+																...accordionData[itemIndex],
 																...itemArg,
 															};
 
 														});
 
+
 														var accordionDataX = {
+
 															...accordionData,
 															...presetClean,
+
 														};
+
+
 
 														onChangeAccordion(accordionDataX);
 

@@ -244,19 +244,7 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [searchInput]);
 
-	var RemoveSliderArg = function ({ index }) {
-		return (
-			<span
-				className="cursor-pointer hover:bg-red-500 hover:text-white "
-				onClick={(ev) => {
-					var sliderOptionsX = { ...accOptions };
-					delete sliderOptionsX[index];
-					setaccOptions(sliderOptionsX);
-				}}>
-				<Icon icon={close} />
-			</span>
-		);
-	};
+
 
 	function onChangeStyle(sudoScource, newVal, attr, propertyType, setProperty) {
 		var path = [sudoScource, attr, breakPointX];
@@ -428,7 +416,7 @@ function Html(props) {
 			value: "category",
 
 			id: "include",
-			//isPro: true,
+
 			label: "Include",
 			description: "Comma-separated string of term IDs to include.",
 			longDescription:
@@ -439,7 +427,7 @@ function Html(props) {
 			value: "",
 
 			id: "exclude",
-			//isPro: true,
+
 			label: "Exclude",
 			description: "Comma-separated string of term IDs to exclude.",
 			longDescription:
@@ -450,7 +438,7 @@ function Html(props) {
 			value: "",
 
 			id: "child_of",
-			//isPro: true,
+
 			label: "Child of",
 			description: "Term ID to retrieve child terms of.",
 			longDescription:
@@ -460,7 +448,7 @@ function Html(props) {
 			value: "",
 
 			id: "parent",
-			//isPro: true,
+
 			label: "Parent",
 			description:
 				"Add {ID} to add Parent term ID to retrieve direct-child terms of.",
@@ -470,7 +458,7 @@ function Html(props) {
 			value: "",
 
 			id: "meta_key",
-			//isPro: true,
+
 			label: "Meta key",
 			description: "Comma-separated keys to return term(s) for.",
 			longDescription: "Meta key or keys to filter by.",
@@ -479,7 +467,7 @@ function Html(props) {
 			value: "",
 
 			id: "meta_value",
-			//isPro: true,
+
 			label: "Meta value",
 			description: "Comma-separated keys to return term(s) for.",
 			longDescription: "Meta value or values to filter by.",
@@ -498,8 +486,8 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		posts: { label: "Posts", value: "posts", isPro: true },
-		terms: { label: "Terms", value: "terms", isPro: true },
+		posts: { label: "Posts", value: "posts", isPro: customerData.isPro ? false : true },
+		terms: { label: "Terms", value: "terms", isPro: customerData.isPro ? false : true },
 	};
 
 	function generate3Digit() {
@@ -1737,9 +1725,9 @@ function Html(props) {
 										{
 											label: __("Mouseover", "accordions"),
 											value: "mouseover",
-											isPro: true,
+											isPro: customerData.isPro ? false : true,
 										},
-										{ label: __("Focus", "accordions"), value: "focus", isPro: true, },
+										{ label: __("Focus", "accordions"), value: "focus", isPro: customerData.isPro ? false : true, },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -2406,7 +2394,22 @@ function Html(props) {
 						</PanelBody>
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Header Label"
+
+							opened={isProFeature ? false : null}
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Header Label", "accordions")}</span>
+									{isProFeature && (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+										>
+											{__("Pro", "accordions")}
+										</span>
+									)}
+								</span>
+							}
+
+
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
@@ -2424,7 +2427,7 @@ function Html(props) {
 										name: "styles",
 										title: "Styles",
 										icon: brush,
-										isPro: true,
+										isPro: customerData.isPro ? false : true,
 										className: "tab-style",
 									},
 								]}>
@@ -3486,7 +3489,7 @@ function Html(props) {
 						</PGtabs>
 					</PanelBody>
 
-					<PanelBody title="Search" initialOpen={false}
+					<PanelBody initialOpen={false}
 						title={
 							<span className="flex justify-between w-full gap-2">
 								<span>{__("Search", "accordions")}</span>

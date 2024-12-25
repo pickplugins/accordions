@@ -83,7 +83,6 @@ function Html(props) {
 
 	useEffect(() => {
 
-		console.log(accordionData);
 
 		setglobalOptions(accordionData.globalOptions);
 
