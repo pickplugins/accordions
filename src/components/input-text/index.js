@@ -15,29 +15,26 @@ function Html(props) {
 
   return (
 
-    <div >
+    <input
+      className={props.className}
+      id={props.id}
+      value={props.value}
+      type="text"
+      size={props.size}
+      name={props.name}
+      placeholder={props.placeholder}
+      minlength={props.minlength}
+      maxlength={props.maxlength}
+      required={props.required}
+      disabled={props.disabled}
 
-      <input
-        className={props.className}
-        id={props.id}
-        value={props.value}
-        type="text"
-        size={props.size}
-        name={props.name}
-        placeholder={props.placeholder}
-        minlength={props.minlength}
-        maxlength={props.maxlength}
-        required={props.required}
-        disabled={props.disabled}
+      onChange={(e) => {
+        props.onChange(e.target.value);
 
-        onChange={(e) => {
-          props.onChange(e.target.value);
-
-        }}
-      />
+      }}
+    />
 
 
-    </div>
 
 
 
