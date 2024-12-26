@@ -10,10 +10,10 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
-    $lazyLoad = isset($globalOptions["lazyLoad"]) ? $globalOptions["lazyLoad"] : true;
-    $stats = isset($globalOptions["stats"]) ? $globalOptions["stats"] : true;
+    $lazyLoad = isset($globalOptions["lazyLoad"]) ? $globalOptions["lazyLoad"] : false;
+    $stats = isset($globalOptions["stats"]) ? $globalOptions["stats"] : false;
     $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : true;
-    $autoPlay = isset($globalOptions["autoPlay"]) ? $globalOptions["autoPlay"] : true;
+    $autoPlay = isset($globalOptions["autoPlay"]) ? $globalOptions["autoPlay"] : false;
     $autoPlayTimeout = isset($globalOptions["autoPlayTimeout"]) ? $globalOptions["autoPlayTimeout"] : 2000;
     $autoPlayDelay = isset($globalOptions["autoPlayDelay"]) ? $globalOptions["autoPlayDelay"] : 2000;
     $autoPlayOrder = isset($globalOptions["autoPlayOrder"]) ? $globalOptions["autoPlayOrder"] : "topToBottom";
