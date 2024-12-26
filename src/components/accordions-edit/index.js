@@ -2042,6 +2042,33 @@ function Html(props) {
 										/>
 									</PanelRow>
 
+									<PanelRow>
+										<label htmlFor="">Auto Play Order</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={globalOptions?.autoPlayOrder ? globalOptions?.autoPlayOrder : __("Choose", "accordions")}
+											options={[
+												{
+													label: __("topToBottom", "accordions"),
+													value: "Top To Bottom",
+													isPro: customerData.isPro ? false : true,
+												},
+												{ label: __("Bottom To Top", "accordions"), value: "bottomToTop", isPro: customerData.isPro ? false : true, },
+												{ label: __("Random", "accordions"), value: "random", isPro: customerData.isPro ? false : true, },
+											]}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayOrder = newVal.value;
+												setglobalOptions(globalOptionsX);
+											}}
+											values=""></PGDropdown>
+
+
+									</PanelRow>
+
+
 								</>
 
 
@@ -3506,6 +3533,28 @@ function Html(props) {
 												}}
 											/>
 										</PanelRow>
+										<PanelRow>
+											<label htmlFor="">Expand/Collapse All Delay</label>
+
+											<PGinputText
+												className="max-w-[140px]"
+												label=""
+												value={expandCollapseAll.options?.delay}
+												onChange={(newVal) => {
+													var expandCollapseAllX = {
+														...expandCollapseAll,
+														options: {
+															...expandCollapseAll.options,
+															delay: newVal,
+														},
+													};
+													setexpandCollapseAll(expandCollapseAllX);
+												}}
+											/>
+										</PanelRow>
+
+
+
 										<PanelRow>
 											<label htmlFor="" className="font-medium text-slate-900 ">
 												{__("Expand All Icon", "accordions")}

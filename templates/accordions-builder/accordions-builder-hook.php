@@ -16,6 +16,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     $autoPlay = isset($globalOptions["autoPlay"]) ? $globalOptions["autoPlay"] : true;
     $autoPlayTimeout = isset($globalOptions["autoPlayTimeout"]) ? $globalOptions["autoPlayTimeout"] : 2000;
     $autoPlayDelay = isset($globalOptions["autoPlayDelay"]) ? $globalOptions["autoPlayDelay"] : 2000;
+    $autoPlayOrder = isset($globalOptions["autoPlayOrder"]) ? $globalOptions["autoPlayOrder"] : "topToBottom";
 
 
 
@@ -37,6 +38,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
     $expandAllText = isset($expandCollapseAllOptions["expandAllText"]) ? $expandCollapseAllOptions["expandAllText"] : "";
     $collapseAllText = isset($expandCollapseAllOptions["collapseAllText"]) ? $expandCollapseAllOptions["collapseAllText"] : "";
+    $expandCollapseAllDelay = isset($expandCollapseAllOptions["delay"]) ? $expandCollapseAllOptions["delay"] : 1000;
 
     $expandAllIcon = isset($expandCollapseAllOptions["expandAllIcon"]) ? $expandCollapseAllOptions["expandAllIcon"] : [];
     $expandAllIconLibrary = isset($expandAllIcon["library"]) ? $expandAllIcon["library"] : "";
@@ -210,6 +212,7 @@ function accordions_builder_accordion($post_id, $accordionData)
         "autoPlay" => $autoPlay,
         "autoPlayTimeout" => $autoPlayTimeout,
         "autoPlayDelay" => $autoPlayDelay,
+        "autoPlayOrder" => $autoPlayOrder,
         "stats" => $stats,
         "urlHash" => $urlHash,
         "clickToScrollTop" => $clickToScrollTop,
@@ -219,6 +222,7 @@ function accordions_builder_accordion($post_id, $accordionData)
         "contentInAnimation" => $contentInAnimation,
         "contentOutAnimation" => $contentOutAnimation,
         "lazyLoad" => $lazyLoad,
+        "expandCollapseAllDelay" => $expandCollapseAllDelay,
     ];
 
 

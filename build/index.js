@@ -5481,7 +5481,7 @@ function Html(props) {
     title: "Click to know more",
     onClick: () => {
       setHelp({
-        id: "statsSetting",
+        id: "autoPlaySetting",
         enable: true
       });
     }
@@ -5567,6 +5567,33 @@ function Html(props) {
       globalOptionsX.autoPlayDelay = newVal;
       setglobalOptions(globalOptionsX);
     }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: ""
+  }, "Auto Play Order"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    position: "bottom right",
+    variant: "secondary",
+    buttonTitle: globalOptions?.autoPlayOrder ? globalOptions?.autoPlayOrder : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions"),
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("topToBottom", "accordions"),
+      value: "Top To Bottom",
+      isPro: customerData.isPro ? false : true
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Bottom To Top", "accordions"),
+      value: "bottomToTop",
+      isPro: customerData.isPro ? false : true
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Random", "accordions"),
+      value: "random",
+      isPro: customerData.isPro ? false : true
+    }],
+    onChange: newVal => {
+      var globalOptionsX = {
+        ...globalOptions
+      };
+      globalOptionsX.autoPlayOrder = newVal.value;
+      setglobalOptions(globalOptionsX);
+    },
+    values: ""
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     className: "font-medium text-slate-900 ",
     title: "Wrapper",
@@ -6512,6 +6539,22 @@ function Html(props) {
         options: {
           ...expandCollapseAll.options,
           collapseAllText: newVal
+        }
+      };
+      setexpandCollapseAll(expandCollapseAllX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: ""
+  }, "Expand/Collapse All Delay"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    className: "max-w-[140px]",
+    label: "",
+    value: expandCollapseAll.options?.delay,
+    onChange: newVal => {
+      var expandCollapseAllX = {
+        ...expandCollapseAll,
+        options: {
+          ...expandCollapseAll.options,
+          delay: newVal
         }
       };
       setexpandCollapseAll(expandCollapseAllX);
