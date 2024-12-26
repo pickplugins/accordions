@@ -1,6 +1,7 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
-import { columns, postAuthor, store, styles } from "@wordpress/icons";
+import { columns, postAuthor, store, styles, postComments } from "@wordpress/icons";
 
+import PGSupportTicket from "../../components/support-ticket";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
 import { pricingData } from "./pricingData";
@@ -14,6 +15,7 @@ function Html(props) {
 
 	var [postData, setpostData] = useState(props.postData); // Using the hook.
 	var addNotifications = props.addNotifications;
+	var customerData = props.customerData;
 
 	const freeVsProArgs = [
 		{
@@ -407,12 +409,12 @@ function Html(props) {
 						className: "tab-disable-blocks",
 					},
 
-					// {
-					// 	name: "supportTicket",
-					// 	title: "Support Ticket",
-					// 	icon: postComments,
-					// 	className: "tab-disable-blocks",
-					// },
+					{
+						name: "supportTicket",
+						title: "Support Ticket",
+						icon: postComments,
+						className: "tab-disable-blocks",
+					},
 				]}>
 				<PGtab name="overview">
 					<div className="flex gap-4 items-start flex-wrap mt-10 px-10">
@@ -590,8 +592,22 @@ function Html(props) {
 						</div>
 					</div>
 				</PGtab>
-				<PGtab name="supportTicket">supportTicket</PGtab>
+				<PGtab name="supportTicket">
+
+
+					<div className=" mx-10 p-5 my-10 bg-white rounded-sm">
+						<PGSupportTicket />
+					</div>
+
+				</PGtab>
 				<PGtab name="buyNow">
+
+					{customerData.isPro && (
+						<div className="mx-10 p-5 my-10  rounded-sm text-center bg-orange-200">
+							<h3 className="text-2xl ">You already purchased, Want to Buy Again!</h3>
+						</div>
+					)}
+
 
 
 					<div className="flex items-center justify-between mx-10 p-5 my-10 bg-white rounded-sm">
@@ -732,9 +748,9 @@ class AccordionsGuide extends Component {
 	}
 
 	render() {
-		var { postData, addNotifications } = this.props;
+		var { postData, addNotifications, customerData } = this.props;
 
-		return <Html postData={postData} addNotifications={addNotifications} warn={this.state.showWarning} />;
+		return <Html postData={postData} addNotifications={addNotifications} customerData={customerData} warn={this.state.showWarning} />;
 	}
 }
 

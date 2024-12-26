@@ -70,6 +70,7 @@ class Accordions
     require_once(accordions_plugin_dir . 'templates/accordion/accordion-hook.php');
     require_once(accordions_plugin_dir . 'templates/tabs/tabs-hook.php');
     require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-hook.php');
+    require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-functions.php');
 
     require_once(accordions_plugin_dir . 'includes/3rd-party/3rd-party.php');
 

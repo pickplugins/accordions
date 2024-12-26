@@ -17,7 +17,6 @@
     "includes",
     "languages",
     "sample-data",
-    "src",
     "templates",
     "dist",
     "accordions.php"
