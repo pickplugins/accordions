@@ -183,7 +183,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var nextIndex = (activeIndex - 1 < 0) ? max : (activeIndex - 1);
 			window.pgAccordion.switch(nextIndex);
 		},
-		autoPlayRun: () => {
+		autoPlayRun: (args) => {
+			var autoPlayTimeout = parseInt(args.autoPlayTimeout);
+			var autoPlayDelay = parseInt(args.autoPlayDelay);
 
 			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
 
@@ -193,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			accordionHeaders.forEach((header, i) => {
 
-				items.push(i)
+				items.push(i - 1)
 			});
 
 
@@ -202,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			function loopThroughItems() {
 				console.log(items[currentIndex]); // Print the current item
 				currentIndex = (currentIndex + 1) % items.length; // Move to the next index
-				setTimeout(loopThroughItems, 1000); // Recursively call after 1 second
+				setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
 
 
 				window.pgAccordion.switch(currentIndex)
@@ -316,6 +318,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var contentOutAnimation = accordionDataObj.contentOutAnimation;
 				var lazyLoad = accordionDataObj.lazyLoad;
 				var autoPlay = accordionDataObj.autoPlay;
+				var autoPlayTimeout = parseInt(accordionDataObj.autoPlayTimeout);
+				var autoPlayDelay = accordionDataObj.autoPlayDelay;
 
 				if (lazyLoad) {
 					accordion.style.display = "block";
@@ -324,9 +328,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 					setTimeout(() => {
 
-						window.pgAccordion.autoPlayRun();
+						window.pgAccordion.autoPlayRun({ autoPlayDelay, autoPlayTimeout });
 
-					}, 2000)
+					}, autoPlayTimeout)
 
 				}
 

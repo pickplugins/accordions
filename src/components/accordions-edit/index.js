@@ -1944,7 +1944,7 @@ function Html(props) {
 										title="Click to know more"
 										onClick={() => {
 											setHelp({
-												id: "statsSetting",
+												id: "autoPlaySetting",
 												enable: true,
 											});
 										}}>
