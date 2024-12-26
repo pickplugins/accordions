@@ -273,8 +273,7 @@ function accordions_builder_accordion($post_id, $accordionData)
             $contentOptions = isset($content["options"]) ? $content["options"] : [];
             $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
 
-            $block_content = '<!-- wp:paragraph --><p>Hello Text</p><!-- /wp:paragraph -->';
-            echo do_blocks($block_content);
+
 
             //var_dump($contentShortcodes);
 
@@ -285,11 +284,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
             if ($contentShortcodes) {
                 //$contentText = apply_filters('the_content', $contentText);
-                $contentText = do_blocks($contentText);
-
-                //var_dump($contentText);
-
-                //$contentText = parse_blocks($contentText);
+                //$contentText = do_blocks($contentText);
             }
 
             if ($contentShortcodes) {

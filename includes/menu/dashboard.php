@@ -55,5 +55,5 @@ wp_localize_script('accordions_builder_js', 'accordions_builder_js', array('post
 
 ?>
 <div class="wrap">
-    <div id="cb-dashboard" class=""></div>
+    <div id="cb-dashboard" class="">Please wait...</div>
 </div>

@@ -7418,6 +7418,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-[18px] font-semibold flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Videos"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Watch our videos to see how the accordion works in real-world projects!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    target: "_blank",
     href: "https://www.youtube.com/playlist?list=PL0QP7T2SN94ZPeQ83jOnteDDrOeDLBuFD",
     className: "inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Watch on YouTube")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -7425,6 +7426,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-[18px] font-semibold flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Documentation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Check out our detailed documentation to learn what the Accordions plugin can do!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    target: "_blank",
     href: "#",
     className: "inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Check Documentation")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -7432,6 +7434,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-[18px] font-semibold flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\uD83C\uDF1F"), "Need Help?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Contact our friendly support team for quick and personalized help!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    target: "_blank",
     href: "https://pickplugins.com/create-support-ticket/",
     className: "inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300"
   }, "Create Support Ticket"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -7485,21 +7488,7 @@ function Html(props) {
     name: "templates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-2 gap-4 w-full p-7 bg-white mt-10"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "text-2xl font-medium mb-4"
-  }, "The Most Powerful Accordion and FAQs Builder plugin for WordPress from the Easy Accordion Team, ShapedPlugin, LLC"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "mb-4 text-pretty"
-  }, "At ShapedPlugin LLC, we have been looking for the best way to create FAQ pages or sections on WordPress sites. Unfortunately, we couldn't find any suitable plugin that met our needs. Hence, we set a simple goal: to develop a highly customizable and full-featured Accordion and FAQs builder plugin to minimize customer support costs."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "mb-4 text-pretty"
-  }, "The Easy Accordion plugin provides a convenient way to create visually appealing FAQ pages to reduce customer costs. Check it out now and experience the difference!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex gap-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "#",
-    className: "bg-gray-700 border-transparent border border-solid font-medium text-white inline-block py-[14px] px-[24px] rounded-md"
-  }, "Explore Easy Accordion"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "#",
-    className: "hover:bg-gray-700 border-gray-700 text-gray-700 hover:text-white border border-solid font-medium transition-colors duration-300 inline-block py-[14px] px-[24px] rounded-md"
-  }, "More About Us"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "self-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("figure", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: "https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -7518,6 +7507,7 @@ function Html(props) {
   }, plugin.name), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "text-[14px]"
   }, plugin.description), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    target: "_blank",
     href: plugin.link,
     className: "absolute inset-0 "
   })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_1__["default"], {
