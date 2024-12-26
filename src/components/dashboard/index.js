@@ -637,7 +637,8 @@ function Html(props) {
 				</div>
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
-						{(postData.ID == null || toggleSettings) && <AccordionsGuide addNotifications={addNotifications} />}
+						{(postData.ID == null || toggleSettings) && <AccordionsGuide addNotifications={addNotifications} customerData={customerData}
+						/>}
 
 						{(!toggleSettings && postData.ID != null) && (
 							<AccordionsView

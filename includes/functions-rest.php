@@ -15,9 +15,29 @@ class AccordionsRest
 	public function register_routes()
 	{
 
+		register_rest_route(
+			'accordions/v2',
+			'/get_site_details',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_site_details'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
-
-
+		register_rest_route(
+			'accordions/v2',
+			'/send_mail',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'send_mail'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 		register_rest_route(
@@ -151,6 +171,77 @@ class AccordionsRest
 	}
 
 
+
+	/**
+	 * Return license info.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $tax_data The tax data.
+	 */
+	public function get_site_details($request)
+	{
+		$response = [];
+		if (!current_user_can('manage_options')) {
+			die(wp_json_encode($response));
+		}
+		$admin_email = get_option('admin_email');
+		$siteurl = get_option('siteurl');
+		$siteAdminurl = admin_url();
+		$adminData = get_user_by('email', $admin_email);
+		$response['email'] = $admin_email;
+		$response['name'] = isset($adminData->display_name) ? $adminData->display_name : '';
+		$response['siteurl'] = $siteurl;
+		$response['siteAdminurl'] = $siteAdminurl;
+		$post_grid_info = get_option('post_grid_info');
+		$subscribe_status = isset($post_grid_info['subscribe_status']) ? $post_grid_info['subscribe_status'] : 'not_subscribed'; /*subscribed, not_interested, not_subscribed*/
+		$response['subscribe_status'] = $subscribe_status;
+		//delete_option('post_grid_info');
+		die(wp_json_encode($response));
+	}
+
+
+
+
+
+
+
+	/**
+	 * Return send_mail.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $tax_data The tax data.
+	 */
+	public function send_mail($request)
+	{
+		$response = [];
+		if (!current_user_can('manage_options')) {
+			die(wp_json_encode($response));
+		}
+		$subject = isset($request['subject']) ? $request['subject'] : '';
+		$email_body = isset($request['body']) ? $request['body'] : '';
+		$email_to = isset($request['email_to']) ? $request['email_to'] : '';
+		$email_from = isset($request['email_from']) ? $request['email_from'] : '';
+		$email_from_name = isset($request['email_from_name']) ? $request['email_from_name'] : '';
+		$reply_to = isset($request['reply_to']) ? $request['reply_to'] : '';
+		$reply_to_name = isset($request['reply_to_name']) ? $request['reply_to_name'] : '';
+		$attachments = isset($email_data['attachments']) ? $email_data['attachments'] : '';
+		$headers = array();
+		$headers[] = "From: " . $email_from_name . " <" . $email_from . ">";
+		if (!empty($reply_to)) {
+			$headers[] = "Reply-To: " . $reply_to_name . " <" . $reply_to . ">";
+		}
+		$headers[] = "MIME-Version: 1.0";
+		$headers[] = "Content-Type: text/html; charset=UTF-8";
+		$status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
+		if ($status) {
+			$response['mail_sent'] = true;
+		} else {
+			$response['mail_sent'] = false;
+		}
+		die(wp_json_encode($response));
+	}
 
 	/**
 	 * Return user_roles_list

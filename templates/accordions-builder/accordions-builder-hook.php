@@ -17,6 +17,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     $autoPlayTimeout = isset($globalOptions["autoPlayTimeout"]) ? $globalOptions["autoPlayTimeout"] : 2000;
     $autoPlayDelay = isset($globalOptions["autoPlayDelay"]) ? $globalOptions["autoPlayDelay"] : 2000;
     $autoPlayOrder = isset($globalOptions["autoPlayOrder"]) ? $globalOptions["autoPlayOrder"] : "topToBottom";
+    $itemSource = isset($globalOptions["itemSource"]) ? $globalOptions["itemSource"] : "topToBottom";
 
 
 
@@ -28,6 +29,13 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
+
+    if ($itemSource == "posts") {
+        $items = accordion_post_query_items();
+    }
+    if ($itemSource == "terms") {
+        $items = accordion_terms_query_item();
+    }
 
     $expandCollapseAll = isset($accordionData["expandCollapseAll"]) ? $accordionData["expandCollapseAll"] : [];
     $expandCollapseAllOptions = isset($expandCollapseAll["options"]) ? $expandCollapseAll["options"] : [];
@@ -258,9 +266,6 @@ function accordions_builder_accordion($post_id, $accordionData)
         foreach ($items as $item) {
 
             $itemActive = isset($item["active"]) ? (bool) $item["active"] : false;
-
-
-
 
             $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
             $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
