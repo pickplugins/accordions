@@ -10,10 +10,10 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
-    $lazyLoad = isset($globalOptions["lazyLoad"]) ? $globalOptions["lazyLoad"] : true;
-    $stats = isset($globalOptions["stats"]) ? $globalOptions["stats"] : true;
+    $lazyLoad = isset($globalOptions["lazyLoad"]) ? $globalOptions["lazyLoad"] : false;
+    $stats = isset($globalOptions["stats"]) ? $globalOptions["stats"] : false;
     $schema = isset($globalOptions["schema"]) ? $globalOptions["schema"] : true;
-    $autoPlay = isset($globalOptions["autoPlay"]) ? $globalOptions["autoPlay"] : true;
+    $autoPlay = isset($globalOptions["autoPlay"]) ? $globalOptions["autoPlay"] : false;
     $autoPlayTimeout = isset($globalOptions["autoPlayTimeout"]) ? $globalOptions["autoPlayTimeout"] : 2000;
     $autoPlayDelay = isset($globalOptions["autoPlayDelay"]) ? $globalOptions["autoPlayDelay"] : 2000;
     $autoPlayOrder = isset($globalOptions["autoPlayOrder"]) ? $globalOptions["autoPlayOrder"] : "topToBottom";
@@ -273,8 +273,7 @@ function accordions_builder_accordion($post_id, $accordionData)
             $contentOptions = isset($content["options"]) ? $content["options"] : [];
             $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
 
-            $block_content = '<!-- wp:paragraph --><p>Hello Text</p><!-- /wp:paragraph -->';
-            echo do_blocks($block_content);
+
 
             //var_dump($contentShortcodes);
 
@@ -285,11 +284,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
             if ($contentShortcodes) {
                 //$contentText = apply_filters('the_content', $contentText);
-                $contentText = do_blocks($contentText);
-
-                //var_dump($contentText);
-
-                //$contentText = parse_blocks($contentText);
+                //$contentText = do_blocks($contentText);
             }
 
             if ($contentShortcodes) {

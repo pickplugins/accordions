@@ -444,7 +444,7 @@ function Html(props) {
 									Watch our videos to see how the accordion works in real-world
 									projects!
 								</p>
-								<a
+								<a target="_blank"
 									href="https://www.youtube.com/playlist?list=PL0QP7T2SN94ZPeQ83jOnteDDrOeDLBuFD"
 									className="inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
 									Watch on YouTube
@@ -458,7 +458,7 @@ function Html(props) {
 									Check out our detailed documentation to learn what the
 									Accordions plugin can do!
 								</p>
-								<a
+								<a target="_blank"
 									href="#"
 									className="inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
 									Check Documentation
@@ -472,7 +472,7 @@ function Html(props) {
 									Contact our friendly support team for quick and personalized
 									help!
 								</p>
-								<a
+								<a target="_blank"
 									href="https://pickplugins.com/create-support-ticket/"
 									className="inline-block no-underline font-medium px-[16px] py-[8px] border border-solid border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white rounded-md w-max transition-colors duration-300">
 									Create Support Ticket
@@ -561,37 +561,7 @@ function Html(props) {
 				</PGtab>
 				<PGtab name="templates">
 					<div className="grid grid-cols-2 gap-4 w-full p-7 bg-white mt-10">
-						<div>
-							<h1 className="text-2xl font-medium mb-4">
-								The Most Powerful Accordion and FAQs Builder plugin for
-								WordPress from the Easy Accordion Team, ShapedPlugin, LLC
-							</h1>
-							<p className="mb-4 text-pretty">
-								At ShapedPlugin LLC, we have been looking for the best way to
-								create FAQ pages or sections on WordPress sites. Unfortunately,
-								we couldn't find any suitable plugin that met our needs. Hence,
-								we set a simple goal: to develop a highly customizable and
-								full-featured Accordion and FAQs builder plugin to minimize
-								customer support costs.
-							</p>
-							<p className="mb-4 text-pretty">
-								The Easy Accordion plugin provides a convenient way to create
-								visually appealing FAQ pages to reduce customer costs. Check it
-								out now and experience the difference!
-							</p>
-							<div className="flex gap-4">
-								<a
-									href="#"
-									className="bg-gray-700 border-transparent border border-solid font-medium text-white inline-block py-[14px] px-[24px] rounded-md">
-									Explore Easy Accordion
-								</a>
-								<a
-									href="#"
-									className="hover:bg-gray-700 border-gray-700 text-gray-700 hover:text-white border border-solid font-medium transition-colors duration-300 inline-block py-[14px] px-[24px] rounded-md">
-									More About Us
-								</a>
-							</div>
-						</div>
+
 						<div className="self-center">
 							<figure>
 								<img
@@ -614,7 +584,7 @@ function Html(props) {
 								<div className="bg-gray-200 hover:bg-gray-300 shadow-sm p-8 rounded-lg relative">
 									<h4 className="font-medium text-lg mb-4">{plugin.name}</h4>
 									<p className="text-[14px]">{plugin.description}</p>
-									<a href={plugin.link} className="absolute inset-0 "></a>
+									<a target="_blank" href={plugin.link} className="absolute inset-0 "></a>
 								</div>
 							))}
 						</div>
