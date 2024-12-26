@@ -3,7 +3,6 @@ import { __ } from "@wordpress/i18n";
 import React from "react";
 
 const Toggle = ({ label, value, onChange }) => {
-	console.log(value);
 	return (
 		<div className="flex items-center gap-2 justify-between ">
 			<span>
