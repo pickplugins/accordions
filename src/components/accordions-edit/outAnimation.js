@@ -1,4 +1,5 @@
 export var popupCloseAnimateBasic = {
+	none: { label: "None", value: "" },
 	backOutDown: { label: "backOutDown", value: "backOutDown" },
 	backOutLeft: { label: "backOutLeft", value: "backOutLeft" },
 	backOutRight: {

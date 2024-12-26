@@ -140,8 +140,6 @@ function Html(props) {
 
 			setisLoading(false);
 
-			console.log(res.posts);
-
 			if (res.posts == undefined) {
 				setPosts([]);
 				addNotifications({ title: "No Items Found", content: "It seems there is no items in the list.", type: "success" })
@@ -174,7 +172,6 @@ function Html(props) {
 			method: "POST",
 			data: { postTitle: searchPrams.search, },
 		}).then((res) => {
-			console.log(res);
 
 			if (res.error) {
 				addNotifications({

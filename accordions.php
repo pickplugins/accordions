@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Accordions - 
+Plugin Name: Accordions - By PickPlugins
 Plugin URI: https://pickplugins.com/accordions/
 Description: Fully responsive and mobile ready accordion grid for wordpress.
 Version: 2.3.2

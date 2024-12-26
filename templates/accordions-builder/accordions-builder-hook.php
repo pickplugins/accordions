@@ -273,18 +273,32 @@ function accordions_builder_accordion($post_id, $accordionData)
             $contentOptions = isset($content["options"]) ? $content["options"] : [];
             $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
 
+            $block_content = '<!-- wp:paragraph --><p>Hello Text</p><!-- /wp:paragraph -->';
+            echo do_blocks($block_content);
+
+            //var_dump($contentShortcodes);
 
             if ($contentAutoembed) {
                 $WP_Embed = new WP_Embed();
                 $contentText = $WP_Embed->autoembed($contentText);
             }
 
-            if ($contentWpautop) {
-                $contentText = wpautop($contentText);
+            if ($contentShortcodes) {
+                //$contentText = apply_filters('the_content', $contentText);
+                $contentText = do_blocks($contentText);
+
+                //var_dump($contentText);
+
+                //$contentText = parse_blocks($contentText);
             }
 
             if ($contentShortcodes) {
                 $contentText = do_shortcode($contentText);
+            }
+
+
+            if ($contentWpautop) {
+                //$contentText = wpautop($contentText);
             }
 
             $itemLabelIcon = isset($item["labelIcon"]) ? $item["labelIcon"] : [];
@@ -373,7 +387,9 @@ function accordions_builder_accordion($post_id, $accordionData)
                 <?php endif; ?>
             </<?php echo tag_escape($headerTag); ?>>
             <<?php echo tag_escape($contentTag); ?> class="<?php echo esc_attr($contentClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false" <?php echo ($itemActive) ? 'style="height: auto; overflow: hidden; display: block;"' : ""; ?>>
-                <?php echo wp_kses_post($contentText); ?>
+                <?php //echo wp_kses_post($contentText); 
+                ?>
+                <?php echo ($contentText); ?>
             </<?php echo tag_escape($contentTag); ?>>
 
         <?php

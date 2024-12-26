@@ -1,4 +1,5 @@
 export var popupEntranceAnimateBasic = {
+	none: { label: "None", value: "" },
 	backInDown: { label: "backInDown", value: "backInDown" },
 	backInLeft: { label: "backInLeft", value: "backInLeft" },
 	backInRight: { label: "backInRight", value: "backInRight" },
