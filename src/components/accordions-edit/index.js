@@ -489,6 +489,12 @@ function Html(props) {
 		posts: { label: "Posts", value: "posts", isPro: customerData.isPro ? false : true },
 		terms: { label: "Terms", value: "terms", isPro: customerData.isPro ? false : true },
 	};
+	var iconSets = [
+		{
+			idle: "",
+			toggle: "",
+		}
+	];
 
 	function generate3Digit() {
 		return Math.floor(100 + Math.random() * 900);
