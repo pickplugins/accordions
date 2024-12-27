@@ -461,8 +461,8 @@
   height: 2.5rem;
 }
 
-.h-24 {
-  height: 6rem;
+.h-28 {
+  height: 7rem;
 }
 
 .h-3 {
@@ -504,10 +504,6 @@
 
 .h-full {
   height: 100%;
-}
-
-.h-28 {
-  height: 7rem;
 }
 
 .max-h-\[350px\] {

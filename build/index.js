@@ -4109,6 +4109,15 @@ function Html(props) {
     obj[sudoSource] = cssObj;
     setProperty(obj);
   }
+  const copyData = data => {
+    navigator.clipboard.writeText(data).then(() => {
+      addNotifications({
+        title: "Copied to clipboard!",
+        content: "Use the shortcode in page or post conent where you want to display.",
+        type: "success"
+      });
+    }).catch(err => {});
+  };
   var accOptionsArgs = {
     autoplay: {
       label: "Auto play",
@@ -4283,12 +4292,45 @@ function Html(props) {
       isPro: customerData.isPro ? false : true
     }
   };
+  var iconSets = [{
+    idle: "",
+    toggle: ""
+  }];
   function generate3Digit() {
     return Math.floor(100 + Math.random() * 900);
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
-  }, props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "hidden",
+    onClick: () => {
+      var str = `
+{
+"wrapper":${JSON.stringify(wrapper)}
+"content":${JSON.stringify(content)},
+				"header":${JSON.stringify(header)},
+				"headerActive":${JSON.stringify(headerActive)},
+				"headerLabel":${JSON.stringify(headerLabel)},
+				"labelCounter":${JSON.stringify(labelCounter)},
+				"labelIcon":${JSON.stringify(labelIcon)},
+				"icon":${JSON.stringify(icon)},
+				"iconToggle":${JSON.stringify(iconToggle)},
+				"searchInput":${JSON.stringify(searchInput)},
+				"expandCollapseAll":${JSON.stringify(expandCollapseAll)},
+				"topWrap":${JSON.stringify(topWrap)},
+				}
+
+`;
+      copyData(str);
+      addNotifications({
+        title: "Copied to clipboard!",
+        content: "Use the shortcode in page or post conent where you want to display.",
+        type: "success"
+      });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `{`), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"wrapper":${JSON.stringify(wrapper)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"content":${JSON.stringify(content)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"header":${JSON.stringify(header)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"headerActive":${JSON.stringify(headerActive)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"headerLabel":${JSON.stringify(headerLabel)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"labelCounter":${JSON.stringify(labelCounter)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"labelIcon":${JSON.stringify(labelIcon)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"icon":${JSON.stringify(icon)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"iconToggle":${JSON.stringify(iconToggle)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"searchInput":${JSON.stringify(searchInput)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"expandCollapseAll":${JSON.stringify(expandCollapseAll)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `"topWrap":${JSON.stringify(topWrap)}`, ","), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, `}`))), props.postData.post_content != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
@@ -4385,11 +4427,13 @@ function Html(props) {
       itemsX.push({
         active: 0,
         hideOnSchema: 0,
+        headerLabelText: "",
+        headerLabelSlug: "",
+        headerLabelToggledText: "",
+        contentText: "",
         headerLabel: {
           options: {
-            text: "Accordion Header",
-            toggledText: "Accordion Header Toggled",
-            slug: "",
+            text: "",
             tag: "",
             class: "accordion-header-label"
           }
@@ -4397,8 +4441,7 @@ function Html(props) {
         content: {
           options: {
             tag: "",
-            class: "accordion-content",
-            text: "Accordion content"
+            class: "accordion-content"
           }
         },
         icon: {
@@ -4493,6 +4536,10 @@ function Html(props) {
           faqX.push({
             active: 0,
             hideOnSchema: 0,
+            headerLabelText: question,
+            headerLabelSlug: "",
+            headerLabelToggledText: "",
+            contentText: answer,
             headerLabel: {
               options: {
                 text: question,
@@ -4546,6 +4593,10 @@ function Html(props) {
           faqX.push({
             active: 0,
             hideOnSchema: 0,
+            headerLabelText: question,
+            headerLabelSlug: "",
+            headerLabelToggledText: "",
+            contentText: answer,
             headerLabel: {
               options: {
                 text: question,
@@ -4599,6 +4650,10 @@ function Html(props) {
           faqX.push({
             active: 0,
             hideOnSchema: 0,
+            headerLabelText: question,
+            headerLabelSlug: "",
+            headerLabelToggledText: "",
+            contentText: answer,
             headerLabel: {
               options: {
                 text: question,
@@ -5069,7 +5124,7 @@ function Html(props) {
       onClick: ev => {
         setitemActive(index == itemActive ? 999 : index);
       }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, item?.headerLabel.options.text), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, item?.headerLabelText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center gap-2"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
@@ -5118,25 +5173,14 @@ function Html(props) {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.RichText, {
       className: "bg-slate-100 p-3 ",
       tagName: "div",
-      value: item?.headerLabel.options.text,
+      value: item?.headerLabelText,
       allowedFormats: ["core/bold", "core/italic", "core/link"],
       onChange: content => {
-        // var itemsX = [...items];
-
-        // itemsX[index].headerLabel.options.text =
-        // 	content;
-        // setitems(itemsX);
         setitems(prevItems => {
           const updatedItems = [...prevItems];
           updatedItems[index] = {
             ...updatedItems[index],
-            headerLabel: {
-              ...updatedItems[index].headerLabel,
-              options: {
-                ...updatedItems[index].headerLabel.options,
-                text: content
-              }
-            }
+            headerLabelText: content
           };
           return updatedItems;
         });
@@ -5147,25 +5191,13 @@ function Html(props) {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_13__["default"], {
       id: `content-${index}-${generate3Digit()}`,
       className: `bg-slate-100 p-3 min-h-24 w-full`,
-      value: item?.content.options.text,
+      value: item?.contentText,
       onChange: content => {
-        // var itemsX = [...items];
-
-        // itemsX[index].content.options.text =
-        // 	content;
-        // setitems(itemsX);
-
         setitems(prevItems => {
           const updatedItems = [...prevItems];
           updatedItems[index] = {
             ...updatedItems[index],
-            content: {
-              ...updatedItems[index].content,
-              options: {
-                ...updatedItems[index].content.options,
-                text: content
-              }
-            }
+            content: content
           };
           return updatedItems;
         });
@@ -5272,7 +5304,7 @@ function Html(props) {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
       className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
       label: "",
-      value: item?.headerLabel.options.slug,
+      value: item?.headerLabelSlug,
       onChange: newVal => {
         if (isProFeature) {
           addNotifications({
@@ -5286,13 +5318,7 @@ function Html(props) {
           const updatedItems = [...prevItems];
           updatedItems[index] = {
             ...updatedItems[index],
-            headerLabel: {
-              ...updatedItems[index].headerLabel,
-              options: {
-                ...updatedItems[index].headerLabel.options,
-                slug: newVal
-              }
-            }
+            headerLabelSlug: newVal
           };
           return updatedItems;
         });
@@ -5301,18 +5327,12 @@ function Html(props) {
       title: "Generate from Label",
       className: "cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1",
       onClick: ev => {
-        var slug = item?.headerLabel.options.text.toLowerCase().replaceAll(" ", "-");
+        var slug = item?.headerLabelText.toLowerCase().replaceAll(" ", "-");
         setitems(prevItems => {
           const updatedItems = [...prevItems];
           updatedItems[index] = {
             ...updatedItems[index],
-            headerLabel: {
-              ...updatedItems[index].headerLabel,
-              options: {
-                ...updatedItems[index].headerLabel.options,
-                slug: slug
-              }
-            }
+            headerLabelSlug: slug
           };
           return updatedItems;
         });
@@ -8031,7 +8051,7 @@ function Html(props) {
     })), item.headerLabel?.options.text.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ``,
       dangerouslySetInnerHTML: {
-        __html: item?.headerLabel.options.text
+        __html: item?.headerLabelText
       }
     })) : "Start Writing...", labelIcon.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
@@ -8070,7 +8090,7 @@ function Html(props) {
     }))), active == index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `accordion-content`,
       dangerouslySetInnerHTML: {
-        __html: item?.content.options.text
+        __html: item?.contentText
       }
     })));
   }))));

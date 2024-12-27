@@ -269,14 +269,16 @@ function accordions_builder_accordion($post_id, $accordionData)
 
             $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
             $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
-            $headerLabelText = isset($headerLabelOptions["text"]) ? $headerLabelOptions["text"] : "";
-            $headerLabelToggledText = isset($headerLabelOptions["toggledText"]) ? $headerLabelOptions["toggledText"] : "";
-            $headerLabelSlug = isset($headerLabelOptions["slug"]) ? $headerLabelOptions["slug"] : "";
 
+            $headerLabelText = isset($item["headerLabelText"]) ? $item["headerLabelText"] : "";
+            $headerLabelToggledText = isset($item["headerLabelToggledText"]) ? $item["headerLabelToggledText"] : "";
+            $headerLabelSlug = isset($item["headerLabelSlug"]) ? $item["headerLabelSlug"] : "";
+
+
+            $contentText = isset($item["contentText"]) ? $item["contentText"] : "";
 
             $content = isset($item["content"]) ? $item["content"] : [];
             $contentOptions = isset($content["options"]) ? $content["options"] : [];
-            $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
 
 
 
