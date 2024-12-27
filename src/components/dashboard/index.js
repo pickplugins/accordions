@@ -397,9 +397,9 @@ function Html(props) {
 										/>
 									</div>
 									<div className="my-5">
-										<label className="text-base" htmlFor="">
+										<div className="text-base" htmlFor="">
 											{__("License Key", "accordions")}
-										</label>
+										</div>
 
 										<PGinputText
 											label=""
@@ -559,8 +559,11 @@ function Html(props) {
 															var itemIndex = item[0];
 															var itemArg = item[1];
 
+
 															if (itemArg.options) {
 																delete itemArg.options;
+															}
+															if (accordionData[itemIndex]) {
 																delete accordionData[itemIndex]?.styles;
 																delete accordionData[itemIndex]?.hover;
 																delete accordionData[itemIndex]?.after;
@@ -569,9 +572,8 @@ function Html(props) {
 																delete accordionData[itemIndex]?.focus;
 																delete accordionData[itemIndex]?.target;
 																delete accordionData[itemIndex]?.visited;
-
-
 															}
+
 
 
 
