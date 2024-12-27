@@ -517,7 +517,7 @@ function Html(props) {
 
 	return (
 		<div className="">
-			<div onClick={() => {
+			<div className="hidden" onClick={() => {
 				var str = `
 {
 "wrapper":${JSON.stringify(wrapper)}
@@ -683,11 +683,15 @@ function Html(props) {
 												itemsX.push({
 													active: 0,
 													hideOnSchema: 0,
+													headerLabelText: "",
+													headerLabelSlug: "",
+
+													headerLabelToggledText: "",
+													contentText: "",
 													headerLabel: {
 														options: {
-															text: "Accordion Header",
-															toggledText: "Accordion Header Toggled",
-															slug: "",
+															text: "",
+
 															tag: "",
 															class: "accordion-header-label",
 														},
@@ -696,7 +700,6 @@ function Html(props) {
 														options: {
 															tag: "",
 															class: "accordion-content",
-															text: "Accordion content",
 														},
 													},
 													icon: {
@@ -805,6 +808,12 @@ function Html(props) {
 																		faqX.push({
 																			active: 0,
 																			hideOnSchema: 0,
+																			headerLabelText: question,
+																			headerLabelSlug: "",
+
+																			headerLabelToggledText: "",
+																			contentText: answer,
+
 																			headerLabel: {
 																				options: {
 																					text: question,
@@ -863,6 +872,11 @@ function Html(props) {
 																		faqX.push({
 																			active: 0,
 																			hideOnSchema: 0,
+																			headerLabelText: question,
+																			headerLabelSlug: "",
+
+																			headerLabelToggledText: "",
+																			contentText: answer,
 																			headerLabel: {
 																				options: {
 																					text: question,
@@ -921,6 +935,10 @@ function Html(props) {
 																		faqX.push({
 																			active: 0,
 																			hideOnSchema: 0,
+																			headerLabelText: question,
+																			headerLabelSlug: "",
+																			headerLabelToggledText: "",
+																			contentText: answer,
 																			headerLabel: {
 																				options: {
 																					text: question,
@@ -1395,7 +1413,7 @@ function Html(props) {
 														onClick={(ev) => {
 															setitemActive(index == itemActive ? 999 : index);
 														}}>
-														<div>{item?.headerLabel.options.text}</div>
+														<div>{item?.headerLabelText}</div>
 														<div className="flex items-center gap-2">
 															<span className="handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
 																<Icon fill={"#fff"} icon={menu} />
@@ -1454,30 +1472,19 @@ function Html(props) {
 																<RichText
 																	className="bg-slate-100 p-3 "
 																	tagName={"div"}
-																	value={item?.headerLabel.options.text}
+																	value={item?.headerLabelText}
 																	allowedFormats={[
 																		"core/bold",
 																		"core/italic",
 																		"core/link",
 																	]}
 																	onChange={(content) => {
-																		// var itemsX = [...items];
 
-																		// itemsX[index].headerLabel.options.text =
-																		// 	content;
-																		// setitems(itemsX);
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				headerLabel: {
-																					...updatedItems[index].headerLabel,
-																					options: {
-																						...updatedItems[index].headerLabel
-																							.options,
-																						text: content,
-																					},
-																				},
+																				headerLabelText: content,
 																			};
 																			return updatedItems;
 																		});
@@ -1489,60 +1496,22 @@ function Html(props) {
 																<PGinputTextarea
 																	id={`content-${index}-${generate3Digit()}`}
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={item?.content.options.text}
+																	value={item?.contentText}
 																	onChange={(content) => {
-																		// var itemsX = [...items];
 
-																		// itemsX[index].content.options.text =
-																		// 	content;
-																		// setitems(itemsX);
 
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				content: {
-																					...updatedItems[index].content,
-																					options: {
-																						...updatedItems[index].content
-																							.options,
-																						text: content,
-																					},
-																				},
+																				content: content,
 																			};
 																			return updatedItems;
 																		});
 																	}}
 																/>
 
-																{/* <RichText
-																	className={`bg-slate-100 p-3 min-h-24`}
-																	tagName={"div"}
-																	value={item?.content.options.text}
-																	allowedFormats={[
-																		"core/bold",
-																		"core/italic",
-																		"core/link",
-																	]}
-																	onChange={(content) => {
-																		setitems((prevItems) => {
-																			const updatedItems = [...prevItems];
-																			updatedItems[index] = {
-																				...updatedItems[index],
-																				content: {
-																					...updatedItems[index].content,
-																					options: {
-																						...updatedItems[index].content
-																							.options,
-																						text: content,
-																					},
-																				},
-																			};
-																			return updatedItems;
-																		});
-																	}}
-																	placeholder={"Write details"}
-																/> */}
+
 															</div>
 															<div className="mb-3">
 																<PanelRow>
@@ -1696,7 +1665,7 @@ function Html(props) {
 																		<PGinputText
 																			className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
 																			label=""
-																			value={item?.headerLabel.options.slug}
+																			value={item?.headerLabelSlug}
 																			onChange={(newVal) => {
 
 																				if (isProFeature) {
@@ -1715,14 +1684,7 @@ function Html(props) {
 																					const updatedItems = [...prevItems];
 																					updatedItems[index] = {
 																						...updatedItems[index],
-																						headerLabel: {
-																							...updatedItems[index].headerLabel,
-																							options: {
-																								...updatedItems[index].headerLabel
-																									.options,
-																								slug: newVal,
-																							},
-																						},
+																						headerLabelSlug: newVal,
 																					};
 																					return updatedItems;
 																				});
@@ -1733,20 +1695,13 @@ function Html(props) {
 
 																		<div title="Generate from Label" className="cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
 																			onClick={ev => {
-																				var slug = item?.headerLabel.options.text.toLowerCase().replaceAll(" ", "-");
+																				var slug = item?.headerLabelText.toLowerCase().replaceAll(" ", "-");
 
 																				setitems((prevItems) => {
 																					const updatedItems = [...prevItems];
 																					updatedItems[index] = {
 																						...updatedItems[index],
-																						headerLabel: {
-																							...updatedItems[index].headerLabel,
-																							options: {
-																								...updatedItems[index].headerLabel
-																									.options,
-																								slug: slug,
-																							},
-																						},
+																						headerLabelSlug: slug,
 																					};
 																					return updatedItems;
 																				});

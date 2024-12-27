@@ -283,7 +283,7 @@ function Html(props) {
 												<span
 													className={``}
 													dangerouslySetInnerHTML={{
-														__html: item?.headerLabel.options.text,
+														__html: item?.headerLabelText,
 													}}></span>
 											</>
 										) : (
@@ -342,7 +342,7 @@ function Html(props) {
 										<div
 											className={`accordion-content`}
 											dangerouslySetInnerHTML={{
-												__html: item?.content.options.text,
+												__html: item?.contentText,
 											}}></div>
 									</>
 								)}
