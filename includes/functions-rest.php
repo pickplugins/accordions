@@ -17,6 +17,16 @@ class AccordionsRest
 
 		register_rest_route(
 			'accordions/v2',
+			'/post_type_objects',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_post_type_objects'),
+				'permission_callback' => '__return_true',
+			)
+		);
+
+		register_rest_route(
+			'accordions/v2',
 			'/get_site_details',
 			array(
 				'methods' => 'POST',
@@ -169,6 +179,39 @@ class AccordionsRest
 			)
 		);
 	}
+
+
+
+
+
+	/**
+	 * Return terms for taxonomy.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $tax_data The tax data.
+	 */
+	public function get_post_type_objects($request)
+	{
+		global $wp_post_types;
+		$postTypes = [];
+		$post_types_all = get_post_types('', 'names');
+		foreach ($post_types_all as $post_type) {
+			$obj = $wp_post_types[$post_type];
+			$postTypes[] = $post_type;
+		}
+		$post_types =  (!empty($request['postTypes'])) ? $request['postTypes'] : $postTypes;
+		$search = isset($request['search']) ? $request['search'] : '';
+		$taxonomies = get_object_taxonomies($post_types);
+		$terms = [];
+		$taxonomiesArr = [];
+		foreach ($taxonomies as $taxonomy) {
+			$taxDetails = get_taxonomy($taxonomy);
+			$taxonomiesArr[] = ['label' => $taxDetails->label, 'id' => $taxonomy];
+		}
+		die(wp_json_encode($taxonomiesArr));
+	}
+
 
 
 

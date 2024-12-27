@@ -54,6 +54,8 @@ function Html(props) {
 
 	const [iconHtml, seticonHtml] = useState("");
 	const [iconToggleHtml, seticonToggleHtml] = useState("");
+	const [iconExpandAllHtml, seticonExpandAllHtml] = useState("");
+	const [iconCollapseAllHtml, seticonCollapseAllHtml] = useState("");
 
 
 
@@ -132,6 +134,28 @@ function Html(props) {
 		setlabelIconHtml(iconHtml);
 	}, [labelIcon?.options]);
 
+
+	useEffect(() => {
+
+		var expandAllIconSrc = expandCollapseAll?.options?.expandAllIcon.iconSrc;
+		var collapseAllIconSrc = expandCollapseAll?.options?.collapseAllIcon.iconSrc;
+
+		var expandIconHtml = `<span class="${expandAllIconSrc}"></span>`;
+		seticonExpandAllHtml(expandIconHtml);
+
+		var collapseIconHtml = `<span class="${collapseAllIconSrc}"></span>`;
+		seticonCollapseAllHtml(collapseIconHtml);
+
+
+
+	}, [expandCollapseAll?.options]);
+
+
+
+
+
+
+
 	var [active, setactive] = useState(9999);
 
 	return (
@@ -204,6 +228,13 @@ function Html(props) {
 
 						{expandCollapseAll.options.enable && (
 							<div class="expand-collapse-all" data-expandAllText="" data-collapseAllText="" data-expandAllIconHtml="" data-collapseAllIconHtml="">
+
+								<span
+									className={` `}
+									dangerouslySetInnerHTML={{
+										__html: iconExpandAllHtml,
+									}}></span>
+
 
 								<span>{expandCollapseAll.options?.expandAllText}</span>
 

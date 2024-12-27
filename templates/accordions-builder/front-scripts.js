@@ -465,10 +465,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			});
 
 
-			let currentIndex = -1;
+			var currentIndex = 0;
 
 			function loopThroughItems() {
+
+
 				currentIndex = (currentIndex + 1) % items.length; // Move to the next index
+
+
+
 				setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
 
 				window.pgAccordion.switch(currentIndex)
@@ -485,7 +490,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				window.pgAccordion.switch(currentIndex)
 			}
 
-			currentIndex = 0;
 
 			function loopThroughItemsRandom() {
 				const currentIndex = Math.floor(Math.random() * items.length);

@@ -19,53 +19,14 @@ var accordionDefaultData = {
 	},
 	items: [
 		{
-			headerLabel: {
-				options: {
-					text: "Accordion Header 1",
-					tag: "",
-					class: "accordion-header-label",
-				},
-			},
-			content: {
-				options: {
-					tag: "",
-					class: "accordion-content",
-					text: "Accordion content 1",
-				},
-			},
+			active: 0,
+			hideOnSchema: 0,
+			headerLabelText: "What are the essential beauty products for everyday use?",
+			headerLabelSlug: "",
+			headerLabelToggledText: "",
+			contentText: "",
 		},
-		{
-			headerLabel: {
-				options: {
-					text: "Accordion Header 2",
-					tag: "",
-					class: "accordion-header-label",
-				},
-			},
-			content: {
-				options: {
-					tag: "",
-					class: "accordion-content",
-					text: "Accordion content 2",
-				},
-			},
-		},
-		{
-			headerLabel: {
-				options: {
-					text: "Accordion Header 3",
-					tag: "",
-					class: "accordion-header-label",
-				},
-			},
-			content: {
-				options: {
-					tag: "",
-					class: "accordion-content",
-					text: "Accordion content 3",
-				},
-			},
-		},
+
 	],
 	content: {
 		options: {

@@ -21,12 +21,6 @@ function TemplatesBtn(props) {
 
 
 
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", DOMContentLoadedImport);
 
 function DOMContentLoadedImport() {
@@ -35,15 +29,7 @@ function DOMContentLoadedImport() {
 
     setTimeout(() => {
 
-
         var headerSettings = document.querySelector('#cb-dashboard');
-
-
-
-
-
-
-
         var importEl = document.createElement('div');
         var html = '<div class="pgTemplates" id="pgDashboardBtn"></div>';
 
@@ -51,18 +37,13 @@ function DOMContentLoadedImport() {
 
         if (headerSettings != null) {
             headerSettings.prepend(importEl);
-
         }
-
 
         var pgDashboardBtn = document.querySelector('#pgDashboardBtn');
 
         if (pgDashboardBtn != null) {
             wp.element.render(<TemplatesBtn />, pgDashboardBtn)
-
         }
-
-
 
 
     }, 2000)

@@ -14,7 +14,7 @@ import {
 	SelectControl,
 	ToggleControl,
 } from "@wordpress/components";
-import { brush, close, copy, help, menu, settings, update } from "@wordpress/icons";
+import { brush, close, copy, help, menu, settings, update, addCard } from "@wordpress/icons";
 
 import { RichText } from "@wordpress/block-editor";
 import breakPoints from "../../breakpoints";
@@ -137,7 +137,6 @@ function Html(props) {
 
 
 	useEffect(() => {
-		console.log(props.customerData);
 
 		if (customerData.isPro) {
 			setisProFeature(false)
@@ -676,7 +675,7 @@ function Html(props) {
 								{globalOptions?.itemSource == "manual" && (
 									<>
 										<div
-											className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+											className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 											onClick={(ev) => {
 												var itemsX = [...items];
 
@@ -685,42 +684,9 @@ function Html(props) {
 													hideOnSchema: 0,
 													headerLabelText: "",
 													headerLabelSlug: "",
-
 													headerLabelToggledText: "",
 													contentText: "",
-													headerLabel: {
-														options: {
-															text: "",
 
-															tag: "",
-															class: "accordion-header-label",
-														},
-													},
-													content: {
-														options: {
-															tag: "",
-															class: "accordion-content",
-														},
-													},
-													icon: {
-														options: {
-															library: "fontAwesome",
-															srcType: "class",
-															iconSrc: "fas fa-angle-down",
-															position: "left",
-															class: "accordion-icon",
-														},
-														styles: {},
-													},
-													iconToggle: {
-														options: {
-															library: "fontAwesome",
-															srcType: "class",
-															iconSrc: " fas fa-angle-up",
-															class: "accordion-icon-toggle",
-														},
-														styles: {},
-													},
 													labelIcon: {
 														options: {
 															library: "fontAwesome",
@@ -738,7 +704,7 @@ function Html(props) {
 													type: "success",
 												});
 											}}>
-											Add New
+											<Icon icon={addCard} fill="#fff" size="20" />
 										</div>
 										<div className=" tracking-wide ">
 											<div
@@ -813,42 +779,16 @@ function Html(props) {
 
 																			headerLabelToggledText: "",
 																			contentText: answer,
+																			labelIcon: {
+																				options: {
+																					library: "fontAwesome",
+																					srcType: "class",
+																					iconSrc: "",
+																				},
+																				styles: {},
+																			},
 
-																			headerLabel: {
-																				options: {
-																					text: question,
-																					toggledText: "",
-																					slug: "",
-																					tag: "",
-																					class: "accordion-header-label",
-																				},
-																			},
-																			content: {
-																				options: {
-																					tag: "",
-																					class: "accordion-content",
-																					text: answer,
-																				},
-																			},
-																			icon: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: "fas fa-angle-down",
-																					position: "left",
-																					class: "accordion-icon",
-																				},
-																				styles: {},
-																			},
-																			iconToggle: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: " fas fa-angle-up",
-																					class: "accordion-icon-toggle",
-																				},
-																				styles: {},
-																			},
+
 																		});
 																	});
 
@@ -877,41 +817,17 @@ function Html(props) {
 
 																			headerLabelToggledText: "",
 																			contentText: answer,
-																			headerLabel: {
-																				options: {
-																					text: question,
-																					toggledText: "",
-																					slug: "",
-																					tag: "",
-																					class: "accordion-header-label",
-																				},
-																			},
-																			content: {
-																				options: {
-																					tag: "",
-																					class: "accordion-content",
-																					text: answer,
-																				},
-																			},
-																			icon: {
+																			labelIcon: {
 																				options: {
 																					library: "fontAwesome",
 																					srcType: "class",
-																					iconSrc: "fas fa-angle-down",
-																					position: "left",
-																					class: "accordion-icon",
+																					iconSrc: "",
 																				},
 																				styles: {},
 																			},
-																			iconToggle: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: " fas fa-angle-up",
-																					class: "accordion-icon-toggle",
-																				},
-																				styles: {},
-																			},
+
+
+
 																		});
 																	});
 
@@ -939,41 +855,16 @@ function Html(props) {
 																			headerLabelSlug: "",
 																			headerLabelToggledText: "",
 																			contentText: answer,
-																			headerLabel: {
-																				options: {
-																					text: question,
-																					toggledText: "",
-																					slug: "",
-																					tag: "",
-																					class: "accordion-header-label",
-																				},
-																			},
-																			content: {
-																				options: {
-																					tag: "",
-																					class: "accordion-content",
-																					text: answer,
-																				},
-																			},
-																			icon: {
+																			labelIcon: {
 																				options: {
 																					library: "fontAwesome",
 																					srcType: "class",
-																					iconSrc: "fas fa-angle-down",
-																					position: "left",
-																					class: "accordion-icon",
+																					iconSrc: "",
 																				},
 																				styles: {},
 																			},
-																			iconToggle: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: " fas fa-angle-up",
-																					class: "accordion-icon-toggle",
-																				},
-																				styles: {},
-																			},
+
+
 																		});
 																	});
 
@@ -1416,7 +1307,7 @@ function Html(props) {
 														<div>{item?.headerLabelText}</div>
 														<div className="flex items-center gap-2">
 															<span className="handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
-																<Icon fill={"#fff"} icon={menu} />
+																<Icon size="20" fill={"#fff"} icon={menu} />
 															</span>
 															<span
 																className="cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
@@ -1440,7 +1331,7 @@ function Html(props) {
 
 
 																}}>
-																<Icon fill={"#fff"} icon={copy} />
+																<Icon size="20" fill={"#fff"} icon={copy} />
 															</span>
 															<span
 																className="cursor-pointer bg-red-700 hover:bg-red-600 hover:text-white px-1 py-1"
@@ -1461,7 +1352,7 @@ function Html(props) {
 
 
 																}}>
-																<Icon fill={"#fff"} icon={close} />
+																<Icon size="20" fill={"#fff"} icon={close} />
 															</span>
 														</div>
 													</div>
@@ -1470,6 +1361,7 @@ function Html(props) {
 														<div className="py-2 w-full">
 															<div className="mb-3">
 																<RichText
+																	placeholder="Write Header Text..."
 																	className="bg-slate-100 p-3 "
 																	tagName={"div"}
 																	value={item?.headerLabelText}
@@ -1489,11 +1381,12 @@ function Html(props) {
 																			return updatedItems;
 																		});
 																	}}
-																	placeholder={""}
 																/>
 															</div>
 															<div className="mb-3">
 																<PGinputTextarea
+																	placeholder="Write Header Text..."
+
 																	id={`content-${index}-${generate3Digit()}`}
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
 																	value={item?.contentText}
@@ -1504,7 +1397,7 @@ function Html(props) {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				content: content,
+																				contentText: content,
 																			};
 																			return updatedItems;
 																		});
@@ -1591,6 +1484,90 @@ function Html(props) {
 																</PanelRow>
 
 
+																{/* <PanelRow>
+																	<label htmlFor="" className="font-medium text-slate-900 ">
+																		{__("Icon Idle", "accordions")}
+																	</label>
+																	<PGIconPicker
+																		library={item?.icon?.options.library}
+																		srcType={item?.icon?.options.srcType}
+																		iconSrc={item?.icon?.options.iconSrc}
+																		onChange={(arg) => {
+
+																			if (isProFeature) {
+
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content: "This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					icon: {
+																						...updatedItems[index].icon,
+																						options: {
+																							...updatedItems[index]?.icon?.options,
+																							srcType: arg.srcType,
+																							library: arg.library,
+																							iconSrc: arg.iconSrc,
+																						}
+
+																					},
+																				};
+																				return updatedItems;
+																			});
+
+
+																		}}
+																	/>
+																</PanelRow>
+																<PanelRow>
+																	<label htmlFor="" className="font-medium text-slate-900 ">
+																		{__("Icon Toggled", "accordions")}
+																	</label>
+																	<PGIconPicker
+																		library={item?.iconToggle?.options.library}
+																		srcType={item?.iconToggle?.options.srcType}
+																		iconSrc={item?.iconToggle?.options.iconSrc}
+																		onChange={(arg) => {
+
+																			if (isProFeature) {
+
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content: "This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					iconToggle: {
+																						...updatedItems[index].iconToggle,
+																						options: {
+																							...updatedItems[index]?.iconToggle?.options,
+																							srcType: arg.srcType,
+																							library: arg.library,
+																							iconSrc: arg.iconSrc,
+																						}
+
+																					},
+																				};
+																				return updatedItems;
+																			});
+
+
+																		}}
+																	/>
+																</PanelRow> */}
 																<PanelRow>
 																	<label htmlFor="" className="font-medium text-slate-900 ">
 																		{__("Label Icon", "accordions")}
@@ -1600,7 +1577,6 @@ function Html(props) {
 																		srcType={item?.labelIcon?.options.srcType}
 																		iconSrc={item?.labelIcon?.options.iconSrc}
 																		onChange={(arg) => {
-
 
 																			if (isProFeature) {
 
@@ -1631,33 +1607,13 @@ function Html(props) {
 																			});
 
 
-
-
-
-
-
-
-
-
-
-																			// var iconToggleX = { ...iconToggle };
-
-																			// var optionsX = {
-																			// 	...iconToggleX.options,
-																			// 	srcType: arg.srcType,
-																			// 	library: arg.library,
-																			// 	iconSrc: arg.iconSrc,
-																			// };
-
-																			// iconToggleX.options = optionsX;
-																			// seticonToggle(iconToggleX);
 																		}}
 																	/>
 																</PanelRow>
 
 
 																<div className="w-full">
-																	<div className="break-all">
+																	<div className="mb-2">
 																		Slug
 																	</div>
 																	<div className="flex items-center gap-2">
@@ -1834,19 +1790,26 @@ function Html(props) {
 								<PGDropdown
 									position="bottom right"
 									variant="secondary"
-									buttonTitle={__("Choose", "accordions")}
+									buttonTitle={globalOptions?.activeEvent ? globalOptions?.activeEvent : __("Choose", "accordions")}
 									options={[
-										{ label: __("Click", "accordions"), value: "click" },
+										{
+											label: __("Click", "accordions"),
+											value: "click"
+										},
 										{
 											label: __("Mouseover", "accordions"),
 											value: "mouseover",
 											isPro: customerData.isPro ? false : true,
 										},
-										{ label: __("Focus", "accordions"), value: "focus", isPro: customerData.isPro ? false : true, },
+										{
+											label: __("Focus", "accordions"),
+											value: "focus",
+											isPro: customerData.isPro ? false : true,
+										},
 									]}
-									onChange={(newVal) => {
+									onChange={(option) => {
 										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.activeEvent = newVal.value;
+										globalOptionsX.activeEvent = option.value;
 										setglobalOptions(globalOptionsX);
 									}}
 									values=""></PGDropdown>
@@ -2070,8 +2033,8 @@ function Html(props) {
 											buttonTitle={globalOptions?.autoPlayOrder ? globalOptions?.autoPlayOrder : __("Choose", "accordions")}
 											options={[
 												{
-													label: __("topToBottom", "accordions"),
-													value: "Top To Bottom",
+													label: __("Top To Bottom", "accordions"),
+													value: "topToBottom",
 													isPro: customerData.isPro ? false : true,
 												},
 												{ label: __("Bottom To Top", "accordions"), value: "bottomToTop", isPro: customerData.isPro ? false : true, },
