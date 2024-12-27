@@ -297,6 +297,20 @@ function Html(props) {
 		setProperty(obj);
 	}
 
+	const copyData = (data) => {
+		navigator.clipboard
+			.writeText(data)
+			.then(() => {
+				addNotifications({
+					title: "Copied to clipboard!",
+					content:
+						"Use the shortcode in page or post conent where you want to display.",
+					type: "success",
+				});
+			})
+			.catch((err) => { });
+	};
+
 	var accOptionsArgs = {
 		autoplay: { label: "Auto play", value: 1 },
 	};
@@ -489,6 +503,7 @@ function Html(props) {
 		posts: { label: "Posts", value: "posts", isPro: customerData.isPro ? false : true },
 		terms: { label: "Terms", value: "terms", isPro: customerData.isPro ? false : true },
 	};
+
 	var iconSets = [
 		{
 			idle: "",
@@ -502,17 +517,60 @@ function Html(props) {
 
 	return (
 		<div className="">
-			{/* <div>{`{`}</div>
-			<div>{`"wrapper":${JSON.stringify(wrapper)}`},</div>
-			<div>{`"content":${JSON.stringify(content)}`},</div>
-			<div>{`"header":${JSON.stringify(header)}`},</div>
-			<div>{`"headerActive":${JSON.stringify(headerActive)}`},</div>
-			<div>{`"headerLabel":${JSON.stringify(headerLabel)}`},</div>
-			<div>{`"labelCounter":${JSON.stringify(labelCounter)}`},</div>
-			<div>{`"labelIcon":${JSON.stringify(labelIcon)}`},</div>
-			<div>{`"icon":${JSON.stringify(icon)}`},</div>
-			<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
-			<div>{`}`}</div> */}
+			<div onClick={() => {
+				var str = `
+{
+"wrapper":${JSON.stringify(wrapper)}
+"content":${JSON.stringify(content)},
+				"header":${JSON.stringify(header)},
+				"headerActive":${JSON.stringify(headerActive)},
+				"headerLabel":${JSON.stringify(headerLabel)},
+				"labelCounter":${JSON.stringify(labelCounter)},
+				"labelIcon":${JSON.stringify(labelIcon)},
+				"icon":${JSON.stringify(icon)},
+				"iconToggle":${JSON.stringify(iconToggle)},
+				"searchInput":${JSON.stringify(searchInput)},
+				"expandCollapseAll":${JSON.stringify(expandCollapseAll)},
+				"topWrap":${JSON.stringify(topWrap)},
+				}
+
+`;
+
+				copyData(str);
+
+
+				addNotifications({
+					title: "Copied to clipboard!",
+					content:
+						"Use the shortcode in page or post conent where you want to display.",
+					type: "success",
+				});
+
+
+
+
+
+			}}>
+
+				<div className="p-3">
+					<div>{`{`}</div>
+					<div>{`"wrapper":${JSON.stringify(wrapper)}`},</div>
+					<div>{`"content":${JSON.stringify(content)}`},</div>
+					<div>{`"header":${JSON.stringify(header)}`},</div>
+					<div>{`"headerActive":${JSON.stringify(headerActive)}`},</div>
+					<div>{`"headerLabel":${JSON.stringify(headerLabel)}`},</div>
+					<div>{`"labelCounter":${JSON.stringify(labelCounter)}`},</div>
+					<div>{`"labelIcon":${JSON.stringify(labelIcon)}`},</div>
+					<div>{`"icon":${JSON.stringify(icon)}`},</div>
+					<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
+					<div>{`"searchInput":${JSON.stringify(searchInput)}`},</div>
+					<div>{`"expandCollapseAll":${JSON.stringify(expandCollapseAll)}`},</div>
+					<div>{`"topWrap":${JSON.stringify(topWrap)}`},</div>
+					<div>{`}`}</div>
+
+
+				</div>
+			</div>
 
 			{props.postData.post_content != null && (
 				<>
