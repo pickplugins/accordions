@@ -137,8 +137,8 @@ function Html(props) {
 
 	useEffect(() => {
 
-		var expandAllIconSrc = expandCollapseAll?.options?.expandAllIcon.iconSrc;
-		var collapseAllIconSrc = expandCollapseAll?.options?.collapseAllIcon.iconSrc;
+		var expandAllIconSrc = expandCollapseAll?.options?.expandAllIcon?.iconSrc;
+		var collapseAllIconSrc = expandCollapseAll?.options?.collapseAllIcon?.iconSrc;
 
 		var expandIconHtml = `<span class="${expandAllIconSrc}"></span>`;
 		seticonExpandAllHtml(expandIconHtml);
@@ -309,7 +309,7 @@ function Html(props) {
 												)}
 											</>
 										)}
-										{item.headerLabel?.options.text.length > 0 ? (
+										{item?.headerLabelText.length > 0 ? (
 											<>
 												<span
 													className={``}

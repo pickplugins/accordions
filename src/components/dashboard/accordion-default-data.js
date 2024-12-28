@@ -21,10 +21,26 @@ var accordionDefaultData = {
 		{
 			active: 0,
 			hideOnSchema: 0,
-			headerLabelText: "What are the essential beauty products for everyday use?",
+			headerLabelText: "Accordion Header 1 ",
 			headerLabelSlug: "",
 			headerLabelToggledText: "",
-			contentText: "",
+			contentText: "Accordion Content 1",
+		},
+		{
+			active: 0,
+			hideOnSchema: 0,
+			headerLabelText: "Accordion Header 2",
+			headerLabelSlug: "",
+			headerLabelToggledText: "",
+			contentText: "Accordion Content 2",
+		},
+		{
+			active: 0,
+			hideOnSchema: 0,
+			headerLabelText: "Accordion Header 3",
+			headerLabelSlug: "",
+			headerLabelToggledText: "",
+			contentText: "Accordion Content 3",
 		},
 
 	],
