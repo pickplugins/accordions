@@ -219,14 +219,14 @@ function Html(props) {
 				<div className={`${wrapper?.options?.class} `}>
 
 					<div className="top-wrap">
-						{searchInput.options.enable && (
+						{searchInput?.options.enable && (
 							<div class="search-wrap">
-								<input type="text" class="search-input" placeholder={searchInput.options.placeholder} />
+								<input type="text" class="search-input" placeholder={searchInput?.options?.placeholder} />
 							</div>
 						)}
 
 
-						{expandCollapseAll.options.enable && (
+						{expandCollapseAll?.options?.enable && (
 							<div class="expand-collapse-all" data-expandAllText="" data-collapseAllText="" data-expandAllIconHtml="" data-collapseAllIconHtml="">
 
 								<span
@@ -236,7 +236,7 @@ function Html(props) {
 									}}></span>
 
 
-								<span>{expandCollapseAll.options?.expandAllText}</span>
+								<span>{expandCollapseAll?.options?.expandAllText}</span>
 
 							</div>
 						)}
@@ -252,16 +252,16 @@ function Html(props) {
 						return (
 							<Fragment key={index}>
 								<div
-									className={`accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""
+									className={`accordion-header ${header?.options.class} ${active == index ? "accordion-header-active" : ""
 										}`}
 									onClick={(ev) => {
 										setToggled(!toggled);
 										setactive(index == active ? 999 : index);
 									}}>
-									{labelCounter.options.position == "left" && (
+									{labelCounter?.options.position == "left" && (
 										<span className={` accordion-label-counter`}>{index}</span>
 									)}
-									{icon.options.position == "left" && (
+									{icon?.options.position == "left" && (
 										<>
 											{active != index && (
 												<span
@@ -277,7 +277,7 @@ function Html(props) {
 											)}
 										</>
 									)}
-									{labelIcon.options.position == "beforeLabel" && (
+									{labelIcon?.options.position == "beforeLabel" && (
 										<>
 											{item?.labelIcon?.options.iconSrc && (
 												<span className={` accordion-label-icon`}
@@ -294,10 +294,10 @@ function Html(props) {
 										onClick={(e) => {
 											return;
 										}}>
-										{labelCounter.options.position == "beforeLabelText" && (
+										{labelCounter?.options.position == "beforeLabelText" && (
 											<span className={` accordion-label-counter`}>{index}</span>
 										)}
-										{labelIcon.options.position == "beforeLabelText" && (
+										{labelIcon?.options.position == "beforeLabelText" && (
 											<>
 												{item?.labelIcon?.options.iconSrc && (
 													<span className={` accordion-label-icon`}
@@ -320,7 +320,7 @@ function Html(props) {
 										) : (
 											"Start Writing..."
 										)}
-										{labelIcon.options.position == "afterLabelText" && (
+										{labelIcon?.options.position == "afterLabelText" && (
 											<>
 												{item?.labelIcon?.options.iconSrc && (
 													<span className={` accordion-label-icon`}
@@ -332,11 +332,11 @@ function Html(props) {
 												)}
 											</>
 										)}
-										{labelCounter.options.position == "afterLabelText" && (
+										{labelCounter?.options.position == "afterLabelText" && (
 											<span className={` accordion-label-counter`}>{index}</span>
 										)}
 									</div>
-									{labelIcon.options.position == "afterLabel" && (
+									{labelIcon?.options.position == "afterLabel" && (
 										<>
 											{item?.labelIcon?.options.iconSrc && (
 												<span className={` accordion-label-icon`}
@@ -348,10 +348,10 @@ function Html(props) {
 											)}
 										</>
 									)}
-									{labelCounter.options.position == "right" && (
+									{labelCounter?.options.position == "right" && (
 										<span className={` accordion-label-counter`}>{index}</span>
 									)}
-									{icon.options.position == "right" && (
+									{icon?.options.position == "right" && (
 										<>
 											{active != index && (
 												<span

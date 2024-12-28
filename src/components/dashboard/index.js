@@ -475,7 +475,7 @@ function Html(props) {
 									<div className=" ">
 										{postData.ID != null && (
 											<>
-												{accordionData.globalOptions.viewType == "accordion" && (
+												{accordionData?.globalOptions?.viewType == "accordion" && (
 													<AccordionsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
@@ -484,7 +484,7 @@ function Html(props) {
 														setHelp={setHelp}
 													/>
 												)}
-												{accordionData.globalOptions.viewType == "tabs" && (
+												{accordionData?.globalOptions?.viewType == "tabs" && (
 													<TabsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}

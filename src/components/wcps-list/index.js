@@ -265,9 +265,7 @@ function Html(props) {
 								}}>
 								<div>
 									<div className="text-base mb-2">{item.post_title}</div>
-									<div className="text-sm flex items-center gap-2">
-										<span className="text-xs">{`(#${item.ID})`}</span>
-									</div>
+
 								</div>
 								{activeAccordion == item.ID && (
 									<span>
