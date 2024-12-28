@@ -21,6 +21,7 @@ import {
 	copy,
 	help,
 	menu,
+	page,
 	settings,
 	update,
 } from "@wordpress/icons";
@@ -106,6 +107,7 @@ function Html(props) {
 	const [itemActive, setitemActive] = useState(99999);
 	const [AIautoUpdate, setAIautoUpdate] = useState(false);
 	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
+	const [copied, setCopied] = useState(false);
 	var formattedPrompt =
 		"Respond only with question answer as json array and no other text. Do not include any explanations, introductions, or concluding remarks.";
 
@@ -677,6 +679,61 @@ function Html(props) {
 
 								{globalOptions?.itemSource == "manual" && (
 									<>
+										<div className="flex items-center gap-2">
+											<span
+												className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+												title="Click to paste"
+												onClick={async () => {
+													try {
+														// Read text from clipboard
+														const clipboardText =
+															await navigator.clipboard.readText();
+
+														// Parse the JSON string back to an object
+														const pastedItems = JSON.parse(clipboardText);
+
+														// Here you need to handle the pasted items
+														// For example, if you have a state setter:
+														setitems(pastedItems);
+
+														addNotifications({
+															title: "Items Pasted",
+															content: "You just pasted items, Now go to edit.",
+															type: "success",
+														});
+													} catch (error) {
+														console.error("Failed to paste items: ", error);
+													}
+												}}>
+												<Icon icon={page} fill="#fff" size="20" />
+											</span>
+											<span
+												className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+												title="Click to copy"
+												onClick={() => {
+													try {
+														const itemsString = JSON.stringify(items, null, 2);
+
+														navigator.clipboard
+															.writeText(itemsString)
+															.then(() => {
+																addNotifications({
+																	title: "Items Copied",
+																	content:
+																		"You just copied items, Now go to edit.",
+																	type: "success",
+																});
+															})
+															.catch((err) => {
+																console.error("Failed to copy: ", err);
+															});
+													} catch (error) {
+														console.error("Failed to copy items: ", error);
+													}
+												}}>
+												<Icon icon={copy} fill="#fff" size="20" />
+											</span>
+										</div>
 										<div
 											className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 											onClick={(ev) => {

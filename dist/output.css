@@ -365,6 +365,17 @@
   margin-top: 70px;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .block {
   display: block;
 }
@@ -461,6 +472,10 @@
   height: 2.5rem;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .h-28 {
   height: 7rem;
 }
@@ -524,6 +539,10 @@
 
 .w-10 {
   width: 2.5rem;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .w-16 {
@@ -1366,6 +1385,10 @@
   padding: 1.25rem;
 }
 
+.p-6 {
+  padding: 1.5rem;
+}
+
 .p-7 {
   padding: 1.75rem;
 }
@@ -1559,6 +1582,10 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.\!text-\[12px\] {
+  font-size: 12px !important;
+}
+
 .\!text-\[13px\] {
   font-size: 13px !important;
 }
@@ -1644,10 +1671,6 @@
   line-height: 1rem;
 }
 
-.\!text-\[12px\] {
-  font-size: 12px !important;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -1722,6 +1745,11 @@
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }
 
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity, 1));
+}
+
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
@@ -1782,8 +1810,9 @@
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.text-\[\] {
-  color: ;
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity, 1));
 }
 
 .underline {
