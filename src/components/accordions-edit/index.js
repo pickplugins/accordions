@@ -149,7 +149,7 @@ function Html(props) {
 		}
 	}, [props.customerData]);
 
-	useEffect(() => {}, [props.postData]);
+	useEffect(() => { }, [props.postData]);
 
 	useEffect(() => {
 		onChange(accordionData);
@@ -307,7 +307,7 @@ function Html(props) {
 					type: "success",
 				});
 			})
-			.catch((err) => {});
+			.catch((err) => { });
 	};
 
 	var accOptionsArgs = {
@@ -499,16 +499,16 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		posts: {
-			label: "Posts",
-			value: "posts",
-			isPro: customerData.isPro ? false : true,
-		},
-		terms: {
-			label: "Terms",
-			value: "terms",
-			isPro: customerData.isPro ? false : true,
-		},
+		// posts: {
+		// 	label: "Posts",
+		// 	value: "posts",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
+		// terms: {
+		// 	label: "Terms",
+		// 	value: "terms",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
 	};
 
 	var iconSets = [
@@ -2075,7 +2075,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2153,7 +2153,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2288,10 +2288,10 @@ function Html(props) {
 										variant="secondary"
 										buttonTitle={
 											popupEntranceAnimateBasic[content.options.inAnimation] ==
-											undefined
+												undefined
 												? __("Choose", "accordions")
 												: popupEntranceAnimateBasic[content.options.inAnimation]
-														.label
+													.label
 										}
 										options={popupEntranceAnimateBasic}
 										onChange={(newVal) => {
@@ -2326,10 +2326,10 @@ function Html(props) {
 										variant="secondary"
 										buttonTitle={
 											popupCloseAnimateBasic[content.options.outAnimation] ==
-											undefined
+												undefined
 												? __("Choose", "accordions")
 												: popupCloseAnimateBasic[content.options.outAnimation]
-														.label
+													.label
 										}
 										options={popupCloseAnimateBasic}
 										onChange={(newVal) => {
@@ -2413,7 +2413,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2526,7 +2526,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2623,7 +2623,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2717,7 +2717,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2860,7 +2860,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2999,36 +2999,36 @@ function Html(props) {
 
 					<PanelBody title="Icons" initialOpen={false}>
 						<div className="flex flex-wrap justify-between my-4">
-						{iconsList.map((item, index) => {
-							return (
-								<div className="flex flex-col gap-1 border border-solid border-slate-300" 
-								key={index}
-								onClick={() => {
-									console.log(item);
-									var iconX = { ...icon };
-									var optionsX = {
-										...iconX.options,
-										iconSrc: item.icon,
-									};
-									iconX.options = optionsX;
-									seticon(iconX);
+							{iconsList.map((item, index) => {
+								return (
+									<div className="flex flex-col gap-1 border border-solid border-slate-300"
+										key={index}
+										onClick={() => {
+											console.log(item);
+											var iconX = { ...icon };
+											var optionsX = {
+												...iconX.options,
+												iconSrc: item.icon,
+											};
+											iconX.options = optionsX;
+											seticon(iconX);
 
-									var iconToggleX = { ...iconToggle };
-									var optionsToggleX = {
-										...iconToggleX.options,
-										iconSrc: item.toggle,
-									};
-									iconToggleX.options = optionsToggleX;
-									seticonToggle(iconToggleX);
-								}}
-								>
-									<span
-										className={` flex items-center justify-center p-1 border-0 border-b border-solid border-b-slate-300 !text-[12px] ${item.icon}`}></span>
-									<span
-										className={` flex items-center justify-center p-1 !text-[12px] ${item.toggle}`}></span>
-								</div>
-							);
-						})}
+											var iconToggleX = { ...iconToggle };
+											var optionsToggleX = {
+												...iconToggleX.options,
+												iconSrc: item.toggle,
+											};
+											iconToggleX.options = optionsToggleX;
+											seticonToggle(iconToggleX);
+										}}
+									>
+										<span
+											className={` flex items-center justify-center p-1 border-0 border-b border-solid border-b-slate-300 !text-[12px] ${item.icon}`}></span>
+										<span
+											className={` flex items-center justify-center p-1 !text-[12px] ${item.toggle}`}></span>
+									</div>
+								);
+							})}
 						</div>
 						<PanelBody
 							className="font-medium text-slate-900 "
@@ -3048,7 +3048,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -3192,10 +3192,10 @@ function Html(props) {
 											variant="secondary"
 											buttonTitle={
 												popupEntranceAnimateBasic[icon.options.inAnimation] ==
-												undefined
+													undefined
 													? __("Choose", "accordions")
 													: popupEntranceAnimateBasic[icon.options.inAnimation]
-															.label
+														.label
 											}
 											options={popupEntranceAnimateBasic}
 											onChange={(newVal) => {
@@ -3220,10 +3220,10 @@ function Html(props) {
 											variant="secondary"
 											buttonTitle={
 												popupCloseAnimateBasic[icon.options.outAnimation] ==
-												undefined
+													undefined
 													? __("Choose", "accordions")
 													: popupCloseAnimateBasic[icon.options.outAnimation]
-															.label
+														.label
 											}
 											options={popupCloseAnimateBasic}
 											onChange={(newVal) => {
@@ -3300,7 +3300,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -3389,7 +3389,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -3641,7 +3641,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -3778,7 +3778,7 @@ function Html(props) {
 									activeTab="options"
 									orientation="horizontal"
 									activeClass="active-tab"
-									onSelect={(tabName) => {}}
+									onSelect={(tabName) => { }}
 									tabs={[
 										{
 											name: "options",
