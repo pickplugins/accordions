@@ -27,6 +27,9 @@ import {
 	code,
 	addCard,
 	help,
+	shortcode,
+	copySmall,
+	trash,
 } from "@wordpress/icons";
 
 var myStore = wp.data.select('postgrid-shop');
@@ -55,9 +58,22 @@ function Html(props) {
 	var [pagination, setPagination] = useState({ currentPage: 1 }); // Using the hook.
 	var [dataLoaded, setdataLoaded] = useState(false); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
+	var [deleteConfirm, setdeleteConfirm] = useState({ id: "", confirm: false }); // Using the hook.
 
 
-
+	const copyData = (data) => {
+		navigator.clipboard
+			.writeText(data)
+			.then(() => {
+				addNotifications({
+					title: "Copied to clipboard!",
+					content:
+						"Use the shortcode in page or post conent where you want to display.",
+					type: "success",
+				});
+			})
+			.catch((err) => { });
+	};
 
 
 
@@ -181,12 +197,109 @@ function Html(props) {
 				});
 			}
 			if (res.success) {
-				posts.unshift({ ID: res.id, post_content: "", post_author: 0, post_title: searchPrams.search });
+				var postsX = [...posts];
+
+				postsX.unshift({ ID: res.id, post_content: "", post_author: 0, post_title: searchPrams.search });
+
+				setPosts(postsX)
+
 				addNotifications({
+
 					title: "Accordion Create!",
 					content: res.successMessage,
 					type: "success",
 				});
+			}
+
+
+
+			setisLoading(false);
+			if (res.status) {
+			}
+		});
+	}
+
+
+	function duplicate_post(postId) {
+
+
+		setisLoading(true);
+		apiFetch({
+			path: "/accordions/v2/duplicate_post",
+			method: "POST",
+			data: { postId: postId, },
+		}).then((res) => {
+
+			if (res.error) {
+				addNotifications({
+					title: "There is an Error!",
+					content: res.errorMessage,
+					type: "error",
+				});
+			}
+			if (res.success) {
+
+				console.log(res);
+				var postsX = [...posts];
+
+
+				postsX.unshift({ ID: res.id, post_title: res.post_title });
+				setPosts(postsX)
+
+				addNotifications({
+					title: "Accordion duplicated!",
+					content: res.successMessage,
+					type: "success",
+				});
+			}
+
+
+
+			setisLoading(false);
+			if (res.status) {
+			}
+		});
+	}
+	function delete_post(postId, index) {
+
+		if (!deleteConfirm) {
+			return;
+		}
+
+		setisLoading(true);
+		apiFetch({
+			path: "/accordions/v2/delete_post",
+			method: "POST",
+			data: { postId: postId, },
+		}).then((res) => {
+
+			if (res.error) {
+				addNotifications({
+					title: "There is an Error!",
+					content: res.errorMessage,
+					type: "error",
+				});
+			}
+			if (res.success) {
+
+				console.log(res);
+
+
+				var postsX = [...posts];
+
+				postsX.splice(index, 1);
+
+				setPosts(postsX)
+				//posts.unshift({ ID: res.id, post_title: res.post_title });
+
+				addNotifications({
+					title: "Accordion deleted!",
+					content: res.successMessage,
+					type: "success",
+				});
+
+				setdeleteConfirm({ id: "", confirm: false });
+
 			}
 
 
@@ -251,27 +364,69 @@ function Html(props) {
 				<>
 					{posts.map((item, index) => {
 						return (
-							<div
-								className="flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer"
-								key={index}
-								onClick={(ev) => {
-									selectAccordion(item.ID);
+							<div className="border-0 border-b border-solid border-[#ddd]">
+								<div
+									className="flex justify-between align-middle items-center p-3  hover:bg-slate-300 cursor-pointer"
+									key={index}
+									onClick={(ev) => {
+										selectAccordion(item.ID);
 
-									addNotifications({
-										title: "Ready to Edit",
-										content: "Now go to Edit panel to customize accordion.",
-										type: "success",
-									});
-								}}>
-								<div>
-									<div className="text-base mb-2">{item.post_title}</div>
+										addNotifications({
+											title: "Ready to Edit",
+											content: "Now go to Edit panel to customize accordion.",
+											type: "success",
+										});
+									}}>
+									<div>
+										<div className="text-base mb-2">{item.post_title}</div>
+
+									</div>
+									{activeAccordion == item.ID && (
+										<span>
+											<Icon icon={check} />
+										</span>
+									)}
+								</div>
+
+								<div className=" px-3 flex flex-wrap align-middle items-center text-xs gap-3 my-2">
+									<div className="">#{item.ID}</div>
+									<div className="cursor-pointer flex items-center" onClick={(ev) => {
+										duplicate_post(item.ID);
+									}}>
+										<Icon icon={copySmall} size="20" />
+										Duplicate</div>
+
+
+
+									<div className="cursor-pointer text-red-700 flex items-center" title={"Delete Post"} onClick={(ev) => {
+										setdeleteConfirm({ id: item.ID, confirm: true });
+										if (deleteConfirm.confirm) {
+											delete_post(item.ID, index);
+										}
+
+									}}>
+										<Icon icon={trash} size="20" />
+										{deleteConfirm.id == item.ID && (
+											<>
+												{deleteConfirm && ("Confirm")}
+											</>
+										)}
+										{deleteConfirm.id != item.ID && (
+											<>
+												{deleteConfirm && ("Delete")}
+											</>
+										)}
+
+
+									</div>
+									<div className="cursor-pointer flex items-center" title="Copy Shortcodes" onClick={() => {
+										var str = `[accordions_builder id="${item.ID}"]`;
+
+										copyData(str);
+									}}><Icon icon={copySmall} size="20" /> Shortcode</div>
 
 								</div>
-								{activeAccordion == item.ID && (
-									<span>
-										<Icon icon={check} />
-									</span>
-								)}
+
 							</div>
 						);
 					})}

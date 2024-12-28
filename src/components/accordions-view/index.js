@@ -79,7 +79,7 @@ function Html(props) {
 
 	useEffect(() => {
 		setaccordionData(postData.post_content);
-		setitems(postData.post_content.items);
+		//setitems(postData.post_content.items);
 	}, [postData]);
 
 
@@ -107,9 +107,9 @@ function Html(props) {
 
 
 	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.items = items;
-		onChange(accordionDataX);
+		//var accordionDataX = { ...accordionData };
+		//accordionDataX.items = items;
+		//onChange(accordionDataX);
 	}, [items]);
 
 	useEffect(() => {
