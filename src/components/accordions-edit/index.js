@@ -86,13 +86,7 @@ function Html(props) {
 		accordionData.expandCollapseAll
 	);
 	var [topWrap, settopWrap] = useState(accordionData.topWrap);
-	var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
-	var [navItem, setnavItem] = useState(accordionData?.navItem);
-	var [activeNavItem, setactiveNavItem] = useState(
-		accordionData?.activeNavItem
-	);
-	var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
-	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
+
 
 	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 
@@ -584,7 +578,7 @@ function Html(props) {
 							<PGDropdown
 								position="bottom right"
 								variant="secondary"
-								buttonTitle={viewTypeArgs[globalOptions.viewType]?.label}
+								buttonTitle={viewTypeArgs[globalOptions?.viewType]?.label}
 								options={viewTypeArgs}
 								onChange={(option, index) => {
 									var globalOptionsX = { ...globalOptions };
@@ -604,9 +598,9 @@ function Html(props) {
 									position="bottom right"
 									variant="secondary"
 									buttonTitle={
-										globalOptions.itemSource == undefined
+										globalOptions?.itemSource == undefined
 											? "Item Source"
-											: itemSources[globalOptions.itemSource]?.label
+											: itemSources[globalOptions?.itemSource]?.label
 									}
 									options={itemSources}
 									onChange={(option, index) => {
@@ -1404,8 +1398,12 @@ function Html(props) {
 								<ReactSortable
 									list={items}
 									handle={".handle"}
-									setList={(item) => {
-										setitems(item);
+									setList={(itemsSorted) => {
+
+
+										setTimeout(() => {
+											setitems(itemsSorted);
+										}, 200)
 
 										addNotifications({
 											title: "Items Sorted",
@@ -1424,7 +1422,7 @@ function Html(props) {
 														}}>
 														<div>{item?.headerLabelText}</div>
 														<div className="flex items-center gap-2">
-															<span className="handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
+															<span className="handle  cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
 																<Icon size="20" fill={"#fff"} icon={menu} />
 															</span>
 															<span
@@ -1570,9 +1568,9 @@ function Html(props) {
 																		{__("Icon Idle", "accordions")}
 																	</label>
 																	<PGIconPicker
-																		library={item?.icon?.options.library}
-																		srcType={item?.icon?.options.srcType}
-																		iconSrc={item?.icon?.options.iconSrc}
+																		library={item?.icon?.options?.library}
+																		srcType={item?.icon?.options?.srcType}
+																		iconSrc={item?.icon?.options?.iconSrc}
 																		onChange={(arg) => {
 
 																			if (isProFeature) {
@@ -1612,9 +1610,9 @@ function Html(props) {
 																		{__("Icon Toggled", "accordions")}
 																	</label>
 																	<PGIconPicker
-																		library={item?.iconToggle?.options.library}
-																		srcType={item?.iconToggle?.options.srcType}
-																		iconSrc={item?.iconToggle?.options.iconSrc}
+																		library={item?.iconToggle?.options?.library}
+																		srcType={item?.iconToggle?.options?.srcType}
+																		iconSrc={item?.iconToggle?.options?.iconSrc}
 																		onChange={(arg) => {
 
 																			if (isProFeature) {
@@ -1656,9 +1654,9 @@ function Html(props) {
 																		{__("Label Icon", "accordions")}
 																	</label>
 																	<PGIconPicker
-																		library={item?.labelIcon?.options.library}
-																		srcType={item?.labelIcon?.options.srcType}
-																		iconSrc={item?.labelIcon?.options.iconSrc}
+																		library={item?.labelIcon?.options?.library}
+																		srcType={item?.labelIcon?.options?.srcType}
+																		iconSrc={item?.labelIcon?.options?.iconSrc}
 																		onChange={(arg) => {
 																			if (isProFeature) {
 																				addNotifications({
@@ -2159,13 +2157,13 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={wrapper.options.class}
+										value={wrapper?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...wrapper,
 												options: {
-													...wrapper.options,
+													...wrapper?.options,
 													class: newVal,
 												},
 											};
@@ -2231,13 +2229,13 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={content.options.class}
+										value={content?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
 												options: {
-													...content.options,
+													...content?.options,
 													class: newVal,
 												},
 											};
@@ -2266,7 +2264,7 @@ function Html(props) {
 											var optionsX = {
 												...content,
 												options: {
-													...content.options,
+													...content?.options,
 													autoembed: newVal,
 												},
 											};
@@ -2292,12 +2290,12 @@ function Html(props) {
 									</label>
 
 									<Toggle
-										value={content.options?.shortcodes}
+										value={content?.options?.shortcodes}
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
 												options: {
-													...content.options,
+													...content?.options,
 													shortcodes: newVal,
 												},
 											};
@@ -2327,7 +2325,7 @@ function Html(props) {
 											var optionsX = {
 												...content,
 												options: {
-													...content.options,
+													...content?.options,
 													wpautop: newVal,
 												},
 											};
@@ -2344,10 +2342,10 @@ function Html(props) {
 										position="bottom right"
 										variant="secondary"
 										buttonTitle={
-											popupEntranceAnimateBasic[content.options.inAnimation] ==
+											popupEntranceAnimateBasic[content?.options?.inAnimation] ==
 												undefined
 												? __("Choose", "accordions")
-												: popupEntranceAnimateBasic[content.options.inAnimation]
+												: popupEntranceAnimateBasic[content?.options?.inAnimation]
 													.label
 										}
 										options={popupEntranceAnimateBasic}
@@ -2365,7 +2363,7 @@ function Html(props) {
 											var optionsX = {
 												...content,
 												options: {
-													...content.options,
+													...content?.options,
 													inAnimation: newVal.value,
 												},
 											};
@@ -2382,10 +2380,10 @@ function Html(props) {
 										position="bottom right"
 										variant="secondary"
 										buttonTitle={
-											popupCloseAnimateBasic[content.options.outAnimation] ==
+											popupCloseAnimateBasic[content?.options?.outAnimation] ==
 												undefined
 												? __("Choose", "accordions")
-												: popupCloseAnimateBasic[content.options.outAnimation]
+												: popupCloseAnimateBasic[content?.options?.outAnimation]
 													.label
 										}
 										options={popupCloseAnimateBasic}
@@ -2403,7 +2401,7 @@ function Html(props) {
 											var optionsX = {
 												...content,
 												options: {
-													...content.options,
+													...content?.options,
 													outAnimation: newVal.value,
 												},
 											};
@@ -2417,14 +2415,14 @@ function Html(props) {
 										{__("Animation duration", "accordions")}
 									</label>
 									<PGinputText
-										value={content.options.animationDuration}
+										value={content?.options?.animationDuration}
 										placeholder={"1000"}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...content,
 												options: {
-													...content.options,
+													...content?.options,
 													animationDuration: newVal,
 												},
 											};
@@ -2491,13 +2489,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={header.options.class}
+											value={header?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...header,
 													options: {
-														...header.options,
+														...header?.options,
 														class: newVal,
 													},
 												};
@@ -2538,7 +2536,7 @@ function Html(props) {
 												var optionsX = {
 													...header,
 													options: {
-														...header.options,
+														...header?.options,
 														toggleText: newVal,
 													},
 												};
@@ -2604,13 +2602,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={headerActive.options.class}
+											value={headerActive?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...headerActive,
 													options: {
-														...headerActive.options,
+														...headerActive?.options,
 														class: newVal,
 													},
 												};
@@ -2702,13 +2700,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={headerLabel.options.class}
+											value={headerLabel?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...headerLabel,
 													options: {
-														...headerLabel.options,
+														...headerLabel?.options,
 														class: newVal,
 													},
 												};
@@ -2796,7 +2794,7 @@ function Html(props) {
 										</label>
 										<SelectControl
 											label=""
-											value={labelCounter.options.position}
+											value={labelCounter?.options?.position}
 											options={[
 												{
 													label: __("Choose Position", "accordions"),
@@ -2831,13 +2829,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={labelCounter.options.class}
+											value={labelCounter?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...labelCounter,
 													options: {
-														...labelCounter.options,
+														...labelCounter?.options,
 														class: newVal,
 													},
 												};
@@ -2938,9 +2936,9 @@ function Html(props) {
 											{__("Choose Label Icon", "accordions")}
 										</label>
 										<PGIconPicker
-											library={labelIcon.options.library}
-											srcType={labelIcon.options.srcType}
-											iconSrc={labelIcon.options.iconSrc}
+											library={labelIcon?.options?.library}
+											srcType={labelIcon?.options?.srcType}
+											iconSrc={labelIcon?.options?.iconSrc}
 											onChange={(arg) => {
 												var labelIconX = { ...labelIcon };
 
@@ -2963,7 +2961,7 @@ function Html(props) {
 										</label>
 										<SelectControl
 											label=""
-											value={labelIcon.options.position}
+											value={labelIcon?.options?.position}
 											options={[
 												{
 													label: __("Choose Position", "accordions"),
@@ -3004,13 +3002,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={labelIcon.options.class}
+											value={labelIcon?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...labelIcon,
 													options: {
-														...labelIcon.options,
+														...labelIcon?.options,
 														class: newVal,
 													},
 												};
@@ -3126,9 +3124,9 @@ function Html(props) {
 											{__("Choose Icon", "accordions")}
 										</label>
 										<PGIconPicker
-											library={icon.options.library}
-											srcType={icon.options.srcType}
-											iconSrc={icon.options.iconSrc}
+											library={icon?.options?.library}
+											srcType={icon?.options?.srcType}
+											iconSrc={icon?.options?.iconSrc}
 											onChange={(arg) => {
 												var iconX = { ...icon };
 
@@ -3149,9 +3147,9 @@ function Html(props) {
 											{__("Choose Toggle Icon", "accordions")}
 										</label>
 										<PGIconPicker
-											library={iconToggle.options.library}
-											srcType={iconToggle.options.srcType}
-											iconSrc={iconToggle.options.iconSrc}
+											library={iconToggle?.options?.library}
+											srcType={iconToggle?.options?.srcType}
+											iconSrc={iconToggle?.options?.iconSrc}
 											onChange={(arg) => {
 												var iconToggleX = { ...iconToggle };
 
@@ -3198,7 +3196,7 @@ function Html(props) {
 											values=""></PGDropdown>
 										{/* <SelectControl
 											label=""
-											value={icon.options.position}
+											value={icon?.options?.position}
 											options={[
 												{
 													label: __("Choose Position", "accordions"),
@@ -3225,13 +3223,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={icon.options.class}
+											value={icon?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...icon,
 													options: {
-														...icon.options,
+														...icon?.options,
 														class: newVal,
 													},
 												};
@@ -3248,10 +3246,10 @@ function Html(props) {
 											position="bottom right"
 											variant="secondary"
 											buttonTitle={
-												popupEntranceAnimateBasic[icon.options.inAnimation] ==
+												popupEntranceAnimateBasic[icon?.options?.inAnimation] ==
 													undefined
 													? __("Choose", "accordions")
-													: popupEntranceAnimateBasic[icon.options.inAnimation]
+													: popupEntranceAnimateBasic[icon?.options?.inAnimation]
 														.label
 											}
 											options={popupEntranceAnimateBasic}
@@ -3259,7 +3257,7 @@ function Html(props) {
 												var optionsX = {
 													...icon,
 													options: {
-														...icon.options,
+														...icon?.options,
 														inAnimation: newVal.value,
 													},
 												};
@@ -3276,10 +3274,10 @@ function Html(props) {
 											position="bottom right"
 											variant="secondary"
 											buttonTitle={
-												popupCloseAnimateBasic[icon.options.outAnimation] ==
+												popupCloseAnimateBasic[icon?.options?.outAnimation] ==
 													undefined
 													? __("Choose", "accordions")
-													: popupCloseAnimateBasic[icon.options.outAnimation]
+													: popupCloseAnimateBasic[icon?.options?.outAnimation]
 														.label
 											}
 											options={popupCloseAnimateBasic}
@@ -3287,7 +3285,7 @@ function Html(props) {
 												var optionsX = {
 													...icon,
 													options: {
-														...icon.options,
+														...icon?.options,
 														outAnimation: newVal.value,
 													},
 												};
@@ -3301,14 +3299,14 @@ function Html(props) {
 											{__("Animation duration", "accordions")}
 										</label>
 										<PGinputText
-											value={icon.options.animationDuration}
+											value={icon?.options?.animationDuration}
 											placeholder={"1000"}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[200px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...icon,
 													options: {
-														...icon.options,
+														...icon?.options,
 														animationDuration: newVal,
 													},
 												};
@@ -3378,13 +3376,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={iconToggle.options.class}
+											value={iconToggle?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...iconToggle,
 													options: {
-														...iconToggle.options,
+														...iconToggle?.options,
 														class: newVal,
 													},
 												};
@@ -3467,13 +3465,13 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={expandCollapseAll.options.class}
+										value={expandCollapseAll?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...expandCollapseAll,
 												options: {
-													...expandCollapseAll.options,
+													...expandCollapseAll?.options,
 													class: newVal,
 												},
 											};
@@ -3504,7 +3502,7 @@ function Html(props) {
 											var expandCollapseAllX = {
 												...expandCollapseAll,
 												options: {
-													...expandCollapseAll.options,
+													...expandCollapseAll?.options,
 													enable: newVal,
 												},
 											};
@@ -3512,7 +3510,7 @@ function Html(props) {
 										}}
 									/>
 								</PanelRow>
-								{expandCollapseAll.options?.enable == 1 && (
+								{expandCollapseAll?.options?.enable == 1 && (
 									<>
 										<PanelRow>
 											<label htmlFor="">Expand All Text</label>
@@ -3520,12 +3518,12 @@ function Html(props) {
 											<PGinputText
 												className="max-w-[140px]"
 												label=""
-												value={expandCollapseAll.options?.expandAllText}
+												value={expandCollapseAll?.options?.expandAllText}
 												onChange={(newVal) => {
 													var expandCollapseAllX = {
 														...expandCollapseAll,
 														options: {
-															...expandCollapseAll.options,
+															...expandCollapseAll?.options,
 															expandAllText: newVal,
 														},
 													};
@@ -3539,12 +3537,12 @@ function Html(props) {
 											<PGinputText
 												className="max-w-[140px]"
 												label=""
-												value={expandCollapseAll.options?.collapseAllText}
+												value={expandCollapseAll?.options?.collapseAllText}
 												onChange={(newVal) => {
 													var expandCollapseAllX = {
 														...expandCollapseAll,
 														options: {
-															...expandCollapseAll.options,
+															...expandCollapseAll?.options,
 															collapseAllText: newVal,
 														},
 													};
@@ -3558,12 +3556,12 @@ function Html(props) {
 											<PGinputText
 												className="max-w-[140px]"
 												label=""
-												value={expandCollapseAll.options?.delay}
+												value={expandCollapseAll?.options?.delay}
 												onChange={(newVal) => {
 													var expandCollapseAllX = {
 														...expandCollapseAll,
 														options: {
-															...expandCollapseAll.options,
+															...expandCollapseAll?.options,
 															delay: newVal,
 														},
 													};
@@ -3578,22 +3576,22 @@ function Html(props) {
 											</label>
 											<PGIconPicker
 												library={
-													expandCollapseAll.options?.expandAllIcon?.library ??
+													expandCollapseAll?.options?.expandAllIcon?.library ??
 													"fontAwesome"
 												}
 												srcType={
-													expandCollapseAll.options?.expandAllIcon?.srcType ??
+													expandCollapseAll?.options?.expandAllIcon?.srcType ??
 													"class"
 												}
 												iconSrc={
-													expandCollapseAll.options?.expandAllIcon?.iconSrc ??
+													expandCollapseAll?.options?.expandAllIcon?.iconSrc ??
 													"fas fa-plus"
 												}
 												onChange={(arg) => {
 													var expandCollapseAllX = {
 														...expandCollapseAll,
 														options: {
-															...expandCollapseAll.options,
+															...expandCollapseAll?.options,
 															expandAllIcon: arg,
 														},
 													};
@@ -3607,22 +3605,22 @@ function Html(props) {
 											</label>
 											<PGIconPicker
 												library={
-													expandCollapseAll.options?.collapseAllIcon?.library ??
+													expandCollapseAll?.options?.collapseAllIcon?.library ??
 													"fontAwesome"
 												}
 												srcType={
-													expandCollapseAll.options?.collapseAllIcon?.srcType ??
+													expandCollapseAll?.options?.collapseAllIcon?.srcType ??
 													"class"
 												}
 												iconSrc={
-													expandCollapseAll.options?.collapseAllIcon?.iconSrc ??
+													expandCollapseAll?.options?.collapseAllIcon?.iconSrc ??
 													"fas fa-minus"
 												}
 												onChange={(arg) => {
 													var expandCollapseAllX = {
 														...expandCollapseAll,
 														options: {
-															...expandCollapseAll.options,
+															...expandCollapseAll?.options,
 															collapseAllIcon: arg,
 														},
 													};
@@ -3725,7 +3723,7 @@ function Html(props) {
 											var optionsX = {
 												...topWrap,
 												options: {
-													...topWrap.options,
+													...topWrap?.options,
 													class: newVal,
 												},
 											};
@@ -3799,14 +3797,14 @@ function Html(props) {
 								onChange={(newVal) => {
 									var searchInputX = {
 										...searchInput,
-										options: { ...searchInput.options, enable: newVal },
+										options: { ...searchInput?.options, enable: newVal },
 									};
 									setsearchInput(searchInputX);
 								}}
 							/>
 						</PanelRow>
 
-						{searchInput.options.enable && (
+						{searchInput?.options?.enable && (
 							<PanelBody
 								className="font-medium text-slate-900 "
 								// title="Search Input"
@@ -3856,13 +3854,13 @@ function Html(props) {
 												{__("Class", "accordions")}
 											</label>
 											<PGinputText
-												value={searchInput.options.class}
+												value={searchInput?.options?.class}
 												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 												onChange={(newVal) => {
 													var optionsX = {
 														...searchInput,
 														options: {
-															...searchInput.options,
+															...searchInput?.options,
 															class: newVal,
 														},
 													};
@@ -3875,13 +3873,13 @@ function Html(props) {
 												{__("Placeholder", "accordions")}
 											</label>
 											<PGinputText
-												value={searchInput.options.placeholder}
+												value={searchInput?.options?.placeholder}
 												className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
 												onChange={(newVal) => {
 													var optionsX = {
 														...searchInput,
 														options: {
-															...searchInput.options,
+															...searchInput?.options,
 															placeholder: newVal,
 														},
 													};

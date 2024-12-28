@@ -42,7 +42,7 @@ function Html(props) {
 		post_content: accordionDefaultData,
 		post_title: "",
 	});
-	var [accordionData, setaccordionData] = useState(postData.post_content);
+	var [accordionData, setaccordionData] = useState(postData?.post_content);
 
 	var [isLoading, setisLoading] = useState(false);
 	var [pleaseUpdate, setpleaseUpdate] = useState(false);
@@ -454,7 +454,7 @@ function Html(props) {
 								]}>
 								<PGtab name="accordions">
 									<div className="relative p-3">
-										{postData.post_content == null && (
+										{postData?.post_content == null && (
 											<div className="p-3 my-5 bg-orange-400">
 												Please choose an accordion first.
 											</div>
@@ -473,9 +473,9 @@ function Html(props) {
 
 
 									<div className=" ">
-										{postData.ID != null && (
+										{postData?.ID != null && (
 											<>
-												{accordionData.globalOptions.viewType == "accordion" && (
+												{accordionData?.globalOptions?.viewType == "accordion" && (
 													<AccordionsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
@@ -484,7 +484,7 @@ function Html(props) {
 														setHelp={setHelp}
 													/>
 												)}
-												{accordionData.globalOptions.viewType == "tabs" && (
+												{accordionData?.globalOptions?.viewType == "tabs" && (
 													<TabsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
@@ -639,10 +639,10 @@ function Html(props) {
 				</div>
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
-						{(postData.ID == null || toggleSettings) && <AccordionsGuide addNotifications={addNotifications} customerData={customerData}
+						{(postData?.ID == null || toggleSettings) && <AccordionsGuide addNotifications={addNotifications} customerData={customerData}
 						/>}
 
-						{(!toggleSettings && postData.ID != null) && (
+						{(!toggleSettings && postData?.ID != null) && (
 							<AccordionsView
 								pleaseUpdate={pleaseUpdate}
 								onUpdate={onUpdateAccordion}
@@ -655,7 +655,7 @@ function Html(props) {
 							/>
 						)}
 
-						{postData.ID != null && (
+						{postData?.ID != null && (
 							<AccordionsGenerateCss
 								postData={postData}
 								onChange={onChangeStyle}

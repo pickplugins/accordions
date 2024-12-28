@@ -3131,6 +3131,39 @@ const columns = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/copy-small.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/copy-small.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const copySmall = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  fillRule: "evenodd",
+  clipRule: "evenodd",
+  d: "M5.625 5.5h9.75c.069 0 .125.056.125.125v9.75a.125.125 0 0 1-.125.125h-9.75a.125.125 0 0 1-.125-.125v-9.75c0-.069.056-.125.125-.125ZM4 5.625C4 4.728 4.728 4 5.625 4h9.75C16.273 4 17 4.728 17 5.625v9.75c0 .898-.727 1.625-1.625 1.625h-9.75A1.625 1.625 0 0 1 4 15.375v-9.75Zm14.5 11.656v-9H20v9C20 18.8 18.77 20 17.251 20H6.25v-1.5h11.001c.69 0 1.249-.528 1.249-1.219Z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (copySmall);
+//# sourceMappingURL=copy-small.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/icons/build-module/library/copy.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/copy.js ***!
@@ -3540,6 +3573,39 @@ const styles = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_p
 }));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (styles);
 //# sourceMappingURL=styles.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@wordpress/icons/build-module/library/trash.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/trash.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const trash = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  fillRule: "evenodd",
+  clipRule: "evenodd",
+  d: "M12 5.5A2.25 2.25 0 0 0 9.878 7h4.244A2.251 2.251 0 0 0 12 5.5ZM12 4a3.751 3.751 0 0 0-3.675 3H5v1.5h1.27l.818 8.997a2.75 2.75 0 0 0 2.739 2.501h4.347a2.75 2.75 0 0 0 2.738-2.5L17.73 8.5H19V7h-3.325A3.751 3.751 0 0 0 12 4Zm4.224 4.5H7.776l.806 8.861a1.25 1.25 0 0 0 1.245 1.137h4.347a1.25 1.25 0 0 0 1.245-1.137l.805-8.861Z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (trash);
+//# sourceMappingURL=trash.js.map
 
 /***/ }),
 
@@ -3984,11 +4050,6 @@ function Html(props) {
   var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
   var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
   var [topWrap, settopWrap] = useState(accordionData.topWrap);
-  var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
-  var [navItem, setnavItem] = useState(accordionData?.navItem);
-  var [activeNavItem, setactiveNavItem] = useState(accordionData?.activeNavItem);
-  var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
-  var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
   var [searchInput, setsearchInput] = useState(accordionData.searchInput);
   var [styleObj, setstyleObj] = useState({}); // Using the hook.
   const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
@@ -4431,7 +4492,7 @@ function Html(props) {
   }, "View Type?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
-    buttonTitle: viewTypeArgs[globalOptions.viewType]?.label,
+    buttonTitle: viewTypeArgs[globalOptions?.viewType]?.label,
     options: viewTypeArgs,
     onChange: (option, index) => {
       var globalOptionsX = {
@@ -4452,7 +4513,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
-    buttonTitle: globalOptions.itemSource == undefined ? "Item Source" : itemSources[globalOptions.itemSource]?.label,
+    buttonTitle: globalOptions?.itemSource == undefined ? "Item Source" : itemSources[globalOptions?.itemSource]?.label,
     options: itemSources,
     onChange: (option, index) => {
       var globalOptionsX = {
@@ -5165,8 +5226,10 @@ function Html(props) {
   })), globalOptions?.itemSource == "manual" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_sortablejs__WEBPACK_IMPORTED_MODULE_5__.ReactSortable, {
     list: items,
     handle: ".handle",
-    setList: item => {
-      setitems(item);
+    setList: itemsSorted => {
+      setTimeout(() => {
+        setitems(itemsSorted);
+      }, 200);
       addNotifications({
         title: "Items Sorted",
         content: "You just sorted items",
@@ -5186,7 +5249,7 @@ function Html(props) {
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, item?.headerLabelText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center gap-2"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
+      className: "handle  cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
       size: "20",
       fill: "#fff",
@@ -5317,9 +5380,9 @@ function Html(props) {
       htmlFor: "",
       className: "font-medium text-slate-900 "
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Label Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      library: item?.labelIcon?.options.library,
-      srcType: item?.labelIcon?.options.srcType,
-      iconSrc: item?.labelIcon?.options.iconSrc,
+      library: item?.labelIcon?.options?.library,
+      srcType: item?.labelIcon?.options?.srcType,
+      iconSrc: item?.labelIcon?.options?.iconSrc,
       onChange: arg => {
         if (isProFeature) {
           addNotifications({
@@ -5743,13 +5806,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: wrapper.options.class,
+    value: wrapper?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...wrapper,
         options: {
-          ...wrapper.options,
+          ...wrapper?.options,
           class: newVal
         }
       };
@@ -5792,13 +5855,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: content.options.class,
+    value: content?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...content,
         options: {
-          ...content.options,
+          ...content?.options,
           class: newVal
         }
       };
@@ -5824,7 +5887,7 @@ function Html(props) {
       var optionsX = {
         ...content,
         options: {
-          ...content.options,
+          ...content?.options,
           autoembed: newVal
         }
       };
@@ -5845,12 +5908,12 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"]
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_toggle__WEBPACK_IMPORTED_MODULE_20__["default"], {
-    value: content.options?.shortcodes,
+    value: content?.options?.shortcodes,
     onChange: newVal => {
       var optionsX = {
         ...content,
         options: {
-          ...content.options,
+          ...content?.options,
           shortcodes: newVal
         }
       };
@@ -5876,7 +5939,7 @@ function Html(props) {
       var optionsX = {
         ...content,
         options: {
-          ...content.options,
+          ...content?.options,
           wpautop: newVal
         }
       };
@@ -5888,7 +5951,7 @@ function Html(props) {
   }, "In Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
-    buttonTitle: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[content.options.inAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[content.options.inAnimation].label,
+    buttonTitle: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[content?.options?.inAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[content?.options?.inAnimation].label,
     options: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic,
     onChange: newVal => {
       if (isProFeature) {
@@ -5902,7 +5965,7 @@ function Html(props) {
       var optionsX = {
         ...content,
         options: {
-          ...content.options,
+          ...content?.options,
           inAnimation: newVal.value
         }
       };
@@ -5915,7 +5978,7 @@ function Html(props) {
   }, "Out Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
-    buttonTitle: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[content.options.outAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[content.options.outAnimation].label,
+    buttonTitle: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[content?.options?.outAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[content?.options?.outAnimation].label,
     options: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic,
     onChange: newVal => {
       if (isProFeature) {
@@ -5929,7 +5992,7 @@ function Html(props) {
       var optionsX = {
         ...content,
         options: {
-          ...content.options,
+          ...content?.options,
           outAnimation: newVal.value
         }
       };
@@ -5976,13 +6039,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: header.options.class,
+    value: header?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...header,
         options: {
-          ...header.options,
+          ...header?.options,
           class: newVal
         }
       };
@@ -6016,7 +6079,7 @@ function Html(props) {
       var optionsX = {
         ...header,
         options: {
-          ...header.options,
+          ...header?.options,
           toggleText: newVal
         }
       };
@@ -6059,13 +6122,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: headerActive.options.class,
+    value: headerActive?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...headerActive,
         options: {
-          ...headerActive.options,
+          ...headerActive?.options,
           class: newVal
         }
       };
@@ -6114,13 +6177,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: headerLabel.options.class,
+    value: headerLabel?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...headerLabel,
         options: {
-          ...headerLabel.options,
+          ...headerLabel?.options,
           class: newVal
         }
       };
@@ -6169,7 +6232,7 @@ function Html(props) {
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Counter position", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
     label: "",
-    value: labelCounter.options.position,
+    value: labelCounter?.options?.position,
     options: [{
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "accordions"),
       value: ""
@@ -6203,13 +6266,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: labelCounter.options.class,
+    value: labelCounter?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...labelCounter,
         options: {
-          ...labelCounter.options,
+          ...labelCounter?.options,
           class: newVal
         }
       };
@@ -6260,9 +6323,9 @@ function Html(props) {
     htmlFor: "",
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Label Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: labelIcon.options.library,
-    srcType: labelIcon.options.srcType,
-    iconSrc: labelIcon.options.iconSrc,
+    library: labelIcon?.options?.library,
+    srcType: labelIcon?.options?.srcType,
+    iconSrc: labelIcon?.options?.iconSrc,
     onChange: arg => {
       var labelIconX = {
         ...labelIcon
@@ -6281,7 +6344,7 @@ function Html(props) {
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Icon position", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
     label: "",
-    value: labelIcon.options.position,
+    value: labelIcon?.options?.position,
     options: [{
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Position", "accordions"),
       value: ""
@@ -6315,13 +6378,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: labelIcon.options.class,
+    value: labelIcon?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...labelIcon,
         options: {
-          ...labelIcon.options,
+          ...labelIcon?.options,
           class: newVal
         }
       };
@@ -6402,9 +6465,9 @@ function Html(props) {
     htmlFor: "",
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: icon.options.library,
-    srcType: icon.options.srcType,
-    iconSrc: icon.options.iconSrc,
+    library: icon?.options?.library,
+    srcType: icon?.options?.srcType,
+    iconSrc: icon?.options?.iconSrc,
     onChange: arg => {
       var iconX = {
         ...icon
@@ -6422,9 +6485,9 @@ function Html(props) {
     htmlFor: "",
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose Toggle Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: iconToggle.options.library,
-    srcType: iconToggle.options.srcType,
-    iconSrc: iconToggle.options.iconSrc,
+    library: iconToggle?.options?.library,
+    srcType: iconToggle?.options?.srcType,
+    iconSrc: iconToggle?.options?.iconSrc,
     onChange: arg => {
       var iconToggleX = {
         ...iconToggle
@@ -6473,13 +6536,13 @@ function Html(props) {
     className: "",
     htmlFor: ""
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: icon.options.class,
+    value: icon?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...icon,
         options: {
-          ...icon.options,
+          ...icon?.options,
           class: newVal
         }
       };
@@ -6491,13 +6554,13 @@ function Html(props) {
   }, "IN Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
-    buttonTitle: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[icon.options.inAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[icon.options.inAnimation].label,
+    buttonTitle: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[icon?.options?.inAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic[icon?.options?.inAnimation].label,
     options: _inAnimation__WEBPACK_IMPORTED_MODULE_18__.popupEntranceAnimateBasic,
     onChange: newVal => {
       var optionsX = {
         ...icon,
         options: {
-          ...icon.options,
+          ...icon?.options,
           inAnimation: newVal.value
         }
       };
@@ -6510,13 +6573,13 @@ function Html(props) {
   }, "OUT Animation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
     position: "bottom right",
     variant: "secondary",
-    buttonTitle: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[icon.options.outAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[icon.options.outAnimation].label,
+    buttonTitle: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[icon?.options?.outAnimation] == undefined ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Choose", "accordions") : _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic[icon?.options?.outAnimation].label,
     options: _outAnimation__WEBPACK_IMPORTED_MODULE_19__.popupCloseAnimateBasic,
     onChange: newVal => {
       var optionsX = {
         ...icon,
         options: {
-          ...icon.options,
+          ...icon?.options,
           outAnimation: newVal.value
         }
       };
@@ -6565,13 +6628,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: iconToggle.options.class,
+    value: iconToggle?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...iconToggle,
         options: {
-          ...iconToggle.options,
+          ...iconToggle?.options,
           class: newVal
         }
       };
@@ -6619,13 +6682,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: expandCollapseAll.options.class,
+    value: expandCollapseAll?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...expandCollapseAll,
         options: {
-          ...expandCollapseAll.options,
+          ...expandCollapseAll?.options,
           class: newVal
         }
       };
@@ -6651,23 +6714,23 @@ function Html(props) {
       var expandCollapseAllX = {
         ...expandCollapseAll,
         options: {
-          ...expandCollapseAll.options,
+          ...expandCollapseAll?.options,
           enable: newVal
         }
       };
       setexpandCollapseAll(expandCollapseAllX);
     }
-  })), expandCollapseAll.options?.enable == 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  })), expandCollapseAll?.options?.enable == 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
   }, "Expand All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "max-w-[140px]",
     label: "",
-    value: expandCollapseAll.options?.expandAllText,
+    value: expandCollapseAll?.options?.expandAllText,
     onChange: newVal => {
       var expandCollapseAllX = {
         ...expandCollapseAll,
         options: {
-          ...expandCollapseAll.options,
+          ...expandCollapseAll?.options,
           expandAllText: newVal
         }
       };
@@ -6678,12 +6741,12 @@ function Html(props) {
   }, "Collapse All Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "max-w-[140px]",
     label: "",
-    value: expandCollapseAll.options?.collapseAllText,
+    value: expandCollapseAll?.options?.collapseAllText,
     onChange: newVal => {
       var expandCollapseAllX = {
         ...expandCollapseAll,
         options: {
-          ...expandCollapseAll.options,
+          ...expandCollapseAll?.options,
           collapseAllText: newVal
         }
       };
@@ -6694,12 +6757,12 @@ function Html(props) {
   }, "Expand/Collapse All Delay"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "max-w-[140px]",
     label: "",
-    value: expandCollapseAll.options?.delay,
+    value: expandCollapseAll?.options?.delay,
     onChange: newVal => {
       var expandCollapseAllX = {
         ...expandCollapseAll,
         options: {
-          ...expandCollapseAll.options,
+          ...expandCollapseAll?.options,
           delay: newVal
         }
       };
@@ -6709,14 +6772,14 @@ function Html(props) {
     htmlFor: "",
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Expand All Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: (_expandCollapseAll$op = expandCollapseAll.options?.expandAllIcon?.library) !== null && _expandCollapseAll$op !== void 0 ? _expandCollapseAll$op : "fontAwesome",
-    srcType: (_expandCollapseAll$op2 = expandCollapseAll.options?.expandAllIcon?.srcType) !== null && _expandCollapseAll$op2 !== void 0 ? _expandCollapseAll$op2 : "class",
-    iconSrc: (_expandCollapseAll$op3 = expandCollapseAll.options?.expandAllIcon?.iconSrc) !== null && _expandCollapseAll$op3 !== void 0 ? _expandCollapseAll$op3 : "fas fa-plus",
+    library: (_expandCollapseAll$op = expandCollapseAll?.options?.expandAllIcon?.library) !== null && _expandCollapseAll$op !== void 0 ? _expandCollapseAll$op : "fontAwesome",
+    srcType: (_expandCollapseAll$op2 = expandCollapseAll?.options?.expandAllIcon?.srcType) !== null && _expandCollapseAll$op2 !== void 0 ? _expandCollapseAll$op2 : "class",
+    iconSrc: (_expandCollapseAll$op3 = expandCollapseAll?.options?.expandAllIcon?.iconSrc) !== null && _expandCollapseAll$op3 !== void 0 ? _expandCollapseAll$op3 : "fas fa-plus",
     onChange: arg => {
       var expandCollapseAllX = {
         ...expandCollapseAll,
         options: {
-          ...expandCollapseAll.options,
+          ...expandCollapseAll?.options,
           expandAllIcon: arg
         }
       };
@@ -6726,14 +6789,14 @@ function Html(props) {
     htmlFor: "",
     className: "font-medium text-slate-900 "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Collapse All Icon", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    library: (_expandCollapseAll$op4 = expandCollapseAll.options?.collapseAllIcon?.library) !== null && _expandCollapseAll$op4 !== void 0 ? _expandCollapseAll$op4 : "fontAwesome",
-    srcType: (_expandCollapseAll$op5 = expandCollapseAll.options?.collapseAllIcon?.srcType) !== null && _expandCollapseAll$op5 !== void 0 ? _expandCollapseAll$op5 : "class",
-    iconSrc: (_expandCollapseAll$op6 = expandCollapseAll.options?.collapseAllIcon?.iconSrc) !== null && _expandCollapseAll$op6 !== void 0 ? _expandCollapseAll$op6 : "fas fa-minus",
+    library: (_expandCollapseAll$op4 = expandCollapseAll?.options?.collapseAllIcon?.library) !== null && _expandCollapseAll$op4 !== void 0 ? _expandCollapseAll$op4 : "fontAwesome",
+    srcType: (_expandCollapseAll$op5 = expandCollapseAll?.options?.collapseAllIcon?.srcType) !== null && _expandCollapseAll$op5 !== void 0 ? _expandCollapseAll$op5 : "class",
+    iconSrc: (_expandCollapseAll$op6 = expandCollapseAll?.options?.collapseAllIcon?.iconSrc) !== null && _expandCollapseAll$op6 !== void 0 ? _expandCollapseAll$op6 : "fas fa-minus",
     onChange: arg => {
       var expandCollapseAllX = {
         ...expandCollapseAll,
         options: {
-          ...expandCollapseAll.options,
+          ...expandCollapseAll?.options,
           collapseAllIcon: arg
         }
       };
@@ -6787,7 +6850,7 @@ function Html(props) {
       var optionsX = {
         ...topWrap,
         options: {
-          ...topWrap.options,
+          ...topWrap?.options,
           class: newVal
         }
       };
@@ -6834,13 +6897,13 @@ function Html(props) {
       var searchInputX = {
         ...searchInput,
         options: {
-          ...searchInput.options,
+          ...searchInput?.options,
           enable: newVal
         }
       };
       setsearchInput(searchInputX);
     }
-  })), searchInput.options.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+  })), searchInput?.options?.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
     className: "font-medium text-slate-900 "
     // title="Search Input"
     ,
@@ -6878,13 +6941,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Class", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: searchInput.options.class,
+    value: searchInput?.options?.class,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...searchInput,
         options: {
-          ...searchInput.options,
+          ...searchInput?.options,
           class: newVal
         }
       };
@@ -6896,13 +6959,13 @@ function Html(props) {
     className: "",
     htmlFor: "emailVerification"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Placeholder", "accordions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    value: searchInput.options.placeholder,
+    value: searchInput?.options?.placeholder,
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]",
     onChange: newVal => {
       var optionsX = {
         ...searchInput,
         options: {
-          ...searchInput.options,
+          ...searchInput?.options,
           placeholder: newVal
         }
       };
@@ -8058,7 +8121,7 @@ function Html(props) {
   }, [props.postData]);
   useEffect(() => {
     setaccordionData(postData.post_content);
-    setitems(postData.post_content.items);
+    //setitems(postData.post_content.items);
   }, [postData]);
   useEffect(() => {
     setglobalOptions(accordionData.globalOptions);
@@ -8077,11 +8140,9 @@ function Html(props) {
     setexpandCollapseAll(accordionData.expandCollapseAll);
   }, [accordionData]);
   useEffect(() => {
-    var accordionDataX = {
-      ...accordionData
-    };
-    accordionDataX.items = items;
-    onChange(accordionDataX);
+    //var accordionDataX = { ...accordionData };
+    //accordionDataX.items = items;
+    //onChange(accordionDataX);
   }, [items]);
   useEffect(() => {
     setpleaseUpdateX(pleaseUpdate);
@@ -8152,13 +8213,13 @@ function Html(props) {
     className: `${wrapper?.options?.class} `
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "top-wrap"
-  }, searchInput.options.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, searchInput?.options.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "search-wrap"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
     class: "search-input",
-    placeholder: searchInput.options.placeholder
-  })), expandCollapseAll.options.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    placeholder: searchInput?.options?.placeholder
+  })), expandCollapseAll?.options?.enable && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "expand-collapse-all",
     "data-expandAllText": "",
     "data-collapseAllText": "",
@@ -8169,18 +8230,18 @@ function Html(props) {
     dangerouslySetInnerHTML: {
       __html: iconExpandAllHtml
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, expandCollapseAll.options?.expandAllText))), items?.map((item, index) => {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, expandCollapseAll?.options?.expandAllText))), items?.map((item, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: index
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `accordion-header ${header.options.class} ${active == index ? "accordion-header-active" : ""}`,
+      className: `accordion-header ${header?.options.class} ${active == index ? "accordion-header-active" : ""}`,
       onClick: ev => {
         setToggled(!toggled);
         setactive(index == active ? 999 : index);
       }
-    }, labelCounter.options.position == "left" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, labelCounter?.options.position == "left" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-counter`
-    }, index), icon.options.position == "left" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, active != index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, index), icon?.options.position == "left" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, active != index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-icon`,
       dangerouslySetInnerHTML: {
         __html: iconHtml
@@ -8190,7 +8251,7 @@ function Html(props) {
       dangerouslySetInnerHTML: {
         __html: iconToggleHtml
       }
-    })), labelIcon.options.position == "beforeLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })), labelIcon?.options.position == "beforeLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
@@ -8205,9 +8266,9 @@ function Html(props) {
       onClick: e => {
         return;
       }
-    }, labelCounter.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, labelCounter?.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-counter`
-    }, index), labelIcon.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, index), labelIcon?.options.position == "beforeLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
@@ -8222,7 +8283,7 @@ function Html(props) {
       dangerouslySetInnerHTML: {
         __html: item?.headerLabelText
       }
-    })) : "Start Writing...", labelIcon.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })) : "Start Writing...", labelIcon?.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
@@ -8232,9 +8293,9 @@ function Html(props) {
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
-    })), labelCounter.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })), labelCounter?.options.position == "afterLabelText" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-counter`
-    }, index)), labelIcon.options.position == "afterLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, index)), labelIcon?.options.position == "afterLabel" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item?.labelIcon?.options.iconSrc && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-icon`,
       dangerouslySetInnerHTML: {
         __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>`
@@ -8244,9 +8305,9 @@ function Html(props) {
       dangerouslySetInnerHTML: {
         __html: labelIconHtml
       }
-    })), labelCounter.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    })), labelCounter?.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-label-counter`
-    }, index), icon.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, active != index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, index), icon?.options.position == "right" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, active != index && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: ` accordion-icon`,
       dangerouslySetInnerHTML: {
         __html: iconHtml
@@ -36754,7 +36815,7 @@ function Html(props) {
     post_content: _accordion_default_data__WEBPACK_IMPORTED_MODULE_13__["default"],
     post_title: ""
   });
-  var [accordionData, setaccordionData] = useState(postData.post_content);
+  var [accordionData, setaccordionData] = useState(postData?.post_content);
   var [isLoading, setisLoading] = useState(false);
   var [pleaseUpdate, setpleaseUpdate] = useState(false);
   const [optionData, setoptionData] = useState({});
@@ -37118,7 +37179,7 @@ function Html(props) {
     name: "accordions"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "relative p-3"
-  }, postData.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, postData?.post_content == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3 my-5 bg-orange-400"
   }, "Please choose an accordion first."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wcps_list__WEBPACK_IMPORTED_MODULE_12__["default"], {
     addNotifications: addNotifications,
@@ -37129,13 +37190,13 @@ function Html(props) {
     name: "edit"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " "
-  }, postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, accordionData.globalOptions.viewType == "accordion" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, postData?.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, accordionData?.globalOptions?.viewType == "accordion" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_edit__WEBPACK_IMPORTED_MODULE_7__["default"], {
     onChange: onChangeAccordion,
     addNotifications: addNotifications,
     postData: postData,
     customerData: customerData,
     setHelp: setHelp
-  }), accordionData.globalOptions.viewType == "tabs" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_edit_tabs__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), accordionData?.globalOptions?.viewType == "tabs" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_edit_tabs__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onChange: onChangeAccordion,
     addNotifications: addNotifications,
     postData: postData,
@@ -37228,10 +37289,10 @@ function Html(props) {
     className: "w-full sticky top-0 overflow-y-scroll"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "  relative"
-  }, (postData.ID == null || toggleSettings) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_guide__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, (postData?.ID == null || toggleSettings) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_guide__WEBPACK_IMPORTED_MODULE_8__["default"], {
     addNotifications: addNotifications,
     customerData: customerData
-  }), !toggleSettings && postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), !toggleSettings && postData?.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_accordions_view__WEBPACK_IMPORTED_MODULE_9__["default"], {
     pleaseUpdate: pleaseUpdate,
     onUpdate: onUpdateAccordion,
     isLoading: isLoading,
@@ -37240,7 +37301,7 @@ function Html(props) {
     id: activeAccordion,
     addNotifications: addNotifications,
     setHelp: setHelp
-  }), postData.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_generate_css__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), postData?.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_generate_css__WEBPACK_IMPORTED_MODULE_15__["default"], {
     postData: postData,
     onChange: onChangeStyle
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_notify__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -44822,6 +44883,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/add-card.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/help.js");
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/check.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/copy-small.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/trash.js");
 /* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
 
 const {
@@ -44854,7 +44917,20 @@ function Html(props) {
   }); // Using the hook.
   var [dataLoaded, setdataLoaded] = useState(false); // Using the hook.
   var [isLoading, setisLoading] = useState(false); // Using the hook.
+  var [deleteConfirm, setdeleteConfirm] = useState({
+    id: "",
+    confirm: false
+  }); // Using the hook.
 
+  const copyData = data => {
+    navigator.clipboard.writeText(data).then(() => {
+      addNotifications({
+        title: "Copied to clipboard!",
+        content: "Use the shortcode in page or post conent where you want to display.",
+        type: "success"
+      });
+    }).catch(err => {});
+  };
   var queryArgs = [{
     "id": "postType",
     "val": ["accordions"]
@@ -44932,16 +45008,92 @@ function Html(props) {
         });
       }
       if (res.success) {
-        posts.unshift({
+        var postsX = [...posts];
+        postsX.unshift({
           ID: res.id,
           post_content: "",
           post_author: 0,
           post_title: searchPrams.search
         });
+        setPosts(postsX);
         addNotifications({
           title: "Accordion Create!",
           content: res.successMessage,
           type: "success"
+        });
+      }
+      setisLoading(false);
+      if (res.status) {}
+    });
+  }
+  function duplicate_post(postId) {
+    setisLoading(true);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
+      path: "/accordions/v2/duplicate_post",
+      method: "POST",
+      data: {
+        postId: postId
+      }
+    }).then(res => {
+      if (res.error) {
+        addNotifications({
+          title: "There is an Error!",
+          content: res.errorMessage,
+          type: "error"
+        });
+      }
+      if (res.success) {
+        console.log(res);
+        var postsX = [...posts];
+        postsX.unshift({
+          ID: res.id,
+          post_title: res.post_title
+        });
+        setPosts(postsX);
+        addNotifications({
+          title: "Accordion duplicated!",
+          content: res.successMessage,
+          type: "success"
+        });
+      }
+      setisLoading(false);
+      if (res.status) {}
+    });
+  }
+  function delete_post(postId, index) {
+    if (!deleteConfirm) {
+      return;
+    }
+    setisLoading(true);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
+      path: "/accordions/v2/delete_post",
+      method: "POST",
+      data: {
+        postId: postId
+      }
+    }).then(res => {
+      if (res.error) {
+        addNotifications({
+          title: "There is an Error!",
+          content: res.errorMessage,
+          type: "error"
+        });
+      }
+      if (res.success) {
+        console.log(res);
+        var postsX = [...posts];
+        postsX.splice(index, 1);
+        setPosts(postsX);
+        //posts.unshift({ ID: res.id, post_title: res.post_title });
+
+        addNotifications({
+          title: "Accordion deleted!",
+          content: res.successMessage,
+          type: "success"
+        });
+        setdeleteConfirm({
+          id: "",
+          confirm: false
         });
       }
       setisLoading(false);
@@ -44990,7 +45142,9 @@ function Html(props) {
     className: "p-3 my-5 bg-orange-400 "
   }, "No Items, Please Create First One!"), posts != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((item, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex justify-between align-middle items-center p-3 border-0 border-b border-solid border-[#ddd] hover:bg-slate-300 cursor-pointer",
+      className: "border-0 border-b border-solid border-[#ddd]"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex justify-between align-middle items-center p-3  hover:bg-slate-300 cursor-pointer",
       key: index,
       onClick: ev => {
         selectAccordion(item.ID);
@@ -45002,13 +45156,46 @@ function Html(props) {
       }
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "text-base mb-2"
-    }, item.post_title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "text-sm flex items-center gap-2"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "text-xs"
-    }, `(#${item.ID})`))), activeAccordion == item.ID && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, item.post_title)), activeAccordion == item.ID && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"]
-    })));
+    }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: " px-3 flex flex-wrap align-middle items-center text-xs gap-3 my-2"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: ""
+    }, "#", item.ID), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "cursor-pointer flex items-center",
+      onClick: ev => {
+        duplicate_post(item.ID);
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      size: "20"
+    }), "Duplicate"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "cursor-pointer text-red-700 flex items-center",
+      title: "Delete Post",
+      onClick: ev => {
+        setdeleteConfirm({
+          id: item.ID,
+          confirm: true
+        });
+        if (deleteConfirm.confirm) {
+          delete_post(item.ID, index);
+        }
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+      size: "20"
+    }), deleteConfirm.id == item.ID && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, deleteConfirm && "Confirm"), deleteConfirm.id != item.ID && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, deleteConfirm && "Delete")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "cursor-pointer flex items-center",
+      title: "Copy Shortcodes",
+      onClick: () => {
+        var str = `[accordions_builder id="${item.ID}"]`;
+        copyData(str);
+      }
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+      size: "20"
+    }), " Shortcode")));
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex py-5 justify-between px-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -50822,11 +51009,15 @@ class APIClient {
         if (signal)
             signal.addEventListener('abort', () => controller.abort());
         const timeout = setTimeout(() => controller.abort(), ms);
-        return (
-        // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
-        this.fetch.call(undefined, url, { signal: controller.signal, ...options }).finally(() => {
+        return (this.getRequestClient()
+            // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
+            .fetch.call(undefined, url, { signal: controller.signal, ...options })
+            .finally(() => {
             clearTimeout(timeout);
         }));
+    }
+    getRequestClient() {
+        return { fetch: this.fetch };
     }
     shouldRetry(response) {
         // Note this is not a standard header.
@@ -56906,7 +57097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.76.1'; // x-release-please-version
+const VERSION = '4.74.0'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })

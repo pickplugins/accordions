@@ -4,7 +4,7 @@
 	Tags: accordion, tabs, AI FAQ, WooCommerce FAQ Tab, accordions
 	Requires at least: 3.8
 	Tested up to: 6.7
-	Stable tag: 2.3.3
+	Stable tag: 2.3.4
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,10 @@ then paste this shortcode anywhere in your page to display accordions<br />
 == Changelog ==
 
 
+
+	= 2.3.3 =
+    * 2024-12-28 - add - Accordions Builder - added duplicate, delete feature in accordions list items
+    * 2024-12-28 - add - Accordions Builder - added copy shortcode in list items
 
 	= 2.3.3 =
     * 2024-12-27 - fix - js error issue fixed.

@@ -15,13 +15,39 @@ class AccordionsRest
 	public function register_routes()
 	{
 
+
+
+		register_rest_route(
+			'accordions/v2',
+			'/delete_post',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'delete_post'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'accordions/v2',
+			'/duplicate_post',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'duplicate_post'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 		register_rest_route(
 			'accordions/v2',
 			'/post_type_objects',
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'get_post_type_objects'),
-				'permission_callback' => '__return_true',
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
 			)
 		);
 
@@ -213,6 +239,130 @@ class AccordionsRest
 	}
 
 
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function duplicate_post($post_data)
+	{
+
+		$postId = isset($post_data['postId']) ? sanitize_text_field($post_data['postId']) : '';
+		$response = new stdClass();
+
+
+		if (empty($postId)) {
+			$response->error = true;
+			$response->errorMessage = __("Post ID should not empty");
+			die(wp_json_encode($response));
+		}
+
+		$post = get_post($postId);
+
+		if ($post->post_type != 'accordions') {
+			$response->error = true;
+			$response->errorMessage = __("Post type is not accordions");
+			die(wp_json_encode($response));
+		}
+
+		$current_user = wp_get_current_user();
+		$new_post_author = $current_user->ID;
+
+
+		if (isset($post) && $post != null) {
+
+			/*
+		 * new post data array
+		 */
+			$args = array(
+				'comment_status' => $post->comment_status,
+				'ping_status'    => $post->ping_status,
+				'post_author'    => $new_post_author,
+				'post_content'   => $post->post_content,
+				'post_excerpt'   => $post->post_excerpt,
+				'post_name'      => $post->post_name,
+				'post_parent'    => $post->post_parent,
+				'post_password'  => $post->post_password,
+				'post_status'    => 'publish',
+				'post_title'     => $post->post_title . ' - Copy of #' . $postId,
+				'post_type'      => $post->post_type,
+				'to_ping'        => $post->to_ping,
+				'menu_order'     => $post->menu_order
+			);
+
+			/*
+		 * insert the post by wp_insert_post() function
+		 */
+			$new_post_id = wp_insert_post($args);
+
+			if ($new_post_id) {
+				$response->post_title = $post->post_title . ' - Copy of #' . $postId;
+				$response->success = true;
+				$response->successMessage = __("Post created");
+			}
+			$response->id = $new_post_id;
+		} else {
+			$response->error = true;
+			$response->errorMessage = __("Post creation failed.");
+		}
+
+
+
+
+
+		die(wp_json_encode($response));
+	}
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function delete_post($post_data)
+	{
+
+		$postId = isset($post_data['postId']) ? sanitize_text_field($post_data['postId']) : '';
+		$response = new stdClass();
+
+
+		if (empty($postId)) {
+			$response->error = true;
+			$response->errorMessage = __("Post ID should not empty");
+			die(wp_json_encode($response));
+		}
+
+		$post = get_post($postId);
+
+		if ($post->post_type != 'accordions') {
+			$response->error = true;
+			$response->errorMessage = __("Post type is not accordions");
+			die(wp_json_encode($response));
+		}
+
+
+		if (isset($post) && $post != null) {
+
+			$new_post_id = wp_delete_post($postId);
+
+			if ($new_post_id) {
+				$response->success = true;
+				$response->successMessage = __("Post deleted");
+			}
+		} else {
+			$response->error = true;
+			$response->errorMessage = __("Post deletion failed.");
+		}
+
+
+
+
+
+		die(wp_json_encode($response));
+	}
 
 
 	/**
