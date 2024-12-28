@@ -4374,17 +4374,17 @@ function Html(props) {
     manual: {
       label: "Manual",
       value: "manual"
-    },
-    posts: {
-      label: "Posts",
-      value: "posts",
-      isPro: customerData.isPro ? false : true
-    },
-    terms: {
-      label: "Terms",
-      value: "terms",
-      isPro: customerData.isPro ? false : true
     }
+    // posts: {
+    // 	label: "Posts",
+    // 	value: "posts",
+    // 	isPro: customerData.isPro ? false : true,
+    // },
+    // terms: {
+    // 	label: "Terms",
+    // 	value: "terms",
+    // 	isPro: customerData.isPro ? false : true,
+    // },
   };
   var iconSets = [{
     idle: "",
