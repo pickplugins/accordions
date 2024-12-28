@@ -141,9 +141,9 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 
-	= 2.3.3 =
-    * 2024-12-28 - add - Accordions Builder - added duplicate, delete feature in accordions list items
-    * 2024-12-28 - add - Accordions Builder - added copy shortcode in list items
+	= 2.3.4 =
+    * 2024-12-28 - add - Accordions Builder - added duplicate, delete feature, copy shortcode in accordions list items
+    * 2024-12-28 - add - Accordions Builder - Sorting items infinite loop issue fixed.
 
 	= 2.3.3 =
     * 2024-12-27 - fix - js error issue fixed.
