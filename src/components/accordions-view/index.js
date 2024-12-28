@@ -309,7 +309,7 @@ function Html(props) {
 												)}
 											</>
 										)}
-										{item.headerLabel?.options.text.length > 0 ? (
+										{item?.headerLabelText.length > 0 ? (
 											<>
 												<span
 													className={``}
