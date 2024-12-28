@@ -455,29 +455,46 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
 
-			var items = [];
+			// var items = [];
 
 
 
-			accordionHeaders.forEach((header, i) => {
+			// accordionHeaders.forEach((header, i) => {
 
-				items.push(i)
-			});
+			// 	items.push(i)
+			// });
+
+			//console.log(items);
+
+			let currentIndex = 0;
 
 
-			var currentIndex = 0;
+			const items = [1, 2, 3, 4, 5, 6, 7];
+			//let currentIndex = 0;
 
 			function loopThroughItems() {
-
-
-				currentIndex = (currentIndex + 1) % items.length; // Move to the next index
-
-
-
-				setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
-
-				window.pgAccordion.switch(currentIndex)
+				console.log(items[currentIndex]); // Print the current item
+				currentIndex = (currentIndex + 1) % items.length; // Move to the next index (looping back to 0 after reaching the end)
+				setTimeout(loopThroughItems, 1000); // Recursively call after 1 second
 			}
+
+
+
+
+
+
+
+
+			// function loopThroughItems() {
+			// 	console.log(items[currentIndex]); // Print the current item
+
+
+			// 	currentIndex = (currentIndex + 1) % items.length; // Move to the next index
+
+			// 	setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
+
+			// 	window.pgAccordion.switch(currentIndex)
+			// }
 
 			currentIndex = items.length;
 			function loopThroughItemsReverse() {

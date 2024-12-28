@@ -134,7 +134,10 @@ function Html(props) {
 	return (
 		<div id="requestTemplate" className="pg-setting-input-text">
 
-
+			<div className='flex items-end justify-end gap-2'>
+				<a className='bg-slate-400 px-4 py-2 rounded-sm' target='_blank' href="https://wordpress.org/support/plugin/accordions/#new-topic-0">Create Ticket at wordpress.org</a>
+				<a className='bg-slate-400 px-4 py-2 rounded-sm' target='_blank' href="https://pickplugins.com/create-support-ticket/">Create Ticket at our site</a>
+			</div>
 
 			<div className="grid grid-cols-2 gap-5 items-center">
 				<div>
