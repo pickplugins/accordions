@@ -7552,8 +7552,14 @@ function Html(props) {
   }, "Accordions"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-base"
   }, "By PickPlugins")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-3 flex items-center gap-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "font-mono text-sm"
-  }, "Version: 2.3.2")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Version: 2.3.2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    className: " ",
+    href: "https://pickplugins.com/demo/accordions/",
+    target: "_blank"
+  }, "Live Demo"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 max-w-52"
@@ -7885,7 +7891,7 @@ function Html(props) {
   }, "Secure Payment by", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "font-bold"
   }, "Lemon Squeezy")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-3 gap-4"
+    className: "grid grid-cols-3 gap-5 mx-10"
   }, _testimonial__WEBPACK_IMPORTED_MODULE_6__.testimonial.map((item, i) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: i,
     className: " flex flex-col text-center"

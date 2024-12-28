@@ -321,7 +321,7 @@ function Html(props) {
 					type: "success",
 				});
 			})
-			.catch((err) => {});
+			.catch((err) => { });
 	};
 
 	return (
@@ -332,9 +332,24 @@ function Html(props) {
 						<span className="text-4xl font-extrabold">Accordions</span>{" "}
 						<span className="text-base">By PickPlugins</span>
 					</div>
-					<div className="font-mono text-sm">Version: 2.3.2</div>
+
+
+					<div className="my-3 flex items-center gap-3">
+						<div className="font-mono text-sm">Version: 2.3.2</div>
+						<a
+							className=" "
+							href="https://pickplugins.com/demo/accordions/"
+							target="_blank">
+							Live Demo
+						</a>
+
+					</div>
 				</div>
 				<div className="">
+
+
+
+
 					<div className="my-4 max-w-52">
 						Help us by providing your feedbacks and five star reviews on
 						wordpress.org 🌟🌟🌟🌟🌟
@@ -357,7 +372,7 @@ function Html(props) {
 				navItemClass=" px-5 py-3 gap-2 rounded-t-md"
 				navItemSelectedClass="!bg-white border-2  border-b-0 border-solid  border-blue-700"
 				activeClass="active-tab"
-				onSelect={(tabName) => {}}
+				onSelect={(tabName) => { }}
 				tabs={[
 					{
 						name: "overview",
@@ -611,7 +626,7 @@ function Html(props) {
 						navItemClass=" px-5 py-3 gap-2 rounded-md"
 						navItemSelectedClass="!bg-white border-2  border-solid  border-blue-700"
 						activeClass="active-tab"
-						onSelect={(tabName) => {}}
+						onSelect={(tabName) => { }}
 						tabs={[
 							{
 								name: "yearly",
@@ -775,7 +790,7 @@ function Html(props) {
 						</div>
 					</div>
 
-					<div className="grid grid-cols-3 gap-4">
+					<div className="grid grid-cols-3 gap-5 mx-10">
 						{testimonial.map((item, i) => (
 							<div key={i} className=" flex flex-col text-center">
 								<p className="bg-white shadow-lg rounded-lg p-6 text-left text-gray-600">
