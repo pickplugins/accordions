@@ -89,7 +89,7 @@ function Html(props) {
 		{
 			"id": "postStatus",
 			"val": [
-				"any"
+				"publish"
 			]
 		},
 		{

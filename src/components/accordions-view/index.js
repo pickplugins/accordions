@@ -216,7 +216,7 @@ function Html(props) {
 			<div className="px-10 py-10">
 
 
-				<div className={`${wrapper?.options?.class} `}>
+				<div id={`accordions-${id}`} className={`${wrapper?.options?.class} `}>
 
 					<div className="top-wrap">
 						{searchInput?.options.enable && (

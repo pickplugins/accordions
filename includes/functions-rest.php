@@ -346,7 +346,7 @@ class AccordionsRest
 
 		if (isset($post) && $post != null) {
 
-			$new_post_id = wp_delete_post($postId);
+			$new_post_id = wp_trash_post($postId, false);
 
 			if ($new_post_id) {
 				$response->success = true;
@@ -803,7 +803,7 @@ class AccordionsRest
 	{
 
 		$postTitle = isset($post_data['postTitle']) ? sanitize_text_field($post_data['postTitle']) : '';
-		$content = isset($post_data['content']) ? sanitize_text_field($post_data['content']) : '';
+		$content = isset($post_data['content']) ? wp_kses_post($post_data['content']) : '';
 		$response = new stdClass();
 
 		if (empty($postTitle)) {
@@ -817,6 +817,7 @@ class AccordionsRest
 			'post_title' => ($postTitle),
 			'post_content' => ($content),
 			'post_type' => "accordions",
+			'post_status' => "publish",
 		);
 
 		// Update the post into the database

@@ -221,7 +221,7 @@ function Html(props) {
 							<div className="flex items-center align-middle gap-3">
 								<div className="text-xl text-white">Accordions</div>
 								<div className="text-xs text-white flex items-center gap-2">
-									<span>2.3.2</span>{" "}
+									<span>2.3.5</span>{" "}
 									<span className="bg-lime-600 px-3 py-1 rounded-md">Beta</span>
 								</div>
 							</div>
