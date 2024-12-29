@@ -4138,6 +4138,13 @@ function Html(props) {
     var accordionDataX = {
       ...accordionData
     };
+    accordionDataX.itemQueryArgs = itemQueryArgs;
+    setaccordionData(accordionDataX);
+  }, [itemQueryArgs]);
+  useEffect(() => {
+    var accordionDataX = {
+      ...accordionData
+    };
     accordionDataX.wrapper = wrapper;
     setaccordionData(accordionDataX);
   }, [wrapper]);
@@ -4336,7 +4343,9 @@ function Html(props) {
     }
   };
   const updatePostQueryArgs = (newVal, index) => {
-    var itemQueryArgsX = [...itemQueryArgs];
+    var itemQueryArgsX = {
+      ...itemQueryArgs
+    };
     itemQueryArgsX[index].value = newVal;
     setitemQueryArgs(itemQueryArgsX);
   };
@@ -4419,8 +4428,19 @@ function Html(props) {
       longDescription: "Meta value or values to filter by."
     }
   };
+  var easyAccordionQueryArgs = {
+    postId: {
+      value: "",
+      id: "postId",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Post Id", "accordions"),
+      description: "",
+      longDescription: ""
+    }
+  };
   const updateTermQueryArgs = (newVal, index) => {
-    var itemQueryArgsX = [...itemQueryArgs];
+    var itemQueryArgsX = {
+      ...itemQueryArgs
+    };
     itemQueryArgsX[index].value = newVal;
     setitemQueryArgs(itemQueryArgsX);
   };
@@ -4435,17 +4455,21 @@ function Html(props) {
     manual: {
       label: "Manual",
       value: "manual"
+    },
+    easyAccordion: {
+      label: "Easy Accordion - FAQ Group",
+      value: "easyAccordion"
+    },
+    posts: {
+      label: "Posts",
+      value: "posts",
+      isPro: customerData.isPro ? false : true
+    },
+    terms: {
+      label: "Terms",
+      value: "terms",
+      isPro: customerData.isPro ? false : true
     }
-    // posts: {
-    // 	label: "Posts",
-    // 	value: "posts",
-    // 	isPro: customerData.isPro ? false : true,
-    // },
-    // terms: {
-    // 	label: "Terms",
-    // 	value: "terms",
-    // 	isPro: customerData.isPro ? false : true,
-    // },
   };
   var iconSets = [{
     idle: "",
@@ -4542,11 +4566,13 @@ function Html(props) {
     buttonTitle: "Add Query",
     options: postQueryArgs,
     onChange: (option, index) => {
-      var itemQueryArgsX = [...itemQueryArgs];
-      itemQueryArgsX.push({
+      var itemQueryArgsX = {
+        ...itemQueryArgs
+      };
+      itemQueryArgsX[option.id] = {
         id: option.id,
         value: option.value
-      });
+      };
       setitemQueryArgs(itemQueryArgsX);
     },
     values: ""
@@ -4567,11 +4593,41 @@ function Html(props) {
     buttonTitle: "Add Query",
     options: termQueryArgs,
     onChange: (option, index) => {
-      var itemQueryArgsX = [...itemQueryArgs];
-      itemQueryArgsX.push({
+      console.log(option);
+      var itemQueryArgsX = {
+        ...itemQueryArgs
+      };
+      itemQueryArgsX[option.id] = {
         id: option.id,
         value: option.value
+      };
+      setitemQueryArgs(itemQueryArgsX);
+    },
+    values: ""
+  })), globalOptions?.itemSource == "easyAccordion" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "cursor-pointer",
+    title: "Click to know more",
+    onClick: () => {
+      setHelp({
+        id: "addTermQuery",
+        enable: true
       });
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Icon, {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"]
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_dropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    position: "bottom right",
+    variant: "secondary",
+    buttonTitle: "Add Query",
+    options: easyAccordionQueryArgs,
+    onChange: (option, index) => {
+      var itemQueryArgsX = {
+        ...itemQueryArgs
+      };
+      itemQueryArgsX[option.id] = {
+        id: option.id,
+        value: option.value
+      };
       setitemQueryArgs(itemQueryArgsX);
     },
     values: ""
@@ -4799,7 +4855,9 @@ function Html(props) {
 
       //setAttributes({ itemsX: { ...itemsX, items: itemx } });
     }
-  }))))))), globalOptions?.itemSource == "posts" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, itemQueryArgs?.map((item, index) => {
+  }))))))), globalOptions?.itemSource == "posts" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, Object.entries(itemQueryArgs)?.map(prams => {
+    var index = prams[0];
+    var item = prams[1];
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: index,
       className: "my-4"
@@ -4813,7 +4871,7 @@ function Html(props) {
       options: postTypes,
       multiple: true,
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "postStatus" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "postStatus" ? "flex items-center justify-between" : "hidden"
@@ -4852,7 +4910,7 @@ function Html(props) {
       }],
       multiple: true,
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "order" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "order" ? "flex items-center justify-between" : "hidden"
@@ -4935,7 +4993,7 @@ function Html(props) {
       }],
       multiple: true,
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "metaKey" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center justify-between"
@@ -4944,7 +5002,7 @@ function Html(props) {
     }, "Meta Key"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
       value: item.value,
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "metaValue" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center justify-between"
@@ -4953,7 +5011,7 @@ function Html(props) {
     }, "Meta Value"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
       value: item.value,
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "metaValueNum" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center justify-between"
@@ -4962,7 +5020,7 @@ function Html(props) {
     }, "Meta Value Number"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
       value: item.value,
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "s" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center justify-between"
@@ -4971,7 +5029,7 @@ function Html(props) {
     }, "Keyword"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
       value: item.value,
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "metaCompare" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "metaCompare" ? "flex items-center justify-between" : "hidden"
@@ -5034,10 +5092,12 @@ function Html(props) {
         value: "RLIKE"
       }],
       onChange: newVal => {
-        updatePostQueryArgs(newVal, index);
+        updatePostQueryArgs(newVal, item.id);
       }
     })));
-  })), globalOptions?.itemSource == "terms" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, itemQueryArgs?.map((item, index) => {
+  })), globalOptions?.itemSource == "terms" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, Object.entries(itemQueryArgs)?.map(prams => {
+    var index = prams[0];
+    var item = prams[1];
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: index,
       className: "my-4"
@@ -5051,11 +5111,13 @@ function Html(props) {
       options: taxonomiesObjects,
       multiple: true,
       onChange: newVal => {
-        var itemQueryArgsX = [...itemQueryArgs];
+        var itemQueryArgsX = {
+          ...itemQueryArgs
+        };
         itemQueryArgsX[index].value = newVal;
         setitemQueryArgs(itemQueryArgsX);
 
-        //updatePostQueryArgs(newVal, index);
+        //updatePostQueryArgs(newVal, item.id);
       }
     })), item.id == "orderby" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "orderby" ? "flex items-center justify-between" : "hidden"
@@ -5121,7 +5183,7 @@ function Html(props) {
       }],
       multiple: true,
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "order" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "order" ? "flex items-center justify-between" : "hidden"
@@ -5150,7 +5212,7 @@ function Html(props) {
       value: item.value,
       type: "number",
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "include" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "include" ? "flex items-center justify-between" : "hidden"
@@ -5160,7 +5222,7 @@ function Html(props) {
       value: item.value,
       type: "text",
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "exclude" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "exclude" ? "flex items-center justify-between" : "hidden"
@@ -5170,7 +5232,7 @@ function Html(props) {
       value: item.value,
       type: "text",
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "child_of" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "child_of" ? "flex items-center justify-between" : "hidden"
@@ -5180,7 +5242,7 @@ function Html(props) {
       value: item.value,
       type: "text",
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "parent" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "parent" ? "flex items-center justify-between" : "hidden"
@@ -5190,7 +5252,7 @@ function Html(props) {
       value: item.value,
       type: "text",
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "meta_key" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "meta_key" ? "flex items-center justify-between" : "hidden"
@@ -5200,7 +5262,7 @@ function Html(props) {
       value: item.value,
       type: "text",
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "meta_value" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "meta_value" ? "flex items-center justify-between" : "hidden"
@@ -5210,7 +5272,7 @@ function Html(props) {
       value: item.value,
       type: "text",
       onChange: newVal => {
-        updateTermQueryArgs(newVal, index);
+        updateTermQueryArgs(newVal, item.id);
       }
     })), item.id == "hide_empty" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: item.id == "hide_empty" ? "flex items-center justify-between" : "hidden"
@@ -5221,6 +5283,23 @@ function Html(props) {
       onChange: () => {
         const newValue = !itemQueryArgs[index].value;
         updateTermQueryArgs(newValue, index);
+      }
+    })));
+  })), globalOptions?.itemSource == "easyAccordion" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, Object.entries(itemQueryArgs)?.map(prams => {
+    var index = prams[0];
+    var item = prams[1];
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      key: index,
+      className: "my-4"
+    }, item.id == "postId" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: `flex items-center justify-between`
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      htmlFor: ""
+    }, "FAQ Group ID"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: item.value,
+      type: "number",
+      onChange: newVal => {
+        updateTermQueryArgs(newVal, item.id);
       }
     })));
   })), globalOptions?.itemSource == "manual" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_sortablejs__WEBPACK_IMPORTED_MODULE_5__.ReactSortable, {
