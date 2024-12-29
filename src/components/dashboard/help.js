@@ -36,10 +36,10 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 			video: "ArANm9K1bes",
 			docsUrl: "#",
 		},
-		useShor: {
+		urlHash: {
 			title: "",
 			content: ``,
-			video: "",
+			video: "ol4rtx7RWiI",
 			docsUrl: "",
 		},
 		addPostQuery: {
@@ -57,7 +57,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 		autoembedSetting: {
 			title: "",
 			content: ``,
-			video: "",
+			video: "bzwa0Zggjqo",
 			docsUrl: "",
 		},
 		shortcodesSetting: {
@@ -75,7 +75,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 		schemaSetting: {
 			title: "",
 			content: ``,
-			video: "",
+			video: "_DdR2ncLOws",
 			docsUrl: "",
 		},
 		toggleTextSetting: {
@@ -87,7 +87,13 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 		expandCollapseSetting: {
 			title: "",
 			content: ``,
-			video: "",
+			video: "c3POl-34kUw",
+			docsUrl: "",
+		},
+		enableSearchSetting: {
+			title: "",
+			content: ``,
+			video: "tdqQhPYEXGU",
 			docsUrl: "",
 		},
 		statsSetting: {
@@ -111,7 +117,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 		accordionTemplatesHelp: {
 			title: "",
 			content: ``,
-			video: "",
+			video: "LdPcQeWe_nQ",
 			docsUrl: "",
 		},
 	};
