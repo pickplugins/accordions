@@ -21,6 +21,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
 
+    $keepExpandOther = isset($globalOptions["keepExpandOther"]) ? $globalOptions["keepExpandOther"] : false;
     $activeEvent = isset($globalOptions["activeEvent"]) ? $globalOptions["activeEvent"] : "";
     $urlHash = isset($globalOptions["urlHash"]) ? $globalOptions["urlHash"] : "";
     $clickToScrollTop = isset($globalOptions["clickToScrollTop"]) ? $globalOptions["clickToScrollTop"] : "";
@@ -53,7 +54,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
     $expandAllText = isset($expandCollapseAllOptions["expandAllText"]) ? $expandCollapseAllOptions["expandAllText"] : "";
     $collapseAllText = isset($expandCollapseAllOptions["collapseAllText"]) ? $expandCollapseAllOptions["collapseAllText"] : "";
-    $expandCollapseAllDelay = isset($expandCollapseAllOptions["delay"]) ? $expandCollapseAllOptions["delay"] : 1000;
+    $expandCollapseAllDelay = isset($expandCollapseAllOptions["delay"]) ? $expandCollapseAllOptions["delay"] : 0;
 
     $expandAllIcon = isset($expandCollapseAllOptions["expandAllIcon"]) ? $expandCollapseAllOptions["expandAllIcon"] : [];
     $expandAllIconLibrary = isset($expandAllIcon["library"]) ? $expandAllIcon["library"] : "";
@@ -103,6 +104,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
     $contentInAnimation = isset($contentOptions["inAnimation"]) ? $contentOptions["inAnimation"] : "";
     $contentOutAnimation = isset($contentOptions["outAnimation"]) ? $contentOptions["outAnimation"] : "";
+    $contentAnimationDuration = isset($contentOptions["animationDuration"]) ? $contentOptions["animationDuration"] : 0;
 
     $contentAutoembed = isset($contentOptions["autoembed"]) ? $contentOptions["autoembed"] : true;
     $contentShortcodes = isset($contentOptions["shortcodes"]) ? $contentOptions["shortcodes"] : true;
@@ -145,6 +147,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     $iconPosition = isset($iconOptions["position"]) ? $iconOptions["position"] : "left";
     $iconInAnimation = isset($iconOptions["inAnimation"]) ? $iconOptions["inAnimation"] : "";
     $iconOutAnimation = isset($iconOptions["outAnimation"]) ? $iconOptions["outAnimation"] : "";
+    $iconAnimationDuration = isset($iconOptions["animationDuration"]) ? $iconOptions["animationDuration"] : 0;
 
 
     $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : "fontAwesome";
@@ -223,6 +226,7 @@ function accordions_builder_accordion($post_id, $accordionData)
         "id" => $blockId,
         "activeIndex" => $activeIndex,
         "activeEvent" => $activeEvent,
+        "keepExpandOther" => $keepExpandOther,
         "autoPlay" => $autoPlay,
         "autoPlayTimeout" => $autoPlayTimeout,
         "autoPlayDelay" => $autoPlayDelay,
@@ -233,8 +237,10 @@ function accordions_builder_accordion($post_id, $accordionData)
         "clickToScrollTopOffset" => $clickToScrollTopOffset,
         "iconInAnimation" => $iconInAnimation,
         "iconOutAnimation" => $iconOutAnimation,
+        "iconAnimationDuration" => $iconAnimationDuration,
         "contentInAnimation" => $contentInAnimation,
         "contentOutAnimation" => $contentOutAnimation,
+        "contentAnimationDuration" => $contentAnimationDuration,
         "lazyLoad" => $lazyLoad,
         "expandCollapseAllDelay" => $expandCollapseAllDelay,
     ];

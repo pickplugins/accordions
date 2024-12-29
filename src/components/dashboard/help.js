@@ -22,18 +22,16 @@ function Html(props) {
 	var helpPrams = {
 		createAccordion: {
 			title: "How to create Accordion",
-			content: `
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, 
+			content: `, 
 `,
-			video: "ArANm9K1bes",
+			video: "zrIgw9mNA0Y",
 			docsUrl: "#",
 		},
 		useShortcodes: {
 			title: "How to create Accordion",
-			content: `
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, 
+			content: ` 
 `,
-			video: "ArANm9K1bes",
+			video: "zrIgw9mNA0Y",
 			docsUrl: "#",
 		},
 		urlHash: {
@@ -136,18 +134,27 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 					<Icon fill={"#fff"} icon={close} />
 				</span>
 
-				<h3>Coming Soon...</h3>
-
-				{/* <div className="mb-4 text-2xl font-bold">{helpPrams[help?.id]?.title}</div>
-				<div className="flex items-center  gap-2 align-middle"></div>
-				<a className=" flex items-center gap-2 py-2 px-3 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+				{!helpPrams[help?.id]?.video && (
+					<div>Coming Soon</div>
+				)}
+				{helpPrams[help?.id]?.video && (
+					<div>
+						{/* <div className="mb-4 text-2xl font-bold">{helpPrams[help?.id]?.title}</div> */}
+						<div className="flex items-center  gap-2 align-middle"></div>
+						{/* <a className=" flex items-center gap-2 py-2 px-3 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
 					<Icon fill={"#fff"} icon={external} />
 					<span>Read on our Site</span>
 				</a>
-				<div className="my-4 text-base">{helpPrams[help?.id]?.content}</div>
-				<div className="my-4 text-base">
-					<iframe width="100%" height="450" src={`https://www.youtube.com/embed/${helpPrams[help?.id]?.video}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				</div> */}
+				<div className="my-4 text-base">{helpPrams[help?.id]?.content}</div> */}
+						<div className="my-4 text-base">
+							<iframe width="100%" height="450" src={`https://www.youtube.com/embed/${helpPrams[help?.id]?.video}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+						</div>
+
+					</div>
+				)}
+
+
+
 			</div>
 		</div>
 	);

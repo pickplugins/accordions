@@ -647,20 +647,12 @@
   width: max-content;
 }
 
-.w-\[220px\] {
-  width: 220px;
-}
-
 .min-w-64 {
   min-width: 16rem;
 }
 
 .min-w-\[100px\] {
   min-width: 100px;
-}
-
-.min-w-\[180px\] {
-  min-width: 180px;
 }
 
 .min-w-\[550px\] {

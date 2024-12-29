@@ -1891,7 +1891,7 @@ function Html(props) {
 						<div className="py-3">
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
-									Lazyload{" "}
+									Lazyload
 									<span
 										className="cursor-pointer"
 										title="Click to know more"
@@ -1916,7 +1916,7 @@ function Html(props) {
 
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
-									Schema{" "}
+									Schema
 									<span
 										className="cursor-pointer"
 										title="Click to know more"
@@ -1939,10 +1939,25 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
+							<PanelRow>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Keep Expand Other
+
+								</label>
+
+								<Toggle
+									value={globalOptions?.keepExpandOther}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.keepExpandOther = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
 
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
-									Stats{" "}
+									Stats
 									<span
 										className="cursor-pointer"
 										title="Click to know more"
@@ -2056,7 +2071,7 @@ function Html(props) {
 							</PanelRow>
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
-									Click To Scroll Top{" "}
+									Click To Scroll Top
 									<span
 										className="cursor-pointer"
 										title="Click to know more"
@@ -2379,7 +2394,7 @@ function Html(props) {
 								</div>
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
-										Autoembed{" "}
+										Autoembed
 										<span
 											className="cursor-pointer"
 											title="Click to know more"
@@ -2409,7 +2424,7 @@ function Html(props) {
 
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
-										Shortcodes{" "}
+										Shortcodes
 										<span
 											className="cursor-pointer"
 											title="Click to know more"
@@ -2439,7 +2454,7 @@ function Html(props) {
 								</PanelRow>
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
-										wpautop{" "}
+										wpautop
 										<span
 											className="cursor-pointer"
 											title="Click to know more"
@@ -2544,7 +2559,7 @@ function Html(props) {
 										values=""></PGDropdown>
 								</PanelRow>
 
-								{/* <div className="flex  my-5  justify-between items-center">
+								<div className="flex  my-5  justify-between items-center">
 									<label className="" htmlFor="emailVerification">
 										{__("Animation duration", "accordions")}
 									</label>
@@ -2563,7 +2578,7 @@ function Html(props) {
 											setcontent(optionsX);
 										}}
 									/>
-								</div> */}
+								</div>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
@@ -3041,7 +3056,7 @@ function Html(props) {
 										</span>
 									) : (
 										""
-									)}{" "}
+									)}
 								</span>
 							}
 							initialOpen={false}>
@@ -3428,7 +3443,7 @@ function Html(props) {
 											values=""></PGDropdown>
 									</PanelRow>
 
-									{/* <div className="flex  my-5  justify-between items-center">
+									<div className="flex  my-5  justify-between items-center">
 										<label className="" htmlFor="emailVerification">
 											{__("Animation duration", "accordions")}
 										</label>
@@ -3447,7 +3462,7 @@ function Html(props) {
 												setcontent(optionsX);
 											}}
 										/>
-									</div> */}
+									</div>
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -3616,7 +3631,7 @@ function Html(props) {
 
 								<PanelRow>
 									<label htmlFor="" className="flex gap-2 items-center">
-										Expand/collapse all{" "}
+										Expand/collapse all
 										<span
 											className="cursor-pointer"
 											title="Click to know more"
@@ -3959,7 +3974,7 @@ function Html(props) {
 											</span>
 										) : (
 											""
-										)}{" "}
+										)}
 									</span>
 								}
 								initialOpen={false}>

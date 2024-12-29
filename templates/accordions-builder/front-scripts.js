@@ -6,10 +6,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		activeIndex: [999],
 		iconInAnimation: "",
 		iconOutAnimation: "",
+		iconAnimationDuration: 0,
 		contentInAnimation: "",
 		contentOutAnimation: "",
+		contentOutAnimation: "",
+		contentAnimationDuration: 0,
 		lazyLoad: false,
 		autoPlay: false,
+		autoPlayDelay: 0,
+		keepExpandOther: false,
+		clickToScrollTop: false,
+		clickToScrollTopOffset: 0,
 
 
 
@@ -23,6 +30,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var index = header.getAttribute("index")
 			window.pgAccordion.switch(index)
 		},
+		scrollToTop: (accordionHeader) => {
+
+
+
+		},
+
+
 		activeByIndex: (index) => {
 			if (window.pgAccordion.id.length == 0) return;
 			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
@@ -39,26 +53,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					var iconIdle = header.querySelector(".accordion-icon-idle");
 
 
-					// if (header.classList.contains("accordion-header-active")) {
-					// 	if (iconToggle != null) {
-					// 		iconToggle.style.display = "inline-block";
-					// 	}
-					// 	if (iconIdle != null) {
-					// 		iconIdle.style.display = "none";
-					// 	}
-					// 	content.style.display = "block";
-					// 	content.style.height = "auto";
-					// } else {
-					// 	if (iconIdle != null) {
-					// 		iconIdle.style.display = "inline-block";
-					// 	}
-					// 	if (iconToggle != null) {
-					// 		iconToggle.style.display = "none";
-					// 	}
-					// 	content.style.display = "none";
-					// 	content.style.height = 0;
-					// }
-
 
 					if (header.classList.contains("accordion-header-active")) {
 						if (iconToggle != null) {
@@ -73,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								iconToggle.classList.remove("animate__animated");
 								iconToggle.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 100);
+							}, window.pgAccordion.iconAnimationDuration);
 						}
 						if (iconIdle != null) {
 							iconIdle.style.display = "none";
@@ -86,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								iconIdle.classList.remove("animate__animated");
 								iconIdle.classList.remove("animate__" + entranceAnimation);
 								// popup.style.display = "none";
-							}, 1000);
+							}, window.pgAccordion.iconAnimationDuration);
 
 						}
 						content.style.display = "block";
@@ -104,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							content.classList.remove("animate__animated");
 							content.classList.remove("animate__" + entranceAnimation);
 							// popup.style.display = "none";
-						}, 800);
+						}, window.pgAccordion.contentOutAnimation);
 
 					} else {
 						if (iconIdle != null) {
@@ -127,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							content.classList.remove("animate__animated");
 							content.classList.remove("animate__" + entranceAnimation);
 							content.style.display = "none";
-						}, 800);
+						}, window.pgAccordion.contentOutAnimation);
 					}
 
 
@@ -148,34 +142,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var content = header.nextElementSibling;
 				if (loopIndex == index) {
 					header.classList.toggle("accordion-header-active");
-					content.style.display = "none";
-					content.style.height = 0;
+					//content.style.display = "none";
+					//content.style.height = 0;
 				}
 
 				var iconToggle = header.querySelector(".accordion-icon-toggle");
 				var iconIdle = header.querySelector(".accordion-icon-idle");
-
-
-				// if (header.classList.contains("accordion-header-active")) {
-				// 	if (iconToggle != null) {
-				// 		iconToggle.style.display = "inline-block";
-				// 	}
-				// 	if (iconIdle != null) {
-				// 		iconIdle.style.display = "none";
-				// 	}
-				// 	content.style.display = "block";
-				// 	content.style.height = "auto";
-				// } else {
-				// 	if (iconIdle != null) {
-				// 		iconIdle.style.display = "inline-block";
-				// 	}
-				// 	if (iconToggle != null) {
-				// 		iconToggle.style.display = "none";
-				// 	}
-				// 	content.style.display = "none";
-				// 	content.style.height = 0;
-				// }
-
 
 
 				if (header.classList.contains("accordion-header-active")) {
@@ -191,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							iconToggle.classList.remove("animate__animated");
 							iconToggle.classList.remove("animate__" + entranceAnimation);
 							// popup.style.display = "none";
-						}, 1000);
+						}, window.pgAccordion.iconAnimationDuration);
 					}
 					if (iconIdle != null) {
 						iconIdle.style.display = "none";
@@ -204,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							iconIdle.classList.remove("animate__animated");
 							iconIdle.classList.remove("animate__" + entranceAnimation);
 							// popup.style.display = "none";
-						}, 1000);
+						}, window.pgAccordion.iconAnimationDuration);
 
 					}
 					content.style.display = "block";
@@ -222,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						content.classList.remove("animate__animated");
 						content.classList.remove("animate__" + entranceAnimation);
 						// popup.style.display = "none";
-					}, 800);
+					}, window.pgAccordion.contentOutAnimation);
 
 				} else {
 					if (iconIdle != null) {
@@ -245,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						content.classList.remove("animate__animated");
 						content.classList.remove("animate__" + entranceAnimation);
 						content.style.display = "none";
-					}, 800);
+					}, window.pgAccordion.contentOutAnimation);
 				}
 
 
@@ -340,7 +312,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							iconToggle.classList.remove("animate__animated");
 							iconToggle.classList.remove("animate__" + entranceAnimation);
 							// popup.style.display = "none";
-						}, 1000);
+						}, window.pgAccordion.iconAnimationDuration);
 					}
 					if (iconIdle != null) {
 						iconIdle.style.display = "none";
@@ -353,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 							iconIdle.classList.remove("animate__animated");
 							iconIdle.classList.remove("animate__" + entranceAnimation);
 							// popup.style.display = "none";
-						}, 1000);
+						}, window.pgAccordion.iconAnimationDuration);
 
 					}
 					content.style.display = "block";
@@ -371,7 +343,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						content.classList.remove("animate__animated");
 						content.classList.remove("animate__" + entranceAnimation);
 						// popup.style.display = "none";
-					}, 800);
+					}, window.pgAccordion.contentOutAnimation);
 
 
 
@@ -402,29 +374,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						content.classList.remove("animate__animated");
 						content.classList.remove("animate__" + entranceAnimation);
 						content.style.display = "none";
-					}, 800);
+					}, window.pgAccordion.contentOutAnimation);
 				}
 
 
-				// if (header.classList.contains("accordion-header-active")) {
-				// 	if (iconToggle != null) {
-				// 		iconToggle.style.display = "inline-block";
-				// 	}
-				// 	if (iconIdle != null) {
-				// 		iconIdle.style.display = "none";
-				// 	}
-				// 	content.style.display = "block";
-				// 	content.style.height = "auto";
-				// } else {
-				// 	if (iconIdle != null) {
-				// 		iconIdle.style.display = "inline-block";
-				// 	}
-				// 	if (iconToggle != null) {
-				// 		iconToggle.style.display = "none";
-				// 	}
-				// 	content.style.display = "none";
-				// 	content.style.height = 0;
-				// }
 
 
 
@@ -455,19 +408,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			var accordionHeaders = document.querySelectorAll("#" + window.pgAccordion.id + " .accordion-header");
 
-			// var items = [];
-
-
-
-			// accordionHeaders.forEach((header, i) => {
-
-			// 	items.push(i)
-			// });
-
-			//console.log(items);
 
 			let currentIndex = 0;
-
 
 			const items = [1, 2, 3, 4, 5, 6, 7];
 			//let currentIndex = 0;
@@ -475,14 +417,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			function loopThroughItems() {
 				console.log(items[currentIndex]); // Print the current item
 				currentIndex = (currentIndex + 1) % items.length; // Move to the next index (looping back to 0 after reaching the end)
-				setTimeout(loopThroughItems, 1000); // Recursively call after 1 second
+				setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
 			}
-
-
-
-
-
-
 
 
 			// function loopThroughItems() {
@@ -606,28 +542,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				expandCollapseAllHndle.setAttribute("data-toggled", true);
 				var innerHtml = `${collapsealliconhtml}<span>${collapsealltext}</span>`;
 
-				console.log(expandCollapseAllDelay);
-
-
 				for (var i = 0; i < headerCount; i++) {
-					// setTimeout((i) => {
-					// 	console.log(i);
-
-
-					// }, 1000)
-
-
 					(function (index) {
 						setTimeout(function () {
 							window.pgAccordion.activeByIndex(index)
 						}, expandCollapseAllDelay * index);
 					})(i);
-
-
-
-
-
-
 
 				}
 
@@ -635,19 +555,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 				for (var i = 0; i < headerCount; i++) {
 
-					// setTimeout(() => {
-					// 	window.pgAccordion.inactiveByIndex(i)
-					// }, expandCollapseAllDelay)
-
-
 					(function (index) {
 						setTimeout(function () {
 							window.pgAccordion.inactiveByIndex(index)
 						}, expandCollapseAllDelay * index);
 					})(i);
-
-
-
 
 				}
 				expandCollapseAllHndle.removeAttribute("data-toggled");
@@ -670,14 +582,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var activeIndex = accordionDataObj.activeIndex;
 				var iconInAnimation = accordionDataObj.iconInAnimation;
 				var iconOutAnimation = accordionDataObj.iconOutAnimation;
+				var iconAnimationDuration = accordionDataObj.iconAnimationDuration;
 				var contentInAnimation = accordionDataObj.contentInAnimation;
 				var contentOutAnimation = accordionDataObj.contentOutAnimation;
+				var contentAnimationDuration = accordionDataObj.contentAnimationDuration;
 				var lazyLoad = accordionDataObj.lazyLoad;
 				var autoPlay = accordionDataObj.autoPlay;
 				var autoPlayTimeout = parseInt(accordionDataObj.autoPlayTimeout);
 				var autoPlayDelay = accordionDataObj.autoPlayDelay;
 				var autoPlayOrder = accordionDataObj.autoPlayOrder;
 				var expandCollapseAllDelay = accordionDataObj.expandCollapseAllDelay;
+				var keepExpandOther = accordionDataObj.keepExpandOther;
+				var clickToScrollTop = accordionDataObj.clickToScrollTop;
+				var clickToScrollTopOffset = parseInt(accordionDataObj.clickToScrollTopOffset);
 
 				if (lazyLoad) {
 					accordion.style.display = "block";
@@ -701,11 +618,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				window.pgAccordion.activeIndex = activeIndex;
 				window.pgAccordion.iconInAnimation = iconInAnimation;
 				window.pgAccordion.iconOutAnimation = iconOutAnimation;
+				window.pgAccordion.iconAnimationDuration = iconAnimationDuration;
 				window.pgAccordion.contentInAnimation = contentInAnimation;
 				window.pgAccordion.contentOutAnimation = contentOutAnimation;
+				window.pgAccordion.contentAnimationDuration = contentAnimationDuration;
 				window.pgAccordion.lazyLoad = lazyLoad;
 				window.pgAccordion.autoPlay = autoPlay;
+				window.pgAccordion.autoPlayDelay = autoPlayDelay;
 				window.pgAccordion.expandCollapseAllDelay = expandCollapseAllDelay;
+				window.pgAccordion.keepExpandOther = keepExpandOther;
 
 
 
@@ -752,87 +673,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 							event.stopImmediatePropagation();
 							event.preventDefault();
-							accordionHeader.classList.toggle("accordion-header-active");
-							content.style.height = "auto";
-							if (accordionHeader.classList.contains("accordion-header-active")) {
-								if (iconToggle != null) {
-									iconToggle.style.display = "inline-block";
 
-									//var entranceAnimation =										popupWrap.getAttribute("data-entrance-animation");
-									var entranceAnimation = window.pgAccordion.iconInAnimation;
+							//accordionHeader.scrollIntoView({ behavior: 'smooth' });
 
-									iconToggle.classList.add("animate__animated");
-									iconToggle.classList.add("animate__" + entranceAnimation);
-									setTimeout(() => {
-										iconToggle.classList.remove("animate__animated");
-										iconToggle.classList.remove("animate__" + entranceAnimation);
-										// popup.style.display = "none";
-									}, 1000);
-								}
-								if (iconIdle != null) {
-									iconIdle.style.display = "none";
+							if (clickToScrollTop) {
+								var offset = clickToScrollTopOffset;
 
-									var entranceAnimation = window.pgAccordion.iconOutAnimation;
+								const elementPosition = accordionHeader.getBoundingClientRect().top + window.scrollY;
+								const offsetPosition = elementPosition - offset;
 
-									iconIdle.classList.add("animate__animated");
-									iconIdle.classList.add("animate__" + entranceAnimation);
-									setTimeout(() => {
-										iconIdle.classList.remove("animate__animated");
-										iconIdle.classList.remove("animate__" + entranceAnimation);
-										// popup.style.display = "none";
-									}, 1000);
-
-								}
-								content.style.display = "block";
-								content.style.height = "auto";
-
-
-
-
-								var entranceAnimation = window.pgAccordion.contentInAnimation;
-
-								content.classList.add("animate__animated");
-								content.classList.add("animate__fast");
-								content.classList.add("animate__" + entranceAnimation);
-								setTimeout(() => {
-									content.classList.remove("animate__animated");
-									content.classList.remove("animate__" + entranceAnimation);
-									// popup.style.display = "none";
-								}, 800);
-
-
-
-
-
-
-
-
-
-							} else {
-								if (iconIdle != null) {
-									iconIdle.style.display = "inline-block";
-								}
-								if (iconToggle != null) {
-									iconToggle.style.display = "none";
-								}
-								//content.style.display = "none";
-								//content.style.height = 0;
-
-
-								var entranceAnimation = window.pgAccordion.contentOutAnimation;
-
-								content.classList.add("animate__animated");
-								content.classList.add("animate__fast");
-								content.classList.add("animate__" + entranceAnimation);
-								setTimeout(() => {
-									content.classList.remove("animate__animated");
-									content.classList.remove("animate__animated");
-									content.classList.remove("animate__" + entranceAnimation);
-									content.style.display = "none";
-								}, 800);
+								window.scrollTo({
+									top: offsetPosition,
+									behavior: 'smooth'
+								});
 							}
 
 
+
+
+
+
+
+
+							var loopIndex = accordionHeader.getAttribute("index");
+							window.pgAccordion.scrollToTop(accordionHeader);
+
+
+							if (keepExpandOther) {
+								window.pgAccordion.activeByIndex(loopIndex);
+
+							} else {
+								window.pgAccordion.switch(loopIndex);
+
+							}
 
 
 
@@ -875,7 +748,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					window.pgAccordion.search(value)
 				}
 
-				searchHndle.addEventListener('keyup', debounce(handleKeyup, 1000));
+				searchHndle.addEventListener('keyup', debounce(handleKeyup, 500));
 
 			}
 

@@ -450,7 +450,207 @@ var accordionTemplates = [
 
 
 	},
+	{
+		label: "Template 24",
 
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": { "margin": [], "width": { "Mobile": "100%", "Tablet": "90%" } } },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "backgroundColor": { "Desktop": "#f5fbf8" }, "padding": { "Desktop": "10px 25px 10px 25px" }, "border": { "Desktop": "1px solid #e4e4e4" }, "marginBottom": { "Desktop": "10px" }, "borderRadius": { "Desktop": "8px 8px 8px 8px" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "space-between" }, "backgroundColor": { "Desktop": "#ffffff" }, "color": { "Desktop": "#000000" }, "padding": { "Desktop": "10px 10px 10px 10px" }, "margin": { "Desktop": "0px 0px 1px 0px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "border": { "Desktop": "1px solid #000000" }, "borderRadius": { "Desktop": "5px 5px 5px 5px" }, "fontSize": { "Desktop": "1.15rem" }, "fontFamily": { "Desktop": "Inter" }, "fontStyle": { "Desktop": "normal" }, "fontWeight": { "Desktop": "500" }, "cursor": { "Desktop": "pointer" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": { "color": { "Desktop": "#ffffff !important" }, "backgroundColor": { "Desktop": "#DFBB9D !important" }, "margin": { "Desktop": "0px 0px 0px 0px !important" }, "borderRadius": { "Desktop": "5px 5px 0px 0px !important" } } },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": {} },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": {} },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": {} },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "right", "class": "accordion-icon" }, "styles": {} },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": [] },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+	},
+	{
+		label: "Template 25",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": { "margin": [], "width": { "Mobile": "100%", "Tablet": "90%" } } },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "backgroundColor": { "Desktop": "#f9eeee" }, "padding": { "Desktop": "10px 10px 10px 10px" }, "marginBottom": { "Desktop": "10px" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "space-between" }, "backgroundColor": { "Desktop": "#18978e" }, "color": { "Desktop": "#494949" }, "padding": { "Desktop": "10px 15px 10px 15px" }, "margin": [], "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "borderBottom": { "Desktop": "1px dashed #000000" }, "marginTop": { "Desktop": "10px" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": { "backgroundColor": { "Desktop": "#f9eeee !important" } } },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": {} },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": {} },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": {} },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "right", "class": "accordion-icon" }, "styles": { "color": { "Desktop": "#494949" } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": [] },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+
+	},
+	{
+		label: "Template 26",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": { "display": { "Desktop": "block" }, "width": {} } },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "backgroundColor": { "Desktop": "#f1f7f9" }, "fontSize": { "Desktop": "16px" }, "fontFamily": { "Desktop": "Poppins" }, "fontStyle": { "Desktop": "normal" }, "fontWeight": { "Desktop": "400" }, "color": { "Desktop": "#1f2e45" }, "padding": { "Desktop": "10px 10px 10px 10px" }, "borderRadius": { "Desktop": "0px 0px 5px 5px" }, "margin": { "Desktop": "0px 0px 10px 0px" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "color": { "Desktop": "#000000" }, "backgroundColor": { "Desktop": "#F1F7F9" }, "padding": { "Desktop": "10px 10px 10px 10px" }, "margin": { "Desktop": "0px 0px 10px 0px" }, "borderRadius": { "Desktop": "5px 5px 5px 5px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "border": {} } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": { "color": { "Desktop": "#ffffff !important" }, "backgroundColor": { "Desktop": "#1f2e45 !important" }, "margin": { "Desktop": "0px 0px 0px 0px !important" }, "borderRadius": { "Desktop": "5px 5px 0px 0px !important" } } },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": {} },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": { "padding": { "Desktop": "0px 10px 0px 0px" } } },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": {} },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "left", "class": "accordion-icon" }, "styles": { "fontSize": { "Desktop": "16px" }, "padding": { "Desktop": "0px 10px 0px 10px" } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": [] },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+
+	},
+	{
+		label: "Template 27",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": { "display": { "Desktop": "block" }, "width": {} } },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "margin": { "Desktop": "0px 0px 5px 0px" }, "padding": { "Desktop": "10px 10px 10px 10px" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "start" }, "backgroundColor": { "Desktop": "#ffffff" }, "color": { "Desktop": "#51557E" }, "padding": { "Desktop": "10px 10px 10px 10px" }, "margin": { "Desktop": "0px 0px 5px 0px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "boxShadow": {}, "border": { "Desktop": "1px solid #50547d4d" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": { "color": { "Desktop": "#ffffff !important" }, "backgroundColor": { "Desktop": "#1f2e45 !important" }, "margin": { "Desktop": "0px 0px 0px 0px !important" }, "borderRadius": { "Desktop": "5px 5px 0px 0px !important" } } },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": {} },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": { "padding": { "Desktop": "0px 10px 0px 0px" } } },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": {} },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "left", "class": "accordion-icon" }, "styles": { "margin": { "Desktop": "0px 5px 0px 0px" } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": [] },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+
+	},
+	{
+		label: "Template 28",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "1px solid #8a9ba5" }, "borderBottom": { "Desktop": "1px solid #8a9ba5" }, "borderLeft": { "Desktop": "1px solid #8a9ba5" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "start" }, "backgroundColor": { "Desktop": "#8a9ba5" }, "color": { "Desktop": "#ffffff" }, "padding": [], "margin": { "Desktop": "10px 0px 0px 0px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "fontSize": { "Desktop": "18px" }, "fontFamily": { "Desktop": "Courgette" }, "fontWeight": { "Desktop": "500" }, "gap": { "Desktop": "1em" }, "cursor": { "Desktop": "pointer" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": {} },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": { "width": { "Desktop": "100%" } } },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": [], "position": [], "zIndex": [] } },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": { "display": { "Desktop": "inline-block" }, "width": [] } },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "left", "class": "accordion-icon" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": { "Desktop": "24px" }, "backgroundColor": { "Desktop": "#546a77" }, "margin": [], "color": { "Desktop": "#ffffff" }, "position": { "Desktop": "relative" }, "zIndex": [], "padding": { "Desktop": "10px 20px 10px 20px" } }, "after": { "zIndex": [], "position": { "Desktop": "absolute !important" }, "content": { "Desktop": "\" \"" }, "height": { "Desktop": "0px" }, "width": { "Desktop": "0px" }, "top": { "Desktop": "0px" }, "backgroundColor": [], "left": { "Desktop": "45px" }, "borderRight": { "Desktop": "30px solid #546a77" }, "borderTop": { "Desktop": "20px solid #556b7800" }, "borderBottom": { "Desktop": "18px solid #556b7800" }, "transform": { "Desktop": "rotate(180deg) " } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": {} },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+	},
+	{
+		label: "Template 29",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": [], "borderBottom": [], "borderLeft": [] } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "start" }, "backgroundColor": { "Desktop": "#c8c8c8 !important" }, "color": { "Desktop": "#444444" }, "padding": [], "margin": { "Desktop": "10px 0px 0px 0px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "fontSize": { "Desktop": "18px" }, "fontFamily": { "Desktop": "Poppins" }, "fontWeight": { "Desktop": "500" }, "gap": { "Desktop": "1em" }, "borderRadius": { "Desktop": "5px 5px 5px 5px" }, "cursor": { "Desktop": "pointer" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": {} },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": { "margin": { "Desktop": "0px 0px 0px 10px" } } },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": [], "position": [], "zIndex": [] } },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": { "display": { "Desktop": "inline-block" }, "width": [] } },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "left", "class": "accordion-icon" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": { "Desktop": "24px" }, "backgroundColor": { "Desktop": "#368ff7" }, "margin": [], "color": { "Desktop": "#ffffff" }, "position": { "Desktop": "relative" }, "zIndex": [], "padding": { "Desktop": "10px 7px 10px 20px" }, "borderRadius": { "Desktop": "5px 0px 0px 5px" } }, "after": { "zIndex": [], "position": { "Desktop": "absolute !important" }, "content": { "Desktop": "\"  \"" }, "height": { "Desktop": "0px" }, "width": { "Desktop": "0px" }, "top": { "Desktop": "0px" }, "backgroundColor": [], "left": { "Desktop": "40px" }, "borderTop": { "Desktop": "20px solid #3690f700" }, "borderRight": { "Desktop": "20px solid #368ff7" }, "borderBottom": { "Desktop": "20px solid #3690f700" }, "transform": { "Desktop": "rotate(180deg) " } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": {} },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+
+	},
+	{
+		label: "Template 30",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "fontSize": [], "fontFamily": [], "fontWeight": [], "padding": { "Desktop": "10px 20px 20px 20px" }, "borderRight": { "Desktop": "1px solid #bf4f00" }, "borderBottom": { "Desktop": "1px solid #bf4f00" }, "borderLeft": { "Desktop": "1px solid #bf4f00" }, "backgroundColor": { "Desktop": "#ffffff" }, "margin": { "Desktop": "0px 0px 10px 0px" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "start" }, "backgroundColor": { "Desktop": "#e6e6e6 !important" }, "color": { "Desktop": "#444444" }, "padding": [], "margin": { "Desktop": "10px 0px 0px 0px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "fontSize": { "Desktop": "18px" }, "fontFamily": { "Desktop": "Poppins" }, "fontWeight": { "Desktop": "500" }, "gap": { "Desktop": "1em" }, "borderRadius": { "Desktop": "5px 5px 5px 5px" }, "cursor": { "Desktop": "pointer" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": { "backgroundColor": { "Desktop": "#efefef !important" }, "margin": { "Desktop": "0px 0px 0px 0px" }, "borderRadius": { "Desktop": "5px 5px 0px 0px" }, "borderTop": [], "borderBottom": { "Desktop": "0px solid #000000 !important" } } },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": { "margin": { "Desktop": "0px 0px 0px 15px" } } },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": [], "position": [], "zIndex": [] } },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": { "display": { "Desktop": "inline-block" }, "width": [] } },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "left", "class": "accordion-icon" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": { "Desktop": "20px" }, "backgroundColor": { "Desktop": "#bf5000" }, "color": { "Desktop": "#ffffff" }, "position": { "Desktop": "relative" }, "zIndex": [], "padding": { "Desktop": "15px 15px 15px 20px" }, "borderRadius": { "Desktop": "5px 0px 0px 5px" } }, "after": { "zIndex": [], "position": { "Desktop": "absolute !important" }, "content": { "Desktop": "\"  \"" }, "height": { "Desktop": "0px" }, "width": { "Desktop": "0px" }, "top": { "Desktop": "0px" }, "backgroundColor": [], "left": { "Desktop": "55px" }, "borderTop": { "Desktop": "27px solid #3690f700" }, "borderRight": { "Desktop": "22px solid #bf5000" }, "borderBottom": { "Desktop": "23px solid #3690f700" }, "transform": { "Desktop": "rotate(180deg) " } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": {} },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+	},
+	{
+		label: "Template 31",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "1px solid #f301a5" }, "borderBottom": { "Desktop": "1px solid #f301a5" }, "borderLeft": { "Desktop": "1px solid #f301a5" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "start" }, "backgroundColor": { "Desktop": "#f4d0ed" }, "color": { "Desktop": "#000000" }, "padding": [], "margin": { "Desktop": "10px 0px 0px 0px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "fontSize": { "Desktop": "18px" }, "fontFamily": { "Desktop": "Poppins" }, "fontWeight": { "Desktop": "500" }, "gap": { "Desktop": "2em" }, "cursor": { "Desktop": "pointer" }, "border": { "Desktop": "1px solid #f301a5" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": {} },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": { "width": { "Desktop": "100%" } } },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": [], "position": [], "zIndex": [] } },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": { "display": { "Desktop": "inline-block" }, "width": [] } },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "left", "class": "accordion-icon" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": { "Desktop": "22px" }, "backgroundColor": { "Desktop": "#f301a5" }, "margin": [], "color": { "Desktop": "#ffffff" }, "position": { "Desktop": "relative" }, "zIndex": [], "padding": { "Desktop": "10px 10px 10px 20px" } }, "after": { "zIndex": [], "position": { "Desktop": "absolute !important" }, "content": { "Desktop": "\" \"" }, "height": { "Desktop": "0px" }, "width": { "Desktop": "0px" }, "top": { "Desktop": "0px" }, "backgroundColor": [], "left": { "Desktop": "50px" }, "borderTop": { "Desktop": "40px solid #3bada800" }, "borderLeft": { "Desktop": "28px solid #f301a5" }, "borderBottom": { "Desktop": "0px solid #3bada800" } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": {} },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+	},
+	{
+		label: "Template 32",
+
+		thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-20.png",
+		isPro: true,
+		data:
+		{
+			"wrapper": { "options": { "tag": "div", "class": "pg-accordion-nested" }, "styles": {} },
+			"content": { "options": { "tag": "div", "class": "accordion-content" }, "styles": { "padding": { "Desktop": "20px 20px 20px 20px" }, "backgroundColor": { "Desktop": "#ffffff" }, "borderRight": { "Desktop": "1px solid #3baea8" }, "borderBottom": { "Desktop": "1px solid #3baea8" }, "borderLeft": { "Desktop": "1px solid #3baea8" } } },
+			"header": { "options": { "tag": "div", "class": "accordion-header" }, "styles": { "justifyContent": { "Desktop": "start" }, "backgroundColor": { "Desktop": "#cae8e7" }, "color": { "Desktop": "#000000" }, "padding": [], "margin": { "Desktop": "10px 0px 0px 0px" }, "display": { "Desktop": "flex" }, "alignItems": { "Desktop": "center" }, "fontSize": { "Desktop": "18px" }, "fontFamily": { "Desktop": "Poppins" }, "fontWeight": { "Desktop": "500" }, "gap": { "Desktop": "1em" }, "cursor": { "Desktop": "pointer" }, "border": { "Desktop": "1px solid #3baea8" } } },
+			"headerActive": { "options": { "tag": "div", "class": "accordion-header-active" }, "styles": {} },
+			"headerLabel": { "options": { "text": "Accordion Header", "tag": "a", "class": "accordion-header-label" }, "styles": { "width": { "Desktop": "100%" } } },
+			"labelCounter": { "options": { "enable": false, "position": "", "tag": "div", "class": "accordion-label-counter" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": [], "position": [], "zIndex": [] } },
+			"labelIcon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-star", "position": "", "class": "accordion-label-icon" }, "styles": { "display": { "Desktop": "inline-block" }, "width": [] } },
+			"icon": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-down", "position": "left", "class": "accordion-icon" }, "styles": { "display": [], "height": [], "lineHeight": [], "width": { "Desktop": "22px" }, "backgroundColor": { "Desktop": "#3baea8" }, "margin": [], "color": { "Desktop": "#ffffff" }, "position": { "Desktop": "relative" }, "zIndex": [], "padding": { "Desktop": "10px 10px 10px 15px" } }, "after": { "zIndex": [], "position": { "Desktop": "absolute !important" }, "content": { "Desktop": "\" \"" }, "height": { "Desktop": "0px" }, "width": { "Desktop": "0px" }, "top": { "Desktop": "0px" }, "backgroundColor": [], "left": { "Desktop": "46px" }, "borderTop": { "Desktop": "0px solid #3bada800" }, "borderLeft": { "Desktop": "22px solid #3baea8" }, "borderBottom": { "Desktop": "40px solid #3bada800" } } },
+			"iconToggle": { "options": { "library": "fontAwesome", "srcType": "class", "iconSrc": "fas fa-angle-up", "class": "accordion-icon-toggle" }, "styles": {} },
+			"searchInput": { "options": { "placeholder": "", "class": "search-input", "enable": false }, "styles": [] },
+			"expandCollapseAll": { "options": { "enable": false, "class": "expand-collapse-all", "expandAllText": "Expand All", "collapseAllText": "Collapse All", "expandAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" }, "collapseAllIcon": { "library": "fontAwesome", "srcType": "class", "iconSrc": " fas fa-angle-up" } }, "styles": { "backgroundColor": { "Desktop": "#774360" }, "padding": { "Desktop": "8px 20px 8px 20px" }, "borderRadius": { "Desktop": "3px 3px 3px 3px" }, "fontSize": { "Desktop": "16px" }, "color": { "Desktop": "#ffffff" }, "display": { "Desktop": "flex" }, "gap": { "Desktop": "1em" }, "alignItems": { "Desktop": "center" } } },
+			"topWrap": { "options": { "class": "top-wrap" }, "styles": { "display": { "Desktop": "flex" }, "justifyContent": { "Desktop": "start" }, "alignItems": { "Desktop": "center" }, "padding": { "Desktop": "20px 0px 20px 0px" }, "gap": { "Desktop": "1em" } } },
+		}
+
+	},
 
 ];
 export default accordionTemplates;

@@ -41,7 +41,6 @@ function Html(props) {
 
 
 	var onChange = props.onChange;
-	var postDataX = props.postData;
 
 	var [postData, setpostData] = useState(props.postData); // Using the hook.
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
@@ -68,6 +67,8 @@ function Html(props) {
 
 
 	useEffect(() => {
+		console.log(postData);
+
 		setaccordionData(postData.post_content)
 
 	}, [postData]);
@@ -77,7 +78,7 @@ function Html(props) {
 
 
 
-	var blockClass = ".pg-accordion-nested";
+	var blockClass = "#accordions-" + postData.ID;
 
 	var wrapperSelector = blockClass + "";
 	var contentSelector = blockClass + " .accordion-content";
