@@ -647,6 +647,10 @@
   width: max-content;
 }
 
+.w-\[220px\] {
+  width: 220px;
+}
+
 .min-w-64 {
   min-width: 16rem;
 }

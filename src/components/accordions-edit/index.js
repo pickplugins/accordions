@@ -41,6 +41,7 @@ import { popupEntranceAnimateBasic } from "./inAnimation";
 import { popupCloseAnimateBasic } from "./outAnimation";
 import Toggle from "./toggle";
 import { iconsList } from "./iconsList";
+import PGinputNumber from "../input-number";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -510,6 +511,15 @@ function Html(props) {
 		itemQueryArgsX[index].value = newVal;
 		setitemQueryArgs(itemQueryArgsX);
 	};
+
+	const handleDelete = (id) => {
+		// Filter out the item with the specified id
+		const updatedItems = Object.fromEntries(
+			Object.entries(itemQueryArgs).filter(([key, item]) => item.id !== id)
+		);
+		setitemQueryArgs(updatedItems);
+	};
+
 
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
@@ -999,15 +1009,18 @@ function Html(props) {
 
 
 									return (
-										<div key={index} className="my-4">
-
-
+										<div key={index} className="my-4 flex gap-2 items-center">
+											<span
+												className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white"
+												onClick={() => handleDelete(item.id)}>
+												<Icon fill={"#fff"} icon={close} size="20" />
+											</span>
 											{item.id == "postType" && (
-												<div className="flex items-center justify-between">
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Post Type</label>
 													<PGinputSelect
 														val={item.value}
-														className="max-w-[200px] min-w-[180px]"
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={postTypes}
 														multiple={true}
 														onChange={(newVal) => {
@@ -1020,13 +1033,13 @@ function Html(props) {
 												<div
 													className={
 														item.id == "postStatus"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Post Status</label>
 													<PGinputSelect
 														val={item.value}
-														className="max-w-[200px] min-w-[180px]"
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{ label: "Publish", value: "publish" },
 															{ label: "Pending", value: "pending" },
@@ -1049,13 +1062,13 @@ function Html(props) {
 												<div
 													className={
 														item.id == "order"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Order</label>
 													<PGinputSelect
 														label=""
-														className="max-w-[200px] min-w-[180px]"
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														val={item.value}
 														options={[
 															{ label: "Ascending", value: "ASC" },
@@ -1072,13 +1085,13 @@ function Html(props) {
 												<div
 													className={
 														item.id == "orderby"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Order By</label>
 													<PGinputSelect
 														val={item.value}
-														className="max-w-[200px] min-w-[180px]"
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{
 																label: __("None", "accordions"),
@@ -1125,9 +1138,11 @@ function Html(props) {
 												</div>
 											)}
 											{item.id == "metaKey" && (
-												<div className="flex items-center justify-between">
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Meta Key</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
 															updatePostQueryArgs(newVal, item.id);
@@ -1136,9 +1151,11 @@ function Html(props) {
 												</div>
 											)}
 											{item.id == "metaValue" && (
-												<div className="flex items-center justify-between">
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Meta Value</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
 															updatePostQueryArgs(newVal, item.id);
@@ -1147,9 +1164,11 @@ function Html(props) {
 												</div>
 											)}
 											{item.id == "metaValueNum" && (
-												<div className="flex items-center justify-between">
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Meta Value Number</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
 															updatePostQueryArgs(newVal, item.id);
@@ -1158,9 +1177,11 @@ function Html(props) {
 												</div>
 											)}
 											{item.id == "s" && (
-												<div className="flex items-center justify-between">
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Keyword</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
 															updatePostQueryArgs(newVal, item.id);
@@ -1172,15 +1193,13 @@ function Html(props) {
 												<div
 													className={
 														item.id == "metaCompare"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Meta Compare</label>
-													<SelectControl
-														style={{ margin: 0 }}
-														label=""
-														className="max-w-[200px] min-w-[180px]"
-														value={item.value}
+													<PGinputSelect
+														val={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{ label: "=", value: "=" },
 															{ label: "!=", value: "!=" },
@@ -1219,12 +1238,17 @@ function Html(props) {
 									var item = prams[1]
 
 									return (
-										<div key={index} className="my-4">
+										<div key={index} className="my-4 flex gap-2 items-center">
+											<span
+												className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white"
+												onClick={() => handleDelete(item.id)}>
+												<Icon fill={"#fff"} icon={close} size="20" />
+											</span>
 											{item.id == "taxonomy" && (
-												<div className="flex items-center justify-between">
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Taxonomy</label>
 													<PGinputSelect
-														className="max-w-[200px] min-w-[180px]"
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														val={item.value}
 														options={taxonomiesObjects}
 														multiple={true}
@@ -1242,13 +1266,13 @@ function Html(props) {
 												<div
 													className={
 														item.id == "orderby"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Order By</label>
-													<SelectControl
-														value={item.value}
-														className="max-w-[200px] min-w-[180px]"
+													<PGinputSelect
+														val={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{
 																label: __("None", "accordions"),
@@ -1298,21 +1322,21 @@ function Html(props) {
 												<div
 													className={
 														item.id == "order"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Order</label>
-													<SelectControl
-														style={{ margin: 0 }}
+													<PGinputSelect
 														label=""
-														className="max-w-[200px] min-w-[180px]"
-														value={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
+														val={item.value}
 														options={[
 															{ label: "Ascending", value: "ASC" },
 															{ label: "Descending", value: "DESC" },
 														]}
+														multiple={false}
 														onChange={(newVal) =>
-															updateTermQueryArgs(newVal, index)
+															updatePostQueryArgs(newVal, index)
 														}
 													/>
 												</div>
@@ -1321,13 +1345,14 @@ function Html(props) {
 												<div
 													className={
 														item.id == "number"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Number</label>
-													<InputControl
+													<PGinputNumber
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="number"
 														onChange={(newVal) => {
 															updateTermQueryArgs(newVal, item.id);
 														}}
@@ -1338,13 +1363,14 @@ function Html(props) {
 												<div
 													className={
 														item.id == "include"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Include</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
 															updateTermQueryArgs(newVal, item.id);
 														}}
@@ -1355,13 +1381,14 @@ function Html(props) {
 												<div
 													className={
 														item.id == "exclude"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Exclude</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
 															updateTermQueryArgs(newVal, item.id);
 														}}
@@ -1372,13 +1399,14 @@ function Html(props) {
 												<div
 													className={
 														item.id == "child_of"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Child Of</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
 															updateTermQueryArgs(newVal, item.id);
 														}}
@@ -1389,13 +1417,14 @@ function Html(props) {
 												<div
 													className={
 														item.id == "parent"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Parent</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
 															updateTermQueryArgs(newVal, item.id);
 														}}
@@ -1406,13 +1435,14 @@ function Html(props) {
 												<div
 													className={
 														item.id == "meta_key"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Meta Key</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
 															updateTermQueryArgs(newVal, item.id);
 														}}
@@ -1423,13 +1453,14 @@ function Html(props) {
 												<div
 													className={
 														item.id == "meta_value"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Meta Value</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
 															updateTermQueryArgs(newVal, item.id);
 														}}
@@ -1440,7 +1471,7 @@ function Html(props) {
 												<div
 													className={
 														item.id == "hide_empty"
-															? "flex items-center justify-between"
+															? "flex items-center justify-between flex-1"
 															: "hidden"
 													}>
 													<label htmlFor="">Hide Empty</label>
@@ -3885,7 +3916,7 @@ function Html(props) {
 									title="Click to know more"
 									onClick={() => {
 										setHelp({
-											id: "expandCollapseSetting",
+											id: "enableSearchSetting",
 											enable: true,
 										});
 									}}>

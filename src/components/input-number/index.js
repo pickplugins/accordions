@@ -34,7 +34,7 @@ function Html(props) {
         disabled={props.disabled}
 
         onChange={(newVal) => {
-          props.onChange(newVal);
+          props.onChange(newVal.target.value);
 
         }}
       />
