@@ -29,13 +29,20 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
     $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
+    $itemQueryArgs = isset($accordionData["itemQueryArgs"]) ? $accordionData["itemQueryArgs"] : [];
 
     if ($itemSource == "posts") {
-        $items = accordion_post_query_items();
+        $items = accordions_post_query_items($itemQueryArgs);
     }
     if ($itemSource == "terms") {
-        $items = accordion_terms_query_item();
+        $items = accordions_terms_query_item($itemQueryArgs);
     }
+    if ($itemSource == "easyAccordion") {
+        $items = accordions_easy_accordion_query_item($itemQueryArgs);
+    }
+
+
+    //var_dump(wp_json_encode($items));
 
     $expandCollapseAll = isset($accordionData["expandCollapseAll"]) ? $accordionData["expandCollapseAll"] : [];
     $expandCollapseAllOptions = isset($expandCollapseAll["options"]) ? $expandCollapseAll["options"] : [];
@@ -208,7 +215,6 @@ function accordions_builder_accordion($post_id, $accordionData)
     $activeIndex[] = 9999;
 
     $blockId = "accordions-" . $post_id;
-    //var_dump($activeIndex);
 
 
 
@@ -282,7 +288,6 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
 
-            //var_dump($contentShortcodes);
 
             if ($contentAutoembed) {
                 $WP_Embed = new WP_Embed();

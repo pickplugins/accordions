@@ -171,6 +171,15 @@ function Html(props) {
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
+		accordionDataX.itemQueryArgs = itemQueryArgs;
+		setaccordionData(accordionDataX);
+	}, [itemQueryArgs]);
+
+
+
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
 		accordionDataX.wrapper = wrapper;
 		setaccordionData(accordionDataX);
 	}, [wrapper]);
@@ -375,7 +384,7 @@ function Html(props) {
 		},
 	};
 	const updatePostQueryArgs = (newVal, index) => {
-		var itemQueryArgsX = [...itemQueryArgs];
+		var itemQueryArgsX = { ...itemQueryArgs };
 		itemQueryArgsX[index].value = newVal;
 		setitemQueryArgs(itemQueryArgsX);
 	};
@@ -482,9 +491,22 @@ function Html(props) {
 			longDescription: "Meta value or values to filter by.",
 		},
 	};
+	var easyAccordionQueryArgs = {
+		postId: {
+			value: "",
+			id: "postId",
+			label: __("Post Id", "accordions"),
+			description: "",
+			longDescription: "",
+		},
+
+	};
+
+
+
 
 	const updateTermQueryArgs = (newVal, index) => {
-		var itemQueryArgsX = [...itemQueryArgs];
+		var itemQueryArgsX = { ...itemQueryArgs };
 		itemQueryArgsX[index].value = newVal;
 		setitemQueryArgs(itemQueryArgsX);
 	};
@@ -495,16 +517,17 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		// posts: {
-		// 	label: "Posts",
-		// 	value: "posts",
-		// 	isPro: customerData.isPro ? false : true,
-		// },
-		// terms: {
-		// 	label: "Terms",
-		// 	value: "terms",
-		// 	isPro: customerData.isPro ? false : true,
-		// },
+		easyAccordion: { label: "Easy Accordion - FAQ Group", value: "easyAccordion" },
+		posts: {
+			label: "Posts",
+			value: "posts",
+			isPro: customerData.isPro ? false : true,
+		},
+		terms: {
+			label: "Terms",
+			value: "terms",
+			isPro: customerData.isPro ? false : true,
+		},
 	};
 
 	var iconSets = [
@@ -631,11 +654,11 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={postQueryArgs}
 											onChange={(option, index) => {
-												var itemQueryArgsX = [...itemQueryArgs];
-												itemQueryArgsX.push({
+												var itemQueryArgsX = { ...itemQueryArgs };
+												itemQueryArgsX[option.id] = {
 													id: option.id,
 													value: option.value,
-												});
+												};
 												setitemQueryArgs(itemQueryArgsX);
 											}}
 											values=""></PGDropdown>
@@ -660,11 +683,44 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-												var itemQueryArgsX = [...itemQueryArgs];
-												itemQueryArgsX.push({
+
+												console.log(option);
+
+
+												var itemQueryArgsX = { ...itemQueryArgs };
+												itemQueryArgsX[option.id] = {
 													id: option.id,
 													value: option.value,
+												};
+												setitemQueryArgs(itemQueryArgsX);
+											}}
+											values=""></PGDropdown>
+									</>
+								)}
+								{globalOptions?.itemSource == "easyAccordion" && (
+									<>
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "addTermQuery",
+													enable: true,
 												});
+											}}>
+											<Icon icon={help} />
+										</span>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Add Query"}
+											options={easyAccordionQueryArgs}
+											onChange={(option, index) => {
+												var itemQueryArgsX = { ...itemQueryArgs };
+												itemQueryArgsX[option.id] = {
+													id: option.id,
+													value: option.value,
+												};
 												setitemQueryArgs(itemQueryArgsX);
 											}}
 											values=""></PGDropdown>
@@ -936,9 +992,16 @@ function Html(props) {
 						</div>
 						{globalOptions?.itemSource == "posts" && (
 							<div>
-								{itemQueryArgs?.map((item, index) => {
+								{Object.entries(itemQueryArgs)?.map((prams) => {
+
+									var index = prams[0]
+									var item = prams[1]
+
+
 									return (
 										<div key={index} className="my-4">
+
+
 											{item.id == "postType" && (
 												<div className="flex items-center justify-between">
 													<label htmlFor="">Post Type</label>
@@ -948,7 +1011,7 @@ function Html(props) {
 														options={postTypes}
 														multiple={true}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -977,7 +1040,7 @@ function Html(props) {
 														]}
 														multiple={true}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1056,7 +1119,7 @@ function Html(props) {
 														]}
 														multiple={true}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1067,7 +1130,7 @@ function Html(props) {
 													<InputControl
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1078,7 +1141,7 @@ function Html(props) {
 													<InputControl
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1089,7 +1152,7 @@ function Html(props) {
 													<InputControl
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1100,7 +1163,7 @@ function Html(props) {
 													<InputControl
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1137,7 +1200,7 @@ function Html(props) {
 															{ label: "RLIKE", value: "RLIKE" },
 														]}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1149,9 +1212,12 @@ function Html(props) {
 						)}
 						{globalOptions?.itemSource == "terms" && (
 							<div>
-								{/* {JSON.stringify(itemQueryArgs)} */}
 
-								{itemQueryArgs?.map((item, index) => {
+								{Object.entries(itemQueryArgs)?.map((prams) => {
+
+									var index = prams[0]
+									var item = prams[1]
+
 									return (
 										<div key={index} className="my-4">
 											{item.id == "taxonomy" && (
@@ -1163,11 +1229,11 @@ function Html(props) {
 														options={taxonomiesObjects}
 														multiple={true}
 														onChange={(newVal) => {
-															var itemQueryArgsX = [...itemQueryArgs];
+															var itemQueryArgsX = { ...itemQueryArgs };
 															itemQueryArgsX[index].value = newVal;
 															setitemQueryArgs(itemQueryArgsX);
 
-															//updatePostQueryArgs(newVal, index);
+															//updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1223,7 +1289,7 @@ function Html(props) {
 														]}
 														multiple={true}
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1263,7 +1329,7 @@ function Html(props) {
 														value={item.value}
 														type="number"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1280,7 +1346,7 @@ function Html(props) {
 														value={item.value}
 														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1297,7 +1363,7 @@ function Html(props) {
 														value={item.value}
 														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1314,7 +1380,7 @@ function Html(props) {
 														value={item.value}
 														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1331,7 +1397,7 @@ function Html(props) {
 														value={item.value}
 														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1348,7 +1414,7 @@ function Html(props) {
 														value={item.value}
 														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1365,7 +1431,7 @@ function Html(props) {
 														value={item.value}
 														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1387,6 +1453,43 @@ function Html(props) {
 													/>
 												</div>
 											)}
+										</div>
+									);
+								})}
+							</div>
+						)}
+
+
+
+
+						{globalOptions?.itemSource == "easyAccordion" && (
+							<div>
+
+								{Object.entries(itemQueryArgs)?.map((prams) => {
+
+									var index = prams[0]
+									var item = prams[1]
+
+
+									return (
+										<div key={index} className="my-4">
+
+
+											{item.id == "postId" && (
+												<div
+													className={`flex items-center justify-between`}>
+													<label htmlFor="">FAQ Group ID</label>
+													<InputControl
+														value={item.value}
+														type="number"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, item.id);
+														}}
+													/>
+												</div>
+											)}
+
+
 										</div>
 									);
 								})}
