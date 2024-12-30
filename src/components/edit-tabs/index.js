@@ -14,7 +14,7 @@ import {
 	SelectControl,
 	ToggleControl,
 } from "@wordpress/components";
-import { brush, close, copy, help, menu, settings } from "@wordpress/icons";
+import { brush, close, copy, help, menu, settings, page, addCard, update } from "@wordpress/icons";
 
 import { RichText } from "@wordpress/block-editor";
 import breakPoints from "../../breakpoints";
@@ -84,8 +84,9 @@ function Html(props) {
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
+	var [customerData, setcustomerData] = useState(props.customerData);
 
-	var isProFeature = true
+	var [isProFeature, setisProFeature] = useState(true);
 
 	const gapValue = accOptions?.gap || "0px";
 	const [number, setNumber] = useState(parseInt(gapValue));
@@ -130,7 +131,11 @@ function Html(props) {
 		});
 	}, []);
 
-	useEffect(() => { }, [props.postData]);
+	useEffect(() => {
+		if (customerData.isPro) {
+			setisProFeature(false);
+		}
+	}, [props.customerData]);
 
 	useEffect(() => {
 		onChange(accordionData);
@@ -480,8 +485,17 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		posts: { label: "Posts", value: "posts", isPro: true },
-		terms: { label: "Terms", value: "terms", isPro: true },
+		easyAccordion: { label: "Easy Accordion - FAQ Group", value: "easyAccordion" },
+		posts: {
+			label: "Posts",
+			value: "posts",
+			isPro: customerData.isPro ? false : true,
+		},
+		terms: {
+			label: "Terms",
+			value: "terms",
+			isPro: customerData.isPro ? false : true,
+		},
 	};
 
 	function generate3Digit() {
@@ -504,13 +518,13 @@ function Html(props) {
 
 			{props.postData.post_content != null && (
 				<>
-					<div className="my-4 p-3">
+					{/* <div className="my-4 p-3">
 						<PanelRow>
 							<label htmlFor="">View Type?</label>
 							<PGDropdown
 								position="bottom right"
 								variant="secondary"
-								buttonTitle={viewTypeArgs[globalOptions.viewType]?.label}
+								buttonTitle={viewTypeArgs[globalOptions?.viewType]?.label}
 								options={viewTypeArgs}
 								onChange={(option, index) => {
 									var globalOptionsX = { ...globalOptions };
@@ -519,7 +533,7 @@ function Html(props) {
 								}}
 								values=""></PGDropdown>
 						</PanelRow>
-					</div>
+					</div> */}
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Items"
@@ -530,9 +544,9 @@ function Html(props) {
 									position="bottom right"
 									variant="secondary"
 									buttonTitle={
-										globalOptions.itemSource == undefined
+										globalOptions?.itemSource == undefined
 											? "Item Source"
-											: itemSources[globalOptions.itemSource]?.label
+											: itemSources[globalOptions?.itemSource]?.label
 									}
 									options={itemSources}
 									onChange={(option, index) => {
@@ -563,11 +577,11 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={postQueryArgs}
 											onChange={(option, index) => {
-												var itemQueryArgsX = [...itemQueryArgs];
-												itemQueryArgsX.push({
+												var itemQueryArgsX = { ...itemQueryArgs };
+												itemQueryArgsX[option.id] = {
 													id: option.id,
 													value: option.value,
-												});
+												};
 												setitemQueryArgs(itemQueryArgsX);
 											}}
 											values=""></PGDropdown>
@@ -592,11 +606,43 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-												var itemQueryArgsX = [...itemQueryArgs];
-												itemQueryArgsX.push({
+
+
+
+												var itemQueryArgsX = { ...itemQueryArgs };
+												itemQueryArgsX[option.id] = {
 													id: option.id,
 													value: option.value,
+												};
+												setitemQueryArgs(itemQueryArgsX);
+											}}
+											values=""></PGDropdown>
+									</>
+								)}
+								{globalOptions?.itemSource == "easyAccordion" && (
+									<>
+										<span
+											className="cursor-pointer"
+											title="Click to know more"
+											onClick={() => {
+												setHelp({
+													id: "addTermQuery",
+													enable: true,
 												});
+											}}>
+											<Icon icon={help} />
+										</span>
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={"Add Query"}
+											options={easyAccordionQueryArgs}
+											onChange={(option, index) => {
+												var itemQueryArgsX = { ...itemQueryArgs };
+												itemQueryArgsX[option.id] = {
+													id: option.id,
+													value: option.value,
+												};
 												setitemQueryArgs(itemQueryArgsX);
 											}}
 											values=""></PGDropdown>
@@ -605,46 +651,76 @@ function Html(props) {
 
 								{globalOptions?.itemSource == "manual" && (
 									<>
+										<div className="flex items-center gap-2">
+											<span
+												className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+												title="Click to paste"
+												onClick={async () => {
+													try {
+														// Read text from clipboard
+														const clipboardText =
+															await navigator.clipboard.readText();
+
+														// Parse the JSON string back to an object
+														const pastedItems = JSON.parse(clipboardText);
+
+														// Here you need to handle the pasted items
+														// For example, if you have a state setter:
+														setitems(pastedItems);
+
+														addNotifications({
+															title: "Items Pasted",
+															content: "You just pasted items, Now go to edit.",
+															type: "success",
+														});
+													} catch (error) {
+													}
+												}}>
+												<Icon icon={page} fill="#fff" size="20" />
+											</span>
+											<span
+												className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+												title="Click to copy"
+												onClick={() => {
+													try {
+														const itemsString = JSON.stringify(items, null, 2);
+
+														navigator.clipboard
+															.writeText(itemsString)
+															.then(() => {
+																addNotifications({
+																	title: "Items Copied",
+																	content:
+																		"You just copied items, Now go to edit.",
+																	type: "success",
+																});
+															})
+															.catch((err) => {
+															});
+													} catch (error) {
+													}
+												}}>
+												<Icon icon={copy} fill="#fff" size="20" />
+											</span>
+										</div>
 										<div
-											className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+											className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 											onClick={(ev) => {
 												var itemsX = [...items];
 
 												itemsX.push({
 													active: 0,
 													hideOnSchema: 0,
-													headerLabel: {
-														options: {
-															text: "Accordion Header",
-															toggledText: "Accordion Header Toggled",
-															slug: "",
-															tag: "",
-															class: "accordion-header-label",
-														},
-													},
-													content: {
-														options: {
-															tag: "",
-															class: "accordion-content",
-															text: "Accordion content",
-														},
-													},
-													icon: {
+													headerLabelText: "",
+													headerLabelSlug: "",
+													headerLabelToggledText: "",
+													contentText: "",
+
+													labelIcon: {
 														options: {
 															library: "fontAwesome",
 															srcType: "class",
-															iconSrc: "fas fa-angle-down",
-															position: "left",
-															class: "accordion-icon",
-														},
-														styles: {},
-													},
-													iconToggle: {
-														options: {
-															library: "fontAwesome",
-															srcType: "class",
-															iconSrc: " fas fa-angle-up",
-															class: "accordion-icon-toggle",
+															iconSrc: "",
 														},
 														styles: {},
 													},
@@ -652,11 +728,12 @@ function Html(props) {
 												setitems(itemsX);
 
 												addNotifications({
-													content: "Item Added",
+													title: "Item Added",
+													content: "You just added an item, Now go to edit.",
 													type: "success",
 												});
 											}}>
-											Add New
+											<Icon icon={addCard} fill="#fff" size="20" />
 										</div>
 										<div className=" tracking-wide ">
 											<div
@@ -664,6 +741,17 @@ function Html(props) {
 												onClick={(ev) => {
 													ev.preventDefault();
 													ev.stopPropagation();
+
+													if (isProFeature) {
+														addNotifications({
+															title: "Opps its pro!",
+															content:
+																"This feature only avilable in premium version",
+															type: "error",
+														});
+														return;
+													}
+
 													setAIWriter(!AIWriter);
 												}}>
 												AI
@@ -711,38 +799,16 @@ function Html(props) {
 																		faqX.push({
 																			active: 0,
 																			hideOnSchema: 0,
-																			headerLabel: {
-																				options: {
-																					text: question,
-																					toggledText: "",
-																					slug: "",
-																					tag: "",
-																					class: "accordion-header-label",
-																				},
-																			},
-																			content: {
-																				options: {
-																					tag: "",
-																					class: "accordion-content",
-																					text: answer,
-																				},
-																			},
-																			icon: {
+																			headerLabelText: question,
+																			headerLabelSlug: "",
+
+																			headerLabelToggledText: "",
+																			contentText: answer,
+																			labelIcon: {
 																				options: {
 																					library: "fontAwesome",
 																					srcType: "class",
-																					iconSrc: "fas fa-angle-down",
-																					position: "left",
-																					class: "accordion-icon",
-																				},
-																				styles: {},
-																			},
-																			iconToggle: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: " fas fa-angle-up",
-																					class: "accordion-icon-toggle",
+																					iconSrc: "",
 																				},
 																				styles: {},
 																			},
@@ -752,7 +818,9 @@ function Html(props) {
 																	setitems([...faqX, ...itemsX]);
 
 																	addNotifications({
-																		content: "Items append",
+																		title: "Items append",
+																		content:
+																			"Items append, You can customize now.",
 																		type: "success",
 																	});
 																}
@@ -768,38 +836,16 @@ function Html(props) {
 																		faqX.push({
 																			active: 0,
 																			hideOnSchema: 0,
-																			headerLabel: {
-																				options: {
-																					text: question,
-																					toggledText: "",
-																					slug: "",
-																					tag: "",
-																					class: "accordion-header-label",
-																				},
-																			},
-																			content: {
-																				options: {
-																					tag: "",
-																					class: "accordion-content",
-																					text: answer,
-																				},
-																			},
-																			icon: {
+																			headerLabelText: question,
+																			headerLabelSlug: "",
+
+																			headerLabelToggledText: "",
+																			contentText: answer,
+																			labelIcon: {
 																				options: {
 																					library: "fontAwesome",
 																					srcType: "class",
-																					iconSrc: "fas fa-angle-down",
-																					position: "left",
-																					class: "accordion-icon",
-																				},
-																				styles: {},
-																			},
-																			iconToggle: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: " fas fa-angle-up",
-																					class: "accordion-icon-toggle",
+																					iconSrc: "",
 																				},
 																				styles: {},
 																			},
@@ -809,7 +855,9 @@ function Html(props) {
 																	setitems([...itemsX, ...faqX]);
 
 																	addNotifications({
-																		content: "Items append",
+																		title: "Items Append",
+																		content:
+																			"Items append, You can customize now.",
 																		type: "success",
 																	});
 																}
@@ -825,38 +873,15 @@ function Html(props) {
 																		faqX.push({
 																			active: 0,
 																			hideOnSchema: 0,
-																			headerLabel: {
-																				options: {
-																					text: question,
-																					toggledText: "",
-																					slug: "",
-																					tag: "",
-																					class: "accordion-header-label",
-																				},
-																			},
-																			content: {
-																				options: {
-																					tag: "",
-																					class: "accordion-content",
-																					text: answer,
-																				},
-																			},
-																			icon: {
+																			headerLabelText: question,
+																			headerLabelSlug: "",
+																			headerLabelToggledText: "",
+																			contentText: answer,
+																			labelIcon: {
 																				options: {
 																					library: "fontAwesome",
 																					srcType: "class",
-																					iconSrc: "fas fa-angle-down",
-																					position: "left",
-																					class: "accordion-icon",
-																				},
-																				styles: {},
-																			},
-																			iconToggle: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: " fas fa-angle-up",
-																					class: "accordion-icon-toggle",
+																					iconSrc: "",
 																				},
 																				styles: {},
 																			},
@@ -866,7 +891,9 @@ function Html(props) {
 																	setitems(faqX);
 
 																	addNotifications({
-																		content: "Items Added",
+																		title: "Items Added",
+																		content:
+																			"You just added an item, Now go to edit.",
 																		type: "success",
 																	});
 																}
@@ -884,28 +911,44 @@ function Html(props) {
 						</div>
 						{globalOptions?.itemSource == "posts" && (
 							<div>
-								{itemQueryArgs?.map((item, index) => {
+								{Object.entries(itemQueryArgs)?.map((prams) => {
+
+									var index = prams[0]
+									var item = prams[1]
+
+
 									return (
-										<div key={index} className="my-4">
+										<div key={index} className="my-4 flex gap-2 items-center">
+											<span
+												className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white"
+												onClick={() => handleDelete(item.id)}>
+												<Icon fill={"#fff"} icon={close} size="20" />
+											</span>
 											{item.id == "postType" && (
-												<div>
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Post Type</label>
 													<PGinputSelect
 														val={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={postTypes}
 														multiple={true}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "postStatus" && (
 												<div
-													className={item.id == "postStatus" ? "" : "hidden"}>
+													className={
+														item.id == "postStatus"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Post Status</label>
 													<PGinputSelect
 														val={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{ label: "Publish", value: "publish" },
 															{ label: "Pending", value: "pending" },
@@ -919,22 +962,28 @@ function Html(props) {
 														]}
 														multiple={true}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "order" && (
-												<div className={item.id == "order" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "order"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Order</label>
-													<SelectControl
-														style={{ margin: 0 }}
+													<PGinputSelect
 														label=""
-														value={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
+														val={item.value}
 														options={[
 															{ label: "Ascending", value: "ASC" },
 															{ label: "Descending", value: "DESC" },
 														]}
+														multiple={false}
 														onChange={(newVal) =>
 															updatePostQueryArgs(newVal, index)
 														}
@@ -942,10 +991,16 @@ function Html(props) {
 												</div>
 											)}
 											{item.id == "orderby" && (
-												<div className={item.id == "orderby" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "orderby"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Order By</label>
 													<PGinputSelect
 														val={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{
 																label: __("None", "accordions"),
@@ -986,62 +1041,74 @@ function Html(props) {
 														]}
 														multiple={true}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "metaKey" && (
-												<div>
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Meta Key</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "metaValue" && (
-												<div>
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Meta Value</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "metaValueNum" && (
-												<div>
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Meta Value Number</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "s" && (
-												<div>
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Keyword</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "metaCompare" && (
-												<div>
+												<div
+													className={
+														item.id == "metaCompare"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Meta Compare</label>
-													<SelectControl
-														style={{ margin: 0 }}
-														label=""
-														value={item.value}
+													<PGinputSelect
+														val={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{ label: "=", value: "=" },
 															{ label: "!=", value: "!=" },
@@ -1061,7 +1128,7 @@ function Html(props) {
 															{ label: "RLIKE", value: "RLIKE" },
 														]}
 														onChange={(newVal) => {
-															updatePostQueryArgs(newVal, index);
+															updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
@@ -1073,33 +1140,48 @@ function Html(props) {
 						)}
 						{globalOptions?.itemSource == "terms" && (
 							<div>
-								{JSON.stringify(itemQueryArgs)}
 
-								{itemQueryArgs?.map((item, index) => {
+								{Object.entries(itemQueryArgs)?.map((prams) => {
+
+									var index = prams[0]
+									var item = prams[1]
+
 									return (
-										<div key={index} className="my-4">
+										<div key={index} className="my-4 flex gap-2 items-center">
+											<span
+												className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white"
+												onClick={() => handleDelete(item.id)}>
+												<Icon fill={"#fff"} icon={close} size="20" />
+											</span>
 											{item.id == "taxonomy" && (
-												<div>
+												<div className="flex items-center justify-between flex-1">
 													<label htmlFor="">Taxonomy</label>
 													<PGinputSelect
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														val={item.value}
 														options={taxonomiesObjects}
 														multiple={true}
 														onChange={(newVal) => {
-															var itemQueryArgsX = [...itemQueryArgs];
+															var itemQueryArgsX = { ...itemQueryArgs };
 															itemQueryArgsX[index].value = newVal;
 															setitemQueryArgs(itemQueryArgsX);
 
-															//updatePostQueryArgs(newVal, index);
+															//updatePostQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "orderby" && (
-												<div className={item.id == "orderby" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "orderby"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Order By</label>
-													<SelectControl
-														value={item.value}
+													<PGinputSelect
+														val={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														options={[
 															{
 																label: __("None", "accordions"),
@@ -1140,123 +1222,170 @@ function Html(props) {
 														]}
 														multiple={true}
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "order" && (
-												<div className={item.id == "order" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "order"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Order</label>
-													<SelectControl
-														style={{ margin: 0 }}
+													<PGinputSelect
 														label=""
-														value={item.value}
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
+														val={item.value}
 														options={[
 															{ label: "Ascending", value: "ASC" },
 															{ label: "Descending", value: "DESC" },
 														]}
+														multiple={false}
 														onChange={(newVal) =>
-															updateTermQueryArgs(newVal, index)
+															updatePostQueryArgs(newVal, index)
 														}
 													/>
 												</div>
 											)}
 											{item.id == "number" && (
-												<div className={item.id == "number" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "number"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Number</label>
-													<InputControl
+													<PGinputNumber
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="number"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "include" && (
-												<div className={item.id == "include" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "include"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Include</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "exclude" && (
-												<div className={item.id == "exclude" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "exclude"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Exclude</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "child_of" && (
-												<div className={item.id == "child_of" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "child_of"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Child Of</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "parent" && (
-												<div className={item.id == "parent" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "parent"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Parent</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "meta_key" && (
-												<div className={item.id == "meta_key" ? "" : "hidden"}>
+												<div
+													className={
+														item.id == "meta_key"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Meta Key</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "meta_value" && (
 												<div
-													className={item.id == "meta_value" ? "" : "hidden"}>
+													className={
+														item.id == "meta_value"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
 													<label htmlFor="">Meta Value</label>
-													<InputControl
+													<PGinputText
+														label=""
+														className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
 														value={item.value}
-														type="text"
 														onChange={(newVal) => {
-															updateTermQueryArgs(newVal, index);
+															updateTermQueryArgs(newVal, item.id);
 														}}
 													/>
 												</div>
 											)}
 											{item.id == "hide_empty" && (
-												<div>
-													<ToggleControl
-														label={termQueryArgs[item.id].label}
-														help={
-															item.value
-																? "Hide Empty Enabled"
-																: "Hide Empty Disabled"
-														}
-														checked={item.value ? true : false}
+												<div
+													className={
+														item.id == "hide_empty"
+															? "flex items-center justify-between flex-1"
+															: "hidden"
+													}>
+													<label htmlFor="">Hide Empty</label>
+													<Toggle
+														value={item?.value}
 														onChange={() => {
 															const newValue = !itemQueryArgs[index].value;
 															updateTermQueryArgs(newValue, index);
@@ -1270,13 +1399,60 @@ function Html(props) {
 							</div>
 						)}
 
+
+
+
+						{globalOptions?.itemSource == "easyAccordion" && (
+							<div>
+
+								{Object.entries(itemQueryArgs)?.map((prams) => {
+
+									var index = prams[0]
+									var item = prams[1]
+
+
+									return (
+										<div key={index} className="my-4">
+
+
+											{item.id == "postId" && (
+												<div
+													className={`flex items-center justify-between`}>
+													<label htmlFor="">FAQ Group ID</label>
+													<InputControl
+														value={item.value}
+														type="number"
+														onChange={(newVal) => {
+															updateTermQueryArgs(newVal, item.id);
+														}}
+													/>
+												</div>
+											)}
+
+
+										</div>
+									);
+								})}
+							</div>
+						)}
+
 						{globalOptions?.itemSource == "manual" && (
 							<div>
 								<ReactSortable
 									list={items}
 									handle={".handle"}
-									setList={(item) => {
-										setitems(item);
+									setList={(itemsSorted) => {
+
+
+										setTimeout(() => {
+											setitems(itemsSorted);
+										}, 200)
+
+										addNotifications({
+											title: "Items Sorted",
+											content: "You just sorted items",
+											type: "success",
+										});
 									}}>
 									{items?.map((item, index) => {
 										return (
@@ -1287,20 +1463,28 @@ function Html(props) {
 														onClick={(ev) => {
 															setitemActive(index == itemActive ? 999 : index);
 														}}>
-														<div>{item?.headerLabel.options.text}</div>
+														<div>{item?.headerLabelText}</div>
 														<div className="flex items-center gap-2">
-															<span className="handle cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
-																<Icon fill={"#fff"} icon={menu} />
+															<span className="handle  cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
+																<Icon size="20" fill={"#fff"} icon={menu} />
 															</span>
 															<span
 																className="cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
 																onClick={(ev) => {
+																	ev.stopPropagation();
+
 																	var itemsX = [...items];
 																	var itemToDup = { ...itemsX[index] };
 																	itemsX.splice(index + 1, 0, itemToDup);
 																	setitems(itemsX);
+
+																	addNotifications({
+																		title: "Item Duplicated",
+																		content: "You just duplicate an item",
+																		type: "success",
+																	});
 																}}>
-																<Icon fill={"#fff"} icon={copy} />
+																<Icon size="20" fill={"#fff"} icon={copy} />
 															</span>
 															<span
 																className="cursor-pointer bg-red-700 hover:bg-red-600 hover:text-white px-1 py-1"
@@ -1309,8 +1493,14 @@ function Html(props) {
 																	var itemsX = [...items];
 																	itemsX.splice(index, 1);
 																	setitems(itemsX);
+
+																	addNotifications({
+																		title: "Item Removed",
+																		content: "You just removed an item",
+																		type: "success",
+																	});
 																}}>
-																<Icon fill={"#fff"} icon={close} />
+																<Icon size="20" fill={"#fff"} icon={close} />
 															</span>
 														</div>
 													</div>
@@ -1319,119 +1509,61 @@ function Html(props) {
 														<div className="py-2 w-full">
 															<div className="mb-3">
 																<RichText
+																	placeholder="Write Header Text..."
 																	className="bg-slate-100 p-3 "
 																	tagName={"div"}
-																	value={item?.headerLabel.options.text}
+																	value={item?.headerLabelText}
 																	allowedFormats={[
 																		"core/bold",
 																		"core/italic",
 																		"core/link",
 																	]}
 																	onChange={(content) => {
-																		// var itemsX = [...items];
-
-																		// itemsX[index].headerLabel.options.text =
-																		// 	content;
-																		// setitems(itemsX);
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				headerLabel: {
-																					...updatedItems[index].headerLabel,
-																					options: {
-																						...updatedItems[index].headerLabel
-																							.options,
-																						text: content,
-																					},
-																				},
+																				headerLabelText: content,
 																			};
 																			return updatedItems;
 																		});
 																	}}
-																	placeholder={""}
 																/>
 															</div>
 															<div className="mb-3">
 																<PGinputTextarea
+																	placeholder="Write Header Text..."
 																	id={`content-${index}-${generate3Digit()}`}
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={item?.content.options.text}
+																	value={item?.contentText}
 																	onChange={(content) => {
-																		// var itemsX = [...items];
-
-																		// itemsX[index].content.options.text =
-																		// 	content;
-																		// setitems(itemsX);
-
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				content: {
-																					...updatedItems[index].content,
-																					options: {
-																						...updatedItems[index].content
-																							.options,
-																						text: content,
-																					},
-																				},
+																				contentText: content,
 																			};
 																			return updatedItems;
 																		});
 																	}}
 																/>
-
-																{/* <RichText
-																	className={`bg-slate-100 p-3 min-h-24`}
-																	tagName={"div"}
-																	value={item?.content.options.text}
-																	allowedFormats={[
-																		"core/bold",
-																		"core/italic",
-																		"core/link",
-																	]}
-																	onChange={(content) => {
-																		setitems((prevItems) => {
-																			const updatedItems = [...prevItems];
-																			updatedItems[index] = {
-																				...updatedItems[index],
-																				content: {
-																					...updatedItems[index].content,
-																					options: {
-																						...updatedItems[index].content
-																							.options,
-																						text: content,
-																					},
-																				},
-																			};
-																			return updatedItems;
-																		});
-																	}}
-																	placeholder={"Write details"}
-																/> */}
 															</div>
 															<div className="mb-3">
 																<PanelRow>
 																	<label htmlFor="">Active</label>
-																	<SelectControl
-																		label=""
-																		value={item?.active ?? 0}
-																		options={[
-																			{
-																				label: __("True", "accordions"),
-																				value: 1,
-																			},
-																			{
-																				label: __("False", "accordions"),
-																				value: 0,
-																			},
-																		]}
-																		onChange={(newVal) => {
-																			// var itemsX = [...items];
 
-																			// itemsX[index].active = newVal;
-																			// setitems(itemsX);
+																	<Toggle
+																		value={item?.active ?? 0}
+																		onChange={(newVal) => {
+																			if (isProFeature) {
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content:
+																						"This feature only available in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
 
 																			setitems((prevItems) => {
 																				const updatedItems = [...prevItems];
@@ -1448,24 +1580,19 @@ function Html(props) {
 															<div className="mb-3">
 																<PanelRow>
 																	<label htmlFor="">Hide On Schema</label>
-																	<SelectControl
-																		label=""
-																		value={item?.hideOnSchema ?? 0}
-																		options={[
-																			{
-																				label: __("True", "accordions"),
-																				value: 1,
-																			},
-																			{
-																				label: __("False", "accordions"),
-																				value: 0,
-																			},
-																		]}
-																		onChange={(newVal) => {
-																			// var itemsX = [...items];
 
-																			// itemsX[index].hideOnSchema = newVal;
-																			// setitems(itemsX);
+																	<Toggle
+																		value={item?.hideOnSchema ?? 0}
+																		onChange={(newVal) => {
+																			if (isProFeature) {
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content:
+																						"This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
 
 																			setitems((prevItems) => {
 																				const updatedItems = [...prevItems];
@@ -1478,6 +1605,183 @@ function Html(props) {
 																		}}
 																	/>
 																</PanelRow>
+
+																{/* <PanelRow>
+																	<label htmlFor="" className="font-medium text-slate-900 ">
+																		{__("Icon Idle", "accordions")}
+																	</label>
+																	<PGIconPicker
+																		library={item?.icon?.options?.library}
+																		srcType={item?.icon?.options?.srcType}
+																		iconSrc={item?.icon?.options?.iconSrc}
+																		onChange={(arg) => {
+
+																			if (isProFeature) {
+
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content: "This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					icon: {
+																						...updatedItems[index].icon,
+																						options: {
+																							...updatedItems[index]?.icon?.options,
+																							srcType: arg.srcType,
+																							library: arg.library,
+																							iconSrc: arg.iconSrc,
+																						}
+
+																					},
+																				};
+																				return updatedItems;
+																			});
+
+
+																		}}
+																	/>
+																</PanelRow>
+																<PanelRow>
+																	<label htmlFor="" className="font-medium text-slate-900 ">
+																		{__("Icon Toggled", "accordions")}
+																	</label>
+																	<PGIconPicker
+																		library={item?.iconToggle?.options?.library}
+																		srcType={item?.iconToggle?.options?.srcType}
+																		iconSrc={item?.iconToggle?.options?.iconSrc}
+																		onChange={(arg) => {
+
+																			if (isProFeature) {
+
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content: "This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					iconToggle: {
+																						...updatedItems[index].iconToggle,
+																						options: {
+																							...updatedItems[index]?.iconToggle?.options,
+																							srcType: arg.srcType,
+																							library: arg.library,
+																							iconSrc: arg.iconSrc,
+																						}
+
+																					},
+																				};
+																				return updatedItems;
+																			});
+
+
+																		}}
+																	/>
+																</PanelRow> */}
+																<PanelRow>
+																	<label
+																		htmlFor=""
+																		className="font-medium text-slate-900 ">
+																		{__("Label Icon", "accordions")}
+																	</label>
+																	<PGIconPicker
+																		library={item?.labelIcon?.options?.library}
+																		srcType={item?.labelIcon?.options?.srcType}
+																		iconSrc={item?.labelIcon?.options?.iconSrc}
+																		onChange={(arg) => {
+																			if (isProFeature) {
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content:
+																						"This feature only avilable in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					labelIcon: {
+																						...updatedItems[index].labelIcon,
+																						options: {
+																							...updatedItems[index]?.labelIcon
+																								?.options,
+																							srcType: arg.srcType,
+																							library: arg.library,
+																							iconSrc: arg.iconSrc,
+																						},
+																					},
+																				};
+																				return updatedItems;
+																			});
+																		}}
+																	/>
+																</PanelRow>
+
+																<div className="w-full">
+																	<div className="mb-2">Slug</div>
+																	<div className="flex items-center gap-2">
+																		<PGinputText
+																			className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+																			label=""
+																			value={item?.headerLabelSlug}
+																			onChange={(newVal) => {
+																				if (isProFeature) {
+																					addNotifications({
+																						title: "Opps its pro!",
+																						content:
+																							"This feature only avilable in premium version",
+																						type: "error",
+																					});
+																					return;
+																				}
+
+																				setitems((prevItems) => {
+																					const updatedItems = [...prevItems];
+																					updatedItems[index] = {
+																						...updatedItems[index],
+																						headerLabelSlug: newVal,
+																					};
+																					return updatedItems;
+																				});
+																			}}
+																		/>
+
+																		<div
+																			title="Generate from Label"
+																			className="cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
+																			onClick={(ev) => {
+																				var slug = item?.headerLabelText
+																					.toLowerCase()
+																					.replaceAll(" ", "-");
+
+																				setitems((prevItems) => {
+																					const updatedItems = [...prevItems];
+																					updatedItems[index] = {
+																						...updatedItems[index],
+																						headerLabelSlug: slug,
+																					};
+																					return updatedItems;
+																				});
+																			}}>
+																			<Icon fill={"#fff"} icon={update} />
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 													)}
@@ -1690,13 +1994,13 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={wrapper.options.class}
+										value={wrapper?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...wrapper,
 												options: {
-													...wrapper.options,
+													...wrapper?.options,
 													class: newVal,
 												},
 											};
@@ -1786,7 +2090,7 @@ function Html(props) {
 									</label>
 									<SelectControl
 										label=""
-										value={labelCounter.options.position}
+										value={labelCounter?.options?.position}
 										options={[
 											{
 												label: __("Choose Position", "accordions"),
@@ -1821,13 +2125,13 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={labelCounter.options.class}
+										value={labelCounter?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...labelCounter,
 												options: {
-													...labelCounter.options,
+													...labelCounter?.options,
 													class: newVal,
 												},
 											};
@@ -1907,9 +2211,9 @@ function Html(props) {
 											{__("Choose Icon", "accordions")}
 										</label>
 										<PGIconPicker
-											library={icon.options.library}
-											srcType={icon.options.srcType}
-											iconSrc={icon.options.iconSrc}
+											library={icon?.options?.library}
+											srcType={icon?.options?.srcType}
+											iconSrc={icon?.options?.iconSrc}
 											onChange={(arg) => {
 												var iconX = { ...icon };
 
@@ -1930,9 +2234,9 @@ function Html(props) {
 											{__("Choose Toggle Icon", "accordions")}
 										</label>
 										<PGIconPicker
-											library={iconToggle.options.library}
-											srcType={iconToggle.options.srcType}
-											iconSrc={iconToggle.options.iconSrc}
+											library={iconToggle?.options?.library}
+											srcType={iconToggle?.options?.srcType}
+											iconSrc={iconToggle?.options?.iconSrc}
 											onChange={(arg) => {
 												var iconToggleX = { ...iconToggle };
 
@@ -1955,7 +2259,7 @@ function Html(props) {
 										</label>
 										<SelectControl
 											label=""
-											value={icon.options.position}
+											value={icon?.options?.position}
 											options={[
 												{
 													label: __("Choose Position", "accordions"),
@@ -1982,13 +2286,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={icon.options.class}
+											value={icon?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...icon,
 													options: {
-														...icon.options,
+														...icon?.options,
 														class: newVal,
 													},
 												};
@@ -2049,13 +2353,13 @@ function Html(props) {
 											{__("Class", "accordions")}
 										</label>
 										<PGinputText
-											value={iconToggle.options.class}
+											value={iconToggle?.options?.class}
 											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 											onChange={(newVal) => {
 												var optionsX = {
 													...iconToggle,
 													options: {
-														...iconToggle.options,
+														...iconToggle?.options,
 														class: newVal,
 													},
 												};
@@ -2137,7 +2441,7 @@ function Html(props) {
 											var optionsX = {
 												...navsWrap,
 												options: {
-													...navsWrap.options,
+													...navsWrap?.options,
 													class: newVal,
 												},
 											};

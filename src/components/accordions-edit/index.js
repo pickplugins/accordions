@@ -56,13 +56,7 @@ function Html(props) {
 
 	var postData = props.postData;
 
-	if (postData.post_content == null) {
-		return (
-			<div className="p-3 my-5 bg-orange-400">
-				Please choose an accordion first.
-			</div>
-		);
-	}
+
 
 	var breakPointX = "Desktop";
 
@@ -523,7 +517,7 @@ function Html(props) {
 
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
-		// tabs: { label: "Tabs", value: "tabs" },
+		tabs: { label: "Tabs", value: "tabs" },
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
@@ -553,6 +547,10 @@ function Html(props) {
 
 	return (
 		<div className="">
+
+
+
+
 			<div
 				className="hidden"
 				onClick={() => {
@@ -605,7 +603,7 @@ function Html(props) {
 
 			{props.postData.post_content != null && (
 				<>
-					<div className="my-4 p-3">
+					{/* <div className="my-4 p-3">
 						<PanelRow>
 							<label htmlFor="">View Type?</label>
 							<PGDropdown
@@ -620,7 +618,7 @@ function Html(props) {
 								}}
 								values=""></PGDropdown>
 						</PanelRow>
-					</div>
+					</div> */}
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Items"
@@ -694,7 +692,6 @@ function Html(props) {
 											options={termQueryArgs}
 											onChange={(option, index) => {
 
-												console.log(option);
 
 
 												var itemQueryArgsX = { ...itemQueryArgs };
@@ -762,7 +759,6 @@ function Html(props) {
 															type: "success",
 														});
 													} catch (error) {
-														console.error("Failed to paste items: ", error);
 													}
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
@@ -785,10 +781,8 @@ function Html(props) {
 																});
 															})
 															.catch((err) => {
-																console.error("Failed to copy: ", err);
 															});
 													} catch (error) {
-														console.error("Failed to copy items: ", error);
 													}
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
@@ -3208,7 +3202,6 @@ function Html(props) {
 									<div className="flex flex-col gap-1 border border-solid border-slate-300"
 										key={index}
 										onClick={() => {
-											console.log(item);
 											var iconX = { ...icon };
 											var optionsX = {
 												...iconX.options,

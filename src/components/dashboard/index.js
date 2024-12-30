@@ -2,7 +2,7 @@ const { Component, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { __ } from "@wordpress/i18n";
 
-import { Popover, Spinner } from "@wordpress/components";
+import { Popover, Spinner, PanelRow } from "@wordpress/components";
 import {
 	Icon,
 	brush,
@@ -14,6 +14,7 @@ import {
 } from "@wordpress/icons";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
+import PGDropdown from "../dropdown";
 
 import TabsEdit from "../../components/edit-tabs";
 import AccordionsEdit from "../../components/accordions-edit";
@@ -21,8 +22,9 @@ import AccordionsGuide from "../../components/accordions-guide";
 import AccordionsView from "../../components/accordions-view";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
-import WCPSList from "../../components/wcps-list";
+import AccordionsList from "../../components/accordions-list";
 import accordionDefaultData from "./accordion-default-data";
+import tabsDefaultData from "./tabs-default-data";
 import accordionTemplates from "./accordion-templates";
 import AccordionsGenerateCss from "./generate-css";
 import PGHelp from "./help";
@@ -39,10 +41,11 @@ function Html(props) {
 	var [activeAccordion, setActiveAccordion] = useState(null);
 	var [postData, setpostData] = useState({
 		ID: null,
-		post_content: accordionDefaultData,
+		post_content: {},
 		post_title: "",
 	});
 	var [accordionData, setaccordionData] = useState(postData?.post_content);
+	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
 
 	var [isLoading, setisLoading] = useState(false);
 	var [pleaseUpdate, setpleaseUpdate] = useState(false);
@@ -56,6 +59,64 @@ function Html(props) {
 	var [customerData, setcustomerData] = useState({ id: "", isPro: false });
 	var [isProFeature, setisProFeature] = useState(true);
 
+	var viewTypeArgs = {
+		accordion: { label: "Accordion", value: "accordion" },
+		tabs: { label: "Tabs", value: "tabs" },
+	};
+
+	useEffect(() => {
+
+		setaccordionData(postData.post_content);
+		setglobalOptions(postData.post_content.globalOptions);
+	}, [postData]);
+
+	useEffect(() => {
+		console.log(accordionData.globalOptions);
+
+		//setglobalOptions(accordionData.globalOptions);
+	}, [accordionData]);
+
+
+	useEffect(() => {
+
+		console.log(globalOptions);
+
+
+		if (globalOptions?.viewType == "accordion") {
+			setpostData({ ...postData, post_content: accordionDefaultData })
+		}
+		if (globalOptions?.viewType == "tabs") {
+			setpostData({ ...postData, post_content: tabsDefaultData })
+		}
+
+	}, [globalOptions]);
+
+	useEffect(() => {
+		setisLoading(true);
+
+		if (activeAccordion == null) return;
+
+		apiFetch({
+			path: "/accordions/v2/accordions_data",
+			method: "POST",
+			data: {
+				postId: activeAccordion,
+				_wpnonce: accordions_builder_js._wpnonce,
+			},
+		}).then((res) => {
+			setisLoading(false);
+
+			if (res?.post_content?.length == 0) {
+				res.post_content = accordionDefaultData;
+			}
+
+			setpostData(res);
+		});
+	}, [activeAccordion]);
+
+
+
+
 	useEffect(() => {
 		setnotifications(notifications);
 
@@ -66,14 +127,30 @@ function Html(props) {
 
 		return () => clearTimeout(timer); // Cleanup timer on value change or unmount
 	}, [notifications]);
+
+
 	useEffect(() => {
 
 		if (customerData.isPro) {
 			setisProFeature(false)
-
 		}
 
 	}, [customerData]);
+
+	useEffect(() => {
+
+		if (globalOptions?.viewType == "accordion") {
+			setpostData({ ...postData, post_content: accordionDefaultData })
+
+		}
+		if (globalOptions?.viewType == "tabs") {
+			setpostData({ ...postData, post_content: tabsDefaultData })
+
+		}
+
+
+	}, [globalOptions?.viewType]);
+
 
 
 
@@ -153,28 +230,7 @@ function Html(props) {
 		});
 	}
 
-	useEffect(() => {
-		setisLoading(true);
 
-		if (activeAccordion == null) return;
-
-		apiFetch({
-			path: "/accordions/v2/accordions_data",
-			method: "POST",
-			data: {
-				postId: activeAccordion,
-				_wpnonce: accordions_builder_js._wpnonce,
-			},
-		}).then((res) => {
-			setisLoading(false);
-			if (res?.post_content?.length == 0) {
-				res.post_content = accordionDefaultData;
-			}
-
-			setpostData(res);
-			setaccordionData(res.post_content);
-		});
-	}, [activeAccordion]);
 
 	useEffect(() => {
 		apiFetch({
@@ -460,7 +516,7 @@ function Html(props) {
 											</div>
 										)}
 
-										<WCPSList
+										<AccordionsList
 											addNotifications={addNotifications}
 											selectAccordion={selectAccordion}
 											activeAccordion={activeAccordion}
@@ -472,10 +528,42 @@ function Html(props) {
 
 
 
+
 									<div className=" ">
 										{postData?.ID != null && (
 											<>
-												{accordionData?.globalOptions?.viewType == "accordion" && (
+
+												{JSON.stringify(globalOptions)}
+												sdfd
+
+												<div className="my-4 p-3">
+													<PanelRow>
+														<label htmlFor="">View Type?</label>
+														<PGDropdown
+															position="bottom right"
+															variant="secondary"
+															buttonTitle={globalOptions?.viewType ? viewTypeArgs[globalOptions?.viewType]?.label : "Choose"}
+															options={viewTypeArgs}
+															onChange={(option, index) => {
+
+																//if (confirm("Data will reset, Please confirm?")) {
+																var globalOptionsX = { ...globalOptions };
+																globalOptionsX.viewType = option.value;
+																setglobalOptions(globalOptionsX);
+																//}
+
+
+
+
+															}}
+															values=""></PGDropdown>
+													</PanelRow>
+												</div>
+
+												{/* {JSON.stringify(postData)} */}
+
+
+												{globalOptions?.viewType == "accordion" && (
 													<AccordionsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
@@ -484,7 +572,7 @@ function Html(props) {
 														setHelp={setHelp}
 													/>
 												)}
-												{accordionData?.globalOptions?.viewType == "tabs" && (
+												{globalOptions?.viewType == "tabs" && (
 													<TabsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
