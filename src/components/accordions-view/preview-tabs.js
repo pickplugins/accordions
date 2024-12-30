@@ -48,6 +48,13 @@ function Html(props) {
 	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 	var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
 
+	var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
+	var [navItem, setnavItem] = useState(accordionData?.navItem);
+	var [activeNavItem, setactiveNavItem] = useState(
+		accordionData?.activeNavItem
+	);
+	var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
+	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
 
 	const [toggled, setToggled] = useState(false);
 	const [labelIconHtml, setlabelIconHtml] = useState("");
@@ -309,6 +316,7 @@ function Html(props) {
 				})} */}
 
 
+
 				<div className={" navs-wrapper  "} role="tablist">
 					{items.map((tab, index) => {
 						return (
@@ -321,37 +329,25 @@ function Html(props) {
 								role="tab"
 								tabIndex={index}
 								onClick={() => setactiveTab(index)}>
+
+								{labelCounter?.options.position == "left" && (
+									<span className={` accordion-label-counter`}>{index}</span>
+								)}
+
 								{icon.options.position == "before" && (
 									<>
 										{index == activeTab ? (
 											<>
-												{(tab.iconToggle?.iconSrc != undefined ||
-													tab.iconToggle?.iconSrc.length != 0) && (
-														<div
-															className="nav-icon"
-														>
-															<span
-																className={
-																	iconToggle.options?.iconSrc
-																}></span>
-														</div>
-													)}
+												<span
+													className={` nav-icon-toggle`}
+													dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
 											</>
 										) : (
 											<>
-												{(tab.icon != undefined || tab.icon != null) && (
-													<>
-														{(tab.icon.iconSrc != undefined ||
-															tab.icon.iconSrc.length != 0) && (
-																<div
-																	className="nav-icon"
-																>
-																	<span
-																		className={icon.options.iconSrc}></span>
-																</div>
-															)}
-													</>
-												)}
+												<span
+													className={` nav-icon`}
+													dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+
 											</>
 										)}
 
@@ -359,21 +355,90 @@ function Html(props) {
 									</>
 								)}
 
+								{labelIcon?.options.position == "beforeLabel" && (
+									<>
+										{tab?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: `<span class="${tab?.labelIcon?.options.iconSrc}"></span>` }}></span>
+										)}
+										{!tab?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+										)}
+									</>
+								)}
 
 								<div className=" nav-label"
-								>{tab.headerLabelText}</div>
+								>
+									{labelCounter?.options.position == "beforeLabelText" && (
+										<span className={` accordion-label-counter`}>{index}</span>
+									)}
 
+									{labelIcon?.options.position == "beforeLabelText" && (
+										<>
+											{tab?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: `<span class="${tab?.labelIcon?.options.iconSrc}"></span>` }}></span>
+											)}
+											{!tab?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											)}
+										</>
+									)}
+
+									{tab.headerLabelText}
+
+									{labelIcon?.options.position == "afterLabelText" && (
+										<>
+											{tab?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: `<span class="${tab?.labelIcon?.options.iconSrc}"></span>` }}></span>
+											)}
+											{!tab?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											)}
+										</>
+									)}
+
+									{labelCounter?.options.position == "afterLabelText" && (
+										<span className={` accordion-label-counter`}>{index}</span>
+									)}
+
+								</div>
+
+								{labelIcon?.options.position == "afterLabel" && (
+									<>
+										{tab?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: `<span class="${tab?.labelIcon?.options.iconSrc}"></span>` }}></span>
+										)}
+										{!tab?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+										)}
+									</>
+								)}
+								{labelCounter?.options.position == "right" && (
+									<span className={` accordion-label-counter`}>{index}</span>
+								)}
 								{icon.options.position == "after" && (
 									<>
-										{tab.icon.iconSrc == undefined ||
-											(tab.icon.iconSrc.length == 0 && (
-												<div
-													className="nav-icon"
-												>
-													<span className={icon.options.iconSrc}></span>
-												</div>
-											))}
+										{index == activeTab ? (
+											<>
+												<span
+													className={` nav-icon-toggle`}
+													dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>
+											</>
+										) : (
+											<>
+												<span
+													className={` nav-icon`}
+													dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
 
+											</>
+										)}
 
 
 									</>
@@ -386,10 +451,12 @@ function Html(props) {
 				<div className={"panels-wrap"}>
 					{items.map((tab, index) => {
 						return (
-							<div className={`pg-tabs-panel  ${activeTab === index ? "pg-tabs-panel-active" : ""
+							<div className={`tabs-panel animate__animated animate__${panelWrap?.options?.inAnimation}  ${activeTab === index ? "tabs-panel-active" : "hidden"
 								}`}
+								dangerouslySetInnerHTML={{ __html: tab.contentText }}
 							>
-								{tab.contentText}
+
+
 							</div>
 						)
 					}
@@ -401,6 +468,7 @@ function Html(props) {
 				</div>
 
 
+				{JSON.stringify(panelWrap)}
 
 
 

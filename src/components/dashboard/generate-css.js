@@ -92,6 +92,12 @@ function Html(props) {
 	var topWrapSelector = blockClass + " .top-wrap";
 	var searchInputSelector = blockClass + " .search-input";
 
+	var navsWrapSelector = blockClass + " .navs-wrapper";
+	var navItemSelector = blockClass + " .nav-item";
+	var activeNavItemSelector = blockClass + " .nav-item-active";
+	var navLabelSelector = blockClass + " .nav-label";
+	var panelWrapSelector = blockClass + " .tabs-panel";
+
 
 	function getElementSelector(sudoScource, mainSelector) {
 		var elementSelector = mainSelector;
@@ -622,6 +628,49 @@ function Html(props) {
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
+
+
+		var navsWrapCss = generateElementCss(accordionData.navsWrap, navsWrapSelector);
+		Object.entries(navsWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+		var navItemCss = generateElementCss(accordionData.navItem, navItemSelector);
+		Object.entries(navItemCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+		var activeNavItemCss = generateElementCss(accordionData.activeNavItem, activeNavItemSelector);
+		Object.entries(activeNavItemCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+		var navLabelCss = generateElementCss(accordionData.navLabel, navLabelSelector);
+		Object.entries(navLabelCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+		var panelWrapCss = generateElementCss(accordionData.panelWrap, panelWrapSelector);
+		Object.entries(panelWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+
+
+		console.log(accordionData);
+
+
+
 
 
 		setstyleObj(styleObjX)
