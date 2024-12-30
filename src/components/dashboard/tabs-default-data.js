@@ -1,8 +1,14 @@
 
 
 var tabsDefaultData = {
-	viewType: "tabs",
-
+	globalOptions: {
+		viewType: "tabs",
+		itemSource: "manual",
+		search: true,
+	},
+	itemQueryArgs: [],
+	styleObj: {},
+	reponsiveCss: "",
 	wrapper: {
 		options: {
 			content: "",
@@ -14,11 +20,12 @@ var tabsDefaultData = {
 	items: [
 		{
 			"isActive": false,
-			"headerText": "What is Lorem Ipsum?",
-			"content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-			"icon": "fas fa-angle-right",
-			"iconToggle": "fas fa-angle-down",
-			"styles": {}
+			"headerLabelSlug": "",
+			"headerLabelText": "What is Lorem Ipsum?",
+			"contentText": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+
+
+
 		},
 
 
@@ -37,22 +44,49 @@ var tabsDefaultData = {
 
 	navsWrap: {
 		options: {
-			class: ""
+			class: "navs-wrapper"
 		},
-		styles: {}
+		"styles": {
+			"display": {
+				"Desktop": "flex"
+			},
+			"gap": {
+				"Desktop": "1em"
+			},
+			"alignItems": {
+				"Desktop": "center"
+			}
+		}
 	},
 	navItem: {
 		options: {
-			class: ""
+			class: "nav-item "
 		},
-		styles: {}
+		"styles": {
+			"padding": {
+				"Desktop": "15px 15px 15px 15px"
+			},
+			"backgroundColor": {
+				"Desktop": "#735efbfa"
+			},
+			"borderRadius": {
+				"Desktop": "3px 3px 3px 3px"
+			},
+			"color": {
+				"Desktop": "#ffffff"
+			}
+		}
 	},
 	activeNavItem: {
 		options: {
-			class: "",
+			class: "nav-item-active",
 			id: ""
 		},
-		styles: {}
+		"styles": {
+			"backgroundColor": {
+				"Desktop": "#462aff"
+			}
+		}
 	},
 	navLabel: {
 		options: {
@@ -60,12 +94,30 @@ var tabsDefaultData = {
 		},
 		styles: {}
 	},
-	panelWrap: {
+	panelsWrap: {
 		options: {
-			position: "left",
-			class: ""
+			class: "panels-wrap"
 		},
 		styles: {}
+	},
+	panelWrap: {
+		options: {
+			class: "tabs-panel "
+		},
+		"styles": {
+			"padding": {
+				"Desktop": "15px 15px 15px 15px"
+			},
+			"backgroundColor": {
+				"Desktop": "#ffffff"
+			},
+			"margin": {
+				"Desktop": "15px 0px 0px 0px"
+			},
+			"borderRadius": {
+				"Desktop": "5px 5px 5px 5px"
+			}
+		}
 	},
 
 
@@ -86,7 +138,7 @@ var tabsDefaultData = {
 			srcType: "class",
 			iconSrc: "fas fa-angle-down",
 			position: "left",
-			class: "accordion-icon",
+			class: " nav-icon-idle nav-icon"
 		},
 		styles: {},
 	},
@@ -95,7 +147,17 @@ var tabsDefaultData = {
 			library: "fontAwesome",
 			srcType: "class",
 			iconSrc: " fas fa-angle-up",
-			class: "accordion-icon-toggle",
+			class: "nav-icon-toggle nav-icon"
+		},
+		styles: {},
+	},
+	labelIcon: {
+		options: {
+			library: "fontAwesome",
+			srcType: "class",
+			iconSrc: "",
+			position: "",
+			class: "label-icon",
 		},
 		styles: {},
 	},

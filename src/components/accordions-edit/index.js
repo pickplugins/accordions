@@ -37,9 +37,11 @@ import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
-import { popupEntranceAnimateBasic } from "./inAnimation";
-import { popupCloseAnimateBasic } from "./outAnimation";
+import { popupEntranceAnimateBasic } from "../../inAnimation";
+import { popupCloseAnimateBasic } from "../../outAnimation";
 import Toggle from "./toggle";
+import InputToggle from "../input-toggle";
+
 import { iconsList } from "./iconsList";
 import PGinputNumber from "../input-number";
 
@@ -1469,7 +1471,7 @@ function Html(props) {
 															: "hidden"
 													}>
 													<label htmlFor="">Hide Empty</label>
-													<Toggle
+													<InputToggle
 														value={item?.value}
 														onChange={() => {
 															const newValue = !itemQueryArgs[index].value;
@@ -1637,7 +1639,7 @@ function Html(props) {
 																<PanelRow>
 																	<label htmlFor="">Active</label>
 
-																	<Toggle
+																	<InputToggle
 																		value={item?.active ?? 0}
 																		onChange={(newVal) => {
 																			if (isProFeature) {
@@ -1666,7 +1668,7 @@ function Html(props) {
 																<PanelRow>
 																	<label htmlFor="">Hide On Schema</label>
 
-																	<Toggle
+																	<InputToggle
 																		value={item?.hideOnSchema ?? 0}
 																		onChange={(newVal) => {
 																			if (isProFeature) {
@@ -1898,7 +1900,7 @@ function Html(props) {
 										<Icon icon={help} />
 									</span>
 								</label>
-								<Toggle
+								<InputToggle
 									value={globalOptions?.lazyLoad}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1924,7 +1926,7 @@ function Html(props) {
 									</span>
 								</label>
 
-								<Toggle
+								<InputToggle
 									value={globalOptions?.schema}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1939,7 +1941,7 @@ function Html(props) {
 
 								</label>
 
-								<Toggle
+								<InputToggle
 									value={globalOptions?.keepExpandOther}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1969,7 +1971,7 @@ function Html(props) {
 										</span>
 									)}
 								</label>
-								<Toggle
+								<InputToggle
 									value={globalOptions?.stats}
 									onChange={(newVal) => {
 										if (isProFeature) {
@@ -2044,7 +2046,7 @@ function Html(props) {
 										</span>
 									)}
 								</label>
-								<Toggle
+								<InputToggle
 									value={globalOptions?.urlHash}
 									onChange={(newVal) => {
 										if (isProFeature) {
@@ -2083,7 +2085,7 @@ function Html(props) {
 										</span>
 									)}
 								</label>
-								<Toggle
+								<InputToggle
 									value={globalOptions?.clickToScrollTop}
 									onChange={(newVal) => {
 										if (isProFeature) {
@@ -2140,7 +2142,7 @@ function Html(props) {
 										</span>
 									)}
 								</label>
-								<Toggle
+								<InputToggle
 									value={globalOptions?.autoPlay}
 									onChange={(newVal) => {
 										if (isProFeature) {
@@ -2176,7 +2178,7 @@ function Html(props) {
 												<Icon icon={help} />
 											</span>
 										</label>
-										<Toggle
+										<InputToggle
 											value={globalOptions?.autoPlayControl}
 											onChange={(newVal) => {
 												if (isProFeature) {
@@ -2401,7 +2403,7 @@ function Html(props) {
 											<Icon icon={help} />
 										</span>
 									</label>
-									<Toggle
+									<InputToggle
 										value={content?.options?.autoembed}
 										onChange={(newVal) => {
 											var optionsX = {
@@ -2432,7 +2434,7 @@ function Html(props) {
 										</span>
 									</label>
 
-									<Toggle
+									<InputToggle
 										value={content?.options?.shortcodes}
 										onChange={(newVal) => {
 											var optionsX = {
@@ -2462,7 +2464,7 @@ function Html(props) {
 										</span>
 									</label>
 
-									<Toggle
+									<InputToggle
 										value={content?.options?.wpautop}
 										onChange={(newVal) => {
 											var optionsX = {
@@ -2663,7 +2665,7 @@ function Html(props) {
 											</span>
 										</label>
 
-										<Toggle
+										<InputToggle
 											value={header?.options?.toggleText}
 											onChange={(newVal) => {
 												if (isProFeature) {
@@ -3638,7 +3640,7 @@ function Html(props) {
 										</span>
 									</label>
 
-									<Toggle
+									<InputToggle
 										value={expandCollapseAll?.options?.enable}
 										onChange={(newVal) => {
 											var expandCollapseAllX = {
@@ -3932,7 +3934,7 @@ function Html(props) {
 								</span>
 							</label>
 
-							<Toggle
+							<InputToggle
 								className="w-[140px]"
 								label=""
 								value={searchInput?.options?.enable}

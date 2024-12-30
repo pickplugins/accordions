@@ -2,7 +2,7 @@ const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { Popover, Spinner } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Icon, close, cog, addCard, helpFilled, help } from "@wordpress/icons";
+import { Icon, close, cog, addCard, helpFilled, help, caution } from "@wordpress/icons";
 
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
@@ -157,6 +157,9 @@ function Html(props) {
 
 	return (
 		<div className="ml-5">
+
+			<div className="my-3 bg-orange-400 p-3 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  Accordions Builder is still in Beta, Please do test and send us feedbacks.</div>
+
 			<div className="flex items-center justify-between align-middle bg-white p-5  mb-5">
 				<div className="flex items-center gap-5">
 					<div className="text-xl">
@@ -209,7 +212,6 @@ function Html(props) {
 				</div>
 			</div>
 
-			{JSON.stringify(postData)}
 
 
 			{globalOptions?.viewType == "accordion" && (

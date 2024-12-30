@@ -67,11 +67,11 @@ function Html(props) {
 	useEffect(() => {
 
 		setaccordionData(postData.post_content);
-		setglobalOptions(postData.post_content.globalOptions);
+		//setglobalOptions(postData.post_content.globalOptions);
 	}, [postData]);
 
 	useEffect(() => {
-		console.log(accordionData.globalOptions);
+		//console.log(accordionData.globalOptions);
 
 		//setglobalOptions(accordionData.globalOptions);
 	}, [accordionData]);
@@ -137,19 +137,7 @@ function Html(props) {
 
 	}, [customerData]);
 
-	useEffect(() => {
 
-		if (globalOptions?.viewType == "accordion") {
-			setpostData({ ...postData, post_content: accordionDefaultData })
-
-		}
-		if (globalOptions?.viewType == "tabs") {
-			setpostData({ ...postData, post_content: tabsDefaultData })
-
-		}
-
-
-	}, [globalOptions?.viewType]);
 
 
 
@@ -533,24 +521,26 @@ function Html(props) {
 										{postData?.ID != null && (
 											<>
 
-												{JSON.stringify(globalOptions)}
-												sdfd
-
 												<div className="my-4 p-3">
 													<PanelRow>
 														<label htmlFor="">View Type?</label>
 														<PGDropdown
 															position="bottom right"
 															variant="secondary"
-															buttonTitle={globalOptions?.viewType ? viewTypeArgs[globalOptions?.viewType]?.label : "Choose"}
+															buttonTitle={postData?.post_content?.globalOptions?.viewType ? viewTypeArgs[postData?.post_content?.globalOptions?.viewType]?.label : "Choose"}
 															options={viewTypeArgs}
 															onChange={(option, index) => {
 
-																//if (confirm("Data will reset, Please confirm?")) {
-																var globalOptionsX = { ...globalOptions };
-																globalOptionsX.viewType = option.value;
-																setglobalOptions(globalOptionsX);
-																//}
+																if (confirm("Data will reset, Please confirm?")) {
+																	if (option.value == "accordion") {
+																		setpostData({ ...postData, post_content: accordionDefaultData })
+
+																	}
+																	if (option.value == "tabs") {
+																		setpostData({ ...postData, post_content: tabsDefaultData })
+
+																	}
+																}
 
 
 
@@ -563,7 +553,7 @@ function Html(props) {
 												{/* {JSON.stringify(postData)} */}
 
 
-												{globalOptions?.viewType == "accordion" && (
+												{postData.post_content.globalOptions?.viewType == "accordion" && (
 													<AccordionsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
@@ -572,7 +562,7 @@ function Html(props) {
 														setHelp={setHelp}
 													/>
 												)}
-												{globalOptions?.viewType == "tabs" && (
+												{postData.post_content.globalOptions?.viewType == "tabs" && (
 													<TabsEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
