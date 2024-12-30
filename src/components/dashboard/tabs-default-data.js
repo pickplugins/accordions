@@ -1,7 +1,7 @@
 
 
 var tabsDefaultData = {
-	viewType: "accordion",
+	viewType: "tabs",
 
 	wrapper: {
 		options: {

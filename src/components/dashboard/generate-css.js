@@ -67,7 +67,6 @@ function Html(props) {
 
 
 	useEffect(() => {
-		console.log(postData);
 
 		setaccordionData(postData.post_content)
 

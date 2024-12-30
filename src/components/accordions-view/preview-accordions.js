@@ -7,8 +7,6 @@ import { Icon, close, cog, addCard, helpFilled, help } from "@wordpress/icons";
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
-import PreviewAccordions from "./preview-accordions";
-import PreviewTabs from "./preview-tabs";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -153,98 +151,193 @@ function Html(props) {
 	}, [expandCollapseAll?.options]);
 
 
+
+
+
+
+
 	var [active, setactive] = useState(9999);
 
 	return (
-		<div className="ml-5">
-			<div className="flex items-center justify-between align-middle bg-white p-5  mb-5">
-				<div className="flex items-center gap-5">
-					<div className="text-xl">
-						{postData?.post_title && (
-							<>You are editing: {postData.post_title}</>
-						)}
-					</div>
-
-
-				</div>
-
-				<div className="flex items-center align-middle gap-3">
-
-
-					<div className="flex items-center align-middle gap-2">
-						<span className="cursor-pointer" title="Click to know more"
-							onClick={() => {
-								setHelp({
-									id: "useShortcodes",
-									enable: true,
-
-								});
-							}}
-						>
-							<Icon icon={help} />
-						</span>
-						<input
-							type="text"
-							className="w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 text-sm !py-1 !px-2 font-mono"
-							value={`[accordions_builder id="${id}"]`}
-							onClick={() => {
-								var str = `[accordions_builder id="${id}"]`;
-
-								copyData(str);
-							}}
-						/>
-					</div>
 
 
 
-					{pleaseUpdateX && (
-						<div
-							className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
-							onClick={(ev) => {
-								onUpdate(true);
-							}}>
-							Save
+		<div className="px-10 py-10">
+
+
+			<div id={`accordions-${id}`} className={`${wrapper?.options?.class} `}>
+
+				<div className="top-wrap">
+					{searchInput?.options.enable && (
+						<div class="search-wrap">
+							<input type="text" class="search-input" placeholder={searchInput?.options?.placeholder} />
 						</div>
 					)}
+
+
+					{expandCollapseAll?.options?.enable && (
+						<div class="expand-collapse-all" data-expandAllText="" data-collapseAllText="" data-expandAllIconHtml="" data-collapseAllIconHtml="">
+
+							<span
+								className={` `}
+								dangerouslySetInnerHTML={{
+									__html: iconExpandAllHtml,
+								}}></span>
+
+
+							<span>{expandCollapseAll?.options?.expandAllText}</span>
+
+						</div>
+					)}
+
+
+
+
+
 				</div>
+
+
+				{items?.map((item, index) => {
+					return (
+						<Fragment key={index}>
+							<div
+								className={`accordion-header ${header?.options.class} ${active == index ? "accordion-header-active" : ""
+									}`}
+								onClick={(ev) => {
+									setToggled(!toggled);
+									setactive(index == active ? 999 : index);
+								}}>
+								{labelCounter?.options.position == "left" && (
+									<span className={` accordion-label-counter`}>{index}</span>
+								)}
+								{icon?.options.position == "left" && (
+									<>
+										{active != index && (
+											<span
+												className={` accordion-icon`}
+												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+										)}
+										{active == index && (
+											<span
+												className={` accordion-icon accordion-icon-toggle`}
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
+										)}
+									</>
+								)}
+								{labelIcon?.options.position == "beforeLabel" && (
+									<>
+										{item?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+										)}
+										{!item?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+										)}
+									</>
+								)}
+								<div
+									className={` accordion-header-label`}
+									onClick={(e) => {
+										return;
+									}}>
+									{labelCounter?.options.position == "beforeLabelText" && (
+										<span className={` accordion-label-counter`}>{index}</span>
+									)}
+									{labelIcon?.options.position == "beforeLabelText" && (
+										<>
+											{item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+											)}
+											{!item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											)}
+										</>
+									)}
+									{item?.headerLabelText.length > 0 ? (
+										<>
+											<span
+												className={``}
+												dangerouslySetInnerHTML={{
+													__html: item?.headerLabelText,
+												}}></span>
+										</>
+									) : (
+										"Start Writing..."
+									)}
+									{labelIcon?.options.position == "afterLabelText" && (
+										<>
+											{item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+											)}
+											{!item?.labelIcon?.options.iconSrc && (
+												<span className={` accordion-label-icon`}
+													dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+											)}
+										</>
+									)}
+									{labelCounter?.options.position == "afterLabelText" && (
+										<span className={` accordion-label-counter`}>{index}</span>
+									)}
+								</div>
+								{labelIcon?.options.position == "afterLabel" && (
+									<>
+										{item?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: `<span class="${item?.labelIcon?.options.iconSrc}"></span>` }}></span>
+										)}
+										{!item?.labelIcon?.options.iconSrc && (
+											<span className={` accordion-label-icon`}
+												dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+										)}
+									</>
+								)}
+								{labelCounter?.options.position == "right" && (
+									<span className={` accordion-label-counter`}>{index}</span>
+								)}
+								{icon?.options.position == "right" && (
+									<>
+										{active != index && (
+											<span
+												className={` accordion-icon`}
+												dangerouslySetInnerHTML={{ __html: iconHtml }}></span>
+										)}
+										{active == index && (
+											<span
+												className={` accordion-icon-toggle`}
+												dangerouslySetInnerHTML={{
+													__html: iconToggleHtml,
+												}}></span>
+										)}
+									</>
+								)}
+							</div>
+							{active == index && (
+								<>
+									<div
+										className={`accordion-content`}
+										dangerouslySetInnerHTML={{
+											__html: item?.contentText,
+										}}></div>
+								</>
+							)}
+						</Fragment>
+					);
+				})}
 			</div>
-
-			{JSON.stringify(postData)}
-
-
-			{globalOptions?.viewType == "accordion" && (
-				<PreviewAccordions isLoading={isLoading}
-					postData={postData}
-					id={id}
-					onUpdate={onUpdate}
-					pleaseUpdate={pleaseUpdate}
-					onChange={onChange}
-					addNotifications={addNotifications}
-					setHelp={setHelp}
-				/>
-			)}
-			{globalOptions?.viewType == "tabs" && (
-				<PreviewTabs isLoading={isLoading}
-					postData={postData}
-					id={id}
-					onUpdate={onUpdate}
-					pleaseUpdate={pleaseUpdate}
-					onChange={onChange}
-					addNotifications={addNotifications}
-					setHelp={setHelp}
-				/>
-			)}
-
-
-
-
-
-
 		</div>
+
+
+
 	);
 }
 
-class AccordionsView extends Component {
+class PreviewAccordions extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
@@ -285,4 +378,4 @@ class AccordionsView extends Component {
 	}
 }
 
-export default AccordionsView;
+export default PreviewAccordions;
