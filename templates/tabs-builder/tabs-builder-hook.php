@@ -116,7 +116,7 @@ function accordions_builder_tabs($post_id, $accordionData)
     $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : "fontAwesome";
     $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : "";
     $iconSrc = !empty($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : "";
-    $iconIdleHtml = !empty($iconSrc) ? '<span class="accordion-icon-idle ' . $iconSrc . '"></span>' : '';
+    $iconIdleHtml = !empty($iconSrc) ? '<span class="nav-icon-idle ' . $iconSrc . '"></span>' : '';
 
 
 
@@ -128,7 +128,7 @@ function accordions_builder_tabs($post_id, $accordionData)
     $iconToggleLibrary = isset($iconToggleOptions['library']) ? $iconToggleOptions['library'] : "fontAwesome";
     $iconToggleSrcType = isset($iconToggleOptions['srcType']) ? $iconToggleOptions['srcType'] : "";
     $iconToggleSrc = !empty($iconToggleOptions['iconSrc']) ? $iconToggleOptions['iconSrc'] : "";
-    $iconToggleHtml = !empty($iconToggleSrc) ? '<span class="accordion-icon-toggle ' . $iconToggleSrc . '"></span>' : '';
+    $iconToggleHtml = !empty($iconToggleSrc) ? '<span class="nav-icon-toggle ' . $iconToggleSrc . '"></span>' : '';
 
 
     if ($iconLibrary == 'fontAwesome') {

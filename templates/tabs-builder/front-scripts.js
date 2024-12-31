@@ -132,6 +132,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var iconToggle = pgTab.querySelectorAll(".nav-icon-toggle");
 				var iconIdle = pgTab.querySelectorAll(".nav-icon-idle");
 
+				console.log(iconIdle);
+				console.log(iconToggle);
+
 
 
 				navItems.forEach((item, index) => {
