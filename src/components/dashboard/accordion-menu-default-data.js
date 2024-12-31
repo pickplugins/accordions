@@ -1,5 +1,5 @@
 
-var imageAccordionDefaultData = {
+var AccordionMenuDefaultData = {
 	globalOptions: {
 		viewType: "accordionMenu",
 		itemSource: "manual",
@@ -12,7 +12,7 @@ var imageAccordionDefaultData = {
 		options: {
 			content: "",
 			tag: "div",
-			class: "image-accordion-wrapper",
+			class: "accordion-menu-wrapper",
 		},
 		styles: {},
 	},
@@ -26,35 +26,6 @@ var imageAccordionDefaultData = {
 	},
 
 
-	contentWrap: {
-		options: {
-			class: "content-wrap",
-		},
-		styles: {},
-	},
-
-	image: {
-		options: {
-			class: "image",
-		},
-		styles: {},
-	},
-	title: {
-		options: {
-			content: "",
-			tag: "div",
-			class: "title",
-		},
-		styles: {},
-	},
-	content: {
-		options: {
-			content: "",
-			tag: "div",
-			class: "content",
-		},
-		styles: {},
-	},
 
 	items: [
 		{
@@ -75,4 +46,4 @@ var imageAccordionDefaultData = {
 
 
 };
-export default imageAccordionDefaultData;
+export default AccordionMenuDefaultData;

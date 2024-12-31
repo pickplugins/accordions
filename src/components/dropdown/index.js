@@ -337,6 +337,11 @@ function Html(props) {
 													</a>
 													// </span>
 												)}
+
+												{x.coming && (
+													<span className="bg-violet-700 text-white px-2 py-1 rounded-sm">Coming</span>
+												)}
+
 											</div>
 											{x.description != undefined &&
 												x.description.length > 0 && (
@@ -398,6 +403,11 @@ function Html(props) {
 														Pro
 													</a>
 												)}
+												{x.coming && (
+													<span className="bg-violet-700 text-white px-2 py-1 rounded-sm">Coming</span>
+												)}
+
+
 											</div>
 
 											{x.description != undefined &&
@@ -457,6 +467,12 @@ function Html(props) {
 															Pro
 														</a>
 													)}
+
+													{x.coming && (
+														<span className="bg-violet-700 text-white px-2 py-1 rounded-sm">Coming</span>
+													)}
+
+
 												</div>
 												{x.description != undefined &&
 													x.description.length > 0 && (
@@ -513,6 +529,13 @@ function Html(props) {
 															Pro
 														</a>
 													)}
+													{x.coming && (
+														<span className="bg-violet-700 text-white px-2 py-1 rounded-sm">Coming</span>
+													)}
+
+
+
+
 												</div>
 												{x.description != undefined &&
 													x.description.length > 0 && (
@@ -565,7 +588,7 @@ class PGDropdown extends Component {
 			variant,
 			btnClass,
 			searchPlaceholder,
-			options, //[{"label":"Select..","icon":"","value":""}]
+			options,
 			buttonTitle,
 			onChange,
 			values,

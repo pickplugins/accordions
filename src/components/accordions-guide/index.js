@@ -401,7 +401,7 @@ function Html(props) {
 
 					{
 						name: "supportTicket",
-						title: "Support Ticket",
+						title: "Send Feedbacks",
 						icon: postComments,
 						className: "tab-disable-blocks",
 					},

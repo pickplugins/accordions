@@ -3198,10 +3198,10 @@ function Html(props) {
 					</PanelBody>
 
 					<PanelBody title="Icons" initialOpen={false}>
-						<div className="flex flex-wrap justify-between my-4">
+						<div className="flex flex-wrap gap-2  my-4">
 							{iconsList.map((item, index) => {
 								return (
-									<div className="flex flex-col gap-1 border border-solid border-slate-300"
+									<div className="flex flex-col  border border-solid border-slate-300"
 										key={index}
 										onClick={() => {
 											var iconX = { ...icon };
@@ -3222,9 +3222,9 @@ function Html(props) {
 										}}
 									>
 										<span
-											className={` flex items-center justify-center p-1 border-0 border-b border-solid border-b-slate-300 !text-[12px] ${item.icon}`}></span>
+											className={` flex items-center text-base justify-center p-2  ${item.icon}`}></span>
 										<span
-											className={` flex items-center justify-center p-1 !text-[12px] ${item.toggle}`}></span>
+											className={` flex items-center text-base justify-center p-2  ${item.toggle}`}></span>
 									</div>
 								);
 							})}
