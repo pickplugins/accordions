@@ -148,7 +148,7 @@ function Html(props) {
 
 																// var sudoScourceArgsLocalX = localStorage.getItem('sudoScourceArgs');
 
-																//console.log(JSON.parse(sudoScourceArgsLocalX));
+
 																//localStorage.clear();
 
 																//options = JSON.parse(sudoScourceArgsLocalX);

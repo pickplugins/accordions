@@ -70,7 +70,6 @@ function Html(props) {
       {
         valArgs != undefined && (
           valArgs.map((arg, i) => {
-            console.log(valArgs)
             return (
               <div className='flex my-3 items-center justify-between'>
                 <label htmlFor="">{filterArgs[arg.id]?.label}</label>

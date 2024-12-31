@@ -163,7 +163,7 @@ import PGcssWordWrap from "../../components/css-word-wrap";
 import PGcssZIndex from "../../components/css-z-index";
 var myStore = wp.data.select("postgrid-shop");
 
-// console.log(myStore);
+
 
 
 import breakPoints from "../../breakpoints";

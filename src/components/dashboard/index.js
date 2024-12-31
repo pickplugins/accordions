@@ -79,7 +79,7 @@ function Html(props) {
 	}, [postData]);
 
 	useEffect(() => {
-		//console.log(accordionData.globalOptions);
+
 
 		//setglobalOptions(accordionData.globalOptions);
 	}, [accordionData]);
@@ -87,7 +87,6 @@ function Html(props) {
 
 	useEffect(() => {
 
-		console.log(globalOptions);
 
 
 		if (globalOptions?.viewType == "accordion") {
@@ -273,7 +272,7 @@ function Html(props) {
 							<div className="flex items-center align-middle gap-3">
 								<div className="text-xl text-white">Accordions</div>
 								<div className="text-xs text-white flex items-center gap-2">
-									<span>2.3.5</span>{" "}
+									{/* <span>2.3.5</span>{" "} */}
 									<span className="bg-lime-600 px-3 py-1 rounded-md">Beta</span>
 								</div>
 							</div>
@@ -672,7 +671,7 @@ function Html(props) {
 																	var itemArg = item[1];
 
 
-																	if (itemArg.options) {
+																	if (itemArg.options != undefined) {
 																		delete itemArg.options;
 																	}
 																	if (accordionData[itemIndex]) {
@@ -784,7 +783,8 @@ function Html(props) {
 																	var itemArg = item[1];
 
 
-																	if (itemArg.options) {
+
+																	if (itemArg.options != undefined) {
 																		delete itemArg.options;
 																	}
 																	if (accordionData[itemIndex]) {
@@ -815,6 +815,7 @@ function Html(props) {
 																	...presetClean,
 
 																};
+
 
 
 
@@ -870,7 +871,7 @@ function Html(props) {
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
 
-						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  <i class="fa-solid fa-triangle-exclamation"></i> Accordions Builder is still in Beta, Please do test and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
+						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  <i class="fa-solid fa-triangle-exclamation"></i> Please test the Accordions Builder and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
 							settoggleSettings(!toggleSettings)
 						}}>send us feedbacks.</span> </div>
 

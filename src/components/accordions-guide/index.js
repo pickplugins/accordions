@@ -335,7 +335,7 @@ function Html(props) {
 
 
 					<div className="my-3 flex items-center gap-3">
-						<div className="font-mono text-sm">Version: 2.3.5</div>
+						{/* <div className="font-mono text-sm">Version: 2.3.5</div> */}
 						<a
 							className=" "
 							href="https://pickplugins.com/demo/accordions/"

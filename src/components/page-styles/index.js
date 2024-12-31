@@ -46,7 +46,6 @@ function Html(props) {
 	const [pageStylsObj, setpageStylsObj] = useState(null);
 	const [pageStylesClipboardObj, setPageStylesClipboardObj] = useState(null);
 	//var [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
-console.log(typeof pageStylsObj)
 	const [copyPrams, setCopyPrams] = useState({
 		isCopied: false,
 		isError: false,
@@ -85,7 +84,6 @@ console.log(typeof pageStylsObj)
 	}, [pageCssObj]);
 
 	// useEffect(() => {
-	//   console.log('generateCss');
 
 	//   if (pageStylsObj != null) {
 
@@ -118,7 +116,6 @@ console.log(typeof pageStylsObj)
 			path: "/wp/v2/" + postTypeX + "/" + postId,
 			method: "POST",
 		}).then((res) => {
-			console.log(res.pgc_meta);
 			// if (pageStylsObj == null) {
 
 			// }
@@ -187,7 +184,7 @@ console.log(typeof pageStylsObj)
 		myStore.generateBlockCss(cssObj, "page-css", "");
 	}
 
-	
+
 
 	function onChangeStyleItem(sudoScource, newVal, attr, obj, extra) {
 		var path = [sudoScource, attr, deviceType];
@@ -270,7 +267,6 @@ console.log(typeof pageStylsObj)
 	// 	});
 
 	// 	var cssItems = { ...blockCssY.items };
-	// 	console.log(cssItems);
 	// 	var cssItemsX = { ...cssItems, ...stylesObj };
 
 	// 	setAttributes({ blockCssY: { items: cssItemsX } });
@@ -287,26 +283,24 @@ console.log(typeof pageStylsObj)
 	}
 
 	const copyObjectToClipboard = (obj) => {
-		console.log(obj);
 		// var objZ = JSON.parse(obj);
 		// var objX = { ...objZ };
 		// objX.pgStyle = true;
 
 		// var objStr = JSON.stringify(objX);
 		const jsonString = JSON.stringify(obj);
-		console.log(jsonString);
 		// .writeText(objStr)
 		navigator.clipboard
 			.writeText(jsonString)
-			.then(() => {})
+			.then(() => { })
 			.catch((err) => {
-				console.error("Could not copy object: ", err);
+
 				// Handle errors here
 			});
 	};
 
 	const [isPgClipboardData, setIsPgClipboardData] = useState(true);
-	
+
 	const [pgCount, setPgCount] = useState(0);
 
 
@@ -317,21 +311,16 @@ console.log(typeof pageStylsObj)
 	// const checkClipboardData = async () => {
 	// 	try {
 	// 		const clipboardData = await navigator.clipboard.readText();
-	// 		console.log(clipboardData);
 	// 		if (clipboardData) {
-	// 			console.log(clipboardData);
 	// 			setIsPgClipboardData(true);
 	// 			// const jsonString = JSON.stringify(clipboardData);
-	// 			// console.log(typeof jsonString);
 
 	// 			setPgClipboardData(jsonString);
 	// 			// Perform actions as needed when clipboard has data
 	// 		} else {
-	// 			console.log("Clipboard is empty");
 	// 			// Perform actions when clipboard is empty
 	// 		}
 	// 	} catch (error) {
-	// 		console.error("Error reading clipboard:", error);
 	// 		// Handle errors if any
 	// 	}
 	// };
@@ -339,16 +328,16 @@ console.log(typeof pageStylsObj)
 	const handlePasteFromClipboard = async () => {
 		try {
 			const clipboardData = await navigator.clipboard.readText();
-			
-			
-			
+
+
+
 			if (clipboardData) {
 				const contentX = JSON.parse(clipboardData);
-				
+
 
 				setpageStylsObj(JSON.parse(contentX));
 			}
-		} catch (error) {}
+		} catch (error) { }
 	};
 
 	function duplicate(index) {
@@ -406,7 +395,6 @@ console.log(typeof pageStylsObj)
 					onClick={(ev) => {
 						var pageStylsObjX = pageStylsObj == undefined ? [] : pageStylsObj;
 
-						console.log(pageStylsObjX);
 						var sdsd = pageStylsObjX.concat({
 							options: { selector: ".selector" },
 							styles: {},
@@ -486,10 +474,7 @@ console.log(typeof pageStylsObj)
 
 														var pageStylsObjX = [...pageStylsObj];
 
-														console.log(content);
-														console.log(typeof content);
 
-														console.log(JSON.parse(content));
 
 														if (content.length == 0) {
 															alert("Style is empty");
@@ -595,7 +580,7 @@ console.log(typeof pageStylsObj)
 								onChange={onChangeStyleItem}
 								onAdd={onAddStyleItem}
 								onRemove={onRemoveStyleItem}
-								// onBulkAdd={onBulkAddItem}
+							// onBulkAdd={onBulkAddItem}
 							/>
 						</PanelBody>
 					);

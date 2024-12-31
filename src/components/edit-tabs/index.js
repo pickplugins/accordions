@@ -530,7 +530,7 @@ function Html(props) {
 				className="hidden"
 				onClick={() => {
 					var str = `{
-				"wrapper":${JSON.stringify(wrapper)}
+				"wrapper":${JSON.stringify(wrapper)},
 				"navItem":${JSON.stringify(navItem)},
 				"activeNavItem":${JSON.stringify(activeNavItem)},
 				"labelCounter":${JSON.stringify(labelCounter)},
@@ -643,7 +643,6 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-												console.log(option);
 
 												var itemQueryArgsX = { ...itemQueryArgs };
 												itemQueryArgsX[option.id] = {
@@ -1856,56 +1855,6 @@ function Html(props) {
 									}}
 								/> */}
 							</PanelRow>
-
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Stats{" "}
-									<span
-										className="cursor-pointer"
-										title="Click to know more"
-										onClick={() => {
-											setHelp({
-												id: "statsSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-								<InputToggle
-									value={globalOptions?.stats}
-									onChange={(newVal) => {
-										if (isProFeature) {
-											addNotifications({
-												title: "Opps its pro!",
-												content:
-													"This feature only avilable in premium version",
-												type: "error",
-											});
-											return;
-										}
-
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.stats = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-								{/* <SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.stats}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.stats = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/> */}
-							</PanelRow>
-
 							<PanelRow>
 								<label htmlFor="">Active Event</label>
 
@@ -1928,6 +1877,9 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
+
+
+
 							<PanelRow>
 								<label htmlFor="">URL Hash</label>
 								<InputToggle
@@ -1965,11 +1917,7 @@ function Html(props) {
 										}}>
 										<Icon icon={help} />
 									</span>
-									{isProFeature && (
-										<span className="bg-amber-500 px-2 py-0.5 text-[11px]  no-underline rounded-sm  cursor-pointer text-white ">
-											{__("Pro", "accordions")}
-										</span>
-									)}
+
 								</label>
 								<InputToggle
 									value={globalOptions?.autoPlay}
@@ -2094,6 +2042,55 @@ function Html(props) {
 									</PanelRow>
 								</>
 							)}
+
+							<PanelRow>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Stats{" "}
+									<span
+										className="cursor-pointer"
+										title="Click to know more"
+										onClick={() => {
+											setHelp({
+												id: "statsSetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+								</label>
+								<InputToggle
+									value={globalOptions?.stats}
+									onChange={(newVal) => {
+										if (isProFeature) {
+											addNotifications({
+												title: "Opps its pro!",
+												content:
+													"This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.stats = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+								{/* <SelectControl
+									className="w-[140px]"
+									label=""
+									value={globalOptions?.stats}
+									options={[
+										{ label: __("True", "accordions"), value: 1 },
+										{ label: __("False", "accordions"), value: 0 },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.stats = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/> */}
+							</PanelRow>
 						</div>
 					</PanelBody>
 					<PanelBody
@@ -2209,7 +2206,33 @@ function Html(props) {
 						</div>
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Icon Idle"
+
+
+							opened={isProFeature ? false : null}
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Icon Idle", "accordions")}</span>
+									{isProFeature ? (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+											onClick={(ev) => {
+												window.open(
+													"https://comboblocks.com/pricing/",
+													"_blank"
+												);
+											}}>
+											{__("Pro", "accordions")}
+										</span>
+									) : (
+										""
+									)}
+								</span>
+							}
+
+
+
+
+
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
@@ -2430,7 +2453,31 @@ function Html(props) {
 
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Icon Toggle"
+							opened={isProFeature ? false : null}
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Icon Toggle", "accordions")}</span>
+									{isProFeature ? (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+											onClick={(ev) => {
+												window.open(
+													"https://comboblocks.com/pricing/",
+													"_blank"
+												);
+											}}>
+											{__("Pro", "accordions")}
+										</span>
+									) : (
+										""
+									)}
+								</span>
+							}
+
+
+
+
+
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
