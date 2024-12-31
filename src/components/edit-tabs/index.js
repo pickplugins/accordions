@@ -240,17 +240,40 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [labelIcon]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.icon = icon;
-		setaccordionData(accordionDataX);
-	}, [icon]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.icon = icon;
+	// 	setaccordionData(accordionDataX);
+	// }, [icon]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.iconToggle = iconToggle;
+	// 	setaccordionData(accordionDataX);
+	// }, [iconToggle]);
 
 	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.iconToggle = iconToggle;
-		setaccordionData(accordionDataX);
-	}, [iconToggle]);
+		setaccordionData((prevData) => ({
+			...prevData,
+			icon,
+			iconToggle,
+		}));
+	}, [icon, iconToggle]);
+
+	const updateIconOptions = (icon, itemSrc) => ({
+		...icon,
+		options: {
+			...icon.options,
+			iconSrc: itemSrc,
+		},
+	});
+
+	const handleClick = (item) => {
+		seticon((prevIcon) => updateIconOptions(prevIcon, item.icon));
+		seticonToggle((prevIconToggle) =>
+			updateIconOptions(prevIconToggle, item.toggle)
+		);
+	};
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -676,8 +699,6 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-												console.log(option);
-
 												var itemQueryArgsX = { ...itemQueryArgs };
 												itemQueryArgsX[option.id] = {
 													id: option.id,
@@ -2073,23 +2094,25 @@ function Html(props) {
 									<div
 										className="flex flex-col gap-1 border border-solid border-slate-300"
 										key={index}
-										onClick={() => {
-											var iconX = { ...icon };
-											var optionsX = {
-												...iconX.options,
-												iconSrc: item.icon,
-											};
-											iconX.options = optionsX;
-											seticon(iconX);
+										// onClick={() => {
+										// 	console.log(item);
+										// 	var iconX = { ...icon };
+										// 	var optionsX = {
+										// 		...iconX.options,
+										// 		iconSrc: item.icon,
+										// 	};
+										// 	iconX.options = optionsX;
+										// 	seticon(iconX);
 
-											var iconToggleX = { ...iconToggle };
-											var optionsToggleX = {
-												...iconToggleX.options,
-												iconSrc: item.toggle,
-											};
-											iconToggleX.options = optionsToggleX;
-											seticonToggle(iconToggleX);
-										}}>
+										// 	var iconToggleX = { ...iconToggle };
+										// 	var optionsToggleX = {
+										// 		...iconToggleX.options,
+										// 		iconSrc: item.toggle,
+										// 	};
+										// 	iconToggleX.options = optionsToggleX;
+										// 	seticonToggle(iconToggleX);
+										// }}
+										onClick={() => handleClick(item)}>
 										<span
 											className={` flex items-center justify-center p-1 border-0 border-b border-solid border-b-slate-300 !text-[12px] ${item.icon}`}></span>
 										<span
