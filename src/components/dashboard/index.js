@@ -870,7 +870,7 @@ function Html(props) {
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
 
-						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  Accordions Builder is still in Beta, Please do test and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
+						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  <i class="fa-solid fa-triangle-exclamation"></i> Accordions Builder is still in Beta, Please do test and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
 							settoggleSettings(!toggleSettings)
 						}}>send us feedbacks.</span> </div>
 

@@ -490,23 +490,20 @@ function Html(props) {
 		setitemQueryArgs(itemQueryArgsX);
 	};
 
-	var viewTypeArgs = {
-		accordion: { label: "Accordion", value: "accordion" },
-		tabs: { label: "Tabs", value: "tabs" },
-	};
+
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
 		easyAccordion: { label: "Easy Accordion - FAQ Group", value: "easyAccordion" },
-		posts: {
-			label: "Posts",
-			value: "posts",
-			isPro: customerData.isPro ? false : true,
-		},
-		terms: {
-			label: "Terms",
-			value: "terms",
-			isPro: customerData.isPro ? false : true,
-		},
+		// posts: {
+		// 	label: "Posts",
+		// 	value: "posts",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
+		// terms: {
+		// 	label: "Terms",
+		// 	value: "terms",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
 	};
 
 	function generate3Digit() {
@@ -530,7 +527,7 @@ function Html(props) {
 	return (
 		<div className="">
 			<div
-				className=""
+				className="hidden"
 				onClick={() => {
 					var str = `{
 				"wrapper":${JSON.stringify(wrapper)}
@@ -573,22 +570,7 @@ function Html(props) {
 
 			{props.postData.post_content != null && (
 				<>
-					{/* <div className="my-4 p-3">
-						<PanelRow>
-							<label htmlFor="">View Type?</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								buttonTitle={viewTypeArgs[globalOptions?.viewType]?.label}
-								options={viewTypeArgs}
-								onChange={(option, index) => {
-									var globalOptionsX = { ...globalOptions };
-									globalOptionsX.viewType = option.value;
-									setglobalOptions(globalOptionsX);
-								}}
-								values=""></PGDropdown>
-						</PanelRow>
-					</div> */}
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Items"
@@ -1933,11 +1915,11 @@ function Html(props) {
 									value={globalOptions?.activeEvent}
 									options={[
 										{ label: __("Click", "accordions"), value: "click" },
-										{
-											label: __("Mouseover", "accordions"),
-											value: "mouseover",
-										},
-										{ label: __("Focus", "accordions"), value: "focus" },
+										// {
+										// 	label: __("Mouseover", "accordions"),
+										// 	value: "mouseover",
+										// },
+										// { label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1969,7 +1951,149 @@ function Html(props) {
 
 							</PanelRow>
 
+							<PanelRow>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Auto Play
+									<span
+										className="cursor-pointer"
+										title="Click to know more"
+										onClick={() => {
+											setHelp({
+												id: "autoPlaySetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+									{isProFeature && (
+										<span className="bg-amber-500 px-2 py-0.5 text-[11px]  no-underline rounded-sm  cursor-pointer text-white ">
+											{__("Pro", "accordions")}
+										</span>
+									)}
+								</label>
+								<InputToggle
+									value={globalOptions?.autoPlay}
+									onChange={(newVal) => {
+										if (isProFeature) {
+											addNotifications({
+												title: "Opps its pro!",
+												content:
+													"This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.autoPlay = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
 
+							{globalOptions?.autoPlay && (
+								<>
+									{/* <PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											Auto Play Control
+											<span
+												className="cursor-pointer"
+												title="Click to know more"
+												onClick={() => {
+													setHelp({
+														id: "statsSetting",
+														enable: true,
+													});
+												}}>
+												<Icon icon={help} />
+											</span>
+										</label>
+										<InputToggle
+											value={globalOptions?.autoPlayControl}
+											onChange={(newVal) => {
+												if (isProFeature) {
+													addNotifications({
+														title: "Opps its pro!",
+														content:
+															"This feature only avilable in premium version",
+														type: "error",
+													});
+													return;
+												}
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayControl = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow> */}
+
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Timeout
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayTimeout}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayTimeout = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Delay
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayDelay}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayDelay = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label htmlFor="">Auto Play Order</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												globalOptions?.autoPlayOrder
+													? globalOptions?.autoPlayOrder
+													: __("Choose", "accordions")
+											}
+											options={[
+												{
+													label: __("Top To Bottom", "accordions"),
+													value: "topToBottom",
+													isPro: customerData.isPro ? false : true,
+												},
+												{
+													label: __("Bottom To Top", "accordions"),
+													value: "bottomToTop",
+													isPro: customerData.isPro ? false : true,
+												},
+												{
+													label: __("Random", "accordions"),
+													value: "random",
+													isPro: customerData.isPro ? false : true,
+												},
+											]}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayOrder = newVal.value;
+												setglobalOptions(globalOptionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+								</>
+							)}
 						</div>
 					</PanelBody>
 					<PanelBody
