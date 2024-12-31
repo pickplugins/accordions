@@ -64,16 +64,13 @@ function Html(props) {
 	var [items, setitems] = useState(accordionData.items); // Using the hook.
 	var [content, setcontent] = useState(accordionData.content);
 	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
-	var [header, setheader] = useState(accordionData.header);
-	var [headerActive, setheaderActive] = useState(accordionData.headerActive);
-	var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+
+
 	var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
 	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
 	var [icon, seticon] = useState(accordionData.icon);
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
-	var [expandCollapseAll, setexpandCollapseAll] = useState(
-		accordionData.expandCollapseAll
-	);
+
 	var [topWrap, settopWrap] = useState(accordionData.topWrap);
 	var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
 	var [navItem, setnavItem] = useState(accordionData?.navItem);
@@ -84,7 +81,7 @@ function Html(props) {
 	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
 	var [panelWrapActive, setpanelWrapActive] = useState(accordionData?.panelWrapActive);
 
-	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
+
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
@@ -210,23 +207,6 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [content]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.header = header;
-		setaccordionData(accordionDataX);
-	}, [header]);
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.headerActive = headerActive;
-		setaccordionData(accordionDataX);
-	}, [headerActive]);
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.headerLabel = headerLabel;
-		setaccordionData(accordionDataX);
-	}, [headerLabel]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -252,11 +232,7 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [iconToggle]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.expandCollapseAll = expandCollapseAll;
-		setaccordionData(accordionDataX);
-	}, [expandCollapseAll]);
+
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -264,11 +240,7 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [topWrap]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.searchInput = searchInput;
-		setaccordionData(accordionDataX);
-	}, [searchInput]);
+
 
 	var RemoveSliderArg = function ({ index }) {
 		return (
@@ -541,14 +513,27 @@ function Html(props) {
 		return Math.floor(100 + Math.random() * 900);
 	}
 
+	const copyData = (data) => {
+		navigator.clipboard
+			.writeText(data)
+			.then(() => {
+				addNotifications({
+					title: "Copied to clipboard!",
+					content:
+						"Use the shortcode in page or post conent where you want to display.",
+					type: "success",
+				});
+			})
+			.catch((err) => { });
+	};
+
 	return (
 		<div className="">
 			<div
-				className="hidden"
+				className=""
 				onClick={() => {
 					var str = `{
 				"wrapper":${JSON.stringify(wrapper)}
-				"header":${JSON.stringify(header)},
 				"navItem":${JSON.stringify(navItem)},
 				"activeNavItem":${JSON.stringify(activeNavItem)},
 				"labelCounter":${JSON.stringify(labelCounter)},
@@ -581,7 +566,7 @@ function Html(props) {
 					<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
 					<div>{`"navLabel":${JSON.stringify(navLabel)}`},</div>
 					<div>{`"panelWrap":${JSON.stringify(panelWrap)}`},</div>
-					<div>{`"topWrap":${JSON.stringify(topWrap)}`},</div>
+					<div>{`"panelWrapActive":${JSON.stringify(panelWrapActive)}`},</div>
 					<div>{`}`}</div>
 				</div>
 			</div>
