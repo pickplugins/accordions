@@ -166,7 +166,7 @@ function Html(props) {
 								onSelect={(media) => {
 									var filesX = searchPrams.files.push(media.url);
 
-									console.log(searchPrams.files);
+
 
 									setsearchPrams({ ...searchPrams, files: searchPrams.files });
 								}}
@@ -195,7 +195,7 @@ function Html(props) {
 											onClick={() => {
 												var filesX = searchPrams.files.splice(index, 1);
 
-												console.log(filesX);
+
 
 												setsearchPrams({
 													...searchPrams,

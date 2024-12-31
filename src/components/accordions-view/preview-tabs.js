@@ -387,7 +387,9 @@ function Html(props) {
 										</>
 									)}
 
-									{tab.headerLabelText}
+
+									<span
+										dangerouslySetInnerHTML={{ __html: tab.headerLabelText }}></span>
 
 									{labelIcon?.options.position == "afterLabelText" && (
 										<>

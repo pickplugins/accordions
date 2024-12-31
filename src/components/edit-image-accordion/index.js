@@ -683,7 +683,7 @@ function Html(props) {
 											options={termQueryArgs}
 											onChange={(option, index) => {
 
-												console.log(option);
+
 
 
 												var itemQueryArgsX = { ...itemQueryArgs };
