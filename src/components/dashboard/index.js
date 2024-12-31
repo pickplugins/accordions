@@ -31,6 +31,7 @@ import tabsDefaultData from "./tabs-default-data";
 import imageAccordionDefaultData from "./image-accordion-default-data";
 import accordionMenuDefaultData from "./accordion-menu-default-data";
 import accordionTemplates from "./accordion-templates";
+import tabsTemplates from "./tabs-templates";
 import AccordionsGenerateCss from "./generate-css";
 import PGHelp from "./help";
 import PGNotify from "./notify";
@@ -631,112 +632,233 @@ function Html(props) {
 												<Icon icon={helpIcon} />
 											</span>
 										</p>
-										{accordionTemplates.map((preset, index) => {
-											return (
-												<div
-													className="my-5 bg-slate-400 hover:bg-slate-500 p-3 rounded-sm cursor-pointer"
-													title="Click To Apply"
-													key={index}
-													onClick={(ev) => {
 
-														if (preset.isPro) {
+										{postData.post_content.globalOptions?.viewType == "accordion" && (
+											<>
+												{accordionTemplates.map((preset, index) => {
+													return (
+														<div
+															className="my-5 bg-slate-400 hover:bg-slate-500 p-3 rounded-sm cursor-pointer"
+															title="Click To Apply"
+															key={index}
+															onClick={(ev) => {
 
-															if (isProFeature) {
+																if (preset.isPro) {
+
+																	if (isProFeature) {
+																		addNotifications({
+																			title: "Opps its pro!",
+																			content: "This feature only avilable in premium version",
+																			type: "error",
+																		});
+																		return;
+
+																	}
+
+																}
+
 																addNotifications({
-																	title: "Opps its pro!",
-																	content: "This feature only avilable in premium version",
-																	type: "error",
+																	title: "Preset Applied",
+																	content: "WOW, Your accordion just got new look!",
+																	type: "success",
 																});
-																return;
-
-															}
-
-														}
-
-														addNotifications({
-															title: "Preset Applied",
-															content: "WOW, Your accordion just got new look!",
-															type: "success",
-														});
 
 
-														var data = preset.data;
-														var presetClean = {};
+																var data = preset.data;
+																var presetClean = {};
 
-														Object.entries(data).map((item) => {
-															var itemIndex = item[0];
-															var itemArg = item[1];
+																Object.entries(data).map((item) => {
+																	var itemIndex = item[0];
+																	var itemArg = item[1];
 
 
-															if (itemArg.options) {
-																delete itemArg.options;
-															}
-															if (accordionData[itemIndex]) {
-																delete accordionData[itemIndex]?.styles;
-																delete accordionData[itemIndex]?.hover;
-																delete accordionData[itemIndex]?.after;
-																delete accordionData[itemIndex]?.before;
-																delete accordionData[itemIndex]?.active;
-																delete accordionData[itemIndex]?.focus;
-																delete accordionData[itemIndex]?.target;
-																delete accordionData[itemIndex]?.visited;
-															}
+																	if (itemArg.options) {
+																		delete itemArg.options;
+																	}
+																	if (accordionData[itemIndex]) {
+																		delete accordionData[itemIndex]?.styles;
+																		delete accordionData[itemIndex]?.hover;
+																		delete accordionData[itemIndex]?.after;
+																		delete accordionData[itemIndex]?.before;
+																		delete accordionData[itemIndex]?.active;
+																		delete accordionData[itemIndex]?.focus;
+																		delete accordionData[itemIndex]?.target;
+																		delete accordionData[itemIndex]?.visited;
+																	}
 
 
 
 
-															presetClean[itemIndex] = {
-																...accordionData[itemIndex],
-																...itemArg,
-															};
+																	presetClean[itemIndex] = {
+																		...accordionData[itemIndex],
+																		...itemArg,
+																	};
 
-														});
-
-
-														var accordionDataX = {
-
-															...accordionData,
-															...presetClean,
-
-														};
+																});
 
 
+																var accordionDataX = {
 
-														onChangeAccordion(accordionDataX);
+																	...accordionData,
+																	...presetClean,
 
-														addNotifications({
-															title: "Preset Applied",
-															content: "WOW, Your accordion just got new look!",
-															type: "success",
-														});
-													}}>
-													<img className="w-full" src={preset.thumb} alt="" />
-													<div className="mt-3 flex justify-between  items-center">
-														<span className="text-lg  text-white ">{preset.label}</span>
+																};
 
-														{preset.isPro && (
 
-															<>
 
-																{isProFeature && (
-																	<span
-																		className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
-																	>
-																		{__("Pro", "accordions")}
-																	</span>
+																onChangeAccordion(accordionDataX);
+
+																addNotifications({
+																	title: "Preset Applied",
+																	content: "WOW, Your accordion just got new look!",
+																	type: "success",
+																});
+															}}>
+															<img className="w-full" src={preset.thumb} alt="" />
+															<div className="mt-3 flex justify-between  items-center">
+																<span className="text-lg  text-white ">{preset.label}</span>
+
+																{preset.isPro && (
+
+																	<>
+
+																		{isProFeature && (
+																			<span
+																				className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+																			>
+																				{__("Pro", "accordions")}
+																			</span>
+																		)}
+																	</>
+
 																)}
-															</>
-
-														)}
 
 
 
 
 
-													</div>
-												</div>
-											);
-										})}
+															</div>
+														</div>
+													);
+												})}
+											</>
+										)}
+
+
+										{postData.post_content.globalOptions?.viewType == "tabs" && (
+											<>
+												{tabsTemplates.map((preset, index) => {
+													return (
+														<div
+															className="my-5 bg-slate-400 hover:bg-slate-500 p-3 rounded-sm cursor-pointer"
+															title="Click To Apply"
+															key={index}
+															onClick={(ev) => {
+
+																if (preset.isPro) {
+
+																	if (isProFeature) {
+																		addNotifications({
+																			title: "Opps its pro!",
+																			content: "This feature only avilable in premium version",
+																			type: "error",
+																		});
+																		return;
+
+																	}
+
+																}
+
+																addNotifications({
+																	title: "Preset Applied",
+																	content: "WOW, Your accordion just got new look!",
+																	type: "success",
+																});
+
+
+																var data = preset.data;
+																var presetClean = {};
+
+																Object.entries(data).map((item) => {
+																	var itemIndex = item[0];
+																	var itemArg = item[1];
+
+
+																	if (itemArg.options) {
+																		delete itemArg.options;
+																	}
+																	if (accordionData[itemIndex]) {
+																		delete accordionData[itemIndex]?.styles;
+																		delete accordionData[itemIndex]?.hover;
+																		delete accordionData[itemIndex]?.after;
+																		delete accordionData[itemIndex]?.before;
+																		delete accordionData[itemIndex]?.active;
+																		delete accordionData[itemIndex]?.focus;
+																		delete accordionData[itemIndex]?.target;
+																		delete accordionData[itemIndex]?.visited;
+																	}
+
+
+
+
+																	presetClean[itemIndex] = {
+																		...accordionData[itemIndex],
+																		...itemArg,
+																	};
+
+																});
+
+
+																var accordionDataX = {
+
+																	...accordionData,
+																	...presetClean,
+
+																};
+
+
+
+																onChangeAccordion(accordionDataX);
+
+																addNotifications({
+																	title: "Preset Applied",
+																	content: "WOW, Your accordion just got new look!",
+																	type: "success",
+																});
+															}}>
+															<img className="w-full" src={preset.thumb} alt="" />
+															<div className="mt-3 flex justify-between  items-center">
+																<span className="text-lg  text-white ">{preset.label}</span>
+
+																{preset.isPro && (
+
+																	<>
+
+																		{isProFeature && (
+																			<span
+																				className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+																			>
+																				{__("Pro", "accordions")}
+																			</span>
+																		)}
+																	</>
+
+																)}
+
+
+
+
+
+															</div>
+														</div>
+													);
+												})}
+											</>
+										)}
+
+
+
+
 									</div>
 								</PGtab>
 							</PGtabs>
@@ -748,7 +870,7 @@ function Html(props) {
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
 
-						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  Accordions Builder is still in Beta, Please do test and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
+						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  <i class="fa-solid fa-triangle-exclamation"></i> Accordions Builder is still in Beta, Please do test and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
 							settoggleSettings(!toggleSettings)
 						}}>send us feedbacks.</span> </div>
 

@@ -690,11 +690,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-
-
-
-
-
 							var loopIndex = accordionHeader.getAttribute("index");
 							window.pgAccordion.scrollToTop(accordionHeader);
 
