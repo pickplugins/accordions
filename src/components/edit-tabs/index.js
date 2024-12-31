@@ -81,6 +81,7 @@ function Html(props) {
 	);
 	var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
 	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
+	var [panelWrapActive, setpanelWrapActive] = useState(accordionData?.panelWrapActive);
 
 	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 
@@ -542,10 +543,7 @@ function Html(props) {
 	return (
 		<div className="">
 
-			{JSON.stringify(navsWrap)}
-			{JSON.stringify(navItem)}
-			{JSON.stringify(activeNavItem)}
-			{JSON.stringify(panelWrap)}
+
 
 
 			<div
@@ -2129,7 +2127,7 @@ function Html(props) {
 					>
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Icon"
+							title="Icon Idle"
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
@@ -2245,6 +2243,89 @@ function Html(props) {
 											}}
 										/>
 									</div>
+
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											IN Animation
+										</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												popupEntranceAnimateBasic[icon?.options?.inAnimation] ==
+													undefined
+													? __("Choose", "accordions")
+													: popupEntranceAnimateBasic[icon?.options?.inAnimation]
+														.label
+											}
+											options={popupEntranceAnimateBasic}
+											onChange={(newVal) => {
+												var optionsX = {
+													...icon,
+													options: {
+														...icon?.options,
+														inAnimation: newVal.value,
+													},
+												};
+												seticon(optionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											OUT Animation
+										</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												popupCloseAnimateBasic[icon?.options?.outAnimation] ==
+													undefined
+													? __("Choose", "accordions")
+													: popupCloseAnimateBasic[icon?.options?.outAnimation]
+														.label
+											}
+											options={popupCloseAnimateBasic}
+											onChange={(newVal) => {
+												var optionsX = {
+													...icon,
+													options: {
+														...icon?.options,
+														outAnimation: newVal.value,
+													},
+												};
+												seticon(optionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Animation duration", "accordions")}
+										</label>
+										<PGinputText
+											value={icon?.options?.animationDuration}
+											placeholder={"1000"}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[200px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...icon,
+													options: {
+														...icon?.options,
+														animationDuration: newVal,
+													},
+												};
+												setcontent(optionsX);
+											}}
+										/>
+									</div>
+
+
+
+
+
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -2349,779 +2430,956 @@ function Html(props) {
 
 					</PanelBody>
 
-
-
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Navs Wrap"
+					<PanelBody title="Navs & Labels"
 						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={navsWrap?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...navsWrap,
-												options: {
-													...navsWrap?.options,
-													class: newVal,
-												},
-											};
-											setnavsWrap(optionsX);
-										}}
-									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={navsWrap}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											navsWrap,
-											setnavsWrap
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, navsWrap, setnavsWrap)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, navsWrap, setnavsWrap)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Nav Item"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={navItem?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...navItem,
-												options: {
-													...navItem?.options,
-													class: newVal,
-												},
-											};
-											setnavsWrap(optionsX);
-										}}
-									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={navItem}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											navItem,
-											setnavItem
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, navItem, setnavItem)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, navItem, setnavItem)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, navItem, setnavItem)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, navItem, setnavItem)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Active Nav Item"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={activeNavItem?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...activeNavItem,
-												options: {
-													...activeNavItem?.options,
-													class: newVal,
-												},
-											};
-											setnavsWrap(optionsX);
-										}}
-									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={activeNavItem}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											activeNavItem,
-											setactiveNavItem
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(
-											sudoScource,
-											key,
-											activeNavItem,
-											setactiveNavItem
-										)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(
-											sudoScource,
-											key,
-											activeNavItem,
-											setactiveNavItem
-										)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, activeNavItem, setactiveNavItem)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(
-											sudoSource,
-											cssObj,
-											activeNavItem,
-											setactiveNavItem
-										)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						// title="Label Counter"
-						opened={isProFeature ? false : null}
-						title={
-							<span className="flex justify-between w-full gap-2">
-								<span>{__("Label Counter", "accordions")}</span>
-								{isProFeature ? (
-									<span
-										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
-										onClick={(ev) => {
-											window.open("https://comboblocks.com/pricing/", "_blank");
-										}}>
-										{__("Pro", "accordions")}
-									</span>
-								) : (
-									""
-								)}{" "}
-							</span>
-						}
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Counter position", "accordions")}
-									</label>
-									<SelectControl
-										label=""
-										value={labelCounter?.options?.position}
-										options={[
-											{
-												label: __("Choose Position", "accordions"),
-												value: "",
-											},
-											{ label: __("Left", "accordions"), value: "left" },
-											{ label: __("Right", "accordions"), value: "right" },
-											{
-												label: __("Before Label Text", "accordions"),
-												value: "beforeLabelText",
-											},
-											{
-												label: __("After Label Text", "accordions"),
-												value: "afterLabelText",
-											},
-										]}
-										onChange={(newVal) => {
-											var labelCounterX = { ...labelCounter };
-
-											var optionsX = {
-												...labelCounterX.options,
-												position: newVal,
-											};
-
-											labelCounterX.options = optionsX;
-											setlabelCounter(labelCounterX);
-										}}
-									/>
-								</PanelRow>
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={labelCounter?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...labelCounter,
-												options: {
-													...labelCounter?.options,
-													class: newVal,
-												},
-											};
-											setlabelCounter(optionsX);
-										}}
-									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={labelCounter}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											labelCounter,
-											setlabelCounter
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, labelCounter, setlabelCounter)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(
-											sudoScource,
-											key,
-											labelCounter,
-											setlabelCounter
-										)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, labelCounter, setlabelCounter)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(
-											sudoSource,
-											cssObj,
-											labelCounter,
-											setlabelCounter
-										)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Nav Label"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={navLabel?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...navLabel,
-												options: {
-													...navLabel?.options,
-													class: newVal,
-												},
-											};
-											setnavsWrap(optionsX);
-										}}
-									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={navLabel}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											navLabel,
-											setnavLabel
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, navLabel, setnavLabel)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, navLabel, setnavLabel)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, navLabel, setnavLabel)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, navLabel, setnavLabel)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						// title="Label Icon"
-						opened={isProFeature ? false : null}
-						title={
-							<span className="flex justify-between w-full gap-2">
-								<span>{__("Label Icon", "accordions")}</span>
-								{isProFeature ? (
-									<span
-										className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
-										onClick={(ev) => {
-											window.open(
-												"https://comboblocks.com/pricing/",
-												"_blank"
-											);
-										}}>
-										{__("Pro", "accordions")}
-									</span>
-								) : (
-									""
-								)}
-							</span>
-						}
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<PanelRow>
-									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Choose Label Icon", "accordions")}
-									</label>
-									<PGIconPicker
-										library={labelIcon?.options?.library}
-										srcType={labelIcon?.options?.srcType}
-										iconSrc={labelIcon?.options?.iconSrc}
-										onChange={(arg) => {
-											var labelIconX = { ...labelIcon };
-
-											var optionsX = {
-												...labelIconX.options,
-												srcType: arg.srcType,
-												library: arg.library,
-												iconSrc: arg.iconSrc,
-											};
-
-											labelIconX.options = optionsX;
-											setlabelIcon(labelIconX);
-										}}
-									/>
-								</PanelRow>
-
-								<PanelRow>
-									<label htmlFor="" className="font-medium text-slate-900 ">
-										{__("Icon position", "accordions")}
-									</label>
-									<SelectControl
-										label=""
-										value={labelIcon?.options?.position}
-										options={[
-											{
-												label: __("Choose Position", "accordions"),
-												value: "",
-											},
-											{
-												label: __("Before Label", "accordions"),
-												value: "beforeLabel",
-											},
-											{
-												label: __("After Label", "accordions"),
-												value: "afterLabel",
-											},
-											{
-												label: __("Before Label Text", "accordions"),
-												value: "beforeLabelText",
-											},
-											{
-												label: __("After Label Text", "accordions"),
-												value: "afterLabelText",
-											},
-										]}
-										onChange={(newVal) => {
-											var labelIconX = { ...labelIcon };
-
-											var optionsX = {
-												...labelIconX.options,
-												position: newVal,
-											};
-
-											labelIconX.options = optionsX;
-											setlabelIcon(labelIconX);
-										}}
-									/>
-								</PanelRow>
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={labelIcon?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...labelIcon,
-												options: {
-													...labelIcon?.options,
-													class: newVal,
-												},
-											};
-											setlabelIcon(optionsX);
-										}}
-									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={labelIcon}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											labelIcon,
-											setlabelIcon
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, labelIcon, setlabelIcon)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, labelIcon, setlabelIcon)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, labelIcon, setlabelIcon)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(
-											sudoSource,
-											cssObj,
-											labelIcon,
-											setlabelIcon
-										)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Panel Wrap"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => { }}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={panelWrap?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...panelWrap,
-												options: {
-													...panelWrap?.options,
-													class: newVal,
-												},
-											};
-											setpanelWrap(optionsX);
-										}}
-									/>
-								</div>
-
-								<PanelRow>
-									<label htmlFor="" className="flex gap-2 items-center">
-										In Animation
-									</label>
-
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											popupEntranceAnimateBasic[panelWrap?.options?.inAnimation] ==
-												undefined
-												? __("Choose", "accordions")
-												: popupEntranceAnimateBasic[panelWrap?.options?.inAnimation]
-													.label
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Navs Wrap"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={navsWrap?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...navsWrap,
+													options: {
+														...navsWrap?.options,
+														class: newVal,
+													},
+												};
+												setnavsWrap(optionsX);
+											}}
+										/>
+									</div>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={navsWrap}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												navsWrap,
+												setnavsWrap
+											)
 										}
-										options={popupEntranceAnimateBasic}
-										onChange={(newVal) => {
-											if (isProFeature) {
-												addNotifications({
-													title: "Opps its pro!",
-													panelWrap:
-														"This feature only avilable in premium version",
-													type: "error",
-												});
-												return;
-											}
-
-											var optionsX = {
-												...panelWrap,
-												options: {
-													...panelWrap?.options,
-													inAnimation: newVal.value,
-												},
-											};
-											setpanelWrap(optionsX);
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-								<PanelRow>
-									<label htmlFor="" className="flex gap-2 items-center">
-										Out Animation
-									</label>
-
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											popupCloseAnimateBasic[panelWrap?.options?.outAnimation] ==
-												undefined
-												? __("Choose", "accordions")
-												: popupCloseAnimateBasic[panelWrap?.options?.outAnimation]
-													.label
+										onAdd={(sudoScource, key) =>
+											onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
 										}
-										options={popupCloseAnimateBasic}
-										onChange={(newVal) => {
-											if (isProFeature) {
-												addNotifications({
-													title: "Opps its pro!",
-													panelWrap:
-														"This feature only avilable in premium version",
-													type: "error",
-												});
-												return;
-											}
-
-											var optionsX = {
-												...panelWrap,
-												options: {
-													...panelWrap?.options,
-													outAnimation: newVal.value,
-												},
-											};
-											setpanelWrap(optionsX);
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Animation duration", "accordions")}
-									</label>
-									<PGinputText
-										value={panelWrap?.options?.animationDuration}
-										placeholder={"1000"}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...panelWrap,
-												options: {
-													...panelWrap?.options,
-													animationDuration: newVal,
-												},
-											};
-											setpanelWrap(optionsX);
-										}}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, navsWrap, setnavsWrap)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(sudoSource, cssObj, navsWrap, setnavsWrap)
+										}
 									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={panelWrap}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											panelWrap,
-											setpanelWrap
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, panelWrap, setpanelWrap)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, panelWrap, setpanelWrap)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, panelWrap, setpanelWrap)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, panelWrap, setpanelWrap)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Item"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={navItem?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...navItem,
+													options: {
+														...navItem?.options,
+														class: newVal,
+													},
+												};
+												setnavsWrap(optionsX);
+											}}
+										/>
+									</div>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={navItem}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												navItem,
+												setnavItem
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(sudoScource, key, navItem, setnavItem)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(sudoScource, key, navItem, setnavItem)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, navItem, setnavItem)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(sudoSource, cssObj, navItem, setnavItem)
+										}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Active Nav Item"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={activeNavItem?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...activeNavItem,
+													options: {
+														...activeNavItem?.options,
+														class: newVal,
+													},
+												};
+												setnavsWrap(optionsX);
+											}}
+										/>
+									</div>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={activeNavItem}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												activeNavItem,
+												setactiveNavItem
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(
+												sudoScource,
+												key,
+												activeNavItem,
+												setactiveNavItem
+											)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(
+												sudoScource,
+												key,
+												activeNavItem,
+												setactiveNavItem
+											)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, activeNavItem, setactiveNavItem)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(
+												sudoSource,
+												cssObj,
+												activeNavItem,
+												setactiveNavItem
+											)
+										}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Nav Label"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={navLabel?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...navLabel,
+													options: {
+														...navLabel?.options,
+														class: newVal,
+													},
+												};
+												setnavsWrap(optionsX);
+											}}
+										/>
+									</div>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={navLabel}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												navLabel,
+												setnavLabel
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(sudoScource, key, navLabel, setnavLabel)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(sudoScource, key, navLabel, setnavLabel)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, navLabel, setnavLabel)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(sudoSource, cssObj, navLabel, setnavLabel)
+										}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							// title="Label Icon"
+							opened={isProFeature ? false : null}
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Label Icon", "accordions")}</span>
+									{isProFeature ? (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+											onClick={(ev) => {
+												window.open(
+													"https://comboblocks.com/pricing/",
+													"_blank"
+												);
+											}}>
+											{__("Pro", "accordions")}
+										</span>
+									) : (
+										""
+									)}
+								</span>
+							}
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label htmlFor="" className="font-medium text-slate-900 ">
+											{__("Choose Label Icon", "accordions")}
+										</label>
+										<PGIconPicker
+											library={labelIcon?.options?.library}
+											srcType={labelIcon?.options?.srcType}
+											iconSrc={labelIcon?.options?.iconSrc}
+											onChange={(arg) => {
+												var labelIconX = { ...labelIcon };
+
+												var optionsX = {
+													...labelIconX.options,
+													srcType: arg.srcType,
+													library: arg.library,
+													iconSrc: arg.iconSrc,
+												};
+
+												labelIconX.options = optionsX;
+												setlabelIcon(labelIconX);
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label htmlFor="" className="font-medium text-slate-900 ">
+											{__("Icon position", "accordions")}
+										</label>
+										<SelectControl
+											label=""
+											value={labelIcon?.options?.position}
+											options={[
+												{
+													label: __("Choose Position", "accordions"),
+													value: "",
+												},
+												{
+													label: __("Before Label", "accordions"),
+													value: "beforeLabel",
+												},
+												{
+													label: __("After Label", "accordions"),
+													value: "afterLabel",
+												},
+												{
+													label: __("Before Label Text", "accordions"),
+													value: "beforeLabelText",
+												},
+												{
+													label: __("After Label Text", "accordions"),
+													value: "afterLabelText",
+												},
+											]}
+											onChange={(newVal) => {
+												var labelIconX = { ...labelIcon };
+
+												var optionsX = {
+													...labelIconX.options,
+													position: newVal,
+												};
+
+												labelIconX.options = optionsX;
+												setlabelIcon(labelIconX);
+											}}
+										/>
+									</PanelRow>
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={labelIcon?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...labelIcon,
+													options: {
+														...labelIcon?.options,
+														class: newVal,
+													},
+												};
+												setlabelIcon(optionsX);
+											}}
+										/>
+									</div>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={labelIcon}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												labelIcon,
+												setlabelIcon
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(sudoScource, key, labelIcon, setlabelIcon)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(sudoScource, key, labelIcon, setlabelIcon)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, labelIcon, setlabelIcon)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(
+												sudoSource,
+												cssObj,
+												labelIcon,
+												setlabelIcon
+											)
+										}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							// title="Label Counter"
+							opened={isProFeature ? false : null}
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Label Counter", "accordions")}</span>
+									{isProFeature ? (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+											onClick={(ev) => {
+												window.open("https://comboblocks.com/pricing/", "_blank");
+											}}>
+											{__("Pro", "accordions")}
+										</span>
+									) : (
+										""
+									)}{" "}
+								</span>
+							}
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<PanelRow>
+										<label htmlFor="" className="font-medium text-slate-900 ">
+											{__("Counter position", "accordions")}
+										</label>
+										<SelectControl
+											label=""
+											value={labelCounter?.options?.position}
+											options={[
+												{
+													label: __("Choose Position", "accordions"),
+													value: "",
+												},
+												{ label: __("Left", "accordions"), value: "left" },
+												{ label: __("Right", "accordions"), value: "right" },
+												{
+													label: __("Before Label Text", "accordions"),
+													value: "beforeLabelText",
+												},
+												{
+													label: __("After Label Text", "accordions"),
+													value: "afterLabelText",
+												},
+											]}
+											onChange={(newVal) => {
+												var labelCounterX = { ...labelCounter };
+
+												var optionsX = {
+													...labelCounterX.options,
+													position: newVal,
+												};
+
+												labelCounterX.options = optionsX;
+												setlabelCounter(labelCounterX);
+											}}
+										/>
+									</PanelRow>
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={labelCounter?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...labelCounter,
+													options: {
+														...labelCounter?.options,
+														class: newVal,
+													},
+												};
+												setlabelCounter(optionsX);
+											}}
+										/>
+									</div>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={labelCounter}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												labelCounter,
+												setlabelCounter
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(sudoScource, key, labelCounter, setlabelCounter)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(
+												sudoScource,
+												key,
+												labelCounter,
+												setlabelCounter
+											)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, labelCounter, setlabelCounter)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(
+												sudoSource,
+												cssObj,
+												labelCounter,
+												setlabelCounter
+											)
+										}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+
 					</PanelBody>
+
+					<PanelBody title="Panels"
+						initialOpen={false}>
+
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Panel Wrap"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={panelWrap?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...panelWrap,
+													options: {
+														...panelWrap?.options,
+														class: newVal,
+													},
+												};
+												setpanelWrap(optionsX);
+											}}
+										/>
+									</div>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											Autoembed
+											<span
+												className="cursor-pointer"
+												title="Click to know more"
+												onClick={() => {
+													setHelp({
+														id: "autoembedSetting",
+														enable: true,
+													});
+												}}>
+												<Icon icon={help} />
+											</span>
+										</label>
+										<InputToggle
+											value={panelWrap?.options?.autoembed}
+											onChange={(newVal) => {
+												var optionsX = {
+													...panelWrap,
+													options: {
+														...panelWrap?.options,
+														autoembed: newVal,
+													},
+												};
+												setpanelWrap(optionsX);
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											Shortcodes
+											<span
+												className="cursor-pointer"
+												title="Click to know more"
+												onClick={() => {
+													setHelp({
+														id: "shortcodesSetting",
+														enable: true,
+													});
+												}}>
+												<Icon icon={help} />
+											</span>
+										</label>
+
+										<InputToggle
+											value={panelWrap?.options?.shortcodes}
+											onChange={(newVal) => {
+												var optionsX = {
+													...panelWrap,
+													options: {
+														...panelWrap?.options,
+														shortcodes: newVal,
+													},
+												};
+												setpanelWrap(optionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											wpautop
+											<span
+												className="cursor-pointer"
+												title="Click to know more"
+												onClick={() => {
+													setHelp({
+														id: "wpautopSetting",
+														enable: true,
+													});
+												}}>
+												<Icon icon={help} />
+											</span>
+										</label>
+
+										<InputToggle
+											value={panelWrap?.options?.wpautop}
+											onChange={(newVal) => {
+												var optionsX = {
+													...panelWrap,
+													options: {
+														...panelWrap?.options,
+														wpautop: newVal,
+													},
+												};
+												setpanelWrap(optionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											In Animation
+										</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												popupEntranceAnimateBasic[panelWrap?.options?.inAnimation] ==
+													undefined
+													? __("Choose", "accordions")
+													: popupEntranceAnimateBasic[panelWrap?.options?.inAnimation]
+														.label
+											}
+											options={popupEntranceAnimateBasic}
+											onChange={(newVal) => {
+												if (isProFeature) {
+													addNotifications({
+														title: "Opps its pro!",
+														panelWrap:
+															"This feature only avilable in premium version",
+														type: "error",
+													});
+													return;
+												}
+
+												var optionsX = {
+													...panelWrap,
+													options: {
+														...panelWrap?.options,
+														inAnimation: newVal.value,
+													},
+												};
+												setpanelWrap(optionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+									<PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											Out Animation
+										</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												popupCloseAnimateBasic[panelWrap?.options?.outAnimation] ==
+													undefined
+													? __("Choose", "accordions")
+													: popupCloseAnimateBasic[panelWrap?.options?.outAnimation]
+														.label
+											}
+											options={popupCloseAnimateBasic}
+											onChange={(newVal) => {
+												if (isProFeature) {
+													addNotifications({
+														title: "Opps its pro!",
+														panelWrap:
+															"This feature only avilable in premium version",
+														type: "error",
+													});
+													return;
+												}
+
+												var optionsX = {
+													...panelWrap,
+													options: {
+														...panelWrap?.options,
+														outAnimation: newVal.value,
+													},
+												};
+												setpanelWrap(optionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Animation duration", "accordions")}
+										</label>
+										<PGinputText
+											value={panelWrap?.options?.animationDuration}
+											placeholder={"1000"}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...panelWrap,
+													options: {
+														...panelWrap?.options,
+														animationDuration: newVal,
+													},
+												};
+												setpanelWrap(optionsX);
+											}}
+										/>
+									</div>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={panelWrap}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												panelWrap,
+												setpanelWrap
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(sudoScource, key, panelWrap, setpanelWrap)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(sudoScource, key, panelWrap, setpanelWrap)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, panelWrap, setpanelWrap)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(sudoSource, cssObj, panelWrap, setpanelWrap)
+										}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+						<PanelBody
+							className="font-medium text-slate-900 "
+							title="Panel Wrap Active"
+							initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => { }}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: brush,
+										className: "tab-style",
+									},
+								]}>
+								<PGtab name="options">
+									<div className="flex  my-5  justify-between items-center">
+										<label className="" htmlFor="emailVerification">
+											{__("Class", "accordions")}
+										</label>
+										<PGinputText
+											value={panelWrapActive?.options?.class}
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+											onChange={(newVal) => {
+												var optionsX = {
+													...panelWrapActive,
+													options: {
+														...panelWrapActive?.options,
+														class: newVal,
+													},
+												};
+												setpanelWrapActive(optionsX);
+											}}
+										/>
+									</div>
+
+
+
+
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={panelWrapActive}
+										onChange={(sudoScource, newVal, attr) =>
+											onChangeStyle(
+												sudoScource,
+												newVal,
+												attr,
+												panelWrapActive,
+												setpanelWrapActive
+											)
+										}
+										onAdd={(sudoScource, key) =>
+											onAddStyle(sudoScource, key, panelWrapActive, setpanelWrapActive)
+										}
+										onRemove={(sudoScource, key) =>
+											onRemoveStyle(sudoScource, key, panelWrapActive, setpanelWrapActive)
+										}
+										onReset={(sudoSources) =>
+											onResetStyle(sudoSources, panelWrapActive, setpanelWrapActive)
+										}
+										onBulkAdd={(sudoSource, cssObj) =>
+											onBulkAddStyle(sudoSource, cssObj, panelWrapActive, setpanelWrapActive)
+										}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
+
+					</PanelBody>
+
+
 				</>
 			)}
 		</div>

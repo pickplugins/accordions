@@ -467,16 +467,6 @@ function Html(props) {
 
 				</div>
 
-
-				{JSON.stringify(panelWrap)}
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 

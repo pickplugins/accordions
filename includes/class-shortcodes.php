@@ -50,7 +50,7 @@ class class_accordions_shortcodes
 
 
         $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
-        $viewType = isset($accordionData["viewType"]) ? $accordionData["viewType"] : "accordion";
+        $viewType = isset($globalOptions["viewType"]) ? $globalOptions["viewType"] : "accordion";
 
 
 
@@ -73,9 +73,15 @@ class class_accordions_shortcodes
 
         do_action("accordions_builder_" . $viewType, $post_id, $accordionData);
 
+        if ($viewType == "accordion") {
+            wp_enqueue_script('accordions_front_scripts');
+            wp_enqueue_style('accordions_animate');
+        }
+        if ($viewType == "tabs") {
+            wp_enqueue_script('tabs_front_scripts');
+            wp_enqueue_style('accordions_animate');
+        }
 
-        wp_enqueue_script('accordions_front_scripts');
-        wp_enqueue_style('accordions_animate');
 
         return ob_get_clean();
     }

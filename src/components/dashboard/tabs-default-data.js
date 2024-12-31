@@ -74,6 +74,15 @@ var tabsDefaultData = {
 			},
 			"color": {
 				"Desktop": "#ffffff"
+			},
+			"display": {
+				"Desktop": "flex"
+			},
+			"justifyContent": {
+				"Desktop": "start"
+			},
+			"gap": {
+				"Desktop": "1em"
 			}
 		}
 	},
@@ -100,6 +109,8 @@ var tabsDefaultData = {
 		},
 		styles: {}
 	},
+
+
 	panelWrap: {
 		options: {
 			class: "tabs-panel "
@@ -119,7 +130,16 @@ var tabsDefaultData = {
 			}
 		}
 	},
-
+	panelWrapActive: {
+		options: {
+			class: "tabs-panel-active"
+		},
+		styles: {
+			"display": {
+				"Desktop": "block"
+			},
+		}
+	},
 
 
 	labelCounter: {
@@ -137,7 +157,7 @@ var tabsDefaultData = {
 			library: "fontAwesome",
 			srcType: "class",
 			iconSrc: "fas fa-angle-down",
-			position: "left",
+			position: "before",
 			class: " nav-icon-idle nav-icon"
 		},
 		styles: {},
@@ -156,7 +176,7 @@ var tabsDefaultData = {
 			library: "fontAwesome",
 			srcType: "class",
 			iconSrc: "",
-			position: "",
+			position: "beforeLabel",
 			class: "label-icon",
 		},
 		styles: {},
