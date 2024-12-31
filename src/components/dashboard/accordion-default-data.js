@@ -13,7 +13,7 @@ var accordionDefaultData = {
 		options: {
 
 			tag: "div",
-			class: "pg-accordion-nested",
+			class: "tabs-wrapper",
 		},
 		styles: {},
 	},

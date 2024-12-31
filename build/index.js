@@ -31811,7 +31811,7 @@ var accordionDefaultData = {
   wrapper: {
     options: {
       tag: "div",
-      class: "pg-accordion-nested"
+      class: "tabs-wrapper"
     },
     styles: {}
   },
@@ -31991,7 +31991,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -32160,7 +32160,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -32346,7 +32346,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -32535,7 +32535,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -32703,7 +32703,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -32877,7 +32877,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -33077,7 +33077,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -33302,7 +33302,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -33480,7 +33480,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -33690,7 +33690,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -33890,7 +33890,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -34090,7 +34090,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -34290,7 +34290,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -34501,7 +34501,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -34682,7 +34682,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -34872,7 +34872,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -35047,7 +35047,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -35306,7 +35306,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -35536,7 +35536,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -35768,7 +35768,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -35993,7 +35993,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -36225,7 +36225,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -36463,7 +36463,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -36692,7 +36692,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -36924,7 +36924,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "margin": [],
@@ -37128,7 +37128,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "display": {
@@ -37362,7 +37362,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {
         "display": {
@@ -37575,7 +37575,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -37851,7 +37851,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -38127,7 +38127,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -38428,7 +38428,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -38704,7 +38704,7 @@ var accordionTemplates = [{
     "wrapper": {
       "options": {
         "tag": "div",
-        "class": "pg-accordion-nested"
+        "class": "accordions-wrapper"
       },
       "styles": {}
     },
@@ -39893,6 +39893,10 @@ function Html(props) {
     tabs: {
       label: "Tabs",
       value: "tabs"
+    },
+    imageAccordion: {
+      label: "Image Accordion",
+      value: "imageAccordion"
     }
   };
   useEffect(() => {
@@ -40567,7 +40571,7 @@ var tabsDefaultData = {
     options: {
       content: "",
       tag: "div",
-      class: "pg-accordion-nested"
+      class: "accordions-wrapper"
     },
     styles: {}
   },
