@@ -72,6 +72,8 @@ class Accordions
     require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-hook.php');
     require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-functions.php');
 
+    require_once(accordions_plugin_dir . 'templates/tabs-builder/tabs-builder-hook.php');
+
     require_once(accordions_plugin_dir . 'includes/3rd-party/3rd-party.php');
 
 
@@ -162,6 +164,7 @@ class Accordions
 
 
     wp_register_script('accordions_front_scripts', accordions_plugin_url . 'templates/accordions-builder/front-scripts.js', array('jquery'), '20181018');
+    wp_register_script('tabs_front_scripts', accordions_plugin_url . 'templates/tabs-builder/front-scripts.js', array('jquery'), '20181018');
 
     wp_register_script('accordions_js', accordions_plugin_url . 'assets/frontend/js/scripts.js', array('jquery'), time(), true);
     wp_register_style('accordions-style', accordions_plugin_url . 'assets/frontend/css/style.css');

@@ -550,7 +550,6 @@ function Html(props) {
 													</PanelRow>
 												</div>
 
-												{/* {JSON.stringify(postData)} */}
 
 
 												{postData.post_content.globalOptions?.viewType == "accordion" && (

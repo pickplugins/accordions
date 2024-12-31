@@ -97,6 +97,7 @@ function Html(props) {
 	var activeNavItemSelector = blockClass + " .nav-item-active";
 	var navLabelSelector = blockClass + " .nav-label";
 	var panelWrapSelector = blockClass + " .tabs-panel";
+	var panelWrapActiveSelector = blockClass + " .tabs-panel-active";
 
 
 	function getElementSelector(sudoScource, mainSelector) {
@@ -660,6 +661,13 @@ function Html(props) {
 
 		var panelWrapCss = generateElementCss(accordionData.panelWrap, panelWrapSelector);
 		Object.entries(panelWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+		var panelWrapActiveCss = generateElementCss(accordionData.panelWrapActive, panelWrapActiveSelector);
+		Object.entries(panelWrapActiveCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
