@@ -2298,7 +2298,7 @@ function Html(props) {
 							]}>
 							<PGtab name="options">
 								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
+									<label className="" htmlFor="">
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
