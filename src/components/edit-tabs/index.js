@@ -742,7 +742,7 @@ function Html(props) {
 															content: "You just pasted items, Now go to edit.",
 															type: "success",
 														});
-													} catch (error) {}
+													} catch (error) { }
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
 											</span>
@@ -763,8 +763,8 @@ function Html(props) {
 																	type: "success",
 																});
 															})
-															.catch((err) => {});
-													} catch (error) {}
+															.catch((err) => { });
+													} catch (error) { }
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
 											</span>
@@ -1981,71 +1981,10 @@ function Html(props) {
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
-								{/* <SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.urlHash}
-									options={[
-										{ label: __("Click", "accordions"), value: "click" },
-										{
-											label: __("Mouseover", "accordions"),
-											value: "mouseover",
-										},
-										{ label: __("Focus", "accordions"), value: "focus" },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.urlHash = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/> */}
+
 							</PanelRow>
 
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Animation Name{" "}
-									<span
-										className="cursor-pointer"
-										title="Click to know more"
-										onClick={() => {
-											setHelp({
-												id: "animationSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.animationName}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.animationName = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-							{globalOptions?.animationName && (
-								<PanelRow>
-									<label htmlFor="">Animation Duration</label>
-									<PGinputText
-										className="max-w-[140px]"
-										label=""
-										value={globalOptions?.animationDuration}
-										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.animationDuration = newVal;
-											setglobalOptions(globalOptionsX);
-										}}
-									/>
-								</PanelRow>
-							)}
+
 						</div>
 					</PanelBody>
 					<PanelBody
@@ -2056,7 +1995,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2167,7 +2106,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2288,11 +2227,11 @@ function Html(props) {
 											variant="secondary"
 											buttonTitle={
 												popupEntranceAnimateBasic[icon?.options?.inAnimation] ==
-												undefined
+													undefined
 													? __("Choose", "accordions")
 													: popupEntranceAnimateBasic[
-															icon?.options?.inAnimation
-													  ].label
+														icon?.options?.inAnimation
+													].label
 											}
 											options={popupEntranceAnimateBasic}
 											onChange={(newVal) => {
@@ -2317,10 +2256,10 @@ function Html(props) {
 											variant="secondary"
 											buttonTitle={
 												popupCloseAnimateBasic[icon?.options?.outAnimation] ==
-												undefined
+													undefined
 													? __("Choose", "accordions")
 													: popupCloseAnimateBasic[icon?.options?.outAnimation]
-															.label
+														.label
 											}
 											options={popupCloseAnimateBasic}
 											onChange={(newVal) => {
@@ -2388,7 +2327,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2468,7 +2407,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2540,7 +2479,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2612,7 +2551,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2700,7 +2639,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2792,7 +2731,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -2955,7 +2894,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -3081,7 +3020,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",
@@ -3220,8 +3159,8 @@ function Html(props) {
 												] == undefined
 													? __("Choose", "accordions")
 													: popupEntranceAnimateBasic[
-															panelWrap?.options?.inAnimation
-													  ].label
+														panelWrap?.options?.inAnimation
+													].label
 											}
 											options={popupEntranceAnimateBasic}
 											onChange={(newVal) => {
@@ -3260,8 +3199,8 @@ function Html(props) {
 												] == undefined
 													? __("Choose", "accordions")
 													: popupCloseAnimateBasic[
-															panelWrap?.options?.outAnimation
-													  ].label
+														panelWrap?.options?.outAnimation
+													].label
 											}
 											options={popupCloseAnimateBasic}
 											onChange={(newVal) => {
@@ -3349,7 +3288,7 @@ function Html(props) {
 								activeTab="options"
 								orientation="horizontal"
 								activeClass="active-tab"
-								onSelect={(tabName) => {}}
+								onSelect={(tabName) => { }}
 								tabs={[
 									{
 										name: "options",

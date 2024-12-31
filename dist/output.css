@@ -598,6 +598,10 @@
   width: 20px;
 }
 
+.w-\[210px\] {
+  width: 210px;
+}
+
 .w-\[24\%\] {
   width: 24%;
 }
@@ -1321,6 +1325,11 @@
 .bg-slate-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1));
+}
+
+.bg-violet-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(109 40 217 / var(--tw-bg-opacity, 1));
 }
 
 .bg-white {

@@ -29,6 +29,7 @@ import AccordionsList from "../../components/accordions-list";
 import accordionDefaultData from "./accordion-default-data";
 import tabsDefaultData from "./tabs-default-data";
 import imageAccordionDefaultData from "./image-accordion-default-data";
+import accordionMenuDefaultData from "./accordion-menu-default-data";
 import accordionTemplates from "./accordion-templates";
 import AccordionsGenerateCss from "./generate-css";
 import PGHelp from "./help";
@@ -66,7 +67,8 @@ function Html(props) {
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
 		tabs: { label: "Tabs", value: "tabs" },
-		imageAccordion: { label: "Image Accordion", value: "imageAccordion" },
+		imageAccordion: { label: "Image Accordion", value: "imageAccordion", coming: true },
+		accordionMenu: { label: "Accordion Menu", value: "accordionMenu", coming: true },
 	};
 
 	useEffect(() => {
@@ -547,6 +549,9 @@ function Html(props) {
 																	if (option.value == "imageAccordion") {
 																		setpostData({ ...postData, post_content: imageAccordionDefaultData })
 																	}
+																	if (option.value == "accordionMenu") {
+																		setpostData({ ...postData, post_content: accordionMenuDefaultData })
+																	}
 
 																}
 
@@ -578,7 +583,7 @@ function Html(props) {
 														setHelp={setHelp}
 													/>
 												)}
-												{postData.post_content.globalOptions?.viewType == "imageAccordion" && (
+												{/* {postData.post_content.globalOptions?.viewType == "imageAccordion" && (
 													<ImageAccordionEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
@@ -586,7 +591,16 @@ function Html(props) {
 														customerData={customerData}
 														setHelp={setHelp}
 													/>
-												)}
+												)} */}
+												{/* {postData.post_content.globalOptions?.viewType == "accordionMenu" && (
+													<ImageAccordionEdit
+														onChange={onChangeAccordion}
+														addNotifications={addNotifications}
+														postData={postData}
+														customerData={customerData}
+														setHelp={setHelp}
+													/>
+												)} */}
 
 
 
@@ -733,6 +747,11 @@ function Html(props) {
 				</div>
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
+
+						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  Accordions Builder is still in Beta, Please do test and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
+							settoggleSettings(!toggleSettings)
+						}}>send us feedbacks.</span> </div>
+
 						{(postData?.ID == null || toggleSettings) && <AccordionsGuide addNotifications={addNotifications} customerData={customerData}
 						/>}
 
