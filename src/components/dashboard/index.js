@@ -62,6 +62,7 @@ function Html(props) {
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
 		tabs: { label: "Tabs", value: "tabs" },
+		imageAccordion: { label: "Image Accordion", value: "imageAccordion" },
 	};
 
 	useEffect(() => {
