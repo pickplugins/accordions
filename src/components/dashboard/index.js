@@ -16,15 +16,19 @@ import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 import PGDropdown from "../dropdown";
 
+import ImageAccordionEdit from "../../components/edit-image-accordion";
 import TabsEdit from "../../components/edit-tabs";
 import AccordionsEdit from "../../components/accordions-edit";
 import AccordionsGuide from "../../components/accordions-guide";
 import AccordionsView from "../../components/accordions-view";
+
 import PGtab from "../../components/tab";
+
 import PGtabs from "../../components/tabs";
 import AccordionsList from "../../components/accordions-list";
 import accordionDefaultData from "./accordion-default-data";
 import tabsDefaultData from "./tabs-default-data";
+import imageAccordionDefaultData from "./image-accordion-default-data";
 import accordionTemplates from "./accordion-templates";
 import AccordionsGenerateCss from "./generate-css";
 import PGHelp from "./help";
@@ -539,8 +543,11 @@ function Html(props) {
 																	}
 																	if (option.value == "tabs") {
 																		setpostData({ ...postData, post_content: tabsDefaultData })
-
 																	}
+																	if (option.value == "imageAccordion") {
+																		setpostData({ ...postData, post_content: imageAccordionDefaultData })
+																	}
+
 																}
 
 
@@ -564,6 +571,15 @@ function Html(props) {
 												)}
 												{postData.post_content.globalOptions?.viewType == "tabs" && (
 													<TabsEdit
+														onChange={onChangeAccordion}
+														addNotifications={addNotifications}
+														postData={postData}
+														customerData={customerData}
+														setHelp={setHelp}
+													/>
+												)}
+												{postData.post_content.globalOptions?.viewType == "imageAccordion" && (
+													<ImageAccordionEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}

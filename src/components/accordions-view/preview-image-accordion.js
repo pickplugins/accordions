@@ -2,14 +2,11 @@ const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { Popover, Spinner } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Icon, close, cog, addCard, helpFilled, help, caution } from "@wordpress/icons";
+import { Icon, close, cog, addCard, helpFilled, help } from "@wordpress/icons";
 
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
-import PreviewAccordions from "./preview-accordions";
-import PreviewTabs from "./preview-tabs";
-import PreviewImageAccordion from "./preview-image-accordion";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -51,6 +48,13 @@ function Html(props) {
 	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 	var [expandCollapseAll, setexpandCollapseAll] = useState(accordionData.expandCollapseAll);
 
+	var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
+	var [navItem, setnavItem] = useState(accordionData?.navItem);
+	var [activeNavItem, setactiveNavItem] = useState(
+		accordionData?.activeNavItem
+	);
+	var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
+	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
 
 	const [toggled, setToggled] = useState(false);
 	const [labelIconHtml, setlabelIconHtml] = useState("");
@@ -59,6 +63,7 @@ function Html(props) {
 	const [iconToggleHtml, seticonToggleHtml] = useState("");
 	const [iconExpandAllHtml, seticonExpandAllHtml] = useState("");
 	const [iconCollapseAllHtml, seticonCollapseAllHtml] = useState("");
+	const [activeTab, setactiveTab] = useState(0);
 
 
 
@@ -154,111 +159,35 @@ function Html(props) {
 	}, [expandCollapseAll?.options]);
 
 
+
+
+
+
+
 	var [active, setactive] = useState(9999);
 
 	return (
-		<div className="ml-5">
-
-			<div className="my-3 bg-orange-400 p-3 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  Accordions Builder is still in Beta, Please do test and send us feedbacks.</div>
-
-			<div className="flex items-center justify-between align-middle bg-white p-5  mb-5">
-				<div className="flex items-center gap-5">
-					<div className="text-xl">
-						{postData?.post_title && (
-							<>You are editing: {postData.post_title}</>
-						)}
-					</div>
-
-
-				</div>
-
-				<div className="flex items-center align-middle gap-3">
-
-
-					<div className="flex items-center align-middle gap-2">
-						<span className="cursor-pointer" title="Click to know more"
-							onClick={() => {
-								setHelp({
-									id: "useShortcodes",
-									enable: true,
-
-								});
-							}}
-						>
-							<Icon icon={help} />
-						</span>
-						<input
-							type="text"
-							className="w-72 !bg-slate-200 !rounded-none !border-2 !border-solid border-slate-400 text-sm !py-1 !px-2 font-mono"
-							value={`[accordions_builder id="${id}"]`}
-							onClick={() => {
-								var str = `[accordions_builder id="${id}"]`;
-
-								copyData(str);
-							}}
-						/>
-					</div>
 
 
 
-					{pleaseUpdateX && (
-						<div
-							className="bg-slate-700 text-white px-5 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
-							onClick={(ev) => {
-								onUpdate(true);
-							}}>
-							Save
-						</div>
-					)}
-				</div>
+		<div className="px-10 py-10">
+
+
+			<div id={`accordions-${id}`} className={`${wrapper?.options?.class} `}>
+
+
+				PreviewImageAccordion
+
+
 			</div>
-
-
-
-			{globalOptions?.viewType == "accordion" && (
-				<PreviewAccordions isLoading={isLoading}
-					postData={postData}
-					id={id}
-					onUpdate={onUpdate}
-					pleaseUpdate={pleaseUpdate}
-					onChange={onChange}
-					addNotifications={addNotifications}
-					setHelp={setHelp}
-				/>
-			)}
-			{globalOptions?.viewType == "tabs" && (
-				<PreviewTabs isLoading={isLoading}
-					postData={postData}
-					id={id}
-					onUpdate={onUpdate}
-					pleaseUpdate={pleaseUpdate}
-					onChange={onChange}
-					addNotifications={addNotifications}
-					setHelp={setHelp}
-				/>
-			)}
-			{globalOptions?.viewType == "imageAccordion" && (
-				<PreviewImageAccordion isLoading={isLoading}
-					postData={postData}
-					id={id}
-					onUpdate={onUpdate}
-					pleaseUpdate={pleaseUpdate}
-					onChange={onChange}
-					addNotifications={addNotifications}
-					setHelp={setHelp}
-				/>
-			)}
-
-
-
-
-
-
 		</div>
+
+
+
 	);
 }
 
-class AccordionsView extends Component {
+class PreviewImageAccordion extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
@@ -299,4 +228,4 @@ class AccordionsView extends Component {
 	}
 }
 
-export default AccordionsView;
+export default PreviewImageAccordion;

@@ -3386,7 +3386,7 @@ function Html(props) {
 	);
 }
 
-class TabsEdit extends Component {
+class ImageAccordionEdit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true, isLoaded: false };
@@ -3416,4 +3416,4 @@ class TabsEdit extends Component {
 	}
 }
 
-export default TabsEdit;
+export default ImageAccordionEdit;
