@@ -30,6 +30,8 @@ import {
 	shortcode,
 	copySmall,
 	trash,
+	addSubmenu,
+	pencil,
 } from "@wordpress/icons";
 
 var myStore = wp.data.select('postgrid-shop');
@@ -59,6 +61,7 @@ function Html(props) {
 	var [dataLoaded, setdataLoaded] = useState(false); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 	var [deleteConfirm, setdeleteConfirm] = useState({ id: "", confirm: false }); // Using the hook.
+	var [rename, setrename] = useState({ id: "", confirm: false }); // Using the hook.
 
 
 	const copyData = (data) => {
@@ -219,6 +222,56 @@ function Html(props) {
 		});
 	}
 
+	function update_post_title(newValue, postId) {
+
+
+		setisLoading(true);
+		apiFetch({
+			path: "/accordions/v2/update_post_title",
+			method: "POST",
+			data: { postTitle: newValue, postId: postId },
+		}).then((res) => {
+
+			console.log(res);
+
+
+			if (res.error) {
+				addNotifications({
+					title: "There is an Error!",
+					content: res.errorMessage,
+					type: "error",
+				});
+			}
+			if (res.success) {
+				//var postsX = [...posts];
+
+				//postsX.unshift({ ID: res.id, post_content: "", post_author: 0, post_title: searchPrams.search });
+
+				//setPosts(postsX)
+
+				addNotifications({
+
+					title: "Accordion Title Updated!",
+					content: res.successMessage,
+					type: "success",
+				});
+			}
+
+
+
+			setisLoading(false);
+			if (res.status) {
+			}
+		});
+	}
+
+
+
+
+
+
+
+
 
 	function duplicate_post(postId) {
 
@@ -239,7 +292,6 @@ function Html(props) {
 			}
 			if (res.success) {
 
-				console.log(res);
 				var postsX = [...posts];
 
 
@@ -282,7 +334,6 @@ function Html(props) {
 			}
 			if (res.success) {
 
-				console.log(res);
 
 
 				var postsX = [...posts];
@@ -377,7 +428,11 @@ function Html(props) {
 											type: "success",
 										});
 									}}>
-									<div>
+
+									<div className="flex  align-middle items-center gap-2  "
+									>
+										<span className="px-1 py-1 bg-slate-500"><Icon fill="#fff" icon={addSubmenu} size="20" /></span>
+
 										<div className="text-base mb-2">{item.post_title}</div>
 
 									</div>
@@ -388,44 +443,96 @@ function Html(props) {
 									)}
 								</div>
 
-								<div className=" px-3 flex flex-wrap align-middle items-center text-xs gap-3 my-2">
-									<div className="">#{item.ID}</div>
-									<div className="cursor-pointer flex items-center" onClick={(ev) => {
-										duplicate_post(item.ID);
-									}}>
-										<Icon icon={copySmall} size="20" />
-										Duplicate</div>
+								{activeAccordion == item.ID && (
+									<>
+										<div className=" px-3 flex flex-wrap align-middle items-center text-xs gap-3 my-2">
+											<div className="">#{item.ID}</div>
+											<div className="cursor-pointer flex items-center" onClick={(ev) => {
+												duplicate_post(item.ID);
+											}}>
+												<Icon icon={copySmall} size="20" />
+												Duplicate</div>
 
 
 
-									<div className="cursor-pointer text-red-700 flex items-center" title={"Delete Post"} onClick={(ev) => {
-										setdeleteConfirm({ id: item.ID, confirm: true });
-										if (deleteConfirm.confirm) {
-											delete_post(item.ID, index);
-										}
+											<div className="cursor-pointer text-red-700 flex items-center" title={"Delete Post"} onClick={(ev) => {
+												setdeleteConfirm({ id: item.ID, confirm: true });
+												if (deleteConfirm.confirm) {
+													delete_post(item.ID, index);
+												}
 
-									}}>
-										<Icon icon={trash} size="20" />
-										{deleteConfirm.id == item.ID && (
-											<>
-												{deleteConfirm && ("Confirm")}
-											</>
+											}}>
+												<Icon icon={trash} size="20" />
+												{deleteConfirm.id == item.ID && (
+													<>
+														{deleteConfirm && ("Confirm")}
+													</>
+												)}
+												{deleteConfirm.id != item.ID && (
+													<>
+														{deleteConfirm && ("Delete")}
+													</>
+												)}
+
+
+											</div>
+											<div className="cursor-pointer flex items-center" title="Copy Shortcodes" onClick={() => {
+												var str = `[accordions_builder id="${item.ID}"]`;
+
+												copyData(str);
+											}}><Icon icon={copySmall} size="20" /> Shortcode</div>
+											<div className="cursor-pointer flex items-center" title="Rename" onClick={() => {
+
+												if (rename.id.length == 0) {
+													setrename({ id: item.ID, confirm: false });
+												} else {
+													setrename({ id: "", confirm: false });
+												}
+
+
+
+											}}><Icon icon={pencil} size="20" /> Rename</div>
+
+
+
+
+										</div>
+
+
+
+										{rename.id == item.ID && (
+											<div className="my-4 flex items-center justify-between gap-3">
+												<PGinputText
+													placeholder={item.post_title}
+													value={item.post_title}
+													className=" px-2 !rounded-none border !border-[#8c8f94] !border-solid w-full"
+													onChange={(newVal) => {
+
+														var postsX = [...posts];
+														postsX[index].post_title = newVal
+														setPosts(postsX)
+
+														const timer = setTimeout(() => {
+
+															// Update the debounced value after delay
+															update_post_title(newVal, item.ID);
+														}, 3000); // 300ms debounce delay
+														return () => clearTimeout(timer); // Cleanup timer on value change or unmount
+													}}
+												/>
+
+
+
+											</div>
 										)}
-										{deleteConfirm.id != item.ID && (
-											<>
-												{deleteConfirm && ("Delete")}
-											</>
-										)}
 
 
-									</div>
-									<div className="cursor-pointer flex items-center" title="Copy Shortcodes" onClick={() => {
-										var str = `[accordions_builder id="${item.ID}"]`;
 
-										copyData(str);
-									}}><Icon icon={copySmall} size="20" /> Shortcode</div>
+									</>
 
-								</div>
+								)}
+
+
 
 							</div>
 						);

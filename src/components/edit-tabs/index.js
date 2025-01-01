@@ -64,16 +64,13 @@ function Html(props) {
 	var [items, setitems] = useState(accordionData.items); // Using the hook.
 	var [content, setcontent] = useState(accordionData.content);
 	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
-	var [header, setheader] = useState(accordionData.header);
-	var [headerActive, setheaderActive] = useState(accordionData.headerActive);
-	var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+
+
 	var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
 	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
 	var [icon, seticon] = useState(accordionData.icon);
 	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
-	var [expandCollapseAll, setexpandCollapseAll] = useState(
-		accordionData.expandCollapseAll
-	);
+
 	var [topWrap, settopWrap] = useState(accordionData.topWrap);
 	var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
 	var [navItem, setnavItem] = useState(accordionData?.navItem);
@@ -84,7 +81,7 @@ function Html(props) {
 	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
 	var [panelWrapActive, setpanelWrapActive] = useState(accordionData?.panelWrapActive);
 
-	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
+
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
@@ -210,23 +207,6 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [content]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.header = header;
-		setaccordionData(accordionDataX);
-	}, [header]);
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.headerActive = headerActive;
-		setaccordionData(accordionDataX);
-	}, [headerActive]);
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.headerLabel = headerLabel;
-		setaccordionData(accordionDataX);
-	}, [headerLabel]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -240,46 +220,19 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [labelIcon]);
 
-	// useEffect(() => {
-	// 	var accordionDataX = { ...accordionData };
-	// 	accordionDataX.icon = icon;
-	// 	setaccordionData(accordionDataX);
-	// }, [icon]);
-
-	// useEffect(() => {
-	// 	var accordionDataX = { ...accordionData };
-	// 	accordionDataX.iconToggle = iconToggle;
-	// 	setaccordionData(accordionDataX);
-	// }, [iconToggle]);
-
 	useEffect(() => {
-		setaccordionData((prevData) => ({
-			...prevData,
-			icon,
-			iconToggle,
-		}));
-	}, [icon, iconToggle]);
-
-	const updateIconOptions = (icon, itemSrc) => ({
-		...icon,
-		options: {
-			...icon.options,
-			iconSrc: itemSrc,
-		},
-	});
-
-	const handleClick = (item) => {
-		seticon((prevIcon) => updateIconOptions(prevIcon, item.icon));
-		seticonToggle((prevIconToggle) =>
-			updateIconOptions(prevIconToggle, item.toggle)
-		);
-	};
+		var accordionDataX = { ...accordionData };
+		accordionDataX.icon = icon;
+		setaccordionData(accordionDataX);
+	}, [icon]);
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.expandCollapseAll = expandCollapseAll;
+		accordionDataX.iconToggle = iconToggle;
 		setaccordionData(accordionDataX);
-	}, [expandCollapseAll]);
+	}, [iconToggle]);
+
+
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -287,11 +240,7 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [topWrap]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.searchInput = searchInput;
-		setaccordionData(accordionDataX);
-	}, [searchInput]);
+
 
 	var RemoveSliderArg = function ({ index }) {
 		return (
@@ -541,28 +490,39 @@ function Html(props) {
 		setitemQueryArgs(itemQueryArgsX);
 	};
 
-	var viewTypeArgs = {
-		accordion: { label: "Accordion", value: "accordion" },
-		tabs: { label: "Tabs", value: "tabs" },
-	};
+
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
 		easyAccordion: { label: "Easy Accordion - FAQ Group", value: "easyAccordion" },
-		posts: {
-			label: "Posts",
-			value: "posts",
-			isPro: customerData.isPro ? false : true,
-		},
-		terms: {
-			label: "Terms",
-			value: "terms",
-			isPro: customerData.isPro ? false : true,
-		},
+		// posts: {
+		// 	label: "Posts",
+		// 	value: "posts",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
+		// terms: {
+		// 	label: "Terms",
+		// 	value: "terms",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
 	};
 
 	function generate3Digit() {
 		return Math.floor(100 + Math.random() * 900);
 	}
+
+	const copyData = (data) => {
+		navigator.clipboard
+			.writeText(data)
+			.then(() => {
+				addNotifications({
+					title: "Copied to clipboard!",
+					content:
+						"Use the shortcode in page or post conent where you want to display.",
+					type: "success",
+				});
+			})
+			.catch((err) => { });
+	};
 
 	return (
 		<div className="">
@@ -570,8 +530,7 @@ function Html(props) {
 				className="hidden"
 				onClick={() => {
 					var str = `{
-				"wrapper":${JSON.stringify(wrapper)}
-				"header":${JSON.stringify(header)},
+				"wrapper":${JSON.stringify(wrapper)},
 				"navItem":${JSON.stringify(navItem)},
 				"activeNavItem":${JSON.stringify(activeNavItem)},
 				"labelCounter":${JSON.stringify(labelCounter)},
@@ -604,29 +563,14 @@ function Html(props) {
 					<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
 					<div>{`"navLabel":${JSON.stringify(navLabel)}`},</div>
 					<div>{`"panelWrap":${JSON.stringify(panelWrap)}`},</div>
-					<div>{`"topWrap":${JSON.stringify(topWrap)}`},</div>
+					<div>{`"panelWrapActive":${JSON.stringify(panelWrapActive)}`},</div>
 					<div>{`}`}</div>
 				</div>
 			</div>
 
 			{props.postData.post_content != null && (
 				<>
-					{/* <div className="my-4 p-3">
-						<PanelRow>
-							<label htmlFor="">View Type?</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								buttonTitle={viewTypeArgs[globalOptions?.viewType]?.label}
-								options={viewTypeArgs}
-								onChange={(option, index) => {
-									var globalOptionsX = { ...globalOptions };
-									globalOptionsX.viewType = option.value;
-									setglobalOptions(globalOptionsX);
-								}}
-								values=""></PGDropdown>
-						</PanelRow>
-					</div> */}
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Items"
@@ -699,6 +643,7 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
+
 												var itemQueryArgsX = { ...itemQueryArgs };
 												itemQueryArgsX[option.id] = {
 													id: option.id,
@@ -1910,6 +1855,193 @@ function Html(props) {
 									}}
 								/> */}
 							</PanelRow>
+							<PanelRow>
+								<label htmlFor="">Active Event</label>
+
+								<SelectControl
+									className="w-[140px]"
+									label=""
+									value={globalOptions?.activeEvent}
+									options={[
+										{ label: __("Click", "accordions"), value: "click" },
+										// {
+										// 	label: __("Mouseover", "accordions"),
+										// 	value: "mouseover",
+										// },
+										// { label: __("Focus", "accordions"), value: "focus" },
+									]}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.activeEvent = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+
+
+							<PanelRow>
+								<label htmlFor="">URL Hash</label>
+								<InputToggle
+									value={globalOptions?.urlHash}
+									onChange={(newVal) => {
+										if (isProFeature) {
+											addNotifications({
+												title: "Opps its pro!",
+												content:
+													"This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.urlHash = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+
+							</PanelRow>
+
+							<PanelRow>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Auto Play
+									<span
+										className="cursor-pointer"
+										title="Click to know more"
+										onClick={() => {
+											setHelp({
+												id: "autoPlaySetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+
+								</label>
+								<InputToggle
+									value={globalOptions?.autoPlay}
+									onChange={(newVal) => {
+										if (isProFeature) {
+											addNotifications({
+												title: "Opps its pro!",
+												content:
+													"This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.autoPlay = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+							{globalOptions?.autoPlay && (
+								<>
+									{/* <PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											Auto Play Control
+											<span
+												className="cursor-pointer"
+												title="Click to know more"
+												onClick={() => {
+													setHelp({
+														id: "statsSetting",
+														enable: true,
+													});
+												}}>
+												<Icon icon={help} />
+											</span>
+										</label>
+										<InputToggle
+											value={globalOptions?.autoPlayControl}
+											onChange={(newVal) => {
+												if (isProFeature) {
+													addNotifications({
+														title: "Opps its pro!",
+														content:
+															"This feature only avilable in premium version",
+														type: "error",
+													});
+													return;
+												}
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayControl = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow> */}
+
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Timeout
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayTimeout}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayTimeout = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Delay
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayDelay}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayDelay = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+
+									<PanelRow>
+										<label htmlFor="">Auto Play Order</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												globalOptions?.autoPlayOrder
+													? globalOptions?.autoPlayOrder
+													: __("Choose", "accordions")
+											}
+											options={[
+												{
+													label: __("Top To Bottom", "accordions"),
+													value: "topToBottom",
+													isPro: customerData.isPro ? false : true,
+												},
+												{
+													label: __("Bottom To Top", "accordions"),
+													value: "bottomToTop",
+													isPro: customerData.isPro ? false : true,
+												},
+												{
+													label: __("Random", "accordions"),
+													value: "random",
+													isPro: customerData.isPro ? false : true,
+												},
+											]}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayOrder = newVal.value;
+												setglobalOptions(globalOptionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow>
+								</>
+							)}
 
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
@@ -1959,53 +2091,6 @@ function Html(props) {
 									}}
 								/> */}
 							</PanelRow>
-
-							<PanelRow>
-								<label htmlFor="">Active Event</label>
-
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.activeEvent}
-									options={[
-										{ label: __("Click", "accordions"), value: "click" },
-										{
-											label: __("Mouseover", "accordions"),
-											value: "mouseover",
-										},
-										{ label: __("Focus", "accordions"), value: "focus" },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.activeEvent = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-							<PanelRow>
-								<label htmlFor="">URL Hash</label>
-								<InputToggle
-									value={globalOptions?.urlHash}
-									onChange={(newVal) => {
-										if (isProFeature) {
-											addNotifications({
-												title: "Opps its pro!",
-												content:
-													"This feature only avilable in premium version",
-												type: "error",
-											});
-											return;
-										}
-
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.urlHash = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-
-							</PanelRow>
-
-
 						</div>
 					</PanelBody>
 					<PanelBody
@@ -2123,7 +2208,33 @@ function Html(props) {
 						</div>
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Icon Idle"
+
+
+							opened={isProFeature ? false : null}
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Icon Idle", "accordions")}</span>
+									{isProFeature ? (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+											onClick={(ev) => {
+												window.open(
+													"https://comboblocks.com/pricing/",
+													"_blank"
+												);
+											}}>
+											{__("Pro", "accordions")}
+										</span>
+									) : (
+										""
+									)}
+								</span>
+							}
+
+
+
+
+
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"
@@ -2344,7 +2455,31 @@ function Html(props) {
 
 						<PanelBody
 							className="font-medium text-slate-900 "
-							title="Icon Toggle"
+							opened={isProFeature ? false : null}
+							title={
+								<span className="flex justify-between w-full gap-2">
+									<span>{__("Icon Toggle", "accordions")}</span>
+									{isProFeature ? (
+										<span
+											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
+											onClick={(ev) => {
+												window.open(
+													"https://comboblocks.com/pricing/",
+													"_blank"
+												);
+											}}>
+											{__("Pro", "accordions")}
+										</span>
+									) : (
+										""
+									)}
+								</span>
+							}
+
+
+
+
+
 							initialOpen={false}>
 							<PGtabs
 								activeTab="options"

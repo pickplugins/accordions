@@ -675,7 +675,6 @@ function Html(props) {
 
 
 
-		console.log(accordionData);
 
 
 

@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 	window.pgTabs = {
 		id: "",
+		lazyLoad: false,
 		navActiveIndex: 0,
 		navActiveId: "",
 		navsIndex: [],
@@ -26,54 +27,114 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			if (hashWrap != null) {
 				var index = hashWrap.getAttribute("index")
+
+				console.log(index);
+
+
 				window.pgTabs.switchNavs(index)
 			}
 
 
 		},
-		switchNavs: (index) => {
-			if (window.pgTabs.id.length == 0) return;
-			var pgTabId = window.pgTabs.id;
-			var navsIndex = window.pgTabs.navsIndex;
-			var navActiveId = navsIndex[index];
-			window.pgTabs.navActiveIndex = index;
-			window.pgTabs.navActiveId = navActiveId;
-			var navItems = document.querySelectorAll(`#${pgTabId} .nav-item`);
-			var tabPanels = document.querySelectorAll(`#${pgTabId} .tabs-panel`);
-			var pgTab = document.querySelector(`#${pgTabId}`);
-			var iconToggle = pgTab.querySelectorAll(".nav-icon-toggle");
-			var iconIdle = pgTab.querySelectorAll(".nav-icon-idle");
-			navItems.forEach((tab) => {
-				tab.classList.remove("nav-item-active");
-				tab.classList.add("nav-item");
-			});
-			// hide all tab panels
-			tabPanels.forEach((panel) => {
-				panel.classList.remove("tabs-panel-active");
-				panel.setAttribute('hidden', true)
-			});
-			var currentTarget = document.querySelector(`#${navActiveId}`);
-			if (currentTarget != null) {
-				//currentTarget.classList.remove("nav-item");
-				currentTarget.classList.add("nav-item-active");
+		switchNavs: (index, oldIndex) => {
+
+			console.log(oldIndex);
+
+
+			var oldtabPanelByattr = document.querySelector(`.tabs-panel[data-tab-id="pg${oldIndex}"]`);
+
+
+			if (oldtabPanelByattr != null) {
+
+				var exitAnimation = window.pgTabs.panelWrapOutAnimation;
+
+				oldtabPanelByattr.classList.add("animate__animated");
+				oldtabPanelByattr.classList.add("animate__fast");
+				oldtabPanelByattr.classList.add("animate__" + exitAnimation);
+				setTimeout(() => {
+					oldtabPanelByattr.classList.remove("animate__animated");
+					oldtabPanelByattr.classList.remove("animate__" + exitAnimation);
+					// popup.style.display = "none";
+				}, 1000);
+
 			}
-			var tabByattr = document.querySelector(
-				`.tabs-panel[data-tab-id="${navActiveId}"]`
-			);
-			if (tabByattr != null) {
-				tabByattr.classList.add("tabs-panel-active");
-				tabByattr.setAttribute('hidden', false)
-			}
-			iconIdle.forEach((iconI, J) => {
-				iconToggle[J].style.display = "none";
-				iconIdle[J].style.display = "inline-block";
-			});
-			if (iconToggle[index] != undefined) {
-				iconToggle[index].style.display = "inline-block";
-			}
-			if (iconIdle[index] != undefined) {
-				iconIdle[index].style.display = "none";
-			}
+
+
+			setTimeout(() => {
+
+
+				if (window.pgTabs.id.length == 0) return;
+				var pgTabId = window.pgTabs.id;
+				var navsIndex = window.pgTabs.navsIndex;
+				var navActiveId = navsIndex[index];
+
+				window.pgTabs.navActiveIndex = index;
+				window.pgTabs.navActiveId = navActiveId;
+				var navItems = document.querySelectorAll(`#${pgTabId} .nav-item`);
+				var tabPanels = document.querySelectorAll(`#${pgTabId} .tabs-panel`);
+				var pgTab = document.querySelector(`#${pgTabId}`);
+				var iconToggle = pgTab.querySelectorAll(".nav-icon-toggle");
+				var iconIdle = pgTab.querySelectorAll(".nav-icon-idle");
+				navItems.forEach((tab) => {
+					tab.classList.remove("nav-item-active");
+					tab.classList.add("nav-item");
+				});
+				// hide all tab panels
+				tabPanels.forEach((panel) => {
+					panel.classList.remove("tabs-panel-active");
+					panel.setAttribute('hidden', true)
+				});
+				var currentTarget = document.querySelector(`#pg${navActiveId}`);
+				if (currentTarget != null) {
+					currentTarget.classList.add("nav-item-active");
+				}
+
+
+
+
+				var tabPanelByattr = document.querySelector(`.tabs-panel[data-tab-id="pg${navActiveId}"]`);
+
+				if (tabPanelByattr != null) {
+					tabPanelByattr.classList.add("tabs-panel-active");
+					tabPanelByattr.setAttribute('hidden', false)
+
+
+					var entranceAnimation = window.pgTabs.panelWrapInAnimation;
+
+					tabPanelByattr.classList.add("animate__animated");
+					tabPanelByattr.classList.add("animate__fast");
+					tabPanelByattr.classList.add("animate__" + entranceAnimation);
+					setTimeout(() => {
+						tabPanelByattr.classList.remove("animate__animated");
+						tabPanelByattr.classList.remove("animate__" + entranceAnimation);
+						// popup.style.display = "none";
+					}, 1000);
+
+				}
+
+
+				iconIdle.forEach((iconI, J) => {
+					iconToggle[J].style.display = "none";
+					iconIdle[J].style.display = "inline-block";
+				});
+				if (iconToggle[index] != undefined) {
+					iconToggle[index].style.display = "inline-block";
+				}
+				if (iconIdle[index] != undefined) {
+					iconIdle[index].style.display = "none";
+				}
+
+
+
+
+
+
+			}, window.pgTabs.panelWrapAnimationDuration)
+
+
+
+
+
 		},
 		switchNext: () => {
 			var navActiveIndex = window.pgTabs.navActiveIndex;
@@ -92,141 +153,108 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var pgTabs = document.querySelectorAll(selector);
 			if (pgTabs.length == 0) return;
 			if (pgTabs != null) {
-				pgTabs.forEach((item) => {
-					// parse tabs data
-					var tabDataX = item.getAttribute("data-pgTabs");
+				pgTabs.forEach((pgTab) => {
+
+
+					var tabDataX = pgTab.getAttribute("data-pgTabs");
 					var tabDataObject = JSON.parse(tabDataX);
+					var pgTabId = tabDataObject.id;
+
 					var activeTab = tabDataObject.activeTab;
+					var navActiveIndex = tabDataObject.navActiveIndex;
 					var panelWrapInAnimation = tabDataObject.panelWrapInAnimation;
 					var panelWrapOutAnimation = tabDataObject.panelWrapOutAnimation;
 					var panelWrapAnimationDuration = tabDataObject.panelWrapAnimationDuration;
-
-
-					var pgTabId = tabDataObject.id;
+					var lazyLoad = tabDataObject.lazyLoad;
 					var navsIndex = tabDataObject.navsIndex;
+
 					window.pgTabs.id = pgTabId;
 					window.pgTabs.navsIndex = navsIndex;
 					window.pgTabs.navActiveId = activeTab;
+					window.pgTabs.navActiveIndex = navActiveIndex;
 					window.pgTabs.panelWrapInAnimation = panelWrapInAnimation;
 					window.pgTabs.panelWrapOutAnimation = panelWrapOutAnimation;
 					window.pgTabs.panelWrapAnimationDuration = panelWrapAnimationDuration;
+					window.pgTabs.lazyLoad = lazyLoad;
 
-
-
-					//window.pgTabs.switchNavs(0)
-					// Assign navs active class
-					pgTabs.forEach((pgTab) => {
-						if (activeTab == pgTabId) {
-							pgTab.classList.add("nav-item-active");
-						}
-					});
-				});
-			}
-			pgTabs.forEach((pgTab) => {
-				var pgTabId = pgTab.getAttribute("id");
-				var tabDataX = pgTab.getAttribute("data-pgTabs");
-				var tabDataObject = JSON.parse(tabDataX);
-				var activeTab = tabDataObject.activeTab;
-				var navItems = document.querySelectorAll(`#${pgTabId} .nav-item`);
-				var tabPanels = document.querySelectorAll(`#${pgTabId} .tabs-panel`);
-				var iconToggle = pgTab.querySelectorAll(".nav-icon-toggle");
-				var iconIdle = pgTab.querySelectorAll(".nav-icon-idle");
-
-				console.log(iconIdle);
-				console.log(iconToggle);
-
-
-
-				navItems.forEach((item, index) => {
-					var tabIdX = item.getAttribute("data-tab-id");
-
-					console.log(tabIdX);
-
-
-					if (activeTab == tabIdX) {
-						item.classList.add("nav-item-active");
-						tabPanels[index].classList.add("tabs-panel-active");
-						tabPanels[index].setAttribute('hidden', false)
-						if (iconToggle[index] != undefined) {
-							iconToggle[index].style.display = "inline-block";
-						}
-						if (iconIdle[index] != undefined) {
-							iconIdle[index].style.display = "none";
-						}
-					} else {
-						if (iconToggle[index] != undefined) {
-							iconToggle[index].style.display = "none";
-						}
-						if (iconIdle[index] != undefined) {
-							iconIdle[index].style.display = "inline-block";
-						}
+					if (lazyLoad) {
+						pgTab.style.display = "block";
 					}
-					item.addEventListener("click", function (event) {
-						event.preventDefault();
-						navItems.forEach((tab) => {
-							tab.classList.remove("nav-item-active");
-							tab.classList.add("nav-item");
-						});
-						// hide all tab panels
-						tabPanels.forEach((panel) => {
 
-							panel.classList.remove("tabs-panel-active");
-							panel.setAttribute('hidden', true)
+					console.log(navActiveIndex);
+
+
+					window.pgTabs.switchNavs(navActiveIndex);
 
 
 
-						});
-						//event.currentTarget.classList.remove("nav-item");
-						event.currentTarget.classList.add("nav-item-active");
-						var tabId = event.currentTarget.getAttribute("data-tab-id");
-						var navActiveIndex = window.pgTabs.navActiveIndex;
-						window.pgTabs.navsIndex.map((z, j) => {
-							if (tabId == z) {
-								navActiveIndex = j;
-							}
-						});
-						window.pgTabs.navActiveIndex = navActiveIndex
-						window.pgTabs.navActiveId = tabId;
-						if (tabId == tabIdX) {
-							iconIdle.forEach((iconI, J) => {
-								iconToggle[J].style.display = "none";
-								iconIdle[J].style.display = "inline-block";
-							});
+
+					//
+
+
+					var pgTabId = pgTab.getAttribute("id");
+
+					var navItems = document.querySelectorAll(`#${pgTabId} .nav-item`);
+					var tabPanels = document.querySelectorAll(`#${pgTabId} .tabs-panel`);
+					var iconToggle = pgTab.querySelectorAll(".nav-icon-toggle");
+					var iconIdle = pgTab.querySelectorAll(".nav-icon-idle");
+
+
+					navItems.forEach((item, index) => {
+						var tabIdX = item.getAttribute("data-tab-id");
+
+
+						if (activeTab == tabIdX) {
+
 							if (iconToggle[index] != undefined) {
 								iconToggle[index].style.display = "inline-block";
 							}
 							if (iconIdle[index] != undefined) {
 								iconIdle[index].style.display = "none";
 							}
+						} else {
+							if (iconToggle[index] != undefined) {
+								iconToggle[index].style.display = "none";
+							}
+							if (iconIdle[index] != undefined) {
+								iconIdle[index].style.display = "inline-block";
+							}
 						}
-						var tabByattr = document.querySelector(
-							`.tabs-panel[data-tab-id="${tabId}"]`
-						);
-						tabByattr.classList.add("tabs-panel-active");
-						tabByattr.setAttribute('hidden', false)
 
 
 
 
 
 
-						var entranceAnimation = window.pgTabs.panelWrapInAnimation;
+						item.addEventListener("click", function (event) {
+							event.preventDefault();
 
-						tabByattr.classList.add("animate__animated");
-						tabByattr.classList.add("animate__fast");
-						tabByattr.classList.add("animate__" + entranceAnimation);
-						setTimeout(() => {
-							tabByattr.classList.remove("animate__animated");
-							tabByattr.classList.remove("animate__" + entranceAnimation);
-							// popup.style.display = "none";
-						}, 1000);
+							var index = event.currentTarget.getAttribute("index");
+
+							window.pgTabs.switchNavs(index, window.pgTabs.navActiveIndex);
 
 
 
 
+						});
 					});
 				});
-			});
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// Next Previous
 			var tabsNextWrap = document.querySelector("#" + window.pgTabs.id + " .next ");
 			var tabsPrevWrap = document.querySelector("#" + window.pgTabs.id + " .prev ");
 			var tabsPageNumbers = document.querySelectorAll("#" + window.pgTabs.id + " .page-numbers ");

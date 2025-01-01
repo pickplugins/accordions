@@ -75,7 +75,6 @@ const PGPostTypes = (props) => {
 				// className="bg-blue-500 my-3 cursor-pointer rounded-sm inline-block text-white px-3 py-1"
 				className="pg-bg-color inline-block gap-2 justify-center my-4 cursor-pointer py-2 px-8 capitalize  text-base font-semibold text-white rounded  focus:outline-none focus:bg-gray-700"
 				onClick={(ev) => {
-					console.log(postTypes);
 					var sdsd = postTypes.concat({
 						labels: {
 							name: "",
@@ -121,7 +120,6 @@ const PGPostTypes = (props) => {
 						show_in_menu: "",
 					});
 
-					console.log(sdsd);
 
 					setpostTypes(sdsd);
 				}}>
@@ -133,7 +131,6 @@ const PGPostTypes = (props) => {
 					//var itemArgs = item[1];
 
 					var options = item;
-					console.log(options);
 					return (
 						<PanelBody
 							title={

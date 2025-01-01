@@ -540,21 +540,21 @@ function Html(props) {
 	};
 
 
-	var viewTypeArgs = {
-		accordion: { label: "Accordion", value: "accordion" },
-		tabs: { label: "Tabs", value: "tabs" },
-	};
+
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
 		easyAccordion: { label: "Easy Accordion - FAQ Group", value: "easyAccordion" },
 		posts: {
 			label: "Posts",
 			value: "posts",
+			coming: true,
 			isPro: customerData.isPro ? false : true,
 		},
 		terms: {
 			label: "Terms",
 			value: "terms",
+			coming: true,
+
 			isPro: customerData.isPro ? false : true,
 		},
 	};
@@ -628,22 +628,7 @@ function Html(props) {
 
 			{props.postData.post_content != null && (
 				<>
-					{/* <div className="my-4 p-3">
-						<PanelRow>
-							<label htmlFor="">View Type?</label>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								buttonTitle={viewTypeArgs[globalOptions?.viewType]?.label}
-								options={viewTypeArgs}
-								onChange={(option, index) => {
-									var globalOptionsX = { ...globalOptions };
-									globalOptionsX.viewType = option.value;
-									setglobalOptions(globalOptionsX);
-								}}
-								values=""></PGDropdown>
-						</PanelRow>
-					</div> */}
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Items"
@@ -2030,16 +2015,16 @@ function Html(props) {
 											label: __("Click", "accordions"),
 											value: "click",
 										},
-										{
-											label: __("Mouseover", "accordions"),
-											value: "mouseover",
-											isPro: customerData.isPro ? false : true,
-										},
-										{
-											label: __("Focus", "accordions"),
-											value: "focus",
-											isPro: customerData.isPro ? false : true,
-										},
+										// {
+										// 	label: __("Mouseover", "accordions"),
+										// 	value: "mouseover",
+										// 	isPro: customerData.isPro ? false : true,
+										// },
+										// {
+										// 	label: __("Focus", "accordions"),
+										// 	value: "focus",
+										// 	isPro: customerData.isPro ? false : true,
+										// },
 									]}
 									onChange={(option) => {
 										var globalOptionsX = { ...globalOptions };
@@ -2186,7 +2171,7 @@ function Html(props) {
 
 							{globalOptions?.autoPlay && (
 								<>
-									<PanelRow>
+									{/* <PanelRow>
 										<label htmlFor="" className="flex gap-2 items-center">
 											Auto Play Control
 											<span
@@ -2218,7 +2203,7 @@ function Html(props) {
 												setglobalOptions(globalOptionsX);
 											}}
 										/>
-									</PanelRow>
+									</PanelRow> */}
 
 									<PanelRow className="w-full">
 										<label htmlFor="" className="break-all">

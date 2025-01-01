@@ -55,13 +55,11 @@ function Html(props) {
 	});
 
 	var [cssLibrary, setCssLibrary] = useState({ items: [] });
-	console.log(cssLibrary);
 
 	var [cssLibraryCats, setCssLibraryCats] = useState([]);
 
 	var [isLoading, setIsLoading] = useState(false);
 	var [loading, setloading] = useState(false);
-	console.log(loading)
 	var [debounce, setDebounce] = useState(null); // Using the hook.
 	var [sudoPicker, setsudoPicker] = useState(null); // Using the hook.
 	const [filterEnable, setfilterEnable] = useState(false);
@@ -138,9 +136,7 @@ function Html(props) {
 				if (response.ok && response.status < 400) {
 					response.json().then((res) => {
 						var isReset = queryCss.isReset;
-						console.log(res);
 						const posts = res.posts;
-						console.log(posts);
 						const blockPosts = { [props.blockName]: posts };
 						const storedVariation = localStorage.getItem("pgBlockVariation");
 						let variation = [];
@@ -152,7 +148,6 @@ function Html(props) {
 						const existingBlockIndex = variation.findIndex(
 							(item) => Object.keys(item)[0] === props.blockName
 						);
-						console.log(existingBlockIndex);
 
 						if (existingBlockIndex !== -1) {
 							const existingPostIds = variation[existingBlockIndex][
@@ -299,9 +294,7 @@ function Html(props) {
 												onChange={(option, index) => {
 													var queryCssX = { ...queryCss };
 
-													console.log(option);
 													queryCssX.filterBy.style.push(option.value);
-													console.log(queryCssX);
 
 													setQueryCss(queryCssX);
 												}}
@@ -681,7 +674,6 @@ function Html(props) {
 								blockName: props.blockName,
 							};
 							postData = JSON.stringify(postData);
-							console.log(postData);
 
 							fetch(
 								"https://comboblocks.com/server/wp-json/accordions/v2/submit_block_variation",

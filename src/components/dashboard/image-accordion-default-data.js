@@ -1,7 +1,7 @@
 
 var imageAccordionDefaultData = {
 	globalOptions: {
-		viewType: "accordionMenu",
+		viewType: "imageAccordion",
 		itemSource: "manual",
 		search: true,
 	},

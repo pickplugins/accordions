@@ -150,13 +150,13 @@ function Html(props) {
 				// className="bg-blue-500 my-3 cursor-pointer rounded-sm inline-block text-white px-3 py-1"
 				className="pg-bg-color inline-block gap-2 justify-center my-4 cursor-pointer py-2 px-8 capitalize  text-base font-semibold text-white rounded  focus:outline-none focus:bg-gray-700"
 				onClick={(ev) => {
-					console.log(globalStyles);
+
 					var sdsd = globalStyles.concat({
 						options: { selector: ".selector" },
 						styles: {},
 					});
 
-					console.log(sdsd);
+
 
 					setglobalStyles(sdsd);
 				}}>
@@ -204,24 +204,24 @@ function Html(props) {
 								</>
 							}
 							initialOpen={false}>
-							
-								<InputControl
-									className="my-3"
-									label=""
-									help=""
-									placeholder=".element-class or #element-id"
-									value={options.selector}
-									onChange={(value) => {
-										// setopenAi({ ...openAi, promt: value })
-										//item.options.selector = value
 
-										// globalStyles[index].options.selector = value
+							<InputControl
+								className="my-3"
+								label=""
+								help=""
+								placeholder=".element-class or #element-id"
+								value={options.selector}
+								onChange={(value) => {
+									// setopenAi({ ...openAi, promt: value })
+									//item.options.selector = value
 
-										globalStyles[index].options.selector = value;
-										props.onChange(globalStyles);
-									}}
-								/>
-								
+									// globalStyles[index].options.selector = value
+
+									globalStyles[index].options.selector = value;
+									props.onChange(globalStyles);
+								}}
+							/>
+
 
 							<PGStyles
 								extra={{ index: index }}

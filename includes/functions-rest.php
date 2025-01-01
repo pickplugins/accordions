@@ -178,6 +178,17 @@ class AccordionsRest
 				},
 			)
 		);
+		register_rest_route(
+			'accordions/v2',
+			'/update_post_title',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'update_post_title'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 		register_rest_route(
 			'accordions/v2',
@@ -822,6 +833,46 @@ class AccordionsRest
 
 		// Update the post into the database
 		$updatep_post_id = wp_insert_post($my_post);
+
+		if ($updatep_post_id) {
+			$response->success = true;
+			$response->successMessage = __("Post created");
+		}
+		$response->id = $updatep_post_id;
+
+		die(wp_json_encode($response));
+	}
+
+
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function update_post_title($post_data)
+	{
+		$postId = isset($post_data['postId']) ? $post_data['postId'] : '';
+
+		$postTitle = isset($post_data['postTitle']) ? sanitize_text_field($post_data['postTitle']) : '';
+		$response = new stdClass();
+
+		if (empty($postTitle)) {
+			$response->error = true;
+			$response->errorMessage = __("Post title should not empty");
+			die(wp_json_encode($response));
+		}
+
+
+		$my_post = array(
+			'ID'           => $postId,
+			'post_title' => ($postTitle),
+		);
+
+		$updatep_post_id = wp_update_post($my_post);
+
+
+		// Update the post into the database
 
 		if ($updatep_post_id) {
 			$response->success = true;

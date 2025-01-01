@@ -155,16 +155,7 @@ function accordions_builder_tabs($post_id, $accordionData)
     }
 
 
-    $activeIndex = [];
-    foreach ($items as $index => $item) {
-        $itemActive = isset($item["active"]) ? (bool) $item["active"] : false;
 
-        if ($itemActive) {
-            $activeIndex[] = $index;
-        }
-    }
-
-    $activeIndex[] = 9999;
 
     $blockId = "accordions-" . $post_id;
 
@@ -175,9 +166,11 @@ function accordions_builder_tabs($post_id, $accordionData)
         }
 
     $activeTab = 0;
+    $navActiveIndex = 0;
 
     $accordionDataAttr = [
         "id" => $blockId,
+        "navActiveIndex" => $navActiveIndex,
         "activeTab" => "pg" . $activeTab,
         "activeEvent" => $activeEvent,
         "autoPlay" => $autoPlay,
@@ -203,7 +196,7 @@ function accordions_builder_tabs($post_id, $accordionData)
     $activeTab = 1;
     $labelCounterEnable = false;
 ?>
-    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> " data-pgTabs="<?php echo esc_attr(json_encode($accordionDataAttr)); ?>">
+    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> " data-pgTabs="<?php echo esc_attr(json_encode($accordionDataAttr)); ?>" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
         <div class="navs-wrapper" role="tablist">
             <?php
             foreach ($items as $index => $item) {

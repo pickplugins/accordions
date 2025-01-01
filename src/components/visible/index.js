@@ -50,27 +50,22 @@ function Html(props) {
 	var [rules, setrules] = useState(
 		visible?.rules == null || visible?.rules == undefined ? [] : visible.rules
 	);
-	console.log(rules);
 
 	var [enableDatePicker, setenableDatePicker] = useState(false);
 	const [userRoles, setuserRoles] = useState({});
 	const [taxonomies, settaxonomies] = useState({});
-	console.log(taxonomies);
-	console.log(userRoles);
+
 
 	useEffect(() => {
-		console.log(visible);
 
 		props.onChange(visible);
 	}, [visible]);
 
 	useEffect(() => {
-		console.log(rules);
 
 		var visibleX = { ...visible };
 		visibleX.rules = rules;
 
-		console.log(visibleX);
 
 		setVisible(visibleX);
 	}, [rules]);
@@ -81,9 +76,6 @@ function Html(props) {
 			method: "POST",
 			data: {},
 		}).then((res) => {
-			console.log(res);
-			console.log(res.roles);
-			console.log(res.taxonomies);
 
 			var userRolesList = [];
 
@@ -104,7 +96,6 @@ function Html(props) {
 				taxonomiesList[tax.id] = { label: tax.label, value: tax.id };
 			});
 
-			console.log(taxonomiesList);
 
 			setuserRoles(userRolesList);
 			settaxonomies(taxonomiesList);
@@ -683,8 +674,7 @@ function Html(props) {
 					className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
 					onClick={(ev) => {
 						var rulesX = [...rules];
-						console.log(index);
-						console.log(rulesX);
+
 						rulesX.splice(index, 1);
 						setrules(rulesX);
 					}}>
@@ -725,7 +715,6 @@ function Html(props) {
 
 						rulesX.push({ relation: "OR", title: "", args: [] });
 
-						console.log(rulesX);
 
 						setrules(rulesX);
 					}}>
@@ -755,7 +744,6 @@ function Html(props) {
 
 			<div className="my-4">
 				{rules.map((group, groupIndex) => {
-					console.log(group);
 
 					return (
 						<PanelBody
@@ -1436,7 +1424,6 @@ function Html(props) {
 																								? month
 																								: "0" + month;
 
-																						console.log(month);
 
 																						let year = dateFull.getFullYear();
 

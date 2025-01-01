@@ -9,13 +9,12 @@ function Html(props) {
 
   const [content, setContent] = useState('');
 
-  console.log(props.id);
 
 
   useEffect(() => {
     //tinymce.execCommand('mceAddEditor', true, props.id);
 
-    // console.log(props.id);
+
 
     // wp.editor.initialize(props.id, {
     //   tinymce: {
@@ -34,7 +33,6 @@ function Html(props) {
     // const updateContent = () => {
     //   const newContent = wp.editor.getContent(props.id);
 
-    //   console.log(newContent);
 
 
     //   setContent(newContent);
@@ -60,7 +58,7 @@ function Html(props) {
       setup: (editor) => {
         editor.on("change", (e) => {
           const newContent = editor.getContent(); // Get the updated content
-          console.log(newContent);
+
 
           props.onChange(newContent);
         });
