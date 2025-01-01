@@ -249,7 +249,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
 
 ?>
-    <div style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>" id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist">
+    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
 
         <div class="top-wrap">
 
