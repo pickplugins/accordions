@@ -1,5 +1,4 @@
-
-var imageAccordionDefaultData = {
+const imageAccordionDefaultData = {
 	globalOptions: {
 		viewType: "imageAccordion",
 		itemSource: "manual",
@@ -7,14 +6,24 @@ var imageAccordionDefaultData = {
 	},
 	itemQueryArgs: [],
 	styleObj: {},
-	reponsiveCss: "",
+	responsiveCss: "",
 	wrapper: {
 		options: {
 			content: "",
 			tag: "div",
 			class: "image-accordion-wrapper",
 		},
-		styles: {},
+		styles: {
+			height: {
+				Desktop: "70vh",
+			},
+			width: {
+				Desktop: "100%",
+			},
+			display: {
+				Desktop: "flex",
+			},
+		},
 	},
 	items: [
 		{
@@ -27,7 +36,7 @@ var imageAccordionDefaultData = {
 			link: "",
 			title: "What is Lorem Ipsum?",
 			content:
-				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
 		},
 	],
 	item: {
@@ -36,13 +45,68 @@ var imageAccordionDefaultData = {
 			tag: "div",
 			class: "image-accordion-item",
 		},
-		styles: {},
+		styles: {
+			height: {
+				Desktop: "100%",
+			},
+			backgroundPosition: {
+				Desktop: "center center",
+			},
+			backgroundSize: {
+				Desktop: "cover",
+			},
+			flexBasis: {
+				Desktop: "0%",
+			},
+			flexGrow: {
+				Desktop: "1",
+			},
+			flexShrink: {
+				Desktop: "1",
+			},
+			position: {
+				Desktop: "relative",
+			},
+			overflow: {
+				Desktop: "hidden",
+			},
+		},
+		hover: {
+			flexBasis: {
+				Desktop: "0%",
+			},
+			flexGrow: {
+				Desktop: "8",
+			},
+			flexShrink: {
+				Desktop: "1",
+			},
+		},
 	},
 	contentWrap: {
 		options: {
 			class: "content-wrap",
 		},
-		styles: {},
+		styles: {
+			backgroundColor: {
+				Desktop: "#ffffff",
+			},
+			padding: {
+				Desktop: "20px 20px 20px 20px",
+			},
+			position: {
+				Desktop: "absolute",
+			},
+			left: {
+				Desktop: "30px",
+			},
+			width: {
+				Desktop: "80%",
+			},
+			top: {
+				Desktop: "-200px",
+			},
+		},
 	},
 	content: {
 		options: {
@@ -67,4 +131,5 @@ var imageAccordionDefaultData = {
 		styles: {},
 	},
 };
+
 export default imageAccordionDefaultData;
