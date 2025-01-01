@@ -871,9 +871,17 @@ function Html(props) {
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
 
-						<div className="my-3 bg-orange-400 p-3 ml-5 text-white text-xl text-center animate__animated animate__flash animate__repeat-2">  <i class="fa-solid fa-triangle-exclamation"></i> Please test the Accordions Builder and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
-							settoggleSettings(!toggleSettings)
-						}}>send us feedbacks.</span> </div>
+						<div className="my-3 bg-orange-400 p-3 ml-5 text-white  text-center animate__animated animate__flash animate__repeat-2">
+
+
+							<div className="text-xl">
+								<i class="fa-solid fa-triangle-exclamation"></i> Please test the Accordions Builder and <span className="font-bold cursor-pointer underline" onClick={(ev) => {
+									settoggleSettings(!toggleSettings)
+								}}>send us feedbacks.</span>
+							</div>
+							<div>Please do not use for old accordion, we will add migration later.</div>
+
+						</div>
 
 						{(postData?.ID == null || toggleSettings) && <AccordionsGuide addNotifications={addNotifications} customerData={customerData}
 						/>}
