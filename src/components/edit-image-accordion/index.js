@@ -14,6 +14,7 @@ import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import {
 	addCard,
+	addTemplate,
 	brush,
 	close,
 	copy,
@@ -703,10 +704,6 @@ function Html(props) {
 											buttonTitle={"Add Query"}
 											options={termQueryArgs}
 											onChange={(option, index) => {
-
-
-
-
 												var itemQueryArgsX = { ...itemQueryArgs };
 												itemQueryArgsX[option.id] = {
 													id: option.id,
@@ -750,6 +747,48 @@ function Html(props) {
 								{globalOptions?.itemSource == "manual" && (
 									<>
 										<div className="flex items-center gap-2">
+											<span>
+												<MediaUpload
+													className="bg-gray-700 hover:bg-gray-600"
+													onSelect={(media) => {
+														const newItems = media.map((item) => ({
+															isActive: false,
+															image: {
+																id: item.id,
+																url: item.url,
+																altText: item.alt || item.title || "",
+															},
+															link: "",
+															title: "",
+															content: "",
+														}));
+
+														// Update the state by merging existing items with new ones
+														setitems((prevItems) => [
+															...prevItems,
+															...newItems,
+														]);
+													}}
+													onClose={() => {}}
+													allowedTypes={["image"]}
+													value={items.map((item) => {
+														return item.id;
+													})}
+													multiple="add"
+													render={({ open }) => (
+														<div
+															className="pg-font cursor-pointer py-1 px-2 flex items-center gap-1 capitalize tracking-wide bg-gray-700 text-white font-medium rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-700 "
+															onClick={open}>
+															<Icon
+																icon={addTemplate}
+																className="fill-white "
+																size={14}
+															/>
+															{__("Add", "post-grid")}
+														</div>
+													)}
+												/>
+											</span>
 											<span
 												className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 												title="Click to paste"
@@ -1541,7 +1580,7 @@ function Html(props) {
 														onClick={(ev) => {
 															setitemActive(index == itemActive ? 999 : index);
 														}}>
-														<div>{item?.headerLabelText}</div>
+														<div>{item?.title}</div>
 														<div className="flex items-center gap-2">
 															<span className="handle  cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
 																<Icon size="20" fill={"#fff"} icon={menu} />
@@ -1590,7 +1629,7 @@ function Html(props) {
 																	placeholder="Write Header Text..."
 																	className="bg-slate-100 p-3 "
 																	tagName={"div"}
-																	value={item?.headerLabelText}
+																	value={item?.title}
 																	allowedFormats={[
 																		"core/bold",
 																		"core/italic",
@@ -1601,7 +1640,7 @@ function Html(props) {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				headerLabelText: content,
+																				title: content,
 																			};
 																			return updatedItems;
 																		});
@@ -1720,7 +1759,7 @@ function Html(props) {
 															</div>
 															<div className="flex  my-5  justify-between items-center">
 																<label className="" htmlFor="emailVerification">
-																	{__("Title Link", "accordions")}
+																	{__("Link", "accordions")}
 																</label>
 																<PGinputText
 																	value={item?.link}
