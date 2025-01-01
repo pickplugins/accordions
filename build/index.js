@@ -46941,20 +46941,37 @@ function Html(props) {
     accordionDataX.labelIcon = labelIcon;
     setaccordionData(accordionDataX);
   }, [labelIcon]);
+
+  // useEffect(() => {
+  // 	var accordionDataX = { ...accordionData };
+  // 	accordionDataX.icon = icon;
+  // 	setaccordionData(accordionDataX);
+  // }, [icon]);
+
+  // useEffect(() => {
+  // 	var accordionDataX = { ...accordionData };
+  // 	accordionDataX.iconToggle = iconToggle;
+  // 	setaccordionData(accordionDataX);
+  // }, [iconToggle]);
+
   useEffect(() => {
-    var accordionDataX = {
-      ...accordionData
-    };
-    accordionDataX.icon = icon;
-    setaccordionData(accordionDataX);
-  }, [icon]);
-  useEffect(() => {
-    var accordionDataX = {
-      ...accordionData
-    };
-    accordionDataX.iconToggle = iconToggle;
-    setaccordionData(accordionDataX);
-  }, [iconToggle]);
+    setaccordionData(prevData => ({
+      ...prevData,
+      icon,
+      iconToggle
+    }));
+  }, [icon, iconToggle]);
+  const updateIconOptions = (icon, itemSrc) => ({
+    ...icon,
+    options: {
+      ...icon.options,
+      iconSrc: itemSrc
+    }
+  });
+  const handleClick = item => {
+    seticon(prevIcon => updateIconOptions(prevIcon, item.icon));
+    seticonToggle(prevIconToggle => updateIconOptions(prevIconToggle, item.toggle));
+  };
   useEffect(() => {
     var accordionDataX = {
       ...accordionData
