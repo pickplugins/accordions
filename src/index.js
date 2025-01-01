@@ -6,5 +6,6 @@
 import "./store";
 
 import "./dashboard";
+import "./global";
 
 

@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						}, autoPlayTimeout)
 
 					} else {
-						//window.pgTabs.switchNavs(navActiveIndex);
+						window.pgTabs.switchNavs(navActiveIndex);
 
 					}
 
@@ -315,17 +315,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				});
 
 			}
-
-
-
-
-
-
-
-
-
-
-
 
 
 			// Next Previous

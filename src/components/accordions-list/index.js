@@ -431,7 +431,6 @@ function Html(props) {
 
 									<div className="flex  align-middle items-center gap-2  "
 									>
-										<span className="px-1 py-1 bg-slate-500"><Icon fill="#fff" icon={addSubmenu} size="20" /></span>
 
 										<div className="text-base mb-2">{item.post_title}</div>
 
