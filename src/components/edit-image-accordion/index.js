@@ -1,10 +1,6 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
-import { store as coreStore } from "@wordpress/core-data";
-import { useSelect } from "@wordpress/data";
-import { __ } from "@wordpress/i18n";
-import { ReactSortable } from "react-sortablejs";
-
+import { MediaUpload, RichText } from "@wordpress/block-editor";
 import {
 	Icon,
 	__experimentalInputControl as InputControl,
@@ -12,19 +8,27 @@ import {
 	PanelRow,
 	Popover,
 	SelectControl,
-	ToggleControl,
 } from "@wordpress/components";
-import { brush, close, copy, help, menu, settings, page, addCard, update } from "@wordpress/icons";
-import { popupEntranceAnimateBasic } from "../../inAnimation";
-import { popupCloseAnimateBasic } from "../../outAnimation";
-import { RichText } from "@wordpress/block-editor";
+import { store as coreStore } from "@wordpress/core-data";
+import { useSelect } from "@wordpress/data";
+import { __ } from "@wordpress/i18n";
+import {
+	addCard,
+	brush,
+	close,
+	copy,
+	help,
+	menu,
+	page,
+	settings,
+} from "@wordpress/icons";
+import { ReactSortable } from "react-sortablejs";
 import breakPoints from "../../breakpoints";
 import PGDropdown from "../dropdown";
-import PGIconPicker from "../icon-picker";
 import PGinputSelect from "../input-select";
-import InputToggle from "../input-toggle";
 import PGinputText from "../input-text";
 import PGinputTextarea from "../input-textarea";
+import InputToggle from "../input-toggle";
 import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
@@ -61,29 +65,33 @@ function Html(props) {
 
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
 	var [items, setitems] = useState(accordionData.items); // Using the hook.
+	var [item, setitem] = useState(accordionData.item);
+	var [contentWrap, setcontentWrap] = useState(accordionData.contentWrap);
 	var [content, setcontent] = useState(accordionData.content);
-	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
-	var [header, setheader] = useState(accordionData.header);
-	var [headerActive, setheaderActive] = useState(accordionData.headerActive);
-	var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
-	var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
-	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
-	var [icon, seticon] = useState(accordionData.icon);
-	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
-	var [expandCollapseAll, setexpandCollapseAll] = useState(
-		accordionData.expandCollapseAll
-	);
-	var [topWrap, settopWrap] = useState(accordionData.topWrap);
-	var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
-	var [navItem, setnavItem] = useState(accordionData?.navItem);
-	var [activeNavItem, setactiveNavItem] = useState(
-		accordionData?.activeNavItem
-	);
-	var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
-	var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
-	var [panelWrapActive, setpanelWrapActive] = useState(accordionData?.panelWrapActive);
+	var [title, settitle] = useState(accordionData.title);
+	var [image, setimage] = useState(accordionData.image);
+	// var [accOptions, setaccOptions] = useState(accordionData.accOptions);
+	// var [header, setheader] = useState(accordionData.header);
+	// var [headerActive, setheaderActive] = useState(accordionData.headerActive);
+	// var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
+	// var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
+	// var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
+	// var [icon, seticon] = useState(accordionData.icon);
+	// var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
+	// var [expandCollapseAll, setexpandCollapseAll] = useState(
+	// 	accordionData.expandCollapseAll
+	// );
+	// var [topWrap, settopWrap] = useState(accordionData.topWrap);
+	// var [navsWrap, setnavsWrap] = useState(accordionData?.navsWrap);
+	// var [navItem, setnavItem] = useState(accordionData?.navItem);
+	// var [activeNavItem, setactiveNavItem] = useState(
+	// 	accordionData?.activeNavItem
+	// );
+	// var [navLabel, setnavLabel] = useState(accordionData?.navLabel);
+	// var [panelWrap, setpanelWrap] = useState(accordionData?.panelWrap);
+	// var [panelWrapActive, setpanelWrapActive] = useState(accordionData?.panelWrapActive);
 
-	var [searchInput, setsearchInput] = useState(accordionData.searchInput);
+	// var [searchInput, setsearchInput] = useState(accordionData.searchInput);
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 	const [taxonomiesObjects, setTaxonomiesObjects] = useState([]);
@@ -91,9 +99,9 @@ function Html(props) {
 
 	var [isProFeature, setisProFeature] = useState(true);
 
-	const gapValue = accOptions?.gap || "0px";
-	const [number, setNumber] = useState(parseInt(gapValue));
-	const [unit, setUnit] = useState(gapValue.replace(number, ""));
+	// const gapValue = accOptions?.gap || "0px";
+	// const [number, setNumber] = useState(parseInt(gapValue));
+	// const [unit, setUnit] = useState(gapValue.replace(number, ""));
 	const [itemActive, setitemActive] = useState(99999);
 	const [AIautoUpdate, setAIautoUpdate] = useState(false);
 	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
@@ -152,12 +160,6 @@ function Html(props) {
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.accOptions = accOptions;
-		setaccordionData(accordionDataX);
-	}, [accOptions]);
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
 		accordionDataX.items = items;
 		setaccordionData(accordionDataX);
 	}, [items]);
@@ -170,118 +172,139 @@ function Html(props) {
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.navsWrap = navsWrap;
-		setaccordionData(accordionDataX);
-	}, [navsWrap]);
-
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.navItem = navItem;
-		setaccordionData(accordionDataX);
-	}, [navItem]);
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.activeNavItem = activeNavItem;
-		setaccordionData(accordionDataX);
-	}, [activeNavItem]);
-
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.navLabel = navLabel;
-		setaccordionData(accordionDataX);
-	}, [navLabel]);
-
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.panelWrap = panelWrap;
-		setaccordionData(accordionDataX);
-	}, [panelWrap]);
-
-
-
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
 		accordionDataX.content = content;
 		setaccordionData(accordionDataX);
 	}, [content]);
-
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.header = header;
+		accordionDataX.item = item;
 		setaccordionData(accordionDataX);
-	}, [header]);
-
+	}, [item]);
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.headerActive = headerActive;
+		accordionDataX.contentWrap = contentWrap;
 		setaccordionData(accordionDataX);
-	}, [headerActive]);
-
+	}, [contentWrap]);
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.headerLabel = headerLabel;
+		accordionDataX.title = title;
 		setaccordionData(accordionDataX);
-	}, [headerLabel]);
-
+	}, [title]);
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.labelCounter = labelCounter;
+		accordionDataX.image = image;
 		setaccordionData(accordionDataX);
-	}, [labelCounter]);
+	}, [image]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.labelIcon = labelIcon;
-		setaccordionData(accordionDataX);
-	}, [labelIcon]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.accOptions = accOptions;
+	// 	setaccordionData(accordionDataX);
+	// }, [accOptions]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.icon = icon;
-		setaccordionData(accordionDataX);
-	}, [icon]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.navsWrap = navsWrap;
+	// 	setaccordionData(accordionDataX);
+	// }, [navsWrap]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.iconToggle = iconToggle;
-		setaccordionData(accordionDataX);
-	}, [iconToggle]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.navItem = navItem;
+	// 	setaccordionData(accordionDataX);
+	// }, [navItem]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.expandCollapseAll = expandCollapseAll;
-		setaccordionData(accordionDataX);
-	}, [expandCollapseAll]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.activeNavItem = activeNavItem;
+	// 	setaccordionData(accordionDataX);
+	// }, [activeNavItem]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.topWrap = topWrap;
-		setaccordionData(accordionDataX);
-	}, [topWrap]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.navLabel = navLabel;
+	// 	setaccordionData(accordionDataX);
+	// }, [navLabel]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.searchInput = searchInput;
-		setaccordionData(accordionDataX);
-	}, [searchInput]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.panelWrap = panelWrap;
+	// 	setaccordionData(accordionDataX);
+	// }, [panelWrap]);
 
-	var RemoveSliderArg = function ({ index }) {
-		return (
-			<span
-				className="cursor-pointer hover:bg-red-500 hover:text-white "
-				onClick={(ev) => {
-					var sliderOptionsX = { ...accOptions };
-					delete sliderOptionsX[index];
-					setaccOptions(sliderOptionsX);
-				}}>
-				<Icon icon={close} />
-			</span>
-		);
-	};
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.header = header;
+	// 	setaccordionData(accordionDataX);
+	// }, [header]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.headerActive = headerActive;
+	// 	setaccordionData(accordionDataX);
+	// }, [headerActive]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.headerLabel = headerLabel;
+	// 	setaccordionData(accordionDataX);
+	// }, [headerLabel]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.labelCounter = labelCounter;
+	// 	setaccordionData(accordionDataX);
+	// }, [labelCounter]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.labelIcon = labelIcon;
+	// 	setaccordionData(accordionDataX);
+	// }, [labelIcon]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.icon = icon;
+	// 	setaccordionData(accordionDataX);
+	// }, [icon]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.iconToggle = iconToggle;
+	// 	setaccordionData(accordionDataX);
+	// }, [iconToggle]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.expandCollapseAll = expandCollapseAll;
+	// 	setaccordionData(accordionDataX);
+	// }, [expandCollapseAll]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.topWrap = topWrap;
+	// 	setaccordionData(accordionDataX);
+	// }, [topWrap]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.searchInput = searchInput;
+	// 	setaccordionData(accordionDataX);
+	// }, [searchInput]);
+
+	// var RemoveSliderArg = function ({ index }) {
+	// 	return (
+	// 		<span
+	// 			className="cursor-pointer hover:bg-red-500 hover:text-white "
+	// 			onClick={(ev) => {
+	// 				var sliderOptionsX = { ...accOptions };
+	// 				delete sliderOptionsX[index];
+	// 				setaccOptions(sliderOptionsX);
+	// 			}}>
+	// 			<Icon icon={close} />
+	// 		</span>
+	// 	);
+	// };
 
 	function onChangeStyle(sudoScource, newVal, attr, propertyType, setProperty) {
 		var path = [sudoScource, attr, breakPointX];
@@ -523,7 +546,10 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		easyAccordion: { label: "Easy Accordion - FAQ Group", value: "easyAccordion" },
+		easyAccordion: {
+			label: "Easy Accordion - FAQ Group",
+			value: "easyAccordion",
+		},
 		posts: {
 			label: "Posts",
 			value: "posts",
@@ -542,10 +568,6 @@ function Html(props) {
 
 	return (
 		<div className="">
-
-
-
-
 			<div
 				className="hidden"
 				onClick={() => {
@@ -575,22 +597,21 @@ function Html(props) {
 				<div className="p-3">
 					<div>{`{`}</div>
 					<div>{`"wrapper":${JSON.stringify(wrapper)}`},</div>
-					<div>{`"navsWrap":${JSON.stringify(navsWrap)}`},</div>
-					<div>{`"navItem":${JSON.stringify(navItem)}`},</div>
-					<div>{`"activeNavItem":${JSON.stringify(activeNavItem)}`},</div>
-					<div>{`"labelCounter":${JSON.stringify(labelCounter)}`},</div>
-					<div>{`"labelIcon":${JSON.stringify(labelIcon)}`},</div>
-					<div>{`"icon":${JSON.stringify(icon)}`},</div>
-					<div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div>
-					<div>{`"navLabel":${JSON.stringify(navLabel)}`},</div>
-					<div>
+					{/* <div>{`"navsWrap":${JSON.stringify(navsWrap)}`},</div> */}
+					{/* <div>{`"navItem":${JSON.stringify(navItem)}`},</div> */}
+					{/* <div>{`"activeNavItem":${JSON.stringify(activeNavItem)}`},</div> */}
+					{/* <div>{`"labelCounter":${JSON.stringify(labelCounter)}`},</div> */}
+					{/* <div>{`"labelIcon":${JSON.stringify(labelIcon)}`},</div> */}
+					{/* <div>{`"icon":${JSON.stringify(icon)}`},</div> */}
+					{/* <div>{`"iconToggle":${JSON.stringify(iconToggle)}`},</div> */}
+					{/* <div>{`"navLabel":${JSON.stringify(navLabel)}`},</div> */}
+					{/* <div>
 						{`"panelWrap":${JSON.stringify(panelWrap)}`},
-					</div>
-					<div>{`"topWrap":${JSON.stringify(topWrap)}`},</div>
+					</div> */}
+					{/* <div>{`"topWrap":${JSON.stringify(topWrap)}`},</div> */}
 					<div>{`}`}</div>
 				</div>
 			</div>
-
 
 			{props.postData.post_content != null && (
 				<>
@@ -750,8 +771,7 @@ function Html(props) {
 															content: "You just pasted items, Now go to edit.",
 															type: "success",
 														});
-													} catch (error) {
-													}
+													} catch (error) {}
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
 											</span>
@@ -772,10 +792,8 @@ function Html(props) {
 																	type: "success",
 																});
 															})
-															.catch((err) => {
-															});
-													} catch (error) {
-													}
+															.catch((err) => {});
+													} catch (error) {}
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
 											</span>
@@ -989,10 +1007,8 @@ function Html(props) {
 						{globalOptions?.itemSource == "posts" && (
 							<div>
 								{Object.entries(itemQueryArgs)?.map((prams) => {
-
-									var index = prams[0]
-									var item = prams[1]
-
+									var index = prams[0];
+									var item = prams[1];
 
 									return (
 										<div key={index} className="my-4 flex gap-2 items-center">
@@ -1217,11 +1233,9 @@ function Html(props) {
 						)}
 						{globalOptions?.itemSource == "terms" && (
 							<div>
-
 								{Object.entries(itemQueryArgs)?.map((prams) => {
-
-									var index = prams[0]
-									var item = prams[1]
+									var index = prams[0];
+									var item = prams[1];
 
 									return (
 										<div key={index} className="my-4 flex gap-2 items-center">
@@ -1476,25 +1490,16 @@ function Html(props) {
 							</div>
 						)}
 
-
-
-
 						{globalOptions?.itemSource == "easyAccordion" && (
 							<div>
-
 								{Object.entries(itemQueryArgs)?.map((prams) => {
-
-									var index = prams[0]
-									var item = prams[1]
-
+									var index = prams[0];
+									var item = prams[1];
 
 									return (
 										<div key={index} className="my-4">
-
-
 											{item.id == "postId" && (
-												<div
-													className={`flex items-center justify-between`}>
+												<div className={`flex items-center justify-between`}>
 													<label htmlFor="">FAQ Group ID</label>
 													<InputControl
 														value={item.value}
@@ -1505,8 +1510,6 @@ function Html(props) {
 													/>
 												</div>
 											)}
-
-
 										</div>
 									);
 								})}
@@ -1519,11 +1522,9 @@ function Html(props) {
 									list={items}
 									handle={".handle"}
 									setList={(itemsSorted) => {
-
-
 										setTimeout(() => {
 											setitems(itemsSorted);
-										}, 200)
+										}, 200);
 
 										addNotifications({
 											title: "Items Sorted",
@@ -1625,240 +1626,116 @@ function Html(props) {
 																	}}
 																/>
 															</div>
-															<div className="mb-3">
-																<PanelRow>
-																	<label htmlFor="">Active</label>
-
-																	<InputToggle
-																		value={item?.active ?? 0}
-																		onChange={(newVal) => {
-																			if (isProFeature) {
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content:
-																						"This feature only available in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					active: newVal,
-																				};
-																				return updatedItems;
-																			});
-																		}}
-																	/>
-																</PanelRow>
+															<div className="flex my-5 justify-between items-center ">
+																<label
+																	className="w-[400px]"
+																	htmlFor="emailVerification">
+																	{__("Select Image", "user-verification")}
+																</label>
+																<MediaUpload
+																	onSelect={(media) => {
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				image: {
+																					...updatedItems[index].image,
+																					id: media.id,
+																					url: media.url,
+																				},
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																	onClose={() => {}}
+																	allowedTypes={["image"]}
+																	value={item?.image?.id}
+																	render={({ open }) => {
+																		return (
+																			<div className="flex flex-col items-center gap-2">
+																				{item?.image?.url && (
+																					<img
+																						src={item?.image?.url}
+																						alt=""
+																						className="cursor-pointer rounded-md max-w-[160px] max-h-[160px] object-contain border border-solid border-gray-300 p-1"
+																						onClick={() => {
+																							open();
+																						}}
+																					/>
+																				)}
+																				<div className="flex items-center gap-2">
+																					<button
+																						onClick={open}
+																						className="no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white">
+																						Open Media Library
+																					</button>
+																					<button
+																						onClick={() => {
+																							setitems((prevItems) => {
+																								const updatedItems = [
+																									...prevItems,
+																								];
+																								updatedItems[index] = {
+																									...updatedItems[index],
+																									image: {
+																										...updatedItems[index]
+																											.image,
+																										id: media.id,
+																										url: media.url,
+																									},
+																								};
+																								return updatedItems;
+																							});
+																						}}
+																						className="no-underline size-[38px] flex items-center justify-center text-[30px] rounded-sm !border !bg-transparent !border-solid !border-gray-700 hover:!border-red-700 text-gray-700   hover:text-red-700"
+																						title="Clear Logo">
+																						&times;
+																					</button>
+																				</div>
+																			</div>
+																		);
+																	}}></MediaUpload>
 															</div>
-															<div className="mb-3">
-																<PanelRow>
-																	<label htmlFor="">Hide On Schema</label>
-
-																	<InputToggle
-																		value={item?.hideOnSchema ?? 0}
-																		onChange={(newVal) => {
-																			if (isProFeature) {
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content:
-																						"This feature only avilable in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					hideOnSchema: newVal,
-																				};
-																				return updatedItems;
-																			});
-																		}}
-																	/>
-																</PanelRow>
-
-																{/* <PanelRow>
-																	<label htmlFor="" className="font-medium text-slate-900 ">
-																		{__("Icon Idle", "accordions")}
-																	</label>
-																	<PGIconPicker
-																		library={item?.icon?.options?.library}
-																		srcType={item?.icon?.options?.srcType}
-																		iconSrc={item?.icon?.options?.iconSrc}
-																		onChange={(arg) => {
-
-																			if (isProFeature) {
-
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content: "This feature only avilable in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					icon: {
-																						...updatedItems[index].icon,
-																						options: {
-																							...updatedItems[index]?.icon?.options,
-																							srcType: arg.srcType,
-																							library: arg.library,
-																							iconSrc: arg.iconSrc,
-																						}
-
-																					},
-																				};
-																				return updatedItems;
-																			});
-
-
-																		}}
-																	/>
-																</PanelRow>
-																<PanelRow>
-																	<label htmlFor="" className="font-medium text-slate-900 ">
-																		{__("Icon Toggled", "accordions")}
-																	</label>
-																	<PGIconPicker
-																		library={item?.iconToggle?.options?.library}
-																		srcType={item?.iconToggle?.options?.srcType}
-																		iconSrc={item?.iconToggle?.options?.iconSrc}
-																		onChange={(arg) => {
-
-																			if (isProFeature) {
-
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content: "This feature only avilable in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					iconToggle: {
-																						...updatedItems[index].iconToggle,
-																						options: {
-																							...updatedItems[index]?.iconToggle?.options,
-																							srcType: arg.srcType,
-																							library: arg.library,
-																							iconSrc: arg.iconSrc,
-																						}
-
-																					},
-																				};
-																				return updatedItems;
-																			});
-
-
-																		}}
-																	/>
-																</PanelRow> */}
-																<PanelRow>
-																	<label
-																		htmlFor=""
-																		className="font-medium text-slate-900 ">
-																		{__("Label Icon", "accordions")}
-																	</label>
-																	<PGIconPicker
-																		library={item?.labelIcon?.options?.library}
-																		srcType={item?.labelIcon?.options?.srcType}
-																		iconSrc={item?.labelIcon?.options?.iconSrc}
-																		onChange={(arg) => {
-																			if (isProFeature) {
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content:
-																						"This feature only avilable in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					labelIcon: {
-																						...updatedItems[index].labelIcon,
-																						options: {
-																							...updatedItems[index]?.labelIcon
-																								?.options,
-																							srcType: arg.srcType,
-																							library: arg.library,
-																							iconSrc: arg.iconSrc,
-																						},
-																					},
-																				};
-																				return updatedItems;
-																			});
-																		}}
-																	/>
-																</PanelRow>
-
-																<div className="w-full">
-																	<div className="mb-2">Slug</div>
-																	<div className="flex items-center gap-2">
-																		<PGinputText
-																			className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
-																			label=""
-																			value={item?.headerLabelSlug}
-																			onChange={(newVal) => {
-																				if (isProFeature) {
-																					addNotifications({
-																						title: "Opps its pro!",
-																						content:
-																							"This feature only avilable in premium version",
-																						type: "error",
-																					});
-																					return;
-																				}
-
-																				setitems((prevItems) => {
-																					const updatedItems = [...prevItems];
-																					updatedItems[index] = {
-																						...updatedItems[index],
-																						headerLabelSlug: newVal,
-																					};
-																					return updatedItems;
-																				});
-																			}}
-																		/>
-
-																		<div
-																			title="Generate from Label"
-																			className="cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1"
-																			onClick={(ev) => {
-																				var slug = item?.headerLabelText
-																					.toLowerCase()
-																					.replaceAll(" ", "-");
-
-																				setitems((prevItems) => {
-																					const updatedItems = [...prevItems];
-																					updatedItems[index] = {
-																						...updatedItems[index],
-																						headerLabelSlug: slug,
-																					};
-																					return updatedItems;
-																				});
-																			}}>
-																			<Icon fill={"#fff"} icon={update} />
-																		</div>
-																	</div>
-																</div>
+															<div className="flex  my-5  justify-between items-center">
+																<label className="" htmlFor="emailVerification">
+																	{__("Alt Text", "accordions")}
+																</label>
+																<PGinputText
+																	value={item?.image?.altText}
+																	className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+																	onChange={(newVal) => {
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				image: {
+																					...updatedItems[index].image,
+																					altText: newVal,
+																				},
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																/>
+															</div>
+															<div className="flex  my-5  justify-between items-center">
+																<label className="" htmlFor="emailVerification">
+																	{__("Title Link", "accordions")}
+																</label>
+																<PGinputText
+																	value={item?.link}
+																	className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+																	onChange={(newVal) => {
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				link: newVal,
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																/>
 															</div>
 														</div>
 													)}
@@ -1909,8 +1786,6 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-
-
 
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
@@ -1988,7 +1863,6 @@ function Html(props) {
 								/>
 							</PanelRow>
 
-
 							<PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
 									Animation Name{" "}
@@ -2044,7 +1918,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2072,7 +1946,7 @@ function Html(props) {
 									</label>
 									<PGinputText
 										value={wrapper?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
 										onChange={(newVal) => {
 											var optionsX = {
 												...wrapper,
@@ -2114,1272 +1988,353 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-
-
-
-
-
-
-
-
-
-					<PanelBody title="Icons" initialOpen={false}
-					>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Icon Idle"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Choose Icon", "accordions")}
-										</label>
-										<PGIconPicker
-											library={icon?.options?.library}
-											srcType={icon?.options?.srcType}
-											iconSrc={icon?.options?.iconSrc}
-											onChange={(arg) => {
-												var iconX = { ...icon };
-
-												var optionsX = {
-													...iconX.options,
-													srcType: arg.srcType,
-													library: arg.library,
-													iconSrc: arg.iconSrc,
-												};
-
-												iconX.options = optionsX;
-												seticon(iconX);
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Choose Toggle Icon", "accordions")}
-										</label>
-										<PGIconPicker
-											library={iconToggle?.options?.library}
-											srcType={iconToggle?.options?.srcType}
-											iconSrc={iconToggle?.options?.iconSrc}
-											onChange={(arg) => {
-												var iconToggleX = { ...iconToggle };
-
-												var optionsX = {
-													...iconToggleX.options,
-													srcType: arg.srcType,
-													library: arg.library,
-													iconSrc: arg.iconSrc,
-												};
-
-												iconToggleX.options = optionsX;
-												seticonToggle(iconToggleX);
-											}}
-										/>
-									</PanelRow>
-
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Icon position", "accordions")}
-										</label>
-										<SelectControl
-											label=""
-											value={icon?.options?.position}
-											options={[
-												{
-													label: __("Choose Position", "accordions"),
-													value: "",
-												},
-												{ label: __("before", "accordions"), value: "before" },
-												{ label: __("after", "accordions"), value: "after" },
-											]}
-											onChange={(newVal) => {
-												var iconX = { ...icon };
-
-												var optionsX = {
-													...iconX.options,
-													position: newVal,
-												};
-
-												iconX.options = optionsX;
-												seticon(iconX);
-											}}
-										/>
-									</PanelRow>
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={icon?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...icon,
-													options: {
-														...icon?.options,
-														class: newVal,
-													},
-												};
-												seticon(optionsX);
-											}}
-										/>
-									</div>
-
-									<PanelRow>
-										<label htmlFor="" className="flex gap-2 items-center">
-											IN Animation
-										</label>
-
-										<PGDropdown
-											position="bottom right"
-											variant="secondary"
-											buttonTitle={
-												popupEntranceAnimateBasic[icon?.options?.inAnimation] ==
-													undefined
-													? __("Choose", "accordions")
-													: popupEntranceAnimateBasic[icon?.options?.inAnimation]
-														.label
-											}
-											options={popupEntranceAnimateBasic}
-											onChange={(newVal) => {
-												var optionsX = {
-													...icon,
-													options: {
-														...icon?.options,
-														inAnimation: newVal.value,
-													},
-												};
-												seticon(optionsX);
-											}}
-											values=""></PGDropdown>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="" className="flex gap-2 items-center">
-											OUT Animation
-										</label>
-
-										<PGDropdown
-											position="bottom right"
-											variant="secondary"
-											buttonTitle={
-												popupCloseAnimateBasic[icon?.options?.outAnimation] ==
-													undefined
-													? __("Choose", "accordions")
-													: popupCloseAnimateBasic[icon?.options?.outAnimation]
-														.label
-											}
-											options={popupCloseAnimateBasic}
-											onChange={(newVal) => {
-												var optionsX = {
-													...icon,
-													options: {
-														...icon?.options,
-														outAnimation: newVal.value,
-													},
-												};
-												seticon(optionsX);
-											}}
-											values=""></PGDropdown>
-									</PanelRow>
-
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Animation duration", "accordions")}
-										</label>
-										<PGinputText
-											value={icon?.options?.animationDuration}
-											placeholder={"1000"}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[200px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...icon,
-													options: {
-														...icon?.options,
-														animationDuration: newVal,
-													},
-												};
-												setcontent(optionsX);
-											}}
-										/>
-									</div>
-
-
-
-
-
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={icon}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(sudoScource, newVal, attr, icon, seticon)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, icon, seticon)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, icon, seticon)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, icon, seticon)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(sudoSource, cssObj, icon, seticon)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Icon Toggle"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={iconToggle?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...iconToggle,
-													options: {
-														...iconToggle?.options,
-														class: newVal,
-													},
-												};
-												seticonToggle(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={iconToggle}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												iconToggle,
-												seticonToggle
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, iconToggle, seticonToggle)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, iconToggle, seticonToggle)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, iconToggle, seticonToggle)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(
-												sudoSource,
-												cssObj,
-												iconToggle,
-												seticonToggle
-											)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-					</PanelBody>
-
-					<PanelBody title="Navs & Labels"
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Content Wrappper"
 						initialOpen={false}>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Navs Wrap"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={navsWrap?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...navsWrap,
-													options: {
-														...navsWrap?.options,
-														class: newVal,
-													},
-												};
-												setnavsWrap(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={navsWrap}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												navsWrap,
-												setnavsWrap
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, navsWrap, setnavsWrap)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, navsWrap, setnavsWrap)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, navsWrap, setnavsWrap)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(sudoSource, cssObj, navsWrap, setnavsWrap)
-										}
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={contentWrap?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...contentWrap,
+												options: {
+													...contentWrap?.options,
+													class: newVal,
+												},
+											};
+											setcontentWrap(optionsX);
+										}}
 									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Nav Item"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={navItem?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...navItem,
-													options: {
-														...navItem?.options,
-														class: newVal,
-													},
-												};
-												setnavsWrap(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={navItem}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												navItem,
-												setnavItem
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, navItem, setnavItem)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, navItem, setnavItem)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, navItem, setnavItem)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(sudoSource, cssObj, navItem, setnavItem)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Active Nav Item"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={activeNavItem?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...activeNavItem,
-													options: {
-														...activeNavItem?.options,
-														class: newVal,
-													},
-												};
-												setnavsWrap(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={activeNavItem}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												activeNavItem,
-												setactiveNavItem
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(
-												sudoScource,
-												key,
-												activeNavItem,
-												setactiveNavItem
-											)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(
-												sudoScource,
-												key,
-												activeNavItem,
-												setactiveNavItem
-											)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, activeNavItem, setactiveNavItem)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(
-												sudoSource,
-												cssObj,
-												activeNavItem,
-												setactiveNavItem
-											)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Nav Label"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={navLabel?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...navLabel,
-													options: {
-														...navLabel?.options,
-														class: newVal,
-													},
-												};
-												setnavsWrap(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={navLabel}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												navLabel,
-												setnavLabel
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, navLabel, setnavLabel)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, navLabel, setnavLabel)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, navLabel, setnavLabel)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(sudoSource, cssObj, navLabel, setnavLabel)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							// title="Label Icon"
-							opened={isProFeature ? false : null}
-							title={
-								<span className="flex justify-between w-full gap-2">
-									<span>{__("Label Icon", "accordions")}</span>
-									{isProFeature ? (
-										<span
-											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
-											onClick={(ev) => {
-												window.open(
-													"https://comboblocks.com/pricing/",
-													"_blank"
-												);
-											}}>
-											{__("Pro", "accordions")}
-										</span>
-									) : (
-										""
-									)}
-								</span>
-							}
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Choose Label Icon", "accordions")}
-										</label>
-										<PGIconPicker
-											library={labelIcon?.options?.library}
-											srcType={labelIcon?.options?.srcType}
-											iconSrc={labelIcon?.options?.iconSrc}
-											onChange={(arg) => {
-												var labelIconX = { ...labelIcon };
-
-												var optionsX = {
-													...labelIconX.options,
-													srcType: arg.srcType,
-													library: arg.library,
-													iconSrc: arg.iconSrc,
-												};
-
-												labelIconX.options = optionsX;
-												setlabelIcon(labelIconX);
-											}}
-										/>
-									</PanelRow>
-
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Icon position", "accordions")}
-										</label>
-										<SelectControl
-											label=""
-											value={labelIcon?.options?.position}
-											options={[
-												{
-													label: __("Choose Position", "accordions"),
-													value: "",
-												},
-												{
-													label: __("Before Label", "accordions"),
-													value: "beforeLabel",
-												},
-												{
-													label: __("After Label", "accordions"),
-													value: "afterLabel",
-												},
-												{
-													label: __("Before Label Text", "accordions"),
-													value: "beforeLabelText",
-												},
-												{
-													label: __("After Label Text", "accordions"),
-													value: "afterLabelText",
-												},
-											]}
-											onChange={(newVal) => {
-												var labelIconX = { ...labelIcon };
-
-												var optionsX = {
-													...labelIconX.options,
-													position: newVal,
-												};
-
-												labelIconX.options = optionsX;
-												setlabelIcon(labelIconX);
-											}}
-										/>
-									</PanelRow>
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={labelIcon?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...labelIcon,
-													options: {
-														...labelIcon?.options,
-														class: newVal,
-													},
-												};
-												setlabelIcon(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={labelIcon}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												labelIcon,
-												setlabelIcon
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, labelIcon, setlabelIcon)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, labelIcon, setlabelIcon)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, labelIcon, setlabelIcon)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(
-												sudoSource,
-												cssObj,
-												labelIcon,
-												setlabelIcon
-											)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							// title="Label Counter"
-							opened={isProFeature ? false : null}
-							title={
-								<span className="flex justify-between w-full gap-2">
-									<span>{__("Label Counter", "accordions")}</span>
-									{isProFeature ? (
-										<span
-											className="bg-amber-500 px-2 py-1  no-underline rounded-sm  cursor-pointer text-white "
-											onClick={(ev) => {
-												window.open("https://comboblocks.com/pricing/", "_blank");
-											}}>
-											{__("Pro", "accordions")}
-										</span>
-									) : (
-										""
-									)}{" "}
-								</span>
-							}
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<PanelRow>
-										<label htmlFor="" className="font-medium text-slate-900 ">
-											{__("Counter position", "accordions")}
-										</label>
-										<SelectControl
-											label=""
-											value={labelCounter?.options?.position}
-											options={[
-												{
-													label: __("Choose Position", "accordions"),
-													value: "",
-												},
-												{ label: __("Left", "accordions"), value: "left" },
-												{ label: __("Right", "accordions"), value: "right" },
-												{
-													label: __("Before Label Text", "accordions"),
-													value: "beforeLabelText",
-												},
-												{
-													label: __("After Label Text", "accordions"),
-													value: "afterLabelText",
-												},
-											]}
-											onChange={(newVal) => {
-												var labelCounterX = { ...labelCounter };
-
-												var optionsX = {
-													...labelCounterX.options,
-													position: newVal,
-												};
-
-												labelCounterX.options = optionsX;
-												setlabelCounter(labelCounterX);
-											}}
-										/>
-									</PanelRow>
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={labelCounter?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...labelCounter,
-													options: {
-														...labelCounter?.options,
-														class: newVal,
-													},
-												};
-												setlabelCounter(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={labelCounter}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												labelCounter,
-												setlabelCounter
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, labelCounter, setlabelCounter)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(
-												sudoScource,
-												key,
-												labelCounter,
-												setlabelCounter
-											)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, labelCounter, setlabelCounter)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(
-												sudoSource,
-												cssObj,
-												labelCounter,
-												setlabelCounter
-											)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
-
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={contentWrap}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											contentWrap,
+											setcontentWrap
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, contentWrap, setcontentWrap)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, contentWrap, setcontentWrap)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, contentWrap, setcontentWrap)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											contentWrap,
+											setcontentWrap
+										)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
 					</PanelBody>
-
-					<PanelBody title="Panels"
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Content"
 						initialOpen={false}>
-
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Panel Wrap"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={panelWrap?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...panelWrap,
-													options: {
-														...panelWrap?.options,
-														class: newVal,
-													},
-												};
-												setpanelWrap(optionsX);
-											}}
-										/>
-									</div>
-									<PanelRow>
-										<label htmlFor="" className="flex gap-2 items-center">
-											Autoembed
-											<span
-												className="cursor-pointer"
-												title="Click to know more"
-												onClick={() => {
-													setHelp({
-														id: "autoembedSetting",
-														enable: true,
-													});
-												}}>
-												<Icon icon={help} />
-											</span>
-										</label>
-										<InputToggle
-											value={panelWrap?.options?.autoembed}
-											onChange={(newVal) => {
-												var optionsX = {
-													...panelWrap,
-													options: {
-														...panelWrap?.options,
-														autoembed: newVal,
-													},
-												};
-												setpanelWrap(optionsX);
-											}}
-										/>
-									</PanelRow>
-
-									<PanelRow>
-										<label htmlFor="" className="flex gap-2 items-center">
-											Shortcodes
-											<span
-												className="cursor-pointer"
-												title="Click to know more"
-												onClick={() => {
-													setHelp({
-														id: "shortcodesSetting",
-														enable: true,
-													});
-												}}>
-												<Icon icon={help} />
-											</span>
-										</label>
-
-										<InputToggle
-											value={panelWrap?.options?.shortcodes}
-											onChange={(newVal) => {
-												var optionsX = {
-													...panelWrap,
-													options: {
-														...panelWrap?.options,
-														shortcodes: newVal,
-													},
-												};
-												setpanelWrap(optionsX);
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="" className="flex gap-2 items-center">
-											wpautop
-											<span
-												className="cursor-pointer"
-												title="Click to know more"
-												onClick={() => {
-													setHelp({
-														id: "wpautopSetting",
-														enable: true,
-													});
-												}}>
-												<Icon icon={help} />
-											</span>
-										</label>
-
-										<InputToggle
-											value={panelWrap?.options?.wpautop}
-											onChange={(newVal) => {
-												var optionsX = {
-													...panelWrap,
-													options: {
-														...panelWrap?.options,
-														wpautop: newVal,
-													},
-												};
-												setpanelWrap(optionsX);
-											}}
-										/>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="" className="flex gap-2 items-center">
-											In Animation
-										</label>
-
-										<PGDropdown
-											position="bottom right"
-											variant="secondary"
-											buttonTitle={
-												popupEntranceAnimateBasic[panelWrap?.options?.inAnimation] ==
-													undefined
-													? __("Choose", "accordions")
-													: popupEntranceAnimateBasic[panelWrap?.options?.inAnimation]
-														.label
-											}
-											options={popupEntranceAnimateBasic}
-											onChange={(newVal) => {
-												if (isProFeature) {
-													addNotifications({
-														title: "Opps its pro!",
-														panelWrap:
-															"This feature only avilable in premium version",
-														type: "error",
-													});
-													return;
-												}
-
-												var optionsX = {
-													...panelWrap,
-													options: {
-														...panelWrap?.options,
-														inAnimation: newVal.value,
-													},
-												};
-												setpanelWrap(optionsX);
-											}}
-											values=""></PGDropdown>
-									</PanelRow>
-									<PanelRow>
-										<label htmlFor="" className="flex gap-2 items-center">
-											Out Animation
-										</label>
-
-										<PGDropdown
-											position="bottom right"
-											variant="secondary"
-											buttonTitle={
-												popupCloseAnimateBasic[panelWrap?.options?.outAnimation] ==
-													undefined
-													? __("Choose", "accordions")
-													: popupCloseAnimateBasic[panelWrap?.options?.outAnimation]
-														.label
-											}
-											options={popupCloseAnimateBasic}
-											onChange={(newVal) => {
-												if (isProFeature) {
-													addNotifications({
-														title: "Opps its pro!",
-														panelWrap:
-															"This feature only avilable in premium version",
-														type: "error",
-													});
-													return;
-												}
-
-												var optionsX = {
-													...panelWrap,
-													options: {
-														...panelWrap?.options,
-														outAnimation: newVal.value,
-													},
-												};
-												setpanelWrap(optionsX);
-											}}
-											values=""></PGDropdown>
-									</PanelRow>
-
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Animation duration", "accordions")}
-										</label>
-										<PGinputText
-											value={panelWrap?.options?.animationDuration}
-											placeholder={"1000"}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...panelWrap,
-													options: {
-														...panelWrap?.options,
-														animationDuration: newVal,
-													},
-												};
-												setpanelWrap(optionsX);
-											}}
-										/>
-									</div>
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={panelWrap}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												panelWrap,
-												setpanelWrap
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, panelWrap, setpanelWrap)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, panelWrap, setpanelWrap)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, panelWrap, setpanelWrap)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(sudoSource, cssObj, panelWrap, setpanelWrap)
-										}
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={content?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content?.options,
+													class: newVal,
+												},
+											};
+											setcontent(optionsX);
+										}}
 									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-						<PanelBody
-							className="font-medium text-slate-900 "
-							title="Panel Wrap Active"
-							initialOpen={false}>
-							<PGtabs
-								activeTab="options"
-								orientation="horizontal"
-								activeClass="active-tab"
-								onSelect={(tabName) => { }}
-								tabs={[
-									{
-										name: "options",
-										title: "Options",
-										icon: settings,
-										className: "tab-settings",
-									},
-									{
-										name: "styles",
-										title: "Styles",
-										icon: brush,
-										className: "tab-style",
-									},
-								]}>
-								<PGtab name="options">
-									<div className="flex  my-5  justify-between items-center">
-										<label className="" htmlFor="emailVerification">
-											{__("Class", "accordions")}
-										</label>
-										<PGinputText
-											value={panelWrapActive?.options?.class}
-											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-											onChange={(newVal) => {
-												var optionsX = {
-													...panelWrapActive,
-													options: {
-														...panelWrapActive?.options,
-														class: newVal,
-													},
-												};
-												setpanelWrapActive(optionsX);
-											}}
-										/>
-									</div>
-
-
-
-
-								</PGtab>
-								<PGtab name="styles">
-									<PGStyles
-										obj={panelWrapActive}
-										onChange={(sudoScource, newVal, attr) =>
-											onChangeStyle(
-												sudoScource,
-												newVal,
-												attr,
-												panelWrapActive,
-												setpanelWrapActive
-											)
-										}
-										onAdd={(sudoScource, key) =>
-											onAddStyle(sudoScource, key, panelWrapActive, setpanelWrapActive)
-										}
-										onRemove={(sudoScource, key) =>
-											onRemoveStyle(sudoScource, key, panelWrapActive, setpanelWrapActive)
-										}
-										onReset={(sudoSources) =>
-											onResetStyle(sudoSources, panelWrapActive, setpanelWrapActive)
-										}
-										onBulkAdd={(sudoSource, cssObj) =>
-											onBulkAddStyle(sudoSource, cssObj, panelWrapActive, setpanelWrapActive)
-										}
-									/>
-								</PGtab>
-							</PGtabs>
-						</PanelBody>
-
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={content}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											content,
+											setcontent
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, content, setcontent)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, content, setcontent)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, content, setcontent)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, content, setcontent)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
 					</PanelBody>
-
-
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Item"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={item?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...item,
+												options: {
+													...item?.options,
+													class: newVal,
+												},
+											};
+											setitem(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={item}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(sudoScource, newVal, attr, item, setitem)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, item, setitem)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, item, setitem)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, item, setitem)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, item, setitem)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Title"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={title?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...title,
+												options: {
+													...title?.options,
+													class: newVal,
+												},
+											};
+											settitle(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={title}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(sudoScource, newVal, attr, title, settitle)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, title, settitle)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, title, settitle)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, title, settitle)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, title, settitle)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
+						title="Image"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => {}}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={image?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...image,
+												options: {
+													...image?.options,
+													class: newVal,
+												},
+											};
+											setimage(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={image}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(sudoScource, newVal, attr, image, setimage)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, image, setimage)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, image, setimage)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, image, setimage)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, image, setimage)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
 				</>
 			)}
 		</div>
@@ -3400,7 +2355,8 @@ class ImageAccordionEdit extends Component {
 	}
 
 	render() {
-		var { onChange, postData, customerData, addNotifications, setHelp } = this.props;
+		var { onChange, postData, customerData, addNotifications, setHelp } =
+			this.props;
 
 		return (
 			<Html

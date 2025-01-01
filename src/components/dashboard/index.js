@@ -537,7 +537,6 @@ function Html(props) {
 															buttonTitle={postData?.post_content?.globalOptions?.viewType ? viewTypeArgs[postData?.post_content?.globalOptions?.viewType]?.label : "Choose"}
 															options={viewTypeArgs}
 															onChange={(option, index) => {
-
 																if (confirm("Data will reset, Please confirm?")) {
 																	if (option.value == "accordion") {
 																		setpostData({ ...postData, post_content: accordionDefaultData })
@@ -564,7 +563,6 @@ function Html(props) {
 												</div>
 
 
-
 												{postData.post_content.globalOptions?.viewType == "accordion" && (
 													<AccordionsEdit
 														onChange={onChangeAccordion}
@@ -583,7 +581,7 @@ function Html(props) {
 														setHelp={setHelp}
 													/>
 												)}
-												{/* {postData.post_content.globalOptions?.viewType == "imageAccordion" && (
+												{postData.post_content.globalOptions?.viewType == "imageAccordion" && (
 													<ImageAccordionEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
@@ -591,7 +589,7 @@ function Html(props) {
 														customerData={customerData}
 														setHelp={setHelp}
 													/>
-												)} */}
+												)}
 												{/* {postData.post_content.globalOptions?.viewType == "accordionMenu" && (
 													<ImageAccordionEdit
 														onChange={onChangeAccordion}

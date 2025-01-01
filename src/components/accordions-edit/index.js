@@ -217,17 +217,40 @@ function Html(props) {
 		setaccordionData(accordionDataX);
 	}, [labelIcon]);
 
-	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.icon = icon;
-		setaccordionData(accordionDataX);
-	}, [icon]);
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.icon = icon;
+	// 	setaccordionData(accordionDataX);
+	// }, [icon]);
+
+	// useEffect(() => {
+	// 	var accordionDataX = { ...accordionData };
+	// 	accordionDataX.iconToggle = iconToggle;
+	// 	setaccordionData(accordionDataX);
+	// }, [iconToggle]);
 
 	useEffect(() => {
-		var accordionDataX = { ...accordionData };
-		accordionDataX.iconToggle = iconToggle;
-		setaccordionData(accordionDataX);
-	}, [iconToggle]);
+		setaccordionData((prevData) => ({
+			...prevData,
+			icon,
+			iconToggle,
+		}));
+	}, [icon, iconToggle]);
+
+	const updateIconOptions = (icon, itemSrc) => ({
+		...icon,
+		options: {
+			...icon.options,
+			iconSrc: itemSrc,
+		},
+	});
+
+	const handleClick = (item) => {
+		seticon((prevIcon) => updateIconOptions(prevIcon, item.icon));
+		seticonToggle((prevIconToggle) =>
+			updateIconOptions(prevIconToggle, item.toggle)
+		);
+	};
 
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
@@ -3186,26 +3209,10 @@ function Html(props) {
 						<div className="flex flex-wrap gap-2  my-4">
 							{iconsList.map((item, index) => {
 								return (
-									<div className="flex flex-col  border border-solid border-slate-300"
+									<div
+										className="flex flex-col  border border-solid border-slate-300"
 										key={index}
-										onClick={() => {
-											var iconX = { ...icon };
-											var optionsX = {
-												...iconX.options,
-												iconSrc: item.icon,
-											};
-											iconX.options = optionsX;
-											seticon(iconX);
-
-											var iconToggleX = { ...iconToggle };
-											var optionsToggleX = {
-												...iconToggleX.options,
-												iconSrc: item.toggle,
-											};
-											iconToggleX.options = optionsToggleX;
-											seticonToggle(iconToggleX);
-										}}
-									>
+										onClick={() => handleClick(item)}>
 										<span
 											className={` flex items-center text-base justify-center p-2  ${item.icon}`}></span>
 										<span

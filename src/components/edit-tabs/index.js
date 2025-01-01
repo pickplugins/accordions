@@ -2179,23 +2179,25 @@ function Html(props) {
 									<div
 										className="flex flex-col gap-1 border border-solid border-slate-300"
 										key={index}
-										onClick={() => {
-											var iconX = { ...icon };
-											var optionsX = {
-												...iconX.options,
-												iconSrc: item.icon,
-											};
-											iconX.options = optionsX;
-											seticon(iconX);
+										// onClick={() => {
+										// 	console.log(item);
+										// 	var iconX = { ...icon };
+										// 	var optionsX = {
+										// 		...iconX.options,
+										// 		iconSrc: item.icon,
+										// 	};
+										// 	iconX.options = optionsX;
+										// 	seticon(iconX);
 
-											var iconToggleX = { ...iconToggle };
-											var optionsToggleX = {
-												...iconToggleX.options,
-												iconSrc: item.toggle,
-											};
-											iconToggleX.options = optionsToggleX;
-											seticonToggle(iconToggleX);
-										}}>
+										// 	var iconToggleX = { ...iconToggle };
+										// 	var optionsToggleX = {
+										// 		...iconToggleX.options,
+										// 		iconSrc: item.toggle,
+										// 	};
+										// 	iconToggleX.options = optionsToggleX;
+										// 	seticonToggle(iconToggleX);
+										// }}
+										onClick={() => handleClick(item)}>
 										<span
 											className={` flex items-center justify-center p-1 border-0 border-b border-solid border-b-slate-300 !text-[12px] ${item.icon}`}></span>
 										<span
