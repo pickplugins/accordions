@@ -243,17 +243,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}
 
 
-
-
-
-
-
-
-
-
-
-
-
 			// Next Previous
 			var tabsNextWrap = document.querySelector("#" + window.pgTabs.id + " .next ");
 			var tabsPrevWrap = document.querySelector("#" + window.pgTabs.id + " .prev ");
