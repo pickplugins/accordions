@@ -142,6 +142,15 @@ function Html(props) {
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+>>>>>>> 8d76befbb6b93ddce704209be5c321ac37d95490
 				{/* <div className={`${wrapper?.options?.class} `}> */}
 					{items?.map((i, index) => {
 						return (
