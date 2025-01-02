@@ -37236,7 +37236,8 @@ function Html(props) {
       }
     }).then(res => {
       setisLoading(false);
-      if (res?.post_content?.length == 0) {
+      console.log(res.post_content);
+      if (res.post_content == null) {
         res.post_content = _accordion_default_data__WEBPACK_IMPORTED_MODULE_15__["default"];
       }
       setpostData(res);
@@ -37579,7 +37580,11 @@ function Html(props) {
     setHelp: setHelp
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_12__["default"], {
     name: "edit"
+  }, postData?.ID == null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "py-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-3 bg-orange-400 p-3  text-white  text-center animate__animated animate__flash animate__repeat-2"
+  }, "Please select post from list.")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " "
   }, postData?.ID != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-4 p-3"
@@ -37643,7 +37648,8 @@ function Html(props) {
     onChange: onChangeAccordion,
     addNotifications: addNotifications,
     postData: postData,
-    customerData: customerData
+    customerData: customerData,
+    setHelp: setHelp
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full sticky top-0 overflow-y-scroll"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -38010,8 +38016,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/help.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/help.js");
 /* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-sortablejs */ "./node_modules/react-sortablejs/dist/index.js");
 /* harmony import */ var react_sortablejs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_sortablejs__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
@@ -38019,7 +38025,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _splidejs_react_splide__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @splidejs/react-splide */ "./node_modules/@splidejs/react-splide/dist/js/react-splide.esm.js");
-/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+/* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
 
 const {
   Component,
@@ -38035,24 +38042,36 @@ const {
 
 
 
+
 var myStore = wp.data.select("postgrid-shop");
 function Html(props) {
   if (!props.warn) {
     return null;
   }
   var addNotifications = props.addNotifications;
+  if (!props?.postData?.post_content?.globalOptions?.viewType) {
+    addNotifications({
+      title: "Opps item missing",
+      content: "Please select post first.",
+      type: "error"
+    });
+    return null;
+  }
   var onChange = props.onChange;
+  var setHelp = props.setHelp;
   var [postData, setpostData] = useState(props.postData); // Using the hook.
   var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
+  var [isLoading, setisLoading] = useState(false); // Using the hook.
 
   var [templates, settemplates] = useState([]); // Using the hook.
-  const [queryLayouts, setQueryLayouts] = useState({
+  const [queryLayouts, setqueryLayouts] = useState({
     keyword: "",
     price: "",
     viewType: postData.post_content.globalOptions.viewType == undefined ? "accordion" : postData.post_content.globalOptions.viewType,
     page: 1
   });
   useEffect(() => {
+    setisLoading(true);
     var requestData = {
       keyword: queryLayouts.keyword,
       page: queryLayouts.page,
@@ -38080,6 +38099,7 @@ function Html(props) {
             });
             settemplates(postsX);
           });
+          setisLoading(false);
         });
       }
     }).catch(_error => {
@@ -38089,7 +38109,7 @@ function Html(props) {
   }, []);
   var isProFeature = true;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "ml-5"
+    className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
@@ -38103,9 +38123,44 @@ function Html(props) {
         enable: true
       });
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"]
-  }))), postData.post_content.globalOptions?.viewType == "accordion" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, templates.map((preset, index) => {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-4  items-center hidden gap-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    value: queryLayouts.keyword,
+    placeholder: "Search...",
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]",
+    onChange: newVal => {
+      var queryLayoutsX = {
+        ...queryLayouts
+      };
+      queryLayoutsX.keyword = newVal;
+      setqueryLayouts(queryLayoutsX);
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: "",
+    value: queryLayouts.price,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Free/Pro", "accordions"),
+      value: ""
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Free", "accordions"),
+      value: "free"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Pro", "accordions"),
+      value: "pro"
+    }],
+    onChange: newVal => {
+      var queryLayoutsX = {
+        ...queryLayouts
+      };
+      queryLayoutsX.keyword = newVal;
+      setqueryLayouts(queryLayoutsX);
+    }
+  })), isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-center py-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, null)), postData.post_content.globalOptions?.viewType == "accordion" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, templates.map((preset, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "my-5 bg-slate-400 hover:bg-slate-500 p-3 rounded-sm cursor-pointer",
       title: "Click To Apply",
@@ -38257,12 +38312,14 @@ class AccordionsTemplates extends Component {
     var {
       postData,
       onChange,
-      addNotifications
+      addNotifications,
+      setHelp
     } = this.props;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       postData: postData,
       onChange: onChange,
       addNotifications: addNotifications,
+      setHelp: setHelp,
       warn: this.state.showWarning
     });
   }
@@ -55359,11 +55416,15 @@ class APIClient {
         if (signal)
             signal.addEventListener('abort', () => controller.abort());
         const timeout = setTimeout(() => controller.abort(), ms);
-        return (
-        // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
-        this.fetch.call(undefined, url, { signal: controller.signal, ...options }).finally(() => {
+        return (this.getRequestClient()
+            // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
+            .fetch.call(undefined, url, { signal: controller.signal, ...options })
+            .finally(() => {
             clearTimeout(timeout);
         }));
+    }
+    getRequestClient() {
+        return { fetch: this.fetch };
     }
     shouldRetry(response) {
         // Note this is not a standard header.
@@ -61443,7 +61504,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = '4.76.1'; // x-release-please-version
+const VERSION = '4.74.0'; // x-release-please-version
 //# sourceMappingURL=version.mjs.map
 
 /***/ })
