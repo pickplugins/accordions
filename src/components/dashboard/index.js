@@ -114,7 +114,10 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 
-			if (res?.post_content?.length == 0) {
+			console.log(res.post_content);
+
+
+			if (res.post_content == null) {
 				res.post_content = accordionDefaultData;
 			}
 
@@ -523,7 +526,11 @@ function Html(props) {
 								<PGtab name="edit">
 
 
-
+									{postData?.ID == null && (
+										<div className="py-3">
+											<div className="my-3 bg-orange-400 p-3  text-white  text-center animate__animated animate__flash animate__repeat-2">Please select post from list.</div>
+										</div>
+									)}
 
 									<div className=" ">
 										{postData?.ID != null && (
@@ -562,6 +569,9 @@ function Html(props) {
 															values=""></PGDropdown>
 													</PanelRow>
 												</div>
+
+
+
 
 
 												{postData.post_content.globalOptions?.viewType == "accordion" && (
@@ -621,6 +631,7 @@ function Html(props) {
 										addNotifications={addNotifications}
 										postData={postData}
 										customerData={customerData}
+										setHelp={setHelp}
 									/>
 								</PGtab>
 							</PGtabs>
