@@ -99,6 +99,10 @@ function Html(props) {
 	var panelWrapSelector = blockClass + " .tabs-panel";
 	var panelWrapActiveSelector = blockClass + " .tabs-panel-active";
 
+	var itemSelector = blockClass + " .image-accordion-item";
+	var contentWrapSelector = blockClass + " .image-accordion-content-wrap";
+	var imageSelector = blockClass + " .image-accordion-image";
+	var titleSelector = blockClass + " .image-accordion-title";
 
 	function getElementSelector(sudoScource, mainSelector) {
 		var elementSelector = mainSelector;
@@ -668,6 +672,31 @@ function Html(props) {
 
 		var panelWrapActiveCss = generateElementCss(accordionData.panelWrapActive, panelWrapActiveSelector);
 		Object.entries(panelWrapActiveCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+		var itemCss = generateElementCss(accordionData.item, itemSelector);
+		Object.entries(itemCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+		var contentWrapCss = generateElementCss(accordionData.contentWrap, contentWrapSelector);
+		Object.entries(contentWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+		var imageCss = generateElementCss(accordionData.image, imageSelector);
+		Object.entries(imageCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+		var titleCss = generateElementCss(accordionData.title, titleSelector);
+		Object.entries(titleCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
