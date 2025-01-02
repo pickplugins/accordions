@@ -70,6 +70,9 @@ const imageAccordionDefaultData = {
 			overflow: {
 				Desktop: "hidden",
 			},
+			transition: {
+				Desktop: "all 1s ease-in-out 0s",
+			},
 		},
 		hover: {
 			flexBasis: {
@@ -82,10 +85,18 @@ const imageAccordionDefaultData = {
 				Desktop: "1",
 			},
 		},
+		"hover div:nth-child(2)": {
+			transform: {
+				Desktop: "translateY(-50%) ",
+			},
+			top: {
+				Desktop: "50%",
+			},
+		},
 	},
 	contentWrap: {
 		options: {
-			class: "content-wrap",
+			class: "image-accordion-content-wrap",
 		},
 		styles: {
 			backgroundColor: {
@@ -104,7 +115,10 @@ const imageAccordionDefaultData = {
 				Desktop: "80%",
 			},
 			top: {
-				Desktop: "-200px",
+				Desktop: "200%",
+			},
+			transition: {
+				Desktop: "all 1s ease-in-out 0s",
 			},
 		},
 	},
@@ -112,7 +126,7 @@ const imageAccordionDefaultData = {
 		options: {
 			content: "",
 			tag: "div",
-			class: "content",
+			class: "accordion-content",
 		},
 		styles: {},
 	},
@@ -120,13 +134,13 @@ const imageAccordionDefaultData = {
 		options: {
 			content: "",
 			tag: "div",
-			class: "title",
+			class: "image-accordion-title",
 		},
 		styles: {},
 	},
 	image: {
 		options: {
-			class: "image",
+			class: "image-accordion-image",
 		},
 		styles: {},
 	},

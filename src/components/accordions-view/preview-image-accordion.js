@@ -1,6 +1,5 @@
 const { Component, RawHTML, useState, useEffect } = wp.element;
 
-
 var myStore = wp.data.select("postgrid-shop");
 
 function Html(props) {
@@ -66,8 +65,6 @@ function Html(props) {
 	// const [iconCollapseAllHtml, seticonCollapseAllHtml] = useState("");
 	// const [activeTab, setactiveTab] = useState(0);
 
-
-
 	const copyData = (data) => {
 		navigator.clipboard
 			.writeText(data)
@@ -79,7 +76,7 @@ function Html(props) {
 					type: "success",
 				});
 			})
-			.catch((err) => { });
+			.catch((err) => {});
 	};
 
 	useEffect(() => {
@@ -91,9 +88,7 @@ function Html(props) {
 		//setitems(postData.post_content.items);
 	}, [postData]);
 
-
 	useEffect(() => {
-
 		setglobalOptions(accordionData.globalOptions);
 
 		setwrapper(accordionData.wrapper);
@@ -103,11 +98,7 @@ function Html(props) {
 		setcontent(accordionData.content);
 		settitle(accordionData.title);
 		setimage(accordionData.image);
-
-
 	}, [accordionData]);
-
-
 
 	useEffect(() => {
 		//var accordionDataX = { ...accordionData };
@@ -119,47 +110,31 @@ function Html(props) {
 		setpleaseUpdateX(pleaseUpdate);
 	}, [pleaseUpdate]);
 
-
-
-
-
-
-
-
 	var [active, setactive] = useState(9999);
 
 	return (
-
-
-
 		<div className="px-10 py-10">
-
-
 			{/* PreviewImageAccordion */}
 			{JSON.stringify(accordionData)}
-			<div id={`accordions-${id}`} className={`${wrapper?.options?.class} `}>
-
-
-
-
-
-
-
-
-
-
-				{/* <div className={`${wrapper?.options?.class} `}> */}
+			<div
+				id={`accordions-${id}`}
+				className={`image-accordion-wrapper ${wrapper?.options?.class} `}>
 				{items?.map((i, index) => {
 					return (
-						<div key={index} className={`${item?.options?.class} `}>
-							<div className={`${image?.options?.class} `}>
-								<img src={i.image.url} />
-							</div>
-							<div className={`${contentWrap?.options?.class} `}>
-								<div className={`${title?.options?.class} `}>
+						<div
+							key={index}
+							className={`image-accordion-item ${item?.options?.class} `}>
+							<img
+								src={i.image.url}
+								className={`image-accordion-image ${image?.options?.class}`}
+							/>
+							<div
+								className={`image-accordion-content-wrap ${contentWrap?.options?.class}`}>
+								<div
+									className={`image-accordion-title ${title?.options?.class}`}>
 									{i.title}
 								</div>
-								<div className={`${content?.options?.class} `}>
+								<div className={`accordion-content ${content?.options?.class}`}>
 									{i.content}
 								</div>
 							</div>
@@ -167,13 +142,7 @@ function Html(props) {
 					);
 				})}
 			</div>
-
-
-			{/* </div> */}
 		</div>
-
-
-
 	);
 }
 
