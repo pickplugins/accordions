@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		panelWrapInAnimation: "",
 		panelWrapOutAnimation: "",
 		panelWrapAnimationDuration: 1000,
+		autoPlay: false,
+		autoPlayDelay: 0,
 		listenUrlHash: () => {
 			var hash = window.location.hash;
 			if (hash.length == 0) return;
@@ -28,18 +30,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			if (hashWrap != null) {
 				var index = hashWrap.getAttribute("index")
 
-				console.log(index);
-
-
 				window.pgTabs.switchNavs(index)
 			}
 
 
 		},
-		switchNavs: (index, oldIndex) => {
-
-			console.log(oldIndex);
-
+		switchNavs: (index, oldIndex = 0) => {
 
 			var oldtabPanelByattr = document.querySelector(`.tabs-panel[data-tab-id="pg${oldIndex}"]`);
 
@@ -148,6 +144,74 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var nextIndex = (navActiveIndex - 1 < 0) ? max : (navActiveIndex - 1);
 			window.pgTabs.switchNavs(nextIndex);
 		},
+		autoPlayRun: (args) => {
+			var autoPlayOrder = (args.autoPlayOrder);
+			var autoPlayDelay = parseInt(args.autoPlayDelay);
+
+			var accordionHeaders = document.querySelectorAll("#" + window.pgTabs.id + " .accordion-header");
+
+
+			let currentIndex = 0;
+
+			const items = [1, 2, 3];
+			//let currentIndex = 0;
+
+			function loopThroughItems() {
+				currentIndex = (currentIndex + 1) % items.length; // Move to the next index (looping back to 0 after reaching the end)
+				window.pgTabs.switchNavs(currentIndex)
+				setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
+
+
+			}
+
+
+
+			currentIndex = items.length;
+			function loopThroughItemsReverse() {
+
+
+				currentIndex = (currentIndex - 1 + (items.length)) % items.length; // Move to the previous index, wrap around
+
+				setTimeout(loopThroughItemsReverse, autoPlayDelay); // Recursively call after 1 second
+
+				window.pgTabs.switchNavs(currentIndex)
+			}
+
+
+			function loopThroughItemsRandom() {
+				const currentIndex = Math.floor(Math.random() * items.length);
+
+				//currentIndex = (currentIndex + 1) % items.length; // Move to the next index
+				setTimeout(loopThroughItemsRandom, autoPlayDelay); // Recursively call after 1 second
+
+				window.pgTabs.switchNavs(currentIndex)
+			}
+
+
+
+
+
+
+
+			// Start the loop
+
+			if (autoPlayOrder == "topToBottom") {
+				loopThroughItems();
+			}
+			if (autoPlayOrder == "bottomToTop") {
+				loopThroughItemsReverse();
+			}
+			if (autoPlayOrder == "random") {
+				loopThroughItemsRandom();
+			}
+
+
+
+
+
+
+
+		},
 		initTabs: ({ selector = "[data-pgTabs]" }) => {
 			// Tabs Wrapper Selectors
 			var pgTabs = document.querySelectorAll(selector);
@@ -168,6 +232,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					var lazyLoad = tabDataObject.lazyLoad;
 					var navsIndex = tabDataObject.navsIndex;
 
+					var autoPlay = tabDataObject.autoPlay;
+					var autoPlayTimeout = parseInt(tabDataObject.autoPlayTimeout);
+					var autoPlayDelay = tabDataObject.autoPlayDelay;
+					var autoPlayOrder = tabDataObject.autoPlayOrder;
+
 					window.pgTabs.id = pgTabId;
 					window.pgTabs.navsIndex = navsIndex;
 					window.pgTabs.navActiveId = activeTab;
@@ -181,15 +250,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						pgTab.style.display = "block";
 					}
 
-					console.log(navActiveIndex);
+
+					if (autoPlay) {
+
+						setTimeout(() => {
+
+							window.pgTabs.autoPlayRun({ autoPlayDelay, autoPlayOrder });
+
+						}, autoPlayTimeout)
+
+					} else {
+						window.pgTabs.switchNavs(navActiveIndex);
+
+					}
 
 
-					window.pgTabs.switchNavs(navActiveIndex);
-
-
-
-
-					//
 
 
 					var pgTabId = pgTab.getAttribute("id");
@@ -205,7 +280,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 						if (activeTab == tabIdX) {
-
 							if (iconToggle[index] != undefined) {
 								iconToggle[index].style.display = "inline-block";
 							}
@@ -241,17 +315,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				});
 
 			}
-
-
-
-
-
-
-
-
-
-
-
 
 
 			// Next Previous

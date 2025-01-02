@@ -128,7 +128,7 @@ function accordions_builder_tabs($post_id, $accordionData)
     $iconToggleLibrary = isset($iconToggleOptions['library']) ? $iconToggleOptions['library'] : "fontAwesome";
     $iconToggleSrcType = isset($iconToggleOptions['srcType']) ? $iconToggleOptions['srcType'] : "";
     $iconToggleSrc = !empty($iconToggleOptions['iconSrc']) ? $iconToggleOptions['iconSrc'] : "";
-    $iconToggleHtml = !empty($iconToggleSrc) ? '<span class="nav-icon-toggle ' . $iconToggleSrc . '"></span>' : '';
+    $iconToggleHtml = !empty($iconToggleSrc) ? '<span  class="nav-icon-toggle ' . $iconToggleSrc . '"></span>' : '';
 
 
     if ($iconLibrary == 'fontAwesome') {
@@ -193,7 +193,7 @@ function accordions_builder_tabs($post_id, $accordionData)
     ];
 
 
-    $activeTab = 1;
+    $activeTab = 999;
     $labelCounterEnable = false;
 ?>
     <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> " data-pgTabs="<?php echo esc_attr(json_encode($accordionDataAttr)); ?>" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">

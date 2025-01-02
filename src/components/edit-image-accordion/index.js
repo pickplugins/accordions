@@ -810,7 +810,7 @@ function Html(props) {
 															content: "You just pasted items, Now go to edit.",
 															type: "success",
 														});
-													} catch (error) {}
+													} catch (error) { }
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
 											</span>
@@ -831,8 +831,8 @@ function Html(props) {
 																	type: "success",
 																});
 															})
-															.catch((err) => {});
-													} catch (error) {}
+															.catch((err) => { });
+													} catch (error) { }
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
 											</span>
@@ -1686,7 +1686,7 @@ function Html(props) {
 																			return updatedItems;
 																		});
 																	}}
-																	onClose={() => {}}
+																	onClose={() => { }}
 																	allowedTypes={["image"]}
 																	value={item?.image?.id}
 																	render={({ open }) => {
@@ -1957,7 +1957,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2035,7 +2035,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2112,7 +2112,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2184,7 +2184,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2250,7 +2250,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2316,7 +2316,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",

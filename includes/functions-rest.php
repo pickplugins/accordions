@@ -1547,7 +1547,6 @@ class AccordionsRest
 
 
 
-			error_log(serialize($posts));
 
 
 
