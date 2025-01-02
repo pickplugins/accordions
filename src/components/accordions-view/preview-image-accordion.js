@@ -103,7 +103,7 @@ function Html(props) {
 		setcontent(accordionData.content);
 		settitle(accordionData.title);
 		setimage(accordionData.image);
-		
+
 
 	}, [accordionData]);
 
@@ -135,32 +135,38 @@ function Html(props) {
 		<div className="px-10 py-10">
 
 
-				{/* PreviewImageAccordion */}
-				{JSON.stringify(accordionData)}
+			{/* PreviewImageAccordion */}
+			{JSON.stringify(accordionData)}
 			<div id={`accordions-${id}`} className={`${wrapper?.options?.class} `}>
 
 
 
 
+
+
+
+
+
+
 				{/* <div className={`${wrapper?.options?.class} `}> */}
-					{items?.map((i, index) => {
-						return (
-							<div key={index} className={`${item?.options?.class} `}>
-								<div className={`${image?.options?.class} `}>
-									<img src={i.image.url} />
+				{items?.map((i, index) => {
+					return (
+						<div key={index} className={`${item?.options?.class} `}>
+							<div className={`${image?.options?.class} `}>
+								<img src={i.image.url} />
+							</div>
+							<div className={`${contentWrap?.options?.class} `}>
+								<div className={`${title?.options?.class} `}>
+									{i.title}
 								</div>
-								<div className={`${contentWrap?.options?.class} `}>
-									<div className={`${title?.options?.class} `}>
-										{i.title}
-									</div>
-									<div className={`${content?.options?.class} `}>
-										{i.content}
-									</div>
+								<div className={`${content?.options?.class} `}>
+									{i.content}
 								</div>
 							</div>
-						);
-					})}
-				</div>
+						</div>
+					);
+				})}
+			</div>
 
 
 			{/* </div> */}
