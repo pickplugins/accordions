@@ -18,6 +18,7 @@ import {
 	brush,
 	close,
 	copy,
+	gallery,
 	help,
 	menu,
 	page,
@@ -746,7 +747,7 @@ function Html(props) {
 
 								{globalOptions?.itemSource == "manual" && (
 									<>
-										<div className="flex items-center gap-2">
+										<div className="flex items-center gap-1">
 											<span>
 												<MediaUpload
 													className="bg-gray-700 hover:bg-gray-600"
@@ -777,10 +778,10 @@ function Html(props) {
 													multiple="add"
 													render={({ open }) => (
 														<div
-															className="pg-font cursor-pointer py-1 px-2 flex items-center gap-1 capitalize tracking-wide bg-gray-700 text-white font-medium rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-700 "
+															className="flex items-center gap-2 bg-slate-700 text-white px-2 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 															onClick={open}>
 															<Icon
-																icon={addTemplate}
+																icon={gallery}
 																className="fill-white "
 																size={14}
 															/>
@@ -790,7 +791,7 @@ function Html(props) {
 												/>
 											</span>
 											<span
-												className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+												className="flex items-center gap-2 bg-slate-700 text-white px-2 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 												title="Click to paste"
 												onClick={async () => {
 													try {
@@ -810,12 +811,12 @@ function Html(props) {
 															content: "You just pasted items, Now go to edit.",
 															type: "success",
 														});
-													} catch (error) { }
+													} catch (error) {}
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
 											</span>
 											<span
-												className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+												className="flex items-center gap-2 bg-slate-700 text-white px-2 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 												title="Click to copy"
 												onClick={() => {
 													try {
@@ -831,14 +832,14 @@ function Html(props) {
 																	type: "success",
 																});
 															})
-															.catch((err) => { });
-													} catch (error) { }
+															.catch((err) => {});
+													} catch (error) {}
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
 											</span>
 										</div>
 										<div
-											className="flex items-center gap-2 bg-slate-700 text-white px-3 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
+											className="flex items-center gap-2 bg-slate-700 text-white px-2 py-2 rounded-sm cursor-pointer hover:bg-slate-600"
 											onClick={(ev) => {
 												var itemsX = [...items];
 
@@ -871,7 +872,7 @@ function Html(props) {
 										</div>
 										<div className=" tracking-wide ">
 											<div
-												className="py-2 px-4 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+												className="py-2 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
 												onClick={(ev) => {
 													ev.preventDefault();
 													ev.stopPropagation();
@@ -1686,7 +1687,7 @@ function Html(props) {
 																			return updatedItems;
 																		});
 																	}}
-																	onClose={() => { }}
+																	onClose={() => {}}
 																	allowedTypes={["image"]}
 																	value={item?.image?.id}
 																	render={({ open }) => {
@@ -1957,7 +1958,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2035,7 +2036,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2112,7 +2113,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2184,7 +2185,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2250,7 +2251,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2316,7 +2317,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
