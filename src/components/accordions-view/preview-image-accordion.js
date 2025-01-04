@@ -115,7 +115,7 @@ function Html(props) {
 	return (
 		<div className="px-10 py-10">
 			{/* PreviewImageAccordion */}
-			{JSON.stringify(accordionData)}
+			{/* {JSON.stringify(accordionData)} */}
 			<div
 				id={`accordions-${id}`}
 				className={`image-accordion-wrapper ${wrapper?.options?.class} `}>
