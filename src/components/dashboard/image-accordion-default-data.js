@@ -136,13 +136,27 @@ const imageAccordionDefaultData = {
 			tag: "div",
 			class: "image-accordion-title",
 		},
-		styles: {},
+		styles: {
+			margin: {
+				Desktop: "0px 0px 12px 0px",
+			},
+		},
 	},
 	image: {
 		options: {
 			class: "image-accordion-image",
 		},
-		styles: {},
+		styles: {
+			height: {
+				Desktop: "100%",
+			},
+			width: {
+				Desktop: "100%",
+			},
+			objectFit: {
+				Desktop: "cover",
+			},
+		},
 	},
 };
 
