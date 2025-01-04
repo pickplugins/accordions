@@ -30,6 +30,7 @@ import {
 } from "@wordpress/components";
 import apiFetch from "@wordpress/api-fetch";
 import { Splide, SplideTrack } from "@splidejs/react-splide";
+import PGinputText from "../input-text";
 
 import PGDropdown from '../../components/dropdown'
 
@@ -42,17 +43,30 @@ function Html(props) {
 		return null;
 	}
 
-
-
 	var addNotifications = props.addNotifications;
+
+
+	if (!props?.postData?.post_content?.globalOptions?.viewType) {
+		addNotifications({
+			title: "Opps item missing",
+			content: "Please select post first.",
+			type: "error",
+		});
+		return null;
+	}
+
+
+
 	var onChange = props.onChange;
+	var setHelp = props.setHelp;
 
 	var [postData, setpostData] = useState(props.postData); // Using the hook.
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
+	var [isLoading, setisLoading] = useState(false); // Using the hook.
 
 
 	var [templates, settemplates] = useState([]); // Using the hook.
-	const [queryLayouts, setQueryLayouts] = useState({
+	const [queryLayouts, setqueryLayouts] = useState({
 		keyword: "",
 		price: "",
 		viewType: postData.post_content.globalOptions.viewType == undefined ? "accordion" : postData.post_content.globalOptions.viewType,
@@ -62,7 +76,7 @@ function Html(props) {
 
 
 	useEffect(() => {
-
+		setisLoading(true);
 		var requestData = {
 			keyword: queryLayouts.keyword,
 			page: queryLayouts.page,
@@ -101,6 +115,7 @@ function Html(props) {
 							settemplates(postsX);
 
 						})
+						setisLoading(false);
 
 
 					});
@@ -122,7 +137,7 @@ function Html(props) {
 
 
 	return (
-		<div className="ml-5">
+		<div className="">
 			<div className="p-3">
 				<p className="flex items-center gap-2">
 					How templates work.
@@ -139,6 +154,43 @@ function Html(props) {
 					</span>
 				</p>
 
+				<div className="my-4  items-center hidden gap-3">
+					<PGinputText
+						value={queryLayouts.keyword}
+						placeholder={"Search..."}
+						className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[200px]"
+						onChange={(newVal) => {
+							var queryLayoutsX = { ...queryLayouts };
+							queryLayoutsX.keyword = newVal;
+							setqueryLayouts(queryLayoutsX);
+
+						}}
+					/>
+					<SelectControl
+						label=""
+						value={queryLayouts.price}
+						options={[
+							{
+								label: __("Free/Pro", "accordions"),
+								value: "",
+							},
+							{ label: __("Free", "accordions"), value: "free" },
+							{ label: __("Pro", "accordions"), value: "pro" },
+
+						]}
+						onChange={(newVal) => {
+							var queryLayoutsX = { ...queryLayouts };
+							queryLayoutsX.keyword = newVal;
+							setqueryLayouts(queryLayoutsX);
+						}}
+					/>
+
+
+				</div>
+
+				{isLoading && (
+					<div className='text-center py-3'><Spinner /></div>
+				)}
 
 
 
@@ -396,13 +448,15 @@ class AccordionsTemplates extends Component {
 
 
 	render() {
-		var { postData, onChange, addNotifications } = this.props;
+		var { postData, onChange, addNotifications, setHelp } = this.props;
 
 		return (
 			<Html
 				postData={postData}
 				onChange={onChange}
 				addNotifications={addNotifications}
+				setHelp={setHelp}
+
 				warn={this.state.showWarning}
 			/>
 		);

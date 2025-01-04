@@ -402,7 +402,9 @@ function accordions_builder_accordion($post_id, $accordionData)
             <<?php echo tag_escape($contentTag); ?> class="<?php echo esc_attr($contentClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false" <?php echo ($itemActive) ? 'style="height: auto; overflow: hidden; display: block;"' : ""; ?>>
                 <?php //echo wp_kses_post($contentText); 
                 ?>
-                <?php echo ($contentText); ?>
+                <?php echo wp_unslash(wp_specialchars_decode($contentText, ENT_QUOTES)) ?>
+                <?php //echo ($contentText); 
+                ?>
             </<?php echo tag_escape($contentTag); ?>>
 
         <?php

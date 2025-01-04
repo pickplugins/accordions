@@ -30,12 +30,15 @@ import PGDropdown from "../dropdown";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 import PGinputTextarea from "../input-textarea";
+import WPEditor from "../input-wp-editor";
+
 import InputToggle from "../input-toggle";
 import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
-
+import { popupEntranceAnimateBasic } from "../../inAnimation";
+import { popupCloseAnimateBasic } from "../../outAnimation";
 var myStore = wp.data.select("postgrid-shop");
 
 function Html(props) {
@@ -548,20 +551,20 @@ function Html(props) {
 	};
 	var itemSources = {
 		manual: { label: "Manual", value: "manual" },
-		easyAccordion: {
-			label: "Easy Accordion - FAQ Group",
-			value: "easyAccordion",
-		},
-		posts: {
-			label: "Posts",
-			value: "posts",
-			isPro: customerData.isPro ? false : true,
-		},
-		terms: {
-			label: "Terms",
-			value: "terms",
-			isPro: customerData.isPro ? false : true,
-		},
+		// easyAccordion: {
+		// 	label: "Easy Accordion - FAQ Group",
+		// 	value: "easyAccordion",
+		// },
+		// posts: {
+		// 	label: "Posts",
+		// 	value: "posts",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
+		// terms: {
+		// 	label: "Terms",
+		// 	value: "terms",
+		// 	isPro: customerData.isPro ? false : true,
+		// },
 	};
 
 	function generate3Digit() {
@@ -752,6 +755,10 @@ function Html(props) {
 												<MediaUpload
 													className="bg-gray-700 hover:bg-gray-600"
 													onSelect={(media) => {
+
+
+														console.log(media);
+
 														const newItems = media.map((item) => ({
 															isActive: false,
 															image: {
@@ -759,9 +766,9 @@ function Html(props) {
 																url: item.url,
 																altText: item.alt || item.title || "",
 															},
-															link: "",
-															title: "",
-															content: "",
+															link: item.link,
+															title: item.title,
+															content: item.description,
 														}));
 
 														// Update the state by merging existing items with new ones
@@ -770,7 +777,7 @@ function Html(props) {
 															...newItems,
 														]);
 													}}
-													onClose={() => {}}
+													onClose={() => { }}
 													allowedTypes={["image"]}
 													value={items.map((item) => {
 														return item.id;
@@ -783,9 +790,9 @@ function Html(props) {
 															<Icon
 																icon={gallery}
 																className="fill-white "
-																size={14}
+																size={20}
 															/>
-															{__("Add", "post-grid")}
+
 														</div>
 													)}
 												/>
@@ -811,7 +818,7 @@ function Html(props) {
 															content: "You just pasted items, Now go to edit.",
 															type: "success",
 														});
-													} catch (error) {}
+													} catch (error) { }
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
 											</span>
@@ -832,8 +839,8 @@ function Html(props) {
 																	type: "success",
 																});
 															})
-															.catch((err) => {});
-													} catch (error) {}
+															.catch((err) => { });
+													} catch (error) { }
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
 											</span>
@@ -844,21 +851,14 @@ function Html(props) {
 												var itemsX = [...items];
 
 												itemsX.push({
-													active: 0,
-													hideOnSchema: 0,
-													headerLabelText: "",
-													headerLabelSlug: "",
-													headerLabelToggledText: "",
-													contentText: "",
-
-													labelIcon: {
-														options: {
-															library: "fontAwesome",
-															srcType: "class",
-															iconSrc: "",
-														},
-														styles: {},
+													image: {
+														id: "",
+														url: "",
+														altText: "",
 													},
+													link: "",
+													title: "",
+													content: "",
 												});
 												setitems(itemsX);
 
@@ -870,176 +870,7 @@ function Html(props) {
 											}}>
 											<Icon icon={addCard} fill="#fff" size="20" />
 										</div>
-										<div className=" tracking-wide ">
-											<div
-												className="py-2 px-2 cursor-pointer  capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-												onClick={(ev) => {
-													ev.preventDefault();
-													ev.stopPropagation();
 
-													if (isProFeature) {
-														addNotifications({
-															title: "Opps its pro!",
-															content:
-																"This feature only avilable in premium version",
-															type: "error",
-														});
-														return;
-													}
-
-													setAIWriter(!AIWriter);
-												}}>
-												AI
-											</div>
-											{AIWriter && (
-												<Popover position="bottom right">
-													<div className="w-[800px] p-3 relative">
-														<span
-															className="cursor-pointer px-1 bg-red-500 hover:bg-red-700 hover:text-white absolute top-0 right-0"
-															onClick={(ev) => {
-																ev.preventDefault();
-																ev.stopPropagation();
-																setAIWriter(!AIWriter);
-															}}>
-															<Icon fill={"#fff"} icon={close} />
-														</span>
-
-														<PGcssOpenaiPrompts
-															value={""}
-															formattedPrompt={formattedPrompt}
-															promptsAgs={{
-																action: "write",
-																aiModel: "gpt-4-turbo",
-																objective: "generateFAQ",
-															}}
-															autoUpdate={AIautoUpdate}
-															onResponseLoaded={(value, autoUpdate) => {
-																// if (autoUpdate) {
-																// 	var options = { ...text.options, content: value };
-																// 	setAttributes({ text: { ...text, options: options } });
-																// }
-															}}
-															clickHandle={(value, action) => {
-																var valueObj = JSON.parse(value);
-
-																if (action == "prepend") {
-																	var itemsX = [...items];
-
-																	var faqX = [];
-
-																	valueObj.map((item) => {
-																		var answer = item.answer;
-																		var question = item.question;
-
-																		faqX.push({
-																			active: 0,
-																			hideOnSchema: 0,
-																			headerLabelText: question,
-																			headerLabelSlug: "",
-
-																			headerLabelToggledText: "",
-																			contentText: answer,
-																			labelIcon: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: "",
-																				},
-																				styles: {},
-																			},
-																		});
-																	});
-
-																	setitems([...faqX, ...itemsX]);
-
-																	addNotifications({
-																		title: "Items append",
-																		content:
-																			"Items append, You can customize now.",
-																		type: "success",
-																	});
-																}
-																if (action == "append") {
-																	var itemsX = [...items];
-
-																	var faqX = [];
-
-																	valueObj.map((item) => {
-																		var answer = item.answer;
-																		var question = item.question;
-
-																		faqX.push({
-																			active: 0,
-																			hideOnSchema: 0,
-																			headerLabelText: question,
-																			headerLabelSlug: "",
-
-																			headerLabelToggledText: "",
-																			contentText: answer,
-																			labelIcon: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: "",
-																				},
-																				styles: {},
-																			},
-																		});
-																	});
-
-																	setitems([...itemsX, ...faqX]);
-
-																	addNotifications({
-																		title: "Items Append",
-																		content:
-																			"Items append, You can customize now.",
-																		type: "success",
-																	});
-																}
-																if (action == "replace") {
-																	var itemsX = [...items];
-
-																	var faqX = [];
-
-																	valueObj.map((item) => {
-																		var answer = item.answer;
-																		var question = item.question;
-
-																		faqX.push({
-																			active: 0,
-																			hideOnSchema: 0,
-																			headerLabelText: question,
-																			headerLabelSlug: "",
-																			headerLabelToggledText: "",
-																			contentText: answer,
-																			labelIcon: {
-																				options: {
-																					library: "fontAwesome",
-																					srcType: "class",
-																					iconSrc: "",
-																				},
-																				styles: {},
-																			},
-																		});
-																	});
-
-																	setitems(faqX);
-
-																	addNotifications({
-																		title: "Items Added",
-																		content:
-																			"You just added an item, Now go to edit.",
-																		type: "success",
-																	});
-																}
-
-																//setAttributes({ itemsX: { ...itemsX, items: itemx } });
-															}}
-														/>
-													</div>
-												</Popover>
-											)}
-										</div>
 									</>
 								)}
 							</div>
@@ -1583,6 +1414,18 @@ function Html(props) {
 														}}>
 														<div>{item?.title}</div>
 														<div className="flex items-center gap-2">
+															{item?.image?.url && (
+																<div className="w-10 h-9 overflow-hidden">
+																	<img
+																		src={item?.image?.url}
+																		alt=""
+																		className="cursor-pointer w-full   "
+																		onClick={() => {
+																			open();
+																		}}
+																	/>
+																</div>
+															)}
 															<span className="handle  cursor-pointer bg-gray-700 hover:bg-gray-600 hover:text-white px-1 py-1">
 																<Icon size="20" fill={"#fff"} icon={menu} />
 															</span>
@@ -1649,6 +1492,62 @@ function Html(props) {
 																/>
 															</div>
 															<div className="mb-3">
+																{/* <RichText
+																	placeholder="Write Header Text..."
+																	className="bg-slate-100 p-3 "
+																	tagName={"div"}
+																	value={item?.contentText}
+
+																	onChange={(content) => {
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				contentText: content,
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																/> */}
+
+																<WPEditor
+																	placeholder="Write Header Text..."
+																	editorId={`content-${index}-${generate3Digit()}`}
+																	className={`bg-slate-100 p-3 min-h-24 w-full`}
+																	value={item?.contentText}
+																	onChange={(content) => {
+																		content = content.replace(/[\r\n]+/g, '');
+																		//var content = JSON.stringify(content);
+																		console.log((content));
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				contentText: (content),
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																/>
+
+
+
+
+
+
+
+
+															</div>
+
+
+
+
+
+
+
+
+
+															{/* <div className="mb-3">
 																<PGinputTextarea
 																	placeholder="Write Header Text..."
 																	id={`content-${index}-${generate3Digit()}`}
@@ -1665,7 +1564,7 @@ function Html(props) {
 																		});
 																	}}
 																/>
-															</div>
+															</div> */}
 															<div className="flex my-5 justify-between items-center ">
 																<label
 																	className="w-[400px]"
@@ -1687,7 +1586,7 @@ function Html(props) {
 																			return updatedItems;
 																		});
 																	}}
-																	onClose={() => {}}
+																	onClose={() => { }}
 																	allowedTypes={["image"]}
 																	value={item?.image?.id}
 																	render={({ open }) => {
@@ -1789,7 +1688,7 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Tabs Settings"
+						title="Settings"
 						initialOpen={false}>
 						<div className="py-3">
 							<PanelRow>
@@ -1827,37 +1726,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Stats{" "}
-									<span
-										className="cursor-pointer"
-										title="Click to know more"
-										onClick={() => {
-											setHelp({
-												id: "statsSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
 
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.stats}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.stats = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
 
 							<PanelRow>
 								<label htmlFor="">Active Event</label>
@@ -1872,7 +1741,6 @@ function Html(props) {
 											label: __("Mouseover", "accordions"),
 											value: "mouseover",
 										},
-										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1893,7 +1761,6 @@ function Html(props) {
 											label: __("Mouseover", "accordions"),
 											value: "mouseover",
 										},
-										{ label: __("Focus", "accordions"), value: "focus" },
 									]}
 									onChange={(newVal) => {
 										var globalOptionsX = { ...globalOptions };
@@ -1903,51 +1770,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 
-							<PanelRow>
-								<label htmlFor="" className="flex gap-2 items-center">
-									Animation Name{" "}
-									<span
-										className="cursor-pointer"
-										title="Click to know more"
-										onClick={() => {
-											setHelp({
-												id: "animationSetting",
-												enable: true,
-											});
-										}}>
-										<Icon icon={help} />
-									</span>
-								</label>
-								<SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.animationName}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.animationName = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/>
-							</PanelRow>
-							{globalOptions?.animationName && (
-								<PanelRow>
-									<label htmlFor="">Animation Duration</label>
-									<PGinputText
-										className="max-w-[140px]"
-										label=""
-										value={globalOptions?.animationDuration}
-										onChange={(newVal) => {
-											var globalOptionsX = { ...globalOptions };
-											globalOptionsX.animationDuration = newVal;
-											setglobalOptions(globalOptionsX);
-										}}
-									/>
-								</PanelRow>
-							)}
+
 						</div>
 					</PanelBody>
 					<PanelBody
@@ -1958,7 +1781,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2030,13 +1853,13 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Content Wrappper"
+						title="Content Wrapper"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2068,6 +1891,84 @@ function Html(props) {
 												},
 											};
 											setcontentWrap(optionsX);
+										}}
+									/>
+								</div>
+
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										IN Animation
+									</label>
+
+									<PGDropdown
+										position="bottom right"
+										variant="secondary"
+										buttonTitle={
+											popupEntranceAnimateBasic[contentWrap?.options?.inAnimation] ==
+												undefined
+												? __("Choose", "accordions")
+												: popupEntranceAnimateBasic[contentWrap?.options?.inAnimation]
+													.label
+										}
+										options={popupEntranceAnimateBasic}
+										onChange={(newVal) => {
+											var optionsX = {
+												...contentWrap,
+												options: {
+													...contentWrap?.options,
+													inAnimation: newVal.value,
+												},
+											};
+											setcontentWrap(optionsX);
+										}}
+										values=""></PGDropdown>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										OUT Animation
+									</label>
+
+									<PGDropdown
+										position="bottom right"
+										variant="secondary"
+										buttonTitle={
+											popupCloseAnimateBasic[contentWrap?.options?.outAnimation] ==
+												undefined
+												? __("Choose", "accordions")
+												: popupCloseAnimateBasic[contentWrap?.options?.outAnimation]
+													.label
+										}
+										options={popupCloseAnimateBasic}
+										onChange={(newVal) => {
+											var optionsX = {
+												...contentWrap,
+												options: {
+													...contentWrap?.options,
+													outAnimation: newVal.value,
+												},
+											};
+											setcontentWrap(optionsX);
+										}}
+										values=""></PGDropdown>
+								</PanelRow>
+
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Animation duration", "accordions")}
+									</label>
+									<PGinputText
+										value={contentWrap?.options?.animationDuration}
+										placeholder={"1000"}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[200px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...contentWrap,
+												options: {
+													...contentWrap?.options,
+													animationDuration: newVal,
+												},
+											};
+											setcontent(optionsX);
 										}}
 									/>
 								</div>
@@ -2105,78 +2006,7 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
-					<PanelBody
-						className="font-medium text-slate-900 "
-						title="Content"
-						initialOpen={false}>
-						<PGtabs
-							activeTab="options"
-							orientation="horizontal"
-							activeClass="active-tab"
-							onSelect={(tabName) => {}}
-							tabs={[
-								{
-									name: "options",
-									title: "Options",
-									icon: settings,
-									className: "tab-settings",
-								},
-								{
-									name: "styles",
-									title: "Styles",
-									icon: brush,
-									className: "tab-style",
-								},
-							]}>
-							<PGtab name="options">
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Class", "accordions")}
-									</label>
-									<PGinputText
-										value={content?.options?.class}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...content,
-												options: {
-													...content?.options,
-													class: newVal,
-												},
-											};
-											setcontent(optionsX);
-										}}
-									/>
-								</div>
-							</PGtab>
-							<PGtab name="styles">
-								<PGStyles
-									obj={content}
-									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(
-											sudoScource,
-											newVal,
-											attr,
-											content,
-											setcontent
-										)
-									}
-									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, content, setcontent)
-									}
-									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, content, setcontent)
-									}
-									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, content, setcontent)
-									}
-									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, content, setcontent)
-									}
-								/>
-							</PGtab>
-						</PGtabs>
-					</PanelBody>
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Item"
@@ -2185,7 +2015,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2251,7 +2081,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2311,13 +2141,85 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
+						title="Content"
+						initialOpen={false}>
+						<PGtabs
+							activeTab="options"
+							orientation="horizontal"
+							activeClass="active-tab"
+							onSelect={(tabName) => { }}
+							tabs={[
+								{
+									name: "options",
+									title: "Options",
+									icon: settings,
+									className: "tab-settings",
+								},
+								{
+									name: "styles",
+									title: "Styles",
+									icon: brush,
+									className: "tab-style",
+								},
+							]}>
+							<PGtab name="options">
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Class", "accordions")}
+									</label>
+									<PGinputText
+										value={content?.options?.class}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...content,
+												options: {
+													...content?.options,
+													class: newVal,
+												},
+											};
+											setcontent(optionsX);
+										}}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="styles">
+								<PGStyles
+									obj={content}
+									onChange={(sudoScource, newVal, attr) =>
+										onChangeStyle(
+											sudoScource,
+											newVal,
+											attr,
+											content,
+											setcontent
+										)
+									}
+									onAdd={(sudoScource, key) =>
+										onAddStyle(sudoScource, key, content, setcontent)
+									}
+									onRemove={(sudoScource, key) =>
+										onRemoveStyle(sudoScource, key, content, setcontent)
+									}
+									onReset={(sudoSources) =>
+										onResetStyle(sudoSources, content, setcontent)
+									}
+									onBulkAdd={(sudoSource, cssObj) =>
+										onBulkAddStyle(sudoSource, cssObj, content, setcontent)
+									}
+								/>
+							</PGtab>
+						</PGtabs>
+					</PanelBody>
+					<PanelBody
+						className="font-medium text-slate-900 "
 						title="Image"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
