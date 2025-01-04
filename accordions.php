@@ -73,6 +73,7 @@ class Accordions
     require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-functions.php');
 
     require_once(accordions_plugin_dir . 'templates/tabs-builder/tabs-builder-hook.php');
+    require_once(accordions_plugin_dir . 'templates/image-accordion/index.php');
 
     require_once(accordions_plugin_dir . 'includes/3rd-party/3rd-party.php');
 

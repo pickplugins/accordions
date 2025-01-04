@@ -757,7 +757,7 @@ class AccordionsRest
 		$post_title = isset($post->post_title) ? $post->post_title : "";
 		$post_content = isset($post->post_content) ? $post->post_content : "";
 
-		$post_content = is_serialized($post_content) ? unserialize($post_content) : json_decode($post_content);
+		$post_content =  json_decode($post_content);
 
 		$response->ID = $post->ID;
 		$response->post_title = $post_title;
@@ -786,13 +786,14 @@ class AccordionsRest
 			$response["id_missing"] = __("Post Id should not empty");
 		}
 
+		//$content = json_encode($content);
+		//$content = wp_kses_post($content); // Sanitizes content for safe HTML output
 
-
+		error_log($content);
 
 		$my_post = array(
 			'ID'           => $postId,
-			//'post_content' => serialize($content),
-			'post_content' => wp_json_encode($content),
+			'post_content' => $content,
 		);
 
 		// Update the post into the database
