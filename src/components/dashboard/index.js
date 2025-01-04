@@ -114,7 +114,6 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 
-			console.log(res.post_content);
 
 
 			if (res.post_content == null) {
@@ -198,6 +197,10 @@ function Html(props) {
 	}
 
 	function onChangeAccordion(args) {
+
+		console.log(args);
+
+
 		var postDataX = { ...postData };
 		postDataX.post_content = args;
 		setpostData(postDataX);
@@ -210,12 +213,19 @@ function Html(props) {
 	function onUpdateAccordion() {
 		setisLoading(true);
 
+
+
+		var content = JSON.stringify(accordionData);
+
+		console.log(content);
+
+
 		apiFetch({
 			path: "/accordions/v2/update_post_data",
 			method: "POST",
 			data: {
 				postId: activeAccordion,
-				content: accordionData,
+				content: content,
 				_wpnonce: accordions_builder_js._wpnonce,
 			},
 		}).then((res) => {

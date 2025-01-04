@@ -519,6 +519,10 @@
   height: 100%;
 }
 
+.h-9 {
+  height: 2.25rem;
+}
+
 .max-h-\[160px\] {
   max-height: 160px;
 }

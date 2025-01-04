@@ -2,7 +2,7 @@ const { Component, RawHTML, useState, useEffect } = wp.element;
 import apiFetch from "@wordpress/api-fetch";
 import { Popover, Spinner } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { Icon, close, cog, addCard, helpFilled, help, caution } from "@wordpress/icons";
+import { Icon, close, cog, addCard, helpFilled, help, caution, seen } from "@wordpress/icons";
 
 import { Fragment } from "react";
 import PGinputSelect from "../input-select";
@@ -170,6 +170,7 @@ function Html(props) {
 						)}
 					</div>
 
+					{/* <a className="bg-slate-700  text-white hover:text-white px-5 py-1 rounded-sm cursor-pointer hover:bg-slate-600 flex items-center gap-2"> <Icon icon={seen} fill={"#fff"} /> Preview</a> */}
 
 				</div>
 

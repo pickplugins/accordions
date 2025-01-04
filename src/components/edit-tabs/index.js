@@ -25,6 +25,8 @@ import PGinputSelect from "../input-select";
 import InputToggle from "../input-toggle";
 import PGinputText from "../input-text";
 import PGinputTextarea from "../input-textarea";
+import WPEditor from "../input-wp-editor";
+
 import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
@@ -1569,6 +1571,61 @@ function Html(props) {
 																/>
 															</div>
 															<div className="mb-3">
+																{/* <RichText
+																	placeholder="Write Header Text..."
+																	className="bg-slate-100 p-3 "
+																	tagName={"div"}
+																	value={item?.contentText}
+																	allowedFormats={[
+																		"core/bold",
+																		"core/italic",
+																		"core/link",
+																	]}
+																	onChange={(content) => {
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				contentText: content,
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																/> */}
+
+
+
+
+																<WPEditor
+																	placeholder="Write Header Text..."
+																	editorId={`content-${index}-${generate3Digit()}`}
+																	className={`bg-slate-100 p-3 min-h-24 w-full`}
+																	value={item?.contentText}
+																	onChange={(content) => {
+																		content = content.replace(/[\r\n]+/g, '');
+																		//var content = JSON.stringify(content);
+																		console.log((content));
+																		setitems((prevItems) => {
+																			const updatedItems = [...prevItems];
+																			updatedItems[index] = {
+																				...updatedItems[index],
+																				contentText: (content),
+																			};
+																			return updatedItems;
+																		});
+																	}}
+																/>
+
+
+
+															</div>
+
+
+
+
+
+
+															{/* <div className="mb-3">
 																<PGinputTextarea
 																	placeholder="Write Header Text..."
 																	id={`content-${index}-${generate3Digit()}`}
@@ -1585,7 +1642,7 @@ function Html(props) {
 																		});
 																	}}
 																/>
-															</div>
+															</div> */}
 															<div className="mb-3">
 																<PanelRow>
 																	<label htmlFor="">Active</label>

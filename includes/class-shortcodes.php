@@ -46,8 +46,9 @@ class class_accordions_shortcodes
         $post_data = get_post($post_id);
         $post_content = isset($post_data->post_content) ? $post_data->post_content : "";
 
-        $accordionData = (is_serialized($post_content)) ? unserialize($post_content) : [];
+        $accordionData = (is_serialized($post_content)) ? unserialize($post_content) : (array) json_decode($post_content, true);
 
+        //var_dump($accordionData);
 
         $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
         $viewType = isset($globalOptions["viewType"]) ? $globalOptions["viewType"] : "accordion";

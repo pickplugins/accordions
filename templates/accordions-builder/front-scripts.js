@@ -685,12 +685,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 									top: offsetPosition,
 									behavior: 'smooth'
 								});
+								//window.pgAccordion.scrollToTop(accordionHeader);
+
 							}
 
 
 
 							var loopIndex = accordionHeader.getAttribute("index");
-							window.pgAccordion.scrollToTop(accordionHeader);
 
 
 							if (keepExpandOther) {

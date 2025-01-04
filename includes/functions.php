@@ -439,7 +439,17 @@ function accordions_preview_content($content)
 {
     if (is_singular('accordions')) {
         $post_id = get_the_id();
-        $content = do_shortcode('[accordions id="' . $post_id . '"]');
+
+        if (!empty($content)) {
+            // $contentArr = json_decode($content);
+            $content = do_shortcode('[accordions_builder id="' . $post_id . '"]');
+
+            // $globalOptions = isset($contentArr["globalOptions"]) ? $contentArr["globalOptions"] : [];
+            // $globalOptions = isset($contentArr["globalOptions"]) ? $contentArr["globalOptions"] : [];
+            //var_dump($contentArr);
+        } else {
+            $content = do_shortcode('[accordions id="' . $post_id . '"]');
+        }
     }
 
     return $content;
