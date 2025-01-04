@@ -6,7 +6,6 @@ import {
 	__experimentalInputControl as InputControl,
 	PanelBody,
 	PanelRow,
-	Popover,
 	SelectControl,
 } from "@wordpress/components";
 import { store as coreStore } from "@wordpress/core-data";
@@ -14,7 +13,6 @@ import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import {
 	addCard,
-	addTemplate,
 	brush,
 	close,
 	copy,
@@ -29,16 +27,14 @@ import breakPoints from "../../breakpoints";
 import PGDropdown from "../dropdown";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
-import PGinputTextarea from "../input-textarea";
 import WPEditor from "../input-wp-editor";
 
+import { popupEntranceAnimateBasic } from "../../inAnimation";
+import { popupCloseAnimateBasic } from "../../outAnimation";
 import InputToggle from "../input-toggle";
-import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
-import { popupEntranceAnimateBasic } from "../../inAnimation";
-import { popupCloseAnimateBasic } from "../../outAnimation";
 var myStore = wp.data.select("postgrid-shop");
 
 function Html(props) {
@@ -755,21 +751,23 @@ function Html(props) {
 												<MediaUpload
 													className="bg-gray-700 hover:bg-gray-600"
 													onSelect={(media) => {
+														// console.log(media);
 
+														const newItems = media
+															.filter((item) => item.id !== undefined) // Filter out items with undefined id
+															.map((item) => ({
+																isActive: false,
+																image: {
+																	id: item.id,
+																	url: item.url,
+																	altText: item.alt || item.title || "",
+																},
+																link: item.link,
+																title: item.title,
+																content: item.description,
+															}));
 
-														console.log(media);
-
-														const newItems = media.map((item) => ({
-															isActive: false,
-															image: {
-																id: item.id,
-																url: item.url,
-																altText: item.alt || item.title || "",
-															},
-															link: item.link,
-															title: item.title,
-															content: item.description,
-														}));
+														// console.log(newItems);
 
 														// Update the state by merging existing items with new ones
 														setitems((prevItems) => [
@@ -777,7 +775,7 @@ function Html(props) {
 															...newItems,
 														]);
 													}}
-													onClose={() => { }}
+													onClose={() => {}}
 													allowedTypes={["image"]}
 													value={items.map((item) => {
 														return item.id;
@@ -792,7 +790,6 @@ function Html(props) {
 																className="fill-white "
 																size={20}
 															/>
-
 														</div>
 													)}
 												/>
@@ -818,7 +815,7 @@ function Html(props) {
 															content: "You just pasted items, Now go to edit.",
 															type: "success",
 														});
-													} catch (error) { }
+													} catch (error) {}
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
 											</span>
@@ -839,8 +836,8 @@ function Html(props) {
 																	type: "success",
 																});
 															})
-															.catch((err) => { });
-													} catch (error) { }
+															.catch((err) => {});
+													} catch (error) {}
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
 											</span>
@@ -870,7 +867,6 @@ function Html(props) {
 											}}>
 											<Icon icon={addCard} fill="#fff" size="20" />
 										</div>
-
 									</>
 								)}
 							</div>
@@ -1516,36 +1512,20 @@ function Html(props) {
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
 																	value={item?.contentText}
 																	onChange={(content) => {
-																		content = content.replace(/[\r\n]+/g, '');
+																		content = content.replace(/[\r\n]+/g, "");
 																		//var content = JSON.stringify(content);
-																		console.log((content));
+																		console.log(content);
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				contentText: (content),
+																				contentText: content,
 																			};
 																			return updatedItems;
 																		});
 																	}}
 																/>
-
-
-
-
-
-
-
-
 															</div>
-
-
-
-
-
-
-
-
 
 															{/* <div className="mb-3">
 																<PGinputTextarea
@@ -1573,20 +1553,24 @@ function Html(props) {
 																</label>
 																<MediaUpload
 																	onSelect={(media) => {
+																		const newItem = {
+																			isActive: false,
+																			image: {
+																				id: media.id,
+																				url: media.url,
+																				altText: media.alt || media.title || "",
+																			},
+																			link: media.link,
+																			title: media.title,
+																			content: media.description,
+																		};
 																		setitems((prevItems) => {
 																			const updatedItems = [...prevItems];
-																			updatedItems[index] = {
-																				...updatedItems[index],
-																				image: {
-																					...updatedItems[index].image,
-																					id: media.id,
-																					url: media.url,
-																				},
-																			};
+																			updatedItems[index] = newItem;
 																			return updatedItems;
 																		});
 																	}}
-																	onClose={() => { }}
+																	onClose={() => {}}
 																	allowedTypes={["image"]}
 																	value={item?.image?.id}
 																	render={({ open }) => {
@@ -1608,7 +1592,7 @@ function Html(props) {
 																						className="no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white">
 																						Open Media Library
 																					</button>
-																					<button
+																					{/* <button
 																						onClick={() => {
 																							setitems((prevItems) => {
 																								const updatedItems = [
@@ -1629,7 +1613,7 @@ function Html(props) {
 																						className="no-underline size-[38px] flex items-center justify-center text-[30px] rounded-sm !border !bg-transparent !border-solid !border-gray-700 hover:!border-red-700 text-gray-700   hover:text-red-700"
 																						title="Clear Logo">
 																						&times;
-																					</button>
+																					</button> */}
 																				</div>
 																			</div>
 																		);
@@ -1706,7 +1690,7 @@ function Html(props) {
 										<Icon icon={help} />
 									</span>
 								</label>
-								<SelectControl
+								{/* <SelectControl
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.lazyLoad}
@@ -1723,10 +1707,16 @@ function Html(props) {
 										globalOptionsX.lazyLoad = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
+								/> */}
+								<InputToggle
+									value={globalOptions?.lazyLoad ?? 0}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.lazyLoad = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
 								/>
 							</PanelRow>
-
-
 
 							<PanelRow>
 								<label htmlFor="">Active Event</label>
@@ -1751,7 +1741,7 @@ function Html(props) {
 							</PanelRow>
 							<PanelRow>
 								<label htmlFor="">URL Hash</label>
-								<SelectControl
+								{/* <SelectControl
 									className="w-[140px]"
 									label=""
 									value={globalOptions?.urlHash}
@@ -1767,10 +1757,16 @@ function Html(props) {
 										globalOptionsX.urlHash = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
+								/> */}
+								<InputToggle
+									value={globalOptions?.urlHash ?? 0}
+									onChange={(newVal) => {
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.urlHash = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
 								/>
 							</PanelRow>
-
-
 						</div>
 					</PanelBody>
 					<PanelBody
@@ -1781,7 +1777,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1859,7 +1855,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -1904,11 +1900,13 @@ function Html(props) {
 										position="bottom right"
 										variant="secondary"
 										buttonTitle={
-											popupEntranceAnimateBasic[contentWrap?.options?.inAnimation] ==
-												undefined
+											popupEntranceAnimateBasic[
+												contentWrap?.options?.inAnimation
+											] == undefined
 												? __("Choose", "accordions")
-												: popupEntranceAnimateBasic[contentWrap?.options?.inAnimation]
-													.label
+												: popupEntranceAnimateBasic[
+														contentWrap?.options?.inAnimation
+												  ].label
 										}
 										options={popupEntranceAnimateBasic}
 										onChange={(newVal) => {
@@ -1932,11 +1930,13 @@ function Html(props) {
 										position="bottom right"
 										variant="secondary"
 										buttonTitle={
-											popupCloseAnimateBasic[contentWrap?.options?.outAnimation] ==
-												undefined
+											popupCloseAnimateBasic[
+												contentWrap?.options?.outAnimation
+											] == undefined
 												? __("Choose", "accordions")
-												: popupCloseAnimateBasic[contentWrap?.options?.outAnimation]
-													.label
+												: popupCloseAnimateBasic[
+														contentWrap?.options?.outAnimation
+												  ].label
 										}
 										options={popupCloseAnimateBasic}
 										onChange={(newVal) => {
@@ -2015,7 +2015,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2081,7 +2081,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2147,7 +2147,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
@@ -2219,7 +2219,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={[
 								{
 									name: "options",
