@@ -789,7 +789,6 @@ class AccordionsRest
 		//$content = json_encode($content);
 		//$content = wp_kses_post($content); // Sanitizes content for safe HTML output
 
-		error_log($content);
 
 		$my_post = array(
 			'ID'           => $postId,

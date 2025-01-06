@@ -567,6 +567,41 @@ function Html(props) {
 		return Math.floor(100 + Math.random() * 900);
 	}
 
+
+
+	function escapeHTML(str) {
+		const map = {
+			'&': '&amp;',
+			'<': '&lt;',
+			'>': '&gt;',
+			'"': '&quot;',
+			"'": '&#039;'
+		};
+		return str.replace(/[&<>"']/g, function (match) {
+			return map[match];
+		});
+	}
+
+
+	function unescapeHTML(str) {
+		const map = {
+			'&amp;': '&',
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#039;': "'"
+		};
+		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function (match) {
+			return map[match];
+		});
+	}
+
+
+
+
+
+
+
 	return (
 		<div className="">
 			<div
@@ -775,7 +810,7 @@ function Html(props) {
 															...newItems,
 														]);
 													}}
-													onClose={() => {}}
+													onClose={() => { }}
 													allowedTypes={["image"]}
 													value={items.map((item) => {
 														return item.id;
@@ -815,7 +850,7 @@ function Html(props) {
 															content: "You just pasted items, Now go to edit.",
 															type: "success",
 														});
-													} catch (error) {}
+													} catch (error) { }
 												}}>
 												<Icon icon={page} fill="#fff" size="20" />
 											</span>
@@ -836,8 +871,8 @@ function Html(props) {
 																	type: "success",
 																});
 															})
-															.catch((err) => {});
-													} catch (error) {}
+															.catch((err) => { });
+													} catch (error) { }
 												}}>
 												<Icon icon={copy} fill="#fff" size="20" />
 											</span>
@@ -1510,9 +1545,11 @@ function Html(props) {
 																	placeholder="Write Header Text..."
 																	editorId={`content-${index}-${generate3Digit()}`}
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={item?.contentText}
+																	value={unescapeHTML(item?.contentText)}
 																	onChange={(content) => {
 																		content = content.replace(/[\r\n]+/g, "");
+																		content = escapeHTML(content);
+
 																		//var content = JSON.stringify(content);
 																		console.log(content);
 																		setitems((prevItems) => {
@@ -1570,7 +1607,7 @@ function Html(props) {
 																			return updatedItems;
 																		});
 																	}}
-																	onClose={() => {}}
+																	onClose={() => { }}
 																	allowedTypes={["image"]}
 																	value={item?.image?.id}
 																	render={({ open }) => {
@@ -1777,7 +1814,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1855,7 +1892,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -1905,8 +1942,8 @@ function Html(props) {
 											] == undefined
 												? __("Choose", "accordions")
 												: popupEntranceAnimateBasic[
-														contentWrap?.options?.inAnimation
-												  ].label
+													contentWrap?.options?.inAnimation
+												].label
 										}
 										options={popupEntranceAnimateBasic}
 										onChange={(newVal) => {
@@ -1935,8 +1972,8 @@ function Html(props) {
 											] == undefined
 												? __("Choose", "accordions")
 												: popupCloseAnimateBasic[
-														contentWrap?.options?.outAnimation
-												  ].label
+													contentWrap?.options?.outAnimation
+												].label
 										}
 										options={popupCloseAnimateBasic}
 										onChange={(newVal) => {
@@ -2015,7 +2052,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2081,7 +2118,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2147,7 +2184,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",
@@ -2219,7 +2256,7 @@ function Html(props) {
 							activeTab="options"
 							orientation="horizontal"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={[
 								{
 									name: "options",

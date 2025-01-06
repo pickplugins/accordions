@@ -589,7 +589,18 @@ function Html(props) {
 	}
 
 
-
+	function unescapeHTML(str) {
+		const map = {
+			'&amp;': '&',
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#039;': "'"
+		};
+		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function (match) {
+			return map[match];
+		});
+	}
 
 
 
@@ -1696,12 +1707,14 @@ function Html(props) {
 																	}}
 																/> */}
 																<WPEditor
-																	placeholder="Write Header Text..."
+																	placeholder="Write content..."
 																	editorId={`content-${index}-${generate3Digit()}`}
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={item?.contentText}
+																	value={unescapeHTML(item?.contentText)}
 																	onChange={(content) => {
 																		content = content.replace(/[\r\n]+/g, '');
+
+																		content = escapeHTML(content);
 
 																		//var content = JSON.stringify(content);
 																		console.log((content));
@@ -2039,7 +2052,7 @@ function Html(props) {
 								/>
 							</PanelRow>
 
-							<PanelRow>
+							{/* <PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
 									Stats
 									<span
@@ -2077,7 +2090,7 @@ function Html(props) {
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
-							</PanelRow>
+							</PanelRow> */}
 
 							<PanelRow>
 								<label htmlFor="">Active Event</label>
@@ -2316,7 +2329,7 @@ function Html(props) {
 										/>
 									</PanelRow>
 
-									<PanelRow>
+									{/* <PanelRow>
 										<label htmlFor="">Auto Play Order</label>
 
 										<PGDropdown
@@ -2350,7 +2363,7 @@ function Html(props) {
 												setglobalOptions(globalOptionsX);
 											}}
 											values=""></PGDropdown>
-									</PanelRow>
+									</PanelRow> */}
 								</>
 							)}
 						</div>
@@ -3526,7 +3539,7 @@ function Html(props) {
 														animationDuration: newVal,
 													},
 												};
-												setcontent(optionsX);
+												seticon(optionsX);
 											}}
 										/>
 									</div>

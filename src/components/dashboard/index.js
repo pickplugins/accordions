@@ -114,6 +114,7 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 
+			console.log(res.post_content);
 
 
 			if (res.post_content == null) {
@@ -198,7 +199,6 @@ function Html(props) {
 
 	function onChangeAccordion(args) {
 
-		console.log(args);
 
 
 		var postDataX = { ...postData };
@@ -217,7 +217,6 @@ function Html(props) {
 
 		var content = JSON.stringify(accordionData);
 
-		console.log(content);
 
 
 		apiFetch({

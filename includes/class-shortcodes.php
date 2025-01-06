@@ -48,25 +48,9 @@ class class_accordions_shortcodes
 
         $accordionData = (is_serialized($post_content)) ? unserialize($post_content) : (array) json_decode($post_content, true);
 
-        //var_dump($accordionData);
 
         $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
         $viewType = isset($globalOptions["viewType"]) ? $globalOptions["viewType"] : "accordion";
-
-
-
-        $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
-
-        $wrapper = isset($accordionData["wrapper"]) ? $accordionData["wrapper"] : [];
-        $content = isset($accordionData["content"]) ? $accordionData["content"] : [];
-        $header = isset($accordionData["header"]) ? $accordionData["header"] : [];
-        $headerActive = isset($accordionData["headerActive"]) ? $accordionData["headerActive"] : [];
-        $headerLabel = isset($accordionData["headerLabel"]) ? $accordionData["headerLabel"] : [];
-        $labelCounter = isset($accordionData["labelCounter"]) ? $accordionData["labelCounter"] : [];
-        $labelIcon = isset($accordionData["labelIcon"]) ? $accordionData["labelIcon"] : [];
-        $icon = isset($accordionData["icon"]) ? $accordionData["icon"] : [];
-        $iconToggle = isset($accordionData["iconToggle"]) ? $accordionData["iconToggle"] : [];
-
 
 
         ob_start();

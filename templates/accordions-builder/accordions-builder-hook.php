@@ -32,6 +32,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     $items = isset($accordionData["items"]) ? $accordionData["items"] : [];
     $itemQueryArgs = isset($accordionData["itemQueryArgs"]) ? $accordionData["itemQueryArgs"] : [];
 
+
     if ($itemSource == "posts") {
         $items = accordions_post_query_items($itemQueryArgs);
     }
@@ -43,7 +44,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     }
 
 
-    //var_dump(wp_json_encode($items));
+
 
     $expandCollapseAll = isset($accordionData["expandCollapseAll"]) ? $accordionData["expandCollapseAll"] : [];
     $expandCollapseAllOptions = isset($expandCollapseAll["options"]) ? $expandCollapseAll["options"] : [];
@@ -109,7 +110,6 @@ function accordions_builder_accordion($post_id, $accordionData)
     $contentAutoembed = isset($contentOptions["autoembed"]) ? $contentOptions["autoembed"] : true;
     $contentShortcodes = isset($contentOptions["shortcodes"]) ? $contentOptions["shortcodes"] : true;
     $contentWpautop = isset($contentOptions["wpautop"]) ? $contentOptions["wpautop"] : true;
-
 
 
     $header = isset($accordionData["header"]) ? $accordionData["header"] : [];
@@ -219,7 +219,7 @@ function accordions_builder_accordion($post_id, $accordionData)
 
     $blockId = "accordions-" . $post_id;
 
-
+    //var_dump($activeIndex);
 
 
     $accordionDataAttr = [
@@ -242,58 +242,40 @@ function accordions_builder_accordion($post_id, $accordionData)
         "contentOutAnimation" => $contentOutAnimation,
         "contentAnimationDuration" => $contentAnimationDuration,
         "lazyLoad" => $lazyLoad,
+        "searchEnable" => $searchInputEnable,
+        "expandCollapseAllEnable" => $expandCollapseAllEnable,
         "expandCollapseAllDelay" => $expandCollapseAllDelay,
     ];
 
 
 
-
 ?>
-    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-pgaccordion="<?php echo esc_attr(json_encode($accordionDataAttr)) ?>" role="tablist" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
-
+    <div id="<?php echo esc_attr($blockId); ?>" class="pg-accordion-nested  " data-accordionBuilder=<?php echo esc_attr(json_encode($accordionDataAttr)) ?> role="tablist" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
         <div class="top-wrap">
-
             <?php if ($searchInputEnable): ?>
-
-
                 <form class="search-form" action="">
                     <input type="text" class="search-input" placeholder="<?php echo esc_attr($searchInputPlaceholder); ?>" />
                 </form>
-
-
             <?php endif; ?>
             <?php if ($expandCollapseAllEnable): ?>
                 <div class="expand-collapse-all" data-expandAllText="<?php echo esc_attr($expandAllText); ?>" data-collapseAllText="<?php echo esc_attr($collapseAllText); ?>" data-expandAllIconHtml="<?php echo esc_attr($expandAllIconHtml); ?>" data-collapseAllIconHtml="<?php echo esc_attr($collapseAllIconHtml); ?>">
                     <?php echo $expandAllIconHtml; ?>
                     <span><?php echo $expandAllText; ?></span>
-
                 </div>
             <?php endif; ?>
-
         </div>
-
-
         <?php
         $count = 0;
-        foreach ($items as $item) {
-
+        foreach ($items as $index => $item) {
             $itemActive = isset($item["active"]) ? (bool) $item["active"] : false;
-
             $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
             $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
-
             $headerLabelText = isset($item["headerLabelText"]) ? $item["headerLabelText"] : "";
             $headerLabelToggledText = isset($item["headerLabelToggledText"]) ? $item["headerLabelToggledText"] : "";
             $headerLabelSlug = isset($item["headerLabelSlug"]) ? $item["headerLabelSlug"] : "";
-
-
             $contentText = isset($item["contentText"]) ? $item["contentText"] : "";
-
             $content = isset($item["content"]) ? $item["content"] : [];
             $contentOptions = isset($content["options"]) ? $content["options"] : [];
-
-
-
 
             if ($contentAutoembed) {
                 $WP_Embed = new WP_Embed();
@@ -309,7 +291,6 @@ function accordions_builder_accordion($post_id, $accordionData)
                 $contentText = do_shortcode($contentText);
             }
 
-
             if ($contentWpautop) {
                 //$contentText = wpautop($contentText);
             }
@@ -317,11 +298,8 @@ function accordions_builder_accordion($post_id, $accordionData)
             $itemLabelIcon = isset($item["labelIcon"]) ? $item["labelIcon"] : [];
             $itemLabelIconOptions = isset($itemLabelIcon["options"]) ? $itemLabelIcon["options"] : [];
             $itemLabelIconSrc = isset($itemLabelIconOptions["iconSrc"]) ? $itemLabelIconOptions["iconSrc"] : "";
-
-
-
         ?>
-            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class="<?php echo esc_attr($blockId); ?>-accordion-header  <?php echo esc_attr($blockId); ?> <?php echo esc_attr($headerClass); ?>" role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1" toggledText="<?php echo esc_attr($headerLabelToggledText); ?>">
+            <<?php echo tag_escape($headerTag); ?> id="ui-id-<?php echo esc_attr((int)$count + 1); ?>" class=" accordion-header   <?php echo esc_attr($headerClass); ?> " role="tab" aria-controls="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-selected="false" aria-expanded="false" tabindex="-1" toggledText="<?php echo esc_attr($headerLabelToggledText); ?>">
                 <?php if ($iconPosition == 'left') : ?>
                     <span class="accordion-icon <?php echo esc_attr($iconClass); ?>">
                         <?php echo wp_kses_post($iconIdleHtml); ?><?php echo wp_kses_post($iconToggleHtml); ?>
@@ -333,30 +311,20 @@ function accordions_builder_accordion($post_id, $accordionData)
                     </span>
                 <?php endif; ?>
                 <?php if ($labelIconPosition == 'beforeLabel') : ?>
-
-
                     <?php if (empty($itemLabelIconSrc)): ?>
                         <?php echo wp_kses_post($labelIconHtml); ?>
                     <?php else: ?>
                         <span class="accordion-label-icon <?php echo "$labelIconClass $itemLabelIconSrc"; ?>"></span>
                     <?php endif; ?>
-
-
                 <?php endif; ?>
                 <<?php echo tag_escape($headerLabelTag); ?> index=""
                     <?php if ($headerLabelTag == 'a') :
-
                         if (empty($headerLabelSlug)) {
                             $link = strtolower($headerLabelText);
                             $link = str_replace(" ", "-", $link);
                         } else {
                             $link = $headerLabelSlug;
                         }
-
-
-
-
-
                     ?> href="#<?php echo esc_attr($link); ?>" <?php endif; ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
                     <?php if ($labelCounterPosition == 'beforeLabelText') : ?>
                         <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
@@ -399,7 +367,7 @@ function accordions_builder_accordion($post_id, $accordionData)
                     </span>
                 <?php endif; ?>
             </<?php echo tag_escape($headerTag); ?>>
-            <<?php echo tag_escape($contentTag); ?> class="<?php echo esc_attr($contentClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false" <?php echo ($itemActive) ? 'style="height: auto; overflow: hidden; display: block;"' : ""; ?>>
+            <<?php echo tag_escape($contentTag); ?> class="<?php echo esc_attr($contentClass); ?>" id="ui-id-<?php echo esc_attr((int)$count + 2); ?>" aria-labelledby="ui-id-<?php echo esc_attr((int)$count + 1); ?>" role="tabpanel" aria-hidden="false">
                 <?php //echo wp_kses_post($contentText); 
                 ?>
                 <?php echo wp_unslash(wp_specialchars_decode($contentText, ENT_QUOTES)) ?>
@@ -410,9 +378,6 @@ function accordions_builder_accordion($post_id, $accordionData)
         <?php
             $count++;
         }
-
-
-
         if ($schema) {
 
             $json = [];
@@ -422,14 +387,10 @@ function accordions_builder_accordion($post_id, $accordionData)
             foreach ($items as $item) {
 
                 $hideOnSchema = isset($item["hideOnSchema"]) ? (bool) $item["hideOnSchema"] : false;
-
                 if ($hideOnSchema) continue;
-
                 $headerLabel = isset($item["headerLabel"]) ? $item["headerLabel"] : [];
                 $headerLabelOptions = isset($headerLabel["options"]) ? $headerLabel["options"] : [];
                 $headerLabelText = isset($headerLabelOptions["text"]) ? $headerLabelOptions["text"] : "";
-
-
                 $content = isset($item["content"]) ? $item["content"] : [];
                 $contentOptions = isset($content["options"]) ? $content["options"] : [];
                 $contentText = isset($contentOptions["text"]) ? $contentOptions["text"] : "";
@@ -443,14 +404,7 @@ function accordions_builder_accordion($post_id, $accordionData)
             }
             $accordionsSchema[$blockId] = $json;
         }
-
-
-
-
-
-
         ?>
-
     </div>
     <style>
         <?php
