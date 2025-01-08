@@ -1,358 +1,147 @@
+document.addEventListener("DOMContentLoaded", function () {
+	class ImageAccordion {
+		constructor(config) {
+			this.id = config.id || "";
+			this.lazyLoad = config.lazyLoad || false;
+			this.navActiveIndex = config.navActiveIndex || 0;
+			this.navsIndex = config.navsIndex || [];
+			this.activeEvent = "mouseover";
+			this.wrapperClass = "tabs";
+			this.navsWrapper = "navs-wrapper";
+			this.navItem = "nav-item";
+			this.panelsWrap = "panels-wrap";
+			this.pgTabsPanel = "tabs-panel";
+			this.overlayInAnimation = config.overlayInAnimation || "";
+			this.overlayOutAnimation = config.overlayOutAnimation || "";
+			this.overlayAnimationDuration = parseInt(config.overlayAnimationDuration) || 0;
+			this.autoPlay = config.autoPlay || false;
+			this.urlHash = config.urlHash || false;
+			this.autoPlayDelay = config.autoPlayDelay || 0;
+			this.autoPlayTimeout = config.autoPlayTimeout || 0;
 
-document.addEventListener("DOMContentLoaded", function (event) {
-	window.pgTabs = {
-		id: "",
-		lazyLoad: false,
-		navActiveIndex: 0,
-		navActiveId: "",
-		navsIndex: [],
-		wrapperClass: "tabs",
-		navsWrapper: "navs-wrapper",
-		navItem: "nav-item",
-		panelsWrap: "panels-wrap",
-		pgTabsPanel: "tabs-panel",
-		progress: "progress",
-		progressFill: "progress-fill",
-		paginationWrapper: "tabs-pagination",
-		paginationItem: "page-numbers",
-		paginationPrev: "prev ",
-		paginationNext: "next ",
-		panelWrapInAnimation: "",
-		panelWrapOutAnimation: "",
-		panelWrapAnimationDuration: 1000,
-		autoPlay: false,
-		autoPlayDelay: 0,
-		listenUrlHash: () => {
-			var hash = window.location.hash;
-			if (hash.length == 0) return;
-			var hashWrap = document.querySelector('[href="' + hash + '"]');
+			this.init();
+		}
 
-			if (hashWrap != null) {
-				var index = hashWrap.getAttribute("index")
+		activeByIndex(index, oldIndex = 0) {
 
-				window.pgTabs.switchNavs(index)
-			}
+			const navItems = document.querySelectorAll(`#${this.id} .image-accordion-item`);
+			navItems.forEach((item, index) => {
+				item.classList.remove("active");
+			})
 
+			// const OlditemHndle = document.querySelector(`#${this.id} .image-accordion-item[index="${oldIndex}"]`);
+			// OlditemHndle.classList.remove("active");
 
-		},
-		switchNavs: (index, oldIndex = 0) => {
+			const itemHndle = document.querySelector(`#${this.id} .image-accordion-item[index="${index}"]`);
+			itemHndle.classList.add("active");
 
-			var oldtabPanelByattr = document.querySelector(`.tabs-panel[data-tab-id="pg${oldIndex}"]`);
+			const overlay = itemHndle.querySelector(".image-accordion-overlay");
+			overlay.style.display = "block";
+			this.animate(overlay, this.overlayInAnimation, this.overlayAnimationDuration)
+		}
+		inactiveByIndex(index) {
+
+			console.log(this.overlayOutAnimation);
+			console.log(this.overlayAnimationDuration);
+
+			const itemHndle = document.querySelector(`#${this.id} .image-accordion-item[index="${index}"]`);
+			itemHndle.classList.remove("active");
+			const overlay = itemHndle.querySelector(".image-accordion-overlay");
+
+			this.animate(overlay, this.overlayOutAnimation, this.overlayAnimationDuration)
+
+			setTimeout(() => { overlay.style.display = "none"; }, this.overlayAnimationDuration)
+
+		}
 
 
-			if (oldtabPanelByattr != null) {
 
-				var exitAnimation = window.pgTabs.panelWrapOutAnimation;
 
-				oldtabPanelByattr.classList.add("animate__animated");
-				oldtabPanelByattr.classList.add("animate__fast");
-				oldtabPanelByattr.classList.add("animate__" + exitAnimation);
-				setTimeout(() => {
-					oldtabPanelByattr.classList.remove("animate__animated");
-					oldtabPanelByattr.classList.remove("animate__" + exitAnimation);
-					// popup.style.display = "none";
-				}, 1000);
 
-			}
 
+
+
+
+
+		animate(element, animate_name, duration) {
+
+			element.classList.add("animate__animated", "animate__fast", `animate__${animate_name}`);
 
 			setTimeout(() => {
+				element.classList.remove("animate__animated", "animate__fast", `animate__${animate_name}`);
+			}, duration);
+		}
+		autoPlayRun() {
+			let currentIndex = this.navActiveIndex;
+			const loopThroughItems = () => {
+				currentIndex = (currentIndex + 1) % this.navsIndex.length;
+				this.activeByIndex(currentIndex);
+				setTimeout(loopThroughItems, this.autoPlayDelay);
+			};
 
+			if (this.autoPlay) loopThroughItems();
+		}
+		listenUrlHash() {
+			var hash = (window.location.hash);
 
-				if (window.pgTabs.id.length == 0) return;
-				var pgTabId = window.pgTabs.id;
-				var navsIndex = window.pgTabs.navsIndex;
-				var navActiveId = navsIndex[index];
+			console.log(hash.replace("#", ""));
+			var index = hash.replace("#", "");
 
-				window.pgTabs.navActiveIndex = index;
-				window.pgTabs.navActiveId = navActiveId;
-				var navItems = document.querySelectorAll(`#${pgTabId} .nav-item`);
-				var tabPanels = document.querySelectorAll(`#${pgTabId} .tabs-panel`);
-				var pgTab = document.querySelector(`#${pgTabId}`);
-				var iconToggle = pgTab.querySelectorAll(".nav-icon-toggle");
-				var iconIdle = pgTab.querySelectorAll(".nav-icon-idle");
-				navItems.forEach((tab) => {
-					tab.classList.remove("nav-item-active");
-					tab.classList.add("nav-item");
-				});
-				// hide all tab panels
-				tabPanels.forEach((panel) => {
-					panel.classList.remove("tabs-panel-active");
-					panel.setAttribute('hidden', true)
-				});
-				var currentTarget = document.querySelector(`#pg${navActiveId}`);
-				if (currentTarget != null) {
-					currentTarget.classList.add("nav-item-active");
-				}
+			if (index.length == 0) return;
+			index = parseInt(index)
+			this.activeByIndex(index);
 
 
 
+		}
+		init() {
+			const tabElement = document.querySelector(`#${this.id}`);
+			if (this.lazyLoad) tabElement.style.display = "block";
 
-				var tabPanelByattr = document.querySelector(`.tabs-panel[data-tab-id="pg${navActiveId}"]`);
+			const navItems = tabElement.querySelectorAll(".image-accordion-item");
+			navItems.forEach((item, index) => {
 
-				if (tabPanelByattr != null) {
-					tabPanelByattr.classList.add("tabs-panel-active");
-					tabPanelByattr.setAttribute('hidden', false)
 
 
-					var entranceAnimation = window.pgTabs.panelWrapInAnimation;
+				item.addEventListener("mouseover", (ev) => {
+					ev.preventDefault();
+					ev.stopImmediatePropagation();
+					var itemIndex = item.getAttribute("index");
+					this.activeByIndex(itemIndex)
 
-					tabPanelByattr.classList.add("animate__animated");
-					tabPanelByattr.classList.add("animate__fast");
-					tabPanelByattr.classList.add("animate__" + entranceAnimation);
-					setTimeout(() => {
-						tabPanelByattr.classList.remove("animate__animated");
-						tabPanelByattr.classList.remove("animate__" + entranceAnimation);
-						// popup.style.display = "none";
-					}, 1000);
-
-				}
-
-
-				iconIdle.forEach((iconI, J) => {
-					iconToggle[J].style.display = "none";
-					iconIdle[J].style.display = "inline-block";
-				});
-				if (iconToggle[index] != undefined) {
-					iconToggle[index].style.display = "inline-block";
-				}
-				if (iconIdle[index] != undefined) {
-					iconIdle[index].style.display = "none";
-				}
-
-
-
-
-
-
-			}, window.pgTabs.panelWrapAnimationDuration)
-
-
-
-
-
-		},
-		switchNext: () => {
-			var navActiveIndex = window.pgTabs.navActiveIndex;
-			var max = window.pgTabs.navsIndex.length - 1;
-			var nextIndex = (navActiveIndex + 1 > max) ? 0 : (navActiveIndex + 1);
-			window.pgTabs.switchNavs(nextIndex);
-		},
-		switchPrev: () => {
-			var navActiveIndex = window.pgTabs.navActiveIndex;
-			var max = window.pgTabs.navsIndex.length - 1;
-			var nextIndex = (navActiveIndex - 1 < 0) ? max : (navActiveIndex - 1);
-			window.pgTabs.switchNavs(nextIndex);
-		},
-		autoPlayRun: (args) => {
-			var autoPlayOrder = (args.autoPlayOrder);
-			var autoPlayDelay = parseInt(args.autoPlayDelay);
-
-			var accordionHeaders = document.querySelectorAll("#" + window.pgTabs.id + " .accordion-header");
-
-
-			let currentIndex = 0;
-
-			const items = [1, 2, 3];
-			//let currentIndex = 0;
-
-			function loopThroughItems() {
-				currentIndex = (currentIndex + 1) % items.length; // Move to the next index (looping back to 0 after reaching the end)
-				window.pgTabs.switchNavs(currentIndex)
-				setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
-
-
-			}
-
-
-
-			currentIndex = items.length;
-			function loopThroughItemsReverse() {
-
-
-				currentIndex = (currentIndex - 1 + (items.length)) % items.length; // Move to the previous index, wrap around
-
-				setTimeout(loopThroughItemsReverse, autoPlayDelay); // Recursively call after 1 second
-
-				window.pgTabs.switchNavs(currentIndex)
-			}
-
-
-			function loopThroughItemsRandom() {
-				const currentIndex = Math.floor(Math.random() * items.length);
-
-				//currentIndex = (currentIndex + 1) % items.length; // Move to the next index
-				setTimeout(loopThroughItemsRandom, autoPlayDelay); // Recursively call after 1 second
-
-				window.pgTabs.switchNavs(currentIndex)
-			}
-
-
-
-
-
-
-
-			// Start the loop
-
-			if (autoPlayOrder == "topToBottom") {
-				loopThroughItems();
-			}
-			if (autoPlayOrder == "bottomToTop") {
-				loopThroughItemsReverse();
-			}
-			if (autoPlayOrder == "random") {
-				loopThroughItemsRandom();
-			}
-
-
-
-
-
-
-
-		},
-		initTabs: ({ selector = "[data-pgTabs]" }) => {
-			// Tabs Wrapper Selectors
-			var pgTabs = document.querySelectorAll(selector);
-			if (pgTabs.length == 0) return;
-			if (pgTabs != null) {
-				pgTabs.forEach((pgTab) => {
-
-
-					var tabDataX = pgTab.getAttribute("data-pgTabs");
-					var tabDataObject = JSON.parse(tabDataX);
-					var pgTabId = tabDataObject.id;
-
-					var activeTab = tabDataObject.activeTab;
-					var navActiveIndex = tabDataObject.navActiveIndex;
-					var panelWrapInAnimation = tabDataObject.panelWrapInAnimation;
-					var panelWrapOutAnimation = tabDataObject.panelWrapOutAnimation;
-					var panelWrapAnimationDuration = tabDataObject.panelWrapAnimationDuration;
-					var lazyLoad = tabDataObject.lazyLoad;
-					var navsIndex = tabDataObject.navsIndex;
-
-					var autoPlay = tabDataObject.autoPlay;
-					var autoPlayTimeout = parseInt(tabDataObject.autoPlayTimeout);
-					var autoPlayDelay = tabDataObject.autoPlayDelay;
-					var autoPlayOrder = tabDataObject.autoPlayOrder;
-
-					window.pgTabs.id = pgTabId;
-					window.pgTabs.navsIndex = navsIndex;
-					window.pgTabs.navActiveId = activeTab;
-					window.pgTabs.navActiveIndex = navActiveIndex;
-					window.pgTabs.panelWrapInAnimation = panelWrapInAnimation;
-					window.pgTabs.panelWrapOutAnimation = panelWrapOutAnimation;
-					window.pgTabs.panelWrapAnimationDuration = panelWrapAnimationDuration;
-					window.pgTabs.lazyLoad = lazyLoad;
-
-					if (lazyLoad) {
-						pgTab.style.display = "block";
-					}
-
-
-					if (autoPlay) {
-
-						setTimeout(() => {
-
-							window.pgTabs.autoPlayRun({ autoPlayDelay, autoPlayOrder });
-
-						}, autoPlayTimeout)
-
-					} else {
-						window.pgTabs.switchNavs(navActiveIndex);
-
-					}
-
-
-
-
-					var pgTabId = pgTab.getAttribute("id");
-
-					var navItems = document.querySelectorAll(`#${pgTabId} .nav-item`);
-					var tabPanels = document.querySelectorAll(`#${pgTabId} .tabs-panel`);
-					var iconToggle = pgTab.querySelectorAll(".nav-icon-toggle");
-					var iconIdle = pgTab.querySelectorAll(".nav-icon-idle");
-
-
-					navItems.forEach((item, index) => {
-						var tabIdX = item.getAttribute("data-tab-id");
-
-
-						if (activeTab == tabIdX) {
-							if (iconToggle[index] != undefined) {
-								iconToggle[index].style.display = "inline-block";
-							}
-							if (iconIdle[index] != undefined) {
-								iconIdle[index].style.display = "none";
-							}
-						} else {
-							if (iconToggle[index] != undefined) {
-								iconToggle[index].style.display = "none";
-							}
-							if (iconIdle[index] != undefined) {
-								iconIdle[index].style.display = "inline-block";
-							}
-						}
-
-
-
-
-
-
-						item.addEventListener("click", function (event) {
-							event.preventDefault();
-
-							var index = event.currentTarget.getAttribute("index");
-
-							window.pgTabs.switchNavs(index, window.pgTabs.navActiveIndex);
-
-
-
-
-						});
-					});
 				});
 
-			}
+				item.addEventListener("mouseleave", (ev) => {
+
+					ev.preventDefault();
+					ev.stopImmediatePropagation();
+
+					var itemIndex = item.getAttribute("index");
+					this.inactiveByIndex(itemIndex);
 
 
-			// Next Previous
-			var tabsNextWrap = document.querySelector("#" + window.pgTabs.id + " .next ");
-			var tabsPrevWrap = document.querySelector("#" + window.pgTabs.id + " .prev ");
-			var tabsPageNumbers = document.querySelectorAll("#" + window.pgTabs.id + " .page-numbers ");
-			if (tabsNextWrap != null) {
-				tabsNextWrap.addEventListener("click", function (event) {
-					window.pgTabs.switchNext()
-				})
-			}
-			if (tabsPrevWrap != null) {
-				tabsPrevWrap.addEventListener("click", function (event) {
-					window.pgTabs.switchPrev()
-				})
-			}
-			if (tabsPageNumbers != null) {
-				tabsPageNumbers.forEach((PageNumbers) => {
-					PageNumbers.addEventListener("click", function (event) {
-						var target = event.target;
-						var itemClass = [];
-						target.classList.forEach((item) => {
-							itemClass.push(item)
-						})
-						if (itemClass.includes("prev")) {
-						}
-						else if (itemClass.includes("next")) {
-						}
-						else {
-							var index = parseInt(target.getAttribute("index"));
-							window.pgTabs.switchNavs(index)
-						}
-					})
-				})
-			}
-		},
+				});
+
+
+
+
+
+
+
+
+
+
+			});
+
+
+			if (this.urlHash) this.listenUrlHash();
+			if (this.autoPlay) this.autoPlayRun();
+		}
 	}
-	window.pgTabs.initTabs({ selector: "[data-pgTabs]" });
-	window.pgTabs.listenUrlHash();
-});
 
+	// Initialize instances
+	document.querySelectorAll("[data-imageAccordion]").forEach((tabElement) => {
+		const config = JSON.parse(tabElement.getAttribute("data-imageAccordion"));
+		new ImageAccordion(config);
+	});
+});

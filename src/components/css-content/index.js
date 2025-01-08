@@ -10,22 +10,55 @@ function Html(props) {
 	if (!props.warn) {
 		return null;
 	}
-	var content =
-		props.val == null || props.val == undefined
-			? ""
-			: props.val.replaceAll('"', "");
-	content = content.replaceAll("u0022", "");
+	//var content = props.val == null || props.val == undefined ? "" : props.val.replaceAll('"', "");
+	var content = props.val == null || props.val == undefined ? "" : props.val;
+
+	// content = content.replaceAll("u0022", "");
+	// content = content.replaceAll("&quot;", "");
+
+	console.log(content);
+
+	function escapeHTML(str) {
+		const map = {
+
+			'<': '&lt;',
+			'>': '&gt;',
+			'"': '&quot;',
+			"'": '&#039;'
+		};
+		return str.replace(/[<>"']/g, function (match) {
+			return map[match];
+		});
+	}
+
+	function unescapeHTML(str) {
+		const map = {
+
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#039;': "'"
+		};
+		return str.replace(/&lt;|&gt;|&quot;|&#039;/g, function (match) {
+			return map[match];
+		});
+	}
+
 	return (
 		<div className="mt-4">
 			<InputControl
-				value={content}
+				value={unescapeHTML(content)}
 				type="text"
 				onChange={(newVal) => {
 					if (newVal.includes("attr")) {
-						props.onChange(newVal, "content");
+						props.onChange(escapeHTML(newVal), "content");
 					}
-					//setwidthVal(newVal);
-					else props.onChange('"' + newVal + '"', "content");
+					else {
+						console.log(newVal);
+
+
+						props.onChange(escapeHTML(newVal), "content");
+					}
 				}}
 			/>
 		</div>

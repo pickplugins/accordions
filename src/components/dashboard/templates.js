@@ -33,6 +33,7 @@ import { Splide, SplideTrack } from "@splidejs/react-splide";
 import PGinputText from "../input-text";
 
 import PGDropdown from '../../components/dropdown'
+import accordionTemplates from "./accordion-templates";
 
 
 var myStore = wp.data.select("postgrid-shop");
@@ -86,6 +87,7 @@ function Html(props) {
 		requestData = JSON.stringify(requestData);
 		fetch(
 			"https://pickplugins.com/demo/accordions/wp-json/accordions/v2/get_posts_accordions",
+			// "http://localhost/wordpress/wp-json/accordions/v2/get_posts_accordions",
 			{
 				method: "POST",
 				headers: {
@@ -100,21 +102,48 @@ function Html(props) {
 
 						var posts = data.posts;
 
+						console.log(accordionTemplates);
+
+
+
 						var postsX = [];
 
-						posts.map(item => {
+
+						accordionTemplates.map(item => {
 
 							postsX.push({
 
-								label: item.post_title,
-								thumb: "https://pickplugins.com/wp-content/uploads/2024/12/accoridons-template-1.png",
-								isPro: item?.is_pro == "yes" ? true : false,
-								data: item.post_content
+								label: item.label,
+								thumb: item.thumb,
+								//isPro: item?.is_pro == "yes" ? true : false,
+								data: JSON.stringify(item.data)
 							})
 
 							settemplates(postsX);
 
 						})
+
+
+
+
+
+
+
+
+
+						// posts.map(item => {
+
+						// 	postsX.push({
+
+						// 		label: item.post_title,
+						// 		thumb: item.thumb,
+						// 		isPro: item?.is_pro == "yes" ? true : false,
+						// 		data: item.post_content
+						// 	})
+
+						// 	settemplates(postsX);
+
+						// })
 						setisLoading(false);
 
 
@@ -229,7 +258,8 @@ function Html(props) {
 
 
 										var data = preset.data;
-										data = JSON.parse(data)
+										data = JSON.parse(data);
+
 
 										var presetClean = {};
 

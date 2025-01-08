@@ -69,8 +69,8 @@ function Html(props) {
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
 		tabs: { label: "Tabs", value: "tabs" },
-		imageAccordion: { label: "Image Accordion", value: "imageAccordion", coming: true },
-		accordionMenu: { label: "Accordion Menu", value: "accordionMenu", coming: true },
+		imageAccordion: { label: "Image Accordion", value: "imageAccordion", isPro: customerData.isPro ? false : true, },
+		// accordionMenu: { label: "Accordion Menu", value: "accordionMenu", coming: true },
 	};
 
 	useEffect(() => {
@@ -114,6 +114,7 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 
+			console.log(res.post_content);
 
 
 			if (res.post_content == null) {
@@ -192,13 +193,16 @@ function Html(props) {
 	}
 	function onChangeStyle(args) {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.reponsiveCss = args;
+
+		console.log(escapeHTML(args));
+
+
+		accordionDataX.reponsiveCss = escapeHTML(args);
 		setaccordionData(accordionDataX);
 	}
 
 	function onChangeAccordion(args) {
 
-		console.log(args);
 
 
 		var postDataX = { ...postData };
@@ -217,7 +221,6 @@ function Html(props) {
 
 		var content = JSON.stringify(accordionData);
 
-		console.log(content);
 
 
 		apiFetch({
@@ -276,6 +279,27 @@ function Html(props) {
 			setisLoading(false);
 		});
 	}, []);
+
+
+	function escapeHTML(str) {
+		const map = {
+			'&': '&amp;',
+			'<': '&lt;',
+			'>': '&gt;',
+			'"': '&quot;',
+			"'": '&#039;'
+		};
+		return str.replace(/[&<>"']/g, function (match) {
+			return map[match];
+		});
+	}
+
+
+
+
+
+
+
 
 	return (
 		<div className="pg-setting-input-text pg-dashboard">

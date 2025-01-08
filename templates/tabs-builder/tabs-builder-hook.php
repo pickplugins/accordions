@@ -6,6 +6,7 @@ add_action('accordions_builder_tabs', 'accordions_builder_tabs', 5, 2);
 function accordions_builder_tabs($post_id, $accordionData)
 {
 
+    global $accordionsBuilderCss;
 
 
     $globalOptions = isset($accordionData["globalOptions"]) ? $accordionData["globalOptions"] : [];
@@ -54,6 +55,7 @@ function accordions_builder_tabs($post_id, $accordionData)
 
     $reponsiveCss = isset($accordionData["reponsiveCss"]) ? $accordionData["reponsiveCss"] : "";
 
+    $accordionsBuilderCss .= $reponsiveCss;
 
     $wrapper = isset($accordionData["wrapper"]) ? $accordionData["wrapper"] : [];
     $wrapperOptions = isset($wrapper["options"]) ? $wrapper["options"] : [];
@@ -165,13 +167,11 @@ function accordions_builder_tabs($post_id, $accordionData)
             $navsIndex[$i] = $i;
         }
 
-    $activeTab = 0;
     $navActiveIndex = 0;
 
     $accordionDataAttr = [
         "id" => $blockId,
         "navActiveIndex" => $navActiveIndex,
-        "activeTab" => "pg" . $activeTab,
         "activeEvent" => $activeEvent,
         "autoPlay" => $autoPlay,
         "autoPlayTimeout" => $autoPlayTimeout,
@@ -193,10 +193,9 @@ function accordions_builder_tabs($post_id, $accordionData)
     ];
 
 
-    $activeTab = 999;
     $labelCounterEnable = false;
 ?>
-    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> " data-pgTabs="<?php echo esc_attr(json_encode($accordionDataAttr)); ?>" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
+    <div id="<?php echo esc_attr($blockId); ?>" class="<?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> " data-tabsBuilder=<?php echo esc_attr(json_encode($accordionDataAttr)); ?> style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
         <div class="navs-wrapper" role="tablist">
             <?php
             foreach ($items as $index => $item) {
@@ -217,7 +216,7 @@ function accordions_builder_tabs($post_id, $accordionData)
 
 
             ?>
-                <div id="pg<?php echo esc_attr($index); ?>" data-tab-id="pg<?php echo esc_attr($index); ?>" class="<?php echo ($index == $activeTab) ? ' nav-item  ' : 'nav-item ' ?>" role="tab" tabIndex="<?php echo ($index == $activeTab) ? '0' : '-1' ?>" aria-controls="tabs-<?php echo esc_attr($index); ?>" aria-selected="false" aria-expanded="false" index="<?php echo esc_attr($index); ?>">
+                <div id="pg<?php echo esc_attr($index); ?><?php echo esc_attr($index); ?>" aria-controls="pg<?php echo esc_attr($index); ?>" class="<?php echo ($index == $navActiveIndex) ? ' nav-item  nav-item-active' : 'nav-item ' ?>" role="tab" tabIndex="<?php echo ($index == $navActiveIndex) ? '0' : '-1' ?>" aria-controls="tabs-<?php echo esc_attr($index); ?>" aria-selected="false" aria-expanded="false" index="<?php echo esc_attr($index); ?>" aria-labelledby="ui-id-<?php echo esc_attr($index); ?>">
 
 
                     <?php if ($iconPosition == 'before') : ?>
@@ -318,25 +317,20 @@ function accordions_builder_tabs($post_id, $accordionData)
 
             ?>
 
-                <div class="tabs-panel <?php echo ($index == $activeTab) ? 'tabs-panel-active' : '' ?>" data-tab-id="pg<?php echo esc_attr($index); ?>" hidden="true" aria-hidden="true" role="tabpanel" aria-labelledby="<?php echo esc_attr($index); ?>">
-                    <?php echo ($contentText); ?>
+                <div class="tabs-panel <?php echo ($index == $navActiveIndex) ? 'tabs-panel-active' : '' ?>" id="pg<?php echo esc_attr($index); ?>" role="tabpanel" aria-labelledby="ui-id-<?php echo esc_attr($index); ?>">
+                    <?php //echo ($contentText); 
+                    ?>
+                    <?php echo wp_unslash(wp_specialchars_decode($contentText, ENT_QUOTES)) ?>
+
                 </div>
             <?php
             }
 
             ?>
-
-
-
         </div>
-
     </div>
 
-    <style>
-        <?php
-        echo $reponsiveCss;
-        ?>
-    </style>
+
 
 <?php
 }

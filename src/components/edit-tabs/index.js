@@ -549,6 +549,41 @@ function Html(props) {
 			.catch((err) => { });
 	};
 
+
+
+	function escapeHTML(str) {
+		const map = {
+			'&': '&amp;',
+			'<': '&lt;',
+			'>': '&gt;',
+			'"': '&quot;',
+			"'": '&#039;'
+		};
+		return str.replace(/[&<>"']/g, function (match) {
+			return map[match];
+		});
+	}
+
+
+	function unescapeHTML(str) {
+		const map = {
+			'&amp;': '&',
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#039;': "'"
+		};
+		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function (match) {
+			return map[match];
+		});
+	}
+
+
+
+
+
+
+
 	return (
 		<div className="">
 			<div
@@ -1553,13 +1588,18 @@ function Html(props) {
 																	className="bg-slate-100 p-3 "
 																	tagName={"div"}
 																	value={item?.headerLabelText}
-																	allowedFormats={[
-																		"core/bold",
-																		"core/italic",
-																		"core/link",
-																	]}
+
 																	onChange={(content) => {
 																		setitems((prevItems) => {
+
+																			// 																			console.log(item?.headerLabelSlug)
+
+																			// if(!item?.headerLabelSlugLock){
+
+
+																			// }
+
+
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
@@ -1571,38 +1611,16 @@ function Html(props) {
 																/>
 															</div>
 															<div className="mb-3">
-																{/* <RichText
-																	placeholder="Write Header Text..."
-																	className="bg-slate-100 p-3 "
-																	tagName={"div"}
-																	value={item?.contentText}
-																	allowedFormats={[
-																		"core/bold",
-																		"core/italic",
-																		"core/link",
-																	]}
-																	onChange={(content) => {
-																		setitems((prevItems) => {
-																			const updatedItems = [...prevItems];
-																			updatedItems[index] = {
-																				...updatedItems[index],
-																				contentText: content,
-																			};
-																			return updatedItems;
-																		});
-																	}}
-																/> */}
-
-
-
 
 																<WPEditor
 																	placeholder="Write Header Text..."
 																	editorId={`content-${index}-${generate3Digit()}`}
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={item?.contentText}
+																	value={unescapeHTML(item?.contentText)}
 																	onChange={(content) => {
 																		content = content.replace(/[\r\n]+/g, '');
+																		content = escapeHTML(content);
+
 																		//var content = JSON.stringify(content);
 																		console.log((content));
 																		setitems((prevItems) => {
@@ -1621,170 +1639,9 @@ function Html(props) {
 															</div>
 
 
-
-
-
-
-															{/* <div className="mb-3">
-																<PGinputTextarea
-																	placeholder="Write Header Text..."
-																	id={`content-${index}-${generate3Digit()}`}
-																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={item?.contentText}
-																	onChange={(content) => {
-																		setitems((prevItems) => {
-																			const updatedItems = [...prevItems];
-																			updatedItems[index] = {
-																				...updatedItems[index],
-																				contentText: content,
-																			};
-																			return updatedItems;
-																		});
-																	}}
-																/>
-															</div> */}
 															<div className="mb-3">
-																<PanelRow>
-																	<label htmlFor="">Active</label>
-
-																	<InputToggle
-																		value={item?.active ?? 0}
-																		onChange={(newVal) => {
-																			if (isProFeature) {
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content:
-																						"This feature only available in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					active: newVal,
-																				};
-																				return updatedItems;
-																			});
-																		}}
-																	/>
-																</PanelRow>
-															</div>
-															<div className="mb-3">
-																<PanelRow>
-																	<label htmlFor="">Hide On Schema</label>
-
-																	<InputToggle
-																		value={item?.hideOnSchema ?? 0}
-																		onChange={(newVal) => {
-																			if (isProFeature) {
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content:
-																						"This feature only avilable in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					hideOnSchema: newVal,
-																				};
-																				return updatedItems;
-																			});
-																		}}
-																	/>
-																</PanelRow>
-
-																{/* <PanelRow>
-																	<label htmlFor="" className="font-medium text-slate-900 ">
-																		{__("Icon Idle", "accordions")}
-																	</label>
-																	<PGIconPicker
-																		library={item?.icon?.options?.library}
-																		srcType={item?.icon?.options?.srcType}
-																		iconSrc={item?.icon?.options?.iconSrc}
-																		onChange={(arg) => {
-
-																			if (isProFeature) {
-
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content: "This feature only avilable in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					icon: {
-																						...updatedItems[index].icon,
-																						options: {
-																							...updatedItems[index]?.icon?.options,
-																							srcType: arg.srcType,
-																							library: arg.library,
-																							iconSrc: arg.iconSrc,
-																						}
-
-																					},
-																				};
-																				return updatedItems;
-																			});
 
 
-																		}}
-																	/>
-																</PanelRow>
-																<PanelRow>
-																	<label htmlFor="" className="font-medium text-slate-900 ">
-																		{__("Icon Toggled", "accordions")}
-																	</label>
-																	<PGIconPicker
-																		library={item?.iconToggle?.options?.library}
-																		srcType={item?.iconToggle?.options?.srcType}
-																		iconSrc={item?.iconToggle?.options?.iconSrc}
-																		onChange={(arg) => {
-
-																			if (isProFeature) {
-
-																				addNotifications({
-																					title: "Opps its pro!",
-																					content: "This feature only avilable in premium version",
-																					type: "error",
-																				});
-																				return;
-																			}
-
-																			setitems((prevItems) => {
-																				const updatedItems = [...prevItems];
-																				updatedItems[index] = {
-																					...updatedItems[index],
-																					iconToggle: {
-																						...updatedItems[index].iconToggle,
-																						options: {
-																							...updatedItems[index]?.iconToggle?.options,
-																							srcType: arg.srcType,
-																							library: arg.library,
-																							iconSrc: arg.iconSrc,
-																						}
-
-																					},
-																				};
-																				return updatedItems;
-																			});
-
-
-																		}}
-																	/>
-																</PanelRow> */}
 																<PanelRow>
 																	<label
 																		htmlFor=""
@@ -2085,7 +1942,7 @@ function Html(props) {
 										/>
 									</PanelRow>
 
-									<PanelRow>
+									{/* <PanelRow>
 										<label htmlFor="">Auto Play Order</label>
 
 										<PGDropdown
@@ -2119,11 +1976,11 @@ function Html(props) {
 												setglobalOptions(globalOptionsX);
 											}}
 											values=""></PGDropdown>
-									</PanelRow>
+									</PanelRow> */}
 								</>
 							)}
 
-							<PanelRow>
+							{/* <PanelRow>
 								<label htmlFor="" className="flex gap-2 items-center">
 									Stats{" "}
 									<span
@@ -2156,21 +2013,8 @@ function Html(props) {
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
-								{/* <SelectControl
-									className="w-[140px]"
-									label=""
-									value={globalOptions?.stats}
-									options={[
-										{ label: __("True", "accordions"), value: 1 },
-										{ label: __("False", "accordions"), value: 0 },
-									]}
-									onChange={(newVal) => {
-										var globalOptionsX = { ...globalOptions };
-										globalOptionsX.stats = newVal;
-										setglobalOptions(globalOptionsX);
-									}}
-								/> */}
-							</PanelRow>
+
+							</PanelRow> */}
 						</div>
 					</PanelBody>
 					<PanelBody

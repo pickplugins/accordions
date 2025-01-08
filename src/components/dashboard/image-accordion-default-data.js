@@ -13,6 +13,14 @@ const imageAccordionDefaultData = {
 			tag: "div",
 			class: "image-accordion-wrapper",
 		},
+		styles: {},
+	},
+	itemsWrap: {
+		options: {
+			content: "",
+			tag: "div",
+			class: "items",
+		},
 		styles: {
 			height: {
 				Desktop: "70vh",
@@ -25,6 +33,9 @@ const imageAccordionDefaultData = {
 			},
 		},
 	},
+
+
+
 	items: [
 		{
 			isActive: false,
@@ -74,7 +85,15 @@ const imageAccordionDefaultData = {
 				Desktop: "all 1s ease-in-out 0s",
 			},
 		},
-		hover: {
+
+	},
+	itemActive: {
+		options: {
+			content: "",
+			tag: "div",
+			class: "image-accordion-item",
+		},
+		styles: {
 			flexBasis: {
 				Desktop: "0%",
 			},
@@ -85,18 +104,15 @@ const imageAccordionDefaultData = {
 				Desktop: "1",
 			},
 		},
-		"hover div:nth-child(2)": {
-			transform: {
-				Desktop: "translateY(-50%) ",
-			},
-			top: {
-				Desktop: "50%",
-			},
+		hover: {
+
 		},
+
 	},
-	contentWrap: {
+
+	overlay: {
 		options: {
-			class: "image-accordion-content-wrap",
+			class: "image-accordion-overlay",
 		},
 		styles: {
 			backgroundColor: {
@@ -126,7 +142,7 @@ const imageAccordionDefaultData = {
 		options: {
 			content: "",
 			tag: "div",
-			class: "accordion-content",
+			class: "image-accordion-content",
 		},
 		styles: {},
 	},
