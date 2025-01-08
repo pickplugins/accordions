@@ -781,6 +781,25 @@ function accordions_global_scripts()
 
 }
 
+add_action('wp_footer', 'accordions_builder_global_scripts', 999);
+
+function accordions_builder_global_scripts()
+{
+
+    global $accordionsBuilderCss;
+
+
+
+?>
+    <style>
+        <?php echo wp_strip_all_tags($accordionsBuilderCss); ?>
+    </style>
+
+
+<?php
+
+}
+
 
 function accordions_global_vars()
 {

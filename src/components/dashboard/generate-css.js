@@ -47,6 +47,7 @@ function Html(props) {
 
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
+	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
 	var [content, setcontent] = useState(accordionData.content);
 	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
@@ -80,7 +81,18 @@ function Html(props) {
 	var blockClass = "#accordions-" + postData.ID;
 
 	var wrapperSelector = blockClass + "";
-	var contentSelector = blockClass + " .accordion-content";
+
+	if (globalOptions.viewType == "imageAccordion") {
+		var contentSelector = blockClass + " .image-accordion-content";
+
+
+	} else {
+		var contentSelector = blockClass + " .accordion-content";
+	}
+	var itemActiveSelector = blockClass + " .image-accordion-item.active";
+
+	var itemsWrapSelector = blockClass + " .items";
+
 	var headerSelector = blockClass + " .accordion-header";
 	var headerActiveSelector = blockClass + " .accordion-header-active";
 	var headerLabelSelector = blockClass + " .accordion-header-label";
@@ -100,7 +112,7 @@ function Html(props) {
 	var panelWrapActiveSelector = blockClass + " .tabs-panel-active";
 
 	var itemSelector = blockClass + " .image-accordion-item";
-	var contentWrapSelector = blockClass + " .image-accordion-content-wrap";
+	var overlaySelector = blockClass + " .image-accordion-overlay";
 	var imageSelector = blockClass + " .image-accordion-image";
 	var titleSelector = blockClass + " .image-accordion-title";
 
@@ -555,6 +567,14 @@ function Html(props) {
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
+		var itemsWrapCss = generateElementCss(accordionData.itemsWrap, itemsWrapSelector);
+		Object.entries(itemsWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+
 
 		var headerActiveCss = generateElementCss(accordionData.headerActive, headerActiveSelector);
 		Object.entries(headerActiveCss).map((selectors) => {
@@ -683,8 +703,17 @@ function Html(props) {
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-		var contentWrapCss = generateElementCss(accordionData.contentWrap, contentWrapSelector);
-		Object.entries(contentWrapCss).map((selectors) => {
+		var itemActiveCss = generateElementCss(accordionData.itemActive, itemActiveSelector);
+		Object.entries(itemActiveCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+
+
+		var overlayCss = generateElementCss(accordionData.overlay, overlaySelector);
+		Object.entries(overlayCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;

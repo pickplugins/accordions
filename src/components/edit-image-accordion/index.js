@@ -67,7 +67,9 @@ function Html(props) {
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
 	var [items, setitems] = useState(accordionData.items); // Using the hook.
 	var [item, setitem] = useState(accordionData.item);
-	var [contentWrap, setcontentWrap] = useState(accordionData.contentWrap);
+	var [itemActive, setitemActive] = useState(accordionData.itemActive);
+	var [itemsWrap, setitemsWrap] = useState(accordionData.itemsWrap);
+	var [overlay, setoverlay] = useState(accordionData.overlay);
 	var [content, setcontent] = useState(accordionData.content);
 	var [title, settitle] = useState(accordionData.title);
 	var [image, setimage] = useState(accordionData.image);
@@ -103,7 +105,6 @@ function Html(props) {
 	// const gapValue = accOptions?.gap || "0px";
 	// const [number, setNumber] = useState(parseInt(gapValue));
 	// const [unit, setUnit] = useState(gapValue.replace(number, ""));
-	const [itemActive, setitemActive] = useState(99999);
 	const [AIautoUpdate, setAIautoUpdate] = useState(false);
 	var [AIWriter, setAIWriter] = useState(false); // Using the hook.
 	var formattedPrompt =
@@ -183,9 +184,24 @@ function Html(props) {
 	}, [item]);
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
-		accordionDataX.contentWrap = contentWrap;
+		accordionDataX.overlay = overlay;
 		setaccordionData(accordionDataX);
-	}, [contentWrap]);
+	}, [overlay]);
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionDataX.itemActive = itemActive;
+		setaccordionData(accordionDataX);
+	}, [itemActive]);
+
+
+
+	useEffect(() => {
+		var accordionDataX = { ...accordionData };
+		accordionDataX.itemsWrap = itemsWrap;
+		setaccordionData(accordionDataX);
+	}, [itemsWrap]);
+
+
 	useEffect(() => {
 		var accordionDataX = { ...accordionData };
 		accordionDataX.title = title;
@@ -1523,29 +1539,13 @@ function Html(props) {
 																/>
 															</div>
 															<div className="mb-3">
-																{/* <RichText
-																	placeholder="Write Header Text..."
-																	className="bg-slate-100 p-3 "
-																	tagName={"div"}
-																	value={item?.contentText}
 
-																	onChange={(content) => {
-																		setitems((prevItems) => {
-																			const updatedItems = [...prevItems];
-																			updatedItems[index] = {
-																				...updatedItems[index],
-																				contentText: content,
-																			};
-																			return updatedItems;
-																		});
-																	}}
-																/> */}
 
 																<WPEditor
 																	placeholder="Write Header Text..."
 																	editorId={`content-${index}-${generate3Digit()}`}
 																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={unescapeHTML(item?.contentText)}
+																	value={unescapeHTML(item?.content)}
 																	onChange={(content) => {
 																		content = content.replace(/[\r\n]+/g, "");
 																		content = escapeHTML(content);
@@ -1556,7 +1556,7 @@ function Html(props) {
 																			const updatedItems = [...prevItems];
 																			updatedItems[index] = {
 																				...updatedItems[index],
-																				contentText: content,
+																				content: content,
 																			};
 																			return updatedItems;
 																		});
@@ -1564,24 +1564,7 @@ function Html(props) {
 																/>
 															</div>
 
-															{/* <div className="mb-3">
-																<PGinputTextarea
-																	placeholder="Write Header Text..."
-																	id={`content-${index}-${generate3Digit()}`}
-																	className={`bg-slate-100 p-3 min-h-24 w-full`}
-																	value={item?.contentText}
-																	onChange={(content) => {
-																		setitems((prevItems) => {
-																			const updatedItems = [...prevItems];
-																			updatedItems[index] = {
-																				...updatedItems[index],
-																				contentText: content,
-																			};
-																			return updatedItems;
-																		});
-																	}}
-																/>
-															</div> */}
+
 															<div className="flex my-5 justify-between items-center ">
 																<label
 																	className="w-[400px]"
@@ -1629,28 +1612,7 @@ function Html(props) {
 																						className="no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white">
 																						Open Media Library
 																					</button>
-																					{/* <button
-																						onClick={() => {
-																							setitems((prevItems) => {
-																								const updatedItems = [
-																									...prevItems,
-																								];
-																								updatedItems[index] = {
-																									...updatedItems[index],
-																									image: {
-																										...updatedItems[index]
-																											.image,
-																										id: media.id,
-																										url: media.url,
-																									},
-																								};
-																								return updatedItems;
-																							});
-																						}}
-																						className="no-underline size-[38px] flex items-center justify-center text-[30px] rounded-sm !border !bg-transparent !border-solid !border-gray-700 hover:!border-red-700 text-gray-700   hover:text-red-700"
-																						title="Clear Logo">
-																						&times;
-																					</button> */}
+
 																				</div>
 																			</div>
 																		);
@@ -1754,7 +1716,7 @@ function Html(props) {
 									}}
 								/>
 							</PanelRow>
-
+							{/* 
 							<PanelRow>
 								<label htmlFor="">Active Event</label>
 
@@ -1775,7 +1737,7 @@ function Html(props) {
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
-							</PanelRow>
+							</PanelRow> */}
 							<PanelRow>
 								<label htmlFor="">URL Hash</label>
 								{/* <SelectControl
@@ -1798,12 +1760,168 @@ function Html(props) {
 								<InputToggle
 									value={globalOptions?.urlHash ?? 0}
 									onChange={(newVal) => {
+
+										if (isProFeature) {
+											addNotifications({
+												title: "Opps its pro!",
+												content:
+													"This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+
 										var globalOptionsX = { ...globalOptions };
 										globalOptionsX.urlHash = newVal;
 										setglobalOptions(globalOptionsX);
 									}}
 								/>
 							</PanelRow>
+
+
+							<PanelRow>
+								<label htmlFor="" className="flex gap-2 items-center">
+									Auto Play
+									<span
+										className="cursor-pointer"
+										title="Click to know more"
+										onClick={() => {
+											setHelp({
+												id: "autoPlaySetting",
+												enable: true,
+											});
+										}}>
+										<Icon icon={help} />
+									</span>
+									{isProFeature && (
+										<span className="bg-amber-500 px-2 py-0.5 text-[11px]  no-underline rounded-sm  cursor-pointer text-white ">
+											{__("Pro", "accordions")}
+										</span>
+									)}
+								</label>
+								<InputToggle
+									value={globalOptions?.autoPlay}
+									onChange={(newVal) => {
+										if (isProFeature) {
+											addNotifications({
+												title: "Opps its pro!",
+												content:
+													"This feature only avilable in premium version",
+												type: "error",
+											});
+											return;
+										}
+										var globalOptionsX = { ...globalOptions };
+										globalOptionsX.autoPlay = newVal;
+										setglobalOptions(globalOptionsX);
+									}}
+								/>
+							</PanelRow>
+
+							{globalOptions?.autoPlay && (
+								<>
+									{/* <PanelRow>
+										<label htmlFor="" className="flex gap-2 items-center">
+											Auto Play Control
+											<span
+												className="cursor-pointer"
+												title="Click to know more"
+												onClick={() => {
+													setHelp({
+														id: "statsSetting",
+														enable: true,
+													});
+												}}>
+												<Icon icon={help} />
+											</span>
+										</label>
+										<InputToggle
+											value={globalOptions?.autoPlayControl}
+											onChange={(newVal) => {
+												if (isProFeature) {
+													addNotifications({
+														title: "Opps its pro!",
+														content:
+															"This feature only avilable in premium version",
+														type: "error",
+													});
+													return;
+												}
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayControl = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow> */}
+
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Timeout
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayTimeout}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayTimeout = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+									<PanelRow className="w-full">
+										<label htmlFor="" className="break-all">
+											Auto Play Delay
+										</label>
+										<PGinputText
+											className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid max-w-[150px]"
+											label=""
+											value={globalOptions?.autoPlayDelay}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayDelay = newVal;
+												setglobalOptions(globalOptionsX);
+											}}
+										/>
+									</PanelRow>
+
+									{/* <PanelRow>
+										<label htmlFor="">Auto Play Order</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											buttonTitle={
+												globalOptions?.autoPlayOrder
+													? globalOptions?.autoPlayOrder
+													: __("Choose", "accordions")
+											}
+											options={[
+												{
+													label: __("Top To Bottom", "accordions"),
+													value: "topToBottom",
+													isPro: customerData.isPro ? false : true,
+												},
+												{
+													label: __("Bottom To Top", "accordions"),
+													value: "bottomToTop",
+													isPro: customerData.isPro ? false : true,
+												},
+												{
+													label: __("Random", "accordions"),
+													value: "random",
+													isPro: customerData.isPro ? false : true,
+												},
+											]}
+											onChange={(newVal) => {
+												var globalOptionsX = { ...globalOptions };
+												globalOptionsX.autoPlayOrder = newVal.value;
+												setglobalOptions(globalOptionsX);
+											}}
+											values=""></PGDropdown>
+									</PanelRow> */}
+								</>
+							)}
 						</div>
 					</PanelBody>
 					<PanelBody
@@ -1884,9 +2002,11 @@ function Html(props) {
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+
+
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Content Wrapper"
+						title="Items Wrapper"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
@@ -1913,136 +2033,57 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={contentWrap?.options?.class}
+										value={itemsWrap?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
 										onChange={(newVal) => {
 											var optionsX = {
-												...contentWrap,
+												...itemsWrap,
 												options: {
-													...contentWrap?.options,
+													...itemsWrap?.options,
 													class: newVal,
 												},
 											};
-											setcontentWrap(optionsX);
+											setitemsWrap(optionsX);
 										}}
 									/>
 								</div>
 
-								<PanelRow>
-									<label htmlFor="" className="flex gap-2 items-center">
-										IN Animation
-									</label>
 
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											popupEntranceAnimateBasic[
-												contentWrap?.options?.inAnimation
-											] == undefined
-												? __("Choose", "accordions")
-												: popupEntranceAnimateBasic[
-													contentWrap?.options?.inAnimation
-												].label
-										}
-										options={popupEntranceAnimateBasic}
-										onChange={(newVal) => {
-											var optionsX = {
-												...contentWrap,
-												options: {
-													...contentWrap?.options,
-													inAnimation: newVal.value,
-												},
-											};
-											setcontentWrap(optionsX);
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-								<PanelRow>
-									<label htmlFor="" className="flex gap-2 items-center">
-										OUT Animation
-									</label>
-
-									<PGDropdown
-										position="bottom right"
-										variant="secondary"
-										buttonTitle={
-											popupCloseAnimateBasic[
-												contentWrap?.options?.outAnimation
-											] == undefined
-												? __("Choose", "accordions")
-												: popupCloseAnimateBasic[
-													contentWrap?.options?.outAnimation
-												].label
-										}
-										options={popupCloseAnimateBasic}
-										onChange={(newVal) => {
-											var optionsX = {
-												...contentWrap,
-												options: {
-													...contentWrap?.options,
-													outAnimation: newVal.value,
-												},
-											};
-											setcontentWrap(optionsX);
-										}}
-										values=""></PGDropdown>
-								</PanelRow>
-
-								<div className="flex  my-5  justify-between items-center">
-									<label className="" htmlFor="emailVerification">
-										{__("Animation duration", "accordions")}
-									</label>
-									<PGinputText
-										value={contentWrap?.options?.animationDuration}
-										placeholder={"1000"}
-										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[200px]"
-										onChange={(newVal) => {
-											var optionsX = {
-												...contentWrap,
-												options: {
-													...contentWrap?.options,
-													animationDuration: newVal,
-												},
-											};
-											setcontent(optionsX);
-										}}
-									/>
-								</div>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
-									obj={contentWrap}
+									obj={itemsWrap}
 									onChange={(sudoScource, newVal, attr) =>
 										onChangeStyle(
 											sudoScource,
 											newVal,
 											attr,
-											contentWrap,
-											setcontentWrap
+											itemsWrap,
+											setitemsWrap
 										)
 									}
 									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, contentWrap, setcontentWrap)
+										onAddStyle(sudoScource, key, itemsWrap, setitemsWrap)
 									}
 									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, contentWrap, setcontentWrap)
+										onRemoveStyle(sudoScource, key, itemsWrap, setitemsWrap)
 									}
 									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, contentWrap, setcontentWrap)
+										onResetStyle(sudoSources, itemsWrap, setitemsWrap)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
 										onBulkAddStyle(
 											sudoSource,
 											cssObj,
-											contentWrap,
-											setcontentWrap
+											itemsWrap,
+											setitemsWrap
 										)
 									}
 								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+
 
 					<PanelBody
 						className="font-medium text-slate-900 "
@@ -2112,7 +2153,7 @@ function Html(props) {
 					</PanelBody>
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Title"
+						title="Item Active"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
@@ -2139,46 +2180,49 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={title?.options?.class}
+										value={itemActive?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
 										onChange={(newVal) => {
 											var optionsX = {
-												...title,
+												...itemActive,
 												options: {
-													...title?.options,
+													...itemActive?.options,
 													class: newVal,
 												},
 											};
-											settitle(optionsX);
+											setitemActive(optionsX);
 										}}
 									/>
 								</div>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
-									obj={title}
+									obj={itemActive}
 									onChange={(sudoScource, newVal, attr) =>
-										onChangeStyle(sudoScource, newVal, attr, title, settitle)
+										onChangeStyle(sudoScource, newVal, attr, itemActive, setitemActive)
 									}
 									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, title, settitle)
+										onAddStyle(sudoScource, key, itemActive, setitemActive)
 									}
 									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, title, settitle)
+										onRemoveStyle(sudoScource, key, itemActive, setitemActive)
 									}
 									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, title, settitle)
+										onResetStyle(sudoSources, itemActive, setitemActive)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, title, settitle)
+										onBulkAddStyle(sudoSource, cssObj, itemActive, setitemActive)
 									}
 								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+
+
+
 					<PanelBody
 						className="font-medium text-slate-900 "
-						title="Content"
+						title="Overlay"
 						initialOpen={false}>
 						<PGtabs
 							activeTab="options"
@@ -2205,49 +2249,322 @@ function Html(props) {
 										{__("Class", "accordions")}
 									</label>
 									<PGinputText
-										value={content?.options?.class}
+										value={overlay?.options?.class}
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
 										onChange={(newVal) => {
 											var optionsX = {
-												...content,
+												...overlay,
 												options: {
-													...content?.options,
+													...overlay?.options,
 													class: newVal,
 												},
 											};
-											setcontent(optionsX);
+											setoverlay(optionsX);
 										}}
 									/>
 								</div>
+
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										IN Animation
+									</label>
+
+									<PGDropdown
+										position="bottom right"
+										variant="secondary"
+										buttonTitle={
+											popupEntranceAnimateBasic[
+												overlay?.options?.inAnimation
+											] == undefined
+												? __("Choose", "accordions")
+												: popupEntranceAnimateBasic[
+													overlay?.options?.inAnimation
+												].label
+										}
+										options={popupEntranceAnimateBasic}
+										onChange={(newVal) => {
+
+
+
+											if (isProFeature) {
+												addNotifications({
+													title: "Opps its pro!",
+													content:
+														"This feature only avilable in premium version",
+													type: "error",
+												});
+												return;
+											}
+
+
+
+
+
+											var optionsX = {
+												...overlay,
+												options: {
+													...overlay?.options,
+													inAnimation: newVal.value,
+												},
+											};
+											setoverlay(optionsX);
+										}}
+										values=""></PGDropdown>
+								</PanelRow>
+								<PanelRow>
+									<label htmlFor="" className="flex gap-2 items-center">
+										OUT Animation
+									</label>
+
+									<PGDropdown
+										position="bottom right"
+										variant="secondary"
+										buttonTitle={
+											popupCloseAnimateBasic[
+												overlay?.options?.outAnimation
+											] == undefined
+												? __("Choose", "accordions")
+												: popupCloseAnimateBasic[
+													overlay?.options?.outAnimation
+												].label
+										}
+										options={popupCloseAnimateBasic}
+										onChange={(newVal) => {
+
+											if (isProFeature) {
+												addNotifications({
+													title: "Opps its pro!",
+													content:
+														"This feature only avilable in premium version",
+													type: "error",
+												});
+												return;
+											}
+
+
+
+
+											var optionsX = {
+												...overlay,
+												options: {
+													...overlay?.options,
+													outAnimation: newVal.value,
+												},
+											};
+											setoverlay(optionsX);
+										}}
+										values=""></PGDropdown>
+								</PanelRow>
+
+								<div className="flex  my-5  justify-between items-center">
+									<label className="" htmlFor="emailVerification">
+										{__("Animation duration", "accordions")}
+									</label>
+									<PGinputText
+										value={overlay?.options?.animationDuration}
+										placeholder={"1000"}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[200px]"
+										onChange={(newVal) => {
+
+											if (isProFeature) {
+												addNotifications({
+													title: "Opps its pro!",
+													content:
+														"This feature only avilable in premium version",
+													type: "error",
+												});
+												return;
+											}
+
+
+
+
+
+											var optionsX = {
+												...overlay,
+												options: {
+													...overlay?.options,
+													animationDuration: newVal,
+												},
+											};
+											setoverlay(optionsX);
+										}}
+									/>
+								</div>
+
+								<PanelBody
+									className="font-medium text-slate-900 "
+									title="Title"
+									initialOpen={false}>
+									<PGtabs
+										activeTab="options"
+										orientation="horizontal"
+										activeClass="active-tab"
+										onSelect={(tabName) => { }}
+										tabs={[
+											{
+												name: "options",
+												title: "Options",
+												icon: settings,
+												className: "tab-settings",
+											},
+											{
+												name: "styles",
+												title: "Styles",
+												icon: brush,
+												className: "tab-style",
+											},
+										]}>
+										<PGtab name="options">
+											<div className="flex  my-5  justify-between items-center">
+												<label className="" htmlFor="emailVerification">
+													{__("Class", "accordions")}
+												</label>
+												<PGinputText
+													value={title?.options?.class}
+													className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+													onChange={(newVal) => {
+														var optionsX = {
+															...title,
+															options: {
+																...title?.options,
+																class: newVal,
+															},
+														};
+														settitle(optionsX);
+													}}
+												/>
+											</div>
+										</PGtab>
+										<PGtab name="styles">
+											<PGStyles
+												obj={title}
+												onChange={(sudoScource, newVal, attr) =>
+													onChangeStyle(sudoScource, newVal, attr, title, settitle)
+												}
+												onAdd={(sudoScource, key) =>
+													onAddStyle(sudoScource, key, title, settitle)
+												}
+												onRemove={(sudoScource, key) =>
+													onRemoveStyle(sudoScource, key, title, settitle)
+												}
+												onReset={(sudoSources) =>
+													onResetStyle(sudoSources, title, settitle)
+												}
+												onBulkAdd={(sudoSource, cssObj) =>
+													onBulkAddStyle(sudoSource, cssObj, title, settitle)
+												}
+											/>
+										</PGtab>
+									</PGtabs>
+								</PanelBody>
+								<PanelBody
+									className="font-medium text-slate-900 "
+									title="Content"
+									initialOpen={false}>
+									<PGtabs
+										activeTab="options"
+										orientation="horizontal"
+										activeClass="active-tab"
+										onSelect={(tabName) => { }}
+										tabs={[
+											{
+												name: "options",
+												title: "Options",
+												icon: settings,
+												className: "tab-settings",
+											},
+											{
+												name: "styles",
+												title: "Styles",
+												icon: brush,
+												className: "tab-style",
+											},
+										]}>
+										<PGtab name="options">
+											<div className="flex  my-5  justify-between items-center">
+												<label className="" htmlFor="emailVerification">
+													{__("Class", "accordions")}
+												</label>
+												<PGinputText
+													value={content?.options?.class}
+													className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-[210px]"
+													onChange={(newVal) => {
+														var optionsX = {
+															...content,
+															options: {
+																...content?.options,
+																class: newVal,
+															},
+														};
+														setcontent(optionsX);
+													}}
+												/>
+											</div>
+										</PGtab>
+										<PGtab name="styles">
+											<PGStyles
+												obj={content}
+												onChange={(sudoScource, newVal, attr) =>
+													onChangeStyle(
+														sudoScource,
+														newVal,
+														attr,
+														content,
+														setcontent
+													)
+												}
+												onAdd={(sudoScource, key) =>
+													onAddStyle(sudoScource, key, content, setcontent)
+												}
+												onRemove={(sudoScource, key) =>
+													onRemoveStyle(sudoScource, key, content, setcontent)
+												}
+												onReset={(sudoSources) =>
+													onResetStyle(sudoSources, content, setcontent)
+												}
+												onBulkAdd={(sudoSource, cssObj) =>
+													onBulkAddStyle(sudoSource, cssObj, content, setcontent)
+												}
+											/>
+										</PGtab>
+									</PGtabs>
+								</PanelBody>
 							</PGtab>
 							<PGtab name="styles">
 								<PGStyles
-									obj={content}
+									obj={overlay}
 									onChange={(sudoScource, newVal, attr) =>
 										onChangeStyle(
 											sudoScource,
 											newVal,
 											attr,
-											content,
-											setcontent
+											overlay,
+											setoverlay
 										)
 									}
 									onAdd={(sudoScource, key) =>
-										onAddStyle(sudoScource, key, content, setcontent)
+										onAddStyle(sudoScource, key, overlay, setoverlay)
 									}
 									onRemove={(sudoScource, key) =>
-										onRemoveStyle(sudoScource, key, content, setcontent)
+										onRemoveStyle(sudoScource, key, overlay, setoverlay)
 									}
 									onReset={(sudoSources) =>
-										onResetStyle(sudoSources, content, setcontent)
+										onResetStyle(sudoSources, overlay, setoverlay)
 									}
 									onBulkAdd={(sudoSource, cssObj) =>
-										onBulkAddStyle(sudoSource, cssObj, content, setcontent)
+										onBulkAddStyle(
+											sudoSource,
+											cssObj,
+											overlay,
+											setoverlay
+										)
 									}
 								/>
 							</PGtab>
 						</PGtabs>
 					</PanelBody>
+
 					<PanelBody
 						className="font-medium text-slate-900 "
 						title="Image"

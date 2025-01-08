@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			this.navsWrapper = "navs-wrapper";
 			this.navItem = "nav-item";
 			this.panelsWrap = "panels-wrap";
-			this.pgTabsPanel = "tabs-panel";
+			this.tabsPanel = "tabs-panel";
 			this.panelWrapInAnimation = config.panelWrapInAnimation || "";
 			this.panelWrapOutAnimation = config.panelWrapOutAnimation || "";
 			this.panelWrapAnimationDuration = config.panelWrapAnimationDuration || 0;
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		switchNavs(index, oldIndex = 0) {
 			const oldTabPanel = document.querySelector(
-				`#${this.id} .tabs-panel[data-tab-id="pg${oldIndex}"]`
+				`#${this.id}  > .panels-wrap > .tabs-panel[id="pg${oldIndex}"]`
 			);
 
 			if (oldTabPanel) {
@@ -33,8 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			setTimeout(() => {
 				const navItems = document.querySelectorAll(`#${this.id} .nav-item`);
 				const tabPanels = document.querySelectorAll(`#${this.id} .tabs-panel`);
-
-				console.log(index);
 
 
 				navItems.forEach((tab, tabIndex) => {
@@ -47,10 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
 						iconToggle.style.display = "inline-block";
 						iconIdle.style.display = "none";
 						tab.classList.add("nav-item-active");
+						tabPanels[index].setAttribute('hidden', false);
 
 					} else {
 
 
+						tabPanels[index].setAttribute('hidden', true);
 
 						iconToggle.style.display = "none";
 						iconIdle.style.display = "inline-block";
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 				tabPanels.forEach((panel) => panel.classList.remove("tabs-panel-active", "hidden"));
 
-				const activeTabPanel = document.querySelector(`#${this.id} .tabs-panel[data-tab-id="pg${index}"]`);
+				const activeTabPanel = document.querySelector(`#${this.id}  > .panels-wrap > .tabs-panel[id="pg${index}"]`);
 				if (activeTabPanel) {
 					activeTabPanel.classList.add("tabs-panel-active");
 					// animate
@@ -106,7 +106,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			const tabElement = document.querySelector(`#${this.id}`);
 			if (this.lazyLoad) tabElement.style.display = "block";
 
-			const navItems = tabElement.querySelectorAll(".nav-item");
+			const navItems = tabElement.querySelectorAll(`#${this.id} > .navs-wrapper .nav-item`);
+			var tabPanels = document.querySelectorAll(`#${this.id} > .panels-wrap > .tabs-panel`);
+
+
 			navItems.forEach((item, index) => {
 
 				var iconToggle = item.querySelector(".nav-icon-toggle");
@@ -115,12 +118,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				if (this.navActiveIndex == index) {
 					iconToggle.style.display = "inline-block";
 					iconIdle.style.display = "none";
+					tabPanels[index].setAttribute('hidden', false);
+
 				} else {
 					iconToggle.style.display = "none";
 					iconIdle.style.display = "inline-block";
+					tabPanels[index].setAttribute('hidden', true);
+
 				}
-
-
 
 
 				item.addEventListener("click", () => this.switchNavs(index, this.navActiveIndex));
@@ -134,6 +139,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// Initialize instances
 	document.querySelectorAll("[data-tabsBuilder]").forEach((tabElement) => {
+
+		console.log(tabElement);
+
+
 		const config = JSON.parse(tabElement.getAttribute("data-tabsBuilder"));
 		new TabsBuilder(config);
 	});

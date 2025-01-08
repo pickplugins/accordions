@@ -158,6 +158,28 @@ function Html(props) {
 
 	var [active, setactive] = useState(9999);
 
+
+
+	function unescapeHTML(str) {
+		const map = {
+			'&amp;': '&',
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#039;': "'"
+		};
+		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function (match) {
+			return map[match];
+		});
+	}
+
+
+
+
+
+
+
+
 	return (
 
 
@@ -322,7 +344,7 @@ function Html(props) {
 									<div
 										className={`accordion-content`}
 										dangerouslySetInnerHTML={{
-											__html: item?.contentText,
+											__html: unescapeHTML(item?.contentText),
 										}}></div>
 								</>
 							)}

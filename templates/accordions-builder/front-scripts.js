@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 			if (this.id.length == 0) return;
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
 				this.activeIndex = index
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		inactiveByIndex(index) {
 			if (this.id.length == 0) return;
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
 
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		hideByIndex(index) {
 			if (this.id.length == 0) return;
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
 
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		unhideByIndex(index) {
 			if (this.id.length == 0) return;
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
 
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 		unhideAll(index) {
 			if (this.id.length == 0) return;
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
 
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		// 	var autoPlayOrder = (args.autoPlayOrder);
 		// 	var autoPlayDelay = parseInt(args.autoPlayDelay);
 
-		// 	var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+		// 	var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 
 
 		// 	let currentIndex = 0;
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			}
 
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
 
@@ -466,7 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (this.lazyLoad) accordionWrapper.style.display = "block";
 
 
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " .accordion-header");
+			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 
 			var headerList = [];
 			accordionHeaders.forEach((header, index) => {

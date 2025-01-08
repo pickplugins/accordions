@@ -161,6 +161,20 @@ function Html(props) {
 
 	var [active, setactive] = useState(9999);
 
+	function unescapeHTML(str) {
+		const map = {
+			'&amp;': '&',
+			'&lt;': '<',
+			'&gt;': '>',
+			'&quot;': '"',
+			'&#039;': "'"
+		};
+		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function (match) {
+			return map[match];
+		});
+	}
+
+
 	return (
 
 
@@ -450,7 +464,7 @@ function Html(props) {
 						return (
 							<div className={`tabs-panel animate__animated animate__${panelWrap?.options?.inAnimation}  ${activeTab === index ? "tabs-panel-active" : "hidden"
 								}`}
-								dangerouslySetInnerHTML={{ __html: tab.contentText }}
+								dangerouslySetInnerHTML={{ __html: unescapeHTML(tab.contentText) }}
 							>
 
 

@@ -66,6 +66,10 @@ class class_accordions_shortcodes
             wp_enqueue_script('tabs_front_scripts');
             wp_enqueue_style('accordions_animate');
         }
+        if ($viewType == "imageAccordion") {
+            wp_enqueue_script('image_accordion_front_scripts');
+            wp_enqueue_style('accordions_animate');
+        }
 
 
         return ob_get_clean();

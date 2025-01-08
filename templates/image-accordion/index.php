@@ -52,6 +52,13 @@ function accordions_builder_imageAccordion($post_id, $accordionData)
     $reponsiveCss = isset($accordionData["reponsiveCss"]) ? $accordionData["reponsiveCss"] : "";
 
 
+    $overlay = isset($accordionData["overlay"]) ? $accordionData["overlay"] : [];
+    $overlayOptions = isset($overlay["options"]) ? $overlay["options"] : [];
+    $overlayInAnimation = !empty($overlayOptions["inAnimation"]) ? $overlayOptions["inAnimation"] : "";
+    $overlayOutAnimation = !empty($overlayOptions["outAnimation"]) ? $overlayOptions["outAnimation"] : "";
+    $overlayAnimationDuration = !empty($overlayOptions["animationDuration"]) ? $overlayOptions["animationDuration"] : "";
+
+
     $wrapper = isset($accordionData["wrapper"]) ? $accordionData["wrapper"] : [];
     $wrapperOptions = isset($wrapper["options"]) ? $wrapper["options"] : [];
     $wrapperTag = !empty($wrapperOptions["tag"]) ? $wrapperOptions["tag"] : "div";
@@ -74,78 +81,85 @@ function accordions_builder_imageAccordion($post_id, $accordionData)
 
     $accordionDataAttr = [
         "id" => $blockId,
-        "navActiveIndex" => $navActiveIndex,
-        "activeTab" => "pg" . $activeTab,
+        "activeIndex" => $navActiveIndex,
         "activeEvent" => $activeEvent,
         "autoPlay" => $autoPlay,
         "autoPlayTimeout" => $autoPlayTimeout,
         "autoPlayDelay" => $autoPlayDelay,
-        "autoPlayOrder" => $autoPlayOrder,
         "stats" => $stats,
         "urlHash" => $urlHash,
         "clickToScrollTop" => $clickToScrollTop,
         "clickToScrollTopOffset" => $clickToScrollTopOffset,
+        "overlayInAnimation" => $overlayInAnimation,
+        "overlayOutAnimation" => $overlayOutAnimation,
+        "overlayAnimationDuration" => $overlayAnimationDuration,
 
         "lazyLoad" => $lazyLoad,
         "navsIndex" => $navsIndex,
 
     ];
 
+    //var_dump($overlayAnimationDuration);
 
     $activeTab = 999;
     $labelCounterEnable = false;
 ?>
-    <div id="<?php echo esc_attr($blockId); ?>" class="image-accordion-wrapper <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> " data-pgTabs="<?php echo esc_attr(json_encode($accordionDataAttr)); ?>" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
+    <div id="<?php echo esc_attr($blockId); ?>" class="image-accordion-wrapper <?php echo esc_attr($wrapperClass); ?> <?php echo esc_attr($blockId); ?> " data-imageAccordion="<?php echo esc_attr(json_encode($accordionDataAttr)); ?>" style="<?php echo ($lazyLoad) ? "display: none;" : ""; ?>">
+
+
+        <div class="items">
+
+            <?php
+            if (!empty($items))
+                foreach ($items as $index => $item) {
+                    $link = isset($item["link"]) ? $item["link"] : "";
+                    $title = isset($item["title"]) ? $item["title"] : "";
+                    $content = isset($item["content"]) ? $item["content"] : "";
+                    $image = isset($item["image"]) ? $item["image"] : "";
+                    $imageId = isset($image["id"]) ? $image["id"] : "";
+                    $imageUrl = isset($image["url"]) ? $image["url"] : "";
+                    $imageAltText = isset($image["altText"]) ? $image["altText"] : "";
+
+
+                    // if ($panelWrapAutoembed) {
+                    //     $WP_Embed = new WP_Embed();
+                    //     $contentText = $WP_Embed->autoembed($contentText);
+                    // }
+
+                    // if ($panelWrapShortcodes) {
+                    //     //$contentText = apply_filters('the_content', $contentText);
+                    //     //$contentText = do_blocks($contentText);
+                    // }
+
+                    // if ($panelWrapShortcodes) {
+                    //     $contentText = do_shortcode($contentText);
+                    // }
+
+
+                    // if ($panelWrapWpautop) {
+                    //     //$contentText = wpautop($contentText);
+                    // }
 
 
 
-        <?php
-        foreach ($items as $index => $item) {
-            $link = isset($item["link"]) ? $item["link"] : "";
-            $title = isset($item["title"]) ? $item["title"] : "";
-            $content = isset($item["content"]) ? $item["content"] : "";
-            $image = isset($item["image"]) ? $item["image"] : "";
-            $imageId = isset($image["id"]) ? $image["id"] : "";
-            $imageUrl = isset($image["url"]) ? $image["url"] : "";
-            $imageAltText = isset($image["altText"]) ? $image["altText"] : "";
 
 
-            // if ($panelWrapAutoembed) {
-            //     $WP_Embed = new WP_Embed();
-            //     $contentText = $WP_Embed->autoembed($contentText);
-            // }
+            ?>
 
-            // if ($panelWrapShortcodes) {
-            //     //$contentText = apply_filters('the_content', $contentText);
-            //     //$contentText = do_blocks($contentText);
-            // }
-
-            // if ($panelWrapShortcodes) {
-            //     $contentText = do_shortcode($contentText);
-            // }
-
-
-            // if ($panelWrapWpautop) {
-            //     //$contentText = wpautop($contentText);
-            // }
-
-
-
-
-
-        ?>
-
-            <div class="image-accordion-item <?php echo ($index == $activeTab) ? 'image-accordion-item-active' : '' ?>" aria-labelledby="<?php echo esc_attr($index); ?>">
-                <img src="<?php echo $imageUrl; ?>" class="image-accordion-image image-accordion-image" />
-                <div class=" image-accordion-content-wrap">
-                    <div class=" image-accordion-title"><?php echo $title; ?></div>
-                    <div class="accordion-content image-accordion-content"><?php echo $content; ?></div>
+                <div class="image-accordion-item <?php echo ($index == $activeTab) ? 'image-accordion-item-active' : '' ?>" aria-labelledby="<?php echo esc_attr($index); ?>" index="<?php echo esc_attr($index); ?>">
+                    <img src="<?php echo esc_url($imageUrl); ?>" class="image-accordion-image" />
+                    <div class="image-accordion-overlay" style="display: none;">
+                        <div class="image-accordion-title"><?php echo wp_kses_post($title); ?></div>
+                        <div class="image-accordion-content"><?php echo wp_kses_post($content); ?></div>
+                    </div>
                 </div>
-            </div>
-        <?php
-        }
+            <?php
+                }
 
-        ?>
+            ?>
+
+        </div>
+
 
 
 
