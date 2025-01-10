@@ -786,9 +786,10 @@ class AccordionsRest
 			$response["id_missing"] = __("Post Id should not empty");
 		}
 
-		//$content = json_encode($content);
-		//$content = wp_kses_post($content); // Sanitizes content for safe HTML output
+		$content = json_encode($content);
+		$content = wp_kses_post($content); // Sanitizes content for safe HTML output
 
+		error_log($content);
 
 		$my_post = array(
 			'ID'           => $postId,

@@ -150,7 +150,7 @@
   resize: vertical;
   border-radius: 6px !important;
   padding: 4px;
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
 }
@@ -160,7 +160,7 @@
   resize: vertical;
   border-radius: 6px !important;
   padding: 4px;
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
 }
@@ -184,13 +184,13 @@
 } */
 .pg-setting-input-text .components-input-control__input {
   padding: 1px;
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-select-control__input {
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
   border: 1px solid #1f2937 !important;
@@ -208,29 +208,29 @@
 }
 
 .pg-font {
-  font-family: "Poppins" !important;
+  
 }
 
 .pg-setting-input-text .components-panel__body {
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-panel__body-title {
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-base-control__field label {
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-base-control__help {
-  font-family: "Poppins" !important;
+  
   /* font-weight: 500; */
   /* font-size: 13px; */
 }
@@ -331,7 +331,7 @@
 
 
 /* .pg-setting-css-components .components-button {
-	font-family: "Poppins" !important;
+	
 	
 	display: flex;
 	padding-top: 0.5rem;
@@ -387,7 +387,7 @@
 
 /* dashnoard */
 .pg-dashboard {
-  font-family: "Poppins" !important;
+  
   font-weight: 500;
   font-size: 13px;
 }

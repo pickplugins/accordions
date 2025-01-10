@@ -30,8 +30,6 @@ import accordionDefaultData from "./accordion-default-data";
 import tabsDefaultData from "./tabs-default-data";
 import imageAccordionDefaultData from "./image-accordion-default-data";
 import accordionMenuDefaultData from "./accordion-menu-default-data";
-import accordionTemplates from "./accordion-templates";
-//import tabsTemplates from "./tabs-templates";
 import AccordionsTemplates from "./templates";
 import AccordionsGenerateCss from "./generate-css";
 import PGHelp from "./help";
@@ -69,7 +67,7 @@ function Html(props) {
 	var viewTypeArgs = {
 		accordion: { label: "Accordion", value: "accordion" },
 		tabs: { label: "Tabs", value: "tabs" },
-		imageAccordion: { label: "Image Accordion", value: "imageAccordion", isPro: customerData.isPro ? false : true, },
+		imageAccordion: { label: "Image Accordion", value: "imageAccordion" },
 		// accordionMenu: { label: "Accordion Menu", value: "accordionMenu", coming: true },
 	};
 
@@ -198,6 +196,7 @@ function Html(props) {
 
 
 		accordionDataX.reponsiveCss = escapeHTML(args);
+		//accordionDataX.reponsiveCss = (args);
 		setaccordionData(accordionDataX);
 	}
 
@@ -217,10 +216,13 @@ function Html(props) {
 	function onUpdateAccordion() {
 		setisLoading(true);
 
+		console.log(accordionData);
 
 
-		var content = JSON.stringify(accordionData);
+		var content = accordionData;
+		//content = JSON.stringify(content);
 
+		console.log(content);
 
 
 		apiFetch({
@@ -660,6 +662,12 @@ function Html(props) {
 								</PGtab>
 								<PGtab name="templates">
 
+									{postData?.ID == null && (
+										<div className="py-3">
+											<div className="my-3 bg-orange-400 p-3  text-white  text-center animate__animated animate__flash animate__repeat-2">Please select post from list.</div>
+										</div>
+									)}
+
 									<AccordionsTemplates
 										onChange={onChangeAccordion}
 										addNotifications={addNotifications}
@@ -677,7 +685,7 @@ function Html(props) {
 				<div className="w-full sticky top-0 overflow-y-scroll">
 					<div className="  relative">
 
-						<div className="my-3 bg-orange-400 p-3 ml-5 text-white  text-center animate__animated animate__flash animate__repeat-2">
+						<div className="my-3 hidden bg-orange-400 p-3 ml-5 text-white  text-center animate__animated animate__flash animate__repeat-2">
 
 
 							<div className="text-xl">

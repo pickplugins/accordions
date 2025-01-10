@@ -33,7 +33,6 @@ import { Splide, SplideTrack } from "@splidejs/react-splide";
 import PGinputText from "../input-text";
 
 import PGDropdown from '../../components/dropdown'
-import accordionTemplates from "./accordion-templates";
 
 
 var myStore = wp.data.select("postgrid-shop");
@@ -64,6 +63,8 @@ function Html(props) {
 	var [postData, setpostData] = useState(props.postData); // Using the hook.
 	var [accordionData, setaccordionData] = useState(postData.post_content); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
+	var [isProFeature, setisProFeature] = useState(true);
+	var [customerData, setcustomerData] = useState(props.customerData);
 
 
 	var [templates, settemplates] = useState([]); // Using the hook.
@@ -75,6 +76,12 @@ function Html(props) {
 	});
 
 
+
+	useEffect(() => {
+		if (customerData.isPro) {
+			setisProFeature(false);
+		}
+	}, [props.customerData]);
 
 	useEffect(() => {
 		setisLoading(true);
@@ -102,48 +109,22 @@ function Html(props) {
 
 						var posts = data.posts;
 
-						console.log(accordionTemplates);
-
-
-
 						var postsX = [];
 
 
-						accordionTemplates.map(item => {
+						posts.map(item => {
 
 							postsX.push({
 
-								label: item.label,
+								label: item.post_title,
 								thumb: item.thumb,
-								//isPro: item?.is_pro == "yes" ? true : false,
-								data: JSON.stringify(item.data)
+								isPro: item?.is_pro == "yes" ? true : false,
+								data: item.post_content
 							})
 
 							settemplates(postsX);
 
 						})
-
-
-
-
-
-
-
-
-
-						// posts.map(item => {
-
-						// 	postsX.push({
-
-						// 		label: item.post_title,
-						// 		thumb: item.thumb,
-						// 		isPro: item?.is_pro == "yes" ? true : false,
-						// 		data: item.post_content
-						// 	})
-
-						// 	settemplates(postsX);
-
-						// })
 						setisLoading(false);
 
 
@@ -157,9 +138,6 @@ function Html(props) {
 
 
 	}, []);
-
-
-	var isProFeature = true;
 
 
 
@@ -478,12 +456,13 @@ class AccordionsTemplates extends Component {
 
 
 	render() {
-		var { postData, onChange, addNotifications, setHelp } = this.props;
+		var { postData, onChange, customerData, addNotifications, setHelp } = this.props;
 
 		return (
 			<Html
 				postData={postData}
 				onChange={onChange}
+				customerData={customerData}
 				addNotifications={addNotifications}
 				setHelp={setHelp}
 

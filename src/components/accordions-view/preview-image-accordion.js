@@ -29,7 +29,7 @@ function Html(props) {
 	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
 	var [items, setitems] = useState(accordionData.items); // Using the hook.
 	var [item, setitem] = useState(accordionData.item);
-	var [contentWrap, setcontentWrap] = useState(accordionData.contentWrap);
+	var [overlay, setoverlay] = useState(accordionData.overlay);
 	var [content, setcontent] = useState(accordionData.content);
 	var [title, settitle] = useState(accordionData.title);
 	var [image, setimage] = useState(accordionData.image);
@@ -94,7 +94,7 @@ function Html(props) {
 		setwrapper(accordionData.wrapper);
 		setitems(accordionData.items);
 		setitem(accordionData.item);
-		setcontentWrap(accordionData.contentWrap);
+		setoverlay(accordionData.overlay);
 		setcontent(accordionData.content);
 		settitle(accordionData.title);
 		setimage(accordionData.image);
@@ -130,6 +130,7 @@ function Html(props) {
 		<div className="px-10 py-10">
 			{/* PreviewImageAccordion */}
 			{/* {JSON.stringify(accordionData)} */}
+
 			<div
 				id={`accordions-${id}`}
 				className={`image-accordion-wrapper ${wrapper?.options?.class} `}>
@@ -139,21 +140,37 @@ function Html(props) {
 						return (
 							<div
 								key={index}
-								className={`image-accordion-item ${item?.options?.class} `}>
+								className={`image-accordion-item  ${i.active ? "active" : ""} ${index == active ? "active" : ""} ${item?.options?.class} `}
+								onMouseOver={ev => {
+									setactive(index)
+
+								}}
+								onMouseLeave={ev => {
+									setactive(9999)
+
+								}}
+
+							>
 								<img
 									src={i.image.url}
 									className={`image-accordion-image ${image?.options?.class}`}
 								/>
-								<div
-									className={`image-accordion-content-wrap ${contentWrap?.options?.class}`}>
+
+								{(index == active || i.active) && (
 									<div
-										className={`image-accordion-title ${title?.options?.class}`}>
-										{i.title}
+										className={`image-accordion-overlay ${overlay?.options?.class} animate__animated animate__${overlay?.options?.inAnimation}`}>
+										<div
+											className={`image-accordion-title ${title?.options?.class}`}>
+											{i.title}
+										</div>
+										<div className={`image-accordion-content ${content?.options?.class}`}>
+											{unescapeHTML(i.content)}
+										</div>
 									</div>
-									<div className={`image-accordion-content ${content?.options?.class}`}>
-										{unescapeHTML(i.content)}
-									</div>
-								</div>
+								)}
+
+
+
 							</div>
 						);
 					})}

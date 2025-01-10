@@ -89,9 +89,7 @@ const imageAccordionDefaultData = {
 	},
 	itemActive: {
 		options: {
-			content: "",
-			tag: "div",
-			class: "image-accordion-item",
+
 		},
 		styles: {
 			flexBasis: {
@@ -104,10 +102,6 @@ const imageAccordionDefaultData = {
 				Desktop: "1",
 			},
 		},
-		hover: {
-
-		},
-
 	},
 
 	overlay: {

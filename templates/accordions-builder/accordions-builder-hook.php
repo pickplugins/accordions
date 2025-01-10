@@ -20,7 +20,7 @@ function accordions_builder_accordion($post_id, $accordionData)
     $autoPlayOrder = isset($globalOptions["autoPlayOrder"]) ? $globalOptions["autoPlayOrder"] : "topToBottom";
     $itemSource = isset($globalOptions["itemSource"]) ? $globalOptions["itemSource"] : "topToBottom";
 
-    var_dump($globalOptions);
+    //var_dump($globalOptions);
 
     $keepExpandOther = isset($globalOptions["keepExpandOther"]) ? $globalOptions["keepExpandOther"] : false;
     $activeEvent = isset($globalOptions["activeEvent"]) ? $globalOptions["activeEvent"] : "";
@@ -289,6 +289,26 @@ function accordions_builder_accordion($post_id, $accordionData)
             }
 
             if ($contentShortcodes) {
+
+
+
+
+                // if (!is_plugin_active('accordions-pro/accordions-pro.php')) {
+                //     if (has_shortcode($contentText, 'accordions_builder') || has_shortcode($contentText, 'accordions_pickplguins') || has_shortcode($contentText, 'accordions_pplugins')) {
+                //         $contentText = str_replace('[accordions_builder', '**<a target="_blank" href="https://pickplugins.com/accordions/"> <strong>Please buy pro to create nested accordion</strong></a>**', $contentText);
+                //     }
+                // }
+
+
+
+
+
+
+
+
+
+
+
                 $contentText = do_shortcode($contentText);
             }
 

@@ -788,6 +788,7 @@ function accordions_builder_global_scripts()
 
     global $accordionsBuilderCss;
 
+    $accordionsBuilderCss = str_replace("&quot;", '"', $accordionsBuilderCss);
 
 
 ?>

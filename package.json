@@ -19,7 +19,8 @@
     "sample-data",
     "templates",
     "dist",
-    "accordions.php"
+    "accordions.php",
+    "readme.md"
   ],
   "keywords": [],
   "author": "",

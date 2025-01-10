@@ -101,6 +101,7 @@ function Html(props) {
 	var [customerData, setcustomerData] = useState(props.customerData);
 
 	var [isProFeature, setisProFeature] = useState(true);
+	var [editActive, seteditActive] = useState(9999);
 
 	// const gapValue = accOptions?.gap || "0px";
 	// const [number, setNumber] = useState(parseInt(gapValue));
@@ -1434,6 +1435,7 @@ function Html(props) {
 							</div>
 						)}
 
+
 						{globalOptions?.itemSource == "manual" && (
 							<div>
 								<ReactSortable
@@ -1457,7 +1459,7 @@ function Html(props) {
 													<div
 														className="bg-slate-300 flex justify-between items-center p-3 py-2 my-2 cursor-pointer hover:bg-slate-400"
 														onClick={(ev) => {
-															setitemActive(index == itemActive ? 999 : index);
+															seteditActive(index == editActive ? 999 : index);
 														}}>
 														<div>{item?.title}</div>
 														<div className="flex items-center gap-2">
@@ -1513,7 +1515,7 @@ function Html(props) {
 														</div>
 													</div>
 
-													{itemActive == index && (
+													{editActive == index && (
 														<div className="py-2 w-full">
 															<div className="mb-3">
 																<RichText
@@ -1658,6 +1660,35 @@ function Html(props) {
 																		});
 																	}}
 																/>
+															</div>
+															<div className="mb-3">
+																<PanelRow>
+																	<label htmlFor="">Active</label>
+
+																	<InputToggle
+																		value={item?.active ?? 0}
+																		onChange={(newVal) => {
+																			if (isProFeature) {
+																				addNotifications({
+																					title: "Opps its pro!",
+																					content:
+																						"This feature only available in premium version",
+																					type: "error",
+																				});
+																				return;
+																			}
+
+																			setitems((prevItems) => {
+																				const updatedItems = [...prevItems];
+																				updatedItems[index] = {
+																					...updatedItems[index],
+																					active: newVal,
+																				};
+																				return updatedItems;
+																			});
+																		}}
+																	/>
+																</PanelRow>
 															</div>
 														</div>
 													)}
