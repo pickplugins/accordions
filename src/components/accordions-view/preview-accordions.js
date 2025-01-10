@@ -260,8 +260,9 @@ function Html(props) {
 										)}
 									</>
 								)}
-								<div
+								<a
 									className={` accordion-header-label`}
+									href={"#" + item.headerLabelSlug}
 									onClick={(e) => {
 										return;
 									}}>
@@ -306,7 +307,7 @@ function Html(props) {
 									{labelCounter?.options.position == "afterLabelText" && (
 										<span className={` accordion-label-counter`}>{index}</span>
 									)}
-								</div>
+								</a>
 								{labelIcon?.options.position == "afterLabel" && (
 									<>
 										{item?.labelIcon?.options.iconSrc && (
@@ -342,7 +343,7 @@ function Html(props) {
 							{active == index && (
 								<>
 									<div
-										className={`accordion-content`}
+										className={`accordion-content animate__animated animate__${content?.options?.inAnimation}`}
 										dangerouslySetInnerHTML={{
 											__html: unescapeHTML(item?.contentText),
 										}}></div>

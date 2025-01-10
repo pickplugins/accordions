@@ -51,9 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		activeByIndex(index) {
 
-
-
-
 			if (this.id.length == 0) return;
 			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
@@ -67,15 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					var iconToggle = header.querySelector(".accordion-icon-toggle");
 					var iconIdle = header.querySelector(".accordion-icon-idle");
-
-
-
 					if (header.classList.contains("accordion-header-active")) {
 						if (iconToggle != null) {
-							iconToggle.style.display = "inline-block";
-
-
-							this.animate(iconToggle, this.iconInAnimation, this.iconAnimationDuration)
+							iconToggle.style.display = "inline-block"; this.animate(iconToggle, this.iconInAnimation, this.iconAnimationDuration)
 						}
 						if (iconIdle != null) {
 							iconIdle.style.display = "none";
@@ -85,9 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
 						}
 						content.style.display = "block";
 						content.style.height = "auto";
-
-
-
 
 						this.animate(content, this.contentInAnimation, this.contentAnimationDuration)
 
@@ -102,12 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
 						this.animate(content, this.contentOutAnimation, this.contentAnimationDuration)
 
 					}
-
-
-
-
-
-
 				}
 			});
 		}
@@ -115,10 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (this.id.length == 0) return;
 			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
-				var loopIndex = header.getAttribute("index");
-
-
-				var content = header.nextElementSibling;
+				var loopIndex = header.getAttribute("index"); var content = header.nextElementSibling;
 				if (loopIndex == index) {
 					header.classList.toggle("accordion-header-active");
 					//content.style.display = "none";
@@ -126,10 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 
 				var iconToggle = header.querySelector(".accordion-icon-toggle");
-				var iconIdle = header.querySelector(".accordion-icon-idle");
-
-
-				if (header.classList.contains("accordion-header-active")) {
+				var iconIdle = header.querySelector(".accordion-icon-idle"); if (header.classList.contains("accordion-header-active")) {
 					if (iconToggle != null) {
 						iconToggle.style.display = "inline-block";
 
@@ -189,10 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			if (this.id.length == 0) return;
 			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 			accordionHeaders.forEach((header, i) => {
-				var loopIndex = header.getAttribute("index");
-
-
-				var content = header.nextElementSibling;
+				var loopIndex = header.getAttribute("index"); var content = header.nextElementSibling;
 				content.style.display = "none";
 				header.style.display = "flex";
 
@@ -201,14 +174,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		switch(index) {
 
-			console.log(this.id);
-			console.log(index);
-
 
 			if (this.id.length == 0) return;
 			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
-
-
 			accordionHeaders.forEach((header, i) => {
 				var loopIndex = header.getAttribute("index");
 				this.activeIndex = index
@@ -222,16 +190,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					content.style.display = "none";
 					content.style.height = 0;
 				}
-
-
-
-
-
 				var iconToggle = header.querySelector(".accordion-icon-toggle");
 				var iconIdle = header.querySelector(".accordion-icon-idle");
-
-
-
 				if (header.classList.contains("accordion-header-active")) {
 					if (iconToggle != null) {
 						iconToggle.style.display = "inline-block";
@@ -246,27 +206,17 @@ document.addEventListener("DOMContentLoaded", function () {
 					content.style.height = "auto";
 
 					this.animate(content, this.contentInAnimation, this.contentAnimationDuration)
-
-
 				} else {
 					if (iconIdle != null) {
 						iconIdle.style.display = "inline-block";
 					}
 					if (iconToggle != null) {
 						iconToggle.style.display = "none";
-					}
-
-
-					this.animate(content, this.contentOutAnimation, this.contentAnimationDuration)
+					} this.animate(content, this.contentOutAnimation, this.contentAnimationDuration)
 					content.style.display = "none";
 				}
-
-
 			});
 		}
-
-
-
 		switchNext() {
 			var activeIndex = this.activeIndex;
 			var max = this.headerList.length - 1;
@@ -279,80 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			var nextIndex = (activeIndex - 1 < 0) ? max : (activeIndex - 1);
 			this.switch(nextIndex);
 		}
-		// autoPlayRun(args) {
-		// 	var autoPlayOrder = (args.autoPlayOrder);
-		// 	var autoPlayDelay = parseInt(args.autoPlayDelay);
 
-		// 	var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
-
-
-		// 	let currentIndex = 0;
-
-		// 	const items = [1, 2, 3, 4, 5, 6, 7];
-		// 	//let currentIndex = 0;
-
-		// 	function loopThroughItems() {
-		// 		currentIndex = (currentIndex + 1) % items.length; // Move to the next index (looping back to 0 after reaching the end)
-		// 		setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
-		// 	}
-
-
-		// 	// function loopThroughItems() {
-
-
-		// 	// 	currentIndex = (currentIndex + 1) % items.length; // Move to the next index
-
-		// 	// 	setTimeout(loopThroughItems, autoPlayDelay); // Recursively call after 1 second
-
-		// 	// 	this.switch(currentIndex)
-		// 	// }
-
-		// 	currentIndex = items.length;
-		// 	function loopThroughItemsReverse() {
-
-
-		// 		currentIndex = (currentIndex - 1 + (items.length)) % items.length; // Move to the previous index, wrap around
-
-		// 		setTimeout(loopThroughItemsReverse, autoPlayDelay); // Recursively call after 1 second
-
-		// 		this.switch(currentIndex)
-		// 	}
-
-
-		// 	function loopThroughItemsRandom() {
-		// 		const currentIndex = Math.floor(Math.random() * items.length);
-
-		// 		//currentIndex = (currentIndex + 1) % items.length; // Move to the next index
-		// 		setTimeout(loopThroughItemsRandom, autoPlayDelay); // Recursively call after 1 second
-
-		// 		this.switch(currentIndex)
-		// 	}
-
-
-
-
-
-
-
-		// 	// Start the loop
-
-		// 	if (autoPlayOrder == "topToBottom") {
-		// 		loopThroughItems();
-		// 	}
-		// 	if (autoPlayOrder == "bottomToTop") {
-		// 		loopThroughItemsReverse();
-		// 	}
-		// 	if (autoPlayOrder == "random") {
-		// 		loopThroughItemsRandom();
-		// 	}
-
-
-
-
-
-
-
-		// }
 		autoPlayRun() {
 			let currentIndex = -1;
 			const loopThroughItems = () => {
@@ -391,9 +268,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 				var searchContent = labelText + " " + contentText
 				var position = searchContent.indexOf(keyword);
-
-
-
 				if (position < 0) {
 					this.hideByIndex(loopIndex)
 
@@ -402,20 +276,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 
 			});
-
-
 		}
-
-
-
 		expandCollapseAll() {
 			var expandCollapseAllHndle = document.querySelector("#" + this.id + " " + this.expandCollapseAllHndle);
 
 			var toggled = expandCollapseAllHndle.getAttribute("data-toggled");
 			var headerCount = this.headerList.length
-			var expandCollapseAllDelay = parseInt(this.expandCollapseAllDelay)
-
-
+			var expandCollapseAllDelay = parseInt(this.expandCollapseAllDelay);
 			var expandalltext = expandCollapseAllHndle.getAttribute("data-expandalltext");
 			var collapsealltext = expandCollapseAllHndle.getAttribute("data-collapsealltext");
 			var expandalliconhtml = expandCollapseAllHndle.getAttribute("data-expandalliconhtml");
@@ -455,18 +322,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			expandCollapseAllHndle.innerHTML = innerHtml
 
-
-
-
 		}
-
-
 		init() {
 			const accordionWrapper = document.querySelector(`#${this.id}`);
-			if (this.lazyLoad) accordionWrapper.style.display = "block";
-
-
-			var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
+			if (this.lazyLoad) accordionWrapper.style.display = "block"; var accordionHeaders = document.querySelectorAll("#" + this.id + " > .accordion-header");
 
 			var headerList = [];
 			accordionHeaders.forEach((header, index) => {
@@ -502,12 +361,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					}
 					accordionHeader.addEventListener("click", (event) => {
 
-
-
 						event.stopImmediatePropagation();
-						event.preventDefault();
-
-						//accordionHeader.scrollIntoView({ behavior: 'smooth' });
+						event.preventDefault();						//accordionHeader.scrollIntoView({ behavior: 'smooth' });
 
 						if (this.clickToScrollTop) {
 							var offset = this.clickToScrollTopOffset;
@@ -528,19 +383,18 @@ document.addEventListener("DOMContentLoaded", function () {
 							this.activeByIndex(loopIndex);
 						} else {
 
-
-
 							this.switch(loopIndex);
 						}
-
-
-
-
-
 					});
 				});
 			}
 
+			if (this.activeIndex.length > 1) {
+				this.activeIndex.map((index) => {
+					this.activeByIndex(index);
+				})
+
+			}
 
 			if (this.urlHash) this.listenUrlHash();
 			if (this.autoPlay) this.autoPlayRun();
@@ -563,18 +417,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				var searchHndle = document.querySelector("#" + this.id + " .search-input");
 
 				if (searchHndle != null) {
-
-
 					function debounce(func, delay) {
 						let timeout;
 						return function (...args) {
 							clearTimeout(timeout);
 							timeout = setTimeout(() => func.apply(this, args), delay);
 						};
-					}
-
-
-					function handleKeyup(event) {
+					} function handleKeyup(event) {
 						event.preventDefault();
 
 						var value = event.target.value;
@@ -584,21 +433,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					searchHndle.addEventListener('keyup', debounce(handleKeyup, 500));
 
 				}
-
-
-
 			}
-
-
-
-
-
-
-
-
-
-
-
 		}
 	}
 

@@ -453,11 +453,6 @@
   display: none;
 }
 
-.size-\[38px\] {
-  width: 38px;
-  height: 38px;
-}
-
 .\!h-4 {
   height: 1rem !important;
 }
@@ -1054,11 +1049,6 @@
   border-color: rgb(107 114 128 / var(--tw-border-opacity, 1)) !important;
 }
 
-.\!border-gray-700 {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1)) !important;
-}
-
 .border-\[\#ddd\] {
   --tw-border-opacity: 1;
   border-color: rgb(221 221 221 / var(--tw-border-opacity, 1));
@@ -1173,10 +1163,6 @@
 .\!bg-slate-200 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1)) !important;
-}
-
-.\!bg-transparent {
-  background-color: transparent !important;
 }
 
 .\!bg-white {
@@ -1670,10 +1656,6 @@
   font-size: 20px;
 }
 
-.text-\[30px\] {
-  font-size: 30px;
-}
-
 .text-\[32px\] {
   font-size: 32px;
 }
@@ -2150,7 +2132,6 @@
   resize: vertical;
   border-radius: 6px !important;
   padding: 4px;
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
@@ -2160,7 +2141,6 @@
   resize: vertical;
   border-radius: 6px !important;
   padding: 4px;
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
@@ -2185,13 +2165,11 @@
 
 .pg-setting-input-text .components-input-control__input {
   padding: 1px;
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-select-control__input {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
   border: 1px solid #1f2937 !important;
@@ -2209,29 +2187,24 @@
 }
 
 .pg-font {
-  font-family: "Poppins" !important;
 }
 
 .pg-setting-input-text .components-panel__body {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-panel__body-title {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-base-control__field label {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-base-control__help {
-  font-family: "Poppins" !important;
   /* font-weight: 500; */
   /* font-size: 13px; */
 }
@@ -2323,7 +2296,7 @@
 /* gradient picker edit  */
 
 /* .pg-setting-css-components .components-button {
-	font-family: "Poppins" !important;
+	
 	
 	display: flex;
 	padding-top: 0.5rem;
@@ -2382,7 +2355,6 @@
 /* dashnoard */
 
 .pg-dashboard {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
@@ -2670,11 +2642,6 @@
   border-bottom-width: 0px;
 }
 
-.hover\:\!border-red-700:hover {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(185 28 28 / var(--tw-border-opacity, 1)) !important;
-}
-
 .hover\:border-black:hover {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
@@ -2798,11 +2765,6 @@
 .hover\:text-gray-800:hover {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-red-700:hover {
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-white:hover {

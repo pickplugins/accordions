@@ -99,6 +99,7 @@ function Html(props) {
 		setwrapper(accordionData.wrapper);
 		setitems(accordionData.items);
 		setcontent(accordionData.content);
+		setpanelWrap(accordionData.panelWrap);
 		setaccOptions(accordionData.accOptions);
 		setheader(accordionData.header);
 		setheaderActive(accordionData.headerActive);
@@ -460,6 +461,7 @@ function Html(props) {
 					})}
 				</div>
 				<div className={"panels-wrap"}>
+
 					{items.map((tab, index) => {
 						return (
 							<div className={`tabs-panel animate__animated animate__${panelWrap?.options?.inAnimation}  ${activeTab === index ? "tabs-panel-active" : "hidden"

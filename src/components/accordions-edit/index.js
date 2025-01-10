@@ -2141,11 +2141,7 @@ function Html(props) {
 										}}>
 										<Icon icon={help} />
 									</span>
-									{isProFeature && (
-										<span className="bg-amber-500 px-2 py-0.5 text-[11px]  no-underline rounded-sm  cursor-pointer text-white ">
-											{__("Pro", "accordions")}
-										</span>
-									)}
+
 								</label>
 								<InputToggle
 									value={globalOptions?.urlHash}
@@ -2180,11 +2176,7 @@ function Html(props) {
 										}}>
 										<Icon icon={help} />
 									</span>
-									{isProFeature && (
-										<span className="bg-amber-500 px-2 py-0.5 text-[11px]  no-underline rounded-sm  cursor-pointer text-white ">
-											{__("Pro", "accordions")}
-										</span>
-									)}
+
 								</label>
 								<InputToggle
 									value={globalOptions?.clickToScrollTop}
@@ -2237,11 +2229,7 @@ function Html(props) {
 										}}>
 										<Icon icon={help} />
 									</span>
-									{isProFeature && (
-										<span className="bg-amber-500 px-2 py-0.5 text-[11px]  no-underline rounded-sm  cursor-pointer text-white ">
-											{__("Pro", "accordions")}
-										</span>
-									)}
+
 								</label>
 								<InputToggle
 									value={globalOptions?.autoPlay}

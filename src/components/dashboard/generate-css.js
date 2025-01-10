@@ -91,6 +91,9 @@ function Html(props) {
 	}
 	var itemActiveSelector = blockClass + " .image-accordion-item.active";
 
+	console.log(itemActiveSelector);
+
+
 	var itemsWrapSelector = blockClass + " .items";
 
 	var headerSelector = blockClass + " .accordion-header";
@@ -514,6 +517,8 @@ function Html(props) {
 
 		onChange(reponsiveCss)
 
+		console.log(reponsiveCss);
+
 
 		var wpfooter = document.getElementById("wpfooter");
 		var csswrappg = document.getElementById("css-block");
@@ -535,6 +540,8 @@ function Html(props) {
 		} else {
 
 			//csswrappg.insertAdjacentHTML("beforeend", reponsiveCss);
+
+
 			csswrappg.innerHTML = reponsiveCss;
 
 		}
@@ -703,6 +710,8 @@ function Html(props) {
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
+
+
 		var itemActiveCss = generateElementCss(accordionData.itemActive, itemActiveSelector);
 		Object.entries(itemActiveCss).map((selectors) => {
 			var selector = selectors[0];
@@ -732,6 +741,7 @@ function Html(props) {
 		});
 
 
+		console.log(styleObjX);
 
 
 
