@@ -181,10 +181,6 @@ var tabsDefaultData = {
 		},
 		styles: {},
 	},
-	accOptions: {
-		active: "9999",
-		collapsible: true,
-		heightStyle: "content",
-	},
+
 };
 export default tabsDefaultData;

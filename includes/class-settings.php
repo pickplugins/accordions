@@ -41,7 +41,7 @@ class accordions_class_settings
 
     public function builder()
     {
-        include('menu/dashboard.php');
+        include('menu/builder.php');
     }
 }
 

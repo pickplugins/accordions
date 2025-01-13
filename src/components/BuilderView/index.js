@@ -20,6 +20,7 @@ function Html(props) {
 	}
 
 	var id = props.id;
+	var appData = props.appData;
 	var onChange = props.onChange;
 	var addNotifications = props.addNotifications;
 	var setHelp = props.setHelp;
@@ -216,7 +217,6 @@ function Html(props) {
 			</div>
 
 
-
 			{globalOptions?.viewType == "accordion" && (
 				<PreviewAccordions isLoading={isLoading}
 					postData={postData}
@@ -271,7 +271,7 @@ function Html(props) {
 	);
 }
 
-class AccordionsView extends Component {
+class BuilderView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
@@ -287,6 +287,7 @@ class AccordionsView extends Component {
 	render() {
 		var {
 			postData,
+			appData,
 			id,
 			isLoading,
 			onChange,
@@ -300,6 +301,7 @@ class AccordionsView extends Component {
 			<Html
 				isLoading={isLoading}
 				postData={postData}
+				appData={appData}
 				id={id}
 				onUpdate={onUpdate}
 				pleaseUpdate={pleaseUpdate}
@@ -312,4 +314,4 @@ class AccordionsView extends Component {
 	}
 }
 
-export default AccordionsView;
+export default BuilderView;

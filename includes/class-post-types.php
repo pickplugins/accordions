@@ -108,8 +108,10 @@ class accordions_post_types
 				'exclude_from_search' 	=> false,
 				'hierarchical' 			=> false,
 				'rewrite' 				=> true,
+				'show_in_rest' => true,
+
 				'query_var' 			=> true,
-				'supports' 				=> array('title', 'editor', 'revisions'),
+				'supports' 				=> array('title',  'revisions'),
 				'show_in_nav_menus' 	=> true,
 				//'show_in_menu' 	=> 'edit.php?post_type=team',	
 				'menu_icon' => 'dashicons-align-center',

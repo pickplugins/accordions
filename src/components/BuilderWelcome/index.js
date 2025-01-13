@@ -17,6 +17,7 @@ function Html(props) {
 	var [postData, setpostData] = useState(props.postData); // Using the hook.
 	var addNotifications = props.addNotifications;
 	var customerData = props.customerData;
+	var appData = props.appData;
 
 	const freeVsProArgs = [
 		{
@@ -329,7 +330,7 @@ function Html(props) {
 			<div className="flex justify-between items-center p-5 pb-20 bg-white ">
 				<div>
 					<div className="flex justify-between items-center gap-3">
-						<span className="text-4xl font-extrabold">Accordions</span>{" "}
+						<span className="text-4xl font-extrabold">{appData.name}</span>{" "}
 						<span className="text-base">By PickPlugins</span>
 					</div>
 
@@ -338,7 +339,7 @@ function Html(props) {
 						{/* <div className="font-mono text-sm">Version: 2.3.5</div> */}
 						<a
 							className=" "
-							href="https://pickplugins.com/demo/accordions/"
+							href={appData.demoUrl}
 							target="_blank">
 							Live Demo
 						</a>
@@ -356,7 +357,7 @@ function Html(props) {
 					</div>
 					<a
 						className=" bg-amber-500 text-white no-underline font-medium px-[16px] py-[8px]  hover:bg-amber-700 hover:text-white rounded-md w-max transition-colors duration-300"
-						href="https://wordpress.org/support/plugin/accordions/reviews/#new-post"
+						href={appData.reviewsUrl}
 						target="_blank">
 						Submit Reviews
 					</a>
@@ -838,7 +839,7 @@ function Html(props) {
 	);
 }
 
-class AccordionsGuide extends Component {
+class BuilderWelcome extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
@@ -852,11 +853,12 @@ class AccordionsGuide extends Component {
 	}
 
 	render() {
-		var { postData, addNotifications, customerData } = this.props;
+		var { postData, appData, addNotifications, customerData } = this.props;
 
 		return (
 			<Html
 				postData={postData}
+				appData={appData}
 				addNotifications={addNotifications}
 				customerData={customerData}
 				warn={this.state.showWarning}
@@ -865,4 +867,4 @@ class AccordionsGuide extends Component {
 	}
 }
 
-export default AccordionsGuide;
+export default BuilderWelcome;
