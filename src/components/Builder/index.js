@@ -17,20 +17,24 @@ import PGinputText from "../input-text";
 import PGDropdown from "../dropdown";
 
 import ImageAccordionEdit from "../../components/edit-image-accordion";
+import AccordionMenuEdit from "../../components/edit-accordion-menu";
 import TabsEdit from "../../components/edit-tabs";
 import AccordionsEdit from "../../components/accordions-edit";
-import AccordionsGuide from "../../components/accordions-guide";
-import AccordionsView from "../../components/accordions-view";
+import BuilderWelcome from "../../components/BuilderWelcome";
+import BuilderView from "../../components/BuilderView";
 
 import PGtab from "../../components/tab";
 
 import PGtabs from "../../components/tabs";
-import AccordionsList from "../../components/accordions-list";
-import accordionDefaultData from "./accordion-default-data";
+import BuilderTabList from "./BuilderTabList";
+import accordionDefaultData from "./default-data-accordion";
 import tabsDefaultData from "./tabs-default-data";
 import imageAccordionDefaultData from "./image-accordion-default-data";
 import accordionMenuDefaultData from "./accordion-menu-default-data";
-import AccordionsTemplates from "./templates";
+
+
+
+import BuilderTabTemplates from "./BuilderTabTemplates";
 import AccordionsGenerateCss from "./generate-css";
 import PGHelp from "./help";
 import PGNotify from "./notify";
@@ -42,6 +46,7 @@ function Html(props) {
 
 	var isProFeature = true;
 
+	var appData = props.appData
 
 	var [activeAccordion, setActiveAccordion] = useState(null);
 	var [postData, setpostData] = useState({
@@ -111,8 +116,6 @@ function Html(props) {
 			},
 		}).then((res) => {
 			setisLoading(false);
-
-			console.log(res.post_content);
 
 
 			if (res.post_content == null) {
@@ -192,7 +195,6 @@ function Html(props) {
 	function onChangeStyle(args) {
 		var accordionDataX = { ...accordionData };
 
-		console.log(escapeHTML(args));
 
 
 		accordionDataX.reponsiveCss = escapeHTML(args);
@@ -216,13 +218,11 @@ function Html(props) {
 	function onUpdateAccordion() {
 		setisLoading(true);
 
-		console.log(accordionData);
 
 
 		var content = accordionData;
 		//content = JSON.stringify(content);
 
-		console.log(content);
 
 
 		apiFetch({
@@ -551,7 +551,7 @@ function Html(props) {
 											</div>
 										)}
 
-										<AccordionsList
+										<BuilderTabList
 											addNotifications={addNotifications}
 											selectAccordion={selectAccordion}
 											activeAccordion={activeAccordion}
@@ -637,15 +637,15 @@ function Html(props) {
 														setHelp={setHelp}
 													/>
 												)}
-												{/* {postData.post_content.globalOptions?.viewType == "accordionMenu" && (
-													<ImageAccordionEdit
+												{postData.post_content.globalOptions?.viewType == "accordionMenu" && (
+													<AccordionMenuEdit
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}
 														customerData={customerData}
 														setHelp={setHelp}
 													/>
-												)} */}
+												)}
 
 
 
@@ -668,7 +668,7 @@ function Html(props) {
 										</div>
 									)}
 
-									<AccordionsTemplates
+									<BuilderTabTemplates
 										onChange={onChangeAccordion}
 										addNotifications={addNotifications}
 										postData={postData}
@@ -697,16 +697,18 @@ function Html(props) {
 
 						</div>
 
-						{(postData?.ID == null || toggleSettings) && <AccordionsGuide addNotifications={addNotifications} customerData={customerData}
+						{(postData?.ID == null || toggleSettings) && <BuilderWelcome appData={appData}
+							addNotifications={addNotifications} customerData={customerData}
 						/>}
 
 						{(!toggleSettings && postData?.ID != null) && (
-							<AccordionsView
+							<BuilderView
 								pleaseUpdate={pleaseUpdate}
 								onUpdate={onUpdateAccordion}
 								isLoading={isLoading}
 								onChange={onChangeAccordion}
 								postData={postData}
+								appData={appData}
 								id={activeAccordion}
 								addNotifications={addNotifications}
 								setHelp={setHelp}
@@ -731,7 +733,7 @@ function Html(props) {
 	);
 }
 
-class PGDashboard extends Component {
+class Builder extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
@@ -745,10 +747,10 @@ class PGDashboard extends Component {
 	}
 
 	render() {
-		var { onChange, setEnable } = this.props;
+		var { onChange, appData } = this.props;
 
-		return <Html setEnable={setEnable} warn={this.state.showWarning} />;
+		return <Html appData={appData} warn={this.state.showWarning} />;
 	}
 }
 
-export default PGDashboard;
+export default Builder;

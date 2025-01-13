@@ -570,7 +570,7 @@ function Html(props) {
 
 }
 
-class WCPSList extends Component {
+class BuilderTabList extends Component {
 
 	constructor(props) {
 		super(props);
@@ -634,4 +634,4 @@ class WCPSList extends Component {
 
 
 
-export default WCPSList;
+export default BuilderTabList;

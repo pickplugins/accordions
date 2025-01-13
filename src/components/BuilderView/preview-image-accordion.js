@@ -163,8 +163,9 @@ function Html(props) {
 											className={`image-accordion-title ${title?.options?.class}`}>
 											{i.title}
 										</div>
-										<div className={`image-accordion-content ${content?.options?.class}`}>
-											{unescapeHTML(i.content)}
+										<div className={`image-accordion-content ${content?.options?.class}`} dangerouslySetInnerHTML={{
+											__html: unescapeHTML(unescapeHTML(i.content)),
+										}}>
 										</div>
 									</div>
 								)}

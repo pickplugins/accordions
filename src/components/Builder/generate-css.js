@@ -48,16 +48,6 @@ function Html(props) {
 	var [styleObj, setstyleObj] = useState({}); // Using the hook.
 
 	var [globalOptions, setglobalOptions] = useState(accordionData.globalOptions); // Using the hook.
-	var [wrapper, setwrapper] = useState(accordionData.wrapper); // Using the hook.
-	var [content, setcontent] = useState(accordionData.content);
-	var [accOptions, setaccOptions] = useState(accordionData.accOptions);
-	var [header, setheader] = useState(accordionData.header);
-	var [headerActive, setheaderActive] = useState(accordionData.headerActive);
-	var [headerLabel, setheaderLabel] = useState(accordionData.headerLabel);
-	var [labelCounter, setlabelCounter] = useState(accordionData.labelCounter);
-	var [labelIcon, setlabelIcon] = useState(accordionData.labelIcon);
-	var [icon, seticon] = useState(accordionData.icon);
-	var [iconToggle, seticonToggle] = useState(accordionData.iconToggle);
 
 
 
@@ -91,7 +81,6 @@ function Html(props) {
 	}
 	var itemActiveSelector = blockClass + " .image-accordion-item.active";
 
-	console.log(itemActiveSelector);
 
 
 	var itemsWrapSelector = blockClass + " .items";
@@ -739,12 +728,6 @@ function Html(props) {
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
-
-
-		console.log(styleObjX);
-
-
-
 
 
 

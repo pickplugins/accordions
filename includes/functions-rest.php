@@ -145,6 +145,21 @@ class AccordionsRest
 		);
 		register_rest_route(
 			'accordions/v2',
+			'/get_nav_menus',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_nav_menus'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+
+			)
+		);
+
+
+
+		register_rest_route(
+			'accordions/v2',
 			'/accordions_data',
 			array(
 				'methods' => 'POST',
@@ -1560,6 +1575,39 @@ class AccordionsRest
 			$responses['noPosts'] = true;
 
 		endif;
+
+
+		die(wp_json_encode($responses));
+	}
+	/**
+	 * Return Posts
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function get_nav_menus($post_data)
+	{
+		$query_args = [];
+
+
+		$nonce = isset($post_data['_wpnonce']) ? $post_data['_wpnonce'] : "";
+
+
+		if (!wp_verify_nonce($nonce, 'wp_rest')) return $query_args;
+
+		//$nav_menus = get_registered_nav_menus();
+		$nav_menus = get_terms("nav_menu", array(
+			'hide_empty' => false,
+		));
+		error_log(serialize($nav_menus));
+
+		$nav_menus_arr = [];
+
+		foreach ($nav_menus as $taxonomy_term) {
+			$nav_menus_arr[$taxonomy_term->term_id] = $taxonomy_term->name . '(' . $taxonomy_term->count . ')';
+		}
+
+		$responses = $nav_menus_arr;
 
 
 		die(wp_json_encode($responses));
