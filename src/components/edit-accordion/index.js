@@ -4156,7 +4156,7 @@ function Html(props) {
 	);
 }
 
-class AccordionsEdit extends Component {
+class EditAccordion extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true, isLoaded: false };
@@ -4187,4 +4187,4 @@ class AccordionsEdit extends Component {
 	}
 }
 
-export default AccordionsEdit;
+export default EditAccordion;

@@ -3,7 +3,7 @@
 Plugin Name: Accordions - By PickPlugins
 Plugin URI: https://pickplugins.com/accordions/
 Description: Fully responsive and mobile ready accordion grid for wordpress.
-Version: 2.3.8
+Version: 2.3.9
 Author: PickPlugins
 Author URI: http://pickplugins.com
 Text Domain: accordions
@@ -23,8 +23,8 @@ class Accordions
 
     define('accordions_plugin_url', plugins_url('/', __FILE__));
     define('accordions_plugin_dir', plugin_dir_path(__FILE__));
-    define('accordions_version', '2.3.8');
-    define('accordions_plugin_name', 'Accordions Combo');
+    define('accordions_version', '2.3.9');
+    define('accordions_plugin_name', 'Combo Accordion');
     define('accordions_plugin_basename', plugin_basename(__FILE__));
 
     $accordionsCss = '';
@@ -70,6 +70,8 @@ class Accordions
 
     require_once(accordions_plugin_dir . 'templates/accordion/accordion-hook.php');
     require_once(accordions_plugin_dir . 'templates/tabs/tabs-hook.php');
+    require_once(accordions_plugin_dir . 'templates/faq-grid/faq-grid-hook.php');
+
     require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-hook.php');
     require_once(accordions_plugin_dir . 'templates/accordions-builder/accordions-builder-functions.php');
 

@@ -31,7 +31,7 @@ import PGcssOpenaiPrompts from "../openai-prompts";
 import PGStyles from "../styles";
 import PGtab from "../tab";
 import PGtabs from "../tabs";
-import { iconsList } from "../accordions-edit/iconsList";
+import { iconsList } from "../edit-accordion/iconsList";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -3462,7 +3462,7 @@ function Html(props) {
 	);
 }
 
-class TabsEdit extends Component {
+class EditTabs extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true, isLoaded: false };
@@ -3492,4 +3492,4 @@ class TabsEdit extends Component {
 	}
 }
 
-export default TabsEdit;
+export default EditTabs;

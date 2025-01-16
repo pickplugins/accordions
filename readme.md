@@ -1,10 +1,10 @@
-=== Accordions - AI FAQ, Accordion, Tabs, Image Accordion ,Product FAQ, FAQ Builder, ===
+=== Accordion - AI FAQ, Accordion, Tabs, Image Accordion, Product FAQ, FAQ Builder, FAQ Grid ===
 	Contributors: PickPlugins, nafismahmudayon
 	Donate link: https://www.pickplugins.com/demo/accordions/
 	Tags: Accordion, Tabs, AI FAQ, WooCommerce FAQ Tab, Image Accordion
 	Requires at least: 5.0
 	Tested up to: 6.7
-	Stable tag: 2.3.8
+	Stable tag: 2.3.9
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,9 @@ then paste this shortcode anywhere in your page to display accordions<br />
 
 
 
+	= 2.3.9 =
+    * 2024-01-16 - add - Accordions Builder - FAQ Grid view added.
+    * 
 	= 2.3.8 =
     * 2024-01-07 - fix - Accordions Builder - Image accordion added.
 
