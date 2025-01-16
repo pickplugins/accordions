@@ -16,10 +16,12 @@ import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 import PGDropdown from "../dropdown";
 
-import ImageAccordionEdit from "../../components/edit-image-accordion";
-import AccordionMenuEdit from "../../components/edit-accordion-menu";
-import TabsEdit from "../../components/edit-tabs";
-import AccordionsEdit from "../../components/accordions-edit";
+import EditImageAccordion from "../../components/edit-image-accordion";
+import EditAccordionMenu from "../../components/edit-accordion-menu";
+import EditTabs from "../../components/edit-tabs";
+import EditAccordion from "../../components/edit-accordion";
+import EditFaqGrid from "../../components/edit-faq-grid";
+
 import BuilderWelcome from "../../components/BuilderWelcome";
 import BuilderView from "../../components/BuilderView";
 
@@ -28,6 +30,7 @@ import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
 import BuilderTabList from "./BuilderTabList";
 import accordionDefaultData from "./default-data-accordion";
+import faqGridDefaultData from "./default-data-faq-grid";
 import tabsDefaultData from "./tabs-default-data";
 import imageAccordionDefaultData from "./image-accordion-default-data";
 import accordionMenuDefaultData from "./accordion-menu-default-data";
@@ -73,6 +76,7 @@ function Html(props) {
 		accordion: { label: "Accordion", value: "accordion" },
 		tabs: { label: "Tabs", value: "tabs" },
 		imageAccordion: { label: "Image Accordion", value: "imageAccordion" },
+		faqGrid: { label: "FAQ Grid", value: "faqGrid" },
 		// accordionMenu: { label: "Accordion Menu", value: "accordionMenu", coming: true },
 	};
 
@@ -93,12 +97,39 @@ function Html(props) {
 
 
 
+		// if (globalOptions?.viewType == "accordion") {
+		// 	setpostData({ ...postData, post_content: accordionDefaultData })
+		// }
+		// if (globalOptions?.viewType == "tabs") {
+		// 	setpostData({ ...postData, post_content: tabsDefaultData })
+		// }
+
+
+
 		if (globalOptions?.viewType == "accordion") {
 			setpostData({ ...postData, post_content: accordionDefaultData })
+
 		}
 		if (globalOptions?.viewType == "tabs") {
 			setpostData({ ...postData, post_content: tabsDefaultData })
 		}
+		if (globalOptions?.viewType == "imageAccordion") {
+			setpostData({ ...postData, post_content: imageAccordionDefaultData })
+		}
+		if (globalOptions?.viewType == "accordionMenu") {
+			setpostData({ ...postData, post_content: accordionMenuDefaultData })
+		}
+		if (globalOptions?.viewType == "faqGrid") {
+			setpostData({ ...postData, post_content: faqGridDefaultData })
+		}
+
+
+
+
+
+
+
+
 
 	}, [globalOptions]);
 
@@ -595,6 +626,9 @@ function Html(props) {
 																	if (option.value == "accordionMenu") {
 																		setpostData({ ...postData, post_content: accordionMenuDefaultData })
 																	}
+																	if (option.value == "faqGrid") {
+																		setpostData({ ...postData, post_content: faqGridDefaultData })
+																	}
 
 																}
 
@@ -611,7 +645,7 @@ function Html(props) {
 
 
 												{postData.post_content.globalOptions?.viewType == "accordion" && (
-													<AccordionsEdit
+													<EditAccordion
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}
@@ -620,7 +654,7 @@ function Html(props) {
 													/>
 												)}
 												{postData.post_content.globalOptions?.viewType == "tabs" && (
-													<TabsEdit
+													<EditTabs
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}
@@ -629,7 +663,7 @@ function Html(props) {
 													/>
 												)}
 												{postData.post_content.globalOptions?.viewType == "imageAccordion" && (
-													<ImageAccordionEdit
+													<EditImageAccordion
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}
@@ -638,7 +672,16 @@ function Html(props) {
 													/>
 												)}
 												{postData.post_content.globalOptions?.viewType == "accordionMenu" && (
-													<AccordionMenuEdit
+													<EditAccordionMenu
+														onChange={onChangeAccordion}
+														addNotifications={addNotifications}
+														postData={postData}
+														customerData={customerData}
+														setHelp={setHelp}
+													/>
+												)}
+												{postData.post_content.globalOptions?.viewType == "faqGrid" && (
+													<EditFaqGrid
 														onChange={onChangeAccordion}
 														addNotifications={addNotifications}
 														postData={postData}

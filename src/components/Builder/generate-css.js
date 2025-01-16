@@ -84,6 +84,7 @@ function Html(props) {
 
 
 	var itemsWrapSelector = blockClass + " .items";
+	var itemWrapSelector = blockClass + " .item";
 
 	var headerSelector = blockClass + " .accordion-header";
 	var headerActiveSelector = blockClass + " .accordion-header-active";
@@ -563,8 +564,16 @@ function Html(props) {
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;
 		});
+
 		var itemsWrapCss = generateElementCss(accordionData.itemsWrap, itemsWrapSelector);
 		Object.entries(itemsWrapCss).map((selectors) => {
+			var selector = selectors[0];
+			var selectorData = selectors[1];
+			styleObjX[selector] = selectorData;
+		});
+
+		var itemWrapCss = generateElementCss(accordionData.itemWrap, itemWrapSelector);
+		Object.entries(itemWrapCss).map((selectors) => {
 			var selector = selectors[0];
 			var selectorData = selectors[1];
 			styleObjX[selector] = selectorData;

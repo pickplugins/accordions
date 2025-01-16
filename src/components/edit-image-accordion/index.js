@@ -2668,7 +2668,7 @@ function Html(props) {
 	);
 }
 
-class ImageAccordionEdit extends Component {
+class EditImageAccordion extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true, isLoaded: false };
@@ -2699,4 +2699,4 @@ class ImageAccordionEdit extends Component {
 	}
 }
 
-export default ImageAccordionEdit;
+export default EditImageAccordion;

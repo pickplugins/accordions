@@ -1,8 +1,8 @@
 
 
-var accordionDefaultData = {
+var faqGridDefaultData = {
 	globalOptions: {
-		viewType: "accordion",
+		viewType: "faqGrid",
 		itemSource: "manual",
 		search: true,
 	},
@@ -13,10 +13,28 @@ var accordionDefaultData = {
 		options: {
 
 			tag: "div",
-			class: "tabs-wrapper",
+			class: "faq-grid-wrapper",
 		},
 		styles: {},
 	},
+	itemsWrap: {
+		options: {
+
+			tag: "div",
+			class: "faq-grid-items items",
+		},
+		styles: {},
+	},
+	itemWrap: {
+		options: {
+
+			tag: "div",
+			class: "faq-grid-item item",
+		},
+		styles: {},
+	},
+
+
 	items: [
 		{
 			active: 0,
@@ -47,7 +65,7 @@ var accordionDefaultData = {
 	content: {
 		options: {
 			tag: "div",
-			class: "accordion-content",
+			class: "faq-content accordion-content",
 		},
 		styles: {
 			padding: { Desktop: "15px 15px 15px 15px" },
@@ -57,7 +75,7 @@ var accordionDefaultData = {
 	header: {
 		options: {
 			tag: "div",
-			class: "accordion-header",
+			class: "faq-header accordion-header",
 		},
 		styles: {
 			display: { Desktop: "flex" },
@@ -68,13 +86,7 @@ var accordionDefaultData = {
 			fontSize: { Desktop: "16px" },
 		},
 	},
-	headerActive: {
-		options: {
-			tag: "div",
-			class: "accordion-header-active",
-		},
-		styles: {},
-	},
+
 	headerLabel: {
 		options: {
 			text: "Accordion Header",
@@ -88,7 +100,7 @@ var accordionDefaultData = {
 			enable: false,
 			position: "",
 			tag: "div",
-			class: "accordion-label-counter",
+			class: "faq-label-counter accordion-label-counter",
 		},
 		styles: {},
 	},
@@ -112,15 +124,7 @@ var accordionDefaultData = {
 		},
 		styles: {},
 	},
-	iconToggle: {
-		options: {
-			library: "fontAwesome",
-			srcType: "class",
-			iconSrc: " fas fa-angle-up",
-			class: "accordion-icon-toggle",
-		},
-		styles: {},
-	},
+
 	searchInput: {
 		options: {
 			placeholder: "",
@@ -128,25 +132,7 @@ var accordionDefaultData = {
 		},
 		styles: {},
 	},
-	expandCollapseAll: {
-		options: {
-			enable: false,
-			class: "expand-collapse-all",
-			expandAllText: "Expand All",
-			collapseAllText: "Collapse All",
-			expandAllIcon: {
-				library: "fontAwesome",
-				srcType: "class",
-				iconSrc: " fas fa-angle-up",
-			},
-			collapseAllIcon: {
-				library: "fontAwesome",
-				srcType: "class",
-				iconSrc: " fas fa-angle-up",
-			},
-		},
-		styles: {},
-	},
+
 	topWrap: {
 		options: {
 			class: "top-wrap",
@@ -154,8 +140,5 @@ var accordionDefaultData = {
 		styles: {},
 	},
 
-
-
-
 };
-export default accordionDefaultData;
+export default faqGridDefaultData;

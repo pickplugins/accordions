@@ -11,6 +11,7 @@ import PreviewAccordions from "./preview-accordions";
 import PreviewTabs from "./preview-tabs";
 import PreviewImageAccordion from "./preview-image-accordion";
 import PreviewAccordionMenu from "./preview-accordion-menu";
+import PreviewFaqGrid from "./preview-faq-grid";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -252,6 +253,17 @@ function Html(props) {
 			)}
 			{globalOptions?.viewType == "accordionMenu" && (
 				<PreviewAccordionMenu isLoading={isLoading}
+					postData={postData}
+					id={id}
+					onUpdate={onUpdate}
+					pleaseUpdate={pleaseUpdate}
+					onChange={onChange}
+					addNotifications={addNotifications}
+					setHelp={setHelp}
+				/>
+			)}
+			{globalOptions?.viewType == "faqGrid" && (
+				<PreviewFaqGrid isLoading={isLoading}
 					postData={postData}
 					id={id}
 					onUpdate={onUpdate}
